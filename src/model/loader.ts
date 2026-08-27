@@ -150,6 +150,7 @@ function walk(
   const colour = ply % 2 === 0 ? 'white' : 'black'
   const loaded: LoadedNode[] = []
   const variantsSeen = new Map<string, string>()
+  const blackSeen = new Set<string>()
 
   for (const raw of nodes) {
     if (!isObject(raw)) {
@@ -197,6 +198,13 @@ function walk(
     checkMistakes(raw, colour, parentFen, path, errors)
     checkShapes(raw, path, errors)
     const variant = checkVariant(raw, colour, path, errors)
+
+    // Two Black siblings playing the same move is always a duplicated branch:
+    // White siblings get the variant rule, Black siblings get this one.
+    if (colour === 'black') {
+      if (blackSeen.has(san)) errors.add(path, `two Black replies play "${san}" here`)
+      blackSeen.add(san)
+    }
 
     if (colour === 'white' && variant) {
       const clash = variantsSeen.get(variant)

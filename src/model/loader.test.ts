@@ -231,6 +231,22 @@ describe('loadChapter, negative fixtures', () => {
     expect(loadChapter(bad).ok).toBe(true)
   })
 
+  it('rejects two Black replies playing the same move', () => {
+    const bad = chapter()
+    bad.tree[0].children!.push({
+      san: 'Nf6',
+      weight: 2,
+      children: [
+        {
+          san: 'e3',
+          note: 'A duplicated branch, which the validator must refuse.',
+          plan: 'Never reached.',
+        },
+      ],
+    } as never)
+    expect(firstError(bad)).toContain('two Black replies play "Nf6"')
+  })
+
   it('rejects a weight on a White move', () => {
     const bad = chapter()
     ;(bad.tree[0] as Record<string, unknown>).weight = 5
