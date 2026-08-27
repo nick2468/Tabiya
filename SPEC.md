@@ -96,9 +96,11 @@ future variant the schema already allows.
 6. **Everything else**: the Dutch (...f5), ...b6 systems, early ...c6 systems, odd
    first moves. One safe recipe each.
 7. **Typical tactics and plans**: the Bxh7+ Greek gift, Ne5 themes, e4 and c4 break
-   timing, the e5 outpost, h-file attacks, plus a short annotated model-game list
-   (Kamsky is the reference player). Its tree nodes are exercise positions where the
-   expected move is the thematic blow.
+   timing, the e5 outpost, h-file attacks, plus the model patterns with Kamsky named
+   as the reference player. Specific game citations wait until the app has a game
+   source to check them against (ruled at review gate 3; see the register in
+   section 6). Its tree nodes are exercise positions where the expected move is the
+   thematic blow.
 
 Quality bar for every chapter: every White move carries a note of 1-3 plain sentences
 (the idea or plan, club-improver reader, no engine variations); every leaf carries a
@@ -193,6 +195,9 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   nice check on the weights; needs their API online; the app is offline-first.
 - **Engine grading of unlisted drill moves**: v1 stays honest with "not the repertoire
   move"; live engine judgement in Drill is a v2 refinement.
+- **Model-game citations**: ch7 describes the Kamsky-style patterns without citing
+  specific games, because a citation nobody can verify is worse than none. Real
+  cited games arrive with PGN import or a game database. Ruled 2026-08-27.
 - **In-app content editor**: the content editor for this app is a Claude session;
   likely a permanent defer.
 - **Classical move order content** (2.Nf3 first): schema-ready; author when wanted.
