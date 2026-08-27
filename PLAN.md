@@ -215,21 +215,21 @@ Open items (phase 3):
 
 Goal: sparring, steered into the repertoire, with truthful feedback.
 
-- [ ] 4.1 `src/engine`: Stockfish WASM in a web worker behind a UCI adapter; vitest
+- [x] 4.1 `src/engine`: Stockfish WASM in a web worker behind a UCI adapter; vitest
   with the engine mocked.
-- [ ] 4.2 Strength scale 1-8 per SPEC.md section 5 guidance (UCI_LimitStrength on the
+- [x] 4.2 Strength scale 1-8 per SPEC.md section 5 guidance (UCI_LimitStrength on the
   top levels, MultiPV randomisation with capped movetime below).
-- [ ] 4.3 Steering in `src/play`: weighted book from the repertoire tree; the three
+- [x] 4.3 Steering in `src/play`: weighted book from the repertoire tree; the three
   launch shapes - any defence, this chapter's defence, from here (wire the phase 2
   stub). Tests for book selection and exit.
-- [ ] 4.4 Game length caps: to move 10, to move 15, full game.
-- [ ] 4.5 Post-game report: first White deviation with book move and note; the
+- [x] 4.4 Game length caps: to move 10, to move 15, full game.
+- [x] 4.5 Post-game report: first White deviation with book move and note; the
   Black-left-book case handled; blunder scan at fixed effort; verdicts in words;
   eval bar in the report view only. Deviation and verdict logic covered by a
   scripted-game test fixture.
-- [ ] 4.6 Engine sanity pass over every ch2 line plus spot checks of ch1 and ch5;
+- [x] 4.6 Engine sanity pass over every ch2 line plus spot checks of ch1 and ch5;
   each finding fixed in content or recorded under Open items.
-- [ ] 4.7 Progress: add play stats (games per chapter, deviation rate).
+- [x] 4.7 Progress: add play stats (games per chapter, deviation rate).
 
 Acceptance: full games complete at strengths 3 and 6; a capped game stops and reports;
 a chapter-targeted game reaches the chosen setup; the report is correct on the
@@ -237,7 +237,34 @@ scripted fixture; sanity-pass findings dispositioned; vitest green.
 
 - [ ] **Review gate 4 passed**
 
-Open items (phase 4): none yet.
+Open items (phase 4):
+
+1. **The ch2 pawn offer is settled, and it was understated.** Phase 1 recorded 4.Nc3 as
+   an unverified gambit. The engine says the opposite of the worry: after 4...Qxb2 5.Nb5
+   White is around +1.3, which is clearly better, not scrambling for compensation. The
+   notes said "a pawn down with a big lead in development" and now say what is true. The
+   engine does prefer 5.Nxd5 there, which holds about +2.9, so Nb5 gives up roughly a
+   pawn and a half of it. Nb5 was kept: it is sound, it is clearly better for White, and
+   it is the one jump the whole chapter teaches. Worth a ruling if Nick would rather have
+   the stronger move at the price of a second idea to remember.
+2. **Bg3 against ...Nh5 is about half a pawn behind Be5**, in a position the engine calls
+   level either way (loss 0.6 to 0.8 at half a second). Kept for the same reason: one
+   answer that works every time, with Be5 already listed beside it as playable.
+3. **Stockfish is GPL-3.** It is bundled as a WASM build in public/engine, copied out of
+   node_modules at build time. That licence attaches to anything distributed, which
+   matters at phase 5 when there is an installer. For one person's own machine it is not
+   a problem; it is recorded so nobody is surprised by it later.
+4. **The bundle is 532 kB and past Vite's warning line** (gate 3 flagged this coming).
+   The engine itself is a separate 7 MB file loaded by the worker, so it is not in that
+   number. A code split is a phase 5 polish item, not a correctness one.
+5. **The blunder scan is fixed at 150 ms a position.** That is enough to catch what a
+   club game throws away and quick enough that a twenty move game reviews in about ten
+   seconds. It will miss quiet positional drift. If the reports feel shallow, the number
+   is one constant in src/ui/Play.tsx.
+6. **The engine pass covered ch2 in full and ch1, ch5 and ch7 by spot check**, which is
+   what the plan asked for. ch0, ch3, ch4 and ch6 have not been checked move by move.
+   Given that the pass found four real faults in the chapters it did cover, the rest are
+   worth the same treatment before v1 is called done.
 
 ---
 
