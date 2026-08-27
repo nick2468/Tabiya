@@ -55,7 +55,7 @@ in the panel; ch1-ch2 main lines reach move 10-12; every White move has a note, 
 leaf a plan; ch1 and ch2 each carry mistake entries on at least 10 positions; ch0
 intro is 300-500 words; vitest green including the negative fixtures.
 
-- [ ] **Review gate 1 passed** (orchestrator ticks after review)
+- [x] **Review gate 1 passed** (orchestrator, 2026-08-27)
 
 Open items (phase 1):
 
@@ -74,6 +74,15 @@ Open items (phase 1):
    verified turn, movable colour and legal destinations from the browser.
 3. **Promotion auto-queens on the phase 1 board.** The scratch board plays a queen
    without asking. Play mode needs a real picker; note it when task 4.3 lands.
+4. **Review findings, gate 1 (orchestrator).** The board now re-measures on host
+   resize: chessground takes one measurement at mount, so a board mounted while
+   hidden stayed zero width (found driving the app through a hidden browser pane;
+   fixed with a ResizeObserver calling redrawAll, which phases 2 and 3 will rely
+   on when boards mount inside switched-away views). Content touches at review:
+   after 4.Nc3 the ...Qxb2 grab now outweighs the declines, matching the chapter
+   intro, and ch1's premature h4 note says backfires rather than loses. For the
+   4.6 engine pass: the ...Nc6 decline after 4.Nc3 stops at move 5 - deepen it a
+   move or two while checking it.
 
 ---
 
