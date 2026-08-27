@@ -53,3 +53,53 @@ button:hover {
   color: #9aa0a6;
   line-height: 1.7;
 }
+
+.status {
+  margin-top: 40px;
+}
+
+.status h2 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.status table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.status th,
+.status td {
+  text-align: left;
+  padding: 6px 12px 6px 0;
+  border-bottom: 1px solid #2a2e35;
+  vertical-align: top;
+}
+
+.status th {
+  color: #9aa0a6;
+  font-weight: 600;
+}
+
+.status .num {
+  text-align: right;
+  padding-right: 24px;
+  font-variant-numeric: tabular-nums;
+}
+
+.status .pass {
+  color: #7bc47f;
+}
+
+.status .fail {
+  color: #e07a6f;
+}
+
+.status-path {
+  color: #9aa0a6;
+}
+
+.status-note {
+  color: #9aa0a6;
+  font-size: 0.9rem;
+}

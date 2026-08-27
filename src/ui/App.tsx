@@ -1,3 +1,4 @@
+import { ContentStatus } from './ContentStatus'
 import { PlayableBoard } from './PlayableBoard'
 import './app.css'
 
@@ -10,6 +11,7 @@ export function App() {
       </header>
       <main>
         <PlayableBoard />
+        <ContentStatus />
       </main>
     </div>
   )
