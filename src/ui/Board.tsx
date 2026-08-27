@@ -80,7 +80,13 @@ export function Board({
       animation: { enabled: true, duration: 180 },
     }
     api.current = Chessground(host.current, config)
+    // Chessground measures its host once, at mount. A board mounted while its
+    // host is hidden or collapsed keeps zero-width bounds until told to look
+    // again, so re-measure whenever the host's size changes.
+    const observer = new ResizeObserver(() => api.current?.redrawAll())
+    observer.observe(host.current)
     return () => {
+      observer.disconnect()
       api.current?.destroy()
       api.current = null
     }
