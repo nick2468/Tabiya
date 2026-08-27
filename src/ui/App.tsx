@@ -1,27 +1,38 @@
 import { useState } from 'react'
 import { Diagnostics } from './Diagnostics'
 import { Drill } from './Drill'
+import { Play, type PlayRequest } from './Play'
 import { Progress } from './Progress'
 import { ProgressProvider } from './progress-context'
 import { Study } from './Study'
 import './app.css'
 
 /**
- * The app shell. Study, Drill and Progress are built; Play arrives in phase 4
- * and gets its tab then. Diagnostics is the phase 1 workbench, kept out of
- * shipped builds.
+ * The app shell. All four modes are built. Diagnostics is the phase 1
+ * workbench, kept out of shipped builds.
+ *
+ * The play request is held here rather than in either view, because it is the
+ * one thing Study and Play have to say to each other: "start a game from this
+ * position".
  */
-type View = 'study' | 'drill' | 'progress' | 'diagnostics'
+type View = 'study' | 'drill' | 'play' | 'progress' | 'diagnostics'
 
 const MODES: { view: View; label: string }[] = [
   { view: 'study', label: 'Study' },
   { view: 'drill', label: 'Drill' },
+  { view: 'play', label: 'Play' },
   { view: 'progress', label: 'Progress' },
 ]
 
 export function App() {
   const [view, setView] = useState<View>('study')
+  const [playRequest, setPlayRequest] = useState<PlayRequest | null>(null)
   const showDiagnostics = import.meta.env.DEV
+
+  const playFrom = (request: PlayRequest) => {
+    setPlayRequest(request)
+    setView('play')
+  }
 
   return (
     <ProgressProvider>
@@ -56,8 +67,11 @@ export function App() {
           </nav>
         </header>
         <main>
-          {view === 'study' ? <Study /> : null}
+          {view === 'study' ? <Study onPlayFrom={playFrom} /> : null}
           {view === 'drill' ? <Drill /> : null}
+          {view === 'play' ? (
+            <Play request={playRequest} onRequestUsed={() => setPlayRequest(null)} />
+          ) : null}
           {view === 'progress' ? <Progress /> : null}
           {view === 'diagnostics' ? <Diagnostics /> : null}
         </main>

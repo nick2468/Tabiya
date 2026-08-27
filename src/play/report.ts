@@ -176,10 +176,22 @@ export function verdictInWords(pawns: number): string {
   return `Winning for ${side}`
 }
 
-/** A slip as a sentence. */
+/**
+ * A slip as a sentence.
+ *
+ * When both sides of the move fall in the same band, saying it turned one
+ * verdict into the same verdict reads as nonsense, however true it is. A
+ * position can get worse without changing what it is called, so say that
+ * instead.
+ */
 export function describeSlip(slip: MoveReview): string {
   const name = { blunder: 'A blunder', mistake: 'A mistake', inaccuracy: 'An inaccuracy' }[slip.tag]
-  return `${name} on move ${fullMove(slip.ply)}: ${slip.san} turned "${verdictInWords(slip.before).toLowerCase()}" into "${verdictInWords(slip.after).toLowerCase()}".`
+  const before = verdictInWords(slip.before).toLowerCase()
+  const after = verdictInWords(slip.after).toLowerCase()
+  const where = `${name} on move ${fullMove(slip.ply)}: ${slip.san}`
+  return before === after
+    ? `${where} gave up more ground in a position already ${before}.`
+    : `${where} turned "${before}" into "${after}".`
 }
 
 /** Puts the whole report together. */

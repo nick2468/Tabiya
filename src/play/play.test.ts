@@ -340,6 +340,21 @@ describe('scanForSlips', () => {
       'A blunder on move 3: e3 turned "slightly better for white" into "winning for black".',
     )
   })
+
+  it('does not say a move turned a verdict into the same verdict', () => {
+    // A position can get worse without changing what it is called.
+    const sentence = describeSlip({
+      ply: 18,
+      san: 'Qe2',
+      before: -4,
+      after: -9,
+      loss: 5,
+      tag: 'blunder',
+    })
+    expect(sentence).toBe(
+      'A blunder on move 10: Qe2 gave up more ground in a position already winning for black.',
+    )
+  })
 })
 
 describe('fullMove', () => {

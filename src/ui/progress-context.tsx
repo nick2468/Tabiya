@@ -4,7 +4,9 @@ import {
   emptyProgress,
   isLearnt,
   recordAnswer,
+  recordGame,
   toggleLearnt,
+  type PlayRecord,
   type ProgressState,
   type ProgressStore,
 } from '../storage/progress'
@@ -34,6 +36,8 @@ export interface Progress {
    * button works.
    */
   answer: (card: Card, verdict: Verdict, rating?: Rating) => void
+  /** Records a finished game, for the play stats. */
+  recordPlay: (game: PlayRecord) => void
   /** The whole state as JSON text, for keeping somewhere safe. */
   exportJson: () => Promise<string>
   /** Replaces everything from exported text. Rejects when the text is bad. */
@@ -80,6 +84,10 @@ export function useProgressStateFor(store: ProgressStore): Progress {
     })
   }, [])
 
+  const recordPlay = useCallback((game: PlayRecord) => {
+    setState((previous) => recordGame(previous, game))
+  }, [])
+
   // Exported from what is in memory, not from storage: the two are kept in
   // step by the effect above, and in memory is the one that cannot be stale.
   const exportJson = useCallback(async () => JSON.stringify(state, null, 2), [state])
@@ -92,7 +100,7 @@ export function useProgressStateFor(store: ProgressStore): Progress {
     [store],
   )
 
-  return { state, loaded, learnt, toggle, answer, exportJson, importJson }
+  return { state, loaded, learnt, toggle, answer, recordPlay, exportJson, importJson }
 }
 
 export function ProgressProvider({

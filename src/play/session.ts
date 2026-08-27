@@ -98,6 +98,14 @@ export class PlaySession {
     return this.completedFullMoves() >= cap ? 'finished' : 'playing'
   }
 
+  /**
+   * True when the game is over. A method rather than a comparison on `status`,
+   * because callers check it either side of a move that can change it.
+   */
+  isFinished(): boolean {
+    return this.status === 'finished'
+  }
+
   /** How many full moves both sides have completed. */
   private completedFullMoves(): number {
     return Math.floor(this.moves.length / 2)

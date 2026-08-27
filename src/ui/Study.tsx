@@ -3,9 +3,10 @@ import Markdown from 'react-markdown'
 import { Board } from './Board'
 import { useProgress } from './progress-context'
 import { chapters } from '../content'
-import { chapterLines, fullMoveNumber, lineId } from '../model/lines'
+import { chapterLines, fullMoveNumber, lineId, moveList } from '../model/lines'
 import { nodeShapes } from '../model/shapes'
 import type { LoadedChapter, LoadedNode } from '../model/types'
+import type { PlayRequest } from './Play'
 import './study.css'
 
 /**
@@ -16,7 +17,7 @@ import './study.css'
  * the board, the note, the branch choices, the learnt toggle - is derived from
  * that chain, so there is only one piece of state to get right.
  */
-export function Study() {
+export function Study({ onPlayFrom }: { onPlayFrom: (request: PlayRequest) => void }) {
   const [chapterId, setChapterId] = useState(chapters[0]?.id ?? '')
   const chapter = chapters.find((entry) => entry.id === chapterId) ?? chapters[0]
 
@@ -44,22 +45,25 @@ export function Study() {
           ))}
         </ol>
       </nav>
-      <ChapterStudy key={chapter.id} chapter={chapter} />
+      <ChapterStudy key={chapter.id} chapter={chapter} onPlayFrom={onPlayFrom} />
     </div>
   )
 }
 
-function ChapterStudy({ chapter }: { chapter: LoadedChapter }) {
+function ChapterStudy({
+  chapter,
+  onPlayFrom,
+}: {
+  chapter: LoadedChapter
+  onPlayFrom: (request: PlayRequest) => void
+}) {
   const [chain, setChain] = useState<LoadedNode[]>([])
   const [introOpen, setIntroOpen] = useState(true)
-  const [playNotice, setPlayNotice] = useState(false)
   const { learnt, toggle } = useProgress()
 
   const current = chain.at(-1)
   const choices = current ? current.children : chapter.tree
   const lines = useMemo(() => chapterLines(chapter), [chapter])
-
-  useEffect(() => setPlayNotice(false), [chain])
 
   const goBack = useCallback(() => setChain((previous) => previous.slice(0, -1)), [])
   const goForward = useCallback(() => {
@@ -171,16 +175,17 @@ function ChapterStudy({ chapter }: { chapter: LoadedChapter }) {
             <button
               type="button"
               className="play-from-here"
-              onClick={() => setPlayNotice(true)}
+              onClick={() =>
+                onPlayFrom({
+                  fen,
+                  moves: current ? current.path : chapter.stem,
+                  chapterId: chapter.id,
+                  label: current ? moveList(chain) : stemLabel(chapter),
+                })
+              }
             >
               Play from here
             </button>
-            {playNotice ? (
-              <p className="notice" role="status">
-                Play mode arrives in phase 4. It will start a game against the engine from
-                this exact position.
-              </p>
-            ) : null}
           </div>
         </div>
       </div>

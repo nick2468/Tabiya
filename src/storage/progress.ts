@@ -15,7 +15,15 @@ import type { Schedule } from '../scheduler'
  */
 
 /** The current shape. Bump it and add a migration when the shape changes. */
-export const PROGRESS_VERSION = 2
+export const PROGRESS_VERSION = 3
+
+/**
+ * How many finished games the progress file remembers.
+ *
+ * Enough to give a deviation rate that means something, and few enough that
+ * the file stays small. The counts shown are over this window, not all time.
+ */
+export const PLAY_HISTORY = 100
 
 /**
  * How many recent answers each concept tag remembers.
@@ -37,10 +45,28 @@ export interface ProgressState {
    * repertoire move, 0 for anything else. Capped at TAG_WINDOW.
    */
   tagHistory: Record<string, number[]>
+  /** Finished games, newest last, capped at PLAY_HISTORY. */
+  playGames: PlayRecord[]
+}
+
+/** What one finished game is worth remembering. */
+export interface PlayRecord {
+  /** The chapter a targeted game sparred against, when there was one. */
+  chapterId?: string
+  /** True when White was the first to leave the repertoire. */
+  deviated: boolean
+  /** The full move number where that happened. */
+  deviationMove?: number
+  /** How many moves the game ran to. */
+  moves: number
+  /** The strength level played against. */
+  level: number
+  /** When it finished, as an ISO timestamp. */
+  at: string
 }
 
 export function emptyProgress(): ProgressState {
-  return { version: PROGRESS_VERSION, learntLines: [], cards: {}, tagHistory: {} }
+  return { version: PROGRESS_VERSION, learntLines: [], cards: {}, tagHistory: {}, playGames: [] }
 }
 
 export interface ProgressStore {
@@ -83,7 +109,20 @@ export function parseProgress(raw: unknown): ProgressState {
     learntLines: [...new Set(learntLines)],
     cards: readCards(record.cards),
     tagHistory: readTagHistory(record.tagHistory),
+    playGames: readPlayGames(record.playGames),
   }
+}
+
+/** Keeps the game records that look like records and drops the rest. */
+function readPlayGames(raw: unknown): PlayRecord[] {
+  if (!Array.isArray(raw)) return []
+  return raw
+    .filter((entry): entry is PlayRecord => {
+      if (typeof entry !== 'object' || entry === null) return false
+      const record = entry as Record<string, unknown>
+      return typeof record.deviated === 'boolean' && typeof record.at === 'string'
+    })
+    .slice(-PLAY_HISTORY)
 }
 
 /** Keeps the schedules that look like schedules and drops the rest. */
@@ -217,6 +256,11 @@ export function tagAccuracy(state: ProgressState, tag: string): number | null {
   const answers = state.tagHistory[tag]
   if (!answers || answers.length === 0) return null
   return answers.reduce((sum, answer) => sum + answer, 0) / answers.length
+}
+
+/** Adds a finished game to the history. */
+export function recordGame(state: ProgressState, game: PlayRecord): ProgressState {
+  return { ...state, playGames: [...state.playGames, game].slice(-PLAY_HISTORY) }
 }
 
 /** How many answers the rolling window currently holds for a concept. */

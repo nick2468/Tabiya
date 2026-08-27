@@ -1,7 +1,13 @@
 import { buildCards, type Card } from './cards'
 import { chapterLines } from './lines'
 import { dueCount, newCount } from './queue'
-import { isLearnt, tagAccuracy, tagAnswerCount, type ProgressState } from '../storage/progress'
+import {
+  isLearnt,
+  tagAccuracy,
+  tagAnswerCount,
+  type PlayRecord,
+  type ProgressState,
+} from '../storage/progress'
 import type { LoadedChapter } from './types'
 
 /**
@@ -112,3 +118,55 @@ export function courseTotals(
     fresh: newCount(cards, state),
   }
 }
+
+/** What the Progress view shows about games played. */
+export interface PlayStats {
+  games: number
+  /** Games where White was the first to leave the repertoire. */
+  deviations: number
+  /** From 0 to 1, or null when no games have been played. */
+  deviationRate: number | null
+  /** The average full move number where White left, when it happened. */
+  averageDeviationMove: number | null
+  /** Games against each chapter, in course order, plus the untargeted ones. */
+  byChapter: { id: string; title: string; games: number; deviations: number }[]
+}
+
+export function playStats(chapters: LoadedChapter[], state: ProgressState): PlayStats {
+  const games = state.playGames
+  const deviated = games.filter((game) => game.deviated)
+  const moves = deviated
+    .map((game) => game.deviationMove)
+    .filter((move): move is number => typeof move === 'number')
+
+  const byChapter = chapters.map((chapter) => {
+    const played = games.filter((game) => game.chapterId === chapter.id)
+    return {
+      id: chapter.id,
+      title: chapter.title,
+      games: played.length,
+      deviations: played.filter((game) => game.deviated).length,
+    }
+  })
+
+  const untargeted = games.filter((game) => !game.chapterId)
+  if (untargeted.length > 0) {
+    byChapter.push({
+      id: 'any',
+      title: 'Any defence',
+      games: untargeted.length,
+      deviations: untargeted.filter((game) => game.deviated).length,
+    })
+  }
+
+  return {
+    games: games.length,
+    deviations: deviated.length,
+    deviationRate: games.length > 0 ? deviated.length / games.length : null,
+    averageDeviationMove:
+      moves.length > 0 ? moves.reduce((sum, move) => sum + move, 0) / moves.length : null,
+    byChapter,
+  }
+}
+
+export type { PlayRecord }

@@ -2,7 +2,7 @@ import { useMemo, useRef, useState } from 'react'
 import { useProgress } from './progress-context'
 import { chapters } from '../content'
 import { buildCards } from '../model/cards'
-import { chapterProgress, conceptAccuracy, courseTotals } from '../model/stats'
+import { chapterProgress, conceptAccuracy, courseTotals, playStats } from '../model/stats'
 import './progress.css'
 
 /**
@@ -16,6 +16,7 @@ export function Progress() {
   const rows = useMemo(() => chapterProgress(chapters, state), [state])
   const concepts = useMemo(() => conceptAccuracy(cards, state), [cards, state])
   const totals = useMemo(() => courseTotals(chapters, cards, state), [cards, state])
+  const play = useMemo(() => playStats(chapters, state), [state])
 
   return (
     <div className="progress">
@@ -88,6 +89,50 @@ export function Progress() {
         <p className="hint">
           Accuracy is the share of your last twenty answers on that concept that were the
           repertoire move. A playable alternative still counts as not recalled.
+        </p>
+      </section>
+
+      <section>
+        <h3>Games played</h3>
+        {play.games === 0 ? (
+          <p className="hint">No games yet. Play one and the numbers turn up here.</p>
+        ) : (
+          <>
+            <p>
+              <strong>{play.games}</strong> {play.games === 1 ? 'game' : 'games'}. You left the
+              repertoire first in <strong>{play.deviations}</strong> of them
+              {play.deviationRate === null
+                ? ''
+                : `, which is ${Math.round(play.deviationRate * 100)}%`}
+              {play.averageDeviationMove === null
+                ? '.'
+                : `, on average around move ${Math.round(play.averageDeviationMove)}.`}
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Sparring against</th>
+                  <th className="num">Games</th>
+                  <th className="num">You left book</th>
+                </tr>
+              </thead>
+              <tbody>
+                {play.byChapter
+                  .filter((row) => row.games > 0)
+                  .map((row) => (
+                    <tr key={row.id}>
+                      <td>{row.title}</td>
+                      <td className="num">{row.games}</td>
+                      <td className="num">{row.deviations}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </>
+        )}
+        <p className="hint">
+          Leaving the repertoire is not the same as playing badly. The report after each
+          game says which one it was.
         </p>
       </section>
 

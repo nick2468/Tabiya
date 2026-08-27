@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import {
   LocalStorageProgressStore,
+  PLAY_HISTORY,
   PROGRESS_VERSION,
   TAG_WINDOW,
   emptyProgress,
@@ -8,6 +9,7 @@ import {
   parseProgress,
   parseProgressJson,
   recordAnswer,
+  recordGame,
   scheduleFor,
   tagAccuracy,
   tagAnswerCount,
@@ -38,7 +40,28 @@ describe('parseProgress', () => {
       learntLines: ['ch0:d4 d5'],
       cards: {},
       tagHistory: {},
+      playGames: [],
     })
+  })
+
+  it('reads a version 2 file, which had no games in it', () => {
+    const state = parseProgress({ version: 2, learntLines: ['a'], cards: {}, tagHistory: {} })
+    expect(state.version).toBe(PROGRESS_VERSION)
+    expect(state.playGames).toEqual([])
+  })
+
+  it('keeps game records and drops anything that is not one', () => {
+    const state = parseProgress({
+      version: 3,
+      learntLines: [],
+      playGames: [
+        { deviated: true, deviationMove: 7, moves: 20, level: 4, at: '2026-08-27T09:00:00.000Z' },
+        { nonsense: true },
+        'not a game',
+      ],
+    })
+    expect(state.playGames).toHaveLength(1)
+    expect(state.playGames[0].deviationMove).toBe(7)
   })
 
   it('reads a version 1 file, which is the whole migration', () => {
@@ -242,5 +265,36 @@ describe('recording answers', () => {
     const imported = await elsewhere.importJson(exported)
     expect(imported).toEqual(state)
     expect(await elsewhere.load()).toEqual(state)
+  })
+})
+
+describe('play history', () => {
+  const game = {
+    chapterId: 'ch3-kings-indian',
+    deviated: false,
+    moves: 20,
+    level: 4,
+    at: '2026-08-27T09:00:00.000Z',
+  }
+
+  it('remembers a finished game', () => {
+    const state = recordGame(emptyProgress(), game)
+    expect(state.playGames).toEqual([game])
+  })
+
+  it('keeps only the most recent games', () => {
+    let state = emptyProgress()
+    for (let i = 0; i < PLAY_HISTORY + 10; i++) {
+      state = recordGame(state, { ...game, moves: i })
+    }
+    expect(state.playGames).toHaveLength(PLAY_HISTORY)
+    // The oldest ten have gone, so the first one left is game ten.
+    expect(state.playGames[0].moves).toBe(10)
+  })
+
+  it('never changes the state it was given', () => {
+    const before = emptyProgress()
+    recordGame(before, game)
+    expect(before.playGames).toEqual([])
   })
 })
