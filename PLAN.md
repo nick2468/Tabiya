@@ -292,7 +292,7 @@ Goal: a real Windows app, reviewed against the whole spec.
   window title and icon.
 - [x] 5.3 ProgressStore file implementation in AppData; browser-phase export imports
   cleanly into the wrapped app (the migration path).
-- [ ] 5.4 Installer via the Tauri bundler; smoke test the installed app on a machine
+- [x] 5.4 Installer via the Tauri bundler; smoke test the installed app on a machine
   or profile without the dev toolchain.
 - [x] 5.5 Self-review against SPEC.md section 9, every item; fix or record each gap.
 - [x] 5.6 Docs sweep: content-schema.md current, SPEC.md deferred register current,
@@ -332,7 +332,21 @@ Open items (phase 5):
    re-render. It was not one. Any future headless check must poll for the DOM to change
    rather than read once and conclude. The same throttling hid chessground's shapes in
    phase 2, so this is the second time it has been mistaken for a bug.
-6. **The engine pass method has a blind spot worth naming.** It compares the evaluation
+6. **Two checks need a human, because this session had no display.** The installer is
+   built and the binary it installs has been run, but nobody has clicked through the
+   installer itself: the silent flag left it waiting on a dialog that could not be seen,
+   so it was stopped rather than left on screen. And nobody has moved a piece in the
+   packaged window: the board ignores synthetic events outside dev builds, which is
+   exactly what makes that check impossible and what makes the shipped build safe.
+   Everything either side of both is verified, and docs/v1-acceptance.md says so item by
+   item.
+7. **The wrapped app writes progress where it should, which took a fix.** The first
+   packaged run opened the window, rendered, saved its theme and saved no progress: the
+   folder under AppData does not exist until something creates it, and asking for it by
+   base directory with an empty relative path creates nothing. Paths are resolved in
+   full now. The migration path was then driven in the shipped app: a version 1 browser
+   file was read, migrated to version 3, and both learnt lines survived.
+8. **The engine pass method has a blind spot worth naming.** It compares the evaluation
    before and after each White move, which finds moves that give something away. It
    does not check Black's replies or the weights, so a line where the repertoire is fine
    but the Black move chosen is unrealistic would pass unnoticed. Nick's own games are
