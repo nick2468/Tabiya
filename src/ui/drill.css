@@ -1,0 +1,124 @@
+.drill h2 {
+  font-size: 1.05rem;
+  margin: 0 0 12px;
+}
+
+.drill-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.drill-head h2 {
+  margin: 0;
+}
+
+.drill-count {
+  margin: 0;
+  color: #9aa0a6;
+  font-variant-numeric: tabular-nums;
+}
+
+.drill-summary {
+  margin: 0 0 16px;
+  font-size: 1.05rem;
+}
+
+.empty-state {
+  max-width: 60ch;
+  color: #9aa0a6;
+}
+
+.weak-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.weak-toggle input {
+  accent-color: #7bc47f;
+  width: 16px;
+  height: 16px;
+}
+
+.drill .hint {
+  max-width: 60ch;
+}
+
+.drill-body {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.drill-side {
+  flex: 1;
+  min-width: 300px;
+  max-width: 48ch;
+}
+
+.prompt h3,
+.feedback h3 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+
+.feedback h4 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #7a808a;
+  margin: 16px 0 4px;
+}
+
+.feedback {
+  border-left: 3px solid #3a3f47;
+  padding-left: 16px;
+}
+
+.feedback.exact {
+  border-left-color: #7bc47f;
+}
+
+.feedback.listed {
+  border-left-color: #d9a441;
+}
+
+.feedback.unlisted {
+  border-left-color: #7fb2e5;
+}
+
+.feedback p {
+  margin: 0 0 10px;
+  max-width: 52ch;
+}
+
+.played {
+  color: #9aa0a6;
+}
+
+.feedback-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+button.primary {
+  background: #2f4a33;
+  border-color: #4b7a52;
+  color: #e6e6e6;
+  font-weight: 600;
+}
+
+button.primary:hover {
+  background: #3a5b3f;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

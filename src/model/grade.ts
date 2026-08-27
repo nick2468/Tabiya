@@ -90,6 +90,17 @@ export function verdictDetail(card: Card, verdict: Verdict): string {
   }
 }
 
+/** The squares a SAN move runs between, or null when it is not legal here. */
+export function squaresForSan(fen: string, san: string): { from: string; to: string } | null {
+  const chess = new Chess(fen)
+  try {
+    const move = chess.move(san)
+    return { from: move.from, to: move.to }
+  } catch {
+    return null
+  }
+}
+
 /**
  * Turns a move made on the board into SAN, or null when it is not legal.
  * Promotions become a queen, which is all this repertoire ever needs.

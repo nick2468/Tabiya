@@ -3,16 +3,20 @@ import {
   LocalStorageProgressStore,
   emptyProgress,
   isLearnt,
+  recordAnswer,
   toggleLearnt,
   type ProgressState,
   type ProgressStore,
 } from '../storage/progress'
+import { newSchedule, review, type Rating } from '../scheduler'
+import { countsAsCorrect, ratingFor, type Verdict } from '../model/grade'
+import type { Card } from '../model/cards'
 
 /**
  * The trainee's progress, held once for the whole app.
  *
- * It lives in a context rather than a hook per view, so Study, and later Drill
- * and Progress, all read and write the same state instead of drifting apart.
+ * It lives in a context rather than a hook per view, so Study, Drill and
+ * Progress all read and write the same state instead of drifting apart.
  *
  * Loading is async, so the value starts empty with a `loaded` flag. Nothing is
  * written back before the first read finishes: saving too early would overwrite
@@ -24,6 +28,16 @@ export interface Progress {
   loaded: boolean
   learnt: (lineId: string) => boolean
   toggle: (lineId: string) => void
+  /**
+   * Records a drill answer: reschedules the card and marks its concepts.
+   * `rating` overrides the one the verdict earns, which is how the Easy
+   * button works.
+   */
+  answer: (card: Card, verdict: Verdict, rating?: Rating) => void
+  /** The whole state as JSON text, for keeping somewhere safe. */
+  exportJson: () => Promise<string>
+  /** Replaces everything from exported text. Rejects when the text is bad. */
+  importJson: (text: string) => Promise<void>
 }
 
 const ProgressContext = createContext<Progress | null>(null)
@@ -54,7 +68,31 @@ export function useProgressStateFor(store: ProgressStore): Progress {
 
   const learnt = useCallback((lineId: string) => isLearnt(state, lineId), [state])
 
-  return { state, loaded, learnt, toggle }
+  const answer = useCallback((card: Card, verdict: Verdict, rating?: Rating) => {
+    const now = new Date()
+    setState((previous) => {
+      const schedule = review(
+        previous.cards[card.key] ?? newSchedule(now),
+        rating ?? ratingFor(verdict),
+        now,
+      )
+      return recordAnswer(previous, card.key, card.tags, countsAsCorrect(verdict), schedule)
+    })
+  }, [])
+
+  // Exported from what is in memory, not from storage: the two are kept in
+  // step by the effect above, and in memory is the one that cannot be stale.
+  const exportJson = useCallback(async () => JSON.stringify(state, null, 2), [state])
+
+  const importJson = useCallback(
+    async (text: string) => {
+      const imported = await store.importJson(text)
+      setState(imported)
+    },
+    [store],
+  )
+
+  return { state, loaded, learnt, toggle, answer, exportJson, importJson }
 }
 
 export function ProgressProvider({

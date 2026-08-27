@@ -1,0 +1,66 @@
+.progress h2 {
+  font-size: 1.05rem;
+  margin: 0 0 12px;
+}
+
+.progress h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #7a808a;
+  margin: 28px 0 8px;
+}
+
+.progress .totals {
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.progress table {
+  border-collapse: collapse;
+  min-width: 420px;
+  max-width: 640px;
+  width: 100%;
+}
+
+.progress th,
+.progress td {
+  text-align: left;
+  padding: 6px 12px 6px 0;
+  border-bottom: 1px solid #2a2e35;
+}
+
+.progress th {
+  color: #7a808a;
+  font-weight: 600;
+}
+
+.progress .num {
+  text-align: right;
+  padding-right: 24px;
+  font-variant-numeric: tabular-nums;
+}
+
+.progress .quiet {
+  color: #7a808a;
+}
+
+.progress .hint {
+  max-width: 64ch;
+}
+
+.backup-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.hidden-input {
+  display: none;
+}
+
+.notice.bad {
+  background: #2e1f1f;
+  border-color: #5a3030;
+  color: #e0b4ae;
+}

@@ -4,6 +4,7 @@ import {
   judge,
   ratingFor,
   sanForMove,
+  squaresForSan,
   verdictDetail,
   verdictHeadline,
 } from './grade'
@@ -110,5 +111,16 @@ describe('sanForMove', () => {
   it('promotes to a queen, which is all this repertoire needs', () => {
     const promoting = '8/4P3/8/8/8/8/8/4K2k w - - 0 1'
     expect(sanForMove(promoting, 'e7', 'e8')).toBe('e8=Q')
+  })
+})
+
+describe('squaresForSan', () => {
+  it('finds the squares a move runs between', () => {
+    expect(squaresForSan(card.fen, 'e3')).toEqual({ from: 'e2', to: 'e3' })
+    expect(squaresForSan(card.fen, 'Bxc7')).toEqual({ from: 'f4', to: 'c7' })
+  })
+
+  it('returns nothing for a move that is not legal here', () => {
+    expect(squaresForSan(card.fen, 'Qh5')).toBeNull()
   })
 })
