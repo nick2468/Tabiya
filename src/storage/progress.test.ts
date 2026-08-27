@@ -2,12 +2,18 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import {
   LocalStorageProgressStore,
   PROGRESS_VERSION,
+  TAG_WINDOW,
   emptyProgress,
   isLearnt,
   parseProgress,
   parseProgressJson,
+  recordAnswer,
+  scheduleFor,
+  tagAccuracy,
+  tagAnswerCount,
   toggleLearnt,
 } from './progress'
+import { newSchedule, review } from '../scheduler'
 
 /** A stand-in for localStorage, since the tests run under node. */
 function fakeStorage(): Storage {
@@ -27,7 +33,46 @@ function fakeStorage(): Storage {
 describe('parseProgress', () => {
   it('reads a well formed state', () => {
     const state = parseProgress({ version: 1, learntLines: ['ch0:d4 d5'] })
-    expect(state).toEqual({ version: PROGRESS_VERSION, learntLines: ['ch0:d4 d5'] })
+    expect(state).toEqual({
+      version: PROGRESS_VERSION,
+      learntLines: ['ch0:d4 d5'],
+      cards: {},
+      tagHistory: {},
+    })
+  })
+
+  it('reads a version 1 file, which is the whole migration', () => {
+    // Version 1 held only learnt lines. Nothing is lost: the drill schedule
+    // simply starts fresh from the lines the trainee had already ticked.
+    const state = parseProgress({ version: 1, learntLines: ['ch1:d4 d5 Bf4'] })
+    expect(state.version).toBe(PROGRESS_VERSION)
+    expect(state.learntLines).toEqual(['ch1:d4 d5 Bf4'])
+    expect(state.cards).toEqual({})
+    expect(state.tagHistory).toEqual({})
+  })
+
+  it('keeps saved schedules and drops anything that is not one', () => {
+    const good = newSchedule(new Date('2026-08-27T09:00:00.000Z'))
+    const state = parseProgress({
+      version: 2,
+      learntLines: [],
+      cards: { keep: good, nonsense: 'not a schedule', partial: { due: 'x' } },
+      tagHistory: {},
+    })
+    expect(Object.keys(state.cards)).toEqual(['keep'])
+  })
+
+  it('keeps tag history within the rolling window', () => {
+    const tooMany = Array.from({ length: TAG_WINDOW + 10 }, (_, i) => (i % 2 === 0 ? 1 : 0))
+    const state = parseProgress({
+      version: 2,
+      learntLines: [],
+      cards: {},
+      tagHistory: { development: tooMany, rubbish: ['yes', 'no'], empty: [] },
+    })
+    expect(state.tagHistory.development).toHaveLength(TAG_WINDOW)
+    expect(state.tagHistory.rubbish).toBeUndefined()
+    expect(state.tagHistory.empty).toBeUndefined()
   })
 
   it('drops entries that are not line ids rather than losing the rest', () => {
@@ -76,13 +121,13 @@ describe('LocalStorageProgressStore', () => {
 
   it('saves and reads back', async () => {
     const store = new LocalStorageProgressStore(storage)
-    await store.save({ version: PROGRESS_VERSION, learntLines: ['ch1:d4 d5 Bf4'] })
+    await store.save({ ...emptyProgress(), learntLines: ['ch1:d4 d5 Bf4'] })
     expect((await store.load()).learntLines).toEqual(['ch1:d4 d5 Bf4'])
   })
 
   it('survives a restart, which is a new store over the same storage', async () => {
     await new LocalStorageProgressStore(storage).save({
-      version: PROGRESS_VERSION,
+      ...emptyProgress(),
       learntLines: ['ch2:d4 d5 Bf4 c5 e3'],
     })
     const afterRestart = await new LocalStorageProgressStore(storage).load()
@@ -100,7 +145,7 @@ describe('LocalStorageProgressStore', () => {
 
   it('round-trips through export and import', async () => {
     const first = new LocalStorageProgressStore(storage)
-    await first.save({ version: PROGRESS_VERSION, learntLines: ['ch0:d4', 'ch1:d4 d5'] })
+    await first.save({ ...emptyProgress(), learntLines: ['ch0:d4', 'ch1:d4 d5'] })
     const exported = await first.exportJson()
 
     const elsewhere = new LocalStorageProgressStore(fakeStorage())
@@ -111,7 +156,7 @@ describe('LocalStorageProgressStore', () => {
 
   it('refuses to import rubbish and leaves the saved state alone', async () => {
     const store = new LocalStorageProgressStore(storage)
-    await store.save({ version: PROGRESS_VERSION, learntLines: ['keep me'] })
+    await store.save({ ...emptyProgress(), learntLines: ['keep me'] })
     await expect(store.importJson('not json at all')).rejects.toThrow(/not valid JSON/)
     expect((await store.load()).learntLines).toEqual(['keep me'])
   })
@@ -131,5 +176,71 @@ describe('learnt lines', () => {
     const before = emptyProgress()
     toggleLearnt(before, 'ch1:line')
     expect(before.learntLines).toEqual([])
+  })
+})
+
+describe('recording answers', () => {
+  const NOW = new Date('2026-08-27T09:00:00.000Z')
+
+  it('saves the card schedule and marks every concept the card carries', () => {
+    const schedule = review(newSchedule(NOW), 'good', NOW)
+    const state = recordAnswer(emptyProgress(), 'card-key', ['development', 'vs-c5'], true, schedule)
+    expect(scheduleFor(state, 'card-key')).toEqual(schedule)
+    expect(tagAccuracy(state, 'development')).toBe(1)
+    expect(tagAccuracy(state, 'vs-c5')).toBe(1)
+  })
+
+  it('works out accuracy from the answers so far', () => {
+    let state = emptyProgress()
+    const schedule = newSchedule(NOW)
+    for (const correct of [true, false, true, true]) {
+      state = recordAnswer(state, 'card', ['development'], correct, schedule)
+    }
+    expect(tagAccuracy(state, 'development')).toBe(0.75)
+    expect(tagAnswerCount(state, 'development')).toBe(4)
+  })
+
+  it('says nothing rather than zero for a concept never drilled', () => {
+    // An untried concept is not a weak one, and scoring it zero would send the
+    // weak-area filter straight at whatever the trainee has not reached yet.
+    expect(tagAccuracy(emptyProgress(), 'endgame')).toBeNull()
+  })
+
+  it('forgets answers older than the rolling window', () => {
+    let state = emptyProgress()
+    const schedule = newSchedule(NOW)
+    // A bad run, then a clean one long enough to push it out of the window.
+    for (let i = 0; i < TAG_WINDOW; i++) {
+      state = recordAnswer(state, 'card', ['h-file'], false, schedule)
+    }
+    expect(tagAccuracy(state, 'h-file')).toBe(0)
+    for (let i = 0; i < TAG_WINDOW; i++) {
+      state = recordAnswer(state, 'card', ['h-file'], true, schedule)
+    }
+    expect(tagAnswerCount(state, 'h-file')).toBe(TAG_WINDOW)
+    expect(tagAccuracy(state, 'h-file')).toBe(1)
+  })
+
+  it('never changes the state it was given', () => {
+    const before = emptyProgress()
+    recordAnswer(before, 'card', ['development'], true, newSchedule(NOW))
+    expect(before.cards).toEqual({})
+    expect(before.tagHistory).toEqual({})
+  })
+
+  it('round-trips a full state through export and import', async () => {
+    const storage = fakeStorage()
+    const store = new LocalStorageProgressStore(storage)
+    let state = emptyProgress()
+    state = toggleLearnt(state, 'ch1:d4 d5 Bf4 e6 e3')
+    state = recordAnswer(state, 'a-position', ['development'], true, review(newSchedule(NOW), 'good', NOW))
+    state = recordAnswer(state, 'another', ['vs-qb6'], false, review(newSchedule(NOW), 'again', NOW))
+    await store.save(state)
+
+    const exported = await store.exportJson()
+    const elsewhere = new LocalStorageProgressStore(fakeStorage())
+    const imported = await elsewhere.importJson(exported)
+    expect(imported).toEqual(state)
+    expect(await elsewhere.load()).toEqual(state)
   })
 })
