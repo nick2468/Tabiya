@@ -1,0 +1,318 @@
+.study {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+/* ---------------------------------------------------------- chapter list */
+
+.chapter-list h2,
+.chapter-head h2 {
+  font-size: 1.05rem;
+  margin: 0 0 10px;
+}
+
+.chapter-list ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.chapter-link {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  border-radius: 0;
+  padding: 7px 8px;
+  color: #c8ccd2;
+  cursor: pointer;
+}
+
+.chapter-link:hover {
+  background: #22262c;
+}
+
+.chapter-link.current {
+  border-left-color: #7bc47f;
+  background: #22262c;
+  color: #e6e6e6;
+  font-weight: 600;
+}
+
+.chapter-number {
+  color: #7a808a;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------- chapter */
+
+.chapter-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #7fb2e5;
+  cursor: pointer;
+  font: inherit;
+}
+
+.link:hover {
+  text-decoration: underline;
+  background: none;
+}
+
+.intro {
+  max-width: 62ch;
+  border-left: 2px solid #2a2e35;
+  padding-left: 16px;
+  margin-bottom: 24px;
+}
+
+.intro h1 {
+  font-size: 1.2rem;
+}
+
+.intro h2 {
+  font-size: 1rem;
+  color: #c8ccd2;
+  margin-bottom: 4px;
+}
+
+.intro p {
+  margin: 0 0 12px;
+}
+
+/* ------------------------------------------------------------ study body */
+
+.study-body {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.study-controls {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.study-side {
+  flex: 1;
+  min-width: 280px;
+  max-width: 46ch;
+}
+
+.hint {
+  color: #7a808a;
+  font-size: 0.85rem;
+  margin: 8px 0 0;
+}
+
+/* ------------------------------------------------------------- the trail */
+
+.trail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.trail-move {
+  background: none;
+  border: 1px solid transparent;
+  padding: 2px 6px;
+  color: #c8ccd2;
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+}
+
+.trail-move:hover {
+  background: #22262c;
+}
+
+.trail-move.current {
+  background: #2f3a2f;
+  border-color: #7bc47f;
+  color: #e6e6e6;
+}
+
+/* ----------------------------------------------------------- the choices */
+
+.choices h3,
+.note h3,
+.lines h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #7a808a;
+  margin: 0 0 8px;
+}
+
+.choice-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.choice {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.weight {
+  background: #3a3f47;
+  border-radius: 8px;
+  padding: 0 6px;
+  font-size: 0.75rem;
+  color: #b3b8bf;
+}
+
+/* -------------------------------------------------------------- the note */
+
+.note {
+  background: #1c1f24;
+  border: 1px solid #2a2e35;
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+}
+
+.note h4 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #7a808a;
+  margin: 14px 0 4px;
+}
+
+.note p {
+  margin: 0;
+}
+
+.note .quiet {
+  color: #7a808a;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px !important;
+}
+
+.tag {
+  background: #262b31;
+  border-radius: 3px;
+  padding: 1px 7px;
+  font-size: 0.75rem;
+  color: #9aa0a6;
+}
+
+/* ------------------------------------------------------- line actions */
+
+.line-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.learnt-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.learnt-toggle.disabled {
+  color: #7a808a;
+  cursor: default;
+}
+
+.learnt-toggle input {
+  accent-color: #7bc47f;
+  width: 16px;
+  height: 16px;
+}
+
+/* -------------------------------------------------------- the line list */
+
+.lines {
+  margin-top: 32px;
+}
+
+.lines .count {
+  text-transform: none;
+  letter-spacing: 0;
+  color: #7a808a;
+  font-weight: 400;
+  margin-left: 8px;
+}
+
+.lines ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 2;
+  column-gap: 32px;
+}
+
+.lines li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  break-inside: avoid;
+  padding: 2px 0;
+}
+
+.line-link {
+  background: none;
+  border: none;
+  padding: 2px 4px;
+  color: #c8ccd2;
+  text-align: left;
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+}
+
+.line-link:hover {
+  background: #22262c;
+  color: #e6e6e6;
+}
+
+.empty {
+  color: #e07a6f;
+}
+
+@media (max-width: 900px) {
+  .study {
+    grid-template-columns: 1fr;
+  }
+
+  .lines ul {
+    columns: 1;
+  }
+}
+
+.notice {
+  background: #1c2530;
+  border: 1px solid #2f4459;
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin: 0;
+  color: #b9c6d4;
+  font-size: 0.9rem;
+}
