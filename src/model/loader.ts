@@ -121,19 +121,22 @@ export function loadChapter(raw: unknown, source = 'unknown'): LoadResult {
   return { ok: true, chapter: loaded, errors: [] }
 }
 
-/** Plays a SAN move, returning false rather than throwing when it is illegal. */
-function playMove(chess: Chess, san: string): boolean {
+/**
+ * Plays a SAN move, returning the squares it moved between, or null rather than
+ * throwing when the move is illegal.
+ */
+function playMove(chess: Chess, san: string): { from: string; to: string } | null {
   try {
-    chess.move(san)
-    return true
+    const move = chess.move(san)
+    return { from: move.from, to: move.to }
   } catch {
-    return false
+    return null
   }
 }
 
 /** True when `san` is legal in the given position. */
 function isLegal(fen: string, san: string): boolean {
-  return playMove(new Chess(fen), san)
+  return playMove(new Chess(fen), san) !== null
 }
 
 function walk(
@@ -165,7 +168,8 @@ function walk(
     }
 
     const chess = new Chess(parentFen)
-    if (!playMove(chess, san)) {
+    const squares = playMove(chess, san)
+    if (!squares) {
       errors.add(path, `"${san}" is not legal in this position`)
       continue
     }
@@ -175,6 +179,8 @@ function walk(
       ...(raw as unknown as Node),
       fen,
       parentFen,
+      from: squares.from,
+      to: squares.to,
       key: positionKey(parentFen),
       ply,
       colour,

@@ -94,6 +94,7 @@ carries everything the author wrote plus:
 |---|---|
 | `fen` | The position after this node's move. |
 | `parentFen` | The position the move was played from. Drill cards use this: it is the position where the trainee must find `san`. |
+| `from`, `to` | The squares the move ran between, so the board can draw the last-move arrow without replaying the move. |
 | `key` | `parentFen` reduced to piece placement, side to move, castling rights and the en passant square. Card identity, so the same position reached through two chapters is one card. |
 | `ply` | `stem.length + depth`. |
 | `colour` | `white` or `black`, from ply parity. |
@@ -112,5 +113,8 @@ problem at once. Each error names the chapter, the path to the node, and what is
   break card dedup.
 - 2026-08-27: mistake entries are legal from the node's PARENT position. A mistake is
   a wrong choice instead of the repertoire move, so it shares the move's start point.
+- 2026-08-27: nodes carry `from` and `to`. The loader already plays each move to
+  check it, so recording the squares costs nothing and saves Study, Drill and Play
+  from replaying a move just to draw an arrow.
 - 2026-08-27: unknown fields rejected. A silently ignored typo in authored content is
   the failure mode this schema exists to prevent.

@@ -56,6 +56,10 @@ export interface LoadedNode extends Node {
   fen: string
   /** The position this move was played from - where a drill card asks. */
   parentFen: string
+  /** The square the move started on, for the board's last-move arrow. */
+  from: string
+  /** The square the move ended on. */
+  to: string
   /** parentFen without the move counters: card identity across chapters. */
   key: string
   /** stem.length + depth. */
