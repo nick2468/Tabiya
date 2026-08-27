@@ -126,7 +126,13 @@ function ChapterStudy({ chapter }: { chapter: LoadedChapter }) {
 
           {choices.length > 0 ? (
             <div className="choices">
-              <h3>{current ? 'Continue with' : 'Black plays'}</h3>
+              <h3>
+                {current
+                  ? 'Continue with'
+                  : choices[0]?.colour === 'white'
+                    ? 'White plays'
+                    : 'Black plays'}
+              </h3>
               <div className="choice-row">
                 {choices.map((node) => (
                   <button
