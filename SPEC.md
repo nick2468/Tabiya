@@ -157,9 +157,9 @@ validator are pure TypeScript with no React in them - Drill and Play consume the
 | Windows wrapper | Tauri 2, added in phase 5 only | Small native .exe on WebView2 (the web view built into Windows 11). The app runs in the browser until then; no Rust toolchain before phase 5. Ruled 2026-08-27. |
 | Board | chessground (the lichess board widget) via a thin React wrapper | Best feel; built-in arrows and highlights that Study needs. Needs its CSS and piece assets imported. Fallback: react-chessboard (MIT), only on a recorded escalation. |
 | Rules | chess.js | Legality, SAN, FEN, PGN groundwork. |
-| Engine | Stockfish WASM in a web worker, UCI protocol | Strong beyond any training need; no native binary before the wrap. |
+| Engine | Stockfish WASM in a web worker, UCI protocol | Strong beyond any training need; no native binary before the wrap. The single-threaded lite build is the one shipped: no SharedArrayBuffer, so no cross-origin isolation headers, and 7 MB rather than 113. It is GPL-3, which binds anything distributed. |
 | Scheduler | ts-fsrs | Modern algorithm, small MIT library, no hand-rolled SM-2. |
-| Persistence | `ProgressStore` interface: load/save/export/import of one versioned JSON state | localStorage implementation until phase 5, then Tauri AppData files. Export/import doubles as the migration path and the backup story. |
+| Persistence | `ProgressStore` interface: load/save/export/import of one versioned JSON state | localStorage in a browser, a file under AppData in the wrapped app, chosen at runtime. Export/import doubles as the migration path and the backup story. Built as specified. |
 
 Module boundaries, kept clean so the Tauri wrap touches only storage and build config:
 `src/model` (types, loader, validator - pure), `src/scheduler` (FSRS wrap - pure),
@@ -203,6 +203,14 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   cited games arrive with PGN import or a game database. Ruled 2026-08-27.
 - **In-app content editor**: the content editor for this app is a Claude session;
   likely a permanent defer.
+- **Code splitting the bundle**: one chunk crosses Vite's 500 kB warning line. It is
+  a local file load in a desktop window, so it costs nothing a trainee would notice.
+  Worth doing if the app ever loads over a network. Recorded at gate 3, ruled at
+  phase 5.
+- **Auto-update and code signing**: the installer is unsigned and the app never
+  phones home. Windows SmartScreen will warn on first run, which is what an unsigned
+  installer looks like. Signing needs a certificate and a decision about updates that
+  a single-user app does not need yet.
 - **Classical move order content** (2.Nf3 first): schema-ready; author when wanted.
 
 ## 7. Risks
