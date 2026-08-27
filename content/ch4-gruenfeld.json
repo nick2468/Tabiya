@@ -1,0 +1,443 @@
+{
+  "id": "ch4-gruenfeld",
+  "title": "Grunfeld setups",
+  "defaultTags": [
+    "vs-gruenfeld"
+  ],
+  "intro": "# Grunfeld setups\n\nBlack fianchettos with ...g6 and also puts a pawn on d5. It looks like the last chapter and plays quite differently, so check the d-pawn before you choose a plan.\n\n## The one difference that matters\n\nIn the King's Indian setups Black plays ...d6 and White answers with c4, taking a big centre. Here Black has a pawn on d5, so c4 achieves nothing and costs something: it opens lines for the bishop on g7, which is the piece you want to keep looking at your solid pawn on d4.\n\nSo the pawn goes to c3 and stays there. This is the slow chapter.\n\n## Your setup\n\nBf4, e3, Nf3, Be2, castle, c3, h3, Nbd2, then Ne5 and f4. The bishop goes to e2 for the same reason as the last chapter: the pawn on g6 covers h7, so d3 aims at a defended square.\n\nThe h3 move is worth playing early. Black's ...Nh5 is the standard nuisance in these positions, and Bh2 is a much better answer than Bg3.\n\n## Where the play comes from\n\nWhite's chances are the e5 square and the kingside. Black's are the long diagonal and the queenside. Keep the centre closed and you keep the better half of that bargain: the bishop on g7 spends the game staring at a pawn on d4 that has two defenders.\n\n## Typical mistakes at this level\n\nPlaying c4 out of habit from the King's Indian chapter and opening the diagonal. Taking on c5, which does the same thing for free. Putting the bishop on d3 where the g6 pawn makes it pointless. Jumping to e5 before c3, d4 and the knight on d2 are there to support it.",
+  "stem": [
+    "d4",
+    "Nf6",
+    "Bf4"
+  ],
+  "tree": [
+    {
+      "san": "g6",
+      "note": "A fianchetto is coming. Whether this is chapter 3 or chapter 4 depends on the d-pawn.",
+      "weight": 8,
+      "children": [
+        {
+          "san": "e3",
+          "note": "Build the triangle and wait for Black to commit the d-pawn.",
+          "tags": [
+            "development"
+          ],
+          "mistakes": [
+            {
+              "san": "Nc3",
+              "grade": "inaccuracy",
+              "note": "It blocks the c-pawn before you know whether the pawn wants c3 or c4."
+            },
+            {
+              "san": "c4",
+              "grade": "playable",
+              "note": "A real alternative that grabs space, but it becomes a different opening once Black replies ...d5."
+            }
+          ],
+          "children": [
+            {
+              "san": "d5",
+              "note": "This is the move that puts you in this chapter rather than the last one. Black has a pawn in the centre, so c4 is no longer a free lunch.",
+              "weight": 7,
+              "children": [
+                {
+                  "san": "Nf3",
+                  "note": "Develop and cover e5. With ...d5 played, White builds rather than grabs.",
+                  "tags": [
+                    "development"
+                  ],
+                  "mistakes": [
+                    {
+                      "san": "c4",
+                      "grade": "inaccuracy",
+                      "note": "It opens the position for the bishop on g7 and hands Black the ...dxc4 and ...c5 counterplay. Save c4 for the setups where Black plays d6."
+                    },
+                    {
+                      "san": "Bd3",
+                      "grade": "inaccuracy",
+                      "note": "The pawn on g6 covers h7, so the bishop has nothing to aim at from d3."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "Bg7",
+                      "weight": 9,
+                      "children": [
+                        {
+                          "san": "Be2",
+                          "note": "Bishop to e2 against any fianchetto. It is out of the way, it supports the centre, and ...Nh5 cannot hit it.",
+                          "tags": [
+                            "bishop-placement"
+                          ],
+                          "mistakes": [
+                            {
+                              "san": "Bd3",
+                              "grade": "inaccuracy",
+                              "note": "The habit from the ...e6 chapters, applied where it does not belong."
+                            },
+                            {
+                              "san": "c3",
+                              "grade": "playable",
+                              "note": "The pawn is going to c3 sooner or later, so this only changes the order."
+                            }
+                          ],
+                          "shapes": [
+                            {
+                              "orig": "g6",
+                              "brush": "red"
+                            },
+                            {
+                              "orig": "f1",
+                              "dest": "e2",
+                              "brush": "green"
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "O-O",
+                              "weight": 8,
+                              "children": [
+                                {
+                                  "san": "O-O",
+                                  "note": "Both kings safe. Now White finishes the triangle and looks for the e5 outpost.",
+                                  "tags": [
+                                    "king-safety"
+                                  ],
+                                  "mistakes": [
+                                    {
+                                      "san": "Ne5",
+                                      "grade": "inaccuracy",
+                                      "note": "The knight arrives before the support does, and Black chases it with ...Nfd7 or ...c5."
+                                    },
+                                    {
+                                      "san": "h4",
+                                      "grade": "mistake",
+                                      "note": "An attack with the king still in the centre, against a position with no weaknesses. Black opens the centre and White is worse."
+                                    }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "c5",
+                                      "note": "The standard break at the base of the triangle.",
+                                      "weight": 6,
+                                      "children": [
+                                        {
+                                          "san": "c3",
+                                          "note": "Hold d4. Black cannot win the pawn, and a solid centre is what keeps the bishop on g7 quiet.",
+                                          "tags": [
+                                            "development"
+                                          ],
+                                          "mistakes": [
+                                            {
+                                              "san": "dxc5",
+                                              "grade": "inaccuracy",
+                                              "note": "It opens the long diagonal straight at your queenside. The bishop on g7 has been waiting for this since move two."
+                                            },
+                                            {
+                                              "san": "c4",
+                                              "grade": "inaccuracy",
+                                              "note": "The same problem: opening lines helps the fianchettoed bishop, not you."
+                                            }
+                                          ],
+                                          "shapes": [
+                                            {
+                                              "orig": "c3",
+                                              "brush": "green"
+                                            },
+                                            {
+                                              "orig": "d4",
+                                              "brush": "green"
+                                            },
+                                            {
+                                              "orig": "e3",
+                                              "brush": "green"
+                                            }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "Nc6",
+                                              "weight": 7,
+                                              "children": [
+                                                {
+                                                  "san": "h3",
+                                                  "note": "The escape square again. With a pawn on h3 the bishop answers ...Nh5 with Bh2 and keeps its diagonal.",
+                                                  "tags": [
+                                                    "bishop-placement"
+                                                  ],
+                                                  "mistakes": [
+                                                    {
+                                                      "san": "Nbd2",
+                                                      "grade": "playable",
+                                                      "note": "The knight is going there anyway. Slipping in h3 first means ...Nh5 and ...Bg4 never cost you anything."
+                                                    },
+                                                    {
+                                                      "san": "Ne5",
+                                                      "grade": "inaccuracy",
+                                                      "note": "Too early: the knight has no support yet, so Black trades it off with ...Nxe5 on comfortable terms."
+                                                    },
+                                                    {
+                                                      "san": "dxc5",
+                                                      "grade": "inaccuracy",
+                                                      "note": "It gives up the centre and opens the long diagonal for the bishop on g7, which is the piece you least want to help."
+                                                    }
+                                                  ],
+                                                  "shapes": [
+                                                    {
+                                                      "orig": "f4",
+                                                      "dest": "h2",
+                                                      "brush": "green"
+                                                    }
+                                                  ],
+                                                  "children": [
+                                                    {
+                                                      "san": "b6",
+                                                      "note": "Black finishes developing on the queenside.",
+                                                      "weight": 5,
+                                                      "children": [
+                                                        {
+                                                          "san": "Nbd2",
+                                                          "note": "The queen's knight to d2, as ever, so the pawn on c3 keeps holding d4.",
+                                                          "tags": [
+                                                            "development"
+                                                          ],
+                                                          "mistakes": [
+                                                            {
+                                                              "san": "Ne5",
+                                                              "grade": "playable",
+                                                              "note": "Fine, but the knight is happier once the other one is on d2 to back it up."
+                                                            },
+                                                            {
+                                                              "san": "c4",
+                                                              "grade": "inaccuracy",
+                                                              "note": "Here it helps Black: the centre opens and the bishop on g7 gets the long diagonal it has been waiting for."
+                                                            }
+                                                          ],
+                                                          "children": [
+                                                            {
+                                                              "san": "Bb7",
+                                                              "weight": 7,
+                                                              "children": [
+                                                                {
+                                                                  "san": "Ne5",
+                                                                  "note": "The outpost, supported by c3, d4 and the knight on d2. This is as good as the London gets against a fianchetto.",
+                                                                  "tags": [
+                                                                    "kingside-attack"
+                                                                  ],
+                                                                  "mistakes": [
+                                                                    {
+                                                                      "san": "Qb3",
+                                                                      "grade": "playable",
+                                                                      "note": "Hitting d5 is a real idea, but the knight jump is simpler and improves your worst-placed piece."
+                                                                    },
+                                                                    {
+                                                                      "san": "g4",
+                                                                      "grade": "mistake",
+                                                                      "note": "A pawn storm in front of your own castled king, with the centre still open and a bishop on b7 aiming at it."
+                                                                    }
+                                                                  ],
+                                                                  "shapes": [
+                                                                    {
+                                                                      "orig": "e5",
+                                                                      "brush": "green"
+                                                                    }
+                                                                  ],
+                                                                  "plan": "Play f4 to weld the knight in place, then Qf3 or Rf3 and swing at the king. Keep an eye on ...cxd4 and ...Nxe5: if the knight is traded, recapture with a pawn so the outpost stays occupied."
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "san": "Nh5",
+                                                      "note": "The harassment try, which the last move already answered.",
+                                                      "weight": 4,
+                                                      "children": [
+                                                        {
+                                                          "san": "Bh2",
+                                                          "note": "Straight back to h2. The bishop keeps the long diagonal, the knight on h5 is offside, and White has lost nothing.",
+                                                          "tags": [
+                                                            "bishop-placement"
+                                                          ],
+                                                          "mistakes": [
+                                                            {
+                                                              "san": "Bg3",
+                                                              "grade": "inaccuracy",
+                                                              "note": "Now ...Nxg3 trades off your best piece. That was the whole reason for playing h3."
+                                                            },
+                                                            {
+                                                              "san": "Be5",
+                                                              "grade": "playable",
+                                                              "note": "Also possible, but on e5 the bishop can be challenged by ...Nc6 or ...f6."
+                                                            }
+                                                          ],
+                                                          "shapes": [
+                                                            {
+                                                              "orig": "h2",
+                                                              "dest": "b8",
+                                                              "brush": "blue"
+                                                            }
+                                                          ],
+                                                          "plan": "Play Nbd2 and Ne5, and remember Black's knight on h5 is not defending anything. If it comes back to f6 you have gained two free moves."
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Bg7",
+              "note": "Black develops first and keeps the d-pawn's choice open.",
+              "weight": 6,
+              "children": [
+                {
+                  "san": "Nf3",
+                  "note": "Develop and wait. The bishop's square is already decided by the pawn on g6.",
+                  "tags": [
+                    "development"
+                  ],
+                  "mistakes": [
+                    {
+                      "san": "Bd3",
+                      "grade": "inaccuracy",
+                      "note": "There is a pawn on g6. The bishop belongs on e2 whatever Black does with the d-pawn."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "d5",
+                      "weight": 7,
+                      "children": [
+                        {
+                          "san": "Be2",
+                          "note": "A fianchetto plus a pawn on d5 means the slow plan: build, castle, and aim for Ne5.",
+                          "tags": [
+                            "bishop-placement"
+                          ],
+                          "children": [
+                            {
+                              "san": "O-O",
+                              "weight": 8,
+                              "children": [
+                                {
+                                  "san": "O-O",
+                                  "note": "The setup is complete and nothing can be taken from White.",
+                                  "tags": [
+                                    "king-safety"
+                                  ],
+                                  "plan": "Play c3 and h3, then Nbd2 and Ne5 with f4 behind it. Do not open the centre while Black's bishop is on g7 looking through it."
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "d5",
+      "note": "The other route in: Black takes the centre first and fianchettos afterwards.",
+      "weight": 6,
+      "children": [
+        {
+          "san": "e3",
+          "note": "The usual triangle. Nothing here needs a decision yet.",
+          "tags": [
+            "development"
+          ],
+          "mistakes": [
+            {
+              "san": "Nc3",
+              "grade": "inaccuracy",
+              "note": "It blocks the c-pawn, which is the pawn holding your centre together."
+            }
+          ],
+          "children": [
+            {
+              "san": "g6",
+              "note": "Now the fianchetto arrives, and with a pawn already on d5 this is a chapter 4 position.",
+              "weight": 6,
+              "children": [
+                {
+                  "san": "Nf3",
+                  "note": "Develop. The bishop's square is settled the moment the g-pawn moves.",
+                  "tags": [
+                    "development"
+                  ],
+                  "mistakes": [
+                    {
+                      "san": "Bd3",
+                      "grade": "inaccuracy",
+                      "note": "The pawn on g6 has just taken away the point of that square."
+                    },
+                    {
+                      "san": "c4",
+                      "grade": "inaccuracy",
+                      "note": "With a Black pawn on d5 and a bishop coming to g7, opening the centre helps Black more than White."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "Bg7",
+                      "weight": 8,
+                      "children": [
+                        {
+                          "san": "Be2",
+                          "note": "Bishop to e2, and the rest follows itself.",
+                          "tags": [
+                            "bishop-placement"
+                          ],
+                          "children": [
+                            {
+                              "san": "O-O",
+                              "weight": 8,
+                              "children": [
+                                {
+                                  "san": "O-O",
+                                  "note": "Castle and take stock. White has the easier position to play because every piece has a known square.",
+                                  "tags": [
+                                    "king-safety"
+                                  ],
+                                  "plan": "Play c3, h3 and Nbd2, then Ne5 with f4. If Black breaks with ...c5, hold with c3 and never take on c5 while that bishop sits on g7."
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
