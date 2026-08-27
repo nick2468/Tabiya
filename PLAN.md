@@ -142,20 +142,20 @@ Open items (phase 2):
 
 Goal: the daily training loop, and content complete.
 
-- [ ] 3.1 `src/scheduler`: ts-fsrs behind a thin interface; vitest coverage of the
+- [x] 3.1 `src/scheduler`: ts-fsrs behind a thin interface; vitest coverage of the
   grade-to-rating mapping and rescheduling.
-- [ ] 3.2 Card generation from learnt lines: one card per White-to-move node, keyed
+- [x] 3.2 Card generation from learnt lines: one card per White-to-move node, keyed
   and deduplicated by FEN across chapters (SPEC.md section 2); tests.
-- [ ] 3.3 Drill UI: due queue; answer by playing the move on the board; grading flow -
+- [x] 3.3 Drill UI: due queue; answer by playing the move on the board; grading flow -
   exact move Good (Easy button available), listed mistake by authored grade with its
   note, unlisted move Again with the honest "not the repertoire move" framing plus
   the expected move's note.
-- [ ] 3.4 Weak-areas filter: rolling per-tag accuracy, filter prefers the weakest
+- [x] 3.4 Weak-areas filter: rolling per-tag accuracy, filter prefers the weakest
   tags; test proving the preference.
-- [ ] 3.5 Progress view, core: per-chapter completion, due counts, per-concept
+- [x] 3.5 Progress view, core: per-chapter completion, due counts, per-concept
   accuracy.
-- [ ] 3.6 Export and import of the whole progress state; round-trip test.
-- [ ] 3.7 Draft ch6 and ch7 to the section 3 bar (ch7 nodes are exercise positions);
+- [x] 3.6 Export and import of the whole progress state; round-trip test.
+- [x] 3.7 Draft ch6 and ch7 to the section 3 bar (ch7 nodes are exercise positions);
   one commit per chapter. Content is now complete: all eight chapters PASS.
 
 Acceptance: a full drill session runs end to end; grading matches SPEC.md section 2;
@@ -164,7 +164,32 @@ preference proven by test; all eight chapters validator-green.
 
 - [ ] **Review gate 3 passed**
 
-Open items (phase 3): none yet.
+Open items (phase 3):
+
+1. **The Greek gift has no exercise, deliberately.** SPEC.md section 3 lists Bxh7+ as a
+   chapter 7 topic. It is taught there as a checklist of the four conditions to verify
+   before playing it, but there is no drill position, because a sacrifice nobody has
+   checked is not something to teach and there is no engine until phase 4. Task 4.6 is
+   the natural moment: build one position, verify it with Stockfish, and add it.
+2. **Model games are described, not cited.** The same chapter says Kamsky is the
+   reference player and names the recurring patterns, but lists no specific games. The
+   app has no game database to check a citation against, and PGN import is a deferred
+   v2 item in SPEC.md section 6. Revisit if that defer is ever taken.
+3. **Chapter 0 keeps its two lines** (carried from phase 2 open items). Checked with
+   the card machinery working: those two lines produce twelve cards, and every position
+   in them is shared with chapter 1 or chapter 7, so nothing goes undrilled. Only the
+   "0 of 2 learnt" line count reads thin. Left as it is: the chapter is a concept tour,
+   and padding it with lines nobody needs would make the course longer, not better.
+4. **A failed card returns at the end of the same session, so a session with a move
+   that will not come to mind never empties by itself.** That is deliberate: the
+   alternative, dropping the card, means the trainee finishes without ever getting it
+   right. The session can always be ended from the header. If it turns out to be
+   annoying in real use, the fix is a cap on how many times one card can come back.
+5. **The export button was not clicked in this session.** It writes a file to the
+   browser's downloads folder, which is Nick's machine, so it was left alone. Import was
+   driven both ways through the real file input, including a deliberately corrupt file
+   that correctly left the saved progress untouched, and the round trip is covered by a
+   unit test. Phase 5 replaces the download with a Tauri save dialog anyway.
 
 ---
 
