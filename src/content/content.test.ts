@@ -103,3 +103,20 @@ describe('the repertoire chapters', () => {
     })
   }
 })
+
+describe('chapter 7, the exercises', () => {
+  it('ends every exercise on a White move worth drilling', () => {
+    const chapter = byId('ch7')
+    for (const line of walkNodes(chapter).filter((node) => node.isLeaf)) {
+      expect(line.colour, line.path.join(' ')).toBe('white')
+    }
+  })
+
+  it('carries at least four exercises', () => {
+    expect(walkNodes(byId('ch7')).filter((node) => node.isLeaf).length).toBeGreaterThanOrEqual(4)
+  })
+
+  it('runs each exercise deep enough to be a real position', () => {
+    expect(deepestFullMove(byId('ch7'))).toBeGreaterThanOrEqual(10)
+  })
+})
