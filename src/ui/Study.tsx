@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import Markdown from 'react-markdown'
-import type { DrawShape } from 'chessground/draw'
 import { Board } from './Board'
 import { useProgress } from './progress-context'
 import { chapters } from '../content'
 import { chapterLines, fullMoveNumber, lineId } from '../model/lines'
+import { nodeShapes } from '../model/shapes'
 import type { LoadedChapter, LoadedNode } from '../model/types'
 import './study.css'
 
@@ -84,7 +84,7 @@ function ChapterStudy({ chapter }: { chapter: LoadedChapter }) {
   }, [goBack, goForward])
 
   const fen = current?.fen ?? chapter.stemFen
-  const shapes = useMemo(() => boardShapes(current), [current])
+  const shapes = useMemo(() => nodeShapes(current), [current])
 
   const atLine = current?.isLeaf ? lineId(chapter.id, current.path) : null
   const learntCount = lines.filter((line) => learnt(line.id)).length
@@ -292,25 +292,4 @@ function stemLabel(chapter: LoadedChapter): string {
 /** The last move as a pair of squares, for the board's own highlight. */
 function lastMove(node: LoadedNode | undefined): [string, string] | undefined {
   return node ? [node.from, node.to] : undefined
-}
-
-/**
- * What the board draws: an arrow for the move just played, then whatever the
- * author asked for on this node.
- */
-function boardShapes(node: LoadedNode | undefined): DrawShape[] {
-  if (!node) return []
-  const arrow: DrawShape = { orig: node.from as never, dest: node.to as never, brush: 'blue' }
-  const authored = (node.shapes ?? [])
-    // An authored arrow along the move just played would draw on top of the
-    // last-move arrow. Keep the author's, which chose its own colour.
-    .filter((shape) => !(shape.orig === node.from && shape.dest === node.to))
-    .map((shape) => ({ orig: shape.orig, dest: shape.dest, brush: shape.brush }) as DrawShape)
-  const repeated = (node.shapes ?? []).find(
-    (shape) => shape.orig === node.from && shape.dest === node.to,
-  )
-  const lastMoveArrow = repeated
-    ? ({ orig: repeated.orig, dest: repeated.dest, brush: repeated.brush } as DrawShape)
-    : arrow
-  return [lastMoveArrow, ...authored]
 }

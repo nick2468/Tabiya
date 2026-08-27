@@ -2,9 +2,9 @@ import { useEffect, useRef } from 'react'
 import { Chessground } from 'chessground'
 import type { Api } from 'chessground/api'
 import type { Config } from 'chessground/config'
-import type { DrawShape } from 'chessground/draw'
 import type { Key } from 'chessground/types'
 import type { Dests } from '../model/position'
+import type { Shape } from '../model/types'
 
 import 'chessground/assets/chessground.base.css'
 import 'chessground/assets/chessground.brown.css'
@@ -24,8 +24,8 @@ export interface BoardProps {
   dests?: Dests
   /** Squares of the previous move, highlighted. */
   lastMove?: [string, string]
-  /** Authored arrows and circles from the content. */
-  shapes?: DrawShape[]
+  /** Arrows and circles to draw: the last move, plus anything authored. */
+  shapes?: Shape[]
   /** Called after a legal drag or click move. */
   onMove?: (orig: string, dest: string) => void
   /** Board width and height in CSS pixels. */
@@ -111,7 +111,13 @@ export function Board({
   }, [fen, orientation, turnColor, movableColor, dests, lastMove])
 
   useEffect(() => {
-    api.current?.setAutoShapes(shapes ?? [])
+    api.current?.setAutoShapes(
+      (shapes ?? []).map((shape) => ({
+        orig: shape.orig as Key,
+        dest: shape.dest as Key | undefined,
+        brush: shape.brush,
+      })),
+    )
   }, [shapes])
 
   return <div className="board" ref={host} style={{ width: size, height: size }} />
