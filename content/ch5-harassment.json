@@ -43,7 +43,7 @@
                   "san": "Bg3",
                   "note": "Step back and let Black decide. Taking on g3 opens the h-file for White, which is a bargain at the price of one bishop.",
                   "tags": [
-                    "vs-bf5",
+                    "bishop-placement",
                     "h-file"
                   ],
                   "mistakes": [
@@ -558,7 +558,7 @@
                       "children": [
                         {
                           "san": "Qxd3",
-                          "note": "Recapture with the queen, not the pawn. The queen lands on the b1 to h7 diagonal, eyeing h7 and b7 at the same time.",
+                          "note": "Recapture with the queen, not the pawn. The queen lands on the b1 to h7 diagonal, eyeing h7.",
                           "tags": [
                             "vs-bf5",
                             "kingside-attack"
