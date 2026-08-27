@@ -1,0 +1,241 @@
+{
+  "id": "ch0-the-system",
+  "title": "The system",
+  "defaultTags": ["development"],
+  "intro": "# The system\n\nThe London System is a setup, not a sequence to memorise. White builds the same little structure against nearly everything Black does, then plays chess from a position White already understands. That is the whole appeal: you spend your study time on plans instead of on theory that changes every year.\n\n## The pawn triangle\n\nThe pawns go to c3, d4 and e3. They form a triangle that holds the centre, gives every piece a safe square, and cannot be knocked over easily. The one pawn missing from the triangle is the f-pawn, and that is deliberate: later it often runs to f4 and joins a kingside attack.\n\n## Piece homes\n\nThe dark-squared bishop goes to f4 BEFORE e3 is played. This is the single most important move order point in the opening. Once the pawn sits on e3 the bishop is stuck behind its own pawns for the rest of the game, which is exactly the problem that made the old Queen's Pawn openings dull.\n\nAfter that the pieces almost place themselves. The knight goes to f3, the other knight to d2 rather than c3, so the c-pawn keeps its square. The light-squared bishop chooses between d3 and e2, and the king castles short.\n\n## Bishop adaptation\n\nAgainst a Black setup with pawns on d5 and e6, put the bishop on d3. It stares at h7, which is the square every London attack eventually aims at.\n\nAgainst a Black fianchetto with a pawn on g6, put the bishop on e2 instead. The g6 pawn already covers h7, so d3 attacks nothing. On e2 the bishop supports the c4 break and stays out of the way of ...Nh5 ideas.\n\n## The h3 escape square\n\nBlack's most annoying try is ...Nh5, hitting the bishop on f4. The tidy answer is to play h2-h3 early. That small move opens h2, so when Black comes with ...Nh5 the bishop retreats to h2 and keeps working on the long diagonal.\n\n## The standard attack\n\nWhen Black castles short and plays on the queenside, White has a ready-made plan: knight to e5, pawn to f4, rook swings to f3 and then h3, and the queen joins on the kingside. Black's pieces are usually on the other wing, which is why the attack works so often at club level.\n\n## When to break the routine\n\nThe setup is a default, not a law. Break it when Black gives you something better: take a free pawn, meet a real threat, or grab the centre with c4 or e4 when the position asks for it. The routine buys you time to think about the position, and thinking is still the job.\n\n## Typical mistakes at this level\n\nPlaying e3 before Bf4 and burying the bishop. Playing Nc3 and taking the c-pawn's square. Attacking on the kingside before the king is safe. Playing the moves in order while ignoring a threat.",
+  "stem": [],
+  "tree": [
+    {
+      "san": "d4",
+      "note": "The one first move this repertoire plays. Everything that follows is built on a pawn here.",
+      "children": [
+        {
+          "san": "d5",
+          "weight": 7,
+          "note": "The most common reply at club level: Black stakes an equal claim in the centre.",
+          "children": [
+            {
+              "san": "Bf4",
+              "note": "The bishop comes out before the e-pawn blocks it in. This is the move that defines the whole opening.",
+              "tags": ["bishop-placement"],
+              "shapes": [{ "orig": "c1", "dest": "f4", "brush": "green" }],
+              "mistakes": [
+                {
+                  "san": "e3",
+                  "grade": "mistake",
+                  "note": "The bishop is now trapped behind its own pawns and has no future. This is the exact error the London exists to avoid."
+                },
+                {
+                  "san": "Nf3",
+                  "grade": "playable",
+                  "note": "A sound move that usually transposes, but it lets Black play ...Bf5 first and take the good diagonal."
+                },
+                {
+                  "san": "c4",
+                  "grade": "playable",
+                  "note": "Fine chess, but this is the Queen's Gambit and a different course of study."
+                }
+              ],
+              "children": [
+                {
+                  "san": "Nf6",
+                  "weight": 8,
+                  "children": [
+                    {
+                      "san": "e3",
+                      "note": "Now the pawn comes to e3, with the bishop safely outside. The triangle has begun.",
+                      "mistakes": [
+                        {
+                          "san": "Nc3",
+                          "grade": "inaccuracy",
+                          "note": "The knight takes the square the c-pawn wants. In the London the queen's knight belongs on d2."
+                        },
+                        {
+                          "san": "Nf3",
+                          "grade": "playable",
+                          "note": "Also good and usually the same thing a move later. Playing e3 first keeps the f3 square open in case the knight is needed elsewhere."
+                        }
+                      ],
+                      "children": [
+                        {
+                          "san": "e6",
+                          "weight": 7,
+                          "note": "A solid, classical setup. Black shuts in the light-squared bishop but builds a wall that is hard to break.",
+                          "children": [
+                            {
+                              "san": "Nf3",
+                              "note": "Develop and cover e5, the square White wants a knight on later.",
+                              "mistakes": [
+                                {
+                                  "san": "c4",
+                                  "grade": "playable",
+                                  "note": "A reasonable move, but it leaves the London for an opening you have not prepared."
+                                },
+                                {
+                                  "san": "Bd3",
+                                  "grade": "playable",
+                                  "note": "The same idea in a different order. Knight first is safer because it stops ...Ne4 tricks."
+                                }
+                              ],
+                              "children": [
+                                {
+                                  "san": "Be7",
+                                  "weight": 5,
+                                  "children": [
+                                    {
+                                      "san": "Bd3",
+                                      "note": "Against a d5 and e6 wall, the bishop belongs here, aiming at h7. Against a fianchetto it would go to e2 instead.",
+                                      "tags": ["bishop-placement", "kingside-attack"],
+                                      "shapes": [{ "orig": "d3", "dest": "h7", "brush": "blue" }],
+                                      "mistakes": [
+                                        {
+                                          "san": "Be2",
+                                          "grade": "inaccuracy",
+                                          "note": "Passive here. Black has no pawn on g6, so h7 is a real target and the bishop should be pointing at it."
+                                        },
+                                        {
+                                          "san": "Bb5+",
+                                          "grade": "inaccuracy",
+                                          "note": "A check with no purpose. Black blocks with ...c6 or ...Nc6 and White has wasted time."
+                                        }
+                                      ],
+                                      "children": [
+                                        {
+                                          "san": "O-O",
+                                          "weight": 8,
+                                          "children": [
+                                            {
+                                              "san": "Nbd2",
+                                              "note": "The queen's knight goes to d2, not c3, so the c-pawn can still reach c3 and hold d4.",
+                                              "mistakes": [
+                                                {
+                                                  "san": "Nc3",
+                                                  "grade": "inaccuracy",
+                                                  "note": "It blocks the c-pawn. Without c3 the d4 pawn has one defender fewer and ...c5 becomes annoying."
+                                                },
+                                                {
+                                                  "san": "Ne5",
+                                                  "grade": "inaccuracy",
+                                                  "note": "Too early. The knight gets chased or traded before the supporting pieces are in place."
+                                                }
+                                              ],
+                                              "children": [
+                                                {
+                                                  "san": "c5",
+                                                  "weight": 6,
+                                                  "note": "The standard freeing try: Black hits the base of White's centre.",
+                                                  "children": [
+                                                    {
+                                                      "san": "c3",
+                                                      "note": "The triangle is complete. The d4 pawn now has two defenders and Black cannot break through by force.",
+                                                      "shapes": [
+                                                        { "orig": "c3", "brush": "green" },
+                                                        { "orig": "d4", "brush": "green" },
+                                                        { "orig": "e3", "brush": "green" }
+                                                      ],
+                                                      "mistakes": [
+                                                        {
+                                                          "san": "dxc5",
+                                                          "grade": "inaccuracy",
+                                                          "note": "It gives up the centre for nothing. Black recaptures with the bishop and gets a free game."
+                                                        }
+                                                      ],
+                                                      "children": [
+                                                        {
+                                                          "san": "Nc6",
+                                                          "weight": 7,
+                                                          "children": [
+                                                            {
+                                                              "san": "O-O",
+                                                              "note": "Get the king safe before starting anything. White often adds h3 around here, which opens h2 as a bolt-hole for the f4 bishop.",
+                                                              "tags": ["king-safety"],
+                                                              "children": [
+                                                                {
+                                                                  "san": "b6",
+                                                                  "weight": 5,
+                                                                  "note": "Black plays on the queenside, which is the invitation White wants.",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Ne5",
+                                                                      "note": "The knight takes its outpost. It is defended, it is annoying, and it is the first piece of the attack.",
+                                                                      "tags": ["kingside-attack"],
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Bb7",
+                                                                          "weight": 7,
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Bg3",
+                                                                              "note": "The bishop steps aside so the f-pawn can move. It keeps the same diagonal and now supports the knight on e5.",
+                                                                              "tags": ["kingside-attack", "bishop-placement"],
+                                                                              "plan": "Play f4 next, which welds the knight to e5, then swing the rook with Rf3 and Rh3 and bring the queen across. Black's pieces are all on the queenside and cannot get back in time.",
+                                                                              "shapes": [
+                                                                                { "orig": "f2", "dest": "f4", "brush": "red" },
+                                                                                { "orig": "f1", "dest": "f3", "brush": "red" }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                },
+                                                                {
+                                                                  "san": "Nh5",
+                                                                  "weight": 3,
+                                                                  "note": "The standard nuisance: Black offers to trade off White's best minor piece.",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Bg3",
+                                                                      "note": "Step back and keep the bishop. Had White played h3 earlier, Bh2 would keep it on the better diagonal.",
+                                                                      "tags": ["bishop-placement", "h-file"],
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Nxg3",
+                                                                          "weight": 6,
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "hxg3",
+                                                                              "note": "Take towards the centre and open the h-file. Black has handed White an attacking road for free.",
+                                                                              "tags": ["h-file", "kingside-attack"],
+                                                                              "plan": "Double on the h-file with Kg2 and Rh1, or play Ne5 and f4 first. Black has traded away a defender of the dark squares near the king.",
+                                                                              "shapes": [{ "orig": "h1", "dest": "h8", "brush": "red" }]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
