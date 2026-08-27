@@ -78,7 +78,7 @@ describe('chapter 0, the system', () => {
 
 describe('the repertoire chapters', () => {
   // Chapter 0 is the concept chapter and is measured separately above.
-  for (const id of ['ch1', 'ch2', 'ch3', 'ch4', 'ch5']) {
+  for (const id of ['ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6']) {
     it(`${id} runs its deepest line to move 10 or beyond`, () => {
       expect(deepestFullMove(byId(id))).toBeGreaterThanOrEqual(10)
     })
