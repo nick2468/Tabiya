@@ -163,64 +163,87 @@
                                                   "children": [
                                                     {
                                                       "san": "Ne4",
-                                                      "note": "The standard Dutch square. It looks strong until it is challenged.",
+                                                      "note": "The standard Dutch square, and here the pawn on f5 is holding it. That changes what White should do about it.",
                                                       "weight": 6,
                                                       "children": [
                                                         {
-                                                          "san": "Nc3",
-                                                          "note": "Challenge it at once. Here the knight belongs on c3, because the c-pawn has already gone to c4.",
+                                                          "san": "h3",
+                                                          "note": "Do not chase it. The knight on e4 is defended by the f5 pawn, so Nc3 only invites ...Nxc3 and a wrecked queenside. Play a move you want anyway and let Black show what the knight is worth.",
                                                           "tags": [
                                                             "development"
                                                           ],
                                                           "mistakes": [
                                                             {
-                                                              "san": "Nbd2",
-                                                              "grade": "playable",
-                                                              "note": "Also challenges the knight. Nc3 is more active and the c-pawn no longer needs the square."
+                                                              "san": "Nc3",
+                                                              "grade": "mistake",
+                                                              "note": "The natural challenge, and it is the one move that helps Black: ...Nxc3 leaves White with doubled c-pawns and nothing to show for them."
                                                             },
                                                             {
-                                                              "san": "Qc2",
+                                                              "san": "Nfd2",
+                                                              "grade": "playable",
+                                                              "note": "The right way to challenge the knight, just a move early. Slipping h3 in first costs nothing and Black cannot improve much in the meantime."
+                                                            },
+                                                            {
+                                                              "san": "Ne5",
                                                               "grade": "inaccuracy",
-                                                              "note": "It leaves the knight sitting on e4 where it makes a nuisance of itself."
+                                                              "note": "It looks active and Black answers ...dxe5, when the pawn recapture leaves White nothing."
+                                                            }
+                                                          ],
+                                                          "shapes": [
+                                                            {
+                                                              "orig": "f5",
+                                                              "brush": "red"
+                                                            },
+                                                            {
+                                                              "orig": "e4",
+                                                              "brush": "red"
                                                             }
                                                           ],
                                                           "children": [
                                                             {
-                                                              "san": "Nxc3",
+                                                              "san": "b6",
+                                                              "note": "Black develops the bishop, which is the piece the Dutch usually struggles with.",
                                                               "weight": 6,
                                                               "children": [
                                                                 {
-                                                                  "san": "bxc3",
-                                                                  "note": "Take towards the centre. The b-file opens for the rook, and the pawns on c3 and c4 hold d4 and d5 between them.",
+                                                                  "san": "Nfd2",
+                                                                  "note": "Now challenge it, and with this knight. Trading on d2 lets White take back with a piece rather than a pawn, so the queenside stays whole.",
                                                                   "tags": [
                                                                     "development"
                                                                   ],
                                                                   "mistakes": [
                                                                     {
-                                                                      "san": "Ne5",
+                                                                      "san": "Nc3",
                                                                       "grade": "mistake",
-                                                                      "note": "It walks past a knight sitting on c3. Take it: the b-pawn is the only piece that can, and leaving it there drops a piece."
+                                                                      "note": "Still the wrong knight. Taking back on c3 with a pawn is exactly what Black wants."
+                                                                    }
+                                                                  ],
+                                                                  "shapes": [
+                                                                    {
+                                                                      "orig": "f3",
+                                                                      "dest": "d2",
+                                                                      "brush": "green"
                                                                     }
                                                                   ],
                                                                   "children": [
                                                                     {
-                                                                      "san": "Nc6",
-                                                                      "weight": 6,
+                                                                      "san": "Nxd2",
+                                                                      "weight": 7,
                                                                       "children": [
                                                                         {
-                                                                          "san": "Rb1",
-                                                                          "note": "The rook takes the open file it was just given, and b7 is Black's one loose point on that side.",
+                                                                          "san": "Qxd2",
+                                                                          "note": "Take with the queen. The knight on b1 stays where it is, the pawns are untouched, and the queen is well placed behind the centre.",
                                                                           "tags": [
                                                                             "development"
                                                                           ],
-                                                                          "shapes": [
+                                                                          "mistakes": [
                                                                             {
-                                                                              "orig": "b1",
-                                                                              "dest": "b7",
-                                                                              "brush": "red"
+                                                                              "san": "Nxd2",
+                                                                              "grade": "playable",
+                                                                              "note": "Also fine. The queen recapture keeps the b1 knight free to choose its square later."
                                                                             }
                                                                           ],
-                                                                          "plan": "Play Qc2 or Qa4, and think about c5 or the e4 break once Black commits. Black's attack needs ...e5 or ...g5; both are slow while you have the queenside to yourself."
+                                                                          "plan": "Play Nc3 or Nd2 with the other knight, then Rad1 and look for the e4 or d5 break. Black attack needs ...g5, which loosens a king you can already reach down the d-file."
                                                                         }
                                                                       ]
                                                                     }
@@ -395,15 +418,15 @@
                       "children": [
                         {
                           "san": "Nf3",
-                          "note": "Develop and take e5 away from Black's pieces.",
+                          "note": "Develop, and look at what it stops: the knight on f3 blocks the b7 bishop road to g2. Until it is there, the g2 pawn is only defended by the bishop on f1.",
                           "tags": [
                             "development"
                           ],
                           "mistakes": [
                             {
                               "san": "Bd3",
-                              "grade": "playable",
-                              "note": "Fine, and d3 is the right square here because there is no pawn on g6 or f5 in the way."
+                              "grade": "mistake",
+                              "note": "It hangs g2. The bishop on f1 was the only thing defending it, and the bishop on b7 is looking straight down that diagonal: ...Bxg2 wins a pawn and the rook is next. Play Nf3 first and the diagonal is shut."
                             }
                           ],
                           "children": [

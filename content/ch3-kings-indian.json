@@ -176,8 +176,8 @@
                                                     },
                                                     {
                                                       "san": "e4",
-                                                      "grade": "playable",
-                                                      "note": "Also a good way to take the centre. c4 is simpler because it does not put a pawn where Black's pieces are aiming."
+                                                      "grade": "mistake",
+                                                      "note": "Count the defenders of e4 before pushing: there are none. Black replies ...Nxe4, and if the knight is chased, ...e5 breaks the centre open anyway."
                                                     }
                                                   ],
                                                   "shapes": [
@@ -236,8 +236,8 @@
                                                                     },
                                                                     {
                                                                       "san": "Nxe5",
-                                                                      "grade": "mistake",
-                                                                      "note": "Black replies ...Nxe5, and after Bxe5 Bxe5 White has lost a piece for a pawn."
+                                                                      "grade": "playable",
+                                                                      "note": "Taking is sound, but know the trap that follows: after ...Nxe5, do NOT recapture with the bishop, because the d-file is open and ...Qxd1 comes first. Bh2 keeps the position simple and the bishop on its diagonal."
                                                                     }
                                                                   ],
                                                                   "shapes": [
