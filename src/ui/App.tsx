@@ -5,6 +5,7 @@ import { Play, type PlayRequest } from './Play'
 import { Progress } from './Progress'
 import { ProgressProvider } from './progress-context'
 import { Study } from './Study'
+import { useTheme } from './theme'
 import './app.css'
 
 /**
@@ -27,6 +28,7 @@ const MODES: { view: View; label: string }[] = [
 export function App() {
   const [view, setView] = useState<View>('study')
   const [playRequest, setPlayRequest] = useState<PlayRequest | null>(null)
+  const { theme, toggle } = useTheme()
   const showDiagnostics = import.meta.env.DEV
 
   const playFrom = (request: PlayRequest) => {
@@ -64,6 +66,15 @@ export function App() {
                 Diagnostics
               </button>
             ) : null}
+            <button
+              type="button"
+              className="nav-link theme-toggle"
+              onClick={toggle}
+              title={theme === 'dark' ? 'Switch to the light theme' : 'Switch to the dark theme'}
+              aria-label={theme === 'dark' ? 'Switch to the light theme' : 'Switch to the dark theme'}
+            >
+              {theme === 'dark' ? 'Light' : 'Dark'}
+            </button>
           </nav>
         </header>
         <main>

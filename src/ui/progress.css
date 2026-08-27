@@ -7,7 +7,7 @@
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #7a808a;
+  color: var(--text-faint);
   margin: 28px 0 8px;
 }
 
@@ -27,11 +27,11 @@
 .progress td {
   text-align: left;
   padding: 6px 12px 6px 0;
-  border-bottom: 1px solid #2a2e35;
+  border-bottom: 1px solid var(--line);
 }
 
 .progress th {
-  color: #7a808a;
+  color: var(--text-faint);
   font-weight: 600;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .progress .quiet {
-  color: #7a808a;
+  color: var(--text-faint);
 }
 
 .progress .hint {
@@ -60,7 +60,7 @@
 }
 
 .notice.bad {
-  background: #2e1f1f;
-  border-color: #5a3030;
-  color: #e0b4ae;
+  background: var(--notice-bad);
+  border-color: var(--notice-bad-edge);
+  color: var(--notice-bad-text);
 }

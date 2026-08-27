@@ -16,7 +16,7 @@
 
 .drill-count {
   margin: 0;
-  color: #9aa0a6;
+  color: var(--text-dim);
   font-variant-numeric: tabular-nums;
 }
 
@@ -27,7 +27,7 @@
 
 .empty-state {
   max-width: 60ch;
-  color: #9aa0a6;
+  color: var(--text-dim);
 }
 
 .weak-toggle {
@@ -38,7 +38,7 @@
 }
 
 .weak-toggle input {
-  accent-color: #7bc47f;
+  accent-color: var(--accent);
   width: 16px;
   height: 16px;
 }
@@ -70,25 +70,25 @@
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #7a808a;
+  color: var(--text-faint);
   margin: 16px 0 4px;
 }
 
 .feedback {
-  border-left: 3px solid #3a3f47;
+  border-left: 3px solid var(--line-strong);
   padding-left: 16px;
 }
 
 .feedback.exact {
-  border-left-color: #7bc47f;
+  border-left-color: var(--accent);
 }
 
 .feedback.listed {
-  border-left-color: #d9a441;
+  border-left-color: var(--warn);
 }
 
 .feedback.unlisted {
-  border-left-color: #7fb2e5;
+  border-left-color: var(--link);
 }
 
 .feedback p {
@@ -97,7 +97,7 @@
 }
 
 .played {
-  color: #9aa0a6;
+  color: var(--text-dim);
 }
 
 .feedback-actions {
@@ -108,14 +108,14 @@
 }
 
 button.primary {
-  background: #2f4a33;
-  border-color: #4b7a52;
-  color: #e6e6e6;
+  background: var(--accent-solid);
+  border-color: var(--accent-edge);
+  color: var(--text);
   font-weight: 600;
 }
 
 button.primary:hover {
-  background: #3a5b3f;
+  background: var(--accent-solid-hover);
 }
 
 button:disabled {

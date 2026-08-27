@@ -29,23 +29,23 @@
   border-left: 3px solid transparent;
   border-radius: 0;
   padding: 7px 8px;
-  color: #c8ccd2;
+  color: var(--text-soft);
   cursor: pointer;
 }
 
 .chapter-link:hover {
-  background: #22262c;
+  background: var(--surface-hover);
 }
 
 .chapter-link.current {
-  border-left-color: #7bc47f;
-  background: #22262c;
-  color: #e6e6e6;
+  border-left-color: var(--accent);
+  background: var(--surface-hover);
+  color: var(--text);
   font-weight: 600;
 }
 
 .chapter-number {
-  color: #7a808a;
+  color: var(--text-faint);
   font-variant-numeric: tabular-nums;
 }
 
@@ -61,7 +61,7 @@
   background: none;
   border: none;
   padding: 0;
-  color: #7fb2e5;
+  color: var(--link);
   cursor: pointer;
   font: inherit;
 }
@@ -73,7 +73,7 @@
 
 .intro {
   max-width: 62ch;
-  border-left: 2px solid #2a2e35;
+  border-left: 2px solid var(--line);
   padding-left: 16px;
   margin-bottom: 24px;
 }
@@ -84,7 +84,7 @@
 
 .intro h2 {
   font-size: 1rem;
-  color: #c8ccd2;
+  color: var(--text-soft);
   margin-bottom: 4px;
 }
 
@@ -114,7 +114,7 @@
 }
 
 .hint {
-  color: #7a808a;
+  color: var(--text-faint);
   font-size: 0.85rem;
   margin: 8px 0 0;
 }
@@ -132,19 +132,19 @@
   background: none;
   border: 1px solid transparent;
   padding: 2px 6px;
-  color: #c8ccd2;
+  color: var(--text-soft);
   cursor: pointer;
   font-variant-numeric: tabular-nums;
 }
 
 .trail-move:hover {
-  background: #22262c;
+  background: var(--surface-hover);
 }
 
 .trail-move.current {
-  background: #2f3a2f;
-  border-color: #7bc47f;
-  color: #e6e6e6;
+  background: var(--accent-wash);
+  border-color: var(--accent);
+  color: var(--text);
 }
 
 /* ----------------------------------------------------------- the choices */
@@ -155,7 +155,7 @@
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #7a808a;
+  color: var(--text-faint);
   margin: 0 0 8px;
 }
 
@@ -173,18 +173,18 @@
 }
 
 .weight {
-  background: #3a3f47;
+  background: var(--line-strong);
   border-radius: 8px;
   padding: 0 6px;
   font-size: 0.75rem;
-  color: #b3b8bf;
+  color: var(--text-soft);
 }
 
 /* -------------------------------------------------------------- the note */
 
 .note {
-  background: #1c1f24;
-  border: 1px solid #2a2e35;
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: 6px;
   padding: 14px 16px;
   margin-bottom: 20px;
@@ -194,7 +194,7 @@
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #7a808a;
+  color: var(--text-faint);
   margin: 14px 0 4px;
 }
 
@@ -203,7 +203,7 @@
 }
 
 .note .quiet {
-  color: #7a808a;
+  color: var(--text-faint);
 }
 
 .tags {
@@ -214,11 +214,11 @@
 }
 
 .tag {
-  background: #262b31;
+  background: var(--chip);
   border-radius: 3px;
   padding: 1px 7px;
   font-size: 0.75rem;
-  color: #9aa0a6;
+  color: var(--text-dim);
 }
 
 /* ------------------------------------------------------- line actions */
@@ -238,12 +238,12 @@
 }
 
 .learnt-toggle.disabled {
-  color: #7a808a;
+  color: var(--text-faint);
   cursor: default;
 }
 
 .learnt-toggle input {
-  accent-color: #7bc47f;
+  accent-color: var(--accent);
   width: 16px;
   height: 16px;
 }
@@ -257,7 +257,7 @@
 .lines .count {
   text-transform: none;
   letter-spacing: 0;
-  color: #7a808a;
+  color: var(--text-faint);
   font-weight: 400;
   margin-left: 8px;
 }
@@ -282,19 +282,19 @@
   background: none;
   border: none;
   padding: 2px 4px;
-  color: #c8ccd2;
+  color: var(--text-soft);
   text-align: left;
   cursor: pointer;
   font-variant-numeric: tabular-nums;
 }
 
 .line-link:hover {
-  background: #22262c;
-  color: #e6e6e6;
+  background: var(--surface-hover);
+  color: var(--text);
 }
 
 .empty {
-  color: #e07a6f;
+  color: var(--bad);
 }
 
 @media (max-width: 900px) {
@@ -308,11 +308,11 @@
 }
 
 .notice {
-  background: #1c2530;
-  border: 1px solid #2f4459;
+  background: var(--notice);
+  border: 1px solid var(--notice-edge);
   border-radius: 6px;
   padding: 10px 12px;
   margin: 0;
-  color: #b9c6d4;
+  color: var(--notice-text);
   font-size: 0.9rem;
 }

@@ -5,11 +5,11 @@
 
 .play-intro {
   max-width: 62ch;
-  color: #c8ccd2;
+  color: var(--text-soft);
 }
 
 .play fieldset {
-  border: 1px solid #2a2e35;
+  border: 1px solid var(--line);
   border-radius: 6px;
   padding: 12px 16px;
   margin: 0 0 16px;
@@ -17,7 +17,7 @@
 }
 
 .play legend {
-  color: #7a808a;
+  color: var(--text-faint);
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -33,18 +33,18 @@
 }
 
 .play fieldset label.disabled {
-  color: #7a808a;
+  color: var(--text-faint);
   cursor: default;
 }
 
 .play input[type='radio'] {
-  accent-color: #7bc47f;
+  accent-color: var(--accent);
 }
 
 .play select {
-  background: #2a2e35;
-  color: #e6e6e6;
-  border: 1px solid #3a3f47;
+  background: var(--control);
+  color: var(--text);
+  border: 1px solid var(--line-strong);
   border-radius: 4px;
   padding: 5px 8px;
   font: inherit;
@@ -64,7 +64,7 @@
 
 .play-status {
   margin: 0;
-  color: #9aa0a6;
+  color: var(--text-dim);
 }
 
 .play-body {
@@ -97,7 +97,7 @@
 }
 
 .move-number {
-  color: #7a808a;
+  color: var(--text-faint);
 }
 
 .play-actions {
@@ -116,7 +116,7 @@
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #7a808a;
+  color: var(--text-faint);
   margin: 20px 0 6px;
 }
 
@@ -126,9 +126,9 @@
 }
 
 .book-note {
-  border-left: 3px solid #7bc47f;
+  border-left: 3px solid var(--accent);
   padding-left: 12px;
-  color: #c8ccd2;
+  color: var(--text-soft);
 }
 
 .slips {
@@ -138,22 +138,22 @@
 }
 
 .slips li {
-  border-left: 3px solid #3a3f47;
+  border-left: 3px solid var(--line-strong);
   padding: 4px 0 4px 12px;
   margin-bottom: 8px;
   max-width: 56ch;
 }
 
 .slips li.blunder {
-  border-left-color: #e07a6f;
+  border-left-color: var(--bad);
 }
 
 .slips li.mistake {
-  border-left-color: #d9a441;
+  border-left-color: var(--warn);
 }
 
 .slips li.inaccuracy {
-  border-left-color: #7fb2e5;
+  border-left-color: var(--link);
 }
 
 /* The one place an evaluation bar belongs: the report, after the game. */
@@ -161,13 +161,13 @@
   height: 10px;
   width: 100%;
   max-width: 320px;
-  background: #1c1f24;
-  border: 1px solid #3a3f47;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
   border-radius: 3px;
   overflow: hidden;
 }
 
 .eval-white {
   height: 100%;
-  background: #d8dbe0;
+  background: var(--bar);
 }

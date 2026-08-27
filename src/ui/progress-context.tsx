@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { TauriProgressStore, isDesktop } from '../storage/tauri-store'
 import {
   LocalStorageProgressStore,
   emptyProgress,
@@ -111,8 +112,12 @@ export function ProgressProvider({
   store?: ProgressStore
 }) {
   // Built once, and only when the app runs: the browser store touches
-  // localStorage, which does not exist under the node test environment.
-  const resolved = useMemo(() => store ?? new LocalStorageProgressStore(), [store])
+  // localStorage, which does not exist under the node test environment. In the
+  // wrapped Windows app the same interface is backed by a file in AppData.
+  const resolved = useMemo(
+    () => store ?? (isDesktop() ? new TauriProgressStore() : new LocalStorageProgressStore()),
+    [store],
+  )
   const value = useProgressStateFor(resolved)
   return <ProgressContext value={value}>{children}</ProgressContext>
 }

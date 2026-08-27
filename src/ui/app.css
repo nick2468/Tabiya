@@ -11,7 +11,7 @@
   gap: 24px;
   flex-wrap: wrap;
   margin-bottom: 24px;
-  border-bottom: 1px solid #2a2e35;
+  border-bottom: 1px solid var(--line);
   padding-bottom: 12px;
 }
 
@@ -31,18 +31,18 @@
   border-bottom: 2px solid transparent;
   border-radius: 0;
   padding: 6px 12px;
-  color: #9aa0a6;
+  color: var(--text-dim);
   cursor: pointer;
 }
 
 .nav-link:hover {
-  background: #22262c;
-  color: #e6e6e6;
+  background: var(--surface-hover);
+  color: var(--text);
 }
 
 .nav-link.current {
-  border-bottom-color: #7bc47f;
-  color: #e6e6e6;
+  border-bottom-color: var(--accent);
+  color: var(--text);
   font-weight: 600;
 }
 
@@ -57,7 +57,7 @@
 
 .app-tagline {
   margin: 0;
-  color: #9aa0a6;
+  color: var(--text-dim);
 }
 
 .playable {
@@ -78,9 +78,9 @@
 }
 
 button {
-  background: #2a2e35;
-  color: #e6e6e6;
-  border: 1px solid #3a3f47;
+  background: var(--control);
+  color: var(--text);
+  border: 1px solid var(--line-strong);
   border-radius: 4px;
   padding: 6px 12px;
   font: inherit;
@@ -88,7 +88,7 @@ button {
 }
 
 button:hover {
-  background: #343941;
+  background: var(--control-hover);
 }
 
 .playable-status {
@@ -96,7 +96,7 @@ button:hover {
 }
 
 .playable-moves {
-  color: #9aa0a6;
+  color: var(--text-dim);
   line-height: 1.7;
 }
 
@@ -118,12 +118,12 @@ button:hover {
 .status td {
   text-align: left;
   padding: 6px 12px 6px 0;
-  border-bottom: 1px solid #2a2e35;
+  border-bottom: 1px solid var(--line);
   vertical-align: top;
 }
 
 .status th {
-  color: #9aa0a6;
+  color: var(--text-dim);
   font-weight: 600;
 }
 
@@ -134,18 +134,29 @@ button:hover {
 }
 
 .status .pass {
-  color: #7bc47f;
+  color: var(--accent);
 }
 
 .status .fail {
-  color: #e07a6f;
+  color: var(--bad);
 }
 
 .status-path {
-  color: #9aa0a6;
+  color: var(--text-dim);
 }
 
 .status-note {
-  color: #9aa0a6;
+  color: var(--text-dim);
   font-size: 0.9rem;
+}
+
+.theme-toggle {
+  margin-left: 12px;
+  border-left: 1px solid var(--line);
+  border-bottom-color: transparent;
+  color: var(--text-faint);
+}
+
+.theme-toggle:hover {
+  color: var(--text);
 }

@@ -1,12 +1,89 @@
+/**
+ * The palette.
+ *
+ * Dark is the default, because that is what the app is for: long evenings
+ * looking at a board. The light theme is a real alternative rather than an
+ * inversion, so the board keeps its own colours in both and only the frame
+ * around it changes.
+ *
+ * Every colour in the app comes from here. A rule that hard-codes one is a
+ * rule that will be wrong in one of the two themes.
+ */
+
+:root, :root[data-theme="dark"] {
+  --ground: #16181c;
+  --surface: #1c1f24;
+  --surface-hover: #22262c;
+  --chip: #262b31;
+  --line: #2a2e35;
+  --line-strong: #3a3f47;
+  --text: #e6e6e6;
+  --text-soft: #c8ccd2;
+  --text-dim: #9aa0a6;
+  --text-faint: #7a808a;
+  --bar: #d8dbe0;
+  --accent: #7bc47f;
+  --accent-wash: #2f3a2f;
+  --accent-solid: #2f4a33;
+  --accent-solid-hover: #3a5b3f;
+  --accent-edge: #4b7a52;
+  --control: #2a2e35;
+  --control-hover: #343941;
+  --link: #7fb2e5;
+  --warn: #d9a441;
+  --bad: #e07a6f;
+  --notice: #1c2530;
+  --notice-edge: #2f4459;
+  --notice-text: #b9c6d4;
+  --notice-bad: #2e1f1f;
+  --notice-bad-edge: #5a3030;
+  --notice-bad-text: #e0b4ae;
+}
+
+:root[data-theme="light"] {
+  --ground: #f4f2ee;
+  --surface: #ffffff;
+  --surface-hover: #e9e6e0;
+  --chip: #e5e2db;
+  --line: #d8d4cc;
+  --line-strong: #bdb8ae;
+  --text: #1f2124;
+  --text-soft: #3d4147;
+  --text-dim: #5f646c;
+  --text-faint: #7c828b;
+  --bar: #2b2e33;
+  --accent: #2f7a3a;
+  --accent-wash: #dcecdd;
+  --accent-solid: #dcecdd;
+  --accent-solid-hover: #c9e2cc;
+  --accent-edge: #2f7a3a;
+  --control: #ffffff;
+  --control-hover: #e9e6e0;
+  --link: #1f5f9e;
+  --warn: #9a6b13;
+  --bad: #a83a2c;
+  --notice: #e6eef6;
+  --notice-edge: #b8cee0;
+  --notice-text: #22384b;
+  --notice-bad: #f7e3e0;
+  --notice-bad-edge: #e0b3ac;
+  --notice-bad-text: #7a2a20;
+}
+
 :root {
+  /* Tells the browser which way round the built-in widgets and scrollbars go. */
   color-scheme: dark;
   font-family: system-ui, "Segoe UI", sans-serif;
   font-size: 16px;
   line-height: 1.5;
 }
 
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
 body {
   margin: 0;
-  background: #16181c;
-  color: #e6e6e6;
+  background: var(--ground);
+  color: var(--text);
 }
