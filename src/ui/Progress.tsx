@@ -3,6 +3,7 @@ import { useProgress } from './progress-context'
 import { chapters } from '../content'
 import { buildCards } from '../model/cards'
 import { chapterProgress, conceptAccuracy, courseTotals, playStats } from '../model/stats'
+import { isDesktop, readBackup, saveBackup } from './backup'
 import './progress.css'
 
 /**
@@ -156,14 +157,28 @@ function BackupSection({
   const [message, setMessage] = useState<{ kind: 'ok' | 'error'; text: string } | null>(null)
 
   const download = async () => {
-    const text = await exportJson()
-    const url = URL.createObjectURL(new Blob([text], { type: 'application/json' }))
-    const link = document.createElement('a')
-    link.href = url
-    link.download = 'london-trainer-progress.json'
-    link.click()
-    URL.revokeObjectURL(url)
-    setMessage({ kind: 'ok', text: 'Progress saved to your downloads folder.' })
+    try {
+      const { message } = await saveBackup(await exportJson())
+      if (message) setMessage({ kind: 'ok', text: message })
+    } catch (error) {
+      setMessage({ kind: 'error', text: `That could not be saved: ${asMessage(error)}` })
+    }
+  }
+
+  /** The desktop opens its own file dialog; the browser uses the input below. */
+  const pick = async () => {
+    if (!isDesktop()) {
+      fileInput.current?.click()
+      return
+    }
+    try {
+      const text = await readBackup()
+      if (text === null) return
+      await importJson(text)
+      setMessage({ kind: 'ok', text: 'Progress replaced from the file.' })
+    } catch (error) {
+      setMessage({ kind: 'error', text: `That file could not be read: ${asMessage(error)}` })
+    }
   }
 
   const upload = async (file: File) => {
@@ -186,7 +201,7 @@ function BackupSection({
         <button type="button" onClick={download}>
           Export progress
         </button>
-        <button type="button" onClick={() => fileInput.current?.click()}>
+        <button type="button" onClick={pick}>
           Import progress
         </button>
         <input
