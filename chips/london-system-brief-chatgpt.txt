@@ -1,0 +1,557 @@
+I want to write a windows app with Claude Code that will teach me how to play and get good at the Chess opening known as the London System. I need an initial brief, can you suggest one?
+
+Absolutely. I’d frame it as a **teaching application rather than a chess database**. The key is that the app should teach you the *ideas and patterns* of the London System, then progressively test whether you actually recognise them.
+
+# London System Chess Trainer — Initial Development Brief
+
+## 1. Purpose
+
+Build a Windows desktop application that teaches me how to play the **London System** in chess and, through structured practice, helps me become genuinely competent at playing it.
+
+The application should act as a **personal chess coach**, not simply a move reference tool.
+
+The primary objective is to teach me:
+
+* The standard London System setup.
+* The strategic ideas behind the opening.
+* Typical plans for White.
+* How to respond to Black's different setups.
+* Common tactical motifs and traps.
+* Typical middlegame positions arising from the London.
+* How to recognise when the standard London plan should be changed.
+* How to avoid playing the opening mechanically.
+
+The app should progressively move me from **understanding → recognising → practising → playing → reviewing**.
+
+---
+
+## 2. Target User
+
+The application is initially for one player: me.
+
+Assume that I understand the basic rules of chess and can play a complete game, but I am not an advanced tournament player.
+
+The teaching style should therefore be:
+
+* Clear and practical.
+* Beginner-friendly without being simplistic.
+* Focused on patterns and ideas rather than memorising long variations.
+* Interactive rather than text-heavy.
+* Encouraging but honest when I make mistakes.
+
+The application should explain **why** a move is good, not merely tell me which move to play.
+
+---
+
+## 3. Core Teaching Philosophy
+
+The application should teach the London System as a **system of ideas**, not a fixed sequence of moves.
+
+For example, the user should learn concepts such as:
+
+* Developing the dark-squared bishop before playing e3.
+* Establishing a strong pawn structure.
+* Typical knight development.
+* Castling safely.
+* When to play Nbd2.
+* When to play c3.
+* When to play Qc2.
+* When the e-file, h-file or kingside attack becomes important.
+* Typical central breaks such as e4.
+* Understanding the role of the c- and d-pawns.
+* Recognising Black's plans and adapting accordingly.
+
+The app should repeatedly reinforce the principle:
+
+> Don't memorise the London. Understand the position.
+
+---
+
+## 4. Main User Experience
+
+The application should have several major modes.
+
+### A. Learn
+
+Structured lessons introducing the London System progressively.
+
+Example lesson sequence:
+
+1. What is the London System?
+2. The basic setup.
+3. Why the setup works.
+4. Development priorities.
+5. Castling and king safety.
+6. Typical middlegame plans.
+7. The e4 break.
+8. Kingside attacks.
+9. Playing against ...d5.
+10. Playing against ...Nf6.
+11. Playing against ...g6.
+12. Playing against ...Bf5.
+13. Playing against ...c5.
+14. Common mistakes.
+15. Typical tactical patterns.
+
+Each lesson should contain a chessboard where moves can be demonstrated interactively.
+
+---
+
+### B. Practice
+
+The app presents a chess position and asks:
+
+**"What would you play here?"**
+
+The user selects a move on the board.
+
+The application should then explain:
+
+* Whether the move is good.
+* The best or recommended move.
+* Why it is good.
+* What strategic idea it supports.
+* What mistake the user made, if applicable.
+
+The system should favour explanations such as:
+
+> "This move is playable, but you are missing the opportunity to prepare e4."
+
+rather than simply:
+
+> "Incorrect. The engine prefers Nbd2."
+
+---
+
+### C. Opening Repertoire
+
+Provide an interactive London System repertoire.
+
+Rather than presenting a huge move tree, organise it around **Black's replies**.
+
+For example:
+
+**1.d4 d5**
+
+Then branches such as:
+
+* ...Nf6
+* ...Bf5
+* ...e6
+* ...c5
+* ...g6
+* ...Nc6
+* early ...Qb6
+
+The user should be able to explore the recommended London response to each setup.
+
+The application should distinguish between:
+
+**"Core London moves"**
+
+and
+
+**"Moves you need to know because Black is challenging your setup."**
+
+---
+
+### D. Tactical Trainer
+
+Create London-specific tactical exercises.
+
+Exercises should be drawn from typical London structures and themes, including:
+
+* Kingside attacks.
+* Bxh7+ ideas.
+* Ne5 tactics.
+* Qc2 attacks.
+* e4 breakthroughs.
+* Pressure on the h-file.
+* Pins and discovered attacks.
+* Tactical exploitation of weak dark squares.
+* Typical mistakes by Black.
+
+The exercises should teach recognition of recurring patterns rather than isolated puzzles.
+
+---
+
+### E. Play the Opening
+
+Allow the user to play against the computer from London System positions.
+
+Modes:
+
+* Play the first 5 moves.
+* Play the first 10 moves.
+* Play until the middlegame.
+* Play a complete game.
+
+The computer should deliberately use a variety of Black setups so that the player learns to adapt.
+
+After the game, provide a **London System review**, rather than just a generic engine analysis.
+
+For example:
+
+> You reached a good London position, but you spent three moves rearranging pieces instead of beginning your kingside expansion.
+
+---
+
+### F. Mistake Review
+
+The application should remember recurring mistakes.
+
+For example:
+
+**Your recurring problems**
+
+* Moving the same piece twice in the opening.
+* Delaying castling.
+* Playing c3 automatically when it is unnecessary.
+* Missing e4 opportunities.
+* Attacking before completing development.
+* Not recognising Black's queenside counterplay.
+
+The app should then generate targeted exercises to address those weaknesses.
+
+---
+
+## 5. Chessboard
+
+The chessboard should be the centrepiece of the application.
+
+Requirements:
+
+* Standard interactive chessboard.
+* Click/tap to move pieces.
+* Legal move validation.
+* Move history.
+* Take-back.
+* Position reset.
+* Highlight legal moves.
+* Optional coordinates.
+* Ability to play variations.
+* Ability to explain a move immediately.
+
+The user should be able to step forwards and backwards through variations.
+
+---
+
+## 6. Teaching System
+
+The teaching engine should distinguish between different types of knowledge.
+
+### Memorisation
+
+"What is the normal move?"
+
+### Understanding
+
+"Why do we play this move?"
+
+### Recognition
+
+"What type of position is this?"
+
+### Calculation
+
+"What happens if you play this move?"
+
+### Decision-making
+
+"What is the best plan?"
+
+The application should gradually move from memorisation toward independent decision-making.
+
+---
+
+## 7. Difficulty Levels
+
+Provide several levels.
+
+### Beginner
+
+Focus on:
+
+* Setup.
+* Development.
+* Castling.
+* Basic plans.
+* Avoiding obvious mistakes.
+
+### Intermediate
+
+Focus on:
+
+* Choosing between competing plans.
+* Recognising Black's setup.
+* Timing pawn breaks.
+* Tactical opportunities.
+
+### Advanced
+
+Focus on:
+
+* Positional nuances.
+* Move-order issues.
+* Transpositions.
+* Engine-informed improvements.
+* Playing against strong defensive setups.
+
+---
+
+## 8. Adaptive Learning
+
+The app should remember what I struggle with.
+
+For example, if I repeatedly miss:
+
+**e4 opportunities**
+
+the application should increase the number of exercises involving e4.
+
+Likewise, if I consistently mishandle:
+
+**Black playing ...c5**
+
+the app should give me more positions involving that structure.
+
+The goal is for the application to behave like a **personal tutor that learns the student's weaknesses**.
+
+---
+
+## 9. Chess Engine
+
+Use a strong chess engine such as **Stockfish** for analysis.
+
+However, engine evaluation should not dominate the user experience.
+
+For example, avoid simply saying:
+
+> +0.72
+
+Instead say:
+
+> White has a small advantage because Black's queenside development is incomplete and White can prepare e4.
+
+Engine information should be available for deeper analysis but should not be the primary teaching mechanism.
+
+---
+
+## 10. London System Knowledge Base
+
+The application should contain a structured knowledge base covering:
+
+* Opening principles.
+* Standard London positions.
+* Typical plans.
+* Common Black responses.
+* Tactical motifs.
+* Typical mistakes.
+* Middlegame structures.
+* Model games.
+* Key positions.
+
+Ideally, positions should be tagged by concepts such as:
+
+`development`
+
+`king_safety`
+
+`e4_break`
+
+`kingside_attack`
+
+`black_c5`
+
+`black_bf5`
+
+`queenside_counterplay`
+
+`piece_redevelopment`
+
+This will allow the teaching engine to select appropriate exercises.
+
+---
+
+## 11. Progress Tracking
+
+Track:
+
+* Lessons completed.
+* Practice positions attempted.
+* Accuracy.
+* Tactical success rate.
+* Opening recognition.
+* Most common mistakes.
+* Performance against different Black setups.
+* Positions requiring review.
+
+Provide a simple dashboard showing:
+
+**London System Progress**
+
+with a few meaningful indicators rather than a large amount of statistics.
+
+---
+
+## 12. Windows Application
+
+Build this as a modern Windows desktop application.
+
+Initial priorities:
+
+1. Fast and responsive.
+2. Simple interface.
+3. Chessboard-focused.
+4. Easy to extend.
+5. Local-first where practical.
+
+The application should not require cloud services for its core functionality.
+
+User progress should be stored locally.
+
+The architecture should make it possible to add later:
+
+* More chess openings.
+* More lessons.
+* More tactical exercises.
+* Imported PGN games.
+* Game analysis.
+* Additional training modes.
+
+The initial version, however, should remain tightly focused on the London System.
+
+---
+
+## 13. Suggested Initial Technology Direction
+
+Use a technology stack that works well with Claude Code and is straightforward to maintain.
+
+A sensible starting point would be:
+
+* **C# / .NET**
+* **WinUI 3** or another modern Windows UI framework.
+* **Stockfish** as the chess engine.
+* **SQLite** for local progress and training data.
+* **FEN/PGN** support for chess positions and games.
+
+Keep the chess rules, engine integration, lesson system and UI separated so they can evolve independently.
+
+---
+
+## 14. MVP
+
+The first version should NOT attempt to build the entire product.
+
+The MVP should contain:
+
+### 1. Interactive chessboard
+
+### 2. London System introductory lesson
+
+Teach the basic setup and explain the purpose of each move.
+
+### 3. "What would you play?" trainer
+
+Start with approximately 20 carefully selected positions.
+
+### 4. Basic Stockfish integration
+
+Allow the application to evaluate the user's move and explain the difference.
+
+### 5. Three Black setups
+
+Initially support:
+
+* ...d5 / ...Nf6
+* ...Bf5
+* ...g6
+
+### 6. Progress tracking
+
+Record results and identify weak areas.
+
+### 7. Basic computer opponent
+
+Allow the user to play a short game beginning from a London position.
+
+The architecture should be designed so that additional openings, lessons and exercises can be added later.
+
+---
+
+## 15. Development Approach
+
+Use Claude Code as an implementation partner.
+
+Develop the application incrementally.
+
+Each stage should produce a usable application rather than attempting to build the entire system at once.
+
+Suggested sequence:
+
+**Phase 1 — Foundation**
+
+Create the Windows application, chessboard and basic navigation.
+
+**Phase 2 — Chess**
+
+Implement legal chess moves, positions, move history and PGN/FEN handling.
+
+**Phase 3 — London Lessons**
+
+Implement the first London System lessons.
+
+**Phase 4 — Training**
+
+Add interactive "What would you play?" exercises.
+
+**Phase 5 — Stockfish**
+
+Add engine evaluation and move explanations.
+
+**Phase 6 — Adaptive Learning**
+
+Track mistakes and generate targeted exercises.
+
+**Phase 7 — Play**
+
+Add computer games beginning from London positions.
+
+**Phase 8 — Polish**
+
+Improve the UX, visual design, explanations and progress dashboard.
+
+---
+
+## 16. Important Design Principle
+
+The application must never become merely:
+
+**"Here is the London System move tree. Memorise it."**
+
+The desired outcome is:
+
+> "I see the position, I understand what Black is trying to do, I know the plans available to me, and I can choose a good move without needing to remember a variation."
+
+That is the measure of whether the application has succeeded.
+
+## 17. First Development Task for Claude Code
+
+Begin by producing:
+
+1. A proposed technical architecture.
+2. The recommended Windows technology stack and justification.
+3. The project/folder structure.
+4. The data model for lessons, positions, exercises and progress.
+5. A minimal working chessboard application.
+6. A first London System lesson.
+7. A small set of training positions.
+8. A roadmap showing the next development increments.
+
+Do not build the entire application in one step. Establish a clean foundation that can be tested and extended incrementally.
+
+I’d use this as the **master brief**, then give Claude Code smaller implementation prompts derived from it. That tends to work much better than asking Claude to build the whole application from one giant prompt.
+
+The particularly important idea here is **adaptive teaching**: the app should learn *your* recurring London mistakes and keep feeding you positions that address them.
+
+Would you like the next prompt to be **technical/architecture**, **UI/UX**, or **the actual first Claude Code build prompt**?

@@ -1,0 +1,69 @@
+I want to write a windows app with Claude Code that will teach me how to play and get good at the Chess opening known as the London System. I need an initial brief, can you suggest one?
+
+Building an app using **Claude Code** (Anthropic’s command-line agentic coding tool) requires a structured initial prompt to guide the AI engineer through architecture, stack setup, and feature implementation without getting lost in scope creep.
+
+---
+
+### **Claude Code Execution Prompt**
+
+> **Copy and paste the block below directly into your terminal prompt for Claude Code.**
+
+```text
+I want to build a desktop Windows application designed to teach chess players how to master the London System opening (1. d4 followed by Bf4).
+
+### APP OBJECTIVE
+The app will act as an interactive trainer that goes beyond basic move memorization. It will teach the underlying structural concepts, critical pawn breaks, tactical themes, and response strategies against major Black defenses.
+
+### TECH STACK REQUIREMENTS
+- Desktop Framework: Electron with React + TypeScript (or Tauri with React/TS for lightweight build).
+- Chess UI & Engine: 
+  - react-chessboard for rendering interactive boards.
+  - chess.js for move validation, FEN parsing, and PGN tracking.
+  - Stockfish (WASM or local process) for engine analysis and move evaluation.
+
+### CORE FEATURES TO BUILD
+
+1. Interactive Lesson Modules (Thematic Learning)
+   - Guided interactive tutorials covering core setups:
+     * The Classical Pyramid Setup (d4, Bf4, e3, c3, Nf3, Bd3, Nbd2).
+     * Modern Move Orders (2. Bf4 vs 2. Nf3).
+     * Facing Counter-Attacks: The early ...c5 & ...Qb6 test (e.g., handling 4. Nc3!).
+     * Facing Setup Variants: King's Indian / ...g6 lines, ...e6 / ...d5 setups, and Symmetrical ...Bf5 setups.
+   - Interactive board prompts asking the user to find the best conceptual move (e.g., "Black played ...g6; where should your light-squared bishop go?").
+
+2. Opening Repertoire Drill System (Spaced Repetition)
+   - Flashcard-style drill mode forcing user to play moves down specific London System variation trees.
+   - Instant feedback on mistakes with explanations of *why* a move breaks the London structure.
+   - Custom Move Tree Editor allowing users to import/export PGNs to expand their repertoire.
+
+3. Tactical & Pattern Trainer
+   - Puzzle bank focused specifically on London System motifs:
+     * The Greek Gift sacrifice (Bxh7+).
+     * Outpost maneuvers (Ne5 followed by f4/Qf3).
+     * Central breaks (e4 and c4 timings).
+     * Kingside pawn storms (h3, g4, Ne5).
+
+4. Engine Practice Partner (Play vs London Engine)
+   - Play full games or specific middlegame positions against Stockfish restricted to predefined Black responses (e.g., "Practice vs King's Indian Defense").
+   - Real-time evaluation bar and dynamic visual indicators for pawn structure control (e.g., highlighting light/dark square control).
+
+### ARCHITECTURE & DESIGN REQUIREMENTS
+- Clean, modern Dark/Light mode UI with responsive chess boards.
+- Local data persistence (SQLite or local JSON store) to save user progress, accuracy rates, and custom PGN repertoires.
+- Modular component design separating logic (Chess Engine/Drill State) from presentation (Board UI/Dashboard).
+
+### FIRST STEP
+Please acknowledge this brief. Before writing code, outline the file directory structure, list the npm packages to install, and ask any clarifying questions about feature priorities.
+
+```
+
+---
+
+### **Key London System Core Concepts to Embed**
+
+When testing your app during development, verify that your lesson modules cover these core strategic rules:
+
+* **Dark-Squared Bishop Freedom:** Developing `Bf4` outside the pawn chain before locking it in with `e3`.
+* **The "Pyramid" Structure:** Solid pawn foundation on `c3-d4-e3`.
+* **Bishop Placement Adaptation:** `Bd3` against standard `...d5` setups (targeting `h7`) vs `Be2` against `...g6` fianchetto setups.
+* **The Critical Test:** Handling early `...c5` and `...Qb6` attacks targeting your undefended `b2` pawn.

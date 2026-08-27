@@ -1,0 +1,78 @@
+I want to write a windows app with Claude Code that will teach me how to play and get good at the Chess opening known as the London System. I need an initial brief, can you suggest one?
+
+A solid initial brief for your Windows app should define **what the app teaches**, **how it teaches**, and **how Claude Code will help you build it**. Here’s a concise but high‑leverage brief you can use as a foundation, written in a way that Claude Code can immediately turn into architecture, UI scaffolding, and training modules.
+
+---
+
+## 🎯 Project Brief: *London System Trainer for Windows*
+
+**Purpose**  
+Build a Windows desktop application that teaches users to understand, practice, and master the **London System** chess opening. The app should combine interactive lessons, guided drills, spaced repetition, and engine‑assisted analysis to help users internalize the structure, plans, and typical tactics of the London.
+
+
+
+
+
+---
+
+## 🧩 Core Learning Goals  
+- **London Structure** — Teach the canonical setup: d4, Nf3, Bf4, e3, c3, Bd3, Nbd2, h3.  
+- **Typical Plans** — Kingside attacks, minority pushes, central breaks (e4, c4), and piece maneuvers.  
+- **Common Responses** — How to handle King’s Indian setups, QGD structures, and early …c5 or …Qb6 pressure.  
+- **Model Games** — Annotated examples from strong players.  
+- **Tactics Training** — Pattern recognition: Bxh7+, e4 breaks, h-file attacks, thematic sacrifices.  
+
+---
+
+## 🖥️ Application Features  
+- **Interactive Board** — Drag‑and‑drop moves, legal‑move highlighting, engine evaluation.  
+- **Stepwise Lessons** — Modular chapters with checkpoints and quizzes.  
+- **Drill Mode** — Timed repetition of key move orders and responses.  
+- **Scenario Trainer** — “Play this position as White” with engine feedback.  
+- **Progress Tracking** — Rating, streaks, mastery indicators.  
+- **Engine Integration** — Use Stockfish or similar for analysis and training.  
+- **Content Editor** — Allow adding new lines, puzzles, and variations.
+
+---
+
+## 🏗️ Technical Requirements  
+- **Platform:** Windows 10/11  
+- **Framework:** .NET (WPF or WinUI 3)  
+- **AI Integration:** Claude Code for code generation, refactoring, and lesson content creation  
+- **Chess Engine:** Stockfish (UCI protocol)  
+- **Data Storage:** Local JSON or SQLite for lessons, drills, and user progress  
+- **Modular Architecture:** Clear separation between UI, engine, lesson logic, and data models  
+
+---
+
+## 📚 Content Structure  
+- **Foundation Module:** London basics, move order, core ideas  
+- **Opponent Systems Module:** How to respond to common Black setups  
+- **Tactics Module:** Pattern‑based puzzles  
+- **Strategy Module:** Pawn structures, typical middlegame plans  
+- **Practice Module:** Drills, timed tests, engine sparring  
+- **Review Module:** Mistake analysis, progress charts  
+
+---
+
+## 🧪 User Experience Flow  
+1. **Onboarding:** Quick intro + diagnostic test  
+2. **Lesson Path:** Guided progression through modules  
+3. **Practice:** Drills and scenario play  
+4. **Analysis:** Review mistakes with engine suggestions  
+5. **Mastery:** Unlock advanced lines and challenges  
+
+---
+
+## 🧭 Deliverables for Claude Code  
+- UI wireframes  
+- Class architecture  
+- Lesson JSON schema  
+- Drill engine logic  
+- Stockfish integration layer  
+- Sample lessons and puzzles  
+- Build + packaging scripts  
+
+---
+
+If you want, I can now generate **a full specification**, **a Claude Code project scaffold**, or **the first set of London lessons**.

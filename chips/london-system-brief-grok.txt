@@ -1,0 +1,56 @@
+I want to write a windows app with Claude Code that will teach me how to play and get good at the Chess opening known as the London System. I need an initial brief, can you suggest one?
+
+**Suggested initial brief for a Windows app that teaches the London System**
+
+### Project Name
+London System Trainer (or “London Master” / “System London”)
+
+### One-sentence goal
+A focused Windows desktop app that teaches the London System opening from absolute beginner to solid intermediate level through interactive lessons, move-order practice, common plans, typical middlegame structures, and targeted puzzles — so the user can play it confidently and improve with it.
+
+### Core Objectives
+1. Teach the fundamental setup and move orders of the London System (mainly 1.d4 d5 2.Nf3 Nf6 3.Bf4 or the modern 1.d4 Nf6 2.Nf3 d5 3.Bf4 / 1.d4 d5 2.Bf4).
+2. Cover the most important Black responses and how White should react (…c5, …Bf5, …e6, …g6 / King’s Indian setups, early …c6, etc.).
+3. Explain typical plans: the “London triangle”, piece placement (especially the dark-squared bishop), when to play e3 vs e4, c3, h3, Ne5, Qe2/Qc2, rook lifts, kingside attacks, and queenside expansion.
+4. Provide interactive practice: guided move-order drills, “find the plan” exercises, and short tactical/strategic puzzles arising from London structures.
+5. Track progress and reinforce weak areas (spaced repetition or simple mastery levels per theme).
+
+### Target User
+Chess players rated roughly 800–1600 who want a reliable, easy-to-learn opening with clear plans rather than heavy theory. Minimal prior London knowledge assumed.
+
+### Key Features (MVP)
+- **Interactive board** (drag-and-drop or click-to-move) with legal-move highlighting.
+- **Lesson modules** broken into short chapters:
+  - Basic setup & move order
+  - Meeting …c5 / …Bf5 / …e6 / fianchetto systems
+  - Typical middlegame plans & pawn structures
+  - Common traps & tactical motifs
+- **Practice mode**: play the London moves against a soft engine or guided opponent; get instant feedback on deviation.
+- **Quiz / Puzzle section**: “What’s the best plan?” or “Find the typical London move.”
+- **Progress tracker**: simple completion % and “mastery” badges per chapter.
+- Clean, distraction-free dark-themed UI suitable for long study sessions.
+- Offline-first (no mandatory internet after install).
+
+### Technical Constraints / Preferences
+- Native Windows app (WinUI 3 / WinAppSDK preferred, or WPF / Avalonia if simpler).
+- Chess logic: use a solid open-source library (e.g., Chess.NET, or integrate Stockfish for analysis/practice).
+- Built with Claude Code assistance — keep the architecture modular so AI can generate lessons, board logic, and UI components cleanly.
+- Store local progress (JSON or SQLite).
+- No accounts or cloud required for MVP.
+
+### Success Criteria
+- After finishing the core modules a user can:
+  - Play the London System correctly against common Black replies.
+  - Understand the main strategic ideas (piece placement, typical breaks, when to castle which side).
+  - Avoid the most common early mistakes.
+- App feels focused and educational rather than a full chess platform.
+
+### Out of Scope for MVP
+- Full repertoire beyond the London System
+- Online multiplayer or cloud sync
+- Advanced engine analysis beyond soft practice strength
+- Video content (text + interactive board is enough)
+
+---
+
+Would you like me to expand any section (e.g., detailed lesson outline, suggested tech stack, or a more formal product-requirements style document)?
