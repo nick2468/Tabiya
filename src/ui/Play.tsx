@@ -112,6 +112,9 @@ export function Play({
       })
       sessionRef.current = fresh
       setSession(fresh)
+      // Dev-only handle on the running game, so a browser check can read the
+      // state the session actually holds rather than guess from the screen.
+      if (import.meta.env.DEV) (window as unknown as Record<string, unknown>).__game = fresh
       if (launch === 'here') onRequestUsed()
       // A "play from here" position may have Black to move.
       if (fresh.sideToMove === 'black' && !fresh.isFinished()) {

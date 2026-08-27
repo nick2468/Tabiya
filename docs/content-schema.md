@@ -73,6 +73,10 @@ Ply parity, not a field: `ply = stem.length + depth`, where the tree roots sit a
 | `shapes` | object[] | Optional board highlights for Study. Each `{ orig, dest?, brush }`; squares like `f4`; brush one of `green`, `red`, `blue`, `yellow`. |
 | `children` | Node[] | Optional. Absent or empty means a leaf. |
 
+Siblings must be distinct moves. White siblings are separated by `variant`, so in v1
+there is at most one White move per position. Black siblings have no such field, so two
+Black replies playing the same move are simply a duplicated branch and are rejected.
+
 Unknown fields are rejected, so a typo like `notes` fails loudly instead of vanishing.
 
 ### Concept tag vocabulary
@@ -121,5 +125,9 @@ problem at once. Each error names the chapter, the path to the node, and what is
   reach the same position by different move orders and expect different moves. Drill
   cards are keyed by position, so one of the two would silently never be asked. The
   card builder reports those as conflicts and the content suite fails on them.
+- 2026-08-27: duplicate Black siblings rejected. The variant rule only ever covered
+  White, so the same Black reply could be authored twice at one position. Chapter 7 had
+  exactly that, which rendered two identical Study buttons and would have double-counted
+  the move in Play's steering weights.
 - 2026-08-27: unknown fields rejected. A silently ignored typo in authored content is
   the failure mode this schema exists to prevent.

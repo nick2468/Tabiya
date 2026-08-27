@@ -30,3 +30,6 @@ src-tauri/target/
 
 # Engine build, copied from node_modules by scripts/copy-engine.mjs
 public/engine/
+
+# Tauri generated schemas, rebuilt from the config on every build
+src-tauri/gen/
