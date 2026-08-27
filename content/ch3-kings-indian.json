@@ -347,12 +347,24 @@
                               "weight": 8,
                               "children": [
                                 {
-                                  "san": "O-O",
-                                  "note": "Both kings are safe and White is a move away from h3 and c4.",
+                                  "san": "h3",
+                                  "note": "The same position the main line reaches, so the same move: h3 first, keeping h2 free for the bishop.",
                                   "tags": [
-                                    "king-safety"
+                                    "bishop-placement"
                                   ],
-                                  "plan": "Play h3 so the bishop keeps h2, then c4 for space. The plan against these setups is always the same: take the centre Black declined to fight for."
+                                  "plan": "Castle, then c4 for space. From here the chapter is one line: this is the main line reached by another move order.",
+                                  "mistakes": [
+                                    {
+                                      "san": "O-O",
+                                      "grade": "playable",
+                                      "note": "Safe, and the king is going there next move anyway. Playing h3 first means ...Nh5 never costs you the bishop pair."
+                                    },
+                                    {
+                                      "san": "c3",
+                                      "grade": "inaccuracy",
+                                      "note": "Black has played d6 rather than d5, so the pawn belongs on c4 taking the centre."
+                                    }
+                                  ]
                                 }
                               ]
                             }

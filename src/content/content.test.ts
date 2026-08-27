@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { chapterEntries, chapters, contentErrors } from './index'
 import { deepestFullMove, positionsWithMistakes, walkNodes } from '../model/loader'
+import { allCards } from '../model/cards'
 import type { LoadedChapter } from '../model/types'
 
 /**
@@ -32,6 +33,12 @@ describe('the authored repertoire', () => {
     for (const chapter of chapters) {
       expect(chapter.intro.toLowerCase(), chapter.id).toContain('typical mistakes')
     }
+  })
+
+  it('never has two chapters expecting different moves in one position', () => {
+    // Drill cards are keyed by position, so a disagreement between chapters
+    // would mean one of them silently never gets asked.
+    expect(allCards(chapters).conflicts).toEqual([])
   })
 
   it('uses plain hyphens, never em dashes, in authored prose', () => {

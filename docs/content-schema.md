@@ -116,5 +116,10 @@ problem at once. Each error names the chapter, the path to the node, and what is
 - 2026-08-27: nodes carry `from` and `to`. The loader already plays each move to
   check it, so recording the squares costs nothing and saves Study, Drill and Play
   from replaying a move just to draw an arrow.
+- 2026-08-27: the one-White-move-per-position rule needs a second check. The validator
+  only compares sibling nodes, so two chapters, or two branches of one chapter, could
+  reach the same position by different move orders and expect different moves. Drill
+  cards are keyed by position, so one of the two would silently never be asked. The
+  card builder reports those as conflicts and the content suite fails on them.
 - 2026-08-27: unknown fields rejected. A silently ignored typo in authored content is
   the failure mode this schema exists to prevent.

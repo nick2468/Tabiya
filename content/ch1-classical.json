@@ -173,22 +173,21 @@
                                                       "weight": 5,
                                                       "children": [
                                                         {
-                                                          "san": "Ne5",
-                                                          "note": "Now the knight takes the outpost, with the d2 knight and the c3 and d4 pawns all supporting it.",
+                                                          "san": "O-O",
+                                                          "note": "Tuck the king away before opening lines. An attack launched from an unsafe king usually rebounds.",
                                                           "tags": [
-                                                            "kingside-attack"
+                                                            "king-safety"
                                                           ],
                                                           "mistakes": [
                                                             {
-                                                              "san": "Qe2",
+                                                              "san": "Ne5",
                                                               "grade": "playable",
-                                                              "note": "Solid but slow. The knight jump is the move that makes the attack real."
-                                                            }
-                                                          ],
-                                                          "shapes": [
+                                                              "note": "The jump is coming anyway. Castling first means an eventual ...cxd4 can never open a line towards a king still sitting on e1."
+                                                            },
                                                             {
-                                                              "orig": "e5",
-                                                              "brush": "green"
+                                                              "san": "h4",
+                                                              "grade": "mistake",
+                                                              "note": "A club favourite that backfires. The king is still on e1 and the h-pawn is not the piece that attacks."
                                                             }
                                                           ],
                                                           "children": [
@@ -197,21 +196,27 @@
                                                               "weight": 7,
                                                               "children": [
                                                                 {
-                                                                  "san": "O-O",
-                                                                  "note": "Tuck the king away before opening lines. An attack launched from an unsafe king usually rebounds.",
+                                                                  "san": "Ne5",
+                                                                  "note": "Now the knight takes the outpost, with the d2 knight and the c3 and d4 pawns all supporting it.",
                                                                   "tags": [
-                                                                    "king-safety"
+                                                                    "kingside-attack"
                                                                   ],
                                                                   "mistakes": [
                                                                     {
-                                                                      "san": "f4",
-                                                                      "grade": "inaccuracy",
-                                                                      "note": "Attacking before castling. The king stays in the centre and ...cxd4 opens lines towards it."
+                                                                      "san": "Qe2",
+                                                                      "grade": "playable",
+                                                                      "note": "Solid but slow. The knight jump is the move that makes the attack real."
                                                                     },
                                                                     {
-                                                                      "san": "h4",
-                                                                      "grade": "mistake",
-                                                                      "note": "A club favourite that backfires. The king is still on e1 and the h-pawn is not the piece that attacks."
+                                                                      "san": "dxc5",
+                                                                      "grade": "inaccuracy",
+                                                                      "note": "It releases the tension and opens the diagonal for the bishop on b7, which was doing nothing."
+                                                                    }
+                                                                  ],
+                                                                  "shapes": [
+                                                                    {
+                                                                      "orig": "e5",
+                                                                      "brush": "green"
                                                                     }
                                                                   ],
                                                                   "children": [
