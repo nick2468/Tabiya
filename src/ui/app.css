@@ -1,0 +1,55 @@
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.app-header h1 {
+  margin: 0 0 4px;
+  font-size: 1.5rem;
+}
+
+.app-tagline {
+  margin: 0 0 24px;
+  color: #9aa0a6;
+}
+
+.playable {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.playable-side {
+  min-width: 240px;
+  flex: 1;
+}
+
+.playable-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+button {
+  background: #2a2e35;
+  color: #e6e6e6;
+  border: 1px solid #3a3f47;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #343941;
+}
+
+.playable-status {
+  font-weight: 600;
+}
+
+.playable-moves {
+  color: #9aa0a6;
+  line-height: 1.7;
+}
