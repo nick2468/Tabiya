@@ -368,4 +368,5 @@ Open items (phase 5):
    "verified arithmetically" capture sequence relied on a bishop recapture that
    Black's own f6 knight blocks. The engine pass has now corrected the human
    review three times; treat any chess prose as unverified until a pass has been
-   over it, including a reviewer's.
+   over it, including a reviewer's. Closed 2026-08-27: Nick ran the installer and
+   played a move in the installed app. Nothing is owed; v1 is green in full.

@@ -56,7 +56,7 @@ engine mocked, and storage.
 
 ## 7. Ships
 
-**Partly checked, and the gap is stated.** The Tauri bundler produces
+**Green, closed by Nick's first-run check below.** The Tauri bundler produces
 `London Trainer_1.0.0_x64-setup.exe`, 6.9 MB. Running the packaged binary opens the
 window and the app renders: that is how the AppData bug was found, and the fix was
 confirmed the same way. Progress lands in
@@ -74,6 +74,9 @@ Two things a human still has to do once, because this session had no display:
 - **Make one move on the board in the packaged app.** The board deliberately ignores
   synthetic events outside dev builds, which is what makes the automated checks
   impossible there. Everything either side of that click is verified.
+
+Both were done by Nick on 2026-08-27: the installer ran and a move was played on the
+board in the installed app. Every item in SPEC.md section 9 is now green.
 
 ## What the checking itself got wrong
 
