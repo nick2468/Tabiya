@@ -162,7 +162,7 @@ Acceptance: a full drill session runs end to end; grading matches SPEC.md sectio
 rescheduling verified; state survives restart; export/import round-trips; weak-area
 preference proven by test; all eight chapters validator-green.
 
-- [ ] **Review gate 3 passed**
+- [x] **Review gate 3 passed** (orchestrator, 2026-08-27)
 
 Open items (phase 3):
 
@@ -190,6 +190,24 @@ Open items (phase 3):
    driven both ways through the real file input, including a deliberately corrupt file
    that correctly left the saved progress untouched, and the round trip is covered by a
    unit test. Phase 5 replaces the download with a Tauri save dialog anyway.
+6. **Review findings, gate 3 (orchestrator).** Chapter 7 carried two sibling "c5"
+   branches under Bf4 - the same Black move twice - which rendered two identical
+   Study buttons with duplicate React keys and would have double-counted c5 in
+   phase 4's steering. Merged into one c5 whose e3 node branches to both
+   exercises, and the validator now rejects duplicate Black siblings outright,
+   with a negative test; the green suite proves ch7 was the only case. The Bxh7+
+   mistake note in exercise 4 claimed the g5 knight was gone; the knight is on f3
+   and Ng5+ works - the real refutation is ...Bxg5 by the e7 bishop, and the note
+   now says so. SPEC.md section 3 amended to ratify the model-games decision
+   (item 2 above), with a register entry. Drill was driven live end to end: all
+   three grading paths, FSRS intervals on the buttons, the failed card re-queued
+   at session end, and every Progress number reconciled to the card arithmetic.
+   Two notes for later: ending a session mid-feedback discards that unrated
+   answer (defensible; a thought for phase 5 polish), and the bundle crossed the
+   500 kB chunk warning - consider a code-split when the engine worker lands.
+   The gate 1 resize fix is correct but undeliverable in a hidden browser pane:
+   ResizeObserver callbacks ride the frame loop, so headless checks must call
+   redrawAll manually. Real windows are unaffected.
 
 ---
 
