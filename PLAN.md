@@ -90,16 +90,16 @@ Open items (phase 1):
 
 Goal: the full Study experience over six chapters.
 
-- [ ] 2.1 Chapter list in course order with intro rendering (markdown) including the
+- [x] 2.1 Chapter list in course order with intro rendering (markdown) including the
   typical-mistakes section.
-- [ ] 2.2 Line navigation: step forwards and backwards, pick variations at branch
+- [x] 2.2 Line navigation: step forwards and backwards, pick variations at branch
   points, jump to any node; last move auto-arrowed; authored `shapes` rendered.
-- [ ] 2.3 Note panel showing the current node's note (and plan on leaves).
-- [ ] 2.4 "Learnt" toggle per line, persisted through `src/storage` ProgressStore
+- [x] 2.3 Note panel showing the current node's note (and plan on leaves).
+- [x] 2.4 "Learnt" toggle per line, persisted through `src/storage` ProgressStore
   (localStorage implementation, versioned state shape from SPEC.md section 5).
-- [ ] 2.5 "Play from here" button present but stubbed with a "phase 4" notice.
-- [ ] 2.6 Draft ch3, ch4, ch5 to the section 3 bar; one commit per chapter.
-- [ ] 2.7 Retire the phase 1 status panel to a dev-only diagnostics view.
+- [x] 2.5 "Play from here" button present but stubbed with a "phase 4" notice.
+- [x] 2.6 Draft ch3, ch4, ch5 to the section 3 bar; one commit per chapter.
+- [x] 2.7 Retire the phase 1 status panel to a dev-only diagnostics view.
 
 Acceptance: every line of the six chapters can be studied end to end with notes and
 arrows; learnt state survives an app restart; validator green on all six chapters;
@@ -107,7 +107,23 @@ vitest green.
 
 - [ ] **Review gate 2 passed**
 
-Open items (phase 2): none yet.
+Open items (phase 2):
+
+1. **Shape rendering could not be checked by eye this session.** The browser pane was
+   never displayed, so screenshots time out and chessground never runs the animation
+   frame that paints its shapes: the SVG stays empty while the tab is hidden. What was
+   verified instead is that the right shapes reach chessground's own state on every
+   leaf of all six chapters, and the composition rule now has unit tests. The drawing
+   itself was seen working earlier, before the pane went away. Worth one look by eye at
+   review.
+2. **Study is read-only on the board.** Moves are made through the move list and the
+   arrow keys, not by dragging pieces, because a dragged move would leave the tree.
+   Playing the next move on the board is Drill's job in phase 3. If it turns out to be
+   wanted in Study too, it belongs behind the same node-matching check Drill will use.
+3. **Chapter 0 has only two lines**, so its learnt count reads "0 of 2". That is the
+   content, not the view: the chapter is a concept tour with one model line and one
+   short branch. Worth a look when chapters 6 and 7 land in phase 3, in case ch0 should
+   carry a few more short lines for drilling.
 
 ---
 
