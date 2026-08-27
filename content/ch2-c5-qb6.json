@@ -107,6 +107,11 @@
                           ],
                           "mistakes": [
                             {
+                              "san": "Nxd5",
+                              "grade": "playable",
+                              "note": "The engine's first choice, about a pawn and a half stronger than the jump: it regains the pawn at once and still threatens Nc7. Kept out of the repertoire so there is one jump to remember, not two."
+                            },
+                            {
                               "san": "Rb1",
                               "grade": "inaccuracy",
                               "note": "It chases the queen to a2 where it is safe, and White has given up a pawn for very little."
