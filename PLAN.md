@@ -35,19 +35,19 @@ box is ticked.
 Goal: a running app skeleton with a playable board, the validated content pipeline,
 and the first three chapters drafted.
 
-- [ ] 1.1 `git init` on branch main; .gitignore for node/Vite; first commit: SPEC.md,
+- [x] 1.1 `git init` on branch main; .gitignore for node/Vite; first commit: SPEC.md,
   PLAN.md, BRIEF.md, chips/ as they stand.
-- [ ] 1.2 Scaffold Vite + React + TypeScript; wire vitest; commit.
-- [ ] 1.3 chess.js plus the chessground wrapper component (CSS and piece assets
+- [x] 1.2 Scaffold Vite + React + TypeScript; wire vitest; commit.
+- [x] 1.3 chess.js plus the chessground wrapper component (CSS and piece assets
   imported); board playable with illegal moves rejected; commit.
-- [ ] 1.4 `docs/content-schema.md` written from SPEC.md section 4; types; loader and
+- [x] 1.4 `docs/content-schema.md` written from SPEC.md section 4; types; loader and
   validator in `src/model` (FEN computed per node during the legality walk); vitest
   coverage including negative fixtures: illegal SAN, illegal mistake-entry SAN,
   missing leaf plan, missing White note, duplicate White siblings in one variant,
   weight on a White node, tag outside the vocabulary; commit.
-- [ ] 1.5 Draft ch0, ch1, ch2 per SPEC.md section 3 (notes, plans, weights, tags,
+- [x] 1.5 Draft ch0, ch1, ch2 per SPEC.md section 3 (notes, plans, weights, tags,
   mistake entries at the stated minimums); validator green; one commit per chapter.
-- [ ] 1.6 Dev status panel: per chapter - title, node count, deepest line in full
+- [x] 1.6 Dev status panel: per chapter - title, node count, deepest line in full
   moves, validation PASS or FAIL with first error; commit.
 
 Acceptance: `npm run dev` serves the page with a playable board; three chapters PASS
@@ -57,7 +57,23 @@ intro is 300-500 words; vitest green including the negative fixtures.
 
 - [ ] **Review gate 1 passed** (orchestrator ticks after review)
 
-Open items (phase 1): none yet.
+Open items (phase 1):
+
+1. **ch2's answer to ...Qb6 is a pawn offer that has not been engine checked.** The
+   repertoire move is 4.Nc3, letting Black take on b2 so the knight can jump to b5 with
+   a fork threat. The passive 4.Qc1 was the alternative and is recorded in the content
+   as a playable mistake entry. SPEC.md section 3 says a fork the builder cannot judge
+   is recorded and the simpler branch taken, but Nc3 is the mainstream recommendation
+   and the chapter is the one place the spec calls critical, so it was taken. The
+   content deliberately claims an initiative, not a forced win. Phase 4 task 4.6
+   already schedules the engine pass over every ch2 line: check this one first.
+2. **The board wrapper turns on chessground's `trustAllEvents` in dev builds.** Without
+   it chessground ignores synthetic events, so no automated check can drive the board.
+   Real users only ever produce trusted events, so shipped behaviour is unchanged. The
+   wrapper also exposes the board API on `window.__cg` in dev, which is how phase 1
+   verified turn, movable colour and legal destinations from the browser.
+3. **Promotion auto-queens on the phase 1 board.** The scratch board plays a queen
+   without asking. Play mode needs a real picker; note it when task 4.3 lands.
 
 ---
 

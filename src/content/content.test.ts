@@ -44,7 +44,7 @@ describe('the authored repertoire', () => {
           ...(node.mistakes ?? []).map((mistake) => mistake.note),
         ]),
       ].join(' ')
-      expect(prose, chapter.id).not.toMatch(/[–—]/)
+      expect(prose, chapter.id).not.toMatch(/[\u2013\u2014]/)
     }
   })
 
