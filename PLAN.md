@@ -304,7 +304,8 @@ Goal: a real Windows app, reviewed against the whole spec.
 
 Acceptance: SPEC.md section 9 green on the installed build.
 
-- [ ] **Review gate 5 passed** (final)
+- [x] **Review gate 5 passed** (orchestrator, 2026-08-27; v1 accepted with one
+  first-run check owed by Nick - open item 9)
 
 Open items (phase 5):
 
@@ -351,3 +352,20 @@ Open items (phase 5):
    does not check Black's replies or the weights, so a line where the repertoire is fine
    but the Black move chosen is unrealistic would pass unnoticed. Nick's own games are
    the check for that, which is what the deferred own-game import is for.
+9. **Review findings, gate 5 (orchestrator).** Suite and production build re-run
+   green at 231 tests. The Tauri capability file, store, backup and theme modules
+   read in full: the grants match their stated reasons, paths resolve in full, and
+   the browser build stays free of the Tauri API through lazy imports. Verified
+   independently on the shipped binary: london-trainer.exe launched, the window
+   confirmed, and progress.json found under AppData as version 3 still carrying
+   both learnt lines from the builder's migration test, which confirms the mkdir
+   fix and the migration in one check. Closing the packaged-window input check
+   with real OS input was attempted and is not possible from this session (the
+   access layer resolves installed applications only), so it folds into the
+   installer click as Nick's single first-run task: install, open, play one move.
+   The csp null default is now a register entry. And a correction to this plan's
+   own record: task 5.7's ch3 finding disproves a gate 3 review claim - the
+   "verified arithmetically" capture sequence relied on a bishop recapture that
+   Black's own f6 knight blocks. The engine pass has now corrected the human
+   review three times; treat any chess prose as unverified until a pass has been
+   over it, including a reviewer's.

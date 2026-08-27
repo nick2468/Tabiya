@@ -195,6 +195,10 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   nice check on the weights; needs their API online; the app is offline-first.
 - **Engine grading of unlisted drill moves**: v1 stays honest with "not the repertoire
   move"; live engine judgement in Drill is a v2 refinement.
+- **A content-security policy for the wrapped window**: csp sits at Tauri's null
+  default. The window loads only bundled local assets, so there is nothing for a
+  policy to fence off yet; tighten it if anything remote is ever loaded. Recorded
+  at gate 5.
 - **A promotion picker in Play**: promotions auto-queen (phase 1 open item 3). An
   underpromotion never decides a club game out of this repertoire's positions, so
   the picker waits until something actually needs it. Ruled at review gate 4.
