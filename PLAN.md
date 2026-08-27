@@ -287,17 +287,17 @@ Open items (phase 4):
 
 Goal: a real Windows app, reviewed against the whole spec.
 
-- [ ] 5.1 Theme and polish pass: dark default, light toggle, consistent layout.
-- [ ] 5.2 Rust toolchain and Tauri 2 wrap (first moment Rust touches this machine);
+- [x] 5.1 Theme and polish pass: dark default, light toggle, consistent layout.
+- [x] 5.2 Rust toolchain and Tauri 2 wrap (first moment Rust touches this machine);
   window title and icon.
-- [ ] 5.3 ProgressStore file implementation in AppData; browser-phase export imports
+- [x] 5.3 ProgressStore file implementation in AppData; browser-phase export imports
   cleanly into the wrapped app (the migration path).
 - [ ] 5.4 Installer via the Tauri bundler; smoke test the installed app on a machine
   or profile without the dev toolchain.
-- [ ] 5.5 Self-review against SPEC.md section 9, every item; fix or record each gap.
-- [ ] 5.6 Docs sweep: content-schema.md current, SPEC.md deferred register current,
+- [x] 5.5 Self-review against SPEC.md section 9, every item; fix or record each gap.
+- [x] 5.6 Docs sweep: content-schema.md current, SPEC.md deferred register current,
   this plan fully ticked or gaps recorded.
-- [ ] 5.7 Engine sanity pass over ch0, ch3, ch4 and ch6, the chapters task 4.6 did
+- [x] 5.7 Engine sanity pass over ch0, ch3, ch4 and ch6, the chapters task 4.6 did
   not cover (added at gate 4: the pass found four real faults in the chapters it
   did cover, so the rest get the same treatment before v1 is called done);
   findings fixed or recorded.
@@ -306,4 +306,34 @@ Acceptance: SPEC.md section 9 green on the installed build.
 
 - [ ] **Review gate 5 passed** (final)
 
-Open items (phase 5): none yet.
+Open items (phase 5):
+
+1. **Task 5.7 found three more content faults, all of the same species as phase 4's.**
+   The Dutch line challenged the e4 knight with Nc3 when the pawn on f5 is holding it,
+   so ...Nxc3 wrecked White's queenside for nothing; it now plays h3 and challenges with
+   the other knight, verified to move 10 against the engine's own line. In the ...b6
+   line Bd3 was called playable and "the right square", and it hangs g2 to the bishop on
+   b7. In the King's Indian chapter e4 was called a good way to take the centre while
+   being undefended, and Nxe5 was called a mistake on a refutation that does not exist
+   because the knight on f6 blocks the bishop. All eight chapters have now had the pass.
+2. **Two moves are deliberately half a pawn to a pawn and a half behind the engine's
+   first choice** (carried from phase 4): 5.Nb5 after the b2 offer, and Bg3 against
+   ...Nh5. Both are sound, both are the one idea their chapter teaches, and both are
+   recorded with numbers in case Nick would rather have the stronger move.
+3. **The installer is unsigned.** Windows SmartScreen warns on first run, which is what
+   an unsigned installer looks like rather than a fault. Signing needs a certificate;
+   ruled into the SPEC.md register along with auto-update.
+4. **Stockfish is GPL-3 and is bundled.** That binds anything distributed. For one
+   person's own machine it is not a problem; it is written into SPEC.md section 5 so it
+   is not a surprise later.
+5. **A hidden browser pane throttles React's scheduler**, which cost real time in this
+   phase. A move played through synthetic events lands in the session immediately but
+   the screen can take a second or more to catch up, which reads exactly like a broken
+   re-render. It was not one. Any future headless check must poll for the DOM to change
+   rather than read once and conclude. The same throttling hid chessground's shapes in
+   phase 2, so this is the second time it has been mistaken for a bug.
+6. **The engine pass method has a blind spot worth naming.** It compares the evaluation
+   before and after each White move, which finds moves that give something away. It
+   does not check Black's replies or the weights, so a line where the repertoire is fine
+   but the Black move chosen is unrealistic would pass unnoticed. Nick's own games are
+   the check for that, which is what the deferred own-game import is for.
