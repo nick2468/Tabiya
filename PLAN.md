@@ -74,6 +74,7 @@ Open items (phase 1):
    verified turn, movable colour and legal destinations from the browser.
 3. **Promotion auto-queens on the phase 1 board.** The scratch board plays a queen
    without asking. Play mode needs a real picker; note it when task 4.3 lands.
+   Dispositioned at gate 4: auto-queen stands for v1, recorded in the SPEC register.
 4. **Review findings, gate 1 (orchestrator).** The board now re-measures on host
    resize: chessground takes one measurement at mount, so a board mounted while
    hidden stayed zero width (found driving the app through a hidden browser pane;
@@ -235,7 +236,7 @@ Acceptance: full games complete at strengths 3 and 6; a capped game stops and re
 a chapter-targeted game reaches the chosen setup; the report is correct on the
 scripted fixture; sanity-pass findings dispositioned; vitest green.
 
-- [ ] **Review gate 4 passed**
+- [x] **Review gate 4 passed** (orchestrator, 2026-08-27)
 
 Open items (phase 4):
 
@@ -264,7 +265,21 @@ Open items (phase 4):
 6. **The engine pass covered ch2 in full and ch1, ch5 and ch7 by spot check**, which is
    what the plan asked for. ch0, ch3, ch4 and ch6 have not been checked move by move.
    Given that the pass found four real faults in the chapters it did cover, the rest are
-   worth the same treatment before v1 is called done.
+   worth the same treatment before v1 is called done. Taken at gate 4: now task 5.7.
+7. **Review findings, gate 4 (orchestrator).** Both headline faults were verified by
+   hand before reading the fixes: the premature ...Nh5 really does hang the knight to
+   Qxh5, and the old ...Bg6 line's c3 really did lose a whole bishop to ...Bxd3. Both
+   passed gate 2's human review, which is worth remembering when weighing item 6. A
+   real game was driven against the live engine: chapter-targeted steering gave
+   1...d5 and 2...c5 from the ch2 book, the engine took over at the exact book exit,
+   and the report named the move 3 deviation with the book note, caught a
+   deliberately played Qxd4 as an inaccuracy in band words, and showed the eval bar
+   in the report only. The play stats record was exactly right. Touches at review:
+   the ...Nh5 Bg3 node's vs-bf5 mis-tag came back with the rework and is fixed again;
+   Nxd5 is now noted on the Nb5 node as the engine's stronger alternative per the
+   theory-fork rule, so item 1 stands settled unless Nick asks for the stronger move;
+   the promotion picker is dispositioned to the SPEC register (auto-queen stands for
+   v1); and item 6 became task 5.7.
 
 ---
 
@@ -282,6 +297,10 @@ Goal: a real Windows app, reviewed against the whole spec.
 - [ ] 5.5 Self-review against SPEC.md section 9, every item; fix or record each gap.
 - [ ] 5.6 Docs sweep: content-schema.md current, SPEC.md deferred register current,
   this plan fully ticked or gaps recorded.
+- [ ] 5.7 Engine sanity pass over ch0, ch3, ch4 and ch6, the chapters task 4.6 did
+  not cover (added at gate 4: the pass found four real faults in the chapters it
+  did cover, so the rest get the same treatment before v1 is called done);
+  findings fixed or recorded.
 
 Acceptance: SPEC.md section 9 green on the installed build.
 

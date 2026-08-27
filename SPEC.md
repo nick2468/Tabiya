@@ -195,6 +195,9 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   nice check on the weights; needs their API online; the app is offline-first.
 - **Engine grading of unlisted drill moves**: v1 stays honest with "not the repertoire
   move"; live engine judgement in Drill is a v2 refinement.
+- **A promotion picker in Play**: promotions auto-queen (phase 1 open item 3). An
+  underpromotion never decides a club game out of this repertoire's positions, so
+  the picker waits until something actually needs it. Ruled at review gate 4.
 - **Model-game citations**: ch7 describes the Kamsky-style patterns without citing
   specific games, because a citation nobody can verify is worse than none. Real
   cited games arrive with PGN import or a game database. Ruled 2026-08-27.
