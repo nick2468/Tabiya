@@ -96,7 +96,7 @@
                     {
                       "san": "Qxb2",
                       "note": "The greedy move most club opponents cannot resist.",
-                      "weight": 4,
+                      "weight": 6,
                       "children": [
                         {
                           "san": "Nb5",
@@ -131,7 +131,7 @@
                     {
                       "san": "e6",
                       "note": "The sensible reply: cover c7 in advance and keep developing.",
-                      "weight": 6,
+                      "weight": 5,
                       "children": [
                         {
                           "san": "Nb5",
