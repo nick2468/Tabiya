@@ -105,7 +105,7 @@ Acceptance: every line of the six chapters can be studied end to end with notes 
 arrows; learnt state survives an app restart; validator green on all six chapters;
 vitest green.
 
-- [ ] **Review gate 2 passed**
+- [x] **Review gate 2 passed** (orchestrator, 2026-08-27)
 
 Open items (phase 2):
 
@@ -124,6 +124,17 @@ Open items (phase 2):
    content, not the view: the chapter is a concept tour with one model line and one
    short branch. Worth a look when chapters 6 and 7 land in phase 3, in case ch0 should
    carry a few more short lines for drilling.
+4. **Review findings, gate 2 (orchestrator).** Shape rendering (item 1) is verified
+   to the SVG: on the ch0 Bf4 node chessground's state holds exactly one shape, the
+   authored green arrow winning the dedup against the last-move blue, and a forced
+   redraw paints one green SVG line. Only pixel compositing still wants a human
+   glance when the pane is next visible. Read-only Study (item 2) confirmed live:
+   no movable colour, zero destinations. Fixed at review: the choices heading said
+   "Black plays" at chapter 0's opening position, where White is to move (it now
+   follows the side to move); a wrong vs-bf5 concept tag on the ...Nh5 Bg3 node in
+   ch5, which would have polluted the weak-area stats; and the ch5 Qxd3 note
+   claimed the queen eyes b7 from d3, which is not a queen line - it now claims
+   only h7. Item 3 (ch0's two lines) stays parked for the phase 3 look.
 
 ---
 
