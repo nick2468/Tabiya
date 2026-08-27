@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev": "npm run engine && vite",
+    "build": "npm run engine && tsc -b && vite build",
     "preview": "vite preview",
+    "engine": "node scripts/copy-engine.mjs",
     "test": "vitest run",
     "lint": "oxlint",
     "test:watch": "vitest"
@@ -17,6 +18,7 @@
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-markdown": "^10.1.0",
+    "stockfish": "^18.0.8",
     "ts-fsrs": "^5.4.1"
   },
   "devDependencies": {
