@@ -339,22 +339,7 @@
                           ]
                         }
                       ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "san": "c5",
-              "weight": 7,
-              "children": [
-                {
-                  "san": "e3",
-                  "note": "Hold the centre.",
-                  "tags": [
-                    "vs-c5"
-                  ],
-                  "children": [
+                    },
                     {
                       "san": "Qb6",
                       "note": "The critical try, hitting b2 where the bishop left it.",
@@ -538,7 +523,7 @@
                                                                                     {
                                                                                       "san": "Bxh7+",
                                                                                       "grade": "mistake",
-                                                                                      "note": "Count the defenders before you sacrifice. The knight on f6 has gone, but so has the knight that would follow up on g5, and after ...Kxh7 White has nothing to bring."
+                                                                                      "note": "Count the defenders before you sacrifice. The bishop on e7 covers g5, so the Ng5+ follow-up is simply taken, and the sacrifice is a piece for a pawn."
                                                                                     }
                                                                                   ],
                                                                                   "shapes": [
