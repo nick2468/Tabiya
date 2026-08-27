@@ -17,7 +17,7 @@
       "children": [
         {
           "san": "e3",
-          "note": "The usual move, and now Black has two ways of poking at the bishop.",
+          "note": "The usual move. It also opens the queen road to h5, which matters the moment Black reaches for ...Nh5.",
           "tags": [
             "development"
           ],
@@ -36,76 +36,116 @@
           "children": [
             {
               "san": "Nh5",
-              "note": "The most common poke: Black offers to trade off White's best minor piece.",
-              "weight": 5,
+              "note": "The poke, played a move too early.",
+              "weight": 3,
               "children": [
                 {
-                  "san": "Bg3",
-                  "note": "Step back and let Black decide. Taking on g3 opens the h-file for White, which is a bargain at the price of one bishop.",
+                  "san": "Qxh5",
+                  "note": "Count before you retreat. The bishop is attacked, but the knight on h5 is defended by nothing, and with the pawn on e3 the queen has a clear road to it. Take the piece.",
                   "tags": [
-                    "bishop-placement",
-                    "h-file"
+                    "tactics"
                   ],
                   "mistakes": [
                     {
+                      "san": "Bg3",
+                      "grade": "mistake",
+                      "note": "The answer from the proper move order, played without looking. It costs a whole piece: the knight on h5 was free."
+                    },
+                    {
                       "san": "Be5",
-                      "grade": "playable",
-                      "note": "Also good and it avoids the trade, but Bg3 is one answer that works every time and needs no thought."
+                      "grade": "mistake",
+                      "note": "It saves the bishop and forgets the knight. Take on h5 instead."
                     },
                     {
                       "san": "Bg5",
-                      "grade": "inaccuracy",
-                      "note": "The bishop has nothing to attack there and ...h6 chases it again."
+                      "grade": "mistake",
+                      "note": "The same oversight. Nothing defends h5, so nothing else matters here."
+                    }
+                  ],
+                  "shapes": [
+                    {
+                      "orig": "d1",
+                      "dest": "h5",
+                      "brush": "green"
+                    }
+                  ],
+                  "plan": "You are a piece up. Play Nf3 and Be2, castle, and trade whenever you can. The rule to take away: before you move an attacked piece, check whether the attacker is defended."
+                }
+              ]
+            },
+            {
+              "san": "e6",
+              "note": "The normal move. Now the poke at the bishop becomes a real question.",
+              "weight": 7,
+              "children": [
+                {
+                  "san": "Nf3",
+                  "note": "Develop, and notice what this move does besides developing: the knight on f3 blocks the queen road to h5, so from here on ...Nh5 has to be answered properly.",
+                  "tags": [
+                    "development"
+                  ],
+                  "mistakes": [
+                    {
+                      "san": "Bd3",
+                      "grade": "playable",
+                      "note": "Fine, but the knight first means ...Nh5 never comes with the bishop loose."
                     },
                     {
-                      "san": "Nf3",
-                      "grade": "inaccuracy",
-                      "note": "It ignores the knight, and after ...Nxf4 exf4 the bishop the whole opening is built around has gone."
+                      "san": "h3",
+                      "grade": "playable",
+                      "note": "Useful in itself and it takes ...Bg4 away. Develop first."
                     }
                   ],
                   "children": [
                     {
-                      "san": "Nxg3",
-                      "note": "Black takes, and gives White exactly what the h-file is worth.",
-                      "weight": 6,
+                      "san": "Nh5",
+                      "note": "The poke, now that the queen cannot simply take.",
+                      "weight": 5,
                       "children": [
                         {
-                          "san": "hxg3",
-                          "note": "Take towards the centre. The h-file is open at Black's king, the g3 pawn covers f4 and h4, and White's rook is already on the file.",
+                          "san": "Bg3",
+                          "note": "Step back and let Black decide. Qxh5 is not on offer this time, because the knight on f3 is standing in the queen road. Taking on g3 opens the h-file for White, which is a bargain at the price of one bishop.",
                           "tags": [
-                            "h-file",
-                            "kingside-attack"
+                            "vs-bf5",
+                            "h-file"
                           ],
                           "mistakes": [
                             {
-                              "san": "fxg3",
-                              "grade": "mistake",
-                              "note": "It wrecks the kingside, shuts in the rook on f1 and gives up the open file. Always take with the h-pawn."
-                            }
-                          ],
-                          "shapes": [
+                              "san": "Be5",
+                              "grade": "playable",
+                              "note": "Also good and it avoids the trade, but Bg3 is one answer that works every time and needs no thought."
+                            },
                             {
-                              "orig": "h1",
-                              "dest": "h8",
-                              "brush": "red"
+                              "san": "Bg5",
+                              "grade": "inaccuracy",
+                              "note": "The bishop has nothing to attack there and ...h6 chases it again."
                             }
                           ],
                           "children": [
                             {
-                              "san": "e6",
-                              "weight": 7,
+                              "san": "Nxg3",
+                              "note": "Black takes, and gives White exactly what the h-file is worth.",
+                              "weight": 6,
                               "children": [
                                 {
-                                  "san": "Nf3",
-                                  "note": "Develop normally. White has a free attacking road and has given up nothing but a bishop for a knight.",
+                                  "san": "hxg3",
+                                  "note": "Take towards the centre. The h-file is open at the black king, the g3 pawn covers f4 and h4, and White has a rook on the file.",
                                   "tags": [
-                                    "development"
+                                    "h-file",
+                                    "kingside-attack"
                                   ],
                                   "mistakes": [
                                     {
-                                      "san": "Qh5",
+                                      "san": "fxg3",
                                       "grade": "mistake",
-                                      "note": "The queen arrives alone. Black plays ...g6 and the queen is chased around while White's pieces sit at home."
+                                      "note": "It wrecks the kingside, shuts in the rook on f1 and gives up the open file. Always take with the h-pawn."
+                                    }
+                                  ],
+                                  "shapes": [
+                                    {
+                                      "orig": "h1",
+                                      "dest": "h8",
+                                      "brush": "red"
                                     }
                                   ],
                                   "children": [
@@ -142,47 +182,31 @@
                                   ]
                                 }
                               ]
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "san": "e6",
-                      "note": "Black leaves the knight on h5 for now, where it is offside.",
-                      "weight": 5,
-                      "children": [
-                        {
-                          "san": "Nf3",
-                          "note": "Ignore it and develop. A knight on h5 defends nothing, so White is effectively a piece up on the queenside.",
-                          "tags": [
-                            "development"
-                          ],
-                          "mistakes": [
-                            {
-                              "san": "Be2",
-                              "grade": "playable",
-                              "note": "It hits the knight and is not wrong, but Black just plays ...Nxg3 or ...Nf6 and White has spent a move on the wrong piece."
                             },
                             {
-                              "san": "Ne2",
-                              "grade": "inaccuracy",
-                              "note": "The knight blocks its own bishop and heads nowhere. Play Nf3 and let the knight on h5 sit there."
-                            }
-                          ],
-                          "children": [
-                            {
-                              "san": "Nxg3",
-                              "weight": 6,
+                              "san": "Be7",
+                              "note": "Black leaves the knight on h5, where it is offside.",
+                              "weight": 5,
                               "children": [
                                 {
-                                  "san": "hxg3",
-                                  "note": "The same recapture, the same open file, and White has developed a piece in the meantime.",
+                                  "san": "Bd3",
+                                  "note": "Ignore it and carry on. A knight on the rim defends nothing, so White is effectively a piece up where the game is.",
                                   "tags": [
-                                    "h-file",
-                                    "kingside-attack"
+                                    "bishop-placement"
                                   ],
-                                  "plan": "Play c3, Bd3 and Nbd2, then decide between castling short behind the g-pawns or keeping the king central and pushing g4. The open h-file does not expire."
+                                  "mistakes": [
+                                    {
+                                      "san": "Be2",
+                                      "grade": "playable",
+                                      "note": "It hits the knight, and Black just plays ...Nxg3 or ...Nf6. The bishop is worth more on the d3 diagonal."
+                                    },
+                                    {
+                                      "san": "h3",
+                                      "grade": "playable",
+                                      "note": "Useful, and it gives the bishop the h2 square. There is no hurry either way while the knight sits on the rim."
+                                    }
+                                  ],
+                                  "plan": "Play c3, Nbd2 and castle. If the knight comes back to f6 you have gained two free moves; if it takes on g3, recapture with the h-pawn and take the file."
                                 }
                               ]
                             }
@@ -392,7 +416,7 @@
                             {
                               "san": "Bxg6",
                               "grade": "playable",
-                              "note": "It trades and gives Black an extra pawn towards the centre with ...hxg6, which also opens the h-file for Black's rook. Leave it."
+                              "note": "Trading is fine and you will do it soon anyway. Right now the queen can still recapture on d3, so there is no hurry."
                             },
                             {
                               "san": "Ne2",
@@ -472,62 +496,48 @@
                                                       "weight": 6,
                                                       "children": [
                                                         {
-                                                          "san": "c3",
-                                                          "note": "Complete the triangle. Everything is defended and White can start thinking about the kingside.",
+                                                          "san": "Bxg6",
+                                                          "note": "Trade now, and know why. With a knight on d2 and the c-pawn about to leave c2, nothing could recapture on d3: the queen road is blocked and the pawn has gone. Take first and the problem never arises.",
                                                           "tags": [
-                                                            "development"
+                                                            "vs-bf5",
+                                                            "bishop-placement"
                                                           ],
                                                           "mistakes": [
                                                             {
+                                                              "san": "c3",
+                                                              "grade": "mistake",
+                                                              "note": "This is the trap. After ...Bxd3 there is no way to take back: the knight on d2 blocks the queen and the c-pawn has just left c2. A whole bishop for nothing."
+                                                            },
+                                                            {
                                                               "san": "dxc5",
                                                               "grade": "inaccuracy",
-                                                              "note": "There is no reason to release the tension, and ...Bxc5 gains Black a tempo."
+                                                              "note": "It keeps the bishops on and leaves the same problem one move later. Trade on g6 first."
                                                             }
                                                           ],
                                                           "shapes": [
                                                             {
-                                                              "orig": "c3",
+                                                              "orig": "d3",
+                                                              "dest": "g6",
                                                               "brush": "green"
                                                             },
                                                             {
-                                                              "orig": "d4",
-                                                              "brush": "green"
-                                                            },
-                                                            {
-                                                              "orig": "e3",
-                                                              "brush": "green"
+                                                              "orig": "g6",
+                                                              "dest": "d3",
+                                                              "brush": "red"
                                                             }
                                                           ],
                                                           "children": [
                                                             {
-                                                              "san": "Nc6",
-                                                              "weight": 7,
+                                                              "san": "hxg6",
+                                                              "weight": 8,
                                                               "children": [
                                                                 {
-                                                                  "san": "Ne5",
-                                                                  "note": "Now the knight goes to its square with everything behind it. Trading the bishops on g6 in this structure would only help Black, so White plays on the dark squares instead.",
+                                                                  "san": "c3",
+                                                                  "note": "Now the triangle is safe to finish. Black has rebuilt towards the centre and opened the h-file for a rook, so keep the king where it is and play in the middle.",
                                                                   "tags": [
-                                                                    "kingside-attack"
+                                                                    "development"
                                                                   ],
-                                                                  "mistakes": [
-                                                                    {
-                                                                      "san": "Bxg6",
-                                                                      "grade": "inaccuracy",
-                                                                      "note": "It straightens Black's pawns towards the centre and opens the h-file for Black, not for you."
-                                                                    },
-                                                                    {
-                                                                      "san": "Qc2",
-                                                                      "grade": "playable",
-                                                                      "note": "It lines the queen up behind the bishop, but Black's own bishop on g6 blocks that diagonal. The knight jump improves your worst piece instead."
-                                                                    }
-                                                                  ],
-                                                                  "shapes": [
-                                                                    {
-                                                                      "orig": "e5",
-                                                                      "brush": "green"
-                                                                    }
-                                                                  ],
-                                                                  "plan": "Play f4 to hold the knight, then Qf3 and Rf3 or a slow build with Qe2 and Rf3. Black's pieces are on the queenside and the bishop on g6 is not defending the king."
+                                                                  "plan": "Play Qc2 or Re1, then Ne5 with f4 behind it. The black king has one fewer pawn in front of it, but the open file belongs to Black, so build before you attack."
                                                                 }
                                                               ]
                                                             }

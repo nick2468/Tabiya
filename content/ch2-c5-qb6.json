@@ -41,8 +41,8 @@
             },
             {
               "san": "e4",
-              "grade": "mistake",
-              "note": "Opening the centre with the king still at home and Black already hitting d4."
+              "grade": "inaccuracy",
+              "note": "Opening the centre with the king at home and Black already hitting d4. Black comes out slightly on top, though it is not a disaster."
             }
           ],
           "children": [
@@ -71,8 +71,8 @@
                     },
                     {
                       "san": "dxc5",
-                      "grade": "mistake",
-                      "note": "Now ...Qxb2 comes with the extra threat against a1, and White has given up the centre as well."
+                      "grade": "inaccuracy",
+                      "note": "It holds the pawn but gives up the centre, and White keeps only a shade of an edge instead of the initiative Nc3 offers."
                     },
                     {
                       "san": "Nd2",
@@ -113,8 +113,8 @@
                             },
                             {
                               "san": "Na4",
-                              "grade": "playable",
-                              "note": "It also hits the queen, but Nb5 comes with a threat against the king as well, which is worth more."
+                              "grade": "mistake",
+                              "note": "It hits the queen but gives up everything else. The knight on a4 does nothing, and after ...Qb4 or ...Nc6 Black is the one who is better."
                             }
                           ],
                           "shapes": [
@@ -124,7 +124,7 @@
                               "brush": "red"
                             }
                           ],
-                          "plan": "Follow up with Rb1 and rapid development, and look for Nc7 or Nd6 tricks. You are a pawn down with a big lead in development, so play for the initiative and open lines. Do not sit and calculate a forced win: there may not be one, and the compensation is real either way."
+                          "plan": "Follow up with Rb1 and rapid development, and look for Nc7 or Nd6 tricks. You gave a pawn and got much more than a pawn back: Black has a queen with no good squares and no development at all. Keep making threats and do not hurry to win the material back."
                         }
                       ]
                     },
@@ -159,15 +159,15 @@
                               "children": [
                                 {
                                   "san": "Rb1",
-                                  "note": "Now defend b2 properly. The knight on b5 is a permanent nuisance and the rook is well placed for a later b4.",
+                                  "note": "Defend b2 and line the rook up against the queen. Offering the pawn again with c3 is just as good; the rook move needs no calculation.",
                                   "tags": [
                                     "vs-qb6"
                                   ],
                                   "mistakes": [
                                     {
                                       "san": "c3",
-                                      "grade": "mistake",
-                                      "note": "b2 is still hanging. Black simply plays ...Qxb2 and this time White has no knight jump to follow up with."
+                                      "grade": "playable",
+                                      "note": "Just as good, and it offers the b2 pawn on the same terms as before: after ...Qxb2 the rook still comes to b1 with tempo. Rb1 first is the simpler thing to remember."
                                     },
                                     {
                                       "san": "Nc7+",
@@ -203,12 +203,32 @@
                       "weight": 5,
                       "children": [
                         {
-                          "san": "Nb5",
-                          "note": "The same idea once more, so there is only one thing to remember. Nc7 is threatened and b2 remains poisoned.",
+                          "san": "Nxd5",
+                          "note": "Not the knight jump here: count the defenders of d5 first. The queen went to b6 and the knight to c6, so nothing guards the pawn. Take it.",
                           "tags": [
-                            "vs-qb6"
+                            "vs-qb6",
+                            "tactics"
                           ],
-                          "plan": "Meet ...Rb8 or ...Kd8 with Rb1 and normal development, and remember that a Black queen on b6 usually has to move again before Black can castle."
+                          "plan": "You are a clean pawn up with the better position. Meet ...Qxb2 with Nc3 or Rb1, get the king castled, and trade pieces when you can: an extra pawn is worth more once the queens come off.",
+                          "shapes": [
+                            {
+                              "orig": "c3",
+                              "dest": "d5",
+                              "brush": "green"
+                            }
+                          ],
+                          "mistakes": [
+                            {
+                              "san": "Nb5",
+                              "grade": "mistake",
+                              "note": "The jump from the other lines, played on autopilot. It gives back everything: the free pawn on d5 is the point of this position, not the fork threat."
+                            },
+                            {
+                              "san": "dxc5",
+                              "grade": "inaccuracy",
+                              "note": "It wins a pawn too and is much less clear. Taking on d5 keeps the centre and the pawn."
+                            }
+                          ]
                         }
                       ]
                     }

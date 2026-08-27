@@ -4,7 +4,7 @@
   "defaultTags": [
     "tactics"
   ],
-  "intro": "# Typical tactics and plans\n\nThe earlier chapters get you a good position. This one is about what to do with it. Each line below builds a position you already know from another chapter and then asks for one move: the blow that the whole setup was for.\n\n## The e5 outpost\n\nAlmost every plan in this repertoire runs through e5. Get a knight there with c3, d4 and the d2 knight behind it, then hold it with f4. When Black trades the knight off, take back with a pawn: the square matters more than the piece, and the pawn that lands on e5 usually attacks something on d6 into the bargain.\n\n## The rook lift\n\nOnce the pawn is on f4 the rook on f1 has nowhere to go, so it steps to f3 and swings to h3. It is slow and it is very hard to meet, because Black's pieces are usually on the queenside by then. Bring the cheap pieces first: rook, then queen.\n\n## The h-file\n\nWhen Black plays ...Nh5 and takes on g3, recapture with the h-pawn. You have swapped a bishop for a knight and been paid an open file at the black king. With that file open, castling queenside is often stronger than castling into it.\n\n## Break timing: c4 and e4\n\nThe rule is about Black's d-pawn. If it is on d6, take the centre with c4. If it is on d5, leave the centre closed and play on the kingside instead. Opening the position helps whichever side has the better pieces, and against a fianchetto that is usually not you.\n\n## The Greek gift, Bxh7+\n\nThe pattern is worth knowing and worth checking before you play it. Four things have to be true: your bishop bears on h7, a knight can reach g5 straight after, the queen can get to h5, and Black has no knight on f6 to cover h5 and no piece that can drop back to f8 or h7. If any one of those is missing, the sacrifice is just a piece. There is no exercise for it here yet: the app has no engine until the next phase, and a sacrifice nobody has checked is not something to teach.\n\n## Model games\n\nGata Kamsky is the reference player for this repertoire. His London games show the same handful of ideas over and over: the knight to e5, the slow rook lift, and the willingness to keep the centre closed for twenty moves. Specific games are deliberately not listed here, because the app has no game database to check them against and a citation nobody can verify is worse than none.\n\n## Typical mistakes at this level\n\nBringing the queen out first and letting it be chased. Sacrificing on h7 without counting the defenders. Opening the centre while your attack is still being built. Playing the fork instead of the threat of the fork, when the threat was doing all the work.",
+  "intro": "# Typical tactics and plans\n\nThe earlier chapters get you a good position. This one is about what to do with it. Each line below builds a position you already know from another chapter and then asks for one move: the blow that the whole setup was for.\n\n## The e5 outpost\n\nAlmost every plan in this repertoire runs through e5. Get a knight there with c3, d4 and the d2 knight behind it, then hold it with f4. When Black trades the knight off, take back with a pawn: the square matters more than the piece, and the pawn that lands on e5 usually attacks something on d6 into the bargain.\n\n## The rook lift\n\nOnce the pawn is on f4 the rook on f1 has nowhere to go, so it steps to f3 and swings to h3. It is slow and it is very hard to meet, because Black's pieces are usually on the queenside by then. Bring the cheap pieces first: rook, then queen.\n\n## The h-file\n\nWhen Black plays ...Nh5 and takes on g3, recapture with the h-pawn. You have swapped a bishop for a knight and been paid an open file at the black king. With that file open, castling queenside is often stronger than castling into it.\n\n## Break timing: c4 and e4\n\nThe rule is about Black's d-pawn. If it is on d6, take the centre with c4. If it is on d5, leave the centre closed and play on the kingside instead. Opening the position helps whichever side has the better pieces, and against a fianchetto that is usually not you.\n\n## The Greek gift, Bxh7+\n\nThe pattern is worth knowing and worth checking before you play it. Four things have to be true: your bishop bears on h7, a knight can reach g5 straight after, the queen can get to h5, and Black has no knight on f6 to cover h5 and no piece that can drop back to f8 or h7. If any one of those is missing, the sacrifice is just a piece.\n\nThe last exercise below is about counting rather than sacrificing, and it is the more useful habit. Bxh7+ turns up there, but it is not a sacrifice at all: the h-file has been open since move six, so the rook behind the bishop covers h7 and the king cannot take. Count the defenders and you find a free pawn. Guess, and you either miss it or throw a bishop away in the next game where the rook is not there.\n\nA true Greek gift, where the piece really is given, is not in the course. None of these lines produced one that the engine agreed with, and a sacrifice nobody has checked is not something to teach.\n\n## Model games\n\nGata Kamsky is the reference player for this repertoire. His London games show the same handful of ideas over and over: the knight to e5, the slow rook lift, and the willingness to keep the centre closed for twenty moves. Specific games are deliberately not listed here, because the app has no game database to check them against and a citation nobody can verify is worse than none.\n\n## Typical mistakes at this level\n\nBringing the queen out first and letting it be chased. Sacrificing on h7 without counting the defenders. Opening the centre while your attack is still being built. Playing the fork instead of the threat of the fork, when the threat was doing all the work.",
   "stem": [
     "d4"
   ],
@@ -426,37 +426,37 @@
                   "note": "Build the triangle.",
                   "children": [
                     {
-                      "san": "Nh5",
-                      "note": "The standard poke at the bishop.",
-                      "weight": 5,
+                      "san": "e6",
+                      "weight": 7,
                       "children": [
                         {
-                          "san": "Bg3",
-                          "note": "Step back and keep the bishop.",
-                          "tags": [
-                            "bishop-placement",
-                            "h-file"
-                          ],
+                          "san": "Nf3",
+                          "note": "Develop, which also blocks the queen road to h5 and makes ...Nh5 a real move.",
                           "children": [
                             {
-                              "san": "Nxg3",
-                              "weight": 6,
+                              "san": "Nh5",
+                              "note": "The standard poke at the bishop, once Nf3 has covered the queen road to h5.",
+                              "weight": 5,
                               "children": [
                                 {
-                                  "san": "hxg3",
-                                  "note": "Always the h-pawn. The file opens at Black's king.",
+                                  "san": "Bg3",
+                                  "note": "Step back and keep the bishop. The knight on f3 is why this works: without it the queen would simply take on h5.",
                                   "tags": [
-                                    "h-file",
-                                    "kingside-attack"
+                                    "bishop-placement",
+                                    "h-file"
                                   ],
                                   "children": [
                                     {
-                                      "san": "e6",
-                                      "weight": 7,
+                                      "san": "Nxg3",
+                                      "weight": 6,
                                       "children": [
                                         {
-                                          "san": "Nf3",
-                                          "note": "Develop normally.",
+                                          "san": "hxg3",
+                                          "note": "Always the h-pawn. The file opens at Black's king.",
+                                          "tags": [
+                                            "h-file",
+                                            "kingside-attack"
+                                          ],
                                           "children": [
                                             {
                                               "san": "c5",
@@ -487,62 +487,47 @@
                                                                   "children": [
                                                                     {
                                                                       "san": "O-O",
-                                                                      "note": "Black castles into the open file.",
+                                                                      "note": "Black castles into the open file, which is the moment to look for something.",
                                                                       "weight": 7,
                                                                       "children": [
                                                                         {
-                                                                          "san": "Qc2",
-                                                                          "note": "The queen steps off d1, connecting the rooks and clearing the way.",
+                                                                          "san": "Bxh7+",
+                                                                          "note": "The exercise: count the defenders before you call this a sacrifice. The h-file has been open since move six and the rook on h1 is behind the bishop, so ...Kxh7 is not even a legal move. Black has exactly one reply, and White is a pawn up with the king stripped.",
                                                                           "tags": [
-                                                                            "development"
+                                                                            "h-file",
+                                                                            "kingside-attack",
+                                                                            "tactics"
                                                                           ],
-                                                                          "children": [
+                                                                          "mistakes": [
                                                                             {
-                                                                              "san": "b6",
-                                                                              "weight": 5,
-                                                                              "children": [
-                                                                                {
-                                                                                  "san": "O-O-O",
-                                                                                  "note": "The exercise: which way does the king go? Long. The h-file is already open at Black's king and White's rook is on it, so castling short would put your own king on the file you want to attack down. On c1 the king is safe behind three pawns and the rook on h1 stays where the game is.",
-                                                                                  "tags": [
-                                                                                    "h-file",
-                                                                                    "kingside-attack",
-                                                                                    "king-safety"
-                                                                                  ],
-                                                                                  "mistakes": [
-                                                                                    {
-                                                                                      "san": "O-O",
-                                                                                      "grade": "inaccuracy",
-                                                                                      "note": "It puts your king on the open file you spent four moves earning. The rook then has to leave to make room, and the attack is gone."
-                                                                                    },
-                                                                                    {
-                                                                                      "san": "g4",
-                                                                                      "grade": "playable",
-                                                                                      "note": "The pawn storm is the right idea and the wrong order. Get the king out of the centre first: Black's ...cxd4 comes with the queens still on."
-                                                                                    },
-                                                                                    {
-                                                                                      "san": "Bxh7+",
-                                                                                      "grade": "mistake",
-                                                                                      "note": "Count the defenders before you sacrifice. The bishop on e7 covers g5, so the Ng5+ follow-up is simply taken, and the sacrifice is a piece for a pawn."
-                                                                                    }
-                                                                                  ],
-                                                                                  "shapes": [
-                                                                                    {
-                                                                                      "orig": "h1",
-                                                                                      "dest": "h7",
-                                                                                      "brush": "red"
-                                                                                    },
-                                                                                    {
-                                                                                      "orig": "e1",
-                                                                                      "dest": "c1",
-                                                                                      "brush": "green"
-                                                                                    }
-                                                                                  ],
-                                                                                  "plan": "Push g4 and g5, double on the h-file, and aim for Rh8. Keep an eye on ...cxd4 and ...Rc8: with kings on opposite sides it is a race, and c3 is the pawn Black will come for first."
-                                                                                }
-                                                                              ]
+                                                                              "san": "Qc2",
+                                                                              "grade": "mistake",
+                                                                              "note": "The slow build, played without looking at h7. It is a reasonable move in a position that no longer needs one: the pawn was there for the taking."
+                                                                            },
+                                                                            {
+                                                                              "san": "Ne5",
+                                                                              "grade": "inaccuracy",
+                                                                              "note": "The outpost is right in most positions and second best in this one. Take on h7 first: the knight can go to e5 next move anyway."
+                                                                            },
+                                                                            {
+                                                                              "san": "Rxh7",
+                                                                              "grade": "mistake",
+                                                                              "note": "The wrong piece. Black takes the rook with the king, because the bishop on d3 is what was covering h7 for the rook, not the other way round."
                                                                             }
-                                                                          ]
+                                                                          ],
+                                                                          "shapes": [
+                                                                            {
+                                                                              "orig": "d3",
+                                                                              "dest": "h7",
+                                                                              "brush": "green"
+                                                                            },
+                                                                            {
+                                                                              "orig": "h1",
+                                                                              "dest": "h7",
+                                                                              "brush": "blue"
+                                                                            }
+                                                                          ],
+                                                                          "plan": "After the forced ...Kh8, retreat the bishop to d3 or e4 and bring the knight to e5. You are a pawn up, the black king has no cover, and the h-file is still yours. Do not hunt for a mate: play Ne5, Qg4 or Qf3, and let the extra pawn and the open file do the work."
                                                                         }
                                                                       ]
                                                                     }
