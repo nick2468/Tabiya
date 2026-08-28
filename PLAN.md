@@ -590,15 +590,15 @@ Open items (phase 7):
 Goal: the second course, Black against 1.e4, proving the whole structure with real
 content.
 
-- [ ] 8.1 Course design: chapter list for a club-level Caro-Kann repertoire (the
+- [x] 8.1 Course design: chapter list for a club-level Caro-Kann repertoire (the
   main line, the Advance, the Exchange, the Panov, sidelines and move-order tricks,
   a tactics-and-plans chapter), agreed with Nick before drafting.
-- [ ] 8.2 Draft the chapters to the SPEC.md section 3 bar, colour rules
+- [x] 8.2 Draft the chapters to the SPEC.md section 3 bar, colour rules
   student-relative: every move noted, plans on leaves, mistake minimums, weights
   giving White's club-level choices, tags from core plus this course's extensions.
-- [ ] 8.3 The engine pass over every student move before the course is called done -
+- [x] 8.3 The engine pass over every student move before the course is called done -
   the standing rule; findings fixed or recorded.
-- [ ] 8.4 Ship it bundled; Play mode verified with the engine opening the game and
+- [x] 8.4 Ship it bundled; Play mode verified with the engine opening the game and
   the book steering White's moves by weight; drill cards verified against the
   London's for key collisions (there must be none, by course scoping).
 
@@ -607,4 +607,88 @@ Drill and Play work end to end as Black; the London is untouched; vitest green.
 
 - [ ] **Review gate 8 passed**
 
-Open items (phase 8): none yet.
+Open items (phase 8):
+
+1. **Nick ruled the chapter list and the two repertoire forks before any drafting.**
+   Seven chapters, as proposed. In the main line 4...Bf5, the classical, chosen over
+   the Karpov 4...Nd7 and the Tartakower 4...Nf6: it gets the problem bishop outside
+   before ...e6, which is the whole justification for the opening, and its long
+   sequence is one idea repeated rather than a list to learn. Against the Advance
+   3...Bf5 for the same reason, over the lower-theory 3...c5.
+2. **The engine pass found thirteen student moves that cost half a pawn or more, and
+   two of them were real blunders.** Method: Stockfish 18 lite over every student
+   move, 500 ms a position, evaluating before and after and reporting anything that
+   cost 0.5 of a pawn or more, with a second pass at 2500 ms and MultiPV on each
+   finding to see what the engine would have played instead. The tooling is now in
+   the repo as `scripts/engine-pass.mjs` and `scripts/engine-ask.mjs`, because every
+   phase so far has rebuilt it by hand. Ten findings fixed, three checked at longer
+   time and kept. What it caught:
+   - The Advance main line let White trade off the knight on f3, the only piece
+     defending e5, and then had Black play a quiet developing move instead of taking
+     the free pawn. Worse, after 10.c3 the answer is not even ...Nxe5 but ...Nxe3
+     first, which wins the same pawn and wrecks White's kingside. White now plays the
+     sound 9.Bb5, and the loose version is a lower-weighted branch that says what to
+     do about it. The punishment became exercise 1.
+   - The Panov exercise had White playing 11.Bg5 where it simply hangs to ...Bxg5 and
+     ...Qxg5, and Black answering ...Bb7.
+   - The Panov chapter kept the blockading knight on d5 and played ...b6, which leaves
+     h7 with nothing guarding it against Bxh7+ and Ng5+. The knight now steps back to
+     f6 first, which is the lesson: the blockade is not worth a mating attack.
+   - Against the Fantasy, ...Qh4+ wins the pawn back with check and leaves White's king
+     in the middle. The chapter played ...c5 and let White consolidate.
+   - Two exercise answers were merely second best, which for an exercise is as bad as
+     wrong.
+3. **One blunder the engine did not find, because a person did.** Chapter 3 played
+   10...Bd6 in a position where Black's own bishop on d7 shuts the queen in, so
+   11.Bxd6 cannot be answered and it drops a piece. It was spotted while building the
+   exercise that ran through that position, not by the pass, because the pass reports
+   what a move COSTS and the loss only appears on White's next move. Worth knowing:
+   the pass measures the student's move against the student's best, so a move that
+   invites a refutation shows up only if the refutation is already forced.
+4. **A phase 6 or 7 escape, found by using the app rather than reading it.** The Play
+   launcher offered "Any defence" and "This chapter's defence", and the play stats
+   labelled untargeted games the same way. In a Black course the opponent is the side
+   choosing an opening, so the word only fits half the courses. Fixed at the root with
+   a test, as its own commit. The colour rules were generalised in phase 6; the copy
+   sitting above them was not, and no test could have caught it because no test read
+   the words.
+5. **`tsc --noEmit` and `tsc -b` do not check the same files.** The suite and
+   `npx tsc --noEmit` were both green with a test fixture missing a required field;
+   `npm run build` failed on it, because the build config covers the test files and the
+   bare `--noEmit` invocation does not. Any future "types are clean" claim should say
+   which one it ran.
+6. **One finding kept rather than fixed.** In chapter 1's 5.Bd3 sideline, 5...Bxe4 is
+   about a quarter of a pawn behind 5...Qxd4 at 2500 ms, and dead level in absolute
+   terms. It is a branch weighted 2 that keeps the chapter's one idea, so it stands.
+   Two others in the same band were kept for the same reason.
+7. **The engine pass still has the blind spot recorded at phase 5, and it bit here.**
+   It judges the student's moves only. Half the faults above were really White moves
+   that no club player would choose, which the pass reports as Black failing to punish
+   them. Reading a finding therefore means asking which side is actually at fault. The
+   White weights were sanity-checked by hand against what club players play, and that
+   check has no test behind it.
+8. **Play, Drill and Study were driven live as Black in the dev build.** The engine
+   opened the game with 1.e4, the book steered White through 2.d4, 3.Bd3, 4.Bxe4 and
+   5.Bf3, all authored moves and one of them weighted 2, which is the weighting doing
+   its job rather than the engine choosing. The engine took over at the exact book exit
+   with 6.a4 and the report named it: "White left the repertoire on move 6 with a4".
+   Drill mixed 13 Caro-Kann cards with 10 London ones in one queue, graded a correct
+   ...c6 with its authored note, and graded a deliberate 2...d6 as the authored
+   inaccuracy with both the mistake note and the reason for ...d5.
+9. **The packaged app was checked, and Nick's progress file came back byte for byte.**
+   Hashed and copied to scratch before the run, per the standing rule that cost this
+   project two learnt lines in phase 7. The installed-shape binary showed both courses
+   with the real progress on the London tile, opened the Caro-Kann with all seven
+   chapters, and left the file at the same SHA256 afterwards. `window.__cg` is absent
+   in the packaged build, which is the dev-only board hook behaving as designed.
+10. **Nobody has clicked through the installer, for the third phase running.** It
+   builds (`Repertoire Trainer_1.0.0_x64-setup.exe`) and the binary it installs has
+   been driven over the DevTools protocol. The installer's own UI needs a human. The
+   separate "London Trainer" entry from phase 7 is still Nick's one manual uninstall.
+11. **The chapter 6 exercises are shallower than the chapter title suggests.** Two of
+   the four end on a genuine tactic (...Nxe3 winning a pawn and the kingside, and the
+   ...Na5 resource inside exercise 3's line); the other two end on a plan move, ...c5
+   and ...g6. That matches the London's chapter 7, where only one of four is a
+   sacrifice, and it is worth saying out loud: this chapter teaches typical positions,
+   not puzzles. A real puzzle set would need positions built for the purpose and each
+   one engine-verified, which is a bigger job than a chapter.

@@ -1,6 +1,6 @@
 # Content schema
 
-v2.1, 2026-08-28 (v1.0 written in phase 1 from SPEC.md section 4). SPEC.md rules
+v2.2, 2026-08-29 (v1.0 written in phase 1 from SPEC.md section 4). SPEC.md rules
 where the two disagree; section 10 governs the course model. Refinements land here
 with one line of why in the change log at the bottom.
 
@@ -170,6 +170,14 @@ Each course adds its own in `tagExtensions`. The London declares `vs-c5`, `vs-qb
 and would only clutter it. A course may use the core set plus its own extensions and
 nothing else.
 
+The Caro-Kann declares eight: `vs-advance`, `vs-exchange`, `vs-panov`, `vs-fantasy`
+and `vs-two-knights` name the opponent's choice, in the same `vs-` shape the London
+uses; `light-squares`, `c5-break` and `isolated-pawn` are chess concepts that happen
+not to arise in a London. The last three could have gone in the core set and did not,
+on the rule below: a concept earns a place in the core only when a second course
+actually needs it, because a core tag every course must understand is a cost paid by
+every course.
+
 Extending the CORE set is allowed, with a line in the change log below saying why.
 
 ## What the loader produces
@@ -246,3 +254,8 @@ recognise were meant to mean.
   "Where a course lives" section above says on what terms. The shadowing rules are
   not tidiness: a course id is written into every progress key hanging off it, so
   two courses sharing an id would share a drill schedule.
+- 2026-08-29: the second course arrived and the vocabulary held. The Caro-Kann needed
+  eight new tags and every one went into its own `tagExtensions`, so the core ten are
+  still exactly the concepts both repertoires share. `light-squares` is the closest
+  call: `dark-squares` is core and its twin is not, which looks lopsided until you
+  notice that no London chapter is about light squares.

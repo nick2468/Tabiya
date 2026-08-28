@@ -184,7 +184,8 @@ dashes, in every file including JSON prose.
 ## 6. Out of scope for v1, and the deferred register
 
 Not in v1: other openings and the classical move order (the data model allows both),
-a Black repertoire, online play, accounts or sync, mobile, video.
+a Black repertoire, online play, accounts or sync, mobile, video. The first two of
+those arrived in v2: the Caro-Kann shipped at phase 8 and is a Black repertoire.
 
 Deferred with reasons (the register; a later phase working nearby may take one along):
 
@@ -226,6 +227,17 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   hook that deletes the wrong folder is a worse outcome than an extra entry in Apps
   and Features.
 - **Classical move order content** (2.Nf3 first): schema-ready; author when wanted.
+- **A real exercise set, built as puzzles rather than as deep repertoire lines**: both
+  courses' exercise chapters end long authored lines on the move that carries the
+  plan, and only some of those moves are tactics. That is honest and it is not what
+  the chapter titles promise. A proper set means positions built for the purpose, each
+  one engine-verified, which is a chapter's work per course rather than a section's.
+  Recorded at phase 8.
+- **Engine-checking the opponent's moves and the frequency weights**: the standing
+  engine pass judges the student's moves only, so a line where the repertoire is sound
+  but the opponent's move is one no club player would choose passes unnoticed. Phase 8
+  found several of those by hand. Checking weights properly needs real-game frequency
+  data, which is the Lichess explorer item above. Recorded at phase 8.
 
 ## 7. Risks
 
