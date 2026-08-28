@@ -491,7 +491,7 @@ Acceptance: catalog navigation end to end; the drop-in proof passes with no sour
 change; one cross-course drill session driven live; vitest green; the installer
 ships as Repertoire Trainer and updates the existing installation.
 
-- [ ] **Review gate 7 passed**
+- [x] **Review gate 7 passed** (2026-08-29)
 
 Open items (phase 7):
 
@@ -562,6 +562,26 @@ Open items (phase 7):
    open appears after a restart. Deliberate: a course discovered halfway through a drill
    session would change the queue under the trainee's hands. The catalog says "restart
    the app" on screen.
+10. **What the review verified independently (gate 7).** The suite (299 tests), tsc and
+   lint re-run green. The packaged binary was driven over the DevTools protocol with
+   `scripts/packaged-eval.mjs`, after backing up the progress file and recording its
+   hash: the catalog opened as Repertoire Trainer with the real progress on the London
+   tile; the drop-in proof was restaged from scratch (a clone with a changed id, a
+   folder with an illegal move, a shadow claiming `london-white`) and all three behaved
+   as item 5 records; with a clone line marked learnt the drill queue read 26 = 17 + 9,
+   the filter narrowed it to 9, and the live card named its course. The read-failure
+   protection was re-proven two ways: the `.read-failure` style is present in the
+   shipped binary's bundle, which settles that the 21:59 build contains the 22:03
+   commit's code, and the failure path was exercised live in the dev build, where the
+   notice showed and the corrupted stored text was still byte-for-byte untouched
+   afterwards. The review's attempt to re-run the corruption test against the real
+   packaged file was blocked by the session's permission layer (writing garbage over
+   the user's file looks like what it is), so the builder's own record stands for that
+   exact variant, backed by the equivalent checks above. Nick's progress file was
+   restored to its pre-review bytes, hash-verified, and the AppData courses folder
+   removed. Two small fixes landed at review: failure messages get a terminating full
+   stop before the notice continues the paragraph, and the inspector's mangled usage
+   comment line was straightened.
 
 ---
 
