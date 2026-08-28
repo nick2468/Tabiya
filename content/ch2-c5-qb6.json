@@ -193,7 +193,8 @@
                                           ],
                                           "plan": "Play c4 or c3 and Bd3, castle, and think about b4 to gain space with the rook already behind the pawn. Black's queen on b6 and knight on a6 are both awkwardly placed."
                                         }
-                                      ]
+                                      ],
+                                      "note": "With the queenside holding for the moment, Black develops and hopes to castle before anything opens."
                                     }
                                   ]
                                 }
@@ -235,7 +236,8 @@
                             }
                           ]
                         }
-                      ]
+                      ],
+                      "note": "Black declines the pawn and develops, keeping the pressure on d4 without committing the queen further."
                     }
                   ]
                 }
@@ -367,7 +369,8 @@
                                           ],
                                           "plan": "Play Nbd2, Bd3 and castle, then use the a-file with Ra1 to a7 ideas. The queens are off, so simply out-develop Black and squeeze."
                                         }
-                                      ]
+                                      ],
+                                      "note": "Black takes, which is the consistent choice: the queen came out to be active, and retreating now would hand back the time it cost."
                                     }
                                   ]
                                 }
@@ -495,15 +498,18 @@
                                                                   ],
                                                                   "plan": "Play f4, then lift the rook with Rf3 and Rh3 and bring the queen across. Watch for ...cxd4 opening the c-file towards your own king, and recapture with the c-pawn when it helps."
                                                                 }
-                                                              ]
+                                                              ],
+                                                              "note": "The bishop lands on the long diagonal. Black's pieces point at the queenside and centre, White's at the kingside."
                                                             }
                                                           ]
                                                         }
-                                                      ]
+                                                      ],
+                                                      "note": "The light-squared bishop heads for b7, the standard way out from behind the e6 wall."
                                                     }
                                                   ]
                                                 }
-                                              ]
+                                              ],
+                                              "note": "Black castles, and the position looks like chapter 1 with the c-pawn already committed."
                                             }
                                           ]
                                         }
@@ -515,7 +521,8 @@
                             }
                           ]
                         }
-                      ]
+                      ],
+                      "note": "Both sides just develop. Black keeps every option open for one more move."
                     },
                     {
                       "san": "cxd4",
@@ -548,7 +555,8 @@
                                   ],
                                   "plan": "Play Bd3, Nbd2 and castle, then consider Ne5 or the e4 break. The open e-file suits White, whose pieces get there first."
                                 }
-                              ]
+                              ],
+                              "note": "Black develops against the new pawn centre. The open e-file belongs to White, so Black has to catch up quickly."
                             }
                           ]
                         }
@@ -581,11 +589,13 @@
                           ],
                           "plan": "Play Nbd2, Bd3 and castle, then Ne5 and f4. If Black tries ...Qb6 now, the answer is Qb3 offering the trade."
                         }
-                      ]
+                      ],
+                      "note": "Black settles for the solid setup. The sting of ...Qb6 fades once both sides are developed."
                     }
                   ]
                 }
-              ]
+              ],
+              "note": "Development first: the knight comes out before Black decides between ...Nc6, ...e6 and ...Qb6."
             },
             {
               "san": "cxd4",
@@ -675,7 +685,8 @@
                           ],
                           "plan": "Play c3, Bd3 and castle. Once the pawn reaches c3 the Qb3 trade offer is available whenever you want it, and Black's queen has to keep watching for it."
                         }
-                      ]
+                      ],
+                      "note": "With b2 defended, the queen sortie is over for now, so Black develops normally."
                     }
                   ]
                 }

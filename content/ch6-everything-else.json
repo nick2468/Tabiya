@@ -245,7 +245,8 @@
                                                                           ],
                                                                           "plan": "Play Nc3 or Nd2 with the other knight, then Rad1 and look for the e4 or d5 break. Black attack needs ...g5, which loosens a king you can already reach down the d-file."
                                                                         }
-                                                                      ]
+                                                                      ],
+                                                                      "note": "Black trades before the knight is pushed back: on e4 it was the best piece, and there was no good way to keep it there."
                                                                     }
                                                                   ]
                                                                 }
@@ -261,19 +262,23 @@
                                             }
                                           ]
                                         }
-                                      ]
+                                      ],
+                                      "note": "Black castles, completing the setup. The plan is ...d6, ...Qe8 and a slow kingside build."
                                     }
                                   ]
                                 }
-                              ]
+                              ],
+                              "note": "The modest square, as usual in the classical Dutch: castle first, expand later."
                             }
                           ]
                         }
-                      ]
+                      ],
+                      "note": "Black opens the bishop's diagonal and gets ready to castle: the classical Dutch shape."
                     }
                   ]
                 }
-              ]
+              ],
+              "note": "The knight develops and holds the e4 square, which the whole Dutch setup is built around."
             }
           ]
         }
@@ -363,15 +368,18 @@
                                   ],
                                   "plan": "Play Bd3 or Be2, castle, and hold d4 with c3. The pawn on d4 is isolated in some lines, so keep pieces on it and remember the e5 square is yours."
                                 }
-                              ]
+                              ],
+                              "note": "Normal development in a normal position: the sting of 1...c5 has gone."
                             }
                           ]
                         }
-                      ]
+                      ],
+                      "note": "Black stakes the centre in return, and the position becomes a quiet, symmetrical one."
                     }
                   ]
                 }
-              ]
+              ],
+              "note": "Black takes at once: the point of 1...c5 is to trade off White's centre pawn early."
             }
           ]
         }
@@ -467,19 +475,23 @@
                                           ],
                                           "plan": "Castle, play c3, then Ne5 and f4 as usual. Black's bishop on b7 is looking at a pawn on d5 that is not there yet, so it is the quieter piece."
                                         }
-                                      ]
+                                      ],
+                                      "note": "The quiet square again: Black finishes developing and will castle next."
                                     }
                                   ]
                                 }
-                              ]
+                              ],
+                              "note": "Development continues. Black delays the d-pawn, keeping both ...d5 and ...d6 in reserve."
                             }
                           ]
                         }
-                      ]
+                      ],
+                      "note": "Black opens the other bishop's diagonal and keeps the centre flexible."
                     }
                   ]
                 }
-              ]
+              ],
+              "note": "The bishop goes straight to the long diagonal, the whole idea of 1...b6: pressure on e4 and the centre from the side."
             }
           ]
         }
@@ -521,7 +533,8 @@
                   ],
                   "plan": "If Black plays ...d6, you are in chapter 3: bishop to e2 and take the centre with c4. If ...d5, you are in chapter 4: bishop to e2 and hold with c3."
                 }
-              ]
+              ],
+              "note": "The fianchetto completes. Which chapter this becomes still depends on the d-pawn."
             }
           ]
         }
@@ -558,7 +571,8 @@
                   ],
                   "plan": "If Black plays ...d5 you are in chapter 1. If ...f5, you are in the Dutch above and the bishop goes to e2. If ...b6, play Bd3 and carry on."
                 }
-              ]
+              ],
+              "note": "Black develops flexibly. This can still become a classical ...d5 game, a Dutch with ...f5, or a queenside fianchetto."
             }
           ]
         }

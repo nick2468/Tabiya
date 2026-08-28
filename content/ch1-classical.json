@@ -244,11 +244,13 @@
                                                                           ],
                                                                           "plan": "Lift the rook with Rf3 and Rh3, bring the queen to h5 or g4, and look for Bxh7+ once Black's pieces have drifted to the queenside. Keep an eye on ...cxd4 opening the c-file towards your own king."
                                                                         }
-                                                                      ]
+                                                                      ],
+                                                                      "note": "The rook goes behind the c-pawn before the file opens: Black intends ...cxd4 and play down the c-file."
                                                                     }
                                                                   ]
                                                                 }
-                                                              ]
+                                                              ],
+                                                              "note": "The bishop solves its one problem, the wall on e6, by going round it to the long diagonal."
                                                             }
                                                           ]
                                                         }
@@ -256,7 +258,8 @@
                                                     }
                                                   ]
                                                 }
-                                              ]
+                                              ],
+                                              "note": "The knight backs up the c5 pawn and adds a second attacker on d4."
                                             }
                                           ]
                                         }
@@ -264,7 +267,8 @@
                                     }
                                   ]
                                 }
-                              ]
+                              ],
+                              "note": "Black castles and keeps the tension: the two dark-squared bishops stay eye to eye on the diagonal."
                             },
                             {
                               "san": "Bxg3",
@@ -329,15 +333,18 @@
                                                           "note": "Finish developing. Every piece now has a job and White can choose between Ne5 and Qc2.",
                                                           "plan": "Castle long or leave the king in the centre and play Qc2, Ne5 and g4. The open h-file means even a slow attack becomes dangerous."
                                                         }
-                                                      ]
+                                                      ],
+                                                      "note": "Develop with pressure on d4, keeping the queenside counterplay moving."
                                                     }
                                                   ]
                                                 }
-                                              ]
+                                              ],
+                                              "note": "The standard counter in the centre: hit the base of the triangle."
                                             }
                                           ]
                                         }
-                                      ]
+                                      ],
+                                      "note": "Black castles short anyway. The open h-file is not dangerous yet, but it will need watching for the rest of the game."
                                     }
                                   ]
                                 }
@@ -375,7 +382,8 @@
                                   "note": "The standard square. White is one move from the full setup and Black has no way to disturb it.",
                                   "plan": "Play c3 and castle, then decide between Ne5 with f4 for a kingside attack, or e4 in one go if Black leaves the centre alone."
                                 }
-                              ]
+                              ],
+                              "note": "Black tucks the king away. The quiet setup is complete, and both sides now turn to their plans."
                             }
                           ]
                         }
@@ -440,15 +448,18 @@
                                                   ],
                                                   "plan": "Castle, then Ne5 and f4 for the attack, or take on c5 and play e4 if Black lets the centre go."
                                                 }
-                                              ]
+                                              ],
+                                              "note": "Castled, developed, and ready for ...b6 or ...cxd4. Black has a perfectly sound game."
                                             }
                                           ]
                                         }
-                                      ]
+                                      ],
+                                      "note": "The trade offer arrives a little later than usual, with the same idea: swap off White's best piece."
                                     }
                                   ]
                                 }
-                              ]
+                              ],
+                              "note": "The knight joins the pressure on d4. Black's play is on the queenside, White's on the kingside."
                             }
                           ]
                         }
@@ -456,7 +467,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "note": "Knight out and castling next. Black develops the kingside first, exactly as White does."
             },
             {
               "san": "Bd6",
@@ -502,11 +514,13 @@
                                   ],
                                   "plan": "Play Nbd2, c3 and castle, then Ne5 and f4. Black's bishop on d6 will be traded on g3 sooner or later, which opens the h-file for you."
                                 }
-                              ]
+                              ],
+                              "note": "Black castles. Everything is transposing to the chapter's main line."
                             }
                           ]
                         }
-                      ]
+                      ],
+                      "note": "The knight comes out behind the early trade offer, and the position heads back towards the main line."
                     }
                   ]
                 }
@@ -537,7 +551,8 @@
                           "note": "Nothing has changed. Develop and complete the setup.",
                           "plan": "Play Nbd2, Bd3 and castle. If Black takes on d4, recapture with the pawn and keep the triangle intact."
                         }
-                      ]
+                      ],
+                      "note": "Develop and keep the options open: Black can still choose between the ...Nc6, ...Qb6 and ...Bd6 setups."
                     }
                   ]
                 }

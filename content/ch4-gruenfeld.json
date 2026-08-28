@@ -243,7 +243,8 @@
                                                                   ],
                                                                   "plan": "Play f4 to weld the knight in place, then Qf3 or Rf3 and swing at the king. Keep an eye on ...cxd4 and ...Nxe5: if the knight is traded, recapture with a pawn so the outpost stays occupied."
                                                                 }
-                                                              ]
+                                                              ],
+                                                              "note": "The second bishop fianchettos too. Black's pressure runs along both long diagonals, all of it pointed at the centre White is holding."
                                                             }
                                                           ]
                                                         }
@@ -285,7 +286,8 @@
                                                     }
                                                   ]
                                                 }
-                                              ]
+                                              ],
+                                              "note": "The knight adds to the pressure on d4, the natural way to make the g7 bishop count."
                                             }
                                           ]
                                         }
@@ -293,11 +295,13 @@
                                     }
                                   ]
                                 }
-                              ]
+                              ],
+                              "note": "Black castles. The setup is comfortable and solid, and the middlegame will be decided by the plans, not the opening."
                             }
                           ]
                         }
-                      ]
+                      ],
+                      "note": "The bishop takes the long diagonal, where it will stare at White's well defended d4 pawn for a long time."
                     }
                   ]
                 }
@@ -345,11 +349,13 @@
                                   ],
                                   "plan": "Play c3 and h3, then Nbd2 and Ne5 with f4 behind it. Do not open the centre while Black's bishop is on g7 looking through it."
                                 }
-                              ]
+                              ],
+                              "note": "Black castles behind the fianchetto, solid as ever. A slow manoeuvring game is coming."
                             }
                           ]
                         }
-                      ]
+                      ],
+                      "note": "Now the d-pawn commits to d5, and the chapter is decided: the slow plan, not the c4 grab."
                     }
                   ]
                 }
@@ -425,11 +431,13 @@
                                   ],
                                   "plan": "Play c3, h3 and Nbd2, then Ne5 with f4. If Black breaks with ...c5, hold with c3 and never take on c5 while that bishop sits on g7."
                                 }
-                              ]
+                              ],
+                              "note": "Black castles, and the third route in arrives at the same position as the others."
                             }
                           ]
                         }
-                      ]
+                      ],
+                      "note": "The familiar picture: g7 bishop, d5 pawn, and a long game of plans ahead."
                     }
                   ]
                 }

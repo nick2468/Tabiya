@@ -173,11 +173,13 @@
                                                   ],
                                                   "plan": "Castle short or leave the king in the centre and play Qc2, Ne5 and g4. With the h-file open, doubling rooks on it is usually stronger than anything Black has on the queenside."
                                                 }
-                                              ]
+                                              ],
+                                              "note": "Develop and press on d4, Black's normal queenside play."
                                             }
                                           ]
                                         }
-                                      ]
+                                      ],
+                                      "note": "Black gets on with the standard counterplay against d4, the right idea even after the trade."
                                     }
                                   ]
                                 }
@@ -313,19 +315,23 @@
                                                   ],
                                                   "plan": "Castle, then Ne5 and f4 as usual. With fewer pieces on the board, keep the bishop pair and remember the endgame is pleasant for White here."
                                                 }
-                                              ]
+                                              ],
+                                              "note": "The knight backs the c5 pawn and the queenside play is properly under way."
                                             }
                                           ]
                                         }
-                                      ]
+                                      ],
+                                      "note": "The standard strike at d4. Nothing about the early trade changed Black's right plan."
                                     }
                                   ]
                                 }
-                              ]
+                              ],
+                              "note": "Back to sensible development: open the bishop's diagonal and prepare to castle."
                             }
                           ]
                         }
-                      ]
+                      ],
+                      "note": "Black trades the adventurous knight off rather than spend another move retreating it."
                     }
                   ]
                 }
@@ -333,7 +339,8 @@
             }
           ]
         }
-      ]
+      ],
+      "note": "The natural developing move. From here Black can play a normal game or start poking at the bishop."
     },
     {
       "san": "Bf5",
@@ -539,15 +546,18 @@
                                                                   ],
                                                                   "plan": "Play Qc2 or Re1, then Ne5 with f4 behind it. The black king has one fewer pawn in front of it, but the open file belongs to Black, so build before you attack."
                                                                 }
-                                                              ]
+                                                              ],
+                                                              "note": "Black takes back towards the centre, the tidy recapture: the g6 pawn now covers f5 and h5."
                                                             }
                                                           ]
                                                         }
-                                                      ]
+                                                      ],
+                                                      "note": "The familiar strike at the base of White's centre."
                                                     }
                                                   ]
                                                 }
-                                              ]
+                                              ],
+                                              "note": "Both sides castled, both dark-squared bishops eye to eye: a quiet middlegame of plans is coming."
                                             }
                                           ]
                                         }
@@ -555,7 +565,8 @@
                                     }
                                   ]
                                 }
-                              ]
+                              ],
+                              "note": "Development continues around the bishop stand-off on the b1 to h7 diagonal."
                             }
                           ]
                         }
@@ -629,15 +640,18 @@
                                                   ],
                                                   "plan": "Castle, play c3, then Ne5 and f4. The queen on d3 is already pointing at h7, so a knight on e5 and a rook lift is often enough to create real threats."
                                                 }
-                                              ]
+                                              ],
+                                              "note": "Black castles into a quiet position. The play from here is about the e5 square and the queenside pawns."
                                             }
                                           ]
                                         }
-                                      ]
+                                      ],
+                                      "note": "The offer to trade the dark-squared bishops as well: Black wants a simple, level game."
                                     }
                                   ]
                                 }
-                              ]
+                              ],
+                              "note": "Black develops and keeps the position simple: the light-squared bishops are gone and the plans are clear."
                             }
                           ]
                         }
@@ -645,7 +659,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "note": "Black completes the little wall. With the bishop already outside, ...e6 costs nothing here, which is the whole point of playing ...Bf5 first."
             }
           ]
         }

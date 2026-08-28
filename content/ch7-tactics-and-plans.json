@@ -160,39 +160,48 @@
                                                                                     }
                                                                                   ]
                                                                                 }
-                                                                              ]
+                                                                              ],
+                                                                              "note": "The rook lines up behind the c-pawn, ready for ...cxd4 and the open file."
                                                                             }
                                                                           ]
                                                                         }
-                                                                      ]
+                                                                      ],
+                                                                      "note": "The bishop reaches the long diagonal, and Black's play stays on the queenside."
                                                                     }
                                                                   ]
                                                                 }
-                                                              ]
+                                                              ],
+                                                              "note": "Black prepares ...Bb7, the standard route out for the light-squared bishop."
                                                             }
                                                           ]
                                                         }
-                                                      ]
+                                                      ],
+                                                      "note": "The knight joins the pressure on d4."
                                                     }
                                                   ]
                                                 }
-                                              ]
+                                              ],
+                                              "note": "The standard counter at the base of the triangle."
                                             }
                                           ]
                                         }
-                                      ]
+                                      ],
+                                      "note": "Black castles and keeps the bishop tension."
                                     }
                                   ]
                                 }
-                              ]
+                              ],
+                              "note": "The usual offer to trade off White's good bishop."
                             }
                           ]
                         }
-                      ]
+                      ],
+                      "note": "Knight out, castling next: the standard developing pattern."
                     }
                   ]
                 }
-              ]
+              ],
+              "note": "The classical wall goes up: solid, and it shuts in the c8 bishop."
             },
             {
               "san": "c5",
@@ -314,31 +323,38 @@
                                                                             }
                                                                           ]
                                                                         }
-                                                                      ]
+                                                                      ],
+                                                                      "note": "The bishop takes the diagonal, and the queenside plan is complete."
                                                                     }
                                                                   ]
                                                                 }
-                                                              ]
+                                                              ],
+                                                              "note": "The b7 route for the bishop, and queenside play to follow."
                                                             }
                                                           ]
                                                         }
-                                                      ]
+                                                      ],
+                                                      "note": "Black castles, and the tension on the diagonal stays."
                                                     }
                                                   ]
                                                 }
-                                              ]
+                                              ],
+                                              "note": "The trade offer, exactly as in the classical chapter."
                                             }
                                           ]
                                         }
-                                      ]
+                                      ],
+                                      "note": "The solid choice: Black settles into the classical wall."
                                     }
                                   ]
                                 }
-                              ]
+                              ],
+                              "note": "Both sides develop, and Black keeps every setup open."
                             }
                           ]
                         }
-                      ]
+                      ],
+                      "note": "Development with pressure: the knight leans on d4 at once."
                     },
                     {
                       "san": "Qb6",
@@ -415,7 +431,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "note": "The immediate strike at d4, the most testing practical try."
             },
             {
               "san": "Nf6",
@@ -533,19 +550,23 @@
                                                                     }
                                                                   ]
                                                                 }
-                                                              ]
+                                                              ],
+                                                              "note": "The bishop takes the quiet square and Black prepares to castle, into a position where White holds the open h-file."
                                                             }
                                                           ]
                                                         }
-                                                      ]
+                                                      ],
+                                                      "note": "The knight backs the pressure on d4."
                                                     }
                                                   ]
                                                 }
-                                              ]
+                                              ],
+                                              "note": "Back to the queenside counterplay."
                                             }
                                           ]
                                         }
-                                      ]
+                                      ],
+                                      "note": "Black takes the bishop, and the h-file opens in White's favour."
                                     }
                                   ]
                                 }
@@ -553,11 +574,13 @@
                             }
                           ]
                         }
-                      ]
+                      ],
+                      "note": "The solid wall, before Black decides whether to poke at the bishop."
                     }
                   ]
                 }
-              ]
+              ],
+              "note": "The natural developing move, which also brings the ...Nh5 poke within reach."
             }
           ]
         }
