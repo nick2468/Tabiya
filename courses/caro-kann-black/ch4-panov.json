@@ -1,0 +1,342 @@
+{
+  "id": "ch4-panov",
+  "title": "The Panov: 4.c4",
+  "defaultTags": ["vs-panov"],
+  "intro": "White exchanges on d5 and then hits the pawn with 4.c4. This is the most ambitious answer to the Caro-Kann and the one that leads to the least Caro-Kann-like game: open lines, pieces out early, and a fight about one pawn in the middle of the board.\n\n## What an isolated pawn is\n\nSooner or later White plays cxd5 and Black recaptures with a piece. White is then left with a pawn on d4 and no pawns on c or e to defend it. That is an isolated pawn. It is strong in the middlegame, because it controls c5 and e5 and gives White's pieces space, and it is weak in the endgame, because it has to be defended by pieces forever.\n\n## Black's plan in one line\n\nBlockade it, trade pieces, then win it. The square in front of the pawn, d5, is where a black knight belongs: it cannot be driven away by a pawn. Every pair of pieces that comes off makes the isolated pawn weaker. So Black develops simply, castles, puts a knight on d5 and a rook where it looks at d4, and waits.\n\n## The move order\n\n4...Nf6 5.Nc3 e6 6.Nf3 Be7 is the low-maintenance setup. Black does not commit the queen or the queenside bishop early, and 7.cxd5 Nxd5 reaches the standard picture with the knight already on the blockade square. The sharper 6...Bb4 pins the knight and is perfectly good; it also asks Black to know a lot more.\n\n## Typical mistakes at this level\n\nTaking on c4 and giving up the centre for a pawn that cannot be held. Recapturing on d5 with the e-pawn, which leaves Black with the isolated pawn instead. Blocking the c-file with the queen's knight before the bishops have squares. And trading off the blockading knight for nothing, which sets White's centre free.",
+  "stem": ["e4", "c6", "d4", "d5", "exd5", "cxd5", "c4"],
+  "tree": [
+    {
+      "san": "Nf6",
+      "note": "Develop and defend d5 at the same time. This is the move that keeps everything simple.",
+      "tags": ["development"],
+      "mistakes": [
+        { "san": "dxc4", "grade": "mistake", "note": "The pawn cannot be held: 5.Bxc4 develops with tempo and White owns the whole centre for nothing." },
+        { "san": "e6", "grade": "playable", "note": "Sound, and it usually transposes. Developing a piece first is more useful than a pawn move." },
+        { "san": "Nc6", "grade": "playable", "note": "A real line and a sharp one. It invites 5.Nf3 Bg4 with a lot of theory attached." }
+      ],
+      "children": [
+        {
+          "san": "Nc3",
+          "note": "The main move. White develops and adds a third attacker to d5.",
+          "weight": 8,
+          "children": [
+            {
+              "san": "e6",
+              "note": "Hold the pawn with a pawn. The bishop on c8 is shut in for now, and it comes out to b7 later, which is a better square anyway.",
+              "tags": ["development"],
+              "mistakes": [
+                { "san": "g6", "grade": "playable", "note": "A good setup with ...Bg7, and a big body of theory around 6.Qb3 and 6.cxd5. This course takes the quieter road." },
+                { "san": "Nc6", "grade": "playable", "note": "Playable, but it blocks the c-file and invites 6.Bg5 with awkward pressure." }
+              ],
+              "children": [
+                {
+                  "san": "Nf3",
+                  "note": "Simple development.",
+                  "weight": 6,
+                  "children": [
+                    {
+                      "san": "Be7",
+                      "note": "Quiet and flexible. Black gets ready to castle and keeps the option of ...Nc6 or ...b6.",
+                      "tags": ["development"],
+                      "mistakes": [
+                        { "san": "Bb4", "grade": "playable", "note": "The main line of the Panov and completely sound. The pin gains time and it comes with far more to remember." },
+                        { "san": "dxc4", "grade": "inaccuracy", "note": "8.Bxc4 hands White a free centre and a developed bishop for a pawn Black cannot keep." }
+                      ],
+                      "children": [
+                        {
+                          "san": "cxd5",
+                          "note": "White releases the tension and takes on the isolated pawn.",
+                          "weight": 6,
+                          "children": [
+                            {
+                              "san": "Nxd5",
+                              "note": "Recapture with the knight, which lands on the blockade square in front of White's isolated pawn.",
+                              "tags": ["isolated-pawn"],
+                              "mistakes": [
+                                { "san": "exd5", "grade": "inaccuracy", "note": "It leaves Black with the isolated pawn instead, and the whole plan of the chapter is reversed." }
+                              ],
+                              "children": [
+                                {
+                                  "san": "Bd3",
+                                  "note": "The bishop takes the diagonal aimed at h7, which is the point of White's extra space.",
+                                  "weight": 6,
+                                  "children": [
+                                    {
+                                      "san": "O-O",
+                                      "note": "Castle before anything else. There is nothing to fear yet, and the king belongs off the centre file.",
+                                      "tags": ["king-safety"],
+                                      "mistakes": [
+                                        { "san": "Nc6", "grade": "playable", "note": "Also fine. Castling first means Black is never caught with the king in the middle if the position opens." }
+                                      ],
+                                      "children": [
+                                        {
+                                          "san": "O-O",
+                                          "note": "White castles too and the middlegame starts.",
+                                          "weight": 8,
+                                          "children": [
+                                            {
+                                              "san": "Nc6",
+                                              "note": "Develop with an eye on d4. The isolated pawn now has two attackers and two defenders.",
+                                              "tags": ["development"],
+                                              "mistakes": [
+                                                { "san": "Nxc3", "grade": "playable", "note": "It gives White doubled pawns on c3 and a strong centre. Keeping the knight on the blockade square is the plan of this chapter." }
+                                              ],
+                                              "children": [
+                                                {
+                                                  "san": "Re1",
+                                                  "note": "The rook takes the open file and supports a later Ne5 or d5 push.",
+                                                  "weight": 5,
+                                                  "children": [
+                                                    {
+                                                      "san": "b6",
+                                                      "note": "Prepare ...Bb7, where the bishop supports the knight on d5 and looks down the long diagonal.",
+                                                      "tags": ["development"],
+                                                      "mistakes": [
+                                                        { "san": "Nxc3", "grade": "playable", "note": "Playable, and it hands White a broad pawn centre in return for a target. Blockading is simpler." },
+                                                        { "san": "Bf6", "grade": "playable", "note": "It adds a second attacker to d4 straight away. The bishop is more useful once ...Bb7 has been arranged." }
+                                                      ],
+                                                      "children": [
+                                                        {
+                                                          "san": "a3",
+                                                          "note": "A useful move: White takes b4 away from the knight before it ever gets there.",
+                                                          "weight": 5,
+                                                          "children": [
+                                                            {
+                                                              "san": "Bb7",
+                                                              "note": "The bishop comes to the long diagonal and defends the blockading knight a second time.",
+                                                              "tags": ["development"],
+                                                              "plan": "Put a rook on c8 or d8, keep the knight on d5, and trade pieces whenever White offers. The isolated pawn gets weaker with every trade, and in an ending it simply falls."
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "san": "Bd3",
+                          "note": "White develops and keeps the tension on d5.",
+                          "weight": 4,
+                          "children": [
+                            {
+                              "san": "dxc4",
+                              "note": "Now taking is right: the bishop has to move again to recapture, so Black gains a move.",
+                              "tags": ["tactics"],
+                              "children": [
+                                {
+                                  "san": "Bxc4",
+                                  "note": "The bishop recaptures on a good square, and White has the isolated pawn on d4.",
+                                  "weight": 9,
+                                  "children": [
+                                    {
+                                      "san": "O-O",
+                                      "note": "Castle and get on with the blockade.",
+                                      "tags": ["king-safety"],
+                                      "children": [
+                                        {
+                                          "san": "O-O",
+                                          "note": "White castles as well.",
+                                          "weight": 7,
+                                          "children": [
+                                            {
+                                              "san": "Nc6",
+                                              "note": "Develop with pressure on the isolated pawn.",
+                                              "tags": ["development"],
+                                              "plan": "Play ...b6 and ...Bb7, put a knight on d5 when it can stay there, and trade pieces. This is the same plan as the main line with a move to spare."
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "san": "Bg5",
+                  "note": "White pins the knight before finishing development.",
+                  "weight": 4,
+                  "children": [
+                    {
+                      "san": "Be7",
+                      "note": "Break the pin the simple way. Black is happy to trade a pair of bishops.",
+                      "tags": ["development"],
+                      "mistakes": [
+                        { "san": "dxc4", "grade": "inaccuracy", "note": "It opens the position while the king is still in the centre and the knight is pinned." }
+                      ],
+                      "children": [
+                        {
+                          "san": "cxd5",
+                          "note": "White takes and accepts the isolated pawn.",
+                          "weight": 6,
+                          "children": [
+                            {
+                              "san": "Nxd5",
+                              "note": "Recapture with the knight, breaking the pin and taking the blockade square.",
+                              "tags": ["isolated-pawn"],
+                              "children": [
+                                {
+                                  "san": "Bxe7",
+                                  "note": "White trades before the knight jumps away.",
+                                  "weight": 7,
+                                  "children": [
+                                    {
+                                      "san": "Qxe7",
+                                      "note": "Recapture with the queen, which now looks down the e-file at White's king.",
+                                      "tags": ["development"],
+                                      "plan": "Castle, play ...Nc6 and ...Rd8, and keep trading. A pair of bishops has already gone, which is one step closer to the ending where d4 falls."
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "san": "cxd5",
+                  "note": "White takes at once rather than developing first.",
+                  "weight": 4,
+                  "children": [
+                    {
+                      "san": "Nxd5",
+                      "note": "The knight takes the blockade square immediately.",
+                      "tags": ["isolated-pawn"],
+                      "mistakes": [
+                        { "san": "exd5", "grade": "inaccuracy", "note": "Again this hands the isolated pawn to Black, which is the wrong side of the bargain." }
+                      ],
+                      "children": [
+                        {
+                          "san": "Nf3",
+                          "note": "Development.",
+                          "weight": 7,
+                          "children": [
+                            {
+                              "san": "Be7",
+                              "note": "Prepare to castle. Nothing has changed about the plan.",
+                              "tags": ["development"],
+                              "children": [
+                                {
+                                  "san": "Bc4",
+                                  "note": "The bishop takes aim at the blockading knight and at f7.",
+                                  "weight": 6,
+                                  "children": [
+                                    {
+                                      "san": "O-O",
+                                      "note": "Castle. If White ever trades on d5, the recapture with the e-pawn gives Black a solid extra defender in the centre.",
+                                      "tags": ["king-safety"],
+                                      "plan": "Play ...Nc6, ...b6 and ...Bb7, and answer Nxd5 with ...exd5. Trade pieces and head for the ending."
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "san": "Nf3",
+          "note": "Development before the knight commits to c3.",
+          "weight": 4,
+          "children": [
+            {
+              "san": "e6",
+              "note": "Hold d5 the same way.",
+              "tags": ["development"],
+              "mistakes": [
+                { "san": "Nc6", "grade": "playable", "note": "Reasonable, but it blocks the c-file before Black has decided where the pieces go." }
+              ],
+              "children": [
+                {
+                  "san": "Nc3",
+                  "note": "The knight arrives after all, and the position is the main line by transposition.",
+                  "weight": 7,
+                  "children": [
+                    {
+                      "san": "Be7",
+                      "note": "The usual developing move, ready to castle.",
+                      "tags": ["development"],
+                      "plan": "This is the main line of the chapter. Expect 7.cxd5 Nxd5 8.Bd3 O-O and blockade the isolated pawn as usual."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "san": "cxd5",
+          "note": "White resolves the centre at once, which gives Black the easiest game of all.",
+          "weight": 3,
+          "children": [
+            {
+              "san": "Nxd5",
+              "note": "The knight takes the blockade square with a move to spare.",
+              "tags": ["isolated-pawn"],
+              "mistakes": [
+                { "san": "Qxd5", "grade": "inaccuracy", "note": "6.Nc3 develops with tempo and White gets the move back." }
+              ],
+              "children": [
+                {
+                  "san": "Nf3",
+                  "note": "Development.",
+                  "weight": 6,
+                  "children": [
+                    {
+                      "san": "e6",
+                      "note": "Solid support for the knight on d5.",
+                      "tags": ["development"],
+                      "children": [
+                        {
+                          "san": "Nc3",
+                          "note": "White challenges the blockading knight.",
+                          "weight": 6,
+                          "children": [
+                            {
+                              "san": "Be7",
+                              "note": "Develop and castle. If White takes on d5, recapture with the e-pawn and the blockade holds.",
+                              "tags": ["development"],
+                              "plan": "Castle, then ...Nc6 and ...b6 with ...Bb7. Trade pieces whenever White offers and aim at the pawn on d4."
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

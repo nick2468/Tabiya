@@ -1,0 +1,26 @@
+{
+  "id": "caro-kann-black",
+  "title": "The Caro-Kann Defence",
+  "colour": "black",
+  "tagline": "A solid, well-signposted answer to 1.e4, as Black.",
+  "formatVersion": 1,
+  "chapters": [
+    "ch0-the-defence.json",
+    "ch1-main-line.json",
+    "ch2-advance.json",
+    "ch3-exchange.json",
+    "ch4-panov.json",
+    "ch5-sidelines.json",
+    "ch6-tactics-and-plans.json"
+  ],
+  "tagExtensions": [
+    "vs-advance",
+    "vs-exchange",
+    "vs-panov",
+    "vs-fantasy",
+    "vs-two-knights",
+    "light-squares",
+    "c5-break",
+    "isolated-pawn"
+  ]
+}
