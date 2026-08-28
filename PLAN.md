@@ -380,24 +380,24 @@ Open items (phase 5):
 Goal: everything below the UI understands courses, and the London becomes the first
 one with nothing visibly changed. SPEC.md section 10 governs phases 6 to 8.
 
-- [ ] 6.1 The manifest: `course.json` schema (id, title, colour, tagline, chapter
+- [x] 6.1 The manifest: `course.json` schema (id, title, colour, tagline, chapter
   order, format version, tag extensions) documented in docs/content-schema.md;
   `content/` moves to `courses/london-white/` with a manifest; the loader takes the
   student colour and prefixes chapter and line ids with the course id; a manifest
   with a newer format version is refused, the progress-file rule.
-- [ ] 6.2 The schema's colour rules generalised to student and opponent per SPEC.md
+- [x] 6.2 The schema's colour rules generalised to student and opponent per SPEC.md
   section 10; loader tests cover a Black-course fixture, including a stem that
   starts with the opponent's move.
-- [ ] 6.3 Cards scoped by course: identity is course id plus position key; dedup and
+- [x] 6.3 Cards scoped by course: identity is course id plus position key; dedup and
   the conflict rule stay within a course; tests prove two courses can teach
   different moves from one position without corrupting each other.
-- [ ] 6.4 Book, session and report generalised: student and opponent maps,
+- [x] 6.4 Book, session and report generalised: student and opponent maps,
   playStudent and playOpponent, the engine able to open the game, the report
   scanning the student's moves; tests with the engine mocked, both colours.
-- [ ] 6.5 Progress version 4: course-scoped line ids, card keys, play records and
+- [x] 6.5 Progress version 4: course-scoped line ids, card keys, play records and
   per-course tag history; the migration assigns all existing data to london-white;
   a migration test runs a real v3 shape through and loses nothing.
-- [ ] 6.6 The content suite runs per course: quality bar parameterised by student
+- [x] 6.6 The content suite runs per course: quality bar parameterised by student
   colour, vocabulary from core plus manifest extensions.
 
 Acceptance: vitest green; the app runs with the London as the single course and the
@@ -406,7 +406,48 @@ a copy first); a hand-built Black fixture course loads, drills and plays in test
 
 - [ ] **Review gate 6 passed**
 
-Open items (phase 6): none yet.
+Open items (phase 6):
+
+1. **The card key format is now part of the progress file, not an implementation
+   detail.** A card is `<course>#<position>` and a line is `<course>/<chapter>:<moves>`,
+   built in `src/model/ids.ts` and read back by the version 4 migration. Two separators
+   because a position key carries slashes and spaces of its own, so a card key needs one
+   a FEN cannot hold. The consequence worth stating: a course id can never change once
+   the course has shipped, because it is written into every key hanging off it. The
+   manifest validator refuses an id containing either separator.
+2. **Nick's real progress file was migrated on a copy, and again in the running app.**
+   The copy from `%APPDATA%\com.nick.london-trainer\progress.json` read as version 4
+   with both learnt lines intact, and each migrated id resolved to a line that really
+   exists in the loaded content - which is the check that matters, since an id that
+   migrates to a name nothing answers to would look fine in the file and show nothing in
+   Study. The same file was then put through the dev app: 2 of 41 lines learnt, 17 cards,
+   and the chapter rows reading 1 of 7 and 1 of 4 exactly as v1 did. **His actual file is
+   untouched**; the app will migrate it on its next run.
+3. **A file in a course folder that the manifest does not list is now an error.** Not in
+   the spec, and worth saying why it was added: it is content nobody will ever see, and
+   silence about it is how a chapter goes missing for a month. It costs an author one
+   line in the manifest.
+4. **Drill and Progress already read across courses, ahead of their phase 7 views.**
+   The queue is built with `buildCardsAcross(courses, ...)` and the play stats span every
+   course, because the model supports it and the ruling asks for it. What is still
+   single-course is the SCREEN: Progress shows one course's rows and Study and Play use
+   `currentCourse`, which is `courses[0]`. Phase 7 replaces those three call sites with
+   the catalog and the switcher.
+5. **The tag vocabulary split is a behaviour change for authors, not for Nick.** A course
+   may use the core ten plus whatever its manifest declares, and nothing else. The London
+   declares its six `vs-` tags, so its content is unchanged; a future course that forgets
+   to declare a tag fails the validator rather than quietly widening the vocabulary.
+6. **The Black fixture course is a test fixture, not content.** It lives in
+   `src/test/fixtures.ts` and is four moves of a Caro-Kann. It exists to prove the colour
+   rules generalised rather than being renamed: its stem starts with the opponent's move,
+   so the loader, the book, the session and the report are all exercised from the other
+   side. The real Caro-Kann is phase 8, and nothing here is a head start on its content.
+7. **The board still cannot be driven in a hidden browser pane without a viewport.**
+   Carried from phase 5 and worth adding to: the pane reports a zero WIDTH, so
+   chessground's hit-testing maps every click to the same square and a synthetic drag
+   does nothing at all. Calling `resize_window` with a real size, then `redrawAll`, fixes
+   it, and after that a drag drives Drill and Play end to end. That is how this phase
+   checked the grading, the steering and the report live rather than only in tests.
 
 ---
 

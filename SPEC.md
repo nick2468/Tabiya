@@ -118,7 +118,8 @@ branch is taken.
 
 ## 4. Content schema
 
-One JSON file per chapter in `content/`. The normative schema lives in
+One JSON file per chapter, in the course folder (section 10 moved these from
+`content/` to `courses/london-white/`). The normative schema lives in
 `docs/content-schema.md`, created in phase 1 from this section; the builder may refine
 details there with one recorded line of why per change.
 
@@ -168,8 +169,8 @@ Module boundaries, kept clean so the Tauri wrap touches only storage and build c
 `src/model` (types, loader, validator - pure), `src/scheduler` (FSRS wrap - pure),
 `src/engine` (worker adapter, strength logic), `src/play` (steering, deviation and
 blunder reports - pure logic, engine mocked in tests), `src/storage` (ProgressStore),
-`src/ui` (React), `content/` (chapter JSON). Vitest covers the pure modules; the UI is
-verified by use.
+`src/ui` (React), `courses/` (course manifests and chapter JSON). Vitest covers the
+pure modules; the UI is verified by use.
 
 Implementation guidance, not contract: strength scale 1-8 maps the top levels to
 UCI_LimitStrength (UCI_Elo floors around 1320), and below that picks semi-randomly
