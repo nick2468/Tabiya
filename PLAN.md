@@ -404,7 +404,7 @@ Acceptance: vitest green; the app runs with the London as the single course and 
 UI behaving exactly as v1; Nick's real progress file migrates in place (verified on
 a copy first); a hand-built Black fixture course loads, drills and plays in tests.
 
-- [ ] **Review gate 6 passed**
+- [x] **Review gate 6 passed** (2026-08-28)
 
 Open items (phase 6):
 
@@ -448,6 +448,18 @@ Open items (phase 6):
    does nothing at all. Calling `resize_window` with a real size, then `redrawAll`, fixes
    it, and after that a drag drives Drill and Play end to end. That is how this phase
    checked the grading, the steering and the report live rather than only in tests.
+8. **What the review verified independently (gate 6).** The full suite (283 tests),
+   tsc and oxlint were re-run: green, and the four lint warnings predate the phase
+   (checked against a worktree at the pre-phase commit). The migration was re-proven
+   three ways without leaning on the builder's account: a scratch test ran a fresh
+   copy of Nick's real AppData file through `parseProgressJson` and confirmed both
+   learnt ids resolve to lines in the loaded content; the same v3 shape was seeded
+   into the dev app's localStorage and the running app showed 2 of 41 learnt, 17
+   cards, rows 1 of 7 and 1 of 4, then wrote version 4 back with course-scoped ids;
+   and the real file was confirmed still at version 3, untouched. One comment fixed
+   in passing: the session's length-cap note said the cap lands when White completes
+   the move number, but `completedFullMoves` counts completed pairs, so it lands when
+   both sides have.
 
 ---
 
