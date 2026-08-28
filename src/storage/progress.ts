@@ -290,7 +290,10 @@ export class LocalStorageProgressStore implements ProgressStore {
 
 /** An error as a sentence, for showing the trainee. */
 export function describe(error: unknown): string {
-  return error instanceof Error ? error.message : String(error)
+  const text = error instanceof Error ? error.message : String(error)
+  // Error messages rarely end in punctuation, and the failure notice reads
+  // them mid-paragraph, so give the sentence its full stop.
+  return /[.!?]$/.test(text) ? text : `${text}.`
 }
 
 /** True when the line is marked learnt. */

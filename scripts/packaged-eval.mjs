@@ -8,7 +8,8 @@
  * DevTools protocol like any other page. That is how phase 7 found a
  * capability fault that had silently destroyed a progress file.
  *
- *   WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS="--remote-debugging-port=9333"  *     ./src-tauri/target/release/london-trainer.exe &
+ *   WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS="--remote-debugging-port=9333"
+ *   ./src-tauri/target/release/london-trainer.exe &
  *   node scripts/packaged-eval.mjs "document.body.innerText"
  *   node scripts/packaged-eval.mjs @probe.js
  *
