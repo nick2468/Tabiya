@@ -386,9 +386,13 @@
                                       "weight": 5,
                                       "children": [
                                         {
-                                          "san": "e6",
-                                          "note": "Solid. Taking on d4 with the queen would win a pawn and hand White a big lead in development.",
-                                          "plan": "Play ...Be7, castle, then ...c5. Black has traded a pair of pieces and has no weaknesses at all."
+                                          "san": "Qxd4",
+                                          "note": "Take the pawn. It looks greedy and it is sound: White has one piece developed and no way to punish the queen.",
+                                          "tags": ["tactics"],
+                                          "mistakes": [
+                                            { "san": "e6", "grade": "inaccuracy", "note": "Solid and passive. It declines a free pawn in a position where White cannot chase the queen with anything." }
+                                          ],
+                                          "plan": "Expect 8.Nf3 and answer ...Qb6, keeping the queen active and defended. Finish developing with ...Nbd7 and ...e6 and give the pawn back only if it buys the safe king."
                                         }
                                       ]
                                     }

@@ -88,12 +88,12 @@
                                                   "weight": 5,
                                                   "children": [
                                                     {
-                                                      "san": "b6",
-                                                      "note": "Prepare ...Bb7, where the bishop supports the knight on d5 and looks down the long diagonal.",
-                                                      "tags": ["development"],
+                                                      "san": "Nf6",
+                                                      "note": "Step back. The blockade was never permanent, and from f6 the knight covers h7, which is the square White's bishop and knight have been aiming at all along.",
+                                                      "tags": ["king-safety"],
                                                       "mistakes": [
-                                                        { "san": "Nxc3", "grade": "playable", "note": "Playable, and it hands White a broad pawn centre in return for a target. Blockading is simpler." },
-                                                        { "san": "Bf6", "grade": "playable", "note": "It adds a second attacker to d4 straight away. The bishop is more useful once ...Bb7 has been arranged." }
+                                                        { "san": "b6", "grade": "mistake", "note": "It looks like the plan and it leaves h7 with nothing guarding it. With the knight still on d5, Bxh7+ followed by Ng5+ and Qh5 is a real attack." },
+                                                        { "san": "Nxc3", "grade": "playable", "note": "Playable, and it hands White a broad pawn centre in return for a target. Retreating keeps more pieces on." }
                                                       ],
                                                       "children": [
                                                         {
@@ -102,10 +102,10 @@
                                                           "weight": 5,
                                                           "children": [
                                                             {
-                                                              "san": "Bb7",
-                                                              "note": "The bishop comes to the long diagonal and defends the blockading knight a second time.",
+                                                              "san": "b6",
+                                                              "note": "Now the bishop can come to b7, because the knight on f6 is holding the kingside together.",
                                                               "tags": ["development"],
-                                                              "plan": "Put a rook on c8 or d8, keep the knight on d5, and trade pieces whenever White offers. The isolated pawn gets weaker with every trade, and in an ending it simply falls."
+                                                              "plan": "Play ...Bb7 and ...Rc8, then watch for White lining a bishop up on c2 with the queen on d3: answer that with ...g6 before it becomes an attack. The pawn on d4 is not going anywhere."
                                                             }
                                                           ]
                                                         }

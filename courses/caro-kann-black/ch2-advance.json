@@ -80,38 +80,42 @@
                                               "tags": ["development"],
                                               "children": [
                                                 {
-                                                  "san": "Nxf5",
-                                                  "note": "White trades off the good bishop before it does any damage.",
+                                                  "san": "Bb5",
+                                                  "note": "The best try. White pins the knight and trades it off before the pressure on e5 starts to tell.",
                                                   "weight": 6,
                                                   "children": [
                                                     {
-                                                      "san": "Nxf5",
-                                                      "note": "Recapture with the knight, which now sits on a fine square hitting e3 and d4.",
-                                                      "tags": ["light-squares"],
+                                                      "san": "a6",
+                                                      "note": "Ask the bishop to commit. While it sits on b5 the knight on c6 is pinned to the king and cannot touch e5.",
+                                                      "tags": ["development"],
                                                       "mistakes": [
-                                                        { "san": "exf5", "grade": "inaccuracy", "note": "It gives Black a broad pawn front but buries the light squares and leaves the e-file to White." }
+                                                        { "san": "Qb6", "grade": "playable", "note": "Active and reasonable. Asking the bishop the question first keeps the position simple." },
+                                                        { "san": "Rc8", "grade": "playable", "note": "The rook belongs there eventually, but the knight stays pinned for another move." }
                                                       ],
                                                       "children": [
                                                         {
-                                                          "san": "c3",
-                                                          "note": "A quiet move covering d4 and b4 and giving the queen the c2 square.",
-                                                          "weight": 5,
+                                                          "san": "Bxc6+",
+                                                          "note": "White takes rather than retreat and lose the pin for nothing.",
+                                                          "weight": 7,
                                                           "children": [
                                                             {
-                                                              "san": "Be7",
-                                                              "note": "Simple development, getting ready to castle.",
+                                                              "san": "Nxc6",
+                                                              "note": "Recapture with the knight. It keeps the pawns whole and puts a defender back on e5 and d4.",
                                                               "tags": ["development"],
+                                                              "mistakes": [
+                                                                { "san": "bxc6", "grade": "inaccuracy", "note": "It doubles the pawns and blocks the b-file, for a c-file Black already half owns." }
+                                                              ],
                                                               "children": [
                                                                 {
-                                                                  "san": "Bd3",
-                                                                  "note": "White aims the bishop at h7 and offers to trade the annoying knight.",
-                                                                  "weight": 5,
+                                                                  "san": "Nxf5",
+                                                                  "note": "White trades off the good bishop while the knight on c6 still guards e5.",
+                                                                  "weight": 6,
                                                                   "children": [
                                                                     {
-                                                                      "san": "O-O",
-                                                                      "note": "Castle. Black has no weaknesses, an active knight and the better long-term plan.",
-                                                                      "tags": ["king-safety"],
-                                                                      "plan": "Play ...f6 next, hitting the head of White's pawn chain. Once e5 falls or advances, Black's pieces are the better placed and the light squares belong to you."
+                                                                      "san": "exf5",
+                                                                      "note": "Take with the pawn here. The knight is needed on c6, and the pawn on f5 takes e4 away from White for good.",
+                                                                      "tags": ["light-squares"],
+                                                                      "plan": "Play ...Be7 or ...Qb6 and castle, then hit e5 with ...f6. White has a little more space and no way to attack, which is the bargain the Caro-Kann always offers."
                                                                     }
                                                                   ]
                                                                 }
@@ -120,6 +124,22 @@
                                                           ]
                                                         }
                                                       ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "san": "Nxf5",
+                                                  "note": "Natural, and it gives up e5. The knight that has just left the board was, through f3, the only piece defending that pawn.",
+                                                  "weight": 5,
+                                                  "children": [
+                                                    {
+                                                      "san": "Nxf5",
+                                                      "note": "Recapture with the knight, which now hits e3 and d4 and is ready to help take on e5.",
+                                                      "tags": ["light-squares"],
+                                                      "mistakes": [
+                                                        { "san": "exf5", "grade": "inaccuracy", "note": "It buries the light squares and lets White defend e5 in peace with f4." }
+                                                      ],
+                                                      "plan": "Nothing defends the pawn on e5, so take it. If White plays 10.c3 first, 10...Nxe3 is stronger still: chapter 6 runs that line to the end."
                                                     }
                                                   ]
                                                 }
@@ -145,7 +165,7 @@
                               "note": "Develop and add pressure to d4. There is no hurry to release the tension now that White has committed the c-pawn.",
                               "tags": ["development"],
                               "mistakes": [
-                                { "san": "cxd4", "grade": "playable", "note": "Fine, but 6.cxd4 leaves White a healthy pawn chain and no weaknesses. Keeping the tension is better here." }
+                                { "san": "cxd4", "grade": "playable", "note": "Also fine. Developing first and taking once White has castled means the recapture comes at a worse moment for White." }
                               ],
                               "children": [
                                 {
@@ -154,20 +174,23 @@
                                   "weight": 5,
                                   "children": [
                                     {
-                                      "san": "Nge7",
-                                      "note": "The knight goes behind the pawns, heading for g6 where it hits e5.",
-                                      "tags": ["development"],
+                                      "san": "cxd4",
+                                      "note": "With White castled and the c-pawn committed, take. The recapture leaves the d-pawn on an open file with nothing behind it.",
+                                      "tags": ["c5-break"],
+                                      "mistakes": [
+                                        { "san": "Nge7", "grade": "inaccuracy", "note": "Natural, and it lets White keep the tension and play a3 and b4 with space on the queenside." }
+                                      ],
                                       "children": [
                                         {
-                                          "san": "Be3",
-                                          "note": "One more defender for d4.",
-                                          "weight": 5,
+                                          "san": "cxd4",
+                                          "note": "Forced in effect: taking with a piece would leave the pawn on e5 hanging.",
+                                          "weight": 9,
                                           "children": [
                                             {
-                                              "san": "Ng6",
-                                              "note": "The knight arrives, adding a second attacker to e5 and clearing the way for the bishop.",
+                                              "san": "Nge7",
+                                              "note": "Now the knight comes out, heading for g6 or f5 where it hits the pawns White has left behind.",
                                               "tags": ["development"],
-                                              "plan": "Play ...Be7, castle, then increase the pressure on d4 and e5 with ...Qb6 or ...f6. White has space and nothing to do with it."
+                                              "plan": "Play ...Ng6, ...Be7 and castle, then use the half open c-file and press d4. White has the space and the only two targets on the board."
                                             }
                                           ]
                                         }
@@ -556,10 +579,14 @@
                           "weight": 5,
                           "children": [
                             {
-                              "san": "cxd5",
-                              "note": "Recapture with the c-pawn, keeping the wall and opening the c-file for a rook.",
-                              "tags": ["c5-break"],
-                              "plan": "Play ...Nbc6, ...Be7 and castle, then use the half open c-file with ...Rc8. White's e5 pawn is the only asset and ...f6 will ask what it is doing."
+                              "san": "Nxd5",
+                              "note": "Recapture with the knight. It lands in the centre with tempo on nothing in particular, and it leaves the pawn on c6 free to play ...c5 next.",
+                              "tags": ["development"],
+                              "mistakes": [
+                                { "san": "cxd5", "grade": "inaccuracy", "note": "It keeps the wall and gives up the ...c5 break, which is the move this whole chapter is built around." },
+                                { "san": "exd5", "grade": "inaccuracy", "note": "It buries the bishop that was just developed and hands White the e-file." }
+                              ],
+                              "plan": "Play ...c5 next, hitting d4 with the c-pawn after all, then ...Nc6 and ...Be7. White's pawn on e5 has no supporters left."
                             }
                           ]
                         }

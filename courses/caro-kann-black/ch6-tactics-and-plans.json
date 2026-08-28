@@ -2,7 +2,7 @@
   "id": "ch6-tactics-and-plans",
   "title": "Typical tactics and plans",
   "defaultTags": ["tactics"],
-  "intro": "Four positions, each one the end of a line you already know from an earlier chapter. In every case the last move is Black's, and it is the move the whole opening has been building towards. Play through them until the final move looks obvious, because in a real game it has to.\n\n## The two levers\n\nBlack's whole plan in the Caro-Kann comes down to two pawn moves. The first is ...c5, which hits the base of White's pawn chain. The second is ...f6, which hits the head of it. Both need preparation and both need the pieces to be ready to use the lines they open. Everything in between is development.\n\n## Exercise 1: ...f6 in the Advance\n\nWhite's chain runs d4 to e5 and the base has already been traded off, so e5 is a lone pawn with nothing behind it. Black is fully developed, castled, and every piece is looking at the centre. Now the second lever arrives and White has to choose which good square to give up.\n\n## Exercise 2: ...c5 in the main line\n\nOpposite side castling, and it is a race. White is going to push pawns at the black king on the kingside. Black opens a file at the white king on the queenside, and gets there first because the lever was ready before White's was. The move is ...c5 and it should never wait.\n\n## Exercise 3: the c-file in the Exchange\n\nA symmetrical position where neither side has a weakness. What Black has is the half open c-file and a way to use it. The exercise ends with the rook arriving on it, because that is the whole plan and most club players never get round to it.\n\n## Exercise 4: pressure on the isolated pawn\n\nThe Panov gives White an isolated pawn on d4 and a lot of activity to go with it. Black blockades the square in front of it, brings a bishop to the long diagonal and then adds a second attacker to the pawn itself, offering a trade of pieces at the same time. Every trade makes the pawn weaker.\n\n## Typical mistakes at this level\n\nReaching a good position and then having nothing to do, because ...c5 or ...f6 was never prepared. Opening lines before the pieces are ready to use them, which usually helps whoever has more space. Trading the blockading knight for no reason and setting White's centre free. And playing on the wing where the opponent is stronger rather than in the centre where the game is decided.",
+  "intro": "Four positions, each one the end of a line you already know from an earlier chapter. In every case the last move is Black's, and it is the move the whole opening has been building towards. Play through them until the final move looks obvious, because in a real game it has to.\n\n## The two levers\n\nBlack's whole plan in the Caro-Kann comes down to two pawn moves. The first is ...c5, which hits the base of White's pawn chain. The second is ...f6, which hits the head of it. Both need preparation and both need the pieces to be ready to use the lines they open. Everything in between is development.\n\n## Exercise 1: the order of two captures\n\nWhite has traded off the knight that guarded e5, so the pawn there has no defender at all. Before taking it, look at the bishop on e3. Taking that first, and forcing the f-pawn to recapture, wins the same pawn and wrecks White's kingside into the bargain. The order is the whole exercise.\n\n## Exercise 2: ...c5 in the main line\n\nOpposite side castling, and it is a race. White is going to push pawns at the black king on the kingside. Black opens a file at the white king on the queenside, and gets there first because the lever was ready before White's was. The move is ...c5 and it should never wait.\n\n## Exercise 3: the c-file in the Exchange\n\nA symmetrical position where neither side has a weakness. What Black has is the half open c-file and a way to use it. The exercise ends with the rook arriving on it, because that is the whole plan and most club players never get round to it.\n\n## Exercise 4: pressure on the isolated pawn\n\nThe Panov gives White an isolated pawn on d4 and a lot of activity to go with it. That activity comes down to one thing: a bishop and a queen lined up on the diagonal that ends at h7. Spot the battery as it is being built and stop it with one pawn move, and White is left with the weak pawn and nothing else.\n\n## Typical mistakes at this level\n\nReaching a good position and then having nothing to do, because ...c5 or ...f6 was never prepared. Opening lines before the pieces are ready to use them, which usually helps whoever has more space. Trading the blockading knight for no reason and setting White's centre free. And playing on the wing where the opponent is stronger rather than in the centre where the game is decided.",
   "stem": ["e4", "c6", "d4", "d5"],
   "tree": [
     {
@@ -77,37 +77,25 @@
                                                           "children": [
                                                             {
                                                               "san": "c3",
-                                                              "note": "A quiet move covering the dark squares.",
+                                                              "note": "A natural move covering d4 and b4, and the moment Black has been waiting for: nothing at all defends the pawn on e5 now.",
                                                               "weight": 5,
                                                               "children": [
                                                                 {
-                                                                  "san": "Be7",
-                                                                  "note": "Development, ready to castle.",
-                                                                  "tags": ["development"],
+                                                                  "san": "Nxe3",
+                                                                  "note": "Take the bishop first. Recapturing costs White the f-pawn's place in the chain, and only then does the pawn on e5 fall.",
+                                                                  "mistakes": [
+                                                                    { "san": "Nxe5", "grade": "inaccuracy", "note": "It wins the pawn, and taking on e3 first wins the pawn as well as wrecking White's kingside." }
+                                                                  ],
                                                                   "children": [
                                                                     {
-                                                                      "san": "Bd3",
-                                                                      "note": "White aims at h7, though the knight on f5 is in the way.",
-                                                                      "weight": 5,
+                                                                      "san": "fxe3",
+                                                                      "note": "Forced. Taking with the queen would drop the pawn on e5 with check to follow.",
+                                                                      "weight": 9,
                                                                       "children": [
                                                                         {
-                                                                          "san": "O-O",
-                                                                          "note": "Castle. Every black piece is now doing something.",
-                                                                          "tags": ["king-safety"],
-                                                                          "children": [
-                                                                            {
-                                                                              "san": "Nd2",
-                                                                              "note": "White's last piece comes out, and nothing at all is defending the pawn on e5.",
-                                                                              "weight": 6,
-                                                                              "children": [
-                                                                                {
-                                                                                  "san": "f6",
-                                                                                  "note": "The second lever. The pawn on e5 is attacked twice and defended once, and White has to give something up.",
-                                                                                  "plan": "After 13.exf6 recapture with the bishop and Black has the better centre and the two open files. If White pushes past with 13.e6 the pawn is weak and Black plays around it."
-                                                                                }
-                                                                              ]
-                                                                            }
-                                                                          ]
+                                                                          "san": "Qg5",
+                                                                          "note": "The point. The queen hits e5 and e3 at once, and White cannot hold both.",
+                                                                          "plan": "Take on e5 next, then castle and play against the ruined pawns on e3 and e5. Two extra weaknesses and a pawn is more than an opening advantage."
                                                                         }
                                                                       ]
                                                                     }
@@ -254,42 +242,15 @@
                                                                                           "tags": ["king-safety"],
                                                                                           "children": [
                                                                                             {
-                                                                                              "san": "Ne4",
-                                                                                              "note": "White offers a trade before pushing pawns.",
+                                                                                              "san": "Rhe1",
+                                                                                              "note": "White brings the last rook to the middle before pushing pawns.",
                                                                                               "weight": 5,
                                                                                               "children": [
                                                                                                 {
-                                                                                                  "san": "Nxe4",
-                                                                                                  "note": "Take it rather than let White choose the moment.",
-                                                                                                  "children": [
-                                                                                                    {
-                                                                                                      "san": "Qxe4",
-                                                                                                      "note": "The queen takes the long diagonal.",
-                                                                                                      "weight": 10,
-                                                                                                      "children": [
-                                                                                                        {
-                                                                                                          "san": "Nf6",
-                                                                                                          "note": "With tempo: the queen has to move again.",
-                                                                                                          "tags": ["development"],
-                                                                                                          "children": [
-                                                                                                            {
-                                                                                                              "san": "Qe2",
-                                                                                                              "note": "The queen steps back and White is ready to advance on the kingside.",
-                                                                                                              "weight": 6,
-                                                                                                              "children": [
-                                                                                                                {
-                                                                                                                  "san": "c5",
-                                                                                                                  "note": "The lever, at the moment it is needed. It hits d4 and opens the c-file straight at the white king.",
-                                                                                                                  "tags": ["c5-break"],
-                                                                                                                  "plan": "Follow with ...Rc8 and ...Qa5 or ...cxd4. Black's attack arrives down an open file while White's still needs two pawn moves to get going."
-                                                                                                                }
-                                                                                                              ]
-                                                                                                            }
-                                                                                                          ]
-                                                                                                        }
-                                                                                                      ]
-                                                                                                    }
-                                                                                                  ]
+                                                                                                  "san": "c5",
+                                                                                                  "note": "The lever, at the moment it is needed. It hits d4 and opens the c-file straight at the white king.",
+                                                                                                  "tags": ["c5-break"],
+                                                                                                  "plan": "Follow with ...Rc8 and ...Qa5, or take on d4 if White allows it. Black's attack comes down an open file while White still needs two pawn moves to get going."
                                                                                                 }
                                                                                               ]
                                                                                             }
@@ -536,30 +497,57 @@
                                                               "weight": 5,
                                                               "children": [
                                                                 {
-                                                                  "san": "b6",
-                                                                  "note": "Preparing the bishop's best square.",
-                                                                  "tags": ["development"],
+                                                                  "san": "Nf6",
+                                                                  "note": "Step back and cover h7 before doing anything else.",
+                                                                  "tags": ["king-safety"],
                                                                   "children": [
                                                                     {
-                                                                      "san": "Bg5",
-                                                                      "note": "White pins nothing but eyes the bishop on e7.",
+                                                                      "san": "a3",
+                                                                      "note": "White takes b4 away from the knight.",
                                                                       "weight": 5,
                                                                       "children": [
                                                                         {
-                                                                          "san": "Bb7",
-                                                                          "note": "The bishop reaches the long diagonal and defends the blockading knight a second time.",
+                                                                          "san": "b6",
+                                                                          "note": "Now the bishop can come out.",
                                                                           "tags": ["development"],
                                                                           "children": [
                                                                             {
-                                                                              "san": "Rc1",
-                                                                              "note": "White's last rook joins in.",
+                                                                              "san": "Bg5",
+                                                                              "note": "White develops and eyes the bishop on e7.",
                                                                               "weight": 5,
                                                                               "children": [
                                                                                 {
-                                                                                  "san": "Bf6",
-                                                                                  "note": "The move the whole plan was for: a third attacker on d4, and an offer to trade the piece White needs to defend it.",
-                                                                                  "tags": ["isolated-pawn"],
-                                                                                  "plan": "If White takes on f6, recapture towards the centre and keep the blockade. Otherwise put a rook on d8 and win the pawn on d4, or trade into an ending where it cannot be held."
+                                                                                  "san": "Bb7",
+                                                                                  "note": "The bishop reaches the long diagonal, where it looks at d5 and past it.",
+                                                                                  "tags": ["development"],
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "Bc2",
+                                                                                      "note": "The bishop steps aside, and this is the move to notice.",
+                                                                                      "weight": 5,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "Rc8",
+                                                                                          "note": "The rook takes the open file while White finishes the setup.",
+                                                                                          "tags": ["development"],
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "san": "Qd3",
+                                                                                              "note": "There it is: bishop on c2, queen behind it, both aimed at h7.",
+                                                                                              "weight": 6,
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "san": "g6",
+                                                                                                  "note": "Stop it before it starts. That battery on the b1-h7 diagonal is the only real attack White's isolated pawn buys, and one pawn move takes it away for good.",
+                                                                                                  "plan": "Now play against d4 with ...Nd5 or ...Bf6 and a rook on d8. With the diagonal shut, every trade brings the ending closer and the isolated pawn is a permanent target."
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
                                                                                 }
                                                                               ]
                                                                             }

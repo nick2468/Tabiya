@@ -2,7 +2,7 @@
   "id": "ch5-sidelines",
   "title": "Sidelines and move-order tricks",
   "defaultTags": ["development"],
-  "intro": "Everything that is not 2.d4 d5 followed by one of the four main choices. None of it is dangerous, and all of it is worth ten minutes so that you are never surprised on move two.\n\n## The Fantasy Variation, 3.f3\n\nWhite props up e4 with a pawn and hopes for an open f-file later. The critical answer is 3...dxe4 4.fxe4 e5, hitting d4 at once, and it is sharp enough that both sides need to know it. This course plays the quiet 3...e6 instead: build the wall, pin the knight with ...Bb4, and only then take on e4. White is left with a broad centre that has to be defended and a weakened kingside that cannot be repaired.\n\n## The Two Knights, 2.Nc3 and 3.Nf3\n\nWhite develops both knights and delays d4. The answer is 3...Bg4, and the point is that the bishop gets out and then trades itself for the knight on f3. Black gives up the bishop pair and gets a completely solid position with no weaknesses, which is a fine bargain when White has no way to open the game.\n\n## The King's Indian Attack, 2.d3\n\nWhite is not fighting for the centre at all, so take it: 2...d5 3.Nd2 e5. Black has two pawns in the middle and free development, which is more than the Caro-Kann normally promises.\n\n## Transpositions\n\nMost sidelines turn into a main chapter after a move or two. 2.Nc3 d5 3.d4 is chapter 1. 2.Nf3 d5 3.e5 Bf5 4.d4 is chapter 2. 2.Nf3 d5 3.exd5 cxd5 4.d4 is chapter 3. Recognising this is most of the work: play the move you would play there.\n\n## Typical mistakes at this level\n\nTaking on e4 too early against the Fantasy, before ...Bb4 has provoked a weakness. Answering 4.h3 in the Two Knights with ...Bh5, when 5.g4 costs Black the bishop's freedom for nothing. Treating 2.d3 as harmless and playing passively, instead of taking the centre with ...e5. And, generally, playing a sideline by feel rather than steering it into the chapter you already know.",
+  "intro": "Everything that is not 2.d4 d5 followed by one of the four main choices. None of it is dangerous, and all of it is worth ten minutes so that you are never surprised on move two.\n\n## The Fantasy Variation, 3.f3\n\nWhite props up e4 with a pawn and hopes for an open f-file later. The critical answer is 3...dxe4 4.fxe4 e5, hitting d4 at once, and it is sharp enough that both sides need to know it. This course plays the quiet 3...e6 instead: build the wall, pin the knight with ...Bb4, trade it off, and only then take on e4. With the f-pawn gone from f3, ...Qh4+ arrives with check and wins the pawn on e4 back at once, and White's king never castles.\n\n## The Two Knights, 2.Nc3 and 3.Nf3\n\nWhite develops both knights and delays d4. The answer is 3...Bg4, and the point is that the bishop gets out and then trades itself for the knight on f3. Black gives up the bishop pair and gets a completely solid position with no weaknesses, which is a fine bargain when White has no way to open the game.\n\n## The King's Indian Attack, 2.d3\n\nWhite is not fighting for the centre at all, so take it: 2...d5 3.Nd2 e5. Black has two pawns in the middle and free development, which is more than the Caro-Kann normally promises.\n\n## Transpositions\n\nMost sidelines turn into a main chapter after a move or two. 2.Nc3 d5 3.d4 is chapter 1. 2.Nf3 d5 3.e5 Bf5 4.d4 is chapter 2. 2.Nf3 d5 3.exd5 cxd5 4.d4 is chapter 3. Recognising this is most of the work: play the move you would play there.\n\n## Typical mistakes at this level\n\nTaking on e4 too early against the Fantasy, before ...Bb4 has provoked a weakness. Answering 4.h3 in the Two Knights with ...Bh5, when 5.g4 costs Black the bishop's freedom for nothing. Treating 2.d3 as harmless and playing passively, instead of taking the centre with ...e5. And, generally, playing a sideline by feel rather than steering it into the chapter you already know.",
   "stem": ["e4", "c6"],
   "tree": [
     {
@@ -76,37 +76,43 @@
                                               "weight": 9,
                                               "children": [
                                                 {
-                                                  "san": "c5",
-                                                  "note": "Hit the base of the centre while White is still developing. The doubled pawn on c3 cannot help d4.",
-                                                  "tags": ["c5-break"],
+                                                  "san": "Qh4+",
+                                                  "note": "The move that makes the whole line worth playing. The pawn on f3 has gone, so the queen reaches h4 with check and the pawn on e4 cannot be held.",
+                                                  "tags": ["tactics"],
+                                                  "mistakes": [
+                                                    { "san": "c5", "grade": "mistake", "note": "The natural break, and it lets White off. 8.Qg4 hits g7 and Black is suddenly the one defending." },
+                                                    { "san": "e5", "grade": "inaccuracy", "note": "It opens the position for White's two bishops while the black king is still in the middle." }
+                                                  ],
                                                   "children": [
                                                     {
-                                                      "san": "Nf3",
-                                                      "note": "Development, defending d4 a second time.",
+                                                      "san": "Ke2",
+                                                      "note": "Forced in practice. 8.g3 loses the rook on h1 after ...Qxe4+ and ...Qxh1.",
                                                       "weight": 6,
                                                       "children": [
                                                         {
-                                                          "san": "Nc6",
-                                                          "note": "A third attacker on d4. White's centre is broad and short of defenders.",
+                                                          "san": "Qxe4+",
+                                                          "note": "Collect the pawn with check. White's king has nowhere good to go and will never castle.",
+                                                          "tags": ["tactics"],
                                                           "children": [
                                                             {
-                                                              "san": "Bd3",
-                                                              "note": "White develops and eyes h7.",
-                                                              "weight": 5,
+                                                              "san": "Kf2",
+                                                              "note": "The king steps back towards its own pieces.",
+                                                              "weight": 8,
                                                               "children": [
                                                                 {
-                                                                  "san": "Nge7",
-                                                                  "note": "The knight goes behind the pawns, heading for g6 where it hits e5 and covers f4.",
+                                                                  "san": "Qh4+",
+                                                                  "note": "One more check, to make White weaken the kingside before the queen goes home.",
+                                                                  "tags": ["tactics"],
                                                                   "children": [
                                                                     {
-                                                                      "san": "O-O",
-                                                                      "note": "White castles into the open f-file, which cuts both ways.",
-                                                                      "weight": 6,
+                                                                      "san": "g3",
+                                                                      "note": "Now the pawn has to block, and the dark squares around White's king are permanently loose.",
+                                                                      "weight": 8,
                                                                       "children": [
                                                                         {
-                                                                          "san": "Ng6",
-                                                                          "note": "The knight arrives and Black is ready to castle with a comfortable game.",
-                                                                          "plan": "Castle, take on d4 when it helps, and play against the doubled pawn on c3 and the loose pawn on e4. Two weak pawns beat a big centre once the pieces come out."
+                                                                          "san": "Qd8",
+                                                                          "note": "Home again, a pawn up, with White's king stuck in the middle and the pawns on c3 and g3 to work on.",
+                                                                          "plan": "Develop with ...Nf6, ...Nd7 and ...b6, and castle either side. Do not hurry: White cannot castle, so every quiet move makes the position better."
                                                                         }
                                                                       ]
                                                                     }
@@ -115,6 +121,18 @@
                                                               ]
                                                             }
                                                           ]
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "san": "Kd2",
+                                                      "note": "The other way. White keeps the pawn on e4 for a moment and puts the king on an even stranger square.",
+                                                      "weight": 4,
+                                                      "children": [
+                                                        {
+                                                          "san": "Nf6",
+                                                          "note": "Develop and hit e4 again. There is no need to grab anything: White's king is the target.",
+                                                          "plan": "Play ...Nd7, ...b6 and ...Ba6, and open the position where the king is. If White pushes e5, the knight comes to e4 with check."
                                                         }
                                                       ]
                                                     }
@@ -173,14 +191,17 @@
                           "children": [
                             {
                               "san": "fxe4",
-                              "note": "White recaptures and keeps the broad centre.",
+                              "note": "White recaptures and keeps the broad centre. The f-pawn has left f3, which is the detail that matters.",
                               "weight": 8,
                               "children": [
                                 {
-                                  "san": "c5",
-                                  "note": "Attack the base of the centre straight away.",
-                                  "tags": ["c5-break"],
-                                  "plan": "Develop with ...Nc6, ...Ne7 and ...Ng6 and castle. White's pawns look impressive and cannot be held once three pieces are looking at d4."
+                                  "san": "Qh4+",
+                                  "note": "The same check as in the main line of this chapter, for the same reason: with f3 empty the queen arrives with check and the pawn on e4 cannot be held.",
+                                  "tags": ["tactics"],
+                                  "mistakes": [
+                                    { "san": "c5", "grade": "inaccuracy", "note": "The natural break, and it lets White consolidate the extra centre pawn in peace." }
+                                  ],
+                                  "plan": "After 6.Kd2 or 6.g3 take on e4, then develop with ...Nf6 and ...Nd7. A pawn and a king stuck in the middle is a good return for one check."
                                 }
                               ]
                             }
@@ -217,38 +238,13 @@
                               "weight": 5,
                               "children": [
                                 {
-                                  "san": "e5",
-                                  "note": "Strike in the centre while White has nothing developed. The d-file is open behind it.",
-                                  "tags": ["dark-squares"],
-                                  "children": [
-                                    {
-                                      "san": "dxe5",
-                                      "note": "White takes, which invites the queens off.",
-                                      "weight": 6,
-                                      "children": [
-                                        {
-                                          "san": "Qxd1+",
-                                          "note": "Trade queens. White has to take with the king and loses the right to castle.",
-                                          "tags": ["tactics", "endgame"],
-                                          "children": [
-                                            {
-                                              "san": "Kxd1",
-                                              "note": "Forced, and White's king is stuck in the middle.",
-                                              "weight": 9,
-                                              "children": [
-                                                {
-                                                  "san": "Ng4",
-                                                  "note": "The knight hits e5 and f2 and Black wins the pawn back with the better position.",
-                                                  "tags": ["tactics"],
-                                                  "plan": "Regain the pawn on e5, develop with ...Bc5 and ...Nd7 and castle. White's king in the centre is worth more than the bishop pair."
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
+                                  "san": "Bf5",
+                                  "note": "The bishop comes out, which is what this opening is for. White has spent three moves on one bishop and traded it, so Black is already comfortable.",
+                                  "tags": ["bishop-placement", "light-squares"],
+                                  "mistakes": [
+                                    { "san": "e5", "grade": "inaccuracy", "note": "It looks like a free strike in the centre and 6.dxe5 Qxd1+ 7.Kxd1 leaves White the better placed, not Black." }
+                                  ],
+                                  "plan": "Play ...e6, ...Nbd7 and ...Be7 and castle, then ...c5 or ...Qb6 against d4. Black has an extra developing move and no weaknesses."
                                 }
                               ]
                             }
