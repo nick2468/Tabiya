@@ -102,8 +102,9 @@ future variant the schema already allows.
    section 6). Its tree nodes are exercise positions where the expected move is the
    thematic blow.
 
-Quality bar for every chapter: every White move carries a note of 1-3 plain sentences
-(the idea or plan, club-improver reader, no engine variations); every leaf carries a
+Quality bar for every chapter: every move carries a note of 1-3 plain sentences (the
+idea or plan for White's moves, what Black is doing for Black's; club-improver reader,
+no engine variations); every leaf carries a
 "your plan from here" note; chapter intros carry the typical-mistakes section; each of
 ch1-ch6 carries authored mistake entries (section 4) on at least 10 positions, ch0 on
 its core setup decisions. Black reply weights are Claude's estimate of club-level
@@ -128,7 +129,8 @@ Chapter file: `{ id, title, intro, stem, tree }`.
 
 Node: `{ san, note?, variant?, weight?, plan?, tags?, mistakes?, shapes?, children? }`.
 
-- `note`: required on White nodes; optional on Black nodes when the idea matters.
+- `note`: required on every node. White's moves say the idea; Black's say what the
+  move is doing (ruled 2026-08-28; Black notes were optional in v1).
 - `variant`: White nodes only; defaults to "modern". Sibling White nodes must carry
   distinct variants, so v1 has at most one White move per position.
 - `weight`: Black nodes only; integer 1-10, club-level frequency estimate, default 1.

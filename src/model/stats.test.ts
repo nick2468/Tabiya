@@ -23,6 +23,7 @@ const chapter = load({
   tree: [
     {
       san: 'Nf6',
+      note: 'A Black reply in the fixture.',
       weight: 8,
       children: [
         {
@@ -32,11 +33,13 @@ const chapter = load({
           children: [
             {
               san: 'e6',
+              note: 'A Black reply in the fixture.',
               weight: 7,
               children: [{ san: 'Nf3', note: 'Develop.', tags: ['development'], plan: 'Castle.' }],
             },
             {
               san: 'c5',
+              note: 'A Black reply in the fixture.',
               weight: 5,
               children: [{ san: 'c3', note: 'Hold d4.', tags: ['vs-c5'], plan: 'Nbd2 next.' }],
             },

@@ -13,6 +13,7 @@ function fixture(): LoadedChapter {
     tree: [
       {
         san: 'Nf6',
+        note: 'A Black reply in the fixture.',
         weight: 8,
         children: [
           {
@@ -21,11 +22,13 @@ function fixture(): LoadedChapter {
             children: [
               {
                 san: 'e6',
+                note: 'A Black reply in the fixture.',
                 weight: 7,
                 children: [{ san: 'Nf3', note: 'Develop.', plan: 'Bd3, c3, castle.' }],
               },
               {
                 san: 'c5',
+                note: 'A Black reply in the fixture.',
                 weight: 5,
                 children: [{ san: 'c3', note: 'Hold d4.', plan: 'Nbd2 and Bd3 next.' }],
               },
@@ -35,6 +38,7 @@ function fixture(): LoadedChapter {
       },
       {
         san: 'c5',
+        note: 'A Black reply in the fixture.',
         weight: 6,
         children: [{ san: 'e3', note: 'Hold the centre.', plan: 'Meet ...Qb6 with Nc3.' }],
       },

@@ -31,6 +31,7 @@ function chapter(overrides: Record<string, unknown> = {}) {
         children: [
           {
             san: 'Nf6',
+            note: 'Black develops the knight.',
             weight: 8,
             children: [
               {
@@ -107,6 +108,7 @@ describe('loadChapter, valid content', () => {
             children: [
               {
                 san: 'd5',
+                note: 'Black claims the centre.',
                 weight: 7,
                 children: [
                   {
@@ -210,6 +212,12 @@ describe('loadChapter, negative fixtures', () => {
     expect(firstError(bad)).toBe('White moves need a note saying the idea')
   })
 
+  it('rejects a Black move with no note', () => {
+    const bad = chapter()
+    delete (bad.tree[0].children![0] as Record<string, unknown>).note
+    expect(firstError(bad)).toBe('Black moves need a note saying what Black is doing')
+  })
+
   it('rejects two White siblings in the same variant', () => {
     const bad = chapter()
     bad.tree.push({
@@ -235,6 +243,7 @@ describe('loadChapter, negative fixtures', () => {
     const bad = chapter()
     bad.tree[0].children!.push({
       san: 'Nf6',
+      note: 'A duplicated reply.',
       weight: 2,
       children: [
         {

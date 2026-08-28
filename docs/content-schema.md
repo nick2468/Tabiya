@@ -64,7 +64,7 @@ Ply parity, not a field: `ply = stem.length + depth`, where the tree roots sit a
 | Field | Type | Rule |
 |---|---|---|
 | `san` | string | Required. Must be legal from the parent position. |
-| `note` | string | Required on White nodes: 1-3 plain sentences saying the idea or the plan. Optional on Black nodes, for when the idea matters. |
+| `note` | string | Required on every node: 1-3 plain sentences. White's moves say the idea or the plan; Black's say what the move is doing. |
 | `variant` | string | White nodes only. Defaults to `modern`. Sibling White nodes must carry distinct variants, so v1 has at most one White move per position. |
 | `weight` | integer | Black nodes only. 1-10, the club-level frequency estimate, default 1. Drives Play steering. |
 | `plan` | string | Required on every leaf: how White continues from here. |
@@ -131,3 +131,5 @@ problem at once. Each error names the chapter, the path to the node, and what is
   the move in Play's steering weights.
 - 2026-08-27: unknown fields rejected. A silently ignored typo in authored content is
   the failure mode this schema exists to prevent.
+- 2026-08-28: notes are required on Black moves too (Nick's ruling). Optional meant
+  half the moves said nothing, which left the student guessing at what Black is doing.

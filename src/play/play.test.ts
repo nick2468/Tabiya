@@ -39,6 +39,7 @@ const chapter = load({
   tree: [
     {
       san: 'Nf6',
+      note: 'A Black reply in the fixture.',
       weight: 9,
       children: [
         {
@@ -47,6 +48,7 @@ const chapter = load({
           children: [
             {
               san: 'e6',
+              note: 'A Black reply in the fixture.',
               weight: 7,
               children: [{ san: 'Nf3', note: 'Develop.', plan: 'Bd3 and castle.' }],
             },
@@ -56,6 +58,7 @@ const chapter = load({
     },
     {
       san: 'c5',
+      note: 'A Black reply in the fixture.',
       weight: 1,
       children: [{ san: 'e3', note: 'Hold the centre.', plan: 'Meet ...Qb6 with Nc3.' }],
     },
@@ -71,6 +74,7 @@ const transposing = load({
   tree: [
     {
       san: 'd5',
+      note: 'A Black reply in the fixture.',
       weight: 8,
       children: [{ san: 'e3', note: 'The same move by another route.', plan: 'Nf3 next.' }],
     },

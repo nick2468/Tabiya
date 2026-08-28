@@ -237,7 +237,15 @@ function walk(
 function checkNote(raw: Record<string, unknown>, colour: string, path: string[], errors: Errors) {
   const note = raw.note
   if (note === undefined) {
-    if (colour === 'white') errors.add(path, 'White moves need a note saying the idea')
+    // Every move teaches something: the idea for White's, what Black is doing
+    // for Black's. Required on both since 2026-08-28 (it was optional on Black
+    // moves in v1, which left the student guessing at half the moves).
+    errors.add(
+      path,
+      colour === 'white'
+        ? 'White moves need a note saying the idea'
+        : 'Black moves need a note saying what Black is doing',
+    )
     return
   }
   if (!isString(note) || note.trim() === '') errors.add(path, 'note must be a non-empty string')
