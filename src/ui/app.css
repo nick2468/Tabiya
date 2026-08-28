@@ -1,5 +1,4 @@
 .app {
-  max-width: 1100px;
   margin: 0 auto;
   padding: 24px;
 }
@@ -10,9 +9,9 @@
   justify-content: space-between;
   gap: 24px;
   flex-wrap: wrap;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   border-bottom: 1px solid var(--line);
-  padding-bottom: 12px;
+  padding-bottom: 8px;
 }
 
 .app-header h1 {
@@ -159,4 +158,22 @@ button:hover {
 
 .theme-toggle:hover {
   color: var(--text);
+}
+
+/* A window at least the app's own minimum size pins the shell to the
+   viewport, so a view can scroll part of itself instead of the whole page.
+   Anything smaller falls back to one flowing, scrolling page. */
+@media (min-width: 900px) and (min-height: 700px) {
+  .app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+
+  .app > main {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+  }
 }

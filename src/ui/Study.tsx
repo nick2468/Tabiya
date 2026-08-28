@@ -3,6 +3,7 @@ import Markdown from 'react-markdown'
 import { Board } from './Board'
 import { useProgress } from './progress-context'
 import { chapters } from '../content'
+import { splitIntro } from '../model/intro'
 import { chapterLines, fullMoveNumber, lineId, moveList } from '../model/lines'
 import { nodeShapes } from '../model/shapes'
 import type { LoadedChapter, LoadedNode } from '../model/types'
@@ -58,12 +59,12 @@ function ChapterStudy({
   onPlayFrom: (request: PlayRequest) => void
 }) {
   const [chain, setChain] = useState<LoadedNode[]>([])
-  const [introOpen, setIntroOpen] = useState(true)
   const { learnt, toggle } = useProgress()
 
   const current = chain.at(-1)
   const choices = current ? current.children : chapter.tree
   const lines = useMemo(() => chapterLines(chapter), [chapter])
+  const intro = useMemo(() => splitIntro(chapter.intro), [chapter])
 
   const goBack = useCallback(() => setChain((previous) => previous.slice(0, -1)), [])
   const goForward = useCallback(() => {
@@ -97,20 +98,15 @@ function ChapterStudy({
     <section className="chapter">
       <header className="chapter-head">
         <h2>{chapter.title}</h2>
-        <button type="button" className="link" onClick={() => setIntroOpen((open) => !open)}>
-          {introOpen ? 'Hide the introduction' : 'Show the introduction'}
-        </button>
       </header>
 
-      {introOpen ? (
-        <div className="intro">
-          <Markdown>{chapter.intro}</Markdown>
-        </div>
-      ) : null}
+      <div className="intro-lead">
+        <Markdown>{intro.lead}</Markdown>
+      </div>
 
       <div className="study-body">
         <div className="study-board">
-          <Board fen={fen} shapes={shapes} lastMove={lastMove(current)} size={420} />
+          <Board fen={fen} shapes={shapes} lastMove={lastMove(current)} size={384} />
           <div className="study-controls">
             <button type="button" onClick={() => setChain([])} disabled={chain.length === 0}>
               Start
@@ -190,7 +186,16 @@ function ChapterStudy({
         </div>
       </div>
 
-      <section className="lines">
+      <hr className="study-separator" />
+
+      <div className="chapter-detail">
+        {intro.rest ? (
+          <div className="intro-detail">
+            <Markdown>{intro.rest}</Markdown>
+          </div>
+        ) : null}
+
+        <section className="lines">
         <h3>
           Lines in this chapter <span className="count">{learntCount} of {lines.length} learnt</span>
         </h3>
@@ -210,7 +215,8 @@ function ChapterStudy({
             </li>
           ))}
         </ul>
-      </section>
+        </section>
+      </div>
     </section>
   )
 }

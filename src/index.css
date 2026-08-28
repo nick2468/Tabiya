@@ -87,3 +87,9 @@ body {
   background: var(--ground);
   color: var(--text);
 }
+
+html,
+body,
+#root {
+  height: 100%;
+}

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { chapterEntries, chapters, contentErrors } from './index'
+import { splitIntro } from '../model/intro'
 import { deepestFullMove, positionsWithMistakes, walkNodes } from '../model/loader'
 import { allCards } from '../model/cards'
 import type { LoadedChapter } from '../model/types'
@@ -32,6 +33,15 @@ describe('the authored repertoire', () => {
   it('gives every chapter intro a typical-mistakes section', () => {
     for (const chapter of chapters) {
       expect(chapter.intro.toLowerCase(), chapter.id).toContain('typical mistakes')
+    }
+  })
+
+  it('gives every intro a lead paragraph and sections, which the Study layout splits', () => {
+    for (const chapter of chapters) {
+      const parts = splitIntro(chapter.intro)
+      expect(parts.lead.length, chapter.id).toBeGreaterThan(0)
+      expect(parts.lead, chapter.id).not.toContain('#')
+      expect(parts.rest.toLowerCase(), chapter.id).toContain('typical mistakes')
     }
   })
 

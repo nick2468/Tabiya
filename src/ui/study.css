@@ -71,25 +71,38 @@
   background: none;
 }
 
-.intro {
-  max-width: 62ch;
-  border-left: 2px solid var(--line);
-  padding-left: 16px;
-  margin-bottom: 24px;
+/* The lead: the intro's opening paragraph, kept short so the board is on
+   screen without scrolling. The rest of the intro lives below the separator. */
+.intro-lead {
+  color: var(--text-soft);
+  margin: 0 0 14px;
 }
 
-.intro h1 {
-  font-size: 1.2rem;
+.intro-lead p,
+.intro-detail p {
+  margin: 0 0 12px;
+  text-align: justify;
+  hyphens: auto;
 }
 
-.intro h2 {
+.study-separator {
+  border: none;
+  border-top: 1px solid var(--line-strong);
+  margin: 16px 0 0;
+}
+
+.chapter-detail {
+  padding: 14px 14px 8px 0;
+}
+
+.intro-detail h2 {
   font-size: 1rem;
   color: var(--text-soft);
-  margin-bottom: 4px;
+  margin: 18px 0 4px;
 }
 
-.intro p {
-  margin: 0 0 12px;
+.intro-detail h2:first-child {
+  margin-top: 0;
 }
 
 /* ------------------------------------------------------------ study body */
@@ -251,7 +264,7 @@
 /* -------------------------------------------------------- the line list */
 
 .lines {
-  margin-top: 32px;
+  margin-top: 24px;
 }
 
 .lines .count {
@@ -297,13 +310,42 @@
   color: var(--bad);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 899px) {
   .study {
     grid-template-columns: 1fr;
   }
 
   .lines ul {
     columns: 1;
+  }
+}
+
+/* On a window at least the app's own minimum size (the Tauri window floor),
+   the chapter holds the viewport: lead and board keep their place, and the
+   text below the separator scrolls in its own panel. Smaller windows keep
+   the flowing one-column page, so nothing is ever clipped. */
+@media (min-width: 900px) and (min-height: 700px) {
+  .study {
+    height: 100%;
+    align-items: stretch;
+  }
+
+  .chapter-list {
+    align-self: start;
+  }
+
+  .chapter {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .chapter-detail {
+    flex: 1;
+    min-height: 8rem;
+    overflow-y: auto;
   }
 }
 
