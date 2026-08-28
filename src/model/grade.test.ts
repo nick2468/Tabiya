@@ -11,8 +11,12 @@ import {
 import type { Card } from './cards'
 
 /** The position after 1.d4 d5 2.Bf4 Nf6, where the repertoire plays 3.e3. */
+const POSITION = 'rnbqkb1r/ppp1pppp/5n2/3p4/3P1B2/8/PPP1PPPP/RN1QKBNR w KQkq -'
+
 const card: Card = {
-  key: 'rnbqkb1r/ppp1pppp/5n2/3p4/3P1B2/8/PPP1PPPP/RN1QKBNR w KQkq -',
+  key: `test-course#${POSITION}`,
+  courseId: 'test-course',
+  position: POSITION,
   fen: 'rnbqkb1r/ppp1pppp/5n2/3p4/3P1B2/8/PPP1PPPP/RN1QKBNR w KQkq - 2 3',
   san: 'e3',
   from: 'e2',
@@ -24,8 +28,8 @@ const card: Card = {
     { san: 'Bxc7', grade: 'mistake', note: 'It drops the bishop to ...Qxc7.' },
   ],
   tags: ['development'],
-  chapterIds: ['ch1'],
-  lineIds: ['ch1:line'],
+  chapterIds: ['test-course/ch1'],
+  lineIds: ['test-course/ch1:line'],
   label: '3.e3',
 }
 

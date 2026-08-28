@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Board } from './Board'
 import { useProgress } from './progress-context'
-import { chapters } from '../content'
+import { chapters, currentCourse } from '../content'
 import { StockfishEngine, strengthProfile, allProfiles, type Engine } from '../engine'
 import { sanForMove, squaresForSan } from '../model/grade'
 import { legalDests } from '../model/position'
+import { colourName, type Colour } from '../model/types'
 import {
   GAME_LENGTHS,
   PlaySession,
@@ -28,6 +29,12 @@ import './play.css'
  * thinking the game is meant to train. Everything the engine knows comes out
  * afterwards, in the report.
  */
+
+/**
+ * The course a game is played out of. Phase 7 lets the trainee pick one; until
+ * then there is one course and Play uses it.
+ */
+const course = currentCourse
 
 /** A request to play from a position, sent over from Study. */
 export interface PlayRequest {
@@ -79,11 +86,12 @@ export function Play({
   }, [])
 
   const book = useMemo(() => {
+    const colour = course?.colour ?? 'white'
     if (launch === 'chapter') {
       const chapter = chapters.find((entry) => entry.id === chapterId)
-      return buildBook(chapter ? [chapter] : [])
+      return buildBook({ colour, chapters: chapter ? [chapter] : [] })
     }
-    return buildBook(chapters)
+    return buildBook({ colour, chapters })
   }, [launch, chapterId])
 
   const refresh = useCallback(() => setTick((count) => count + 1), [])
@@ -116,9 +124,10 @@ export function Play({
       // state the session actually holds rather than guess from the screen.
       if (import.meta.env.DEV) (window as unknown as Record<string, unknown>).__game = fresh
       if (launch === 'here') onRequestUsed()
-      // A "play from here" position may have Black to move.
-      if (fresh.sideToMove === 'black' && !fresh.isFinished()) {
-        await fresh.playBlack()
+      // The engine may be the one to move first: a "play from here" position
+      // stopped on the opponent's turn, or a Black course, where it opens.
+      if (!fresh.studentToMove && !fresh.isFinished()) {
+        await fresh.playOpponent()
       }
       refresh()
     } catch (error) {
@@ -133,12 +142,12 @@ export function Play({
       const running = sessionRef.current
       if (!running || thinking || running.isFinished()) return
       const san = sanForMove(running.fen, from, to)
-      if (!san || !running.playWhite(san)) return
+      if (!san || !running.playStudent(san)) return
       refresh()
       if (running.isFinished()) return
       setThinking(true)
       try {
-        await running.playBlack()
+        await running.playOpponent()
         refresh()
       } catch (error) {
         setEngineError(asMessage(error))
@@ -166,10 +175,13 @@ export function Play({
       const built = buildReport(running.moves, book, evaluations, outcome)
       setReport(built)
       recordPlay({
+        courseId: course?.id ?? '',
         chapterId: launch === 'chapter' ? chapterId : undefined,
-        deviated: built.deviation.kind === 'white-left-book',
+        deviated: built.deviation.kind === 'student-left-book',
         deviationMove:
-          built.deviation.kind === 'white-left-book' ? fullMove(built.deviation.ply ?? 0) : undefined,
+          built.deviation.kind === 'student-left-book'
+            ? fullMove(built.deviation.ply ?? 0)
+            : undefined,
         moves: fullMove(Math.max(0, running.moves.length - 1)),
         level,
         at: new Date().toISOString(),
@@ -197,7 +209,8 @@ export function Play({
       <div className="play">
         <h2>Play</h2>
         <p className="play-intro">
-          A game against Stockfish, with Black steered into the lines you have studied.
+          A game against Stockfish, with your opponent steered into the lines you have
+          studied.
           No evaluation while you play: everything the engine thinks comes out in the
           report afterwards.
         </p>
@@ -294,7 +307,7 @@ export function Play({
             : finished
               ? session.outcome ?? 'Game over'
               : thinking
-                ? 'Black is thinking...'
+                ? `${colourName(book.opponentColour)} is thinking...`
                 : 'Your move'}
         </p>
         <button type="button" className="link" onClick={reset}>
@@ -306,7 +319,7 @@ export function Play({
         <Board
           fen={session.fen}
           turnColor={session.sideToMove}
-          movableColor={finished || thinking || report ? undefined : 'white'}
+          movableColor={finished || thinking || report ? undefined : session.studentColour}
           dests={finished || thinking || report ? undefined : legalDests(session.fen)}
           lastMove={lastMoveSquares(session)}
           onMove={onMove}
@@ -317,7 +330,7 @@ export function Play({
           <MoveList session={session} />
 
           {report ? (
-            <Report report={report} />
+            <Report report={report} opponentColour={book.opponentColour} />
           ) : (
             <div className="play-actions">
               {finished ? (
@@ -366,14 +379,20 @@ function MoveList({ session }: { session: PlaySession }) {
   )
 }
 
-function Report({ report }: { report: GameReport }) {
+function Report({
+  report,
+  opponentColour,
+}: {
+  report: GameReport
+  opponentColour: Colour
+}) {
   return (
     <div className="report">
       <h3>The report</h3>
 
       <h4>The repertoire</h4>
-      <p>{describeDeviation(report.deviation)}</p>
-      {report.deviation.kind === 'white-left-book' && report.deviation.note ? (
+      <p>{describeDeviation(report.deviation, opponentColour)}</p>
+      {report.deviation.kind === 'student-left-book' && report.deviation.note ? (
         <p className="book-note">
           <strong>{report.deviation.label}</strong> {report.deviation.note}
         </p>

@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from 'react'
 import { useProgress } from './progress-context'
-import { chapters } from '../content'
-import { buildCards } from '../model/cards'
+import { courses, currentCourse } from '../content'
+import { buildCardsAcross } from '../model/cards'
 import { chapterProgress, conceptAccuracy, courseTotals, playStats } from '../model/stats'
 import { isDesktop, readBackup, saveBackup } from './backup'
 import './progress.css'
@@ -13,11 +13,24 @@ import './progress.css'
 export function Progress() {
   const { state, exportJson, importJson } = useProgress()
 
-  const cards = useMemo(() => buildCards(chapters, state.learntLines).cards, [state.learntLines])
-  const rows = useMemo(() => chapterProgress(chapters, state), [state])
-  const concepts = useMemo(() => conceptAccuracy(cards, state), [cards, state])
-  const totals = useMemo(() => courseTotals(chapters, cards, state), [cards, state])
-  const play = useMemo(() => playStats(chapters, state), [state])
+  // Phase 7 stacks one of these blocks per course. Until then there is one.
+  const course = currentCourse
+  const cards = useMemo(
+    () => buildCardsAcross(courses, state.learntLines).cards,
+    [state.learntLines],
+  )
+  const rows = useMemo(() => (course ? chapterProgress(course, state) : []), [course, state])
+  const concepts = useMemo(
+    () => (course ? conceptAccuracy(course, cards, state) : []),
+    [cards, course, state],
+  )
+  const totals = useMemo(
+    () => (course ? courseTotals(course, cards, state) : null),
+    [cards, course, state],
+  )
+  const play = useMemo(() => playStats(courses, state), [state])
+
+  if (!totals) return <p className="empty">No courses loaded. Check the diagnostics view.</p>
 
   return (
     <div className="progress">

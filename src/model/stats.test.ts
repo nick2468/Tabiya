@@ -2,20 +2,15 @@ import { describe, expect, it } from 'vitest'
 import { chapterProgress, conceptAccuracy, courseTotals } from './stats'
 import { buildCards } from './cards'
 import { chapterLines } from './lines'
-import { loadChapter } from './loader'
+import { loadFixture as load, manifest } from '../test/fixtures'
+import { loadCourse } from './course'
+import type { LoadedCourse } from './types'
 import { newSchedule, review } from '../scheduler'
 import { emptyProgress, recordAnswer, toggleLearnt } from '../storage/progress'
-import type { LoadedChapter } from './types'
 
 const NOW = new Date('2026-08-27T09:00:00.000Z')
 
-function load(raw: unknown): LoadedChapter {
-  const result = loadChapter(raw)
-  if (!result.ok) throw new Error(`fixture failed: ${result.errors[0]?.message}`)
-  return result.chapter
-}
-
-const chapter = load({
+const raw = {
   id: 'ch-test',
   title: 'Test chapter',
   intro: 'Typical mistakes: rushing.',
@@ -48,19 +43,36 @@ const chapter = load({
       ],
     },
   ],
-})
+}
+
+const chapter = load(raw)
 
 const lines = chapterLines(chapter)
 
+/** The fixture chapter as the whole course it belongs to. */
+const course: LoadedCourse = (() => {
+  const result = loadCourse(manifest({ chapters: ['one.json'] }), { 'one.json': raw })
+  if (!result.ok) throw new Error(`fixture course failed: ${result.errors[0]?.message}`)
+  return result.course
+})()
+
+const COURSE = course.id
+
 describe('chapterProgress', () => {
   it('counts nothing learnt to start with', () => {
-    const [row] = chapterProgress([chapter], emptyProgress(), NOW)
-    expect(row).toMatchObject({ id: 'ch-test', title: 'Test chapter', learnt: 0, lines: 2, due: 0 })
+    const [row] = chapterProgress(course, emptyProgress(), NOW)
+    expect(row).toMatchObject({
+      id: `${COURSE}/ch-test`,
+      title: 'Test chapter',
+      learnt: 0,
+      lines: 2,
+      due: 0,
+    })
   })
 
   it('counts the lines ticked and the cards they make', () => {
     const state = toggleLearnt(emptyProgress(), lines[0].id)
-    const [row] = chapterProgress([chapter], state, NOW)
+    const [row] = chapterProgress(course, state, NOW)
     expect(row.learnt).toBe(1)
     expect(row.lines).toBe(2)
     // 3.e3 and 4.Nf3, both never answered, so both due and both fresh.
@@ -70,11 +82,18 @@ describe('chapterProgress', () => {
 
   it('stops counting a card as due once it has been answered', () => {
     let state = toggleLearnt(emptyProgress(), lines[0].id)
-    const { cards } = buildCards([chapter], [lines[0].id])
+    const { cards } = buildCards(course, [lines[0].id])
     for (const card of cards) {
-      state = recordAnswer(state, card.key, card.tags, true, review(newSchedule(NOW), 'easy', NOW))
+      state = recordAnswer(
+        state,
+        card.courseId,
+        card.key,
+        card.tags,
+        true,
+        review(newSchedule(NOW), 'easy', NOW),
+      )
     }
-    const [row] = chapterProgress([chapter], state, NOW)
+    const [row] = chapterProgress(course, state, NOW)
     expect(row.due).toBe(0)
     expect(row.fresh).toBe(0)
   })
@@ -82,22 +101,22 @@ describe('chapterProgress', () => {
 
 describe('conceptAccuracy', () => {
   it('counts how many learnt cards carry each concept', () => {
-    const { cards } = buildCards([chapter], [lines[0].id, lines[1].id])
-    const rows = conceptAccuracy(cards, emptyProgress())
+    const { cards } = buildCards(course, [lines[0].id, lines[1].id])
+    const rows = conceptAccuracy(course, cards, emptyProgress())
     const development = rows.find((row) => row.tag === 'development')
     expect(development).toMatchObject({ cards: 2, accuracy: null, answers: 0 })
   })
 
   it('puts the worst concept first and the undrilled ones last', () => {
-    const { cards } = buildCards([chapter], [lines[0].id, lines[1].id])
+    const { cards } = buildCards(course, [lines[0].id, lines[1].id])
     let state = emptyProgress()
     for (const correct of [true, true, true, true]) {
-      state = recordAnswer(state, 'x', ['development'], correct, newSchedule(NOW))
+      state = recordAnswer(state, COURSE, 'x', ['development'], correct, newSchedule(NOW))
     }
     for (const correct of [false, false, true, false]) {
-      state = recordAnswer(state, 'y', ['vs-c5'], correct, newSchedule(NOW))
+      state = recordAnswer(state, COURSE, 'y', ['vs-c5'], correct, newSchedule(NOW))
     }
-    const rows = conceptAccuracy(cards, state)
+    const rows = conceptAccuracy(course, cards, state)
     expect(rows.map((row) => row.tag)).toEqual(['vs-c5', 'development'])
     expect(rows[0].accuracy).toBe(0.25)
     expect(rows[1].accuracy).toBe(1)
@@ -105,8 +124,8 @@ describe('conceptAccuracy', () => {
 
   it('keeps a concept with history even when no learnt card carries it now', () => {
     let state = emptyProgress()
-    state = recordAnswer(state, 'x', ['h-file'], false, newSchedule(NOW))
-    const rows = conceptAccuracy([], state)
+    state = recordAnswer(state, COURSE, 'x', ['h-file'], false, newSchedule(NOW))
+    const rows = conceptAccuracy(course, [], state)
     expect(rows.map((row) => row.tag)).toEqual(['h-file'])
     expect(rows[0].cards).toBe(0)
   })
@@ -115,8 +134,8 @@ describe('conceptAccuracy', () => {
 describe('courseTotals', () => {
   it('adds up the whole course', () => {
     const state = toggleLearnt(emptyProgress(), lines[0].id)
-    const { cards } = buildCards([chapter], state.learntLines)
-    expect(courseTotals([chapter], cards, state, NOW)).toEqual({
+    const { cards } = buildCards(course, state.learntLines)
+    expect(courseTotals(course, cards, state, NOW)).toEqual({
       learntLines: 1,
       totalLines: 2,
       cards: 2,

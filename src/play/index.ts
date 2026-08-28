@@ -1,13 +1,15 @@
 export {
-  blackBookReplies,
+  STEM_WEIGHT,
   bookSize,
   buildBook,
-  chooseBlackReply,
+  chooseOpponentReply,
   inBook,
-  whiteBookMove,
+  opponentBookReplies,
+  studentBookMove,
   type Book,
   type BookMove,
   type BookReply,
+  type BookSource,
 } from './book'
 export {
   SLIP_THRESHOLDS,
@@ -31,5 +33,6 @@ export {
   lengthCap,
   scanGame,
   type GameLength,
+  type OpponentMoveResult,
   type SessionOptions,
 } from './session'

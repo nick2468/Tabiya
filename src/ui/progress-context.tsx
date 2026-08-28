@@ -81,7 +81,14 @@ export function useProgressStateFor(store: ProgressStore): Progress {
         rating ?? ratingFor(verdict),
         now,
       )
-      return recordAnswer(previous, card.key, card.tags, countsAsCorrect(verdict), schedule)
+      return recordAnswer(
+        previous,
+        card.courseId,
+        card.key,
+        card.tags,
+        countsAsCorrect(verdict),
+        schedule,
+      )
     })
   }, [])
 

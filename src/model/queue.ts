@@ -9,6 +9,10 @@ import type { Card } from './cards'
  * that falls due and is buried under thirty fresh cards is a review that gets
  * forgotten. And the weak-area filter puts the concepts going worst at the
  * front, which is the whole point of tagging the content.
+ *
+ * One queue across every course, which is Nick's ruling (SPEC.md section 10):
+ * due is due, whichever repertoire it belongs to. Nothing here needs to know
+ * how many courses there are - the cards arrive already scoped.
  */
 
 export interface QueueOptions {
@@ -24,10 +28,15 @@ export interface QueueOptions {
  * A card is judged by its weakest concept: if a position is tagged both
  * `development` and `vs-qb6`, and ...Qb6 lines are going badly, that card is
  * worth asking whatever the other figure says.
+ *
+ * The accuracy read is the card's OWN course. The queue spans courses, so a
+ * shared tag like `development` means one thing in the London and another in a
+ * Black repertoire, and reading the wrong one would reorder the queue by a
+ * number about somebody else's moves.
  */
 export function cardWeakness(state: ProgressState, card: Card): number | null {
   const measured = card.tags
-    .map((tag) => tagAccuracy(state, tag))
+    .map((tag) => tagAccuracy(state, card.courseId, tag))
     .filter((accuracy): accuracy is number => accuracy !== null)
   if (measured.length === 0) return null
   return Math.min(...measured)

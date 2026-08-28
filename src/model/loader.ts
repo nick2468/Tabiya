@@ -1,12 +1,16 @@
 import { Chess } from 'chess.js'
+import { qualifyChapterId } from './ids'
 import { positionKey } from './position'
 import {
   BRUSHES,
   DEFAULT_VARIANT,
   MISTAKE_GRADES,
-  TAGS,
+  colourName,
+  otherColour,
   type Brush,
   type Chapter,
+  type ChapterContext,
+  type Colour,
   type ContentError,
   type LoadResult,
   type LoadedChapter,
@@ -20,6 +24,14 @@ import {
  *
  * Every error is collected rather than thrown, so a content pass shows all the
  * problems at once. Pure TypeScript: Study, Drill and Play share this.
+ *
+ * The rules are written in terms of the STUDENT and the OPPONENT rather than
+ * White and Black, because a course teaches one colour and it need not be
+ * White. Which colour a node belongs to still falls out of ply parity, since
+ * White always moves first; whether it is the student's is that colour compared
+ * with the course's. Everything authored on a move - the variant, the tags, the
+ * wrong tries - sits on the student's moves, and the frequency weights sit on
+ * the opponent's.
  */
 
 const CHAPTER_FIELDS = new Set(['id', 'title', 'intro', 'defaultTags', 'stem', 'tree'])
@@ -46,14 +58,21 @@ const isString = (value: unknown): value is string => typeof value === 'string'
 /** Collects errors while walking one chapter. */
 class Errors {
   readonly list: ContentError[] = []
+  private readonly course: string
   private readonly chapter: string
 
-  constructor(chapter: string) {
+  constructor(course: string, chapter: string) {
+    this.course = course
     this.chapter = chapter
   }
 
   add(path: string[], message: string): void {
-    this.list.push({ chapter: this.chapter, path: path.join(' '), message })
+    this.list.push({
+      course: this.course,
+      chapter: this.chapter,
+      path: path.join(' '),
+      message,
+    })
   }
 
   get any(): boolean {
@@ -62,14 +81,40 @@ class Errors {
 }
 
 /**
+ * The two roles at a chapter's positions, with the colour names to say them in.
+ * Built once per chapter so every rule below reads the same way.
+ */
+interface Roles {
+  student: Colour
+  opponent: Colour
+  studentName: string
+  opponentName: string
+  tags: string[]
+}
+
+function rolesFor(context: ChapterContext): Roles {
+  const opponent = otherColour(context.colour)
+  return {
+    student: context.colour,
+    opponent,
+    studentName: colourName(context.colour),
+    opponentName: colourName(opponent),
+    tags: context.tags,
+  }
+}
+
+/**
  * Validates and loads a chapter read from JSON.
  *
  * @param raw the parsed JSON, of unknown shape
- * @param source a name for error messages when `raw.id` is missing or unusable
+ * @param context the course above this chapter: its id, the student's colour,
+ * and the tag vocabulary it allows
  */
-export function loadChapter(raw: unknown, source = 'unknown'): LoadResult {
-  const id = isObject(raw) && isString(raw.id) ? raw.id : source
-  const errors = new Errors(id)
+export function loadChapter(raw: unknown, context: ChapterContext): LoadResult {
+  const source = context.source ?? 'unknown'
+  const fileId = isObject(raw) && isString(raw.id) ? raw.id : source
+  const errors = new Errors(context.courseId, fileId)
+  const roles = rolesFor(context)
 
   if (!isObject(raw)) {
     errors.add([], 'chapter must be a JSON object')
@@ -87,7 +132,7 @@ export function loadChapter(raw: unknown, source = 'unknown'): LoadResult {
   }
   if (!Array.isArray(raw.tree)) errors.add([], 'tree must be an array of nodes')
 
-  const defaultTags = readTags(raw.defaultTags, errors, [], 'defaultTags')
+  const defaultTags = readTags(raw.defaultTags, roles, errors, [], 'defaultTags')
 
   if (errors.any) return { ok: false, chapter: null, errors: errors.list }
 
@@ -105,12 +150,14 @@ export function loadChapter(raw: unknown, source = 'unknown'): LoadResult {
   }
   const stemFen = chess.fen()
 
-  const tree = walk(chapter.tree, stemFen, chapter.stem.length, stemPath, defaultTags, errors)
+  const tree = walk(chapter.tree, stemFen, chapter.stem.length, stemPath, defaultTags, roles, errors)
 
   if (errors.any) return { ok: false, chapter: null, errors: errors.list }
 
   const loaded: LoadedChapter = {
-    id: chapter.id,
+    id: qualifyChapterId(context.courseId, chapter.id),
+    fileId: chapter.id,
+    courseId: context.courseId,
     title: chapter.title,
     intro: chapter.intro,
     defaultTags,
@@ -145,12 +192,16 @@ function walk(
   ply: number,
   parentPath: string[],
   defaultTags: string[],
+  roles: Roles,
   errors: Errors,
 ): LoadedNode[] {
-  const colour = ply % 2 === 0 ? 'white' : 'black'
+  // White always moves first, so parity still gives the colour. Whether it is
+  // the student's move is that colour against the course's.
+  const colour: Colour = ply % 2 === 0 ? 'white' : 'black'
+  const isStudent = colour === roles.student
   const loaded: LoadedNode[] = []
   const variantsSeen = new Map<string, string>()
-  const blackSeen = new Set<string>()
+  const opponentSeen = new Set<string>()
 
   for (const raw of nodes) {
     if (!isObject(raw)) {
@@ -185,33 +236,36 @@ function walk(
       key: positionKey(parentFen),
       ply,
       colour,
+      isStudent,
       path,
       tags: [],
       isLeaf: true,
       children: [],
     }
 
-    checkNote(raw, colour, path, errors)
-    checkPlan(raw, path, errors)
-    node.tags = checkTags(raw, colour, path, defaultTags, errors)
-    checkWeight(raw, colour, path, errors)
-    checkMistakes(raw, colour, parentFen, path, errors)
+    checkNote(raw, isStudent, roles, path, errors)
+    checkPlan(raw, roles, path, errors)
+    node.tags = checkTags(raw, isStudent, roles, path, defaultTags, errors)
+    checkWeight(raw, isStudent, roles, path, errors)
+    checkMistakes(raw, isStudent, roles, parentFen, path, errors)
     checkShapes(raw, path, errors)
-    const variant = checkVariant(raw, colour, path, errors)
+    const variant = checkVariant(raw, isStudent, roles, path, errors)
 
-    // Two Black siblings playing the same move is always a duplicated branch:
-    // White siblings get the variant rule, Black siblings get this one.
-    if (colour === 'black') {
-      if (blackSeen.has(san)) errors.add(path, `two Black replies play "${san}" here`)
-      blackSeen.add(san)
+    // Two opponent siblings playing the same move is always a duplicated
+    // branch: the student's siblings get the variant rule, these get this one.
+    if (!isStudent) {
+      if (opponentSeen.has(san)) {
+        errors.add(path, `two ${roles.opponentName} replies play "${san}" here`)
+      }
+      opponentSeen.add(san)
     }
 
-    if (colour === 'white' && variant) {
+    if (isStudent && variant) {
       const clash = variantsSeen.get(variant)
       if (clash !== undefined) {
         errors.add(
           path,
-          `two White moves share the variant "${variant}" here: "${clash}" and "${san}"`,
+          `two ${roles.studentName} moves share the variant "${variant}" here: "${clash}" and "${san}"`,
         )
       } else {
         variantsSeen.set(variant, san)
@@ -223,7 +277,7 @@ function walk(
       if (!Array.isArray(children)) {
         errors.add(path, 'children must be an array of nodes')
       } else if (children.length > 0) {
-        node.children = walk(children, fen, ply + 1, path, defaultTags, errors)
+        node.children = walk(children, fen, ply + 1, path, defaultTags, roles, errors)
         node.isLeaf = false
       }
     }
@@ -234,28 +288,42 @@ function walk(
   return loaded
 }
 
-function checkNote(raw: Record<string, unknown>, colour: string, path: string[], errors: Errors) {
+function checkNote(
+  raw: Record<string, unknown>,
+  isStudent: boolean,
+  roles: Roles,
+  path: string[],
+  errors: Errors,
+) {
   const note = raw.note
   if (note === undefined) {
-    // Every move teaches something: the idea for White's, what Black is doing
-    // for Black's. Required on both since 2026-08-28 (it was optional on Black
-    // moves in v1, which left the student guessing at half the moves).
+    // Every move teaches something: the idea for the student's, what the
+    // opponent is doing for theirs. Required on both since 2026-08-28 (it was
+    // optional on the opponent's moves in v1, which left the student guessing
+    // at half of them).
     errors.add(
       path,
-      colour === 'white'
-        ? 'White moves need a note saying the idea'
-        : 'Black moves need a note saying what Black is doing',
+      isStudent
+        ? `${roles.studentName} moves need a note saying the idea`
+        : `${roles.opponentName} moves need a note saying what ${roles.opponentName} is doing`,
     )
     return
   }
   if (!isString(note) || note.trim() === '') errors.add(path, 'note must be a non-empty string')
 }
 
-function checkPlan(raw: Record<string, unknown>, path: string[], errors: Errors) {
+function checkPlan(
+  raw: Record<string, unknown>,
+  roles: Roles,
+  path: string[],
+  errors: Errors,
+) {
   const isLeaf = !Array.isArray(raw.children) || raw.children.length === 0
   const plan = raw.plan
   if (plan === undefined) {
-    if (isLeaf) errors.add(path, 'leaves need a plan saying how White continues')
+    if (isLeaf) {
+      errors.add(path, `leaves need a plan saying how ${roles.studentName} continues`)
+    }
     return
   }
   if (!isString(plan) || plan.trim() === '') errors.add(path, 'plan must be a non-empty string')
@@ -263,14 +331,15 @@ function checkPlan(raw: Record<string, unknown>, path: string[], errors: Errors)
 
 function checkVariant(
   raw: Record<string, unknown>,
-  colour: string,
+  isStudent: boolean,
+  roles: Roles,
   path: string[],
   errors: Errors,
 ): string | null {
   const variant = raw.variant
-  if (variant === undefined) return colour === 'white' ? DEFAULT_VARIANT : null
-  if (colour !== 'white') {
-    errors.add(path, 'variant belongs on White moves only')
+  if (variant === undefined) return isStudent ? DEFAULT_VARIANT : null
+  if (!isStudent) {
+    errors.add(path, `variant belongs on ${roles.studentName} moves only`)
     return null
   }
   if (!isString(variant) || variant.trim() === '') {
@@ -282,14 +351,15 @@ function checkVariant(
 
 function checkWeight(
   raw: Record<string, unknown>,
-  colour: string,
+  isStudent: boolean,
+  roles: Roles,
   path: string[],
   errors: Errors,
 ) {
   const weight = raw.weight
   if (weight === undefined) return
-  if (colour !== 'black') {
-    errors.add(path, 'weight belongs on Black moves only')
+  if (isStudent) {
+    errors.add(path, `weight belongs on ${roles.opponentName} moves only`)
     return
   }
   if (typeof weight !== 'number' || !Number.isInteger(weight) || weight < 1 || weight > 10) {
@@ -299,22 +369,24 @@ function checkWeight(
 
 function checkTags(
   raw: Record<string, unknown>,
-  colour: string,
+  isStudent: boolean,
+  roles: Roles,
   path: string[],
   defaultTags: string[],
   errors: Errors,
 ): string[] {
-  if (raw.tags === undefined) return colour === 'white' ? defaultTags : []
-  if (colour !== 'white') {
-    errors.add(path, 'tags belong on White moves only')
+  if (raw.tags === undefined) return isStudent ? defaultTags : []
+  if (!isStudent) {
+    errors.add(path, `tags belong on ${roles.studentName} moves only`)
     return []
   }
-  return readTags(raw.tags, errors, path, 'tags')
+  return readTags(raw.tags, roles, errors, path, 'tags')
 }
 
 /** Shared by chapter defaultTags and node tags. */
 function readTags(
   value: unknown,
+  roles: Roles,
   errors: Errors,
   path: string[],
   field: string,
@@ -330,7 +402,7 @@ function readTags(
       errors.add(path, `${field} must contain strings`)
       continue
     }
-    if (!(TAGS as readonly string[]).includes(tag)) {
+    if (!roles.tags.includes(tag)) {
       errors.add(path, `"${tag}" is not in the concept tag vocabulary`)
       continue
     }
@@ -341,15 +413,16 @@ function readTags(
 
 function checkMistakes(
   raw: Record<string, unknown>,
-  colour: string,
+  isStudent: boolean,
+  roles: Roles,
   parentFen: string,
   path: string[],
   errors: Errors,
 ) {
   const mistakes = raw.mistakes
   if (mistakes === undefined) return
-  if (colour !== 'white') {
-    errors.add(path, 'mistakes belong on White moves only')
+  if (!isStudent) {
+    errors.add(path, `mistakes belong on ${roles.studentName} moves only`)
     return
   }
   if (!Array.isArray(mistakes)) {

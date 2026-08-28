@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useState } from 'react'
 import { Board } from './Board'
 import { useProgress } from './progress-context'
-import { chapters } from '../content'
-import { buildCards, type Card } from '../model/cards'
+import { chapters, courses } from '../content'
+import { buildCardsAcross, type Card } from '../model/cards'
 import {
   judge,
   ratingFor,
@@ -36,7 +36,12 @@ export function Drill() {
   const [done, setDone] = useState(0)
   const [correct, setCorrect] = useState(0)
 
-  const cards = useMemo(() => buildCards(chapters, state.learntLines).cards, [state.learntLines])
+  // One queue across every course (SPEC.md section 10): due is due, whichever
+  // repertoire the card belongs to.
+  const cards = useMemo(
+    () => buildCardsAcross(courses, state.learntLines).cards,
+    [state.learntLines],
+  )
   const byKey = useMemo(() => new Map(cards.map((card) => [card.key, card])), [cards])
 
   // The live queue, for the counts shown before a session starts.

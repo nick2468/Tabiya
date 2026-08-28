@@ -1,0 +1,18 @@
+{
+  "id": "london-white",
+  "title": "The London System",
+  "colour": "white",
+  "tagline": "One setup against almost everything, as White.",
+  "formatVersion": 1,
+  "chapters": [
+    "ch0-the-system.json",
+    "ch1-classical.json",
+    "ch2-c5-qb6.json",
+    "ch3-kings-indian.json",
+    "ch4-gruenfeld.json",
+    "ch5-harassment.json",
+    "ch6-everything-else.json",
+    "ch7-tactics-and-plans.json"
+  ],
+  "tagExtensions": ["vs-c5", "vs-qb6", "vs-kid", "vs-gruenfeld", "vs-bf5", "vs-dutch"]
+}

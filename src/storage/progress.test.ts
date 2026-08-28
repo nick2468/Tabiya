@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import {
+  LEGACY_COURSE_ID,
   LocalStorageProgressStore,
   PLAY_HISTORY,
   PROGRESS_VERSION,
@@ -16,6 +17,10 @@ import {
   toggleLearnt,
 } from './progress'
 import { newSchedule, review } from '../scheduler'
+import { cardKey } from '../model/ids'
+
+/** The course the answer-recording tests attribute their answers to. */
+const COURSE = 'test-course'
 
 /** A stand-in for localStorage, since the tests run under node. */
 function fakeStorage(): Storage {
@@ -37,7 +42,8 @@ describe('parseProgress', () => {
     const state = parseProgress({ version: 1, learntLines: ['ch0:d4 d5'] })
     expect(state).toEqual({
       version: PROGRESS_VERSION,
-      learntLines: ['ch0:d4 d5'],
+      // Pre-course line ids gain the course they always belonged to.
+      learntLines: [`${LEGACY_COURSE_ID}/ch0:d4 d5`],
       cards: {},
       tagHistory: {},
       playGames: [],
@@ -62,6 +68,7 @@ describe('parseProgress', () => {
     })
     expect(state.playGames).toHaveLength(1)
     expect(state.playGames[0].deviationMove).toBe(7)
+    expect(state.playGames[0].courseId).toBe(LEGACY_COURSE_ID)
   })
 
   it('reads a version 1 file, which is the whole migration', () => {
@@ -69,7 +76,7 @@ describe('parseProgress', () => {
     // simply starts fresh from the lines the trainee had already ticked.
     const state = parseProgress({ version: 1, learntLines: ['ch1:d4 d5 Bf4'] })
     expect(state.version).toBe(PROGRESS_VERSION)
-    expect(state.learntLines).toEqual(['ch1:d4 d5 Bf4'])
+    expect(state.learntLines).toEqual([`${LEGACY_COURSE_ID}/ch1:d4 d5 Bf4`])
     expect(state.cards).toEqual({})
     expect(state.tagHistory).toEqual({})
   })
@@ -82,7 +89,7 @@ describe('parseProgress', () => {
       cards: { keep: good, nonsense: 'not a schedule', partial: { due: 'x' } },
       tagHistory: {},
     })
-    expect(Object.keys(state.cards)).toEqual(['keep'])
+    expect(Object.keys(state.cards)).toEqual([cardKey(LEGACY_COURSE_ID, 'keep')])
   })
 
   it('keeps tag history within the rolling window', () => {
@@ -93,20 +100,24 @@ describe('parseProgress', () => {
       cards: {},
       tagHistory: { development: tooMany, rubbish: ['yes', 'no'], empty: [] },
     })
-    expect(state.tagHistory.development).toHaveLength(TAG_WINDOW)
-    expect(state.tagHistory.rubbish).toBeUndefined()
-    expect(state.tagHistory.empty).toBeUndefined()
+    const london = state.tagHistory[LEGACY_COURSE_ID]
+    expect(london.development).toHaveLength(TAG_WINDOW)
+    expect(london.rubbish).toBeUndefined()
+    expect(london.empty).toBeUndefined()
   })
 
   it('drops entries that are not line ids rather than losing the rest', () => {
     const state = parseProgress({ version: 1, learntLines: ['ch0:d4', 42, null, 'ch1:d4'] })
-    expect(state.learntLines).toEqual(['ch0:d4', 'ch1:d4'])
+    expect(state.learntLines).toEqual([
+      `${LEGACY_COURSE_ID}/ch0:d4`,
+      `${LEGACY_COURSE_ID}/ch1:d4`,
+    ])
   })
 
   it('removes duplicates', () => {
     expect(parseProgress({ version: 1, learntLines: ['a', 'a', 'b'] }).learntLines).toEqual([
-      'a',
-      'b',
+      `${LEGACY_COURSE_ID}/a`,
+      `${LEGACY_COURSE_ID}/b`,
     ])
   })
 
@@ -121,6 +132,72 @@ describe('parseProgress', () => {
   it('refuses something that is not an object', () => {
     expect(() => parseProgress(['a'])).toThrow(/JSON object/)
     expect(() => parseProgress('nope')).toThrow(/JSON object/)
+  })
+})
+
+describe('the version 3 to version 4 migration', () => {
+  // Version 3 is what the shipped v1 app wrote. This is Nick's real file in
+  // miniature: learnt lines, card schedules, tag history and a game, none of
+  // them naming a course because there was only one.
+  const v3 = {
+    version: 3,
+    learntLines: ['ch2-c5-qb6:d4 d5 Bf4 c5 e3', 'ch1-classical:d4 d5 Bf4 e6'],
+    cards: {
+      'rnbqkbnr/pp2pppp/8/2pp4/3P1B2/8/PPP1PPPP/RN1QKBNR w KQkq -': newSchedule(
+        new Date('2026-08-27T09:00:00.000Z'),
+      ),
+    },
+    tagHistory: { 'vs-c5': [1, 0, 1], development: [1, 1] },
+    playGames: [
+      {
+        chapterId: 'ch2-c5-qb6',
+        deviated: true,
+        deviationMove: 6,
+        moves: 15,
+        level: 4,
+        at: '2026-08-27T09:00:00.000Z',
+      },
+    ],
+  }
+
+  it('loses nothing, and puts all of it in the London course', () => {
+    const state = parseProgress(v3)
+    expect(state.version).toBe(PROGRESS_VERSION)
+
+    expect(state.learntLines).toEqual([
+      'london-white/ch2-c5-qb6:d4 d5 Bf4 c5 e3',
+      'london-white/ch1-classical:d4 d5 Bf4 e6',
+    ])
+
+    const [[position, schedule]] = Object.entries(v3.cards)
+    expect(Object.keys(state.cards)).toEqual([`london-white#${position}`])
+    expect(state.cards[`london-white#${position}`]).toEqual(schedule)
+
+    expect(state.tagHistory).toEqual({
+      'london-white': { 'vs-c5': [1, 0, 1], development: [1, 1] },
+    })
+
+    expect(state.playGames[0]).toMatchObject({
+      courseId: 'london-white',
+      chapterId: 'london-white/ch2-c5-qb6',
+      deviated: true,
+      deviationMove: 6,
+    })
+  })
+
+  it('reads a version 4 file back unchanged, so the migration runs once', () => {
+    const migrated = parseProgress(v3)
+    expect(parseProgress(migrated)).toEqual(migrated)
+  })
+
+  it('leaves an untargeted pre-course game without a chapter', () => {
+    const state = parseProgress({
+      version: 3,
+      learntLines: [],
+      playGames: [{ deviated: false, moves: 10, level: 3, at: '2026-08-27T09:00:00.000Z' }],
+    })
+    expect(state.playGames[0].courseId).toBe('london-white')
+    expect(state.playGames[0].chapterId).toBeUndefined()
   })
 })
 
@@ -207,26 +284,26 @@ describe('recording answers', () => {
 
   it('saves the card schedule and marks every concept the card carries', () => {
     const schedule = review(newSchedule(NOW), 'good', NOW)
-    const state = recordAnswer(emptyProgress(), 'card-key', ['development', 'vs-c5'], true, schedule)
+    const state = recordAnswer(emptyProgress(), COURSE, 'card-key', ['development', 'vs-c5'], true, schedule)
     expect(scheduleFor(state, 'card-key')).toEqual(schedule)
-    expect(tagAccuracy(state, 'development')).toBe(1)
-    expect(tagAccuracy(state, 'vs-c5')).toBe(1)
+    expect(tagAccuracy(state, COURSE, 'development')).toBe(1)
+    expect(tagAccuracy(state, COURSE, 'vs-c5')).toBe(1)
   })
 
   it('works out accuracy from the answers so far', () => {
     let state = emptyProgress()
     const schedule = newSchedule(NOW)
     for (const correct of [true, false, true, true]) {
-      state = recordAnswer(state, 'card', ['development'], correct, schedule)
+      state = recordAnswer(state, COURSE, 'card', ['development'], correct, schedule)
     }
-    expect(tagAccuracy(state, 'development')).toBe(0.75)
-    expect(tagAnswerCount(state, 'development')).toBe(4)
+    expect(tagAccuracy(state, COURSE, 'development')).toBe(0.75)
+    expect(tagAnswerCount(state, COURSE, 'development')).toBe(4)
   })
 
   it('says nothing rather than zero for a concept never drilled', () => {
     // An untried concept is not a weak one, and scoring it zero would send the
     // weak-area filter straight at whatever the trainee has not reached yet.
-    expect(tagAccuracy(emptyProgress(), 'endgame')).toBeNull()
+    expect(tagAccuracy(emptyProgress(), COURSE, 'endgame')).toBeNull()
   })
 
   it('forgets answers older than the rolling window', () => {
@@ -234,19 +311,19 @@ describe('recording answers', () => {
     const schedule = newSchedule(NOW)
     // A bad run, then a clean one long enough to push it out of the window.
     for (let i = 0; i < TAG_WINDOW; i++) {
-      state = recordAnswer(state, 'card', ['h-file'], false, schedule)
+      state = recordAnswer(state, COURSE, 'card', ['h-file'], false, schedule)
     }
-    expect(tagAccuracy(state, 'h-file')).toBe(0)
+    expect(tagAccuracy(state, COURSE, 'h-file')).toBe(0)
     for (let i = 0; i < TAG_WINDOW; i++) {
-      state = recordAnswer(state, 'card', ['h-file'], true, schedule)
+      state = recordAnswer(state, COURSE, 'card', ['h-file'], true, schedule)
     }
-    expect(tagAnswerCount(state, 'h-file')).toBe(TAG_WINDOW)
-    expect(tagAccuracy(state, 'h-file')).toBe(1)
+    expect(tagAnswerCount(state, COURSE, 'h-file')).toBe(TAG_WINDOW)
+    expect(tagAccuracy(state, COURSE, 'h-file')).toBe(1)
   })
 
   it('never changes the state it was given', () => {
     const before = emptyProgress()
-    recordAnswer(before, 'card', ['development'], true, newSchedule(NOW))
+    recordAnswer(before, COURSE, 'card', ['development'], true, newSchedule(NOW))
     expect(before.cards).toEqual({})
     expect(before.tagHistory).toEqual({})
   })
@@ -256,8 +333,8 @@ describe('recording answers', () => {
     const store = new LocalStorageProgressStore(storage)
     let state = emptyProgress()
     state = toggleLearnt(state, 'ch1:d4 d5 Bf4 e6 e3')
-    state = recordAnswer(state, 'a-position', ['development'], true, review(newSchedule(NOW), 'good', NOW))
-    state = recordAnswer(state, 'another', ['vs-qb6'], false, review(newSchedule(NOW), 'again', NOW))
+    state = recordAnswer(state, COURSE, 'a-position', ['development'], true, review(newSchedule(NOW), 'good', NOW))
+    state = recordAnswer(state, COURSE, 'another', ['vs-qb6'], false, review(newSchedule(NOW), 'again', NOW))
     await store.save(state)
 
     const exported = await store.exportJson()
@@ -270,7 +347,8 @@ describe('recording answers', () => {
 
 describe('play history', () => {
   const game = {
-    chapterId: 'ch3-kings-indian',
+    courseId: 'london-white',
+    chapterId: 'london-white/ch3-kings-indian',
     deviated: false,
     moves: 20,
     level: 4,

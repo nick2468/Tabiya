@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
 import { chapterLines, fullMoveNumber, lineId, moveList, nodesForPath } from './lines'
-import { loadChapter } from './loader'
+import { loadFixture } from '../test/fixtures'
 import type { LoadedChapter } from './types'
 
 /** 1.d4 d5 2.Bf4, then two lines that split at Black's second move. */
 function fixture(): LoadedChapter {
-  const result = loadChapter({
+  return loadFixture({
     id: 'ch-test',
     title: 'Test chapter',
     intro: 'Typical mistakes: rushing.',
@@ -44,8 +44,6 @@ function fixture(): LoadedChapter {
       },
     ],
   })
-  if (!result.ok) throw new Error(`fixture failed to load: ${result.errors[0]?.message}`)
-  return result.chapter
 }
 
 describe('chapterLines', () => {
@@ -67,8 +65,11 @@ describe('chapterLines', () => {
 
   it('builds an id from the chapter and the moves', () => {
     const [first] = chapterLines(fixture())
-    expect(first.id).toBe(lineId('ch-test', ['d4', 'd5', 'Bf4', 'Nf6', 'e3', 'e6', 'Nf3']))
-    expect(first.id).toBe('ch-test:d4 d5 Bf4 Nf6 e3 e6 Nf3')
+    // The chapter id carries its course, so a line id is scoped to one course.
+    expect(first.id).toBe(
+      lineId('test-course/ch-test', ['d4', 'd5', 'Bf4', 'Nf6', 'e3', 'e6', 'Nf3']),
+    )
+    expect(first.id).toBe('test-course/ch-test:d4 d5 Bf4 Nf6 e3 e6 Nf3')
   })
 
   it('gives every line a distinct id', () => {

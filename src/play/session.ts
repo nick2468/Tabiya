@@ -1,15 +1,20 @@
 import { Chess } from 'chess.js'
 import { chooseCandidate, splitMove, whitePovPawns, type Engine, type StrengthProfile } from '../engine'
 import { positionKey } from '../model/position'
-import { chooseBlackReply, type Book } from './book'
+import { chooseOpponentReply, type Book } from './book'
 import type { PlayedMove } from './report'
+import type { Colour } from '../model/types'
 
 /**
  * A game of chess against the engine, steered into the repertoire.
  *
- * Black's moves come from the book while the position is still in it, chosen by
- * the club-level weights, so a sparring game lands in structures worth
- * training. The engine takes over the moment the book runs out.
+ * The opponent's moves come from the book while the position is still in it,
+ * chosen by the club-level weights, so a sparring game lands in structures
+ * worth training. The engine takes over the moment the book runs out.
+ *
+ * Which colour the trainee plays comes from the book, which got it from the
+ * course. In a Black course the engine opens the game: the session simply
+ * starts with the opponent to move, and playOpponent is the first thing called.
  *
  * The engine is injected rather than built here, so the tests drive a fake and
  * never start a worker.
@@ -39,7 +44,7 @@ export interface SessionOptions {
 
 export type SessionStatus = 'playing' | 'finished'
 
-export interface BlackMoveResult {
+export interface OpponentMoveResult {
   san: string
   /** True when the move came from the repertoire rather than the engine. */
   fromBook: boolean
@@ -57,7 +62,7 @@ export class PlaySession {
   readonly moves: PlayedMove[] = []
   private readonly options: SessionOptions
   private readonly random: () => number
-  /** How many of Black's moves came out of the book. */
+  /** How many of the opponent's moves came out of the book. */
   bookReplies = 0
   /** Set when the game ends by itself: checkmate, stalemate, a draw. */
   outcome?: string
@@ -85,8 +90,18 @@ export class PlaySession {
     return this.chess.fen()
   }
 
-  get sideToMove(): 'white' | 'black' {
+  get sideToMove(): Colour {
     return this.chess.turn() === 'w' ? 'white' : 'black'
+  }
+
+  /** The colour the trainee is playing, which came from the course. */
+  get studentColour(): Colour {
+    return this.options.book.studentColour
+  }
+
+  /** True when it is the trainee's turn. */
+  get studentToMove(): boolean {
+    return this.sideToMove === this.studentColour
   }
 
   get status(): SessionStatus {
@@ -111,9 +126,9 @@ export class PlaySession {
     return Math.floor(this.moves.length / 2)
   }
 
-  /** Plays White's move. Returns false when it is not legal. */
-  playWhite(san: string): boolean {
-    if (this.sideToMove !== 'white') return false
+  /** Plays the trainee's move. Returns false when it is not legal. */
+  playStudent(san: string): boolean {
+    if (!this.studentToMove) return false
     const before = this.chess.fen()
     let move
     try {
@@ -124,7 +139,7 @@ export class PlaySession {
     this.moves.push({
       ply: this.moves.length,
       san: move.san,
-      colour: 'white',
+      colour: this.studentColour,
       fen: before,
       after: this.chess.fen(),
     })
@@ -133,14 +148,14 @@ export class PlaySession {
   }
 
   /**
-   * Plays Black's reply: from the book while the book still has one, from the
-   * engine after that.
+   * Plays the opponent's reply: from the book while the book still has one,
+   * from the engine after that.
    */
-  async playBlack(): Promise<BlackMoveResult | null> {
-    if (this.sideToMove !== 'black' || this.status === 'finished') return null
+  async playOpponent(): Promise<OpponentMoveResult | null> {
+    if (this.studentToMove || this.status === 'finished') return null
     const before = this.chess.fen()
 
-    const bookReply = chooseBlackReply(this.options.book, before, this.random())
+    const bookReply = chooseOpponentReply(this.options.book, before, this.random())
     let san: string | null = null
     let fromBook = false
     if (bookReply) {
@@ -164,7 +179,7 @@ export class PlaySession {
     this.moves.push({
       ply: this.moves.length,
       san,
-      colour: 'black',
+      colour: this.options.book.opponentColour,
       fen: before,
       after: this.chess.fen(),
     })
@@ -182,7 +197,10 @@ export class PlaySession {
 
   private noteOutcome(): void {
     if (this.chess.isCheckmate()) {
-      this.outcome = this.chess.turn() === 'w' ? 'Black won by checkmate' : 'You won by checkmate'
+      // The side to move is the one that got mated.
+      const mated: Colour = this.chess.turn() === 'w' ? 'white' : 'black'
+      this.outcome =
+        mated === this.studentColour ? 'You were checkmated' : 'You won by checkmate'
     } else if (this.chess.isStalemate()) {
       this.outcome = 'Drawn by stalemate'
     } else if (this.chess.isInsufficientMaterial()) {

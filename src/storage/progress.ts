@@ -1,3 +1,4 @@
+import { cardKey } from '../model/ids'
 import type { Schedule } from '../scheduler'
 
 /**
@@ -15,7 +16,17 @@ import type { Schedule } from '../scheduler'
  */
 
 /** The current shape. Bump it and add a migration when the shape changes. */
-export const PROGRESS_VERSION = 3
+export const PROGRESS_VERSION = 4
+
+/**
+ * The course everything in a version 3 file belongs to.
+ *
+ * Version 3 predates courses, so it had no way of saying which repertoire its
+ * line ids, card keys and games were about. There was only one, and this is its
+ * id. The migration stamps it on everything, which is why the id can never
+ * change: it is written into the format.
+ */
+export const LEGACY_COURSE_ID = 'london-white'
 
 /**
  * How many finished games the progress file remembers.
@@ -43,17 +54,23 @@ export interface ProgressState {
   /**
    * The last few answers for each concept tag, newest last: 1 for the
    * repertoire move, 0 for anything else. Capped at TAG_WINDOW.
+   *
+   * Kept per course, and pooling them would be wrong rather than merely
+   * untidy (SPEC.md section 10). Two courses share the core tags, so a strong
+   * repertoire would hide a weak one behind an average that describes neither.
    */
-  tagHistory: Record<string, number[]>
+  tagHistory: Record<string, Record<string, number[]>>
   /** Finished games, newest last, capped at PLAY_HISTORY. */
   playGames: PlayRecord[]
 }
 
 /** What one finished game is worth remembering. */
 export interface PlayRecord {
+  /** The course the game was played out of. */
+  courseId: string
   /** The chapter a targeted game sparred against, when there was one. */
   chapterId?: string
-  /** True when White was the first to leave the repertoire. */
+  /** True when the student was the first to leave the repertoire. */
   deviated: boolean
   /** The full move number where that happened. */
   deviationMove?: number
@@ -98,35 +115,53 @@ export function parseProgress(raw: unknown): ProgressState {
       `this progress file was written by a newer version of the app (version ${version})`,
     )
   }
+  // Everything before version 4 predates courses. Reading it and stamping the
+  // London on it IS the migration: nothing the trainee did is lost, and a file
+  // written by v1 of the app still opens.
+  const preCourses = version < 4
   const learntLines = Array.isArray(record.learntLines)
     ? record.learntLines.filter((id): id is string => typeof id === 'string')
     : []
-  // A version 1 file has no cards and no history. Reading it as an empty pair
-  // of those IS the migration: nothing the trainee did is lost, and the drill
-  // schedule simply starts from their learnt lines.
+  // A version 1 file has no cards and no history either. Reading those as an
+  // empty pair is the rest of the same migration: the drill schedule simply
+  // starts again from the learnt lines.
   return {
     version: PROGRESS_VERSION,
-    learntLines: [...new Set(learntLines)],
-    cards: readCards(record.cards),
-    tagHistory: readTagHistory(record.tagHistory),
-    playGames: readPlayGames(record.playGames),
+    learntLines: [...new Set(preCourses ? learntLines.map(scopeLineId) : learntLines)],
+    cards: readCards(record.cards, preCourses),
+    tagHistory: readTagHistory(record.tagHistory, preCourses),
+    playGames: readPlayGames(record.playGames, preCourses),
   }
 }
 
+/** A pre-course line id, moved into the course it always belonged to. */
+function scopeLineId(id: string): string {
+  return `${LEGACY_COURSE_ID}/${id}`
+}
+
 /** Keeps the game records that look like records and drops the rest. */
-function readPlayGames(raw: unknown): PlayRecord[] {
+function readPlayGames(raw: unknown, preCourses: boolean): PlayRecord[] {
   if (!Array.isArray(raw)) return []
   return raw
-    .filter((entry): entry is PlayRecord => {
+    .filter((entry): entry is Record<string, unknown> => {
       if (typeof entry !== 'object' || entry === null) return false
       const record = entry as Record<string, unknown>
       return typeof record.deviated === 'boolean' && typeof record.at === 'string'
+    })
+    .map((entry) => {
+      if (!preCourses) return entry as unknown as PlayRecord
+      const chapterId = typeof entry.chapterId === 'string' ? entry.chapterId : undefined
+      return {
+        ...entry,
+        courseId: LEGACY_COURSE_ID,
+        chapterId: chapterId === undefined ? undefined : `${LEGACY_COURSE_ID}/${chapterId}`,
+      } as unknown as PlayRecord
     })
     .slice(-PLAY_HISTORY)
 }
 
 /** Keeps the schedules that look like schedules and drops the rest. */
-function readCards(raw: unknown): Record<string, Schedule> {
+function readCards(raw: unknown, preCourses: boolean): Record<string, Schedule> {
   if (typeof raw !== 'object' || raw === null || Array.isArray(raw)) return {}
   const cards: Record<string, Schedule> = {}
   for (const [key, value] of Object.entries(raw as Record<string, unknown>)) {
@@ -134,22 +169,46 @@ function readCards(raw: unknown): Record<string, Schedule> {
     const schedule = value as Record<string, unknown>
     if (typeof schedule.due !== 'string') continue
     if (typeof schedule.state !== 'number') continue
-    cards[key] = schedule as unknown as Schedule
+    // A pre-course key is a bare position. The card it schedules is the same
+    // card; only its name has grown a course.
+    cards[preCourses ? cardKey(LEGACY_COURSE_ID, key) : key] = schedule as unknown as Schedule
   }
   return cards
 }
 
-function readTagHistory(raw: unknown): Record<string, number[]> {
+/**
+ * The per-course tag history. A pre-course file has one flat map, which is the
+ * London's, so it is read into that one course.
+ */
+function readTagHistory(
+  raw: unknown,
+  preCourses: boolean,
+): Record<string, Record<string, number[]>> {
   if (typeof raw !== 'object' || raw === null || Array.isArray(raw)) return {}
-  const history: Record<string, number[]> = {}
-  for (const [tag, value] of Object.entries(raw as Record<string, unknown>)) {
-    if (!Array.isArray(value)) continue
-    const answers = value
-      .filter((entry): entry is number => entry === 0 || entry === 1)
-      .slice(-TAG_WINDOW)
-    if (answers.length > 0) history[tag] = answers
+  if (preCourses) {
+    const answers = readTagAnswers(raw)
+    return Object.keys(answers).length > 0 ? { [LEGACY_COURSE_ID]: answers } : {}
+  }
+  const history: Record<string, Record<string, number[]>> = {}
+  for (const [courseId, value] of Object.entries(raw as Record<string, unknown>)) {
+    const answers = readTagAnswers(value)
+    if (Object.keys(answers).length > 0) history[courseId] = answers
   }
   return history
+}
+
+/** One course's tags: the answer windows that still look like answer windows. */
+function readTagAnswers(raw: unknown): Record<string, number[]> {
+  if (typeof raw !== 'object' || raw === null || Array.isArray(raw)) return {}
+  const answers: Record<string, number[]> = {}
+  for (const [tag, value] of Object.entries(raw as Record<string, unknown>)) {
+    if (!Array.isArray(value)) continue
+    const window = value
+      .filter((entry): entry is number => entry === 0 || entry === 1)
+      .slice(-TAG_WINDOW)
+    if (window.length > 0) answers[tag] = window
+  }
+  return answers
 }
 
 /** Parses exported text. Kept separate so the error mentions the text, not the store. */
@@ -227,33 +286,39 @@ export function scheduleFor(state: ProgressState, cardKey: string): Schedule | u
 
 /**
  * Records one answer: the card's new schedule, and a mark against every concept
- * the card carries.
+ * the card carries, in the card's own course.
  */
 export function recordAnswer(
   state: ProgressState,
-  cardKey: string,
+  courseId: string,
+  key: string,
   tags: string[],
   correct: boolean,
   schedule: Schedule,
 ): ProgressState {
-  const tagHistory = { ...state.tagHistory }
+  const answers = { ...(state.tagHistory[courseId] ?? {}) }
   for (const tag of tags) {
-    tagHistory[tag] = [...(tagHistory[tag] ?? []), correct ? 1 : 0].slice(-TAG_WINDOW)
+    answers[tag] = [...(answers[tag] ?? []), correct ? 1 : 0].slice(-TAG_WINDOW)
   }
   return {
     ...state,
-    cards: { ...state.cards, [cardKey]: schedule },
-    tagHistory,
+    cards: { ...state.cards, [key]: schedule },
+    tagHistory: { ...state.tagHistory, [courseId]: answers },
   }
+}
+
+/** Every concept the trainee has answered in one course. */
+export function courseTags(state: ProgressState, courseId: string): string[] {
+  return Object.keys(state.tagHistory[courseId] ?? {})
 }
 
 /**
  * How often the repertoire move came to mind for a concept lately, from 0 to 1,
- * or null when the concept has not been drilled yet. An untried concept is not
- * a weak one, and saying it scored zero would be a lie.
+ * or null when the concept has not been drilled yet in this course. An untried
+ * concept is not a weak one, and saying it scored zero would be a lie.
  */
-export function tagAccuracy(state: ProgressState, tag: string): number | null {
-  const answers = state.tagHistory[tag]
+export function tagAccuracy(state: ProgressState, courseId: string, tag: string): number | null {
+  const answers = state.tagHistory[courseId]?.[tag]
   if (!answers || answers.length === 0) return null
   return answers.reduce((sum, answer) => sum + answer, 0) / answers.length
 }
@@ -264,6 +329,6 @@ export function recordGame(state: ProgressState, game: PlayRecord): ProgressStat
 }
 
 /** How many answers the rolling window currently holds for a concept. */
-export function tagAnswerCount(state: ProgressState, tag: string): number {
-  return state.tagHistory[tag]?.length ?? 0
+export function tagAnswerCount(state: ProgressState, courseId: string, tag: string): number {
+  return state.tagHistory[courseId]?.[tag]?.length ?? 0
 }

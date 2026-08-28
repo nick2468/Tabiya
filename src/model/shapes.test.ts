@@ -12,6 +12,7 @@ function node(from: string, to: string, shapes?: Shape[]): LoadedNode {
     key: '',
     ply: 2,
     colour: 'white',
+    isStudent: true,
     path: ['d4', 'd5', 'Bf4'],
     tags: [],
     isLeaf: true,

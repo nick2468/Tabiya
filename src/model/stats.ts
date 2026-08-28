@@ -2,18 +2,24 @@ import { buildCards, type Card } from './cards'
 import { chapterLines } from './lines'
 import { dueCount, newCount } from './queue'
 import {
+  courseTags,
   isLearnt,
   tagAccuracy,
   tagAnswerCount,
   type PlayRecord,
   type ProgressState,
 } from '../storage/progress'
-import type { LoadedChapter } from './types'
+import type { LoadedCourse } from './types'
 
 /**
  * The numbers behind the Progress view. Plain counts, no scores out of ten and
  * no badges: the point is to show what has been done and what is going badly,
  * so the trainee can decide what to do next.
+ *
+ * Everything here is per course. Weak areas especially: pooling two courses'
+ * accuracy would let a strong repertoire hide a weak one behind an average
+ * that describes neither (SPEC.md section 10). Phase 7's Progress view stacks
+ * these rollups; nothing here has to know how many courses there are.
  */
 
 export interface ChapterProgress {
@@ -38,18 +44,21 @@ export interface ConceptAccuracy {
   cards: number
 }
 
-/** One row per chapter, in course order. */
+/** One row per chapter of one course, in course order. */
 export function chapterProgress(
-  chapters: LoadedChapter[],
+  course: LoadedCourse,
   state: ProgressState,
   now: Date = new Date(),
 ): ChapterProgress[] {
-  return chapters.map((chapter) => {
+  return course.chapters.map((chapter) => {
     const lines = chapterLines(chapter)
     const learntLines = lines.filter((line) => isLearnt(state, line.id))
     // Cards are built from this chapter alone, so a position shared with
     // another chapter is still counted here: this is the chapter's own work.
-    const { cards } = buildCards([chapter], learntLines.map((line) => line.id))
+    const { cards } = buildCards(
+      { id: course.id, chapters: [chapter] },
+      learntLines.map((line) => line.id),
+    )
     return {
       id: chapter.id,
       title: chapter.title,
@@ -62,27 +71,35 @@ export function chapterProgress(
 }
 
 /**
- * One row per concept the learnt cards carry, worst first.
+ * One row per concept one course's learnt cards carry, worst first.
  *
  * Concepts with no answers yet sit at the bottom rather than the top: nothing
  * has gone wrong with them, they simply have not come up.
+ *
+ * @param cards any card list; the ones from other courses are ignored, so the
+ * cross-course drill set can be handed straight in
  */
-export function conceptAccuracy(cards: Card[], state: ProgressState): ConceptAccuracy[] {
+export function conceptAccuracy(
+  course: LoadedCourse,
+  cards: Card[],
+  state: ProgressState,
+): ConceptAccuracy[] {
   const counts = new Map<string, number>()
   for (const card of cards) {
+    if (card.courseId !== course.id) continue
     for (const tag of card.tags) counts.set(tag, (counts.get(tag) ?? 0) + 1)
   }
   // A concept drilled in the past still belongs on the list even if no learnt
   // card carries it now, because its history is what the filter reads.
-  for (const tag of Object.keys(state.tagHistory)) {
+  for (const tag of courseTags(state, course.id)) {
     if (!counts.has(tag)) counts.set(tag, 0)
   }
 
   return [...counts.entries()]
     .map(([tag, cardCount]) => ({
       tag,
-      accuracy: tagAccuracy(state, tag),
-      answers: tagAnswerCount(state, tag),
+      accuracy: tagAccuracy(state, course.id, tag),
+      answers: tagAnswerCount(state, course.id, tag),
       cards: cardCount,
     }))
     .sort((a, b) => {
@@ -104,25 +121,26 @@ export interface CourseTotals {
 }
 
 export function courseTotals(
-  chapters: LoadedChapter[],
+  course: LoadedCourse,
   cards: Card[],
   state: ProgressState,
   now: Date = new Date(),
 ): CourseTotals {
-  const lines = chapters.flatMap(chapterLines)
+  const lines = course.chapters.flatMap(chapterLines)
+  const own = cards.filter((card) => card.courseId === course.id)
   return {
     learntLines: lines.filter((line) => isLearnt(state, line.id)).length,
     totalLines: lines.length,
-    cards: cards.length,
-    due: dueCount(cards, state, now),
-    fresh: newCount(cards, state),
+    cards: own.length,
+    due: dueCount(own, state, now),
+    fresh: newCount(own, state),
   }
 }
 
 /** What the Progress view shows about games played. */
 export interface PlayStats {
   games: number
-  /** Games where White was the first to leave the repertoire. */
+  /** Games where the student was the first to leave the repertoire. */
   deviations: number
   /** From 0 to 1, or null when no games have been played. */
   deviationRate: number | null
@@ -132,8 +150,9 @@ export interface PlayStats {
   byChapter: { id: string; title: string; games: number; deviations: number }[]
 }
 
-export function playStats(chapters: LoadedChapter[], state: ProgressState): PlayStats {
+export function playStats(courses: LoadedCourse[], state: ProgressState): PlayStats {
   const games = state.playGames
+  const chapters = courses.flatMap((course) => course.chapters)
   const deviated = games.filter((game) => game.deviated)
   const moves = deviated
     .map((game) => game.deviationMove)

@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
 import { Chess } from 'chess.js'
 import {
-  blackBookReplies,
   buildBook,
-  chooseBlackReply,
+  chooseOpponentReply,
   inBook,
-  whiteBookMove,
+  opponentBookReplies,
+  studentBookMove,
 } from './book'
 import {
   buildReport,
@@ -18,17 +18,10 @@ import {
   type PlayedMove,
 } from './report'
 import { GAME_LENGTHS, PlaySession, lengthCap, scanGame } from './session'
-import { loadChapter } from '../model/loader'
+import { blackCourse, loadFixture as load } from '../test/fixtures'
 import { positionKey } from '../model/position'
 import { strengthProfile } from '../engine'
 import type { Engine, SearchResult } from '../engine'
-import type { LoadedChapter } from '../model/types'
-
-function load(raw: unknown): LoadedChapter {
-  const result = loadChapter(raw)
-  if (!result.ok) throw new Error(`fixture failed: ${result.errors[0]?.message}`)
-  return result.chapter
-}
 
 /** 1.d4 d5 2.Bf4, with two Black replies of different popularity. */
 const chapter = load({
@@ -129,38 +122,38 @@ function fakeEngine(overrides: Partial<Engine> & { move?: string; cp?: number } 
 
 describe('buildBook', () => {
   it('indexes White moves by position', () => {
-    const book = buildBook([chapter])
-    expect(whiteBookMove(book, fenAfter(['d4', 'd5', 'Bf4', 'Nf6']))?.san).toBe('e3')
-    expect(whiteBookMove(book, fenAfter(['d4', 'd5', 'Bf4', 'Nf6', 'e3', 'e6']))?.san).toBe('Nf3')
+    const book = buildBook({ colour: 'white', chapters: [chapter] })
+    expect(studentBookMove(book, fenAfter(['d4', 'd5', 'Bf4', 'Nf6']))?.san).toBe('e3')
+    expect(studentBookMove(book, fenAfter(['d4', 'd5', 'Bf4', 'Nf6', 'e3', 'e6']))?.san).toBe('Nf3')
   })
 
   it('has nothing for a position the repertoire never reaches', () => {
-    expect(whiteBookMove(buildBook([chapter]), fenAfter(['e4', 'e5']))).toBeNull()
+    expect(studentBookMove(buildBook({ colour: 'white', chapters: [chapter] }), fenAfter(['e4', 'e5']))).toBeNull()
   })
 
   it('carries the note, so the report can explain the book move', () => {
-    const move = whiteBookMove(buildBook([chapter]), fenAfter(['d4', 'd5', 'Bf4', 'Nf6']))
+    const move = studentBookMove(buildBook({ colour: 'white', chapters: [chapter] }), fenAfter(['d4', 'd5', 'Bf4', 'Nf6']))
     expect(move?.note).toBe('Complete the triangle.')
     expect(move?.label).toBe('3.e3')
   })
 
   it('finds the book by position, so a transposition is still in book', () => {
     // The same position, reached 1.d4 Nf6 2.Bf4 d5 rather than 1.d4 d5 2.Bf4 Nf6.
-    const book = buildBook([chapter])
+    const book = buildBook({ colour: 'white', chapters: [chapter] })
     const viaNf6 = fenAfter(['d4', 'Nf6', 'Bf4', 'd5'])
-    expect(whiteBookMove(book, viaNf6)?.san).toBe('e3')
+    expect(studentBookMove(book, viaNf6)?.san).toBe('e3')
   })
 
   it('collects Black replies from every chapter, keeping the higher weight', () => {
-    const book = buildBook([chapter, transposing])
-    const replies = blackBookReplies(book, fenAfter(['d4', 'd5', 'Bf4']))
+    const book = buildBook({ colour: 'white', chapters: [chapter, transposing] })
+    const replies = opponentBookReplies(book, fenAfter(['d4', 'd5', 'Bf4']))
     expect(replies.map((reply) => reply.san).sort()).toEqual(['Nf6', 'c5'])
     // ch-book weights Nf6 at 9, ch-transpose reaches the same position with 8.
     expect(replies.find((reply) => reply.san === 'Nf6')?.weight).toBe(9)
   })
 
   it('knows when each side has run out of book', () => {
-    const book = buildBook([chapter])
+    const book = buildBook({ colour: 'white', chapters: [chapter] })
     expect(inBook(book, fenAfter(['d4', 'd5', 'Bf4']), 'black')).toBe(true)
     expect(inBook(book, fenAfter(['d4', 'd5', 'Bf4', 'Nf6']), 'white')).toBe(true)
     expect(inBook(book, fenAfter(['d4', 'd5', 'Bf4', 'Nf6', 'e3', 'e6', 'Nf3']), 'black')).toBe(
@@ -169,29 +162,29 @@ describe('buildBook', () => {
   })
 })
 
-describe('chooseBlackReply', () => {
-  const book = buildBook([chapter])
+describe('chooseOpponentReply', () => {
+  const book = buildBook({ colour: 'white', chapters: [chapter] })
   const start = fenAfter(['d4', 'd5', 'Bf4'])
 
   it('follows the weights, so the common reply comes up most', () => {
     // Nf6 is weighted 9 and c5 just 1, so nine tickets in ten are Nf6.
-    expect(chooseBlackReply(book, start, 0)?.san).toBe('Nf6')
-    expect(chooseBlackReply(book, start, 0.5)?.san).toBe('Nf6')
-    expect(chooseBlackReply(book, start, 0.89)?.san).toBe('Nf6')
-    expect(chooseBlackReply(book, start, 0.95)?.san).toBe('c5')
+    expect(chooseOpponentReply(book, start, 0)?.san).toBe('Nf6')
+    expect(chooseOpponentReply(book, start, 0.5)?.san).toBe('Nf6')
+    expect(chooseOpponentReply(book, start, 0.89)?.san).toBe('Nf6')
+    expect(chooseOpponentReply(book, start, 0.95)?.san).toBe('c5')
   })
 
   it('still returns something at the very top of the range', () => {
-    expect(chooseBlackReply(book, start, 0.999999)).not.toBeNull()
+    expect(chooseOpponentReply(book, start, 0.999999)).not.toBeNull()
   })
 
   it('returns nothing once the book has run out', () => {
-    expect(chooseBlackReply(book, fenAfter(['e4']), 0.5)).toBeNull()
+    expect(chooseOpponentReply(book, fenAfter(['e4']), 0.5)).toBeNull()
   })
 })
 
 describe('findDeviation', () => {
-  const book = buildBook([chapter])
+  const book = buildBook({ colour: 'white', chapters: [chapter] })
 
   it('says so when the game never left the book', () => {
     const moves = playedMoves(['d4', 'd5', 'Bf4', 'Nf6', 'e3', 'e6', 'Nf3'])
@@ -201,7 +194,7 @@ describe('findDeviation', () => {
   it('names the first White move that left the book, and the move it should have been', () => {
     const moves = playedMoves(['d4', 'd5', 'Bf4', 'Nf6', 'Nf3'])
     expect(findDeviation(moves, book)).toMatchObject({
-      kind: 'white-left-book',
+      kind: 'student-left-book',
       ply: 4,
       played: 'Nf3',
       bookMove: 'e3',
@@ -218,24 +211,30 @@ describe('findDeviation', () => {
     // 2...a6 is not in the book, so White's third move is not a deviation.
     const moves = playedMoves(['d4', 'd5', 'Bf4', 'a6', 'h3'])
     const deviation = findDeviation(moves, book)
-    expect(deviation).toMatchObject({ kind: 'black-left-book-first', ply: 3, played: 'a6' })
+    expect(deviation).toMatchObject({
+      kind: 'opponent-left-book-first',
+      ply: 3,
+      played: 'a6',
+    })
     expect(deviation.bookMove).toBeUndefined()
   })
 
   it('says it was just chess when the book simply ends', () => {
     // The book ends after 4.Nf3; Black's next move cannot be a deviation.
     const moves = playedMoves(['d4', 'd5', 'Bf4', 'Nf6', 'e3', 'e6', 'Nf3', 'Be7'])
-    expect(findDeviation(moves, book).kind).toBe('black-left-book-first')
+    expect(findDeviation(moves, book).kind).toBe('opponent-left-book-first')
   })
 
   it('puts the deviation in words', () => {
     const moves = playedMoves(['d4', 'd5', 'Bf4', 'Nf6', 'Nf3'])
-    expect(describeDeviation(findDeviation(moves, book))).toBe(
+    expect(describeDeviation(findDeviation(moves, book), 'black')).toBe(
       'You left the repertoire on move 3 with Nf3. The line plays e3.',
     )
-    expect(describeDeviation({ kind: 'stayed-in-book' })).toContain('stayed in the repertoire')
+    expect(describeDeviation({ kind: 'stayed-in-book' }, 'black')).toContain(
+      'stayed in the repertoire',
+    )
     expect(
-      describeDeviation({ kind: 'black-left-book-first', ply: 3, played: 'a6' }),
+      describeDeviation({ kind: 'opponent-left-book-first', ply: 3, played: 'a6' }, 'black'),
     ).toContain('just chess')
   })
 })
@@ -298,7 +297,7 @@ describe('scanForSlips', () => {
     expect(slips[0]).toMatchObject({ san: 'e3', tag: 'blunder', loss: 3 })
   })
 
-  it('scans only White, since the report is on the trainee', () => {
+  it('scans only the trainee, since the report is on their play', () => {
     // Black blunders on move 1 and the evaluation stays there. White's moves
     // lose nothing, so the report has nothing to say, however bad Black was.
     const evaluations = new Map<string, number>()
@@ -370,18 +369,18 @@ describe('fullMove', () => {
 })
 
 describe('PlaySession', () => {
-  const book = buildBook([chapter])
+  const book = buildBook({ colour: 'white', chapters: [chapter] })
   const profile = strengthProfile(4)
 
-  it('plays Black out of the book while the book lasts', async () => {
+  it('plays the opponent out of the book while the book lasts', async () => {
     const session = new PlaySession({ book, engine: fakeEngine(), profile, length: 'full', random: () => 0 })
-    expect(session.playWhite('d4')).toBe(true)
-    const reply = await session.playBlack()
+    expect(session.playStudent('d4')).toBe(true)
+    const reply = await session.playOpponent()
     // 1...d5 is part of the chapter's stem, so it is book too.
     expect(reply).toEqual({ san: 'd5', fromBook: true })
   })
 
-  it('steers Black by the weights, so the common defence turns up', async () => {
+  it('steers the opponent by the weights, so the common defence turns up', async () => {
     // From 1.d4 d5 2.Bf4 the book offers Nf6 (weight 9) and c5 (weight 1).
     const session = new PlaySession({
       book,
@@ -391,7 +390,7 @@ describe('PlaySession', () => {
       startMoves: ['d4', 'd5', 'Bf4'],
       random: () => 0.1,
     })
-    const reply = await session.playBlack()
+    const reply = await session.playOpponent()
     expect(reply).toEqual({ san: 'Nf6', fromBook: true })
     expect(session.bookReplies).toBe(1)
   })
@@ -405,15 +404,15 @@ describe('PlaySession', () => {
       startMoves: ['d4', 'd5', 'Bf4', 'Nf6', 'e3', 'e6', 'Nf3'],
       random: () => 0.5,
     })
-    const reply = await session.playBlack()
+    const reply = await session.playOpponent()
     expect(reply).toEqual({ san: 'Be7', fromBook: false })
   })
 
   it('refuses an illegal move and an out of turn one', () => {
     const session = new PlaySession({ book, engine: fakeEngine(), profile, length: 'full' })
-    expect(session.playWhite('e5')).toBe(false)
-    expect(session.playWhite('d4')).toBe(true)
-    expect(session.playWhite('d5')).toBe(false)
+    expect(session.playStudent('e5')).toBe(false)
+    expect(session.playStudent('d4')).toBe(true)
+    expect(session.playStudent('d5')).toBe(false)
   })
 
   it('keeps the ply numbers honest when starting from a Study position', () => {
@@ -426,7 +425,7 @@ describe('PlaySession', () => {
     })
     expect(session.moves).toHaveLength(4)
     expect(session.sideToMove).toBe('white')
-    session.playWhite('e3')
+    session.playStudent('e3')
     expect(session.moves.at(-1)?.ply).toBe(4)
   })
 
@@ -443,8 +442,8 @@ describe('PlaySession', () => {
     // Play out ten full moves of whatever is legal.
     while (session.status === 'playing') {
       const legal = session.chess.moves()
-      if (session.sideToMove === 'white') session.playWhite(legal[0])
-      else await session.playBlack()
+      if (session.studentToMove) session.playStudent(legal[0])
+      else await session.playOpponent()
     }
     expect(session.moves).toHaveLength(20)
     expect(session.status).toBe('finished')
@@ -463,7 +462,7 @@ describe('PlaySession', () => {
       startMoves: ['f3', 'e5', 'g4'],
     })
     // Black now mates with ...Qh4.
-    const reply = await session.playBlack()
+    const reply = await session.playOpponent()
     expect(session.status).toBe('playing')
     expect(reply?.san).toBeDefined()
     const mated = new PlaySession({
@@ -473,8 +472,8 @@ describe('PlaySession', () => {
       length: 'full',
       startMoves: ['f3', 'e5', 'g4'],
     })
-    await mated.playBlack()
-    expect(mated.outcome).toBe('Black won by checkmate')
+    await mated.playOpponent()
+    expect(mated.outcome).toBe('You were checkmated')
     expect(mated.status).toBe('finished')
   })
 })
@@ -500,7 +499,7 @@ describe('scanGame', () => {
 
 describe('buildReport', () => {
   it('puts the deviation, the slips and the verdict together', () => {
-    const book = buildBook([chapter])
+    const book = buildBook({ colour: 'white', chapters: [chapter] })
     const moves = playedMoves(['d4', 'd5', 'Bf4', 'Nf6', 'Nf3'])
     const evaluations = new Map<string, number>()
     for (const move of moves) {
@@ -509,15 +508,126 @@ describe('buildReport', () => {
     }
     evaluations.set(positionKey(moves[4].after), -1.2)
     const report = buildReport(moves, book, evaluations, 'Stopped at move 3')
-    expect(report.deviation.kind).toBe('white-left-book')
+    expect(report.deviation.kind).toBe('student-left-book')
     expect(report.slips.map((slip) => slip.tag)).toEqual(['mistake'])
     expect(report.verdict).toBe('Clearly better for Black')
     expect(report.outcome).toBe('Stopped at move 3')
   })
 
   it('says the scan did not run rather than inventing a verdict', () => {
-    const report = buildReport(playedMoves(['d4']), buildBook([chapter]), new Map())
+    const report = buildReport(playedMoves(['d4']), buildBook({ colour: 'white', chapters: [chapter] }), new Map())
     expect(report.verdict).toBe('Not scanned')
     expect(report.finalEval).toBeUndefined()
+  })
+})
+
+/**
+ * The same three pieces, played as Black.
+ *
+ * The engine opens the game here, which is the case a White course can never
+ * reach: the first thing the session does is play the opponent's move, and the
+ * book has to have an opinion about the starting position itself.
+ */
+describe('playing a Black course', () => {
+  const course = blackCourse()
+  const book = buildBook(course)
+  const profile = strengthProfile(4)
+
+  it('knows the student is Black and the opponent is White', () => {
+    expect(book.studentColour).toBe('black')
+    expect(book.opponentColour).toBe('white')
+  })
+
+  it('has a book move for the starting position, since White opens', () => {
+    // 1.e4 is the chapter stem, so it is the opponent's book move, not the
+    // student's: the student's first book move is 1...c6.
+    expect(studentBookMove(book, fenAfter([]))).toBeNull()
+    expect(opponentBookReplies(book, fenAfter([])).map((r) => r.san)).toEqual(['e4'])
+    expect(studentBookMove(book, fenAfter(['e4']))?.san).toBe('c6')
+    expect(studentBookMove(book, fenAfter(['e4']))?.label).toBe('1...c6')
+  })
+
+  it('lets the engine open the game out of the book', async () => {
+    const session = new PlaySession({
+      book,
+      engine: fakeEngine(),
+      profile,
+      length: 'full',
+      random: () => 0,
+    })
+    expect(session.studentToMove).toBe(false)
+    const opening = await session.playOpponent()
+    expect(opening).toEqual({ san: 'e4', fromBook: true })
+    expect(session.studentToMove).toBe(true)
+    expect(session.playStudent('c6')).toBe(true)
+  })
+
+  it('refuses a White move from the student', () => {
+    const session = new PlaySession({ book, engine: fakeEngine(), profile, length: 'full' })
+    // White is to move and the student is Black, so this is out of turn.
+    expect(session.playStudent('e4')).toBe(false)
+  })
+
+  it('names the deviation from Black\'s side', () => {
+    // 1.e4 c6 2.d4 g6: the student left the book, which plays 2...d5.
+    const moves = playedMoves(['e4', 'c6', 'd4', 'g6'])
+    const deviation = findDeviation(moves, book)
+    expect(deviation).toMatchObject({ kind: 'student-left-book', played: 'g6', bookMove: 'd5' })
+    expect(describeDeviation(deviation, book.opponentColour)).toBe(
+      'You left the repertoire on move 2 with g6. The line plays d5.',
+    )
+  })
+
+  it('says White left first, and stops blaming the student after that', () => {
+    const moves = playedMoves(['e4', 'c6', 'Nf3', 'd5'])
+    const deviation = findDeviation(moves, book)
+    expect(deviation).toMatchObject({ kind: 'opponent-left-book-first', played: 'Nf3' })
+    expect(describeDeviation(deviation, book.opponentColour)).toContain('White left the repertoire')
+  })
+
+  it('counts a slip as the trainee losing ground, not White', () => {
+    // Evaluations are always from White's point of view, so for a Black course
+    // a move that costs the student makes the number go UP.
+    const moves = playedMoves(['e4', 'c6', 'd4', 'd5'])
+    const evaluations = new Map<string, number>()
+    for (const move of moves) {
+      evaluations.set(positionKey(move.fen), 0)
+      evaluations.set(positionKey(move.after), 0)
+    }
+    // Black's second move hands White two and a half pawns.
+    evaluations.set(positionKey(moves[3].fen), 0)
+    evaluations.set(positionKey(moves[3].after), 2.5)
+    const slips = scanForSlips(moves, evaluations, 'black')
+    expect(slips).toHaveLength(1)
+    expect(slips[0]).toMatchObject({ san: 'd5', tag: 'blunder', loss: 2.5 })
+    // The same numbers read as a White course would call it a good move.
+    expect(scanForSlips(moves, evaluations, 'white')).toEqual([])
+  })
+
+  it('builds a whole report from Black\'s side', () => {
+    const moves = playedMoves(['e4', 'c6', 'd4', 'g6'])
+    const evaluations = new Map<string, number>()
+    for (const move of moves) {
+      evaluations.set(positionKey(move.fen), 0)
+      evaluations.set(positionKey(move.after), 0)
+    }
+    evaluations.set(positionKey(moves[3].after), 1.5)
+    const report = buildReport(moves, book, evaluations, 'Stopped at move 2')
+    expect(report.deviation.kind).toBe('student-left-book')
+    expect(report.slips.map((slip) => slip.tag)).toEqual(['mistake'])
+    // The verdict is absolute, so it still names the side that is better.
+    expect(report.verdict).toBe('Clearly better for White')
+  })
+
+  it('says the student was checkmated rather than naming a colour', async () => {
+    const session = new PlaySession({
+      book,
+      engine: fakeEngine({ move: 'f3f7' }),
+      profile,
+      length: 'full',
+      startMoves: ['e4', 'e5', 'Bc4', 'Nc6', 'Qf3', 'a6'],
+    })
+    await session.playOpponent()
+    expect(session.outcome).toBe('You were checkmated')
   })
 })

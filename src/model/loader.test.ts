@@ -7,6 +7,7 @@ import {
   walkNodes,
 } from './loader'
 import { positionKey } from './position'
+import { BLACK_CHAPTER, blackContext, loadFixture, whiteContext } from '../test/fixtures'
 import type { LoadedChapter } from './types'
 
 /**
@@ -62,7 +63,7 @@ function chapter(overrides: Record<string, unknown> = {}) {
 
 /** Loads the fixture and fails loudly if it did not load. */
 function loadOk(raw: unknown): LoadedChapter {
-  const result = loadChapter(raw)
+  const result = loadChapter(raw, whiteContext())
   expect(result.errors).toEqual([])
   if (!result.ok) throw new Error('expected the chapter to load')
   return result.chapter
@@ -171,7 +172,7 @@ describe('loadChapter, valid content', () => {
 
 /** The message of the first error, for the negative cases below. */
 function firstError(raw: unknown): string {
-  const result = loadChapter(raw)
+  const result = loadChapter(raw, whiteContext())
   expect(result.ok).toBe(false)
   return result.errors[0]?.message ?? ''
 }
@@ -236,7 +237,7 @@ describe('loadChapter, negative fixtures', () => {
       note: 'The classical move order, kept out of v1 content but allowed by the schema.',
       plan: 'Play Bf4 next.',
     } as never)
-    expect(loadChapter(bad).ok).toBe(true)
+    expect(loadChapter(bad, whiteContext()).ok).toBe(true)
   })
 
   it('rejects two Black replies playing the same move', () => {
@@ -295,7 +296,7 @@ describe('loadChapter, negative fixtures', () => {
   it('names the chapter and the path on every error', () => {
     const bad = chapter()
     bad.tree[0].san = 'Bf7'
-    const result = loadChapter(bad)
+    const result = loadChapter(bad, whiteContext())
     expect(result.errors[0].chapter).toBe('ch-test')
     expect(result.errors[0].path).toBe('d4 d5 Bf7')
   })
@@ -304,6 +305,89 @@ describe('loadChapter, negative fixtures', () => {
     const bad = chapter()
     delete (bad.tree[0] as Record<string, unknown>).note
     delete (bad.tree[0].children![0].children![0] as Record<string, unknown>).plan
-    expect(loadChapter(bad).errors.length).toBe(2)
+    expect(loadChapter(bad, whiteContext()).errors.length).toBe(2)
+  })
+})
+
+/**
+ * The same rules, read from Black's side.
+ *
+ * This is what "generalised" has to mean: not that the loader was renamed, but
+ * that a course whose student moves second is held to the same standard. The
+ * stem starts with the opponent's move here, so every parity assumption in the
+ * walk is exercised from the other end.
+ */
+describe('loadChapter, a Black course', () => {
+  it('makes the student the side that moves second', () => {
+    const loaded = loadFixture(BLACK_CHAPTER, blackContext())
+    const byPath = new Map(walkNodes(loaded).map((n) => [n.path.join(' '), n]))
+    // 1.e4 is the stem, so the tree roots are Black's first move.
+    const c6 = byPath.get('e4 c6')!
+    expect(c6.colour).toBe('black')
+    expect(c6.isStudent).toBe(true)
+    expect(c6.ply).toBe(1)
+    const d4 = byPath.get('e4 c6 d4')!
+    expect(d4.colour).toBe('white')
+    expect(d4.isStudent).toBe(false)
+  })
+
+  it('puts the authored judgement on Black and the weights on White', () => {
+    const loaded = loadFixture(BLACK_CHAPTER, blackContext())
+    const byPath = new Map(walkNodes(loaded).map((n) => [n.path.join(' '), n]))
+    expect(byPath.get('e4 c6')?.tags).toEqual(['development'])
+    expect(byPath.get('e4 c6')?.mistakes?.[0].san).toBe('e5')
+    expect(byPath.get('e4 c6 d4')?.weight).toBe(8)
+    // And nothing authored for the student sits on the opponent's move.
+    expect(byPath.get('e4 c6 d4')?.tags).toEqual([])
+  })
+
+  it('asks the student from the position before their own move', () => {
+    const loaded = loadFixture(BLACK_CHAPTER, blackContext())
+    const c6 = walkNodes(loaded).find((n) => n.san === 'c6')!
+    // The card position is after 1.e4, with Black to move.
+    expect(c6.parentFen).toBe(loaded.stemFen)
+    expect(c6.parentFen.split(' ')[1]).toBe('b')
+  })
+
+  it('names Black in the messages when Black is the student', () => {
+    const bad = structuredClone(BLACK_CHAPTER) as Record<string, unknown>
+    const tree = bad.tree as Record<string, unknown>[]
+    delete tree[0].note
+    const result = loadChapter(bad, blackContext())
+    expect(result.errors[0].message).toBe('Black moves need a note saying the idea')
+  })
+
+  it('says leaves plan for Black, not for White', () => {
+    const bad = structuredClone(BLACK_CHAPTER) as Record<string, unknown>
+    const tree = bad.tree as Record<string, unknown>[]
+    const children = tree[0].children as Record<string, unknown>[]
+    const grandchildren = children[0].children as Record<string, unknown>[]
+    const line = (grandchildren[0].children as Record<string, unknown>[])[0]
+    delete ((line.children as Record<string, unknown>[])[0]).plan
+    const result = loadChapter(bad, blackContext())
+    expect(result.errors[0].message).toBe('leaves need a plan saying how Black continues')
+  })
+
+  it('refuses a variant on the opponent\'s move', () => {
+    const bad = structuredClone(BLACK_CHAPTER) as Record<string, unknown>
+    const tree = bad.tree as Record<string, unknown>[]
+    const children = tree[0].children as Record<string, unknown>[]
+    children[0].variant = 'classical'
+    const result = loadChapter(bad, blackContext())
+    expect(result.errors[0].message).toBe('variant belongs on Black moves only')
+  })
+
+  it('refuses two White replies playing the same move', () => {
+    const bad = structuredClone(BLACK_CHAPTER) as Record<string, unknown>
+    const tree = bad.tree as Record<string, unknown>[]
+    const children = tree[0].children as Record<string, unknown>[]
+    children.push({
+      san: 'd4',
+      note: 'A duplicated reply.',
+      weight: 2,
+      children: [{ san: 'd5', note: 'Never reached.', plan: 'Never reached.' }],
+    })
+    const result = loadChapter(bad, blackContext())
+    expect(result.errors[0].message).toContain('two White replies play "d4"')
   })
 })
