@@ -36,5 +36,5 @@
     "vite": "^8.2.2",
     "vitest": "^4.1.11"
   },
-  "description": "A desktop trainer for the London System"
+  "description": "A desktop trainer for chess opening repertoires"
 }

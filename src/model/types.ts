@@ -187,6 +187,25 @@ export type CourseLoadResult =
   | { ok: true; course: LoadedCourse; errors: [] }
   | { ok: false; course: null; errors: ContentError[] }
 
+/** Where a course came from. External courses are dropped into a folder by hand. */
+export type CourseOrigin = 'bundled' | 'external'
+
+/**
+ * One course folder after loading: either the course or the errors in it.
+ *
+ * A course that will not load still gets an entry. It appears in the catalog
+ * saying what is wrong with it, which is the whole point of collecting errors
+ * rather than throwing: a folder someone dropped in should say why it did not
+ * work, not vanish.
+ */
+export interface CourseEntry {
+  /** The folder name, used in error messages and when the id is unusable. */
+  source: string
+  origin: CourseOrigin
+  course: LoadedCourse | null
+  errors: ContentError[]
+}
+
 /**
  * The course format this build understands. A course written to a newer one is
  * refused rather than half-read, the same rule the progress file follows: a

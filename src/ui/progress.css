@@ -64,3 +64,31 @@
   border-color: var(--notice-bad-edge);
   color: var(--notice-bad-text);
 }
+
+.progress .course-block {
+  margin-top: 32px;
+  padding-top: 4px;
+  border-top: 1px solid var(--line);
+}
+
+.progress .course-block h3 {
+  margin-top: 20px;
+}
+
+.progress .course-colour {
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text-faint);
+  font-weight: 400;
+}
+
+.progress .course-block h4 {
+  margin: 20px 0 6px;
+  font-size: 0.95rem;
+  color: var(--text-soft);
+}
+
+.progress .course-totals {
+  margin: 0;
+  color: var(--text-soft);
+}

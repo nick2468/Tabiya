@@ -5,7 +5,9 @@ import {
   otherColour,
   type Colour,
   type ContentError,
+  type CourseEntry,
   type CourseLoadResult,
+  type CourseOrigin,
   type CourseManifest,
   type LoadedChapter,
   type LoadedCourse,
@@ -191,4 +193,66 @@ export function allChapters(courses: LoadedCourse[]): LoadedChapter[] {
 /** The course a chapter belongs to, or undefined when it is not in the list. */
 export function courseOf(courses: LoadedCourse[], courseId: string): LoadedCourse | undefined {
   return courses.find((course) => course.id === courseId)
+}
+
+/**
+ * The catalog: the bundled courses, then whatever was dropped in beside them.
+ *
+ * Two rules, both from SPEC.md section 10, and both about the same worry - a
+ * folder someone copied in should never quietly take over a course they have
+ * been drilling for months.
+ *
+ * A bundled course cannot be shadowed. An external course claiming a bundled
+ * id is refused and says so, rather than replacing it or being dropped in
+ * silence. The same goes for two external courses claiming one id: progress
+ * keys hang off the id, so two courses sharing one would share a drill
+ * schedule and each would answer for the other.
+ *
+ * Order is bundled first, in folder order, then external in the order they
+ * were found.
+ */
+export function mergeCourses(bundled: CourseEntry[], external: CourseEntry[]): CourseEntry[] {
+  const claimed = new Map<string, CourseOrigin>()
+  for (const entry of bundled) {
+    if (entry.course) claimed.set(entry.course.id, 'bundled')
+  }
+
+  const merged = [...bundled]
+  for (const entry of external) {
+    const id = entry.course?.id
+    if (id === undefined) {
+      merged.push(entry)
+      continue
+    }
+    const held = claimed.get(id)
+    if (held === undefined) {
+      claimed.set(id, 'external')
+      merged.push(entry)
+      continue
+    }
+    merged.push({
+      source: entry.source,
+      origin: 'external',
+      course: null,
+      errors: [
+        {
+          course: id,
+          chapter: MANIFEST_FILE,
+          path: '',
+          message:
+            held === 'bundled'
+              ? `"${id}" is a course this app has built in, so a dropped-in copy cannot replace it. Give the folder's course.json a different id.`
+              : `another folder already uses the course id "${id}". Two courses with one id would share one drill schedule.`,
+        },
+      ],
+    })
+  }
+  return merged
+}
+
+/** The courses of a catalog that loaded cleanly, in catalog order. */
+export function loadedCourses(entries: CourseEntry[]): LoadedCourse[] {
+  return entries
+    .map((entry) => entry.course)
+    .filter((course): course is LoadedCourse => course !== null)
 }

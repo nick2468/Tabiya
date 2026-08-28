@@ -1,0 +1,136 @@
+.catalog {
+  max-width: 900px;
+}
+
+.catalog-head h2 {
+  font-size: 1.05rem;
+  margin: 0 0 6px;
+}
+
+.catalog-totals {
+  margin: 0 0 20px;
+  color: var(--text-soft);
+}
+
+.course-tiles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.course-tile {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+.tile-open {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  padding: 16px;
+  cursor: pointer;
+  color: inherit;
+}
+
+.tile-open:hover {
+  background: var(--surface-hover);
+}
+
+.tile-colour {
+  justify-self: start;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--line-strong);
+  color: var(--text-dim);
+}
+
+.tile-colour.white {
+  background: var(--bar);
+  color: var(--ground);
+  border-color: var(--bar);
+}
+
+.tile-colour.black {
+  background: var(--chip);
+  color: var(--text);
+}
+
+.tile-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.tile-tagline {
+  color: var(--text-dim);
+}
+
+.tile-numbers {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+
+.tile-origin {
+  justify-self: start;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+.course-tile.broken {
+  padding: 16px;
+  border-color: var(--notice-bad-edge);
+  background: var(--notice-bad);
+}
+
+.course-tile.broken h3 {
+  margin: 0 0 4px;
+  font-size: 1rem;
+}
+
+.tile-errors {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  color: var(--notice-bad-text);
+  font-size: 0.9rem;
+}
+
+.tile-errors li {
+  margin-bottom: 4px;
+}
+
+.catalog .hint {
+  margin-top: 20px;
+}
+
+.catalog code {
+  background: var(--chip);
+  padding: 1px 5px;
+  border-radius: 3px;
+  word-break: break-all;
+}
+
+.course-switch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.course-switch select {
+  max-width: 220px;
+}

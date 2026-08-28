@@ -1,4 +1,4 @@
-//! The Tauri shell around the London Trainer web app.
+//! The Tauri shell around the Repertoire Trainer web app.
 //!
 //! It does almost nothing on purpose. The app is the same web build that runs
 //! in a browser; the only reason for the wrapper is a real window on Windows
@@ -10,5 +10,5 @@ pub fn run() {
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_dialog::init())
         .run(tauri::generate_context!())
-        .expect("error while running the London Trainer window");
+        .expect("error while running the Repertoire Trainer window");
 }

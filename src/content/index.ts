@@ -1,5 +1,5 @@
 import { loadCourse } from '../model/course'
-import type { ContentError, LoadedChapter, LoadedCourse } from '../model/types'
+import type { ContentError, CourseEntry, LoadedChapter, LoadedCourse } from '../model/types'
 
 /**
  * The bundled courses, read from courses/ at build time.
@@ -9,9 +9,9 @@ import type { ContentError, LoadedChapter, LoadedCourse } from '../model/types'
  * course: a course.json manifest naming its chapter files in course order.
  *
  * Bundled courses only. The desktop app also reads courses dropped into a
- * folder under AppData, which is phase 7's job and lands beside this one - the
- * merging happens above here, not inside it, because the browser build has no
- * such folder to read.
+ * folder under AppData (src/content/external.ts); the merging happens in the
+ * catalog above both, not inside either, because the browser build has no such
+ * folder to read and the bundled set must not wait on a filesystem.
  */
 
 const manifests = import.meta.glob<{ default: unknown }>('../../courses/*/course.json', {
@@ -20,14 +20,6 @@ const manifests = import.meta.glob<{ default: unknown }>('../../courses/*/course
 const chapterFiles = import.meta.glob<{ default: unknown }>('../../courses/*/*.json', {
   eager: true,
 })
-
-/** One course folder after loading: either the course or the errors in it. */
-export interface CourseEntry {
-  /** The folder name, used in error messages and when the id is unusable. */
-  source: string
-  course: LoadedCourse | null
-  errors: ContentError[]
-}
 
 /** The folder name a bundled path sits in: courses/<folder>/<file>. */
 function folderOf(path: string): string {
@@ -38,7 +30,7 @@ function fileOf(path: string): string {
   return path.split('/').at(-1) ?? path
 }
 
-export const courseEntries: CourseEntry[] = Object.keys(manifests)
+export const bundledEntries: CourseEntry[] = Object.keys(manifests)
   .sort()
   .map((manifestPath) => {
     const folder = folderOf(manifestPath)
@@ -50,31 +42,21 @@ export const courseEntries: CourseEntry[] = Object.keys(manifests)
       files[file] = chapterFiles[path].default
     }
     const result = loadCourse(manifests[manifestPath].default, files)
-    return { source: folder, course: result.course, errors: result.errors }
+    return { source: folder, origin: 'bundled', course: result.course, errors: result.errors }
   })
 
-/** Only the courses that loaded cleanly, in folder order. */
-export const courses: LoadedCourse[] = courseEntries
+/**
+ * Only the bundled courses that loaded cleanly, in folder order.
+ *
+ * This is what the content suite holds to the quality bar. The app reads the
+ * merged catalog instead, which is these plus whatever was dropped in.
+ */
+export const bundledCourses: LoadedCourse[] = bundledEntries
   .map((entry) => entry.course)
   .filter((course): course is LoadedCourse => course !== null)
 
-/** Every content error across every course. */
-export const contentErrors: ContentError[] = courseEntries.flatMap((entry) => entry.errors)
+/** Every content error across every bundled course. */
+export const contentErrors: ContentError[] = bundledEntries.flatMap((entry) => entry.errors)
 
-/**
- * Every chapter of every course, in course order.
- *
- * v1 had one course, so the views read a flat chapter list. They still can:
- * the catalog shell in phase 7 is what makes a course something the trainee
- * chooses, and until then this keeps the app behaving exactly as it did.
- */
-export const chapters: LoadedChapter[] = courses.flatMap((course) => course.chapters)
-
-/**
- * The course the views work in until the catalog arrives.
- *
- * Phase 7 makes a course something the trainee picks, with Study and Play
- * scoped to it and a switcher in the header. Until then there is one, and this
- * names it rather than leaving `courses[0]` scattered through the views.
- */
-export const currentCourse: LoadedCourse | undefined = courses[0]
+/** Every chapter of every bundled course, in course order. For the test suite. */
+export const bundledChapters: LoadedChapter[] = bundledCourses.flatMap((c) => c.chapters)

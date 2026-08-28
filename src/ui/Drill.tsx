@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from 'react'
 import { Board } from './Board'
 import { useProgress } from './progress-context'
-import { chapters, courses } from '../content'
+import { useCatalog } from './catalog-context'
 import { buildCardsAcross, type Card } from '../model/cards'
 import {
   judge,
@@ -12,16 +12,21 @@ import {
   verdictHeadline,
   type Verdict,
 } from '../model/grade'
-import { legalDests } from '../model/position'
+import { legalDests, sideToMove } from '../model/position'
 import { dueQueue } from '../model/queue'
 import { describeInterval, newSchedule, review, type Rating } from '../scheduler'
 import type { ProgressState } from '../storage/progress'
-import type { Shape } from '../model/types'
+import { colourName, type LoadedCourse, type Shape } from '../model/types'
 import './drill.css'
 
 /**
- * Drill: the daily loop. A position comes up, White to move, and the trainee
- * plays what the repertoire plays.
+ * Drill: the daily loop. A position comes up, the trainee is to move, and they
+ * play what the repertoire plays.
+ *
+ * One queue across every course, which is the ruling in SPEC.md section 10:
+ * due is due, whichever repertoire the card belongs to, and a session that
+ * made you finish one course before starting another would leave the second
+ * one rotting. The filter is there for deliberate practice, not for tidiness.
  *
  * The session takes a snapshot of the queue when it starts and walks it in
  * order. A card answered wrong goes to the back of that session rather than
@@ -30,24 +35,46 @@ import './drill.css'
  */
 export function Drill() {
   const { state, answer } = useProgress()
+  const { courses } = useCatalog()
   const [weakAreasFirst, setWeakAreasFirst] = useState(false)
+  const [only, setOnly] = useState<string>('')
   const [session, setSession] = useState<string[] | null>(null)
   const [verdict, setVerdict] = useState<Verdict | null>(null)
   const [done, setDone] = useState(0)
   const [correct, setCorrect] = useState(0)
 
-  // One queue across every course (SPEC.md section 10): due is due, whichever
-  // repertoire the card belongs to.
-  const cards = useMemo(
+  const everyCard = useMemo(
     () => buildCardsAcross(courses, state.learntLines).cards,
-    [state.learntLines],
+    [courses, state.learntLines],
   )
-  const byKey = useMemo(() => new Map(cards.map((card) => [card.key, card])), [cards])
+  // The filter narrows the queue, not the card set: the counts on the start
+  // screen are still about everything learnt.
+  const cards = useMemo(
+    () => (only ? everyCard.filter((card) => card.courseId === only) : everyCard),
+    [everyCard, only],
+  )
+  const byKey = useMemo(() => new Map(everyCard.map((card) => [card.key, card])), [everyCard])
 
   // The live queue, for the counts shown before a session starts.
   const queue = useMemo(
     () => dueQueue(cards, state, { weakAreasFirst }),
     [cards, state, weakAreasFirst],
+  )
+
+  // One row per course that has anything learnt, for the start screen.
+  const perCourse = useMemo(
+    () =>
+      courses
+        .map((course) => ({
+          course,
+          cards: everyCard.filter((card) => card.courseId === course.id).length,
+          due: dueQueue(
+            everyCard.filter((card) => card.courseId === course.id),
+            state,
+          ).length,
+        }))
+        .filter((row) => row.cards > 0),
+    [courses, everyCard, state],
   )
 
   const card = session ? byKey.get(session[0]) : undefined
@@ -88,13 +115,13 @@ export function Drill() {
     [answer, card, session, verdict],
   )
 
-  if (cards.length === 0) {
+  if (everyCard.length === 0) {
     return (
       <div className="drill">
         <h2>Drill</h2>
         <p className="empty-state">
-          Nothing to drill yet. Study a line, tick "I have learnt this line", and every
-          White move in it becomes a card here.
+          Nothing to drill yet. Open a course, study a line, tick "I have learnt this
+          line", and every move of yours in it becomes a card here.
         </p>
       </div>
     )
@@ -114,6 +141,34 @@ export function Drill() {
             </>
           )}
         </p>
+
+        {perCourse.length > 1 ? (
+          <div className="course-filter">
+            <p className="hint">
+              The queue mixes every course. Narrow it when you want to work on one.
+            </p>
+            <div className="filter-row">
+              <button
+                type="button"
+                className={only === '' ? 'filter current' : 'filter'}
+                onClick={() => setOnly('')}
+              >
+                Everything <span className="filter-count">{everyCard.length}</span>
+              </button>
+              {perCourse.map((row) => (
+                <button
+                  key={row.course.id}
+                  type="button"
+                  className={only === row.course.id ? 'filter current' : 'filter'}
+                  onClick={() => setOnly(row.course.id)}
+                >
+                  {row.course.title} <span className="filter-count">{row.due} due</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        ) : null}
+
         <label className="weak-toggle">
           <input
             type="checkbox"
@@ -163,8 +218,9 @@ export function Drill() {
       <div className="drill-body">
         <Board
           fen={card.fen}
-          turnColor="white"
-          movableColor={verdict ? undefined : 'white'}
+          orientation={sideToMove(card.fen)}
+          turnColor={sideToMove(card.fen)}
+          movableColor={verdict ? undefined : sideToMove(card.fen)}
           dests={verdict ? undefined : legalDests(card.fen)}
           shapes={verdict ? answerShapes(card, verdict) : []}
           onMove={onMove}
@@ -176,11 +232,9 @@ export function Drill() {
             <Feedback card={card} verdict={verdict} state={state} onNext={next} />
           ) : (
             <div className="prompt">
-              <h3>White to move</h3>
+              <h3>{colourName(sideToMove(card.fen))} to move</h3>
               <p>Play the move the repertoire plays.</p>
-              <p className="hint">
-                From {card.chapterIds.map(chapterTitle).join(' and ')}.
-              </p>
+              <p className="hint">{whereFrom(card, courses)}</p>
             </div>
           )}
         </div>
@@ -264,6 +318,18 @@ function nextDueLine(cards: Card[], state: ProgressState): string {
   return upcoming ? `The next card comes back ${describeInterval(upcoming)}.` : ''
 }
 
-function chapterTitle(id: string): string {
-  return chapters.find((chapter) => chapter.id === id)?.title ?? id
+/**
+ * Where the card came from, in one line: the course, then its chapters.
+ *
+ * The course is named on every card because the queue mixes them. Without it a
+ * position out of a Black repertoire arriving between two London ones is just
+ * confusing.
+ */
+function whereFrom(card: Card, courses: LoadedCourse[]): string {
+  const course = courses.find((entry) => entry.id === card.courseId)
+  const titles = card.chapterIds.map((id) => {
+    const chapter = course?.chapters.find((entry) => entry.id === id)
+    return chapter?.title ?? id
+  })
+  return `${course?.title ?? card.courseId}: ${titles.join(' and ')}.`
 }

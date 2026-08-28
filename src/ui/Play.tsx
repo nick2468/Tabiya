@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Board } from './Board'
 import { useProgress } from './progress-context'
-import { chapters, currentCourse } from '../content'
+
 import { StockfishEngine, strengthProfile, allProfiles, type Engine } from '../engine'
 import { sanForMove, squaresForSan } from '../model/grade'
 import { legalDests } from '../model/position'
-import { colourName, type Colour } from '../model/types'
+import { colourName, type Colour, type LoadedCourse } from '../model/types'
 import {
   GAME_LENGTHS,
   PlaySession,
@@ -30,12 +30,6 @@ import './play.css'
  * afterwards, in the report.
  */
 
-/**
- * The course a game is played out of. Phase 7 lets the trainee pick one; until
- * then there is one course and Play uses it.
- */
-const course = currentCourse
-
 /** A request to play from a position, sent over from Study. */
 export interface PlayRequest {
   fen: string
@@ -50,13 +44,16 @@ type Shape_ = 'any' | 'chapter' | 'here'
 const SCAN_MOVETIME = 150
 
 export function Play({
+  course,
   request,
   onRequestUsed,
 }: {
+  course: LoadedCourse
   request: PlayRequest | null
   onRequestUsed: () => void
 }) {
   const { state, recordPlay } = useProgress()
+  const chapters = course.chapters
   const [launch, setLaunch] = useState<Shape_>(request ? 'here' : 'any')
   const [chapterId, setChapterId] = useState(chapters[0]?.id ?? '')
   const [length, setLength] = useState<GameLength>('move15')
@@ -86,13 +83,12 @@ export function Play({
   }, [])
 
   const book = useMemo(() => {
-    const colour = course?.colour ?? 'white'
     if (launch === 'chapter') {
       const chapter = chapters.find((entry) => entry.id === chapterId)
-      return buildBook({ colour, chapters: chapter ? [chapter] : [] })
+      return buildBook({ colour: course.colour, chapters: chapter ? [chapter] : [] })
     }
-    return buildBook({ colour, chapters })
-  }, [launch, chapterId])
+    return buildBook({ colour: course.colour, chapters })
+  }, [chapters, course.colour, launch, chapterId])
 
   const refresh = useCallback(() => setTick((count) => count + 1), [])
 
@@ -175,7 +171,7 @@ export function Play({
       const built = buildReport(running.moves, book, evaluations, outcome)
       setReport(built)
       recordPlay({
-        courseId: course?.id ?? '',
+        courseId: course.id,
         chapterId: launch === 'chapter' ? chapterId : undefined,
         deviated: built.deviation.kind === 'student-left-book',
         deviationMove:
@@ -192,7 +188,7 @@ export function Play({
       setScanning(null)
       setThinking(false)
     }
-  }, [book, chapterId, engine, launch, level, recordPlay])
+  }, [book, chapterId, course.id, engine, launch, level, recordPlay])
 
   const reset = useCallback(() => {
     sessionRef.current = null
@@ -209,8 +205,8 @@ export function Play({
       <div className="play">
         <h2>Play</h2>
         <p className="play-intro">
-          A game against Stockfish, with your opponent steered into the lines you have
-          studied.
+          A game against Stockfish as {colourName(course.colour)}, with your opponent
+          steered into the lines you have studied.
           No evaluation while you play: everything the engine thinks comes out in the
           report afterwards.
         </p>
@@ -318,6 +314,7 @@ export function Play({
       <div className="play-body">
         <Board
           fen={session.fen}
+          orientation={session.studentColour}
           turnColor={session.sideToMove}
           movableColor={finished || thinking || report ? undefined : session.studentColour}
           dests={finished || thinking || report ? undefined : legalDests(session.fen)}

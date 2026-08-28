@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { loadCourse } from './course'
-import { COURSE_FORMAT_VERSION } from './types'
+import { loadCourse, loadedCourses, mergeCourses } from './course'
+import { COURSE_FORMAT_VERSION, type CourseEntry } from './types'
 import { BLACK_CHAPTER, blackCourse, manifest } from '../test/fixtures'
 
 /**
@@ -175,5 +175,69 @@ describe('a Black course', () => {
     )
     expect(result.ok).toBe(false)
     expect(result.errors[0].message).toBe('weight belongs on White moves only')
+  })
+})
+
+/**
+ * Merging the bundled courses with whatever was dropped into the AppData
+ * folder. Both rules here exist to stop a folder someone copied in from
+ * quietly taking over a course they have been drilling for months.
+ */
+describe('mergeCourses', () => {
+  const entry = (id: string, origin: 'bundled' | 'external'): CourseEntry => {
+    const result = loadCourse(manifest({ id, chapters: ['one.json'] }), files)
+    if (!result.ok) throw new Error(`fixture failed: ${result.errors[0]?.message}`)
+    return { source: id, origin, course: result.course, errors: [] }
+  }
+
+  const broken: CourseEntry = {
+    source: 'half-a-course',
+    origin: 'external',
+    course: null,
+    errors: [{ course: 'half-a-course', chapter: 'course.json', path: '', message: 'no id' }],
+  }
+
+  it('lists the bundled courses first, then the ones dropped in', () => {
+    const merged = mergeCourses(
+      [entry('london-white', 'bundled')],
+      [entry('caro-black', 'external')],
+    )
+    expect(merged.map((e) => e.course?.id)).toEqual(['london-white', 'caro-black'])
+    expect(loadedCourses(merged)).toHaveLength(2)
+  })
+
+  it('refuses a dropped-in course claiming a bundled id, and says why', () => {
+    const merged = mergeCourses(
+      [entry('london-white', 'bundled')],
+      [entry('london-white', 'external')],
+    )
+    expect(merged).toHaveLength(2)
+    // The bundled one is untouched, which is the point.
+    expect(merged[0].course?.id).toBe('london-white')
+    expect(merged[0].origin).toBe('bundled')
+    // The copy appears saying what is wrong, rather than vanishing.
+    expect(merged[1].course).toBeNull()
+    expect(merged[1].errors[0].message).toContain('built in')
+    expect(loadedCourses(merged)).toHaveLength(1)
+  })
+
+  it('refuses a second dropped-in course claiming the same id', () => {
+    // Progress keys hang off the id, so two courses with one id would share a
+    // drill schedule and each would answer for the other.
+    const merged = mergeCourses([], [entry('caro-black', 'external'), entry('caro-black', 'external')])
+    expect(merged[0].course?.id).toBe('caro-black')
+    expect(merged[1].course).toBeNull()
+    expect(merged[1].errors[0].message).toContain('already uses the course id')
+  })
+
+  it('keeps a folder that would not load, with its own errors', () => {
+    const merged = mergeCourses([entry('london-white', 'bundled')], [broken])
+    expect(merged).toHaveLength(2)
+    expect(merged[1]).toBe(broken)
+  })
+
+  it('does nothing at all when nothing was dropped in', () => {
+    const bundled = [entry('london-white', 'bundled')]
+    expect(mergeCourses(bundled, [])).toEqual(bundled)
   })
 })

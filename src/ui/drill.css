@@ -122,3 +122,43 @@ button:disabled {
   opacity: 0.5;
   cursor: default;
 }
+
+.course-filter {
+  margin: 16px 0;
+}
+
+.course-filter .hint {
+  margin: 0 0 6px;
+}
+
+.filter-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.filter {
+  background: var(--control);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 5px 10px;
+  color: var(--text-soft);
+  cursor: pointer;
+}
+
+.filter:hover {
+  background: var(--control-hover);
+  color: var(--text);
+}
+
+.filter.current {
+  border-color: var(--accent-edge);
+  background: var(--accent-wash);
+  color: var(--text);
+}
+
+.filter-count {
+  color: var(--text-faint);
+  margin-left: 4px;
+  font-size: 0.85rem;
+}

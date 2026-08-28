@@ -1,7 +1,7 @@
 [package]
 name = "london-trainer"
 version = "1.0.0"
-description = "A trainer for the London System"
+description = "A trainer for chess opening repertoires"
 authors = ["Nick"]
 edition = "2021"
 rust-version = "1.77.2"

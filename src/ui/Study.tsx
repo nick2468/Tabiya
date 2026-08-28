@@ -2,34 +2,43 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import Markdown from 'react-markdown'
 import { Board } from './Board'
 import { useProgress } from './progress-context'
-import { chapters } from '../content'
 import { splitIntro } from '../model/intro'
 import { chapterLines, fullMoveNumber, lineId, moveList } from '../model/lines'
 import { nodeShapes } from '../model/shapes'
-import type { LoadedChapter, LoadedNode } from '../model/types'
+import type { LoadedChapter, LoadedCourse, LoadedNode } from '../model/types'
 import type { PlayRequest } from './Play'
 import './study.css'
 
 /**
  * Study mode: walk a chapter line by line, with the note for every move.
  *
+ * Study happens inside one course, which the shell chose. The chapter list is
+ * that course's, in course order.
+ *
  * The current position is a chain of nodes from the tree root down. An empty
  * chain is the start of the chapter, at the end of its stem. Everything else -
  * the board, the note, the branch choices, the learnt toggle - is derived from
  * that chain, so there is only one piece of state to get right.
  */
-export function Study({ onPlayFrom }: { onPlayFrom: (request: PlayRequest) => void }) {
+export function Study({
+  course,
+  onPlayFrom,
+}: {
+  course: LoadedCourse
+  onPlayFrom: (request: PlayRequest) => void
+}) {
+  const chapters = course.chapters
   const [chapterId, setChapterId] = useState(chapters[0]?.id ?? '')
   const chapter = chapters.find((entry) => entry.id === chapterId) ?? chapters[0]
 
   if (!chapter) {
-    return <p className="empty">No chapters loaded. Check the diagnostics view.</p>
+    return <p className="empty">This course has no chapters. Check the diagnostics view.</p>
   }
 
   return (
     <div className="study">
       <nav className="chapter-list" aria-label="Chapters">
-        <h2>Chapters</h2>
+        <h2>{course.title}</h2>
         <ol>
           {chapters.map((entry, index) => (
             <li key={entry.id}>
@@ -46,15 +55,22 @@ export function Study({ onPlayFrom }: { onPlayFrom: (request: PlayRequest) => vo
           ))}
         </ol>
       </nav>
-      <ChapterStudy key={chapter.id} chapter={chapter} onPlayFrom={onPlayFrom} />
+      <ChapterStudy
+        key={chapter.id}
+        course={course}
+        chapter={chapter}
+        onPlayFrom={onPlayFrom}
+      />
     </div>
   )
 }
 
 function ChapterStudy({
+  course,
   chapter,
   onPlayFrom,
 }: {
+  course: LoadedCourse
   chapter: LoadedChapter
   onPlayFrom: (request: PlayRequest) => void
 }) {
@@ -106,7 +122,14 @@ function ChapterStudy({
 
       <div className="study-body">
         <div className="study-board">
-          <Board fen={fen} shapes={shapes} lastMove={lastMove(current)} size={384} />
+          {/* The board faces the side the course teaches. */}
+          <Board
+            fen={fen}
+            orientation={course.colour}
+            shapes={shapes}
+            lastMove={lastMove(current)}
+            size={384}
+          />
           <div className="study-controls">
             <button type="button" onClick={() => setChain([])} disabled={chain.length === 0}>
               Start

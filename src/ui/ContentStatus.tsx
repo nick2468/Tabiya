@@ -1,4 +1,4 @@
-import { courseEntries } from '../content'
+import { useCatalog } from './catalog-context'
 import { deepestFullMove, nodeCount, positionsWithMistakes } from '../model/loader'
 import type { ContentError } from '../model/types'
 
@@ -12,14 +12,18 @@ import type { ContentError } from '../model/types'
  * will not load appears, saying why, rather than disappearing.
  */
 export function ContentStatus() {
+  const { entries } = useCatalog()
+
   return (
     <section className="status">
       <h2>Content status</h2>
-      {courseEntries.map((entry) => (
+      {entries.map((entry) => (
         <div key={entry.source} className="status-course">
           <h3>
             {entry.course ? `${entry.course.title} (${entry.course.id})` : entry.source}
-            {entry.course ? <span className="quiet"> - {entry.course.colour}</span> : null}
+            <span className="quiet">
+              {entry.course ? ` - ${entry.course.colour}` : ''} - {entry.origin}
+            </span>
           </h3>
           {entry.course ? (
             <table>

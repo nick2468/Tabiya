@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { contentErrors, courseEntries, courses } from './index'
+import { bundledCourses as courses, bundledEntries as courseEntries, contentErrors } from './index'
 import { splitIntro } from '../model/intro'
 import { deepestFullMove, positionsWithMistakes, walkNodes } from '../model/loader'
 import { allCards } from '../model/cards'
