@@ -109,7 +109,7 @@ export class PlaySession {
     if (this.chess.isGameOver()) return 'finished'
     const cap = lengthCap(this.options.length)
     if (cap === null) return 'playing'
-    // The cap is reached once White has completed that move number.
+    // The cap is reached once both sides have completed that move number.
     return this.completedFullMoves() >= cap ? 'finished' : 'playing'
   }
 
