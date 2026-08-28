@@ -158,7 +158,7 @@ describe('the labels shown to both colours', () => {
   it('uses that label for games that were not aimed at a chapter', () => {
     const state = {
       ...emptyProgress(),
-      playGames: [{ courseId: 'c', deviated: false, moves: 12, level: 4 }],
+      playGames: [{ courseId: 'c', deviated: false, moves: 12, level: 4, at: NOW.toISOString() }],
     }
     expect(playStats([], state).byChapter.map((row) => row.title)).toContain(ANY_LINE)
   })
