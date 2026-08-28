@@ -528,9 +528,9 @@ Open items (phase 7):
    `WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS=--remote-debugging-port=9333`, so the whole
    page can be read and its buttons clicked over the DevTools protocol. Everything in
    items 1, 2 and 5 was verified that way against the real installed-shape binary. The
-   client is about eighty lines of Node with no dependencies and lives in this session's
-   scratchpad; if it is wanted again it belongs in the repo under `scripts/`. What still
-   cannot be driven is the BOARD, because that is the part that needs a trusted event.
+   client is about a hundred lines of Node with no dependencies and is now in the repo
+   as `scripts/packaged-eval.mjs`, because phase 8 will want it. What still cannot be
+   driven is the BOARD, because that is the part that needs a trusted event.
 5. **The drop-in proof passed in full, including both refusals.** Four folders were put
    in `%APPDATA%\com.nick.london-trainer\courses`: a copy of the London with a changed
    id, a course with an illegal move in it, and a copy claiming the bundled
