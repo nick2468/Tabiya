@@ -219,7 +219,7 @@ export function Play({
               checked={launch === 'any'}
               onChange={() => setLaunch('any')}
             />
-            Any defence
+            Any line
           </label>
           <label>
             <input
@@ -227,7 +227,7 @@ export function Play({
               checked={launch === 'chapter'}
               onChange={() => setLaunch('chapter')}
             />
-            This chapter's defence
+            This chapter's line
           </label>
           {launch === 'chapter' ? (
             <select value={chapterId} onChange={(event) => setChapterId(event.target.value)}>

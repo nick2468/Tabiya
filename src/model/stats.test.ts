@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { chapterProgress, conceptAccuracy, courseTotals } from './stats'
+import { ANY_LINE, chapterProgress, conceptAccuracy, courseTotals, playStats } from './stats'
 import { buildCards } from './cards'
 import { chapterLines } from './lines'
 import { loadFixture as load, manifest } from '../test/fixtures'
@@ -142,5 +142,24 @@ describe('courseTotals', () => {
       due: 2,
       fresh: 2,
     })
+  })
+})
+
+describe('the labels shown to both colours', () => {
+  // Phase 8 found this in the live app: the Play launcher and the play stats
+  // both said "defence", which is only true when the student is White. In a
+  // Black course the opponent is the side choosing an opening.
+  it('names an untargeted game without naming a colour or a defence', () => {
+    expect(ANY_LINE.toLowerCase()).not.toContain('defence')
+    expect(ANY_LINE.toLowerCase()).not.toContain('white')
+    expect(ANY_LINE.toLowerCase()).not.toContain('black')
+  })
+
+  it('uses that label for games that were not aimed at a chapter', () => {
+    const state = {
+      ...emptyProgress(),
+      playGames: [{ courseId: 'c', deviated: false, moves: 12, level: 4 }],
+    }
+    expect(playStats([], state).byChapter.map((row) => row.title)).toContain(ANY_LINE)
   })
 })

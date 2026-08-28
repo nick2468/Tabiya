@@ -12,6 +12,14 @@ import {
 import type { LoadedCourse } from './types'
 
 /**
+ * The label for games that were not aimed at a chapter.
+ *
+ * Not 'Any defence': in a Black course the opponent is the side choosing an
+ * opening, so the word only fits half the courses this app now carries.
+ */
+export const ANY_LINE = 'Any line'
+
+/**
  * The numbers behind the Progress view. Plain counts, no scores out of ten and
  * no badges: the point is to show what has been done and what is going badly,
  * so the trainee can decide what to do next.
@@ -144,7 +152,7 @@ export interface PlayStats {
   deviations: number
   /** From 0 to 1, or null when no games have been played. */
   deviationRate: number | null
-  /** The average full move number where White left, when it happened. */
+  /** The average full move number where the student left, when it happened. */
   averageDeviationMove: number | null
   /** Games against each chapter, in course order, plus the untargeted ones. */
   byChapter: { id: string; title: string; games: number; deviations: number }[]
@@ -172,7 +180,7 @@ export function playStats(courses: LoadedCourse[], state: ProgressState): PlaySt
   if (untargeted.length > 0) {
     byChapter.push({
       id: 'any',
-      title: 'Any defence',
+      title: ANY_LINE,
       games: untargeted.length,
       deviations: untargeted.filter((game) => game.deviated).length,
     })

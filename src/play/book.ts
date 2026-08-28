@@ -148,7 +148,7 @@ export function opponentBookReplies(book: Book, fen: string): BookReply[] {
  * Picks one of the opponent's replies, weighted by how often it turns up.
  *
  * The weights are what make a sparring game land in structures worth training:
- * the common defences come up often, the odd ones now and then.
+ * the common replies come up often, the odd ones now and then.
  *
  * @param random a number in [0, 1); injected so the tests are not a coin toss
  */
