@@ -1,8 +1,10 @@
 # London Trainer - build plan
 
-v1.0, 2026-08-27. Governed by SPEC.md; where they disagree, SPEC.md wins. Five phases.
-One builder session executes one phase, working in `C:\Users\nick2\Code\London` on
-`main`, no worktree. Read SPEC.md in full, then your phase here, before touching code.
+v2.0, 2026-08-28 (v1 phases 1-5 shipped 2026-08-27). Governed by SPEC.md; where they
+disagree, SPEC.md wins. One builder session executes one phase, working in
+`C:\Users\nick2\Code\London` on `main`, no worktree. Read SPEC.md in full - section 10
+for the v2 phases - then your phase here, before touching code. Every convention below
+applies to every phase, v2 included.
 
 **Checkbox rules.** The builder ticks task boxes as it completes them - Nick follows
 progress from this file while a phase runs. The "Review gate" box at the end of each
@@ -370,3 +372,98 @@ Open items (phase 5):
    review three times; treat any chess prose as unverified until a pass has been
    over it, including a reviewer's. Closed 2026-08-27: Nick ran the installer and
    played a move in the installed app. Nothing is owed; v1 is green in full.
+
+---
+
+## Phase 6 - v2: the course model
+
+Goal: everything below the UI understands courses, and the London becomes the first
+one with nothing visibly changed. SPEC.md section 10 governs phases 6 to 8.
+
+- [ ] 6.1 The manifest: `course.json` schema (id, title, colour, tagline, chapter
+  order, format version, tag extensions) documented in docs/content-schema.md;
+  `content/` moves to `courses/london-white/` with a manifest; the loader takes the
+  student colour and prefixes chapter and line ids with the course id; a manifest
+  with a newer format version is refused, the progress-file rule.
+- [ ] 6.2 The schema's colour rules generalised to student and opponent per SPEC.md
+  section 10; loader tests cover a Black-course fixture, including a stem that
+  starts with the opponent's move.
+- [ ] 6.3 Cards scoped by course: identity is course id plus position key; dedup and
+  the conflict rule stay within a course; tests prove two courses can teach
+  different moves from one position without corrupting each other.
+- [ ] 6.4 Book, session and report generalised: student and opponent maps,
+  playStudent and playOpponent, the engine able to open the game, the report
+  scanning the student's moves; tests with the engine mocked, both colours.
+- [ ] 6.5 Progress version 4: course-scoped line ids, card keys, play records and
+  per-course tag history; the migration assigns all existing data to london-white;
+  a migration test runs a real v3 shape through and loses nothing.
+- [ ] 6.6 The content suite runs per course: quality bar parameterised by student
+  colour, vocabulary from core plus manifest extensions.
+
+Acceptance: vitest green; the app runs with the London as the single course and the
+UI behaving exactly as v1; Nick's real progress file migrates in place (verified on
+a copy first); a hand-built Black fixture course loads, drills and plays in tests.
+
+- [ ] **Review gate 6 passed**
+
+Open items (phase 6): none yet.
+
+---
+
+## Phase 7 - v2: the catalog shell
+
+Goal: the app becomes Repertoire Trainer, with the catalog as its front door and
+drop-in courses working on the desktop.
+
+- [ ] 7.1 Catalog home: one tile per course (colour, title, tagline, learnt lines,
+  due count) plus overall numbers; entering a course scopes Study and Play to it; a
+  header switcher changes course without returning home.
+- [ ] 7.2 Drill and Progress move to the top level: one due queue across all courses
+  with each card naming its course and a per-course filter; Progress shows the
+  rollup and each course, weak areas per course.
+- [ ] 7.3 External courses: the desktop app scans the AppData `courses` folder at
+  startup (capability grant for that folder only), merges valid courses in, shows a
+  failing course in the catalog with its errors, and refuses to shadow a bundled
+  course id. The browser dev build sees the bundled set only.
+- [ ] 7.4 The rename: Repertoire Trainer as display name, window title and installer
+  name; the identifier stays `com.nick.london-trainer`; tagline updated.
+- [ ] 7.5 Drop-in proof: a copy of the London course with a changed id and title,
+  dropped into the AppData folder, appears in the catalog after restart and its
+  cards join the drill queue - which also exercises the cross-course queue with
+  real content before phase 8 exists.
+- [ ] 7.6 Docs sweep and installer rebuild; the installed app updates in place with
+  progress intact.
+
+Acceptance: catalog navigation end to end; the drop-in proof passes with no source
+change; one cross-course drill session driven live; vitest green; the installer
+ships as Repertoire Trainer and updates the existing installation.
+
+- [ ] **Review gate 7 passed**
+
+Open items (phase 7): none yet.
+
+---
+
+## Phase 8 - v2: the Caro-Kann course
+
+Goal: the second course, Black against 1.e4, proving the whole structure with real
+content.
+
+- [ ] 8.1 Course design: chapter list for a club-level Caro-Kann repertoire (the
+  main line, the Advance, the Exchange, the Panov, sidelines and move-order tricks,
+  a tactics-and-plans chapter), agreed with Nick before drafting.
+- [ ] 8.2 Draft the chapters to the SPEC.md section 3 bar, colour rules
+  student-relative: every move noted, plans on leaves, mistake minimums, weights
+  giving White's club-level choices, tags from core plus this course's extensions.
+- [ ] 8.3 The engine pass over every student move before the course is called done -
+  the standing rule; findings fixed or recorded.
+- [ ] 8.4 Ship it bundled; Play mode verified with the engine opening the game and
+  the book steering White's moves by weight; drill cards verified against the
+  London's for key collisions (there must be none, by course scoping).
+
+Acceptance: the course meets the quality bar with the engine pass recorded; Study,
+Drill and Play work end to end as Black; the London is untouched; vitest green.
+
+- [ ] **Review gate 8 passed**
+
+Open items (phase 8): none yet.

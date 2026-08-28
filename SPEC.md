@@ -1,9 +1,10 @@
 # London Trainer - specification
 
-v1.0, 2026-08-27. The authoritative build document. It supersedes BRIEF.md (kept for
-history) and folds in the review of four external briefs in `chips/` (ChatGPT, Copilot,
-Gemini, Grok) plus Nick's rulings, all dated 2026-08-27 in section 8. The build follows
-PLAN.md; where the two disagree, SPEC.md wins.
+v2.0, 2026-08-28 (v1.0 shipped 2026-08-27). The authoritative build document. It
+supersedes BRIEF.md (kept for history) and folds in the review of four external briefs
+in `chips/` plus Nick's rulings (section 8). The build follows PLAN.md; where the two
+disagree, SPEC.md wins. Sections 1-9 specify v1 and stay true within a single course;
+section 10 specifies the v2 course catalog and wins where they differ.
 
 ## 1. Purpose and teaching principle
 
@@ -258,3 +259,92 @@ chosen stack.
 6. Tests: vitest green over model, scheduler, play logic (engine mocked), and storage.
 7. Ships: a Tauri-built installer produces a working windowed app on a clean Windows 11
    machine, with progress stored in AppData and importable from a browser-phase export.
+
+## 10. v2: the course catalog
+
+Ruled by Nick 2026-08-28 after docs/multi-opening-concept.md and a Q and A session
+(every recommendation stood). This section governs the v2 work and wins over
+sections 1-9 where they differ; those sections stay true within a single course.
+
+### What a course is
+
+One repertoire for one colour, as a folder of content files: a `course.json`
+manifest plus chapter files in the existing format, which does not change. The
+manifest carries the course id (globally unique - progress keys hang off it),
+title, student colour, a one-line tagline, the chapter files in course order, a
+format version (refused if newer than the app knows, the progress-file rule), and
+any concept tags the course adds beyond the shared core set. The repo's content
+moves to `courses/london-white/`.
+
+The schema's colour rules generalise from White/Black to student/opponent, with
+the student's colour read from the manifest: notes stay required on every move;
+variant, tags and mistake entries sit on student moves; frequency weights sit on
+opponent moves. Chapter and line ids gain the course id as a prefix. In a Black
+course the opponent moves first, stems included, and Play mode's engine opens the
+game.
+
+### Course-scoped rules
+
+- **Cards** are identified by course id plus position. Dedup and the
+  different-moves-in-one-position conflict rule apply within a course; the same
+  position taught by two courses is two cards, accepted because it means something
+  different in each repertoire.
+- **Weak-area statistics are per course.** Recall of one course's lines says
+  nothing about another's, and pooling would let a strong course hide a weak one.
+  Progress shows the rollup and the per-course figures.
+- **Tag vocabulary**: a shared core (development, king-safety, bishop-placement,
+  e4-break, c4-break, kingside-attack, dark-squares, h-file, tactics, endgame)
+  plus per-course extensions declared in the manifest; the London's vs-something
+  tags become its extensions. Validator-checked as now.
+- **Progress** goes to version 4: line ids, card keys and play records carry
+  course ids. The migration assigns everything existing to `london-white`, so
+  nothing Nick has done is lost.
+
+### Delivery: hybrid (ruled)
+
+Built-in courses stay bundled and behind the test suite. The desktop app also
+scans a `courses` folder under AppData at startup and merges external courses in,
+validated at load by the same collect-every-error discipline: a failing course
+appears in the catalog with its errors listed and loads nothing else, and an
+external course cannot shadow a bundled course id. The browser dev build sees the
+bundled set only. Adding an opening to the installed app means dropping a course
+folder in and restarting - no source change, no rebuild. Courses authored in this
+repo still pass the full quality bar (suite plus engine pass) before being handed
+over as files.
+
+### Navigation: catalog home (ruled)
+
+A courses screen is the front door: one tile per course with colour, title,
+progress and due counts, plus overall numbers. Study and Play open inside the
+selected course; a header switcher jumps between courses. Drill and Progress sit
+at the top level because they span courses: **the drill queue is one queue across
+all courses (ruled)**, due cards interleaved under the existing ordering rules,
+each card naming its course, with a per-course filter for deliberate practice.
+Progress shows the rollup and each course.
+
+### Name: Repertoire Trainer (ruled)
+
+Display name, window title and installer name change; the Tauri identifier stays
+`com.nick.london-trainer`, so the installed app updates in place and progress
+stays where it is. The identifier is invisible and not worth a migration.
+
+### The second course: the Caro-Kann (ruled)
+
+Black against 1.e4, the London's closest relative in spirit and the proof that the
+colour generalisation is real. Full section 3 quality bar, engine pass included,
+authored to the same club depth with weights giving White's club-level choices.
+
+### v2 acceptance
+
+1. The London course behaves exactly as v1 did, and Nick's real progress file
+   migrates in place with nothing lost.
+2. The catalog shows every course with progress and due counts; Study and Play
+   scope to a course; Drill is one cross-course queue with a per-course filter;
+   Progress shows rollup and per-course figures.
+3. A course folder dropped into the AppData courses folder appears in the catalog
+   after a restart with no source change; an invalid one lists its errors and
+   loads nothing else; a bundled id cannot be shadowed.
+4. The Caro-Kann course meets the quality bar, engine pass included, and plays end
+   to end with the engine opening the game.
+5. Tests green throughout; the installer ships as Repertoire Trainer and updates
+   the existing installation in place.
