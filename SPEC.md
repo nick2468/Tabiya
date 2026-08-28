@@ -219,6 +219,12 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   phones home. Windows SmartScreen will warn on first run, which is what an unsigned
   installer looks like. Signing needs a certificate and a decision about updates that
   a single-user app does not need yet.
+- **An NSIS hook that removes a previous install under a different product name**:
+  Tauri supports `installerHooks`, so the rename could uninstall "London Trainer"
+  on the way in. Left undone deliberately at phase 7: it is a one-off saving of one
+  manual uninstall, it cannot be tested from a headless session, and an installer
+  hook that deletes the wrong folder is a worse outcome than an extra entry in Apps
+  and Features.
 - **Classical move order content** (2.Nf3 first): schema-ready; author when wanted.
 
 ## 7. Risks
@@ -326,8 +332,19 @@ Progress shows the rollup and each course.
 ### Name: Repertoire Trainer (ruled)
 
 Display name, window title and installer name change; the Tauri identifier stays
-`com.nick.london-trainer`, so the installed app updates in place and progress
-stays where it is. The identifier is invisible and not worth a migration.
+`com.nick.london-trainer`, so progress stays exactly where it is. The identifier
+is invisible and not worth a migration.
+
+**Corrected at phase 7, against the machine.** The rest of that ruling assumed
+the identifier also makes the installer update in place. It does not. Tauri's
+NSIS installer keys its uninstall entry and its install folder on the PRODUCT
+name, verified in the registry: the v1 install sits under
+`HKCU\...\Uninstall\London Trainer` at `C:\Apps\London Trainer`, and there is
+no key anywhere under the identifier. So the renamed installer registers a
+second, separate application. Nothing is lost - progress lives in the
+identifier's AppData folder and neither installer touches it - but Nick
+uninstalls "London Trainer" once, by hand, or keeps two entries in Apps and
+Features. The ruling stands; only the reasoning behind one clause was wrong.
 
 ### The second course: the Caro-Kann (ruled)
 
@@ -347,5 +364,6 @@ authored to the same club depth with weights giving White's club-level choices.
    loads nothing else; a bundled id cannot be shadowed.
 4. The Caro-Kann course meets the quality bar, engine pass included, and plays end
    to end with the engine opening the game.
-5. Tests green throughout; the installer ships as Repertoire Trainer and updates
-   the existing installation in place.
+5. Tests green throughout; the installer ships as Repertoire Trainer, and
+   progress survives the change of name. The old "London Trainer" entry is
+   uninstalled once by hand: see the correction above.

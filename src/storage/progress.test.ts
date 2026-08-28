@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 import {
   LEGACY_COURSE_ID,
   LocalStorageProgressStore,
@@ -216,13 +216,13 @@ describe('LocalStorageProgressStore', () => {
 
   it('starts empty when nothing has been saved', async () => {
     const store = new LocalStorageProgressStore(storage)
-    expect(await store.load()).toEqual(emptyProgress())
+    expect(await store.load()).toEqual({ state: emptyProgress() })
   })
 
   it('saves and reads back', async () => {
     const store = new LocalStorageProgressStore(storage)
     await store.save({ ...emptyProgress(), learntLines: ['ch1:d4 d5 Bf4'] })
-    expect((await store.load()).learntLines).toEqual(['ch1:d4 d5 Bf4'])
+    expect((await store.load()).state.learntLines).toEqual(['ch1:d4 d5 Bf4'])
   })
 
   it('survives a restart, which is a new store over the same storage', async () => {
@@ -231,16 +231,33 @@ describe('LocalStorageProgressStore', () => {
       learntLines: ['ch2:d4 d5 Bf4 c5 e3'],
     })
     const afterRestart = await new LocalStorageProgressStore(storage).load()
-    expect(afterRestart.learntLines).toEqual(['ch2:d4 d5 Bf4 c5 e3'])
+    expect(afterRestart.state.learntLines).toEqual(['ch2:d4 d5 Bf4 c5 e3'])
   })
 
-  it('starts fresh and warns when the saved entry is corrupt', async () => {
+  it('starts fresh and SAYS SO when the saved entry is corrupt', async () => {
+    // The failure is the important half. Without it the caller writes the
+    // blank state straight back over the file it could not read, which is how
+    // one bad read used to cost the trainee everything.
     storage.setItem('london-trainer.progress', '{ half a file')
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
-    const state = await new LocalStorageProgressStore(storage).load()
-    expect(state).toEqual(emptyProgress())
-    expect(warn).toHaveBeenCalled()
-    warn.mockRestore()
+    const loaded = await new LocalStorageProgressStore(storage).load()
+    expect(loaded.state).toEqual(emptyProgress())
+    expect(loaded.failure).toContain('not valid JSON')
+  })
+
+  it('says nothing failed when there is simply nothing saved yet', async () => {
+    // A new trainee is not a failure, and saving over nothing loses nothing.
+    expect((await new LocalStorageProgressStore(storage).load()).failure).toBeUndefined()
+  })
+
+  it('reports a storage that refuses to be read at all', async () => {
+    const refuses = {
+      ...fakeStorage(),
+      getItem: () => {
+        throw new Error('storage is disabled in this browser')
+      },
+    } as Storage
+    const loaded = await new LocalStorageProgressStore(refuses).load()
+    expect(loaded.failure).toContain('storage is disabled')
   })
 
   it('round-trips through export and import', async () => {
@@ -251,14 +268,14 @@ describe('LocalStorageProgressStore', () => {
     const elsewhere = new LocalStorageProgressStore(fakeStorage())
     const imported = await elsewhere.importJson(exported)
     expect(imported.learntLines).toEqual(['ch0:d4', 'ch1:d4 d5'])
-    expect((await elsewhere.load()).learntLines).toEqual(['ch0:d4', 'ch1:d4 d5'])
+    expect((await elsewhere.load()).state.learntLines).toEqual(['ch0:d4', 'ch1:d4 d5'])
   })
 
   it('refuses to import rubbish and leaves the saved state alone', async () => {
     const store = new LocalStorageProgressStore(storage)
     await store.save({ ...emptyProgress(), learntLines: ['keep me'] })
     await expect(store.importJson('not json at all')).rejects.toThrow(/not valid JSON/)
-    expect((await store.load()).learntLines).toEqual(['keep me'])
+    expect((await store.load()).state.learntLines).toEqual(['keep me'])
   })
 })
 
@@ -341,7 +358,7 @@ describe('recording answers', () => {
     const elsewhere = new LocalStorageProgressStore(fakeStorage())
     const imported = await elsewhere.importJson(exported)
     expect(imported).toEqual(state)
-    expect(await elsewhere.load()).toEqual(state)
+    expect((await elsewhere.load()).state).toEqual(state)
   })
 })
 

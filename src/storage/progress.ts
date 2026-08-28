@@ -86,9 +86,27 @@ export function emptyProgress(): ProgressState {
   return { version: PROGRESS_VERSION, learntLines: [], cards: {}, tagHistory: {}, playGames: [] }
 }
 
+/**
+ * What a read produced.
+ *
+ * The `failure` is the important half. A store that cannot read its own file
+ * used to hand back a blank state, and the app would then save that blank
+ * state straight over the file it had failed to read - so one bad read cost
+ * the trainee everything. Now a failed read says so, and the caller must not
+ * write until it is resolved.
+ *
+ * A file that simply does not exist yet is NOT a failure. That is a new
+ * trainee, and saving over nothing loses nothing.
+ */
+export interface LoadedProgress {
+  state: ProgressState
+  /** Why the saved progress could not be read, when it could not. */
+  failure?: string
+}
+
 export interface ProgressStore {
   /** Reads the saved state, or a fresh one when nothing is saved yet. */
-  load(): Promise<ProgressState>
+  load(): Promise<LoadedProgress>
   save(state: ProgressState): Promise<void>
   /** The whole state as JSON text, for the trainee to keep somewhere safe. */
   exportJson(): Promise<string>
@@ -239,14 +257,19 @@ export class LocalStorageProgressStore implements ProgressStore {
     this.key = key
   }
 
-  async load(): Promise<ProgressState> {
-    const text = this.storage.getItem(this.key)
-    if (text === null) return emptyProgress()
+  async load(): Promise<LoadedProgress> {
+    let text: string | null
     try {
-      return parseProgressJson(text)
+      text = this.storage.getItem(this.key)
     } catch (error) {
-      console.warn('Saved progress could not be read, starting fresh:', error)
-      return emptyProgress()
+      return { state: emptyProgress(), failure: describe(error) }
+    }
+    // Nothing saved yet is not a failure: it is a new trainee.
+    if (text === null) return { state: emptyProgress() }
+    try {
+      return { state: parseProgressJson(text) }
+    } catch (error) {
+      return { state: emptyProgress(), failure: describe(error) }
     }
   }
 
@@ -255,8 +278,7 @@ export class LocalStorageProgressStore implements ProgressStore {
   }
 
   async exportJson(): Promise<string> {
-    const state = await this.load()
-    return JSON.stringify(state, null, 2)
+    return JSON.stringify((await this.load()).state, null, 2)
   }
 
   async importJson(text: string): Promise<ProgressState> {
@@ -264,6 +286,11 @@ export class LocalStorageProgressStore implements ProgressStore {
     await this.save(state)
     return state
   }
+}
+
+/** An error as a sentence, for showing the trainee. */
+export function describe(error: unknown): string {
+  return error instanceof Error ? error.message : String(error)
 }
 
 /** True when the line is marked learnt. */

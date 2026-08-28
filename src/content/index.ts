@@ -1,5 +1,5 @@
 import { loadCourse } from '../model/course'
-import type { ContentError, CourseEntry, LoadedChapter, LoadedCourse } from '../model/types'
+import type { ContentError, CourseEntry, LoadedCourse } from '../model/types'
 
 /**
  * The bundled courses, read from courses/ at build time.
@@ -58,5 +58,3 @@ export const bundledCourses: LoadedCourse[] = bundledEntries
 /** Every content error across every bundled course. */
 export const contentErrors: ContentError[] = bundledEntries.flatMap((entry) => entry.errors)
 
-/** Every chapter of every bundled course, in course order. For the test suite. */
-export const bundledChapters: LoadedChapter[] = bundledCourses.flatMap((c) => c.chapters)

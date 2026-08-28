@@ -468,23 +468,23 @@ Open items (phase 6):
 Goal: the app becomes Repertoire Trainer, with the catalog as its front door and
 drop-in courses working on the desktop.
 
-- [ ] 7.1 Catalog home: one tile per course (colour, title, tagline, learnt lines,
+- [x] 7.1 Catalog home: one tile per course (colour, title, tagline, learnt lines,
   due count) plus overall numbers; entering a course scopes Study and Play to it; a
   header switcher changes course without returning home.
-- [ ] 7.2 Drill and Progress move to the top level: one due queue across all courses
+- [x] 7.2 Drill and Progress move to the top level: one due queue across all courses
   with each card naming its course and a per-course filter; Progress shows the
   rollup and each course, weak areas per course.
-- [ ] 7.3 External courses: the desktop app scans the AppData `courses` folder at
+- [x] 7.3 External courses: the desktop app scans the AppData `courses` folder at
   startup (capability grant for that folder only), merges valid courses in, shows a
   failing course in the catalog with its errors, and refuses to shadow a bundled
   course id. The browser dev build sees the bundled set only.
-- [ ] 7.4 The rename: Repertoire Trainer as display name, window title and installer
+- [x] 7.4 The rename: Repertoire Trainer as display name, window title and installer
   name; the identifier stays `com.nick.london-trainer`; tagline updated.
-- [ ] 7.5 Drop-in proof: a copy of the London course with a changed id and title,
+- [x] 7.5 Drop-in proof: a copy of the London course with a changed id and title,
   dropped into the AppData folder, appears in the catalog after restart and its
   cards join the drill queue - which also exercises the cross-course queue with
   real content before phase 8 exists.
-- [ ] 7.6 Docs sweep and installer rebuild; the installed app updates in place with
+- [x] 7.6 Docs sweep and installer rebuild; the installed app updates in place with
   progress intact.
 
 Acceptance: catalog navigation end to end; the drop-in proof passes with no source
@@ -493,7 +493,75 @@ ships as Repertoire Trainer and updates the existing installation.
 
 - [ ] **Review gate 7 passed**
 
-Open items (phase 7): none yet.
+Open items (phase 7):
+
+1. **This phase destroyed Nick's saved progress, and then found out why.** Running the
+   packaged app read his progress file, failed, and saved a blank state straight over
+   it. Both learnt lines were gone. They are back: the file is version 4 with both
+   lines, verified in the running app as "2 of 41 lines learnt, 17 due now". Nothing
+   else was in the file - no card schedules, no tag history, no games - so nothing else
+   could be lost. It was restored from a copy this session had taken earlier, which is
+   luck rather than design.
+2. **The cause was a capability grant that never worked, and a store that turned that
+   into data loss.** `fs:allow-exists` was granted `$APPDATA/*`, and that pattern does
+   not match `progress.json`: `exists` on the file came back "forbidden path" while
+   `read_text_file` on the same path succeeded, because reading was separately covered
+   by `$HOME/**`. So `load()` threw at its first line, caught it, returned a blank
+   state, and the provider's save effect wrote that blank state to disk. Two fixes,
+   because either alone would have left the other. The capability now names literal
+   paths (`$APPDATA/progress.json`, `$APPDATA/courses`, `$APPDATA/courses/**`) rather
+   than trusting a wildcard, and it is tighter than before as a result. And `load()`
+   now REPORTS a failure instead of quietly returning a blank state: the app refuses to
+   save anything while a read has failed, and says so across the top of the window.
+   Proven on the machine: a deliberately corrupted progress.json produced the notice
+   and was still byte-for-byte corrupt afterwards, where the old code would have
+   replaced it.
+3. **This should have been caught at phase 5, and the lesson is about the verification,
+   not the code.** Phase 5 recorded the migration as proven in the shipped app. The
+   grant it was proven under is the one that fails here, so either that check was
+   thinner than its record says or something moved since. Either way: the packaged app
+   is a different program from the dev build, and a store that fails soft will pass any
+   test that only asks "did the app open".
+4. **The packaged window can be driven after all, which is new.** Phase 5 recorded that
+   the shipped app cannot be checked because it ignores synthetic events. It still does,
+   but the window is a WebView2 and honours
+   `WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS=--remote-debugging-port=9333`, so the whole
+   page can be read and its buttons clicked over the DevTools protocol. Everything in
+   items 1, 2 and 5 was verified that way against the real installed-shape binary. The
+   client is about eighty lines of Node with no dependencies and lives in this session's
+   scratchpad; if it is wanted again it belongs in the repo under `scripts/`. What still
+   cannot be driven is the BOARD, because that is the part that needs a trusted event.
+5. **The drop-in proof passed in full, including both refusals.** Four folders were put
+   in `%APPDATA%\com.nick.london-trainer\courses`: a copy of the London with a changed
+   id, a course with an illegal move in it, and a copy claiming the bundled
+   `london-white` id. The catalog showed the copy with its own progress ("1 of 41 lines
+   learnt, 8 due"), the broken one saying `"Bf7" is not legal in this position at
+   d4 d5 Bf7` and loading nothing else, and the shadow attempt refused by name. The
+   drill queue mixed both working courses - 17 cards, 9 from one and 8 from the other -
+   and the filter narrowed it to 8. Progress showed the rollup and a block each. All
+   four folders have been removed; the app is back to the one bundled course.
+6. **The rename does not update the existing installation, and SPEC.md has been
+   corrected.** Tauri's NSIS keys its uninstall entry on the product name, not the
+   identifier: the v1 install is at `HKCU\...\Uninstall\London Trainer` and
+   `C:\Apps\London Trainer`, with no key under `com.nick.london-trainer` anywhere. So
+   the new installer registers a second application. Progress is untouched either way,
+   because that lives under the identifier. Nick uninstalls "London Trainer" once by
+   hand. An NSIS hook could do it for him and is in the register with the reason it was
+   not taken.
+7. **Nobody has clicked through the installer, again.** It builds
+   (`Repertoire Trainer_1.0.0_x64-setup.exe`, 6.9 MB) and the binary it installs has
+   been run and driven hard. The installer's own UI needs a human, exactly as at phase
+   5. The stale `London Trainer_1.0.0_x64-setup.exe` beside it has been deleted so there
+   is one artefact.
+8. **The catalog is the front door every time the app opens, which is one extra click
+   with one course.** That is the ruling and it is right once there are two, but worth
+   a look in use. Remembering the last course opened would remove it and is a small
+   change; not made, because nobody has asked for it and a front door that sometimes
+   is not the front door is worse than a click.
+9. **The external scan happens once, at startup.** A course dropped in while the app is
+   open appears after a restart. Deliberate: a course discovered halfway through a drill
+   session would change the queue under the trainee's hands. The catalog says "restart
+   the app" on screen.
 
 ---
 

@@ -177,3 +177,7 @@ button:hover {
     overflow-y: auto;
   }
 }
+
+.read-failure {
+  margin: 12px 0;
+}

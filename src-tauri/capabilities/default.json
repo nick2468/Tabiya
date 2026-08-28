@@ -13,10 +13,7 @@
       "identifier": "fs:allow-read-text-file",
       "allow": [
         {
-          "path": "$APPDATA"
-        },
-        {
-          "path": "$APPDATA/*"
+          "path": "$APPDATA/progress.json"
         },
         {
           "path": "$APPDATA/courses/**"
@@ -30,10 +27,7 @@
       "identifier": "fs:allow-write-text-file",
       "allow": [
         {
-          "path": "$APPDATA"
-        },
-        {
-          "path": "$APPDATA/*"
+          "path": "$APPDATA/progress.json"
         },
         {
           "path": "$HOME/**"
@@ -47,7 +41,13 @@
           "path": "$APPDATA"
         },
         {
-          "path": "$APPDATA/*"
+          "path": "$APPDATA/progress.json"
+        },
+        {
+          "path": "$APPDATA/courses"
+        },
+        {
+          "path": "$APPDATA/courses/*"
         },
         {
           "path": "$APPDATA/courses/**"
@@ -59,9 +59,6 @@
       "allow": [
         {
           "path": "$APPDATA"
-        },
-        {
-          "path": "$APPDATA/*"
         }
       ]
     },

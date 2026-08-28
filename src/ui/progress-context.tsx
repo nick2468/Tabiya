@@ -24,11 +24,22 @@ import type { Card } from '../model/cards'
  * Loading is async, so the value starts empty with a `loaded` flag. Nothing is
  * written back before the first read finishes: saving too early would overwrite
  * real progress with the blank state the app started with.
+ *
+ * The same reasoning covers a read that FAILS rather than one that has not
+ * finished. A store that could not read its own file hands back a blank state
+ * and says why; writing that blank state back would destroy exactly the file
+ * it could not read. So a failed read stops saving altogether until the
+ * trainee replaces the state themselves, and the shell says so on screen.
  */
 
 export interface Progress {
   state: ProgressState
   loaded: boolean
+  /**
+   * Why the saved progress could not be read, when it could not. While this is
+   * set nothing is written, so whatever is on disk stays there.
+   */
+  failure: string | null
   learnt: (lineId: string) => boolean
   toggle: (lineId: string) => void
   /**
@@ -50,12 +61,14 @@ const ProgressContext = createContext<Progress | null>(null)
 export function useProgressStateFor(store: ProgressStore): Progress {
   const [state, setState] = useState<ProgressState>(emptyProgress)
   const [loaded, setLoaded] = useState(false)
+  const [failure, setFailure] = useState<string | null>(null)
 
   useEffect(() => {
     let cancelled = false
     void store.load().then((saved) => {
       if (cancelled) return
-      setState(saved)
+      setState(saved.state)
+      setFailure(saved.failure ?? null)
       setLoaded(true)
     })
     return () => {
@@ -64,8 +77,9 @@ export function useProgressStateFor(store: ProgressStore): Progress {
   }, [store])
 
   useEffect(() => {
-    if (loaded) void store.save(state)
-  }, [loaded, state, store])
+    // Never write over a file that could not be read.
+    if (loaded && !failure) void store.save(state)
+  }, [failure, loaded, state, store])
 
   const toggle = useCallback((lineId: string) => {
     setState((previous) => toggleLearnt(previous, lineId))
@@ -104,11 +118,14 @@ export function useProgressStateFor(store: ProgressStore): Progress {
     async (text: string) => {
       const imported = await store.importJson(text)
       setState(imported)
+      // An import is the trainee deliberately replacing the state, which is
+      // also how they get out of a failed read.
+      setFailure(null)
     },
     [store],
   )
 
-  return { state, loaded, learnt, toggle, answer, recordPlay, exportJson, importJson }
+  return { state, loaded, failure, learnt, toggle, answer, recordPlay, exportJson, importJson }
 }
 
 export function ProgressProvider({

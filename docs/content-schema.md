@@ -1,6 +1,6 @@
 # Content schema
 
-v2.0, 2026-08-28 (v1.0 written in phase 1 from SPEC.md section 4). SPEC.md rules
+v2.1, 2026-08-28 (v1.0 written in phase 1 from SPEC.md section 4). SPEC.md rules
 where the two disagree; section 10 governs the course model. Refinements land here
 with one line of why in the change log at the bottom.
 
@@ -16,6 +16,30 @@ like `Bf4`. **FEN** is the one-line text code for a whole position.
 Two more, which every rule below is written in. The **student** is the side the course
 teaches; the **opponent** is the other one. A course names the student's colour in its
 manifest, so a Black course is the same schema read from the other side.
+
+## Where a course lives
+
+Two places, and the format is the same in both.
+
+**Bundled**, in `courses/` in this repo. These ship inside the app, are held to the
+quality bar by the test suite, and are the ones a build can be trusted to contain.
+
+**Dropped in**, in a `courses` folder under the installed app's own AppData directory
+(`%APPDATA%\com.nick.london-trainer\courses\<your-course>\`). The desktop app scans
+it once at startup and merges what it finds into the catalog. Adding an opening to an
+installed app is putting a folder there and restarting: no source change, no rebuild,
+no installer. The browser build has no such folder and shows the bundled set alone.
+
+Two rules keep a dropped-in folder from taking over something the trainee has been
+drilling for months. A dropped-in course cannot claim a bundled course's id, and two
+dropped-in folders cannot claim one id between them. In either case the second one
+appears in the catalog saying what is wrong rather than replacing anything or
+vanishing. The reason is the progress file: every card key and line id carries the
+course id, so two courses sharing one id would share one drill schedule and each
+would answer for the other.
+
+A folder that will not load costs the trainee that folder and nothing else. Its
+errors are listed on its own tile in the catalog.
 
 ## Course file
 
@@ -216,4 +240,9 @@ recognise were meant to mean.
   progress migration is written against it.
 - 2026-08-28: a file in a course folder that the manifest does not list is an error.
   It is content nobody will ever see, and silence about it is how a chapter goes
-  missing for a month.
+  missing for a month. Non-JSON files are ignored rather than refused, so a dropped-in
+  folder can carry a readme of its own.
+- 2026-08-28: courses can also be dropped into a folder under AppData, and the
+  "Where a course lives" section above says on what terms. The shadowing rules are
+  not tidiness: a course id is written into every progress key hanging off it, so
+  two courses sharing an id would share a drill schedule.

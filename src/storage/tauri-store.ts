@@ -1,6 +1,8 @@
 import {
+  describe,
   emptyProgress,
   parseProgressJson,
+  type LoadedProgress,
   type ProgressState,
   type ProgressStore,
 } from './progress'
@@ -65,16 +67,18 @@ export class TauriProgressStore implements ProgressStore {
     return this.resolved
   }
 
-  async load(): Promise<ProgressState> {
+  async load(): Promise<LoadedProgress> {
     try {
       const [fs, { file }] = await Promise.all([this.fs(), this.paths()])
-      if (!(await fs.exists(file))) return emptyProgress()
-      return parseProgressJson(await fs.readTextFile(file))
+      // No file yet is a new trainee, not a failure.
+      if (!(await fs.exists(file))) return { state: emptyProgress() }
+      return { state: parseProgressJson(await fs.readTextFile(file)) }
     } catch (error) {
-      // Same rule as the browser store: a file that cannot be read must not
-      // stop the app from opening. It is not overwritten until a real save.
-      console.warn('Saved progress could not be read, starting fresh:', error)
-      return emptyProgress()
+      // A file that cannot be read must not stop the app from opening, and
+      // must not be written over either. The caller stops saving until the
+      // trainee resolves it.
+      console.warn('Saved progress could not be read:', error)
+      return { state: emptyProgress(), failure: describe(error) }
     }
   }
 
@@ -86,7 +90,7 @@ export class TauriProgressStore implements ProgressStore {
   }
 
   async exportJson(): Promise<string> {
-    return JSON.stringify(await this.load(), null, 2)
+    return JSON.stringify((await this.load()).state, null, 2)
   }
 
   async importJson(text: string): Promise<ProgressState> {
