@@ -134,7 +134,7 @@
                                                                                             {
                                                                                               "san": "Qh5",
                                                                                               "grade": "mistake",
-                                                                                              "note": "The queen arrives alone, and one attacker is never enough. Black defends with ...g6 or ...Nxe5 and the queen has to go home."
+                                                                                              "note": "It loses the queen: the knight on f6 plays ...Nxh5 and nothing recaptures. The rook goes to f3 first for exactly this reason, so that the queen arrives with company rather than alone."
                                                                                             },
                                                                                             {
                                                                                               "san": "a4",
