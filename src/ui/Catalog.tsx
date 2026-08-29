@@ -1,6 +1,9 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useCatalog } from './catalog-context'
 import { useProgress } from './progress-context'
+import { ImportCourse } from './ImportCourse'
+import { saveBundle } from './bundles'
+import { courseToPgn } from '../model/bundle'
 import { buildCardsAcross } from '../model/cards'
 import { courseTotals } from '../model/stats'
 import { dueCount } from '../model/queue'
@@ -69,6 +72,7 @@ export function Catalog({ onOpen }: { onOpen: (courseId: string) => void }) {
       </ul>
 
       <DropInNote folder={folder} scanned={scanned} />
+      <ImportCourse />
     </div>
   )
 }
@@ -107,7 +111,44 @@ function CourseTile({
           </span>
         ) : null}
       </button>
+      <ExportCourse course={course} />
     </li>
+  )
+}
+
+/**
+ * Writing a course out as a bundle.
+ *
+ * Any course, including the ones that ship with the app: exporting the London
+ * and opening it in a chess GUI is a fair thing for a trainee to want, and it
+ * is also how somebody starts a course of their own without facing an empty
+ * file.
+ */
+function ExportCourse({ course }: { course: LoadedCourse }) {
+  const [said, setSaid] = useState<string | null>(null)
+
+  const run = async () => {
+    setSaid(null)
+    const written = courseToPgn(course)
+    if (!written.ok) {
+      setSaid(`This course cannot be written out: ${written.errors[0].message}`)
+      return
+    }
+    try {
+      const where = await saveBundle(course.id, written.text)
+      if (where) setSaid(`Written to ${where}.`)
+    } catch (error) {
+      setSaid(`Nothing was written: ${error instanceof Error ? error.message : String(error)}`)
+    }
+  }
+
+  return (
+    <div className="tile-actions">
+      <button type="button" className="tile-export" onClick={() => void run()}>
+        Export as a file
+      </button>
+      {said ? <p className="tile-said">{said}</p> : null}
+    </div>
   )
 }
 

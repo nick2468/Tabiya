@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import Markdown from 'react-markdown'
+import { Prose } from './Prose'
 import { Board } from './Board'
 import { useProgress } from './progress-context'
 import { splitIntro } from '../model/intro'
@@ -117,7 +117,7 @@ function ChapterStudy({
       </header>
 
       <div className="intro-lead">
-        <Markdown>{intro.lead}</Markdown>
+        <Prose>{intro.lead}</Prose>
       </div>
 
       <div className="study-body">
@@ -214,7 +214,7 @@ function ChapterStudy({
       <div className="chapter-detail">
         {intro.rest ? (
           <div className="intro-detail">
-            <Markdown>{intro.rest}</Markdown>
+            <Prose>{intro.rest}</Prose>
           </div>
         ) : null}
 

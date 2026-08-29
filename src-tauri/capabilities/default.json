@@ -1,7 +1,7 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "What the Repertoire Trainer window is allowed to do: keep its own progress file, read courses dropped into its own courses folder, and let the trainee pick a file to import or a place to export.",
+  "description": "What the Repertoire Trainer window is allowed to do: keep its own progress file, read courses dropped into its own courses folder, install a course the trainee imports into that same folder, and let them pick a file to import or a place to export.",
   "windows": [
     "main"
   ],
@@ -31,6 +31,15 @@
         },
         {
           "path": "$HOME/**"
+        },
+        {
+          "path": "$APPDATA/courses/*"
+        },
+        {
+          "path": "$APPDATA/courses/*/*"
+        },
+        {
+          "path": "$APPDATA/courses/**"
         }
       ]
     },
@@ -59,6 +68,12 @@
       "allow": [
         {
           "path": "$APPDATA"
+        },
+        {
+          "path": "$APPDATA/courses"
+        },
+        {
+          "path": "$APPDATA/courses/*"
         }
       ]
     },
@@ -70,6 +85,20 @@
         },
         {
           "path": "$APPDATA/courses/*"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-remove",
+      "allow": [
+        {
+          "path": "$APPDATA/courses/*"
+        },
+        {
+          "path": "$APPDATA/courses/*/*"
+        },
+        {
+          "path": "$APPDATA/courses/**"
         }
       ]
     }

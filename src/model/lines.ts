@@ -1,4 +1,5 @@
-import type { LoadedChapter, LoadedNode } from './types'
+import { courseOfChapterId } from './ids'
+import type { LoadedChapter, LoadedCourse, LoadedNode } from './types'
 
 /**
  * Lines: one root-to-leaf path through a chapter tree.
@@ -80,6 +81,31 @@ export function fullMoveNumber(node: LoadedNode): number {
 /** Every line of every chapter, in course order. */
 export function allLines(chapters: LoadedChapter[]): Line[] {
   return chapters.flatMap(chapterLines)
+}
+
+/** Every line id in a course, which is what the progress file remembers. */
+export function courseLineIds(course: LoadedCourse): Set<string> {
+  return new Set(allLines(course.chapters).map((line) => line.id))
+}
+
+/**
+ * How many of the trainee's learnt lines a course still has.
+ *
+ * A line id carries its own moves, so replacing a course with a different
+ * version of itself can orphan what the trainee has learnt: the id stays in
+ * the progress file, resolves to nothing, and shows as neither learnt nor
+ * available. SPEC.md section 11 puts that count in front of them before
+ * anything is written, which is the check review gate 10 relied on, moved to
+ * where the person making the decision can see it.
+ */
+export function survivingLines(
+  course: LoadedCourse,
+  learnt: string[],
+): { kept: number; total: number; lost: string[] } {
+  const mine = learnt.filter((id) => courseOfChapterId(id) === course.id)
+  const ids = courseLineIds(course)
+  const lost = mine.filter((id) => !ids.has(id))
+  return { kept: mine.length - lost.length, total: mine.length, lost }
 }
 
 /**
