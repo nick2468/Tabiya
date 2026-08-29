@@ -771,7 +771,7 @@ The rulings, so the plan carries them and not only the chip:
 - [x] 9.8 ch6 typical tactics and plans, the exercises.
 - [x] 9.9 The engine pass over every student move, **run after the last content
   edit** (phase 8 open item 3): findings fixed or recorded with numbers.
-- [ ] 9.10 Ship it bundled: the course's own numeric block in the content suite,
+- [x] 9.10 Ship it bundled: the course's own numeric block in the content suite,
   card keys proved disjoint from both other courses, Play driven live with the
   engine opening the game, docs swept, installer rebuilt.
 
@@ -802,7 +802,7 @@ Open items (phase 9):
      break, so the course takes on c4 instead, which is what chapter 1 does anyway.
    - The Colle line allowed 5.dxc5, the engine's first choice and the move a Colle
      player rarely finds. It is now a branch of its own, answered by ...e5.
-   The final pass leaves three findings, all between 0.51 and 0.75 at 500 ms, all
+   The final pass leaves four findings, all between 0.55 and 0.65 at 500 ms, all
    re-checked at 2500 ms and all noise or judgement calls: see item 5.
 3. **The bigger finding is what the first pass cannot see, and it needed a second
    tool.** `scripts/engine-pass.mjs` checks the moves the course tells the trainee to
@@ -815,23 +815,25 @@ Open items (phase 9):
    evaluates every mistake entry against the repertoire move and reports where the
    grade and the engine disagree. It found eight, including ...Bf5 against the Colle
    and ...Bf5 against 4.Qc2, both graded "playable" and both simply hanging a bishop.
-   Both passes are now quiet.
+   The mistake pass reports nothing at all on the finished course, and the move pass
+   is down to the four judgement calls in item 5.
 4. **A line in the plan did not survive the engine.** Task 9.4 describes chapter 2 as
    "the quiet build-up (4.e3 and 4.Bf4), where the bishop comes out easily". Half of
    that is right. Against 4.e3 the bishop comes out for free; against 4.Bf4 it is the
    one line in the course where ...Bf5 is not the move. The chapter says so in its
    own intro rather than pretending otherwise, and the plan's one-line description is
    left as written, because it is a record of what was asked for.
-5. **Three findings kept, with their numbers.** In chapter 4's fianchetto line,
-   7...Be7 is 0.62 behind 7...dxc4 at 2500 ms and +0.41 in absolute terms, which is an
-   ordinary opening pull rather than a fault; taking is now recorded as a graded
-   alternative with the engine's preference stated, and the chapter keeps the complete
-   set-up that is easier to play. In chapter 5's Colle, 4...Nc6 reads as a loss only
-   because it allows 5.dxc5, which is now a branch of its own, so the number is the
-   pass reporting White's best reply rather than a fault in Black's move. And in the
-   anti-London line 10...Be7 measured 0.51 at 500 ms and 0.25 at 2500 ms, where the
-   engine's preference is 10...b5, which is the move the leaf's own plan already names.
-   All three were left as they are, deliberately.
+5. **Four findings kept, with their numbers.** Chapter 4's two fianchetto lines both
+   end on ...Be7, which the engine puts 0.62 and 0.44 behind its own choice at 2500 ms
+   and at +0.41 and +0.19 in absolute terms: an ordinary opening pull rather than a
+   fault, and in one of them the engine's preference is the waiting move ...h6, which
+   is not a lesson worth teaching a club player over finishing development. Taking on
+   c4 is recorded as a graded alternative in both, with the engine's preference stated.
+   In chapter 5's Colle, 4...Nc6 reads as a loss only because it allows 5.dxc5, which
+   is now a branch of its own, so the number is the pass reporting White's best reply
+   rather than a fault in Black's move. The anti-London line's 10...Be7 measured 0.51
+   at 500 ms and 0.25 at 2500 ms, where the engine prefers 10...b5, which is the move
+   the leaf's own plan already names. All were left as they are, deliberately.
 6. **A gap in the London course, found by writing the Slav.** Chapter 5 answers
    5.c3 Qb6 6.Qb3 with 6...c4, and the London course's chapter 2 covers only
    6...Qxb3. The chip put the other courses out of scope, so this went to the SPEC
@@ -867,7 +869,15 @@ Open items (phase 9):
    so in its own intro. The other two end on a decision, which is honest and is not
    what a chapter called "typical tactics" promises. The register item from phase 8
    stands.
-12. **A trap worth knowing for the next session on this machine.** `$TMPDIR` is empty
+12. **"Quiet" is not a stable answer at 500 ms, and the threshold is where it wobbles.**
+   The finished course was passed four times over identical content and reported two,
+   three, three and four findings. Every one of them came from the same small set
+   hovering around the 0.5 line, and the mistake pass did the same: one entry landed
+   at 0.62 on one run and outside the band on the next, and at 2500 ms it measured
+   1.06, which made the original grade right. So a report is a list of things to look
+   at, not a verdict, and the re-check at 2500 ms is the part that decides. Running
+   the pass twice and reading both is cheap; treating one clean run as proof is not.
+13. **A trap worth knowing for the next session on this machine.** `$TMPDIR` is empty
    in the Bash tool here, so `"$TMPDIR/scratch.py"` resolves to the filesystem root
    and writes into `C:\Apps\Git`. Six files went there before it was noticed, and
    they were moved out. That directory already holds a couple of dozen stray files
