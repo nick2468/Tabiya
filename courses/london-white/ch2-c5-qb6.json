@@ -232,7 +232,7 @@
                             {
                               "san": "dxc5",
                               "grade": "inaccuracy",
-                              "note": "It wins a pawn too and is much less clear. Taking on d5 keeps the centre and the pawn."
+                              "note": "It wins nothing: the queen on b6 takes straight back on c5. Nxd5 is the capture that actually wins a pawn, because nothing is guarding d5."
                             }
                           ]
                         }
