@@ -129,7 +129,7 @@
                                             {
                                               "san": "c4",
                                               "grade": "inaccuracy",
-                                              "note": "Too early. The d4 pawn loses its support and Black gets counterplay with ...cxd4."
+                                              "note": "Too early. It gives up the pawn triangle for an isolated queen's pawn after ...cxd4 exd4 and a later ...dxc4, which is the structure the London is built to avoid."
                                             }
                                           ],
                                           "shapes": [
@@ -489,8 +489,8 @@
                     },
                     {
                       "san": "Bg5",
-                      "grade": "inaccuracy",
-                      "note": "The bishop wanders. It has nothing to attack on g5 and can be hit by ...f6 or ...Be7."
+                      "grade": "mistake",
+                      "note": "It hangs the bishop. With the pawn on e6 the diagonal to g5 is open, so 4...Qxg5 simply takes it."
                     }
                   ],
                   "children": [

@@ -297,8 +297,8 @@
                                                                                   "mistakes": [
                                                                                     {
                                                                                       "san": "Bxe5",
-                                                                                      "grade": "inaccuracy",
-                                                                                      "note": "It trades your best piece and leaves the d4 pawn alone in the centre. The pawn recapture keeps the bishop and gains a move."
+                                                                                      "grade": "mistake",
+                                                                                      "note": "It trades your best piece and gives the whole advantage back: the pawn recapture is worth about three pawns more, because it keeps the bishop and gains a move."
                                                                                     },
                                                                                     {
                                                                                       "san": "f4",
@@ -401,13 +401,13 @@
                                             },
                                             {
                                               "san": "Qc1",
-                                              "grade": "inaccuracy",
-                                              "note": "Offering the trade lets Black off. The queen on b2 is the piece with no good squares, so keep it there and keep hitting it."
+                                              "grade": "mistake",
+                                              "note": "Offering the trade lets Black off the hook and gives back most of the attack. The queen on b2 has no good squares, so keep her there and keep hitting her."
                                             },
                                             {
                                               "san": "Bd3",
-                                              "grade": "playable",
-                                              "note": "Developing is never bad here, but the rook move develops and threatens at the same time."
+                                              "grade": "inaccuracy",
+                                              "note": "Developing is never bad, and here it costs over a pawn: the rook move develops and threatens at the same time, which is what keeps the queen on b2 in trouble."
                                             }
                                           ],
                                           "shapes": [
@@ -523,8 +523,8 @@
                                                                             },
                                                                             {
                                                                               "san": "Ne5",
-                                                                              "grade": "inaccuracy",
-                                                                              "note": "The outpost is right in most positions and second best in this one. Take on h7 first: the knight can go to e5 next move anyway."
+                                                                              "grade": "mistake",
+                                                                              "note": "The outpost is right in most positions and it throws this one away: the sacrifice is worth about four pawns and Ne5 keeps half of one. Take on h7 first, and the knight still reaches e5 next move."
                                                                             },
                                                                             {
                                                                               "san": "Rxh7",

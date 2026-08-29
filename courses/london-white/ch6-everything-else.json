@@ -149,8 +149,8 @@
                                                     },
                                                     {
                                                       "san": "Ne5",
-                                                      "grade": "playable",
-                                                      "note": "Playable, but Black answers ...dxe5 and the strong square disappears."
+                                                      "grade": "mistake",
+                                                      "note": "The square is not covered yet: ...dxe5 wins a knight for a pawn whichever way White recaptures."
                                                     }
                                                   ],
                                                   "shapes": [
@@ -185,8 +185,8 @@
                                                             },
                                                             {
                                                               "san": "Ne5",
-                                                              "grade": "inaccuracy",
-                                                              "note": "It looks active and Black answers ...dxe5, when the pawn recapture leaves White nothing."
+                                                              "grade": "mistake",
+                                                              "note": "Same answer as a move ago: ...dxe5 and White has given a knight for a pawn. The outpost needs a defender first."
                                                             }
                                                           ],
                                                           "shapes": [

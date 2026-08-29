@@ -264,8 +264,8 @@
                                                           "mistakes": [
                                                             {
                                                               "san": "Bg3",
-                                                              "grade": "inaccuracy",
-                                                              "note": "Now ...Nxg3 trades off your best piece. That was the whole reason for playing h3."
+                                                              "grade": "mistake",
+                                                              "note": "Now ...Nxg3 trades off your best piece, which is the one thing h3 was played to prevent. Two moves wasted and the bishop gone."
                                                             },
                                                             {
                                                               "san": "Be5",

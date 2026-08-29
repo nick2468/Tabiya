@@ -204,8 +204,8 @@
                                     },
                                     {
                                       "san": "h3",
-                                      "grade": "playable",
-                                      "note": "Useful, and it gives the bishop the h2 square. There is no hurry either way while the knight sits on the rim."
+                                      "grade": "inaccuracy",
+                                      "note": "Useful in itself, and it lets Black settle: developing first is worth about a pawn and a half here, because the knight on the rim has to be answered before it is helped."
                                     }
                                   ],
                                   "plan": "Play c3, Nbd2 and castle. If the knight comes back to f6 you have gained two free moves; if it takes on g3, recapture with the h-pawn and take the file."

@@ -202,8 +202,8 @@
                                                           "mistakes": [
                                                             {
                                                               "san": "d5",
-                                                              "grade": "inaccuracy",
-                                                              "note": "It closes the centre, which is exactly what Black wants. Black then attacks with ...f5 and White's queenside play is slower."
+                                                              "grade": "mistake",
+                                                              "note": "It forgets what ...e5 attacked. The pawn hits f4 as well as d4, so 9...exf4 10.exf4 leaves White a bishop down for a pawn."
                                                             },
                                                             {
                                                               "san": "Bh2",

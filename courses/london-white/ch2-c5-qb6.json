@@ -113,8 +113,8 @@
                             },
                             {
                               "san": "Rb1",
-                              "grade": "inaccuracy",
-                              "note": "It chases the queen to a2 where it is safe, and White has given up a pawn for very little."
+                              "grade": "mistake",
+                              "note": "The rook hits the queen and leaves the knight hanging: 5...Qxc3+ takes it with check, so White has given a piece as well as the pawn."
                             },
                             {
                               "san": "Na4",
@@ -177,7 +177,7 @@
                                     {
                                       "san": "Nc7+",
                                       "grade": "mistake",
-                                      "note": "It wins nothing: Black takes the knight with ...Nxc7."
+                                      "note": "It loses a piece: ...Nxc7 takes the knight, and Bxc7 Qxc7 leaves White a bishop down as well."
                                     }
                                   ],
                                   "children": [
