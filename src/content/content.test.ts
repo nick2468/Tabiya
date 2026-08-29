@@ -278,10 +278,13 @@ describe('the two courses together', () => {
     expect(caro.filter((key) => london.has(key))).toEqual([])
   })
 
-  it('reaches positions that genuinely coincide, so the scoping is doing work', () => {
-    // Both repertoires meet 1.e4 c6 2.d4 d5 style positions only in the Caro,
-    // but the bare position keys still overlap nowhere by accident: strip the
-    // course prefix and the two sets are compared on position alone.
+  it('happens to share no bare position either, so today nothing tests the scoping', () => {
+    // Worth stating plainly, because it is easy to read the test above as proof
+    // that course scoping is load bearing. It is not: a 1.d4 repertoire and a
+    // 1.e4 defence never reach the same position, so these two would not
+    // collide even without the course half of the key. The scoping earns its
+    // place against a course not yet written - a White 1.e4 repertoire would
+    // meet the Caro-Kann's own positions from the other side.
     const positions = (id: string) =>
       new Set(allCards(courseById(id)).cards.map((card) => card.position))
     const london = positions('london-white')
