@@ -1,0 +1,650 @@
+{
+  "id": "ch6-tactics-and-plans",
+  "title": "Typical tactics and plans",
+  "intro": "Five positions from the lines you have just learnt, each stopping on the move that matters. Play through the moves and find the last one.\n\n## What these are, and what they are not\n\nTwo of the five end on a genuine tactic: a knight that wins a pawn because the piece defending it has been removed, and a knight move that defends a pawn by attacking the square the attacker would have to stand on. The other three end on a decision, which is the more common kind of moment in a real game. Knowing that ...c4 is better than the queen trade will win you more games than any single combination in this opening, and it is not a tactic.\n\n## The themes worth carrying away\n\nRemove the defender. In the Colle, the pawn on d4 is held up by the knight on f3. Trade the knight off first and the pawn falls; hit the pawn first and nothing happens.\n\nDefend by attacking. In the Exchange Slav, ...Na5 guards b7 because it attacks b7, so the queen that was going to take there loses herself instead.\n\nWatch the diagonal behind your own piece. In the 6.Ne5 line Black's knight on e5 is pinned against the queen on c7, and the pin is invisible until you move the knight and lose the queen.\n\nSpace before trades. Against the London, pushing the pawn to c4 keeps a queenside bind that a queen trade on b3 hands straight back.\n\nStrike the wedge. When White's pawn reaches e5 in the main line, ...f6 is the move that stops the position going quietly downhill.\n\n## Typical mistakes at this level\n\nPlaying the capture that looks like the tactic before the preparation that makes it work. Trading queens because the trade is offered. Moving a piece that is holding a diagonal shut. And reaching a comfortable position and then not having a plan, which is the most expensive mistake on this list.",
+  "defaultTags": ["tactics"],
+  "stem": ["d4", "d5"],
+  "tree": [
+    {
+      "san": "c4",
+      "note": "The Queen's Gambit, which is where four of the five exercises start.",
+      "weight": 9,
+      "children": [
+        {
+          "san": "c6",
+          "note": "The Slav.",
+          "tags": ["development"],
+          "children": [
+            {
+              "san": "Nf3",
+              "note": "The main move.",
+              "weight": 8,
+              "children": [
+                {
+                  "san": "Nf6",
+                  "note": "Develop and hold d5 for one more move.",
+                  "tags": ["development"],
+                  "children": [
+                    {
+                      "san": "Nc3",
+                      "note": "The main line.",
+                      "weight": 8,
+                      "children": [
+                        {
+                          "san": "dxc4",
+                          "note": "Take, to free the bishop and make White spend a move.",
+                          "tags": ["development", "light-squares"],
+                          "children": [
+                            {
+                              "san": "a4",
+                              "note": "White stops ...b5.",
+                              "weight": 8,
+                              "children": [
+                                {
+                                  "san": "Bf5",
+                                  "note": "The bishop goes outside the pawn chain.",
+                                  "tags": ["bishop-placement", "light-squares"],
+                                  "children": [
+                                    {
+                                      "san": "e3",
+                                      "note": "The main line. This is exercise five: play through to move fourteen and find Black's answer to the pawn on e5.",
+                                      "weight": 7,
+                                      "children": [
+                                        {
+                                          "san": "e6",
+                                          "note": "Safe now that the bishop is out.",
+                                          "tags": ["development"],
+                                          "children": [
+                                            {
+                                              "san": "Bxc4",
+                                              "note": "White recovers the pawn.",
+                                              "weight": 8,
+                                              "children": [
+                                                {
+                                                  "san": "Bb4",
+                                                  "note": "Pin the knight and prepare to castle.",
+                                                  "tags": ["development"],
+                                                  "children": [
+                                                    {
+                                                      "san": "O-O",
+                                                      "note": "White castles.",
+                                                      "weight": 8,
+                                                      "children": [
+                                                        {
+                                                          "san": "Nbd7",
+                                                          "note": "Develop the last knight.",
+                                                          "tags": ["development"],
+                                                          "children": [
+                                                            {
+                                                              "san": "Qe2",
+                                                              "note": "White prepares the e4 break.",
+                                                              "weight": 7,
+                                                              "children": [
+                                                                {
+                                                                  "san": "Bg6",
+                                                                  "note": "Step off the square the pawn is coming to.",
+                                                                  "tags": ["bishop-placement"],
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "e4",
+                                                                      "note": "The break arrives.",
+                                                                      "weight": 7,
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "O-O",
+                                                                          "note": "King first.",
+                                                                          "tags": ["king-safety"],
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Bd3",
+                                                                              "note": "White asks the bishop a question.",
+                                                                              "weight": 7,
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "Bh5",
+                                                                                  "note": "Dodge the trade and eye the knight on f3.",
+                                                                                  "tags": ["bishop-placement"],
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "e5",
+                                                                                      "note": "White pushes the pawn to e5 and takes a wedge of space.",
+                                                                                      "weight": 7,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "Nd5",
+                                                                                          "note": "The knight takes the best square available.",
+                                                                                          "tags": ["development"],
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "san": "Nxd5",
+                                                                                              "note": "White trades.",
+                                                                                              "weight": 7,
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "san": "cxd5",
+                                                                                                  "note": "Take with the c-pawn and open the file.",
+                                                                                                  "tags": ["c-file"],
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "san": "Qe3",
+                                                                                                      "note": "White supports the wedge and eyes the kingside. Black to play: the pawn on e5 is cramping the whole position, so what does something about it?",
+                                                                                                      "weight": 6,
+                                                                                                      "children": [
+                                                                                                        {
+                                                                                                          "san": "f6",
+                                                                                                          "note": "Strike the wedge. The pawn on e5 is what makes Black's position uncomfortable, and it has to be challenged before White builds around it.",
+                                                                                                          "tags": ["e5-break", "c-file"],
+                                                                                                          "plan": "After exf6 recapture with a knight or the queen and use the half-open f-file. If White leaves the tension, take on e5 yourself and the cramp is gone.",
+                                                                                                          "mistakes": [
+                                                                                                            {
+                                                                                                              "san": "Be7",
+                                                                                                              "grade": "playable",
+                                                                                                              "note": "Sensible development, and it leaves the pawn on e5 exactly where White wants it. The break is the point of the position."
+                                                                                                            },
+                                                                                                            {
+                                                                                                              "san": "Bxf3",
+                                                                                                              "grade": "inaccuracy",
+                                                                                                              "note": "15.gxf3 damages White's kingside and gives up Black's best minor piece for a knight that was not doing much."
+                                                                                                            }
+                                                                                                          ]
+                                                                                                        }
+                                                                                                      ]
+                                                                                                    }
+                                                                                                  ]
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "san": "Ne5",
+                                      "note": "Exercise three. Play to move eleven and find the move that keeps everything defended.",
+                                      "weight": 5,
+                                      "children": [
+                                        {
+                                          "san": "Nbd7",
+                                          "note": "Challenge the knight.",
+                                          "tags": ["development"],
+                                          "children": [
+                                            {
+                                              "san": "Nxc4",
+                                              "note": "White wins the pawn back.",
+                                              "weight": 7,
+                                              "children": [
+                                                {
+                                                  "san": "Qc7",
+                                                  "note": "The queen eyes e5.",
+                                                  "tags": ["development"],
+                                                  "children": [
+                                                    {
+                                                      "san": "g3",
+                                                      "note": "White fianchettoes.",
+                                                      "weight": 6,
+                                                      "children": [
+                                                        {
+                                                          "san": "e5",
+                                                          "note": "The break, with White's king bishop still at home.",
+                                                          "tags": ["e5-break"],
+                                                          "children": [
+                                                            {
+                                                              "san": "dxe5",
+                                                              "note": "White takes.",
+                                                              "weight": 7,
+                                                              "children": [
+                                                                {
+                                                                  "san": "Nxe5",
+                                                                  "note": "Recapture with the knight.",
+                                                                  "tags": ["e5-break"],
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Bf4",
+                                                                      "note": "White develops with a hit on the knight, and pins it against the queen on c7.",
+                                                                      "weight": 7,
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Nfd7",
+                                                                          "note": "A second defender rather than a retreat.",
+                                                                          "tags": ["development"],
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Bg2",
+                                                                              "note": "White finishes the fianchetto. Black to play: the knight on c4 is loose and taking it loses the game. Find the move that settles the centre instead.",
+                                                                              "weight": 7,
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "f6",
+                                                                                  "note": "Hold the knight on e5 with a pawn. Taking on c4 instead loses the queen to Bxc7, because the knight on e5 is the only thing keeping that diagonal shut.",
+                                                                                  "tags": ["tactics", "e5-break"],
+                                                                                  "plan": "Follow with ...Be7, ...O-O and ...Rd8. The knight on e5 is a permanent asset once a pawn is holding it there.",
+                                                                                  "mistakes": [
+                                                                                    {
+                                                                                      "san": "Nxc4",
+                                                                                      "grade": "mistake",
+                                                                                      "note": "12.Bxc7 and the queen is gone. The knight on e5 was pinned along the f4 to c7 diagonal the whole time."
+                                                                                    },
+                                                                                    {
+                                                                                      "san": "Be7",
+                                                                                      "grade": "playable",
+                                                                                      "note": "Develops, and it leaves the knight on e5 held by pieces alone. A pawn does the job better and for good."
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "cxd5",
+              "note": "Exercise two, the Exchange Slav. Play to move seven and find the answer to the queen on b3.",
+              "weight": 6,
+              "children": [
+                {
+                  "san": "cxd5",
+                  "note": "Recapture with the c-pawn.",
+                  "tags": ["c-file"],
+                  "children": [
+                    {
+                      "san": "Nc3",
+                      "note": "White develops.",
+                      "weight": 6,
+                      "children": [
+                        {
+                          "san": "Nf6",
+                          "note": "Develop and hold d5.",
+                          "tags": ["development"],
+                          "children": [
+                            {
+                              "san": "Bf4",
+                              "note": "The bishop goes outside the chain.",
+                              "weight": 6,
+                              "children": [
+                                {
+                                  "san": "Nc6",
+                                  "note": "Develop and press d4.",
+                                  "tags": ["development"],
+                                  "children": [
+                                    {
+                                      "san": "e3",
+                                      "note": "White props up d4.",
+                                      "weight": 6,
+                                      "children": [
+                                        {
+                                          "san": "Bf5",
+                                          "note": "Out before ...e6, as always.",
+                                          "tags": ["bishop-placement", "light-squares"],
+                                          "children": [
+                                            {
+                                              "san": "Qb3",
+                                              "note": "The queen hits b7 and d5 together. Black to play: b7 has no defender and d5 has exactly one. What holds both?",
+                                              "weight": 5,
+                                              "children": [
+                                                {
+                                                  "san": "Na5",
+                                                  "note": "Defend by attacking. The knight covers b7 by attacking it, so 8.Qxb7 loses the queen to 8...Nxb7, and White has to check on a4 instead.",
+                                                  "tags": ["tactics"],
+                                                  "plan": "Meet 8.Qa4+ with 8...Bd7, gaining another move, and bring the knight back into the game through c4 or c6 once the queen has gone home.",
+                                                  "mistakes": [
+                                                    {
+                                                      "san": "Qd7",
+                                                      "grade": "inaccuracy",
+                                                      "note": "It defends b7 and ties the queen to a pawn. The knight does the same job and gains a move as well."
+                                                    },
+                                                    {
+                                                      "san": "b6",
+                                                      "grade": "mistake",
+                                                      "note": "It defends b7 and abandons d5: 8.Qxd5 wins a pawn and hits both rook and knight afterwards."
+                                                    },
+                                                    {
+                                                      "san": "e6",
+                                                      "grade": "mistake",
+                                                      "note": "It defends d5 and forgets b7: 8.Qxb7 simply wins a pawn."
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Nf3",
+      "note": "Exercise one, the Colle. Play to move thirteen and find the move that collects the pawn on d4.",
+      "weight": 6,
+      "children": [
+        {
+          "san": "Nf6",
+          "note": "Develop and wait.",
+          "tags": ["development"],
+          "children": [
+            {
+              "san": "e3",
+              "note": "The Colle.",
+              "weight": 6,
+              "children": [
+                {
+                  "san": "c5",
+                  "note": "Hit the centre.",
+                  "tags": ["c5-break"],
+                  "children": [
+                    {
+                      "san": "c3",
+                      "note": "White builds the pyramid.",
+                      "weight": 7,
+                      "children": [
+                        {
+                          "san": "Nc6",
+                          "note": "Develop and press d4.",
+                          "tags": ["development"],
+                          "children": [
+                            {
+                              "san": "Bd3",
+                              "note": "The Colle bishop.",
+                              "weight": 8,
+                              "children": [
+                                {
+                                  "san": "Bg4",
+                                  "note": "Out before ...e6, hitting the knight that holds d4 together.",
+                                  "tags": ["bishop-placement", "light-squares"],
+                                  "children": [
+                                    {
+                                      "san": "Nbd2",
+                                      "note": "White prepares e4.",
+                                      "weight": 7,
+                                      "children": [
+                                        {
+                                          "san": "e6",
+                                          "note": "Safe now the bishop is outside.",
+                                          "tags": ["development"],
+                                          "children": [
+                                            {
+                                              "san": "O-O",
+                                              "note": "White castles.",
+                                              "weight": 7,
+                                              "children": [
+                                                {
+                                                  "san": "Bd6",
+                                                  "note": "The bishop takes the diagonal pointing at h2.",
+                                                  "tags": ["bishop-placement"],
+                                                  "children": [
+                                                    {
+                                                      "san": "Re1",
+                                                      "note": "White puts a rook behind the e-pawn.",
+                                                      "weight": 6,
+                                                      "children": [
+                                                        {
+                                                          "san": "O-O",
+                                                          "note": "Castle and let the break come.",
+                                                          "tags": ["king-safety"],
+                                                          "children": [
+                                                            {
+                                                              "san": "e4",
+                                                              "note": "The Colle break, which is what the whole set-up was for.",
+                                                              "weight": 6,
+                                                              "children": [
+                                                                {
+                                                                  "san": "dxe4",
+                                                                  "note": "Take. Leaving the tension lets White play e5 with a free attack.",
+                                                                  "tags": ["development"],
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Nxe4",
+                                                                      "note": "White recaptures with a piece.",
+                                                                      "weight": 8,
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Nxe4",
+                                                                          "note": "Trade one pair of knights off before White's pieces coordinate.",
+                                                                          "tags": ["development"],
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Bxe4",
+                                                                              "note": "White takes back with the bishop, which now points at h7.",
+                                                                              "weight": 8,
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "Bxf3",
+                                                                                  "note": "Remove the defender. The knight on f3 is the piece holding d4 up, and it has to go first.",
+                                                                                  "tags": ["tactics"],
+                                                                                  "mistakes": [
+                                                                                    {
+                                                                                      "san": "cxd4",
+                                                                                      "grade": "inaccuracy",
+                                                                                      "note": "12.cxd4 and the pawn is defended by both the queen and the knight. Trade the knight off first and the same capture works."
+                                                                                    }
+                                                                                  ],
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "Qxf3",
+                                                                                      "note": "White recaptures with the queen, keeping the kingside pawns intact.",
+                                                                                      "weight": 7,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "cxd4",
+                                                                                          "note": "Now open the position against the pawn that has lost its defender.",
+                                                                                          "tags": ["tactics"],
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "san": "cxd4",
+                                                                                              "note": "White recaptures and the pawn on d4 is now defended by the queen alone, from a square she is about to have to leave.",
+                                                                                              "weight": 6,
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "san": "Nxd4",
+                                                                                                  "note": "A clean pawn. The knight lands on d4 attacking the queen, so White has to move her before recapturing, and nothing else defends the square.",
+                                                                                                  "tags": ["tactics"],
+                                                                                                  "plan": "Meet a queen move by finishing development with ...Qh4 or ...Rc8. A pawn up with the better structure is a game to convert slowly, not to force.",
+                                                                                                  "mistakes": [
+                                                                                                    {
+                                                                                                      "san": "Qh4",
+                                                                                                      "grade": "inaccuracy",
+                                                                                                      "note": "Active, and it lets White consolidate with a pawn still on d4. The pawn is free: take it."
+                                                                                                    },
+                                                                                                    {
+                                                                                                      "san": "Bxh2+",
+                                                                                                      "grade": "mistake",
+                                                                                                      "note": "14.Kxh2 and there is no follow-up. Black has given a bishop for a pawn and lost the fork on d4 as well."
+                                                                                                    }
+                                                                                                  ]
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Bf4",
+      "note": "Exercise four, the London. Play to move six and choose between the queen trade and something better.",
+      "weight": 7,
+      "children": [
+        {
+          "san": "Nf6",
+          "note": "Develop first, so that Nc3 has no gambit behind it.",
+          "tags": ["development", "vs-london"],
+          "children": [
+            {
+              "san": "e3",
+              "note": "White props up d4 and shuts in the bishop that has already left.",
+              "weight": 8,
+              "children": [
+                {
+                  "san": "c5",
+                  "note": "Hit the centre, because White has not fought for d5.",
+                  "tags": ["c5-break", "vs-london"],
+                  "children": [
+                    {
+                      "san": "Nf3",
+                      "note": "White develops.",
+                      "weight": 7,
+                      "children": [
+                        {
+                          "san": "Nc6",
+                          "note": "A second attacker on d4.",
+                          "tags": ["development", "vs-london"],
+                          "children": [
+                            {
+                              "san": "c3",
+                              "note": "White props d4 up a third time and leaves b2 with nothing on it.",
+                              "weight": 7,
+                              "children": [
+                                {
+                                  "san": "Qb6",
+                                  "note": "Hit b2.",
+                                  "tags": ["dark-squares", "vs-london"],
+                                  "children": [
+                                    {
+                                      "san": "Qb3",
+                                      "note": "White offers the trade. Black to play: taking is safe, comfortable and exactly what White prepared for. What is better?",
+                                      "weight": 7,
+                                      "children": [
+                                        {
+                                          "san": "c4",
+                                          "note": "Push past. The queen has to take on b6 on Black's terms, and the pawn on c4 shuts the bishop on f1 out of the game for the rest of it.",
+                                          "tags": ["c5-break", "vs-london"],
+                                          "plan": "Recapture on b6 with the a-pawn, then ...Bf5, ...e6 and ...Be7. The plan is the a-file and a later ...b5 and ...b4.",
+                                          "mistakes": [
+                                            {
+                                              "san": "Qxb3",
+                                              "grade": "playable",
+                                              "note": "Safe and level, and 7.axb3 gives White the open a-file and the more comfortable game. This is the trade a London player has seen a hundred times."
+                                            },
+                                            {
+                                              "san": "cxd4",
+                                              "grade": "inaccuracy",
+                                              "note": "7.exd4 or 7.Qxb6 both leave White comfortable, and the queenside bind that ...c4 creates is gone for good."
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "slav-black",
+  "title": "The Slav Defence",
+  "colour": "black",
+  "tagline": "One structure against 1.d4, with the bishop outside, as Black.",
+  "formatVersion": 1,
+  "chapters": [
+    "ch0-the-defence.json",
+    "ch1-main-line.json",
+    "ch2-quiet.json",
+    "ch3-exchange.json",
+    "ch4-sidelines.json",
+    "ch5-no-c4.json",
+    "ch6-tactics-and-plans.json"
+  ],
+  "tagExtensions": [
+    "vs-quiet",
+    "vs-exchange-slav",
+    "vs-catalan",
+    "vs-london",
+    "light-squares",
+    "c5-break",
+    "e5-break",
+    "c-file"
+  ]
+}
