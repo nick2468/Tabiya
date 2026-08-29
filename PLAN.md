@@ -699,6 +699,8 @@ Open items (phase 8):
    builds (`Repertoire Trainer_1.0.0_x64-setup.exe`) and the binary it installs has
    been driven over the DevTools protocol. The installer's own UI needs a human. The
    separate "London Trainer" entry from phase 7 is still Nick's one manual uninstall.
+   **Closed 2026-08-29**: Nick ran the installer, clicked through it, opened the app,
+   and uninstalled "London Trainer". Nothing is owed; v2 is accepted in full.
 11. **The chapter 6 exercises are shallower than the chapter title suggests.** Two of
    the four end on a genuine tactic (...Nxe3 winning a pawn and the kingside, and the
    ...Na5 resource inside exercise 3's line); the other two end on a plan move, ...c5

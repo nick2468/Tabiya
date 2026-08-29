@@ -379,3 +379,9 @@ authored to the same club depth with weights giving White's club-level choices.
 5. Tests green throughout; the installer ships as Repertoire Trainer, and
    progress survives the change of name. The old "London Trainer" entry is
    uninstalled once by hand: see the correction above.
+
+**All five accepted, 2026-08-29.** Items 1 to 4 were verified at review gates 6, 7
+and 8. Item 5 closed the same day: Nick ran the Repertoire Trainer installer, clicked
+through it, opened the app, and uninstalled the old "London Trainer" entry. That was
+the last thing v2 owed a human, and it had been outstanding since phase 5 - three
+phases of "nobody has clicked through the installer" are now answered.
