@@ -605,7 +605,7 @@ content.
 Acceptance: the course meets the quality bar with the engine pass recorded; Study,
 Drill and Play work end to end as Black; the London is untouched; vitest green.
 
-- [ ] **Review gate 8 passed**
+- [x] **Review gate 8 passed** (2026-08-29)
 
 Open items (phase 8):
 
@@ -641,10 +641,22 @@ Open items (phase 8):
 3. **One blunder the engine did not find, because a person did.** Chapter 3 played
    10...Bd6 in a position where Black's own bishop on d7 shuts the queen in, so
    11.Bxd6 cannot be answered and it drops a piece. It was spotted while building the
-   exercise that ran through that position, not by the pass, because the pass reports
-   what a move COSTS and the loss only appears on White's next move. Worth knowing:
-   the pass measures the student's move against the student's best, so a move that
-   invites a refutation shows up only if the refutation is already forced.
+   exercise that ran through that position rather than by the pass. It is now taught
+   as a graded mistake entry on the ...Be7 node, which is the best home for it.
+
+   **The reason first recorded here was wrong, and gate 8 measured it.** This item
+   claimed the pass cannot see a move that invites a refutation, because the loss only
+   appears on the opponent's next move. That is not how the pass works: it SEARCHES
+   the position after the student's move, so a refutation inside the search horizon is
+   already priced in. Run on this exact position pair, the pass reports ...Bd6 as
+   costing 3.97 at 500 ms against ...Be7's 0.11 - eight times the threshold and the
+   top line of any report it appeared in. A move that hangs a piece to an immediate
+   recapture is therefore NOT a blind spot.
+   The real lesson is about timing, and it is a process rule rather than a tool
+   limit: **a pass is only evidence about the content that existed when it ran.**
+   This one was authored after the pass had been over chapter 3, so nothing had ever
+   looked at it. Re-run the pass after the last content edit, which is what gate 8
+   did - see item 12.
 4. **A phase 6 or 7 escape, found by using the app rather than reading it.** The Play
    launcher offered "Any defence" and "This chapter's defence", and the play stats
    labelled untargeted games the same way. In a Black course the opponent is the side
@@ -666,7 +678,9 @@ Open items (phase 8):
    that no club player would choose, which the pass reports as Black failing to punish
    them. Reading a finding therefore means asking which side is actually at fault. The
    White weights were sanity-checked by hand against what club players play, and that
-   check has no test behind it.
+   check has no test behind it. This one is real, unlike the blind spot item 3 claimed:
+   the pass never evaluates a position where the opponent is to choose, so nothing in
+   it can object to an opponent move nobody would play.
 8. **Play, Drill and Study were driven live as Black in the dev build.** The engine
    opened the game with 1.e4, the book steered White through 2.d4, 3.Bd3, 4.Bxe4 and
    5.Bf3, all authored moves and one of them weighted 2, which is the weighting doing
@@ -692,3 +706,26 @@ Open items (phase 8):
    sacrifice, and it is worth saying out loud: this chapter teaches typical positions,
    not puzzles. A real puzzle set would need positions built for the purpose and each
    one engine-verified, which is a bigger job than a chapter.
+12. **What the review verified independently (gate 8).** The suite (337 tests) and
+   `npx tsc -b --force` re-run green, and the London's content is byte-identical to
+   its gate 7 state. **The engine pass was re-run from scratch over the final
+   content**: 160 student moves, 317 positions at 500 ms, and only two findings
+   survived - the ch1 ...Bxe4 and ch2 ...h6 that item 6 records as deliberately kept.
+   Both were then re-checked at 2500 ms, where ...h6 falls to 0.37 (under the
+   threshold, so noise) and ...Bxe4 sits at 0.54 in a position the engine calls 0.28,
+   which is level. So the fixes hold and nothing new was introduced by them - the
+   check item 3's correction is really about.
+   Exercise 1 was verified against the engine rather than taken on trust, since the
+   phase built a branch around it: the position is -2.27 for Black, **the engine's own
+   first choice is ...Nxe3**, and taking the pawn first with ...Nxe5 instead costs
+   0.83 - which is exactly the move-order lesson the exercise teaches. The chapter 3
+   trap was confirmed by hand: after 10...Bd6 11.Bxd6 chess.js reports zero legal
+   recaptures on d6.
+   Driven live as Black in the dev build: the catalog shows both courses, Study opens
+   the Caro-Kann with the board `orientation-black`, and a real game ran through the
+   board - the engine opened 1.e4, the book steered 2.c4 and 3.exd5, and the report
+   read "You stayed in the repertoire for the whole game" with a Level verdict.
+   Nick's progress file was hashed before and after and is unchanged from its gate 7
+   bytes; the AppData courses folder is empty. One test renamed at review: the
+   two-courses position test claimed to prove course scoping was load bearing while
+   asserting the opposite, so it now says what it actually checks.
