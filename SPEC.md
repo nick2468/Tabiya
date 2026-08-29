@@ -237,7 +237,16 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   engine pass judges the student's moves only, so a line where the repertoire is sound
   but the opponent's move is one no club player would choose passes unnoticed. Phase 8
   found several of those by hand. Checking weights properly needs real-game frequency
-  data, which is the Lichess explorer item above. Recorded at phase 8.
+  data, which is the Lichess explorer item above. Recorded at phase 8. Phase 9 took
+  half of it: `scripts/engine-mistakes.mjs` now checks the graded alternatives beside
+  each repertoire move, which found eight faults the first pass could not see. The
+  opponent's own moves and the weights are still unchecked.
+- **A gap in the London course, found from the other side**: the Slav's chapter 5
+  answers 5.c3 Qb6 6.Qb3 with 6...c4, and the London course's chapter 2 covers only
+  6...Qxb3. That is a hole in White's preparation rather than an error in it, and the
+  phase 9 chip put both other courses out of scope, so it was not touched. Whoever
+  works on the London next should add the branch: a trainee who plays both sides of
+  this repertoire will meet it. Recorded at phase 9.
 
 ## 7. Risks
 
@@ -385,3 +394,11 @@ and 8. Item 5 closed the same day: Nick ran the Repertoire Trainer installer, cl
 through it, opened the app, and uninstalled the old "London Trainer" entry. That was
 the last thing v2 owed a human, and it had been outstanding since phase 5 - three
 phases of "nobody has clicked through the installer" are now answered.
+
+**The third course tested the claim this section makes.** The Slav arrived at phase 9,
+after v2 closed, and adding it took a course folder and a block of numbers in the
+content suite. Not one line of source registers a course, because `src/content/index.ts`
+picks up `courses/*/course.json` through Vite's glob, so the catalog, Study, Play, Drill
+and Progress all found it without being told. That is the strongest evidence available
+that the course model is data rather than code, short of Nick dropping a folder into
+AppData himself, which phase 7 proved separately.

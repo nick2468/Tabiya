@@ -755,21 +755,21 @@ The rulings, so the plan carries them and not only the chip:
 - **Seven chapters**, in the shape both other courses use - organised by what the
   opponent does, a concept chapter first and exercises last.
 
-- [ ] 9.1 The course folder and manifest: `courses/slav-black/`, id `slav-black`
+- [x] 9.1 The course folder and manifest: `courses/slav-black/`, id `slav-black`
   (permanent once shipped), colour black, tag extensions declared.
-- [ ] 9.2 ch0 the defence and its ideas: the c6 and d5 structure, the bishop rule,
+- [x] 9.2 ch0 the defence and its ideas: the c6 and d5 structure, the bishop rule,
   the ...c5 break, and what carries over from the Caro-Kann. Concept chapter,
   intro 300-500 words, mistake entries on at least four setup decisions.
-- [ ] 9.3 ch1 the main line 3.Nf3 Nf6 4.Nc3 dxc4 5.a4 Bf5, to the section 3 depth.
-- [ ] 9.4 ch2 the quiet build-up (4.e3 and 4.Bf4), where the bishop comes out easily.
-- [ ] 9.5 ch3 the Exchange Slav 3.cxd5, including how Black plays it for more than
+- [x] 9.3 ch1 the main line 3.Nf3 Nf6 4.Nc3 dxc4 5.a4 Bf5, to the section 3 depth.
+- [x] 9.4 ch2 the quiet build-up (4.e3 and 4.Bf4), where the bishop comes out easily.
+- [x] 9.5 ch3 the Exchange Slav 3.cxd5, including how Black plays it for more than
   a draw rather than shaking hands.
-- [ ] 9.6 ch4 sidelines and move-order tricks: early queen sorties, g3 and Catalan
+- [x] 9.6 ch4 sidelines and move-order tricks: early queen sorties, g3 and Catalan
   setups, and the order care around ...Bf5 meeting Qb3.
-- [ ] 9.7 ch5 White without c4: the London, Colle and Torre. Nick plays the London
+- [x] 9.7 ch5 White without c4: the London, Colle and Torre. Nick plays the London
   as White, so this chapter is his own repertoire seen from the other side.
-- [ ] 9.8 ch6 typical tactics and plans, the exercises.
-- [ ] 9.9 The engine pass over every student move, **run after the last content
+- [x] 9.8 ch6 typical tactics and plans, the exercises.
+- [x] 9.9 The engine pass over every student move, **run after the last content
   edit** (phase 8 open item 3): findings fixed or recorded with numbers.
 - [ ] 9.10 Ship it bundled: the course's own numeric block in the content suite,
   card keys proved disjoint from both other courses, Play driven live with the
@@ -782,4 +782,94 @@ file is unchanged.
 
 - [ ] **Review gate 9 passed**
 
-Open items (phase 9): none yet.
+Open items (phase 9):
+
+1. **The phase ran unattended, start to finish, which is what the chip was for.**
+   Nick ruled the opening, the seven chapters and the main-line fork on 2026-08-29
+   before any drafting, so no decision had to wait for him. Phase 8 stopped for a
+   chapter list; this one stopped for nothing.
+2. **The engine pass over the student moves found eight, and one was a lost game.**
+   Method as at phase 8: Stockfish 18 lite, 500 ms a position, every finding
+   re-checked at 2500 ms with MultiPV before anything was changed. What it caught:
+   - Chapter 2's main quiet line had White playing 10.Qc2, which loses on the spot
+     to 10...Bxh2+, and Black answering with a developing move. The bishop cannot be
+     taken: the rook on h8 defends h2 down the file that ...hxg6 opened eight moves
+     earlier, so 11.Kxh2 is not a legal move at all. White now plays the sound 10.h3,
+     the blunder is a weighted branch that wins for Black, and the sacrifice became
+     chapter 6's first exercise.
+   - Against 4.Bf4 the course's own rule does not hold. With a bishop on f4 backing
+     it, 4...Bf5 5.Qb3 Qb6 6.c5 clamps the queenside and Black has no comfortable
+     break, so the course takes on c4 instead, which is what chapter 1 does anyway.
+   - The Colle line allowed 5.dxc5, the engine's first choice and the move a Colle
+     player rarely finds. It is now a branch of its own, answered by ...e5.
+   The final pass leaves three findings, all between 0.51 and 0.75 at 500 ms, all
+   re-checked at 2500 ms and all noise or judgement calls: see item 5.
+3. **The bigger finding is what the first pass cannot see, and it needed a second
+   tool.** `scripts/engine-pass.mjs` checks the moves the course tells the trainee to
+   play. It never looks at the graded alternatives beside them, and those are half
+   the teaching: a mistake entry says a move is wrong and says why. Three of this
+   course's entries named a punishment that loses material for the side supposedly
+   doing the punishing. The worst called 6...Qc7 a mistake "because 7.Qxd5 wins a
+   pawn", when 7.Qxd5 loses a piece to 7...Qxc1+ and 6...Qc7 is in fact the best
+   move in the position. So the phase built `scripts/engine-mistakes.mjs`, which
+   evaluates every mistake entry against the repertoire move and reports where the
+   grade and the engine disagree. It found eight, including ...Bf5 against the Colle
+   and ...Bf5 against 4.Qc2, both graded "playable" and both simply hanging a bishop.
+   Both passes are now quiet.
+4. **A line in the plan did not survive the engine.** Task 9.4 describes chapter 2 as
+   "the quiet build-up (4.e3 and 4.Bf4), where the bishop comes out easily". Half of
+   that is right. Against 4.e3 the bishop comes out for free; against 4.Bf4 it is the
+   one line in the course where ...Bf5 is not the move. The chapter says so in its
+   own intro rather than pretending otherwise, and the plan's one-line description is
+   left as written, because it is a record of what was asked for.
+5. **Three findings kept, with their numbers.** In chapter 4's fianchetto line,
+   7...Be7 is 0.62 behind 7...dxc4 at 2500 ms and +0.41 in absolute terms, which is an
+   ordinary opening pull rather than a fault; taking is now recorded as a graded
+   alternative with the engine's preference stated, and the chapter keeps the complete
+   set-up that is easier to play. In chapter 5's Colle, 4...Nc6 reads as a loss only
+   because it allows 5.dxc5, which is now a branch of its own, so the number is the
+   pass reporting White's best reply rather than a fault in Black's move. And in the
+   anti-London line 10...Be7 measured 0.51 at 500 ms and 0.25 at 2500 ms, where the
+   engine's preference is 10...b5, which is the move the leaf's own plan already names.
+   All three were left as they are, deliberately.
+6. **A gap in the London course, found by writing the Slav.** Chapter 5 answers
+   5.c3 Qb6 6.Qb3 with 6...c4, and the London course's chapter 2 covers only
+   6...Qxb3. The chip put the other courses out of scope, so this went to the SPEC
+   section 6 register rather than into White's content. It is a hole in the
+   preparation rather than an error in it, and Nick will meet it from both sides.
+7. **What neither pass can see, which matters before reading a clean report.** The
+   student's moves and the graded alternatives are now covered. The opponent's own
+   moves and the frequency weights are not, so a line where the repertoire is sound
+   and White's move is one no club player would choose still reads as clean. And
+   neither pass reads the prose: a note can name a punishment that does not exist
+   while the grade beside it is perfectly fair, which is exactly what three of this
+   course's notes did. Those were caught by hand, by grepping every note that made a
+   concrete material claim and checking each one.
+8. **Study, Play, Drill and Progress were driven live as Black.** The engine opened
+   with 1.d4, the book steered White through 2.c4, 3.Nf3, 4.Bf4, 5.e3, 6.Be2 and
+   7.O-O, every one an authored move, and took over at the exact book exit with 8.b3.
+   The report named it: "White left the repertoire on move 8 with b3". Drill mixed 10
+   London cards with 5 Slav in one queue, the per-course filter narrowed it to the
+   Slav, and both a correct answer and a deliberate Qxd5 were graded with their
+   authored notes. Progress showed the Slav's chapters, its concepts and the game.
+9. **The packaged app shows three courses and read Nick's real progress.** It opened
+   with "2 of 41 lines learnt, 17 due now" on the London tile, which is his data
+   rather than a blank state, and the Slav opened with all seven chapters. The file
+   was hashed and copied to scratch before the run, per the rule that cost this
+   project two learnt lines at phase 7, and it came back byte for byte at
+   SHA256 DB071A7F...A741. Nothing was left in the AppData folder.
+10. **The lint bar is six warnings, not the four recorded at gate 6.** All six are
+   pre-existing and none is from this phase: two each in progress-context and
+   catalog-context about fast refresh, one in PlayableBoard, one in Play. A seventh,
+   an unused import in the phase 8 engine pass, was removed in its own commit.
+11. **The exercises are better than phase 8's and still not a puzzle set.** Three of
+   the five end on a genuine tactic now rather than two of four, and the chapter says
+   so in its own intro. The other two end on a decision, which is honest and is not
+   what a chapter called "typical tactics" promises. The register item from phase 8
+   stands.
+12. **A trap worth knowing for the next session on this machine.** `$TMPDIR` is empty
+   in the Bash tool here, so `"$TMPDIR/scratch.py"` resolves to the filesystem root
+   and writes into `C:\Apps\Git`. Six files went there before it was noticed, and
+   they were moved out. That directory already holds a couple of dozen stray files
+   from earlier sessions, which suggests this is not the first time. Use the absolute
+   scratchpad path.

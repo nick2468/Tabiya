@@ -1,6 +1,6 @@
 # Content schema
 
-v2.2, 2026-08-29 (v1.0 written in phase 1 from SPEC.md section 4). SPEC.md rules
+v2.3, 2026-08-29 (v1.0 written in phase 1 from SPEC.md section 4). SPEC.md rules
 where the two disagree; section 10 governs the course model. Refinements land here
 with one line of why in the change log at the bottom.
 
@@ -178,6 +178,17 @@ on the rule below: a concept earns a place in the core only when a second course
 actually needs it, because a core tag every course must understand is a cost paid by
 every course.
 
+The Slav declares eight of its own: `vs-quiet`, `vs-exchange-slav`, `vs-catalan` and
+`vs-london` name the opponent's choice; `light-squares`, `c5-break` and `e5-break` are
+chess concepts; and `c-file` is the one an Exchange Slav is actually about. Three of
+those names are already in the Caro-Kann's list, and sharing a name is the intended
+behaviour rather than a clash: a course declares what it uses, and the Progress view
+compares courses by exactly these strings, so `light-squares` should mean the same
+thing in both. `vs-exchange-slav` is spelt out rather than reusing the Caro-Kann's
+`vs-exchange` for the opposite reason: the two Exchange variations are different
+positions with different plans, and pooling them would put unrelated numbers side by
+side.
+
 Extending the CORE set is allowed, with a line in the change log below saying why.
 
 ## What the loader produces
@@ -254,6 +265,11 @@ recognise were meant to mean.
   "Where a course lives" section above says on what terms. The shadowing rules are
   not tidiness: a course id is written into every progress key hanging off it, so
   two courses sharing an id would share a drill schedule.
+- 2026-08-29: a third course, and the first rule about sharing tag NAMES between
+  courses. The Slav reuses `light-squares` and `c5-break` from the Caro-Kann because
+  they mean the same thing, and spells out `vs-exchange-slav` rather than reusing
+  `vs-exchange` because that one does not. The test is whether the Progress view
+  putting the two courses' numbers side by side would say something true.
 - 2026-08-29: the second course arrived and the vocabulary held. The Caro-Kann needed
   eight new tags and every one went into its own `tagExtensions`, so the core ten are
   still exactly the concepts both repertoires share. `light-squares` is the closest
