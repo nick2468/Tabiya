@@ -945,7 +945,7 @@ reason; the prose sweep done and its method stated; **no repertoire move changed
 Nick's two learnt line ids still resolve, proven on a copy of his real progress file;
 the Slav untouched; vitest green and `tsc -b` clean.
 
-- [ ] **Review gate 10 passed**
+- [x] **Review gate 10 passed** (2026-08-29)
 
 Open items (phase 10):
 
@@ -1044,3 +1044,43 @@ Open items (phase 10):
    findings their own gates accepted, plus item 9's escalation.
    One commit lands after those runs and it changes a note, which neither engine pass
    reads: they see moves and grades only. The note checker was re-run after it.
+12. **What the review verified independently (gate 10).** 371 tests and
+   `tsc -b --force` green; the Slav byte-identical. The rule this phase was built
+   around was checked rather than believed: both course trees were re-parsed from the
+   pre-phase commit and compared move by move, **343 London node paths and 425
+   Caro-Kann ones, identical**, so not one repertoire move moved, and both of Nick's
+   learnt line ids resolve against the loaded content. His progress file is untouched
+   at SHA256 DB071A7F...A741.
+   Both mistake passes were re-run from scratch. The London reports 15 findings with
+   **one** on the "too kindly" side, at 0.96 against a band ending at 0.90, which is
+   the band-edge keep item 10 already records; it was 27 findings and 13 too-kindly at
+   gate 9. The Caro-Kann reports 3, **all three positional keeps and nothing
+   too-kindly at all**, from 12 and 10. The counts differ from item 11's by a few
+   because of the 500 ms wobble phase 9 item 12 documents; the direction that matters,
+   the too-kindly side, is 13 to 1 and 10 to 0. `note-claims.mjs` was run over all
+   three courses and reports no unsupported claim anywhere.
+   Four content claims were played out on a board rather than taken on trust. The
+   headline one holds: **...Qa5 loses the queen** in two Caro-Kann chapters, because
+   13.Bxa5 takes her and nothing recaptures - it was graded an inaccuracy about losing
+   time. So do the three new London claims: dxc5 really wins nothing (Qxc5 takes
+   back), Ne5 really loses a knight for a pawn either way, and Bd3 really hangs g2
+   with no recapture.
+13. **One residual fault the review found, of the species this phase existed to
+   remove.** In the London's chapter 7, `Qh5` was graded a mistake with a note saying
+   the queen "arrives alone" and "has to go home". It does not go home: the knight on
+   f6 plays ...Nxh5 and nothing recaptures. Fixed in its own commit. It is worth
+   naming why three separate checkers missed it. The mistake pass saw a correct grade
+   and moved on. The note checker only tests notes that MAKE a material claim, and
+   this one makes none. And the prose sweep greps for material words, which this note
+   does not contain. **The gap is the note that explains a capture positionally**, and
+   the way to find it is to work from the board to the prose rather than the other way
+   round: list the entries a capture answers, then read what each one says. Gate 9's
+   sweep surfaced this entry and did not chase it, so the miss is this reviewer's too.
+14. **Item 9's Nb5 escalation is not new, and the register already holds it.** Phase 4
+   open item 1 recorded the same thing after its own engine pass: the engine prefers
+   5.Nxd5 at about +2.9 to the taught 5.Nb5 at about +1.3, and Nb5 was kept
+   deliberately because it is sound, clearly better for White, and the one idea the
+   chapter teaches. It ends "worth a ruling if Nick would rather have the stronger
+   move at the price of a second idea to remember", and that ruling is still open. Two
+   independent passes reaching the same conclusion is a good sign for the tooling, not
+   a new finding.
