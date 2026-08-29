@@ -731,3 +731,55 @@ Open items (phase 8):
    bytes; the AppData courses folder is empty. One test renamed at review: the
    two-courses position test claimed to prove course scoping was load bearing while
    asserting the opposite, so it now says what it actually checks.
+
+---
+
+## Phase 9 - the Slav: a Black answer to 1.d4
+
+Goal: the third course, and the first built on a structure the app already proves.
+Nick asked for an easy-to-learn answer to 1.d4 on 2026-08-29 and ruled the opening,
+the chapter list and the main-line fork the same day, so this phase needs nobody:
+it runs start to finish unattended. `chips/phase-9-slav.md` is the builder prompt.
+
+The rulings, so the plan carries them and not only the chip:
+
+- **The Slav**, 1.d4 d5 2.c4 c6, chosen over the King's Indian, the Stonewall Dutch
+  and the Queen's Gambit Declined. It puts Black's pawns on c6 and d5, which is the
+  Caro-Kann structure one file across, and it obeys the same rule: the light-squared
+  bishop comes out before ...e6. The whole Black repertoire then runs on one
+  structure, which is the London's "one setup" idea applied to Nick's Black games.
+- **Against the main line 4.Nc3, the course plays 4...dxc4 5.a4 Bf5.** It is the
+  answer that actually delivers the bishop outside, which is the through-line of the
+  repertoire. The a6 Chebanenko was the lower-theory option and was not taken: its
+  plans are more flexible and therefore easier to play aimlessly.
+- **Seven chapters**, in the shape both other courses use - organised by what the
+  opponent does, a concept chapter first and exercises last.
+
+- [ ] 9.1 The course folder and manifest: `courses/slav-black/`, id `slav-black`
+  (permanent once shipped), colour black, tag extensions declared.
+- [ ] 9.2 ch0 the defence and its ideas: the c6 and d5 structure, the bishop rule,
+  the ...c5 break, and what carries over from the Caro-Kann. Concept chapter,
+  intro 300-500 words, mistake entries on at least four setup decisions.
+- [ ] 9.3 ch1 the main line 3.Nf3 Nf6 4.Nc3 dxc4 5.a4 Bf5, to the section 3 depth.
+- [ ] 9.4 ch2 the quiet build-up (4.e3 and 4.Bf4), where the bishop comes out easily.
+- [ ] 9.5 ch3 the Exchange Slav 3.cxd5, including how Black plays it for more than
+  a draw rather than shaking hands.
+- [ ] 9.6 ch4 sidelines and move-order tricks: early queen sorties, g3 and Catalan
+  setups, and the order care around ...Bf5 meeting Qb3.
+- [ ] 9.7 ch5 White without c4: the London, Colle and Torre. Nick plays the London
+  as White, so this chapter is his own repertoire seen from the other side.
+- [ ] 9.8 ch6 typical tactics and plans, the exercises.
+- [ ] 9.9 The engine pass over every student move, **run after the last content
+  edit** (phase 8 open item 3): findings fixed or recorded with numbers.
+- [ ] 9.10 Ship it bundled: the course's own numeric block in the content suite,
+  card keys proved disjoint from both other courses, Play driven live with the
+  engine opening the game, docs swept, installer rebuilt.
+
+Acceptance: the course meets the SPEC.md section 3 quality bar with the engine pass
+recorded; Study, Drill and Play work end to end; the London and the Caro-Kann are
+untouched; vitest green; the packaged app shows three courses and Nick's progress
+file is unchanged.
+
+- [ ] **Review gate 9 passed**
+
+Open items (phase 9): none yet.
