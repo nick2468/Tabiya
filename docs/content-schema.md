@@ -1,6 +1,6 @@
 # Content schema
 
-v2.3, 2026-08-29 (v1.0 written in phase 1 from SPEC.md section 4). SPEC.md rules
+v2.4, 2026-08-29 (v1.0 written in phase 1 from SPEC.md section 4). SPEC.md rules
 where the two disagree; section 10 governs the course model. Refinements land here
 with one line of why in the change log at the bottom.
 
@@ -147,7 +147,7 @@ the rules below attach to.
 | `weight` | integer | Opponent nodes only. 1-10, the club-level frequency estimate, default 1. Drives Play steering. |
 | `plan` | string | Required on every leaf: how the student continues from here. |
 | `tags` | string[] | Student nodes only. Every tag from the vocabulary below. |
-| `mistakes` | object[] | Student nodes only. Each entry `{ san, grade, note }`; `san` legal from this node's own parent position (the mistake is an alternative to this move, not a reply to it); `grade` one of `playable`, `inaccuracy`, `mistake`; `note` required, saying why. |
+| `mistakes` | object[] | Student nodes only. Each entry `{ san, grade, note }`; `san` legal from this node's own parent position (the mistake is an alternative to this move, not a reply to it); `grade` one of `playable`, `inaccuracy`, `mistake`; `note` required, saying why. The validator checks the move; two scripts check the judgement, and neither is optional: `scripts/engine-mistakes.mjs` compares the grade with what the engine says the alternative costs, and `scripts/note-claims.mjs` plays out any material the note claims. |
 | `shapes` | object[] | Optional board highlights for Study. Each `{ orig, dest?, brush }`; squares like `f4`; brush one of `green`, `red`, `blue`, `yellow`. |
 | `children` | Node[] | Optional. Absent or empty means a leaf. |
 
@@ -265,6 +265,12 @@ recognise were meant to mean.
   "Where a course lives" section above says on what terms. The shadowing rules are
   not tidiness: a course id is written into every progress key hanging off it, so
   two courses sharing an id would share a drill schedule.
+- 2026-08-29: a mistake entry now has three things checked rather than one. The
+  validator has always checked that the alternative move is legal. Phase 9 added a
+  pass over the GRADE, and phase 10 added one over the NOTE, after a sweep of the two
+  older courses found nineteen grades the engine disagreed with and four notes naming
+  a punishment that does not exist. The rule for an author is short: a grade is a
+  claim about a number and a note is a claim about a board, and both get checked.
 - 2026-08-29: a third course, and the first rule about sharing tag NAMES between
   courses. The Slav reuses `light-squares` and `c5-break` from the Caro-Kann because
   they mean the same thing, and spells out `vs-exchange-slav` rather than reusing

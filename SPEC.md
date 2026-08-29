@@ -255,8 +255,10 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   bishop out first. Deferred at gate 9 only because it is a phase of work rather than a
   review touch. Recorded 2026-08-29. Phase 9 took
   half of it: `scripts/engine-mistakes.mjs` now checks the graded alternatives beside
-  each repertoire move, which found eight faults the first pass could not see. The
-  opponent's own moves and the weights are still unchecked.
+  each repertoire move, which found eight faults the first pass could not see. Phase
+  10 ran it over the two older courses and added `scripts/note-claims.mjs` for the
+  prose. The opponent's own moves and the weights are still unchecked, and that is
+  now the whole of what is left in this item.
 - **A gap in the London course, found from the other side**: the Slav's chapter 5
   answers 5.c3 Qb6 6.Qb3 with 6...c4, and the London course's chapter 2 covers only
   6...Qxb3. That is a hole in White's preparation rather than an error in it, and the

@@ -926,18 +926,18 @@ on the Slav; run over the older two courses it disagrees with 27 London entries 
 Caro-Kann ones. Three were verified and fixed at the gate; the rest is this phase.
 `chips/phase-10-mistake-sweep.md` is the builder prompt and it runs unattended.
 
-- [ ] 10.1 The "graded too kindly" findings, 13 in the London and 10 in the
+- [x] 10.1 The "graded too kindly" findings, 13 in the London and 10 in the
   Caro-Kann: each re-checked at 2500 ms, then regraded or kept with a reason.
-- [ ] 10.2 The "graded too harshly" findings, 14 and 2: read all, expect to change
+- [x] 10.2 The "graded too harshly" findings, 14 and 2: read all, expect to change
   almost none, record the count kept and why. A system opening's mistake entries are
   positional judgements the engine scores at nothing.
-- [ ] 10.3 The prose sweep by hand: every note making a concrete material claim in
+- [x] 10.3 The prose sweep by hand: every note making a concrete material claim in
   both courses, played out and verified. This is the class with no checker, and it is
   how gate 9 found the `...Be4` note claiming a capture that never wins the bishop.
-- [ ] 10.4 Build the prose checker if it can be made honest, designing around the two
+- [x] 10.4 Build the prose checker if it can be made honest, designing around the two
   false-positive traps gate 9 hit: multi-move sequences in a note, and alternatives
   that are themselves captures. A checker nobody trusts is worse than none.
-- [ ] 10.5 Both passes re-run over both courses after the last edit, final numbers
+- [x] 10.5 Both passes re-run over both courses after the last edit, final numbers
   recorded.
 
 Acceptance: every "too kindly" finding fixed or recorded with its 2500 ms number and a
@@ -947,4 +947,100 @@ the Slav untouched; vitest green and `tsc -b` clean.
 
 - [ ] **Review gate 10 passed**
 
-Open items (phase 10): none yet.
+Open items (phase 10):
+
+1. **The loop lesson, and it is the reason this phase existed.** A new checker is a
+   claim about every course, not just the one it ships with. The mistake pass was
+   built at phase 9 and run on the Slav, where it reports nothing. Run over the two
+   older courses it disagreed with 26 of the London's 199 entries and 11 of the
+   Caro-Kann's 127. Nothing about those courses changed between their review gates
+   and this phase. What changed is that something finally looked at that field.
+2. **The "graded too kindly" findings: 11 in the London, 8 in the Caro-Kann, all 19
+   re-measured at 2500 ms before anything was touched, all confirmed, most larger at
+   the longer time.** The worst of them:
+   - Caro-Kann, main line, in TWO chapters: after White castles long, ...Qa5 was an
+     inaccuracy that "loses the time needed to castle". The bishop went to d2 two
+     moves earlier and covers a5, so 13.Bxa5 takes the queen and nothing recaptures.
+     5.54. A queen-losing move described as slow, in the chapter a trainee reads first.
+   - Caro-Kann Advance: ...Qb6 graded PLAYABLE at 4.67. It walks onto a discovered
+     attack, 17.Nxf5 Nxf5 18.Bxb6, and loses the queen for a bishop.
+   - London, the Qxb2 gambit: Rb1 an inaccuracy that "chases the queen to a2" when
+     5...Qxc3+ takes a knight with check. 5.72.
+   - London, King's Indian: d5 an inaccuracy for "closing the centre" when it forgets
+     that ...e5 attacks f4 as well as d4. 9...exf4 10.exf4 is a bishop for a pawn. 4.66.
+   - London, Classical: Bg5 an inaccuracy that "wanders" when 4...Qxg5 takes it. 4.38.
+   - Caro-Kann: ...Bg4 in two chapters, both inaccuracies for positional reasons that
+     never arise, because Qxg4 wins the bishop. 4.31 and 4.06.
+   - London, against the Dutch: Ne5 graded playable and then an inaccuracy a move
+     later, while ...dxe5 wins a knight for a pawn either way. 3.65 and 3.68.
+   Every one regraded, every rewritten note played out with chess.js first.
+3. **The "graded too harshly" findings: 15 in the London and 3 in the Caro-Kann read,
+   and all 18 kept.** A system opening's mistake entries are positional judgements
+   the engine scores at nothing, and those judgements are the course's subject. The
+   London grades 1.d4 d5 2.e3 a mistake and it costs 0.03, which is right for a course
+   whose whole point is getting the bishop out before the pawn; the h4 pawn lunges
+   cost 0.01 to 0.28 and are graded mistakes for the same kind of reason. Two are
+   cases where the engine actually PREFERS the alternative, Bg5 at -0.62 and Qf3 at
+   -0.45, and the grades still stand, because a one-setup course is teaching a setup.
+4. **The prose sweep found four faults, and three sat beside grades that were
+   correct.** Method: grep every note in both courses for a material word, then play
+   each claim out on a board. That is the class no engine pass can see.
+   - London: "The d4 pawn loses its support" is false. The pawn on e3 supports d4
+     throughout; what c4 gives up is the triangle, for an isolated queen's pawn.
+   - London: "It wins a pawn too" for dxc5 is false. The queen on b6 takes back.
+   - London: "It wins nothing" for Nc7+ understates a move that loses a piece.
+   - Caro-Kann: "taking with the queen loses the e4 pawn" names a capture that does
+     not exist in the position. White's only recapture is bxc3, and both blocks lose
+     a piece rather than a pawn.
+5. **The checker was worth building, and it is calibrated rather than assumed.**
+   `scripts/note-claims.mjs` parses the move sequence a mistake note names, plays it,
+   and compares the material that changes hands with the material the note promises.
+   Calibrated against the Slav, whose notes phase 9 swept by hand: 13 claims checked,
+   zero false positives. Over all three courses now it reports nothing unsupported.
+   Its limits are worth knowing: it reads mistake entries only, only claims that name
+   a numbered move, and it cannot judge a positional claim at all. It lists the
+   claims it cannot check for a human, and two of the four prose faults above came
+   off that list rather than out of the checker.
+6. **A false-positive trap the chip did not name, and it decided the design.** The
+   obvious baseline, the position before the alternative, makes the checker lie
+   whenever the repertoire move is a recapture: "4.dxc6 Nxc6 leaves Black a pawn
+   down" is true against ...cxd5 and reads as nothing against the position before it.
+   Measuring against the repertoire line instead fixes that and the chip's second
+   trap at the same time, because an even trade nets zero either way. The third
+   thing it needed was a negation guard: "it does not lose a pawn" is a note about
+   why a move is safe, and reading it as a promise of material is how a checker
+   earns its distrust.
+7. **No repertoire move changed, and it is proven rather than asserted.** Both
+   versions of all 12 touched files were re-parsed and every move path compared:
+   identical, including the alternatives inside the mistake entries. Only grade and
+   note strings differ.
+8. **Nick's two learnt lines survive, proven on a copy of his real file with a
+   negative control.** Both ids resolve against the loaded content; a deliberately
+   mutated id does not, and the id set has over a hundred members, so the check
+   cannot pass vacuously. The scratch test was deleted afterwards. His file was
+   hashed before and after and never opened for writing: SHA256 DB071A7F...A741.
+9. **Two move-pass findings that are repertoire moves, recorded and not touched.**
+   The London's 1.89 at Nb5 in the Qxb2 gambit, where the position before it reads
+   +3.03 and the engine prefers something else, and the Caro-Kann's 0.59 at ...Bxe4,
+   which gate 8 already recorded and kept. The chip puts repertoire moves out of
+   scope for this phase; the first is worth a look by whoever next opens the London,
+   because it says the gambit line has a stronger move than the one taught.
+10. **Three entries left deliberately at the band edge, all graded playable and all
+   within a tenth of a pawn of the line.** The Caro-Kann Advance's ...e6 at 0.89, the
+   London's 2.e4 against a fianchetto at 0.91, and the London's Be5 in the Gruenfeld
+   chapter at 0.84, each measured at 2500 ms against a band that ends at 0.90. All
+   three notes already say the move is a real try with a drawback, which is what
+   playable means. The last two only appeared in the final run: at 500 ms they sit on
+   either side of the threshold depending on the run, which is phase 9 open item 12
+   showing up again in a different course.
+11. **The final numbers, all four passes re-run after the last edit that could change
+   them.** The mistake pass over the London falls from 26 findings to 18, and every
+   one of the 18 is a keep: 16 positional judgements graded harshly on purpose, and
+   the two band-edge entries in item 10. Over the Caro-Kann it falls from 11 to 2,
+   both positional keeps, with nothing left on the "too kindly" side at all. The
+   note checker reports no unsupported claim in any of the three courses. The move
+   passes, which are about repertoire moves and therefore out of this phase's scope,
+   report 5 in the London and 2 in the Caro-Kann, unchanged content and the same
+   findings their own gates accepted, plus item 9's escalation.
+   One commit lands after those runs and it changes a note, which neither engine pass
+   reads: they see moves and grades only. The note checker was re-run after it.
