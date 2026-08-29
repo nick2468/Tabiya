@@ -91,8 +91,8 @@
                                     },
                                     {
                                       "san": "Bf5",
-                                      "grade": "inaccuracy",
-                                      "note": "5.cxd5 cxd5 6.Qb3 hits b7 and d5 together. Take on c4 first and the bishop comes out with nothing hanging behind it."
+                                      "grade": "playable",
+                                      "note": "Playable, and 5.cxd5 cxd5 6.Qb3 puts a question to b7 and d5 that Black then has to answer exactly. Taking on c4 first avoids the discussion altogether."
                                     }
                                   ],
                                   "children": [

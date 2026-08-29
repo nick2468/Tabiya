@@ -110,7 +110,7 @@
                                           "mistakes": [
                                             {
                                               "san": "Qxb3",
-                                              "grade": "playable",
+                                              "grade": "inaccuracy",
                                               "note": "The trade White wants and is prepared for: 7.axb3 gives White the open a-file and a comfortable, slightly better game."
                                             }
                                           ],
@@ -367,6 +367,26 @@
                           ],
                           "children": [
                             {
+                              "san": "dxc5",
+                              "note": "The critical try, and the one a Colle player rarely finds. White grabs the pawn and hopes to hold it with b4.",
+                              "weight": 3,
+                              "children": [
+                                {
+                                  "san": "e5",
+                                  "note": "Take the centre instead of the pawn. With pawns on d5 and e5 Black has more space than White has extra material.",
+                                  "tags": ["e5-break"],
+                                  "plan": "Play ...Be7 or ...Bxc5, castle, and only then decide about the pawn. If White holds it with b4, the queenside squares White gave up are worth more than the pawn.",
+                                  "mistakes": [
+                                    {
+                                      "san": "Qa5+",
+                                      "grade": "inaccuracy",
+                                      "note": "6.Nc3 or 6.Bd2 blocks and the queen has to move again. The pawn is not running anywhere."
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
                               "san": "Bd3",
                               "note": "The Colle bishop. It points at h7 and waits for the centre to open.",
                               "weight": 8,
@@ -383,8 +403,8 @@
                                     },
                                     {
                                       "san": "Bf5",
-                                      "grade": "playable",
-                                      "note": "Also outside, and 6.Bxf5 trades Black's good bishop off. From g4 it cannot be traded so easily and it hits the defender of d4."
+                                      "grade": "mistake",
+                                      "note": "6.Bxf5 simply wins a bishop: with no pawn on e6 and none on g6, nothing takes back. On g4 the bishop is safe and it hits the defender of d4."
                                     }
                                   ],
                                   "children": [

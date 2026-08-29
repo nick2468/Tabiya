@@ -1,7 +1,7 @@
 {
   "id": "ch3-exchange",
   "title": "The Exchange Slav: 3.cxd5",
-  "intro": "White trades on d5 and the pawns are symmetrical. Most books shrug at this point and say the position is equal. It is, and there is still a great deal to do, because symmetrical positions are decided by who uses the one open file first.\n\n## Recapture with the c-pawn\n\n3...cxd5 keeps a pawn on d5, opens the c-file and leaves the bishop on c8 free to come out. Taking with the queen instead invites 4.Nc3, which develops a piece and gains a move on her.\n\n## What Black is actually playing for\n\nThree things, in order. The c-file: a rook on c8 is worth more than a rook on a random square, and Black gets to put one there first because White has spent moves on Bf4 and Bd3. The c4 square: a knight that reaches c4 through a5 cannot be driven off by a pawn without White playing b3, which loosens c3. And the b2 pawn: once the dark-squared bishops come off, ...Qb6 is a real threat rather than a gesture.\n\nNone of that wins a game by itself. What it does is give Black something to aim at while a club opponent shuffles, and shuffling is what most club opponents do in a symmetrical position.\n\n## The one sequence to memorise\n\nAfter 4.Nc3 Nf6 5.Bf4 Nc6 6.e3 Bf5 White often plays 7.Qb3, hitting b7 and d5 at once. The answer is 7...Na5. It looks like it puts the knight offside and it is the only move that solves everything: it defends b7 by attacking b7, so 8.Qxb7 loses the queen to 8...Nxb7. White has to check on a4, Black blocks with 8...Bd7, and Black has gained two moves.\n\n## Typical mistakes at this level\n\nRecapturing on d5 with the queen and losing a move to Nc3. Meeting Qb3 with ...Qd7 or ...Rb8, both of which defend b7 and leave Black passive when ...Na5 gains time. Playing ...e6 before the bishop is out, which is the same error as everywhere else in this course. And treating a symmetrical position as an agreed draw, then drifting until the one open file belongs to White.",
+  "intro": "White trades on d5 and the pawns are symmetrical. Most books shrug at this point and say the position is equal. It is, and there is still a great deal to do, because symmetrical positions are decided by who uses the one open file first.\n\n## Recapture with the c-pawn\n\n3...cxd5 keeps a pawn on d5, opens the c-file and leaves the bishop on c8 free to come out. Taking with the queen instead invites 4.Nc3, which develops a piece and gains a move on her.\n\n## What Black is actually playing for\n\nThree things, in order. The c-file: a rook on c8 is worth more than a rook on a random square, and Black gets to put one there first because White has spent moves on Bf4 and Bd3. The c4 square: a knight that reaches c4 through a5 cannot be driven off by a pawn without White playing b3, which loosens c3. And the b2 pawn: once the dark-squared bishops come off, ...Qb6 is a real threat rather than a gesture.\n\nNone of that wins a game by itself. What it does is give Black something to aim at while a club opponent shuffles, and shuffling is what most club opponents do in a symmetrical position.\n\n## The one sequence to memorise\n\nAfter 4.Nc3 Nf6 5.Bf4 Nc6 6.e3 Bf5 White often plays 7.Qb3, hitting b7 and d5 at once. The answer is 7...Na5. It looks like it puts the knight offside and it is the only move that solves everything: it defends b7 by attacking b7, so 8.Qxb7 loses the queen to 8...Nxb7. White checks on a4 instead, and the block has to be 8...Bd7, because the bishop attacks the queen back. Any other block and 9.Qxa5 takes the knight.\n\n## Typical mistakes at this level\n\nRecapturing on d5 with the queen and losing a move to Nc3. Meeting Qb3 with ...Rb8, which drops the exchange to Bxb8, or blocking the check on a4 with the queen, which drops the knight on a5. Playing ...e6 before the bishop is out, which is the same error as everywhere else in this course. And treating a symmetrical position as an agreed draw, then drifting until the one open file belongs to White.",
   "defaultTags": ["vs-exchange-slav"],
   "stem": ["d4", "d5", "c4", "c6", "cxd5"],
   "tree": [
@@ -17,8 +17,8 @@
         },
         {
           "san": "Nf6",
-          "grade": "mistake",
-          "note": "4.dxc6 Nxc6 leaves Black a pawn down with nothing to show for it. The pawn on d5 has to be taken."
+          "grade": "inaccuracy",
+          "note": "4.dxc6 Nxc6 leaves Black a pawn down for a lead in development. That is a gambit, and there is no reason to play one here."
         }
       ],
       "children": [
@@ -209,7 +209,7 @@
                                   "children": [
                                     {
                                       "san": "Na5",
-                                      "note": "The move to remember. It defends b7 by attacking it: 8.Qxb7 loses the queen to 8...Nxb7.",
+                                      "note": "The move to remember. It defends b7 by attacking it, so 8.Qxb7 loses the queen to 8...Nxb7, and the check on a4 is answered by a bishop that hits the queen back.",
                                       "tags": ["tactics"],
                                       "mistakes": [
                                         {
@@ -219,8 +219,8 @@
                                         },
                                         {
                                           "san": "Rb8",
-                                          "grade": "inaccuracy",
-                                          "note": "Passive. The rook was going to c8, and now it sits on b8 defending a pawn for the rest of the game."
+                                          "grade": "mistake",
+                                          "note": "8.Bxb8 wins the exchange. The bishop on f4 has been looking down the diagonal at b8 since move five."
                                         },
                                         {
                                           "san": "e6",
@@ -236,13 +236,13 @@
                                           "children": [
                                             {
                                               "san": "Bd7",
-                                              "note": "Block with the bishop, which gains another move on the queen. The bishop is not badly placed on d7 either.",
+                                              "note": "Block with the bishop, and notice that it attacks the queen on a4 as it does so. That is what saves the knight: 9.Qxa5 now loses the queen to 9...Bxa4.",
                                               "tags": ["development"],
                                               "mistakes": [
                                                 {
                                                   "san": "Qd7",
-                                                  "grade": "inaccuracy",
-                                                  "note": "9.Qxd7+ Kxd7 leaves Black's king in the middle in an endgame. The bishop is the right blocker."
+                                                  "grade": "mistake",
+                                                  "note": "9.Qxa5 simply takes the knight. Only the bishop can block, because only the bishop attacks the queen on a4 while it does."
                                                 },
                                                 {
                                                   "san": "Nc6",

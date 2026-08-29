@@ -205,6 +205,13 @@
                                           "san": "Be7",
                                           "note": "Quiet development. Black has no weaknesses and White has no way in.",
                                           "tags": ["development", "king-safety"],
+                                          "mistakes": [
+                                            {
+                                              "san": "dxc4",
+                                              "grade": "playable",
+                                              "note": "Also good, and the engine prefers it: taking makes White spend a move on the pawn. Finishing the set-up first is the simpler way to play the position."
+                                            }
+                                          ],
                                           "children": [
                                             {
                                               "san": "Nh4",
@@ -296,13 +303,13 @@
                                   "mistakes": [
                                     {
                                       "san": "Qc7",
-                                      "grade": "mistake",
-                                      "note": "It guards b7 and abandons d5: 7.Qxd5 wins a pawn, and the bishop on g2 is looking at the same square."
+                                      "grade": "inaccuracy",
+                                      "note": "7.Bf4 comes with a hit on the queen and White keeps the pull. It does not lose a pawn, because 7.Qxd5 would run into 7...Qxc1+, but the queen is misplaced on c7 here."
                                     },
                                     {
                                       "san": "b6",
-                                      "grade": "mistake",
-                                      "note": "7.Qxd5 wins the pawn and the bishop on g2 joins in. The queen trade is the only clean answer."
+                                      "grade": "inaccuracy",
+                                      "note": "It defends b7 with a pawn and leaves c6 and a6 full of holes for a bishop on g2 to use. Offering the queen trade solves the whole problem."
                                     }
                                   ]
                                 }
@@ -353,8 +360,8 @@
                     },
                     {
                       "san": "Bf5",
-                      "grade": "playable",
-                      "note": "Playable, and 5.Qb3 puts a question to b7 straight away. Taking on c4 first avoids the whole discussion."
+                      "grade": "mistake",
+                      "note": "5.Qxf5 wins a bishop. The queen went to c2 for exactly this diagonal, which is the point of putting her there."
                     }
                   ],
                   "children": [

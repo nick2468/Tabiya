@@ -22,8 +22,8 @@
         },
         {
           "san": "Bf5",
-          "grade": "inaccuracy",
-          "note": "5.cxd5 cxd5 6.Qb3 hits b7 and d5 together. Take on c4 first and the bishop comes out with nothing hanging behind it."
+          "grade": "playable",
+          "note": "Playable, and 5.cxd5 cxd5 6.Qb3 puts a question to b7 and d5 that Black then has to answer exactly. Taking on c4 first avoids the discussion altogether."
         }
       ],
       "children": [
@@ -314,8 +314,8 @@
                                               "mistakes": [
                                                 {
                                                   "san": "Qxe5",
-                                                  "grade": "inaccuracy",
-                                                  "note": "10.Bf4 hits the queen and gains a move for nothing. The knight is the right piece for e5."
+                                                  "grade": "mistake",
+                                                  "note": "10.Nxe5 Nxe5 11.Qd4 attacks the knight on e5 and nothing defends it. The knight is the piece that belongs there."
                                                 }
                                               ],
                                               "children": [
@@ -335,8 +335,8 @@
                                                         },
                                                         {
                                                           "san": "Bd6",
-                                                          "grade": "inaccuracy",
-                                                          "note": "11.Nxe5 Bxe5 12.Bxe5 Qxe5 trades Black's best piece off and leaves the queenside pawns to defend."
+                                                          "grade": "mistake",
+                                                          "note": "11.Nxd6+ Qxd6 12.Qxd6 and the knight on e5 goes too, because the bishop on f4 was pinning it to the queen all along."
                                                         }
                                                       ],
                                                       "children": [
@@ -375,8 +375,8 @@
                                                                       "mistakes": [
                                                                         {
                                                                           "san": "O-O-O",
-                                                                          "grade": "mistake",
-                                                                          "note": "The king walks straight into the open a-file that a4 left behind, with a bishop on g2 already pointing that way."
+                                                                          "grade": "playable",
+                                                                          "note": "Sound enough, and it puts the king on the side where a4 has opened a file and a bishop on g2 is already pointing. Short castling asks fewer questions."
                                                                         }
                                                                       ]
                                                                     }
@@ -716,8 +716,8 @@
                                               "mistakes": [
                                                 {
                                                   "san": "Bb7",
-                                                  "grade": "inaccuracy",
-                                                  "note": "10.bxc6 and the extra pawn is gone for nothing. Recapture on b5 first."
+                                                  "grade": "mistake",
+                                                  "note": "10.bxc6 Bxc6 11.Ng5 and Black is not a pawn up any more, with the king still in the middle. Recapture on b5 first."
                                                 }
                                               ]
                                             }
