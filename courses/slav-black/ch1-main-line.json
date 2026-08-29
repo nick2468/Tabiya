@@ -562,12 +562,12 @@
                           "children": [
                             {
                               "san": "e6",
-                              "note": "Open a path for the dark-squared bishop. The other bishop is not shut in here: with the b-pawn gone from b7 it comes out to b7 or a6.",
+                              "note": "Open the path for the dark-squared bishop, which is what holds the pawn on b4: Nxb4 can now be answered by ...Bxb4+. The light-squared bishop is not shut in here, because with the b-pawn gone it comes out to b7 or a6.",
                               "mistakes": [
                                 {
                                   "san": "Bf5",
-                                  "grade": "playable",
-                                  "note": "Also natural. With the queenside opened up, the bishop has a better home on b7 or a6 than on f5."
+                                  "grade": "inaccuracy",
+                                  "note": "8.Nxb4 then wins the pawn outright. After ...e6 the bishop on f8 answers Nxb4 with ...Bxb4+, which is the whole reason that move comes first."
                                 }
                               ],
                               "children": [

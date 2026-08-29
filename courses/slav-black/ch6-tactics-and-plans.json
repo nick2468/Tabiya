@@ -47,7 +47,7 @@
                                   "children": [
                                     {
                                       "san": "e3",
-                                      "note": "The main line. This is exercise five: play through to move fourteen and find Black's answer to the pawn on e5.",
+                                      "note": "The main line, and exercise one. Play through to move fourteen and find Black's answer to the pawn on e5.",
                                       "weight": 7,
                                       "children": [
                                         {
@@ -184,7 +184,7 @@
                                     },
                                     {
                                       "san": "Ne5",
-                                      "note": "Exercise three. Play to move eleven and find the move that keeps everything defended.",
+                                      "note": "Exercise two. Play to move eleven and find the move that keeps everything defended.",
                                       "weight": 5,
                                       "children": [
                                         {
@@ -287,7 +287,7 @@
                     },
                     {
                       "san": "e3",
-                      "note": "Exercise one, the Slow Slav. Play to move ten and find out what the open h-file is worth.",
+                      "note": "Exercise three, the Slow Slav. Play to move ten and find out what the open h-file is worth.",
                       "weight": 6,
                       "children": [
                         {
@@ -395,7 +395,7 @@
             },
             {
               "san": "cxd5",
-              "note": "Exercise two, the Exchange Slav. Play to move seven and find the answer to the queen on b3.",
+              "note": "Exercise four, the Exchange Slav. Play to move seven and find the answer to the queen on b3.",
               "weight": 6,
               "children": [
                 {
@@ -485,7 +485,7 @@
     },
     {
       "san": "Bf4",
-      "note": "Exercise four, the London. Play to move six and choose between the queen trade and something better.",
+      "note": "Exercise five, the London. Play to move six and choose between the queen trade and something better.",
       "weight": 7,
       "children": [
         {
