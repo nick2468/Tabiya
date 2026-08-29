@@ -21,7 +21,7 @@
  * Usage: node scripts/engine-pass.mjs <course-folder> [movetime-ms]
  */
 import { createRequire } from 'node:module'
-import { readFileSync, readdirSync } from 'node:fs'
+import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { Chess } from 'chess.js'
 
