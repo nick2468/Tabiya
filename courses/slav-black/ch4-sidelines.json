@@ -501,6 +501,13 @@
                                           "san": "Be7",
                                           "note": "Finish the development and get ready to castle.",
                                           "tags": ["development", "king-safety"],
+                                          "mistakes": [
+                                            {
+                                              "san": "dxc4",
+                                              "grade": "playable",
+                                              "note": "Also good, and the engine slightly prefers it here as well: taking makes White spend a move on the pawn. Finishing the set-up is the simpler way to play it."
+                                            }
+                                          ],
                                           "children": [
                                             {
                                               "san": "b3",
