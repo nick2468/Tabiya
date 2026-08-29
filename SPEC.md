@@ -246,9 +246,9 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   outright, and one note naming a punishment that does not exist. **The rest have not
   been read**, and they need the same treatment: run both passes, re-check each finding
   at 2500 ms, and sweep the prose for material claims by hand, which is what phase 9
-  did for the Slav. Two calibration notes for whoever takes it. The "graded too kindly"
-  direction is where the real faults sit, and 11 of the London's and 10 of the
-  Caro-Kann's fall that way. The "graded too harshly" direction is mostly noise on the
+  did for the Slav. **Taken up as PLAN.md phase 10**, chipped 2026-08-29. Two
+  calibration notes for whoever runs it. The "graded too kindly" direction is where the
+  real faults sit, and 13 of the London's and 10 of the Caro-Kann's fall that way. The "graded too harshly" direction is mostly noise on the
   London specifically, because a system opening's mistake entries are positional
   judgements the engine scores at nothing: "1.d4 d5 2.e3" is graded a mistake and
   costs 0.06, and that grade is right for a course whose whole subject is getting the

@@ -914,3 +914,37 @@ Open items (phase 9):
    a course whose entire subject is getting the bishop out first. Sixteen of the
    London's 27 fall that way. The "graded too kindly" direction is where the real
    faults sit. Worth knowing before anyone reads a 27-line report as 27 bugs.
+   Counted exactly when the chip was written: the London splits 13 too kindly and 14
+   too harshly, the Caro-Kann 10 and 2.
+
+---
+
+## Phase 10 - the mistake-entry sweep of the London and the Caro-Kann
+
+Goal: finish what gate 9 started. The mistake pass built in phase 9 had only ever run
+on the Slav; run over the older two courses it disagrees with 27 London entries and 12
+Caro-Kann ones. Three were verified and fixed at the gate; the rest is this phase.
+`chips/phase-10-mistake-sweep.md` is the builder prompt and it runs unattended.
+
+- [ ] 10.1 The "graded too kindly" findings, 13 in the London and 10 in the
+  Caro-Kann: each re-checked at 2500 ms, then regraded or kept with a reason.
+- [ ] 10.2 The "graded too harshly" findings, 14 and 2: read all, expect to change
+  almost none, record the count kept and why. A system opening's mistake entries are
+  positional judgements the engine scores at nothing.
+- [ ] 10.3 The prose sweep by hand: every note making a concrete material claim in
+  both courses, played out and verified. This is the class with no checker, and it is
+  how gate 9 found the `...Be4` note claiming a capture that never wins the bishop.
+- [ ] 10.4 Build the prose checker if it can be made honest, designing around the two
+  false-positive traps gate 9 hit: multi-move sequences in a note, and alternatives
+  that are themselves captures. A checker nobody trusts is worse than none.
+- [ ] 10.5 Both passes re-run over both courses after the last edit, final numbers
+  recorded.
+
+Acceptance: every "too kindly" finding fixed or recorded with its 2500 ms number and a
+reason; the prose sweep done and its method stated; **no repertoire move changed**, so
+Nick's two learnt line ids still resolve, proven on a copy of his real progress file;
+the Slav untouched; vitest green and `tsc -b` clean.
+
+- [ ] **Review gate 10 passed**
+
+Open items (phase 10): none yet.
