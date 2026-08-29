@@ -237,7 +237,23 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   engine pass judges the student's moves only, so a line where the repertoire is sound
   but the opponent's move is one no club player would choose passes unnoticed. Phase 8
   found several of those by hand. Checking weights properly needs real-game frequency
-  data, which is the Lichess explorer item above. Recorded at phase 8. Phase 9 took
+  data, which is the Lichess explorer item above. Recorded at phase 8.
+- **The mistake-entry sweep of the London and the Caro-Kann**: `scripts/engine-mistakes.mjs`
+  was built in phase 9 and run only on the Slav, because the chip scoped the other two
+  courses out. Gate 9 ran it on both and it disagrees with 27 of the London's 190
+  entries and 12 of the Caro-Kann's 107, against 0 for the Slav. Three Caro-Kann faults
+  were verified and fixed at the gate: two moves graded `playable` that hang a bishop
+  outright, and one note naming a punishment that does not exist. **The rest have not
+  been read**, and they need the same treatment: run both passes, re-check each finding
+  at 2500 ms, and sweep the prose for material claims by hand, which is what phase 9
+  did for the Slav. Two calibration notes for whoever takes it. The "graded too kindly"
+  direction is where the real faults sit, and 11 of the London's and 10 of the
+  Caro-Kann's fall that way. The "graded too harshly" direction is mostly noise on the
+  London specifically, because a system opening's mistake entries are positional
+  judgements the engine scores at nothing: "1.d4 d5 2.e3" is graded a mistake and
+  costs 0.06, and that grade is right for a course whose whole subject is getting the
+  bishop out first. Deferred at gate 9 only because it is a phase of work rather than a
+  review touch. Recorded 2026-08-29. Phase 9 took
   half of it: `scripts/engine-mistakes.mjs` now checks the graded alternatives beside
   each repertoire move, which found eight faults the first pass could not see. The
   opponent's own moves and the weights are still unchecked.

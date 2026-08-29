@@ -780,7 +780,7 @@ recorded; Study, Drill and Play work end to end; the London and the Caro-Kann ar
 untouched; vitest green; the packaged app shows three courses and Nick's progress
 file is unchanged.
 
-- [ ] **Review gate 9 passed**
+- [x] **Review gate 9 passed** (2026-08-29)
 
 Open items (phase 9):
 
@@ -883,3 +883,34 @@ Open items (phase 9):
    they were moved out. That directory already holds a couple of dozen stray files
    from earlier sessions, which suggests this is not the first time. Use the absolute
    scratchpad path.
+14. **What the review verified independently (gate 9).** 371 tests and `tsc -b --force`
+   green; the London and the Caro-Kann untouched by the phase itself. Both passes were
+   re-run from scratch over the finished Slav: the mistake pass reports **0**, and the
+   move pass reports **3**, all between 0.57 and 0.60 and all three the ones item 5
+   records as kept - which also lands inside the two-to-four spread item 12 predicts.
+   The two headline claims were checked with chess.js rather than believed. After
+   10...Bxh2+ White's only legal move is Kh1: nothing on the board can capture on h2,
+   exactly as the note says. And 7.Qxd5 really does lose a piece to 7...Qxc1+, leaving
+   Black two points up. The 9.Nxd5 Nxd5 10.Qxd5 sequence in chapter 2 was challenged
+   and stands: after it there is no recapture on d5 and White is a clean pawn ahead.
+15. **The new tool found unfixed faults in the two OLDER courses, which is the gate's
+   real finding.** `scripts/engine-mistakes.mjs` had only ever been run on the Slav.
+   Run at review on the others it disagrees with 27 of the London's 190 mistake
+   entries and 12 of the Caro-Kann's 107, against 0 for the Slav. Three Caro-Kann
+   faults were verified by hand and fixed in their own commit: `...Bf5` graded
+   **playable** in two Exchange positions where 7.Bxf5 simply wins the bishop because
+   nothing recaptures - the identical species phase 9 fixed in the Slav - and an
+   Advance note claiming 6.Nxe4 wins a bishop when 6...dxe4 takes back. That last one
+   is the case phase 9 named as having no checker: the grade was fair, so the mistake
+   pass could not see it, and only reading the prose finds it. The rest of the sweep is
+   a phase of work and went to the SPEC section 6 register rather than into this gate.
+   The lesson for the delivery loop: **a new checker is a claim about every course, not
+   just the one it shipped with**, and the chip that builds one should say who runs it
+   over the back catalogue.
+16. **A calibration note on the mistake pass, from running it on a system opening.**
+   Its "graded too harshly" direction is mostly noise on the London: a system
+   repertoire's mistake entries are positional judgements the engine scores at nothing,
+   so "1.d4 d5 2.e3" is graded a mistake, costs 0.06, and the grade is still right for
+   a course whose entire subject is getting the bishop out first. Sixteen of the
+   London's 27 fall that way. The "graded too kindly" direction is where the real
+   faults sit. Worth knowing before anyone reads a 27-line report as 27 bugs.
