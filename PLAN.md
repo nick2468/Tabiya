@@ -1084,3 +1084,69 @@ Open items (phase 10):
    move at the price of a second idea to remember", and that ruling is still open. Two
    independent passes reaching the same conclusion is a good sign for the tooling, not
    a new finding.
+
+---
+
+## Phase 11 - course bundles: import, export and the author's documentation
+
+Goal: a course becomes one file a chess player can write, share and install without
+reinstalling the app. SPEC.md section 11 governs; `docs/course-bundles-concept.md`
+records the reasoning. Nick ruled the format (a PGN file), the re-import behaviour
+(ask, showing what survives) and the proving course (the Ruy Lopez Exchange) on
+2026-08-30, so this phase runs unattended.
+
+- [ ] 11.1 The PGN parser: variations, comments, glyphs and header tags, keeping the
+  tree. **chess.js discards variations silently - verified at design time - so this
+  is ours.** Pure, in `src/model`, with tests over a hand-written PGN covering a
+  branch, a nested variation, a glyph, a comment with tokens and a malformed file.
+- [ ] 11.2 PGN to course: header tags to manifest, games to chapters, the pre-move
+  comment to the intro, `[%tags]`, `[%weight]`, `[%plan]`, `[%cal]` and `[%csl]` to
+  their fields, glyphs to mistake grades. Errors collected, never thrown, in the
+  loader's own style; a `{` or `}` in prose is a named error.
+- [ ] 11.3 Course to PGN, and the round-trip test: exporting every bundled course and
+  parsing it back must reproduce the course exactly. This is the test that keeps the
+  parser and the writer honest at the same time.
+- [ ] 11.4 Import in the app: a file picker, validation with every error listed, and
+  compilation into the AppData folder shape phase 7 already loads. Nothing written on
+  failure. Refuses to shadow a built-in course, as now.
+- [ ] 11.5 The re-import check: before writing over an installed course, count how
+  many learnt lines still resolve against the incoming one and say so, then confirm
+  or cancel. Cancel writes nothing.
+- [ ] 11.6 Export in the app: any course in the catalog, built-in or added, to a
+  `.pgn` the trainee chooses. Reuses the dialog plumbing progress backup already has.
+- [ ] 11.7 Course prose renders markdown links as plain text (SPEC.md section 11): a
+  link would navigate the Tauri window itself, and an opening note does not need one.
+- [ ] 11.8 `docs/authoring-a-course.md` for a chess player, not a programmer: build
+  it in a study, one chapter per chapter, glyphs for alternatives, the optional
+  tokens, what the app checks and refuses, and how to send it to someone.
+
+Acceptance: SPEC.md section 11 items 1 to 5; vitest green and `tsc -b` clean; the
+installer rebuilt; Nick's progress file unchanged, hash-verified.
+
+- [ ] **Review gate 11 passed**
+
+Open items (phase 11): none yet.
+
+---
+
+## Phase 12 - the Ruy Lopez Exchange, delivered as a bundle
+
+Goal: the fourth course, and the first that arrives the way a community course would.
+Its chip is written after gate 11, so it can describe the format as built rather than
+as planned.
+
+- [ ] 12.1 Chapter list for a club-level Exchange Ruy (4.Bxc6 dxc6), agreed with Nick
+  before drafting, in the shape the other three courses use.
+- [ ] 12.2 Draft to the SPEC.md section 3 bar, student White.
+- [ ] 12.3 Both engine passes and the note checker, run after the last content edit.
+- [ ] 12.4 Export it as `docs/bundles/ruy-lopez-exchange.pgn`, the reference bundle
+  and the documentation's worked example, and prove the round trip.
+- [ ] 12.5 Install it through the app's own importer on a clean profile, which is the
+  end-to-end proof that a course needs no reinstall.
+
+Acceptance: the course meets the section 3 bar with both passes recorded; it installs
+from its bundle through the app; the other three courses are untouched; vitest green.
+
+- [ ] **Review gate 12 passed**
+
+Open items (phase 12): none yet.

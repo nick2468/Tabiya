@@ -420,3 +420,113 @@ picks up `courses/*/course.json` through Vite's glob, so the catalog, Study, Pla
 and Progress all found it without being told. That is the strongest evidence available
 that the course model is data rather than code, short of Nick dropping a folder into
 AppData himself, which phase 7 proved separately.
+
+## 11. Course bundles: one file, written by chess players
+
+Ruled 2026-08-30 after a Q and A. `docs/course-bundles-concept.md` records the
+reasoning and the options not taken; this section is normative. Sections 1-10 stay
+true. Phase 7 already loads courses from a folder under AppData: this section makes a
+course **one shareable file that a chess player can author, and adds a way to get one
+out of the app.**
+
+### The bundle is a PGN file (ruled)
+
+One `.pgn` per course, chapters as separate games in it, in course order. PGN with
+variations is what every chess GUI writes, so the authoring tool is one the audience
+already owns: build the repertoire in a Lichess study or any chess program, export,
+import. There is no bespoke syntax for moves, tree structure or prose.
+
+**A PGN parser is ours to write.** chess.js's `loadPgn` silently discards variations,
+verified at design time - a sideline vanished with no error. A repertoire is a tree,
+so its parser must keep variations, comments and glyphs. It is pure and testable, and
+it is the only real engineering in this section.
+
+Mapping, in both directions:
+
+| Course concept | PGN |
+|---|---|
+| Course id, title, student colour, tagline, format version, tag extensions | Header tags `[CourseId]`, `[CourseTitle]`, `[StudentColour]`, `[Tagline]`, `[FormatVersion]`, `[TagExtensions]`, repeated on every game so an extracted chapter still identifies its course; they must agree, and disagreement is an error |
+| Chapter id, title | `[ChapterId]`, `[ChapterTitle]` per game |
+| Chapter order | Game order in the file |
+| Chapter intro | The comment before the first move |
+| Stem | The moves before the tree branches |
+| Note | A `{comment}` after the move |
+| Concept tags | `[%tags development king-safety]` inside a comment |
+| Opponent frequency weight | `[%weight 7]` |
+| Leaf plan | `[%plan ...]` |
+| Study highlights (`shapes`) | `[%cal Gc1f4]` and `[%csl Gd4]`, the format Lichess already writes |
+| Mistake entry and its grade | A variation whose move carries a glyph: `!?` playable, `?!` inaccuracy, `?` mistake |
+| A genuine alternative line | A variation with no glyph |
+
+A glyphed variation is a mistake entry and carries no continuation, because the
+schema has nowhere to put one. A continuation after a glyphed move is an error naming
+the fix: put the refutation in the comment. Every token is optional; a PGN with
+nothing but moves and comments is a valid course.
+
+Prose lives in PGN comments, so a `{` or `}` in a note is an error with a clear
+message rather than a silent truncation.
+
+### Import and export
+
+**Import** takes a `.pgn`, parses it, validates it through the existing course loader,
+and compiles it into the folder shape under AppData that phase 7 already loads. The
+catalog, the merge rules and the shadowing checks are untouched. A file that fails
+validation is refused with every error listed, and nothing is written.
+
+**Export** goes the other way from any loaded course, built-in or added, so the London
+can be exported and edited in a chess GUI like anything else. Import of an export must
+reproduce the course exactly: that round trip is the test keeping parser and writer
+honest at once.
+
+### Importing over a course already installed (ruled)
+
+Progress hangs off the course id and a line id carries its own moves, so replacing a
+course can orphan learnt lines. Before writing anything, the app loads the incoming
+course, counts how many of the trainee's learnt lines still resolve against it, and
+says so - "replacing this keeps 7 of your 9 learnt lines" - then asks. Cancel writes
+nothing. This is the check gate 10 relied on, put in front of the trainee.
+
+### Community content
+
+Bundles are files. There is no registry, no signing and no ratings: those are a
+distribution product, and this is an offline single-user app.
+
+- **Imported courses are validated strictly, and are not held to the numeric quality
+  bar.** Legality, schema, the tag vocabulary and the shadowing rules all apply. The
+  section 3 bar - ten mistake entries a chapter, depth to move ten, the
+  typical-mistakes section - governs courses shipped in this repo, and already does,
+  because `content.test.ts` reads the bundled set only.
+- **Course prose renders links as plain text.** `react-markdown` already blocks raw
+  HTML, so a bundle cannot inject script, but a markdown link would navigate the Tauri
+  window itself. An opening note has no need of a hyperlink.
+- The author documentation states plainly that a bundle is code-free data, what the
+  app checks, and that a bundle should be treated like any other downloaded file.
+
+### Documentation
+
+`docs/authoring-a-course.md`, written for a chess player and not a programmer: build
+it in a study, one chapter per study chapter, how to mark an alternative with a glyph,
+the three optional tokens, what the app checks and what it refuses, and how to send it
+to somebody. The Ruy Lopez bundle is its worked example.
+
+### The bundle that proves it: the Ruy Lopez, Exchange Variation (ruled)
+
+4.Bxc6 dxc6, as White against 1...e5. The lowest-theory serious Ruy, with a clear
+structural plan around the healthy pawn majority, chosen over the Closed with d3 and
+the full classical Ruy, which is several phases of content. Authored in this repo to
+the full section 3 bar with both engine passes and the note checker, then exported as
+`docs/bundles/ruy-lopez-exchange.pgn` as the reference bundle and the documentation's
+worked example.
+
+### Section 11 acceptance
+
+1. A PGN with variations, comments and glyphs parses into a course, and a course
+   exports to a PGN that parses back into an identical course.
+2. Import from the app installs a course that appears in the catalog after a restart,
+   with no reinstall and no source change.
+3. Importing over an installed course reports how many learnt lines survive and does
+   nothing at all if cancelled.
+4. A malformed or invalid bundle is refused with its errors listed and writes nothing.
+5. `docs/authoring-a-course.md` takes a chess player from a study to an installed
+   course, with the Ruy Lopez bundle as its worked example.
+6. The Ruy Lopez meets the section 3 bar, and the reference bundle round-trips.
