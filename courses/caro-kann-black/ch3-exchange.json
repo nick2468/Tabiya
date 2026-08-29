@@ -52,7 +52,7 @@
                               "tags": ["bishop-placement", "light-squares"],
                               "mistakes": [
                                 { "san": "e6", "grade": "playable", "note": "Solid, but it locks in the bishop on c8 for no reason. Getting it out first is the whole idea of the opening." },
-                                { "san": "Bf5", "grade": "playable", "note": "Also natural. After 7.Bxf5 the trade helps White a little, whereas from g4 the bishop cannot be traded off so easily." }
+                                { "san": "Bf5", "grade": "mistake", "note": "It is not a trade: 7.Bxf5 simply wins the bishop, because with no pawn on e6 and none on g6 nothing takes back. On g4 the bishop is safe." }
                               ],
                               "children": [
                                 {
@@ -198,7 +198,7 @@
                               "note": "With g4 taken away the bishop has no outside square, so the structure comes first and the bishop goes to d7 later.",
                               "tags": ["development"],
                               "mistakes": [
-                                { "san": "Bf5", "grade": "playable", "note": "It gets the bishop out, and 7.Bxf5 trades it off straight away, which suits White slightly." }
+                                { "san": "Bf5", "grade": "mistake", "note": "It does not get the bishop out, it gives it away: 7.Bxf5 and nothing recaptures, with no pawn on e6 and none on g6. Play ...e6 first." }
                               ],
                               "children": [
                                 {

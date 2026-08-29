@@ -328,7 +328,7 @@
                       "note": "Step back and stay outside the chain. Every pawn White has thrown forward is a weakness once the game opens.",
                       "tags": ["bishop-placement"],
                       "mistakes": [
-                        { "san": "Be4", "grade": "mistake", "note": "6.Nxe4 wins the bishop, since the knight on c3 covers that square." }
+                        { "san": "Be4", "grade": "mistake", "note": "Nothing hangs, but 6.Nxe4 dxe4 gives up the bishop this whole opening exists to free, and leaves Black with doubled e-pawns against the two bishops." }
                       ],
                       "children": [
                         {
