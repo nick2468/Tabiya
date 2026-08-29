@@ -24,7 +24,7 @@
               "note": "Now the pawn comes, because the bishop is already outside it.",
               "tags": ["development"],
               "mistakes": [
-                { "san": "c5", "grade": "playable", "note": "Also good, and it hits d4 a move earlier. Playing ...e6 first means the bishop on f8 is never short of a square." },
+                { "san": "c5", "grade": "inaccuracy", "note": "It hits d4 a move earlier and costs about a pawn: ...e6 first keeps the bishop on f8 supplied with squares, which is what makes the break work later." },
                 { "san": "h6", "grade": "inaccuracy", "note": "There is no threat to stop yet, and the move does nothing for the plan." }
               ],
               "children": [
@@ -89,7 +89,7 @@
                                                       "note": "Ask the bishop to commit. While it sits on b5 the knight on c6 is pinned to the king and cannot touch e5.",
                                                       "tags": ["development"],
                                                       "mistakes": [
-                                                        { "san": "Qb6", "grade": "playable", "note": "Active and reasonable. Asking the bishop the question first keeps the position simple." },
+                                                        { "san": "Qb6", "grade": "mistake", "note": "It walks onto a discovered attack. The bishop on e3 is aimed at b6 through the knight, so 17.Nxf5 Nxf5 18.Bxb6 wins the queen for a bishop." },
                                                         { "san": "Rc8", "grade": "playable", "note": "The rook belongs there eventually, but the knight stays pinned for another move." }
                                                       ],
                                                       "children": [
@@ -137,7 +137,7 @@
                                                       "note": "Recapture with the knight, which now hits e3 and d4 and is ready to help take on e5.",
                                                       "tags": ["light-squares"],
                                                       "mistakes": [
-                                                        { "san": "exf5", "grade": "inaccuracy", "note": "It buries the light squares and lets White defend e5 in peace with f4." }
+                                                        { "san": "exf5", "grade": "mistake", "note": "It buries the light squares and lets White hold e5 in peace with f4. The engine puts it nearly two pawns behind the knight recapture." }
                                                       ],
                                                       "plan": "Nothing defends the pawn on e5, so take it. If White plays 10.c3 first, 10...Nxe3 is stronger still: chapter 6 runs that line to the end."
                                                     }

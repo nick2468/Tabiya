@@ -24,7 +24,7 @@
               "tags": ["development"],
               "mistakes": [
                 { "san": "Nf6", "grade": "playable", "note": "Also good, and it usually transposes. The queenside knight is the one with an obvious square." },
-                { "san": "Bg4", "grade": "inaccuracy", "note": "There is nothing on f3 to pin yet, and 5.Qf3 or 5.Nf3 makes the bishop look silly." }
+                { "san": "Bg4", "grade": "mistake", "note": "There is nothing on f3 to pin, and the queen sees g4: 5.Qxg4 simply wins the bishop." }
               ],
               "children": [
                 {

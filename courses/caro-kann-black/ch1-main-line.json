@@ -43,7 +43,7 @@
                           "note": "The bishop keeps the diagonal. It has not been driven anywhere useless.",
                           "tags": ["bishop-placement"],
                           "mistakes": [
-                            { "san": "Bg4", "grade": "inaccuracy", "note": "h3 and g4 send the bishop to g6 anyway, and White gets the kingside advance for free." },
+                            { "san": "Bg4", "grade": "mistake", "note": "The diagonal to g4 is open and the bishop would be undefended there: 6.Qxg4 simply wins it." },
                             { "san": "Be6", "grade": "inaccuracy", "note": "It blocks the e-pawn and does nothing from there." }
                           ],
                           "children": [
@@ -134,7 +134,7 @@
                                                                                   "note": "Modest and correct. It covers f6 and g5 and gets Black ready to castle.",
                                                                                   "tags": ["king-safety"],
                                                                                   "mistakes": [
-                                                                                    { "san": "Qa5", "grade": "inaccuracy", "note": "Kb1 and Ne4 chase the queen, and Black loses the time needed to castle." },
+                                                                                    { "san": "Qa5", "grade": "mistake", "note": "It loses the queen: the bishop on d2 covers a5, so 13.Bxa5 takes her and nothing recaptures. Castling first is the whole point of this move order." },
                                                                                     { "san": "Qc7", "grade": "playable", "note": "Playable, and it keeps long castling available. Getting the bishop out is simpler to handle." }
                                                                                   ],
                                                                                   "children": [

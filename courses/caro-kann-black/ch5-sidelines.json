@@ -59,7 +59,7 @@
                                   "children": [
                                     {
                                       "san": "bxc3",
-                                      "note": "Forced, since taking with the queen loses the e4 pawn.",
+                                      "note": "The only recapture. Blocking with Bd2 or Qd2 instead lets Black take on d2, and White stays a piece down.",
                                       "weight": 9,
                                       "children": [
                                         {
@@ -81,7 +81,7 @@
                                                   "tags": ["tactics"],
                                                   "mistakes": [
                                                     { "san": "c5", "grade": "mistake", "note": "The natural break, and it lets White off. 8.Qg4 hits g7 and Black is suddenly the one defending." },
-                                                    { "san": "e5", "grade": "inaccuracy", "note": "It opens the position for White's two bishops while the black king is still in the middle." }
+                                                    { "san": "e5", "grade": "mistake", "note": "It opens the position for White's two bishops with the black king still in the middle, and it passes up the check that wins the pawn back. Nearly two pawns." }
                                                   ],
                                                   "children": [
                                                     {

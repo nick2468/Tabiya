@@ -71,7 +71,7 @@
                                           "note": "The bishop keeps the diagonal and stays outside. It is not going back into the box.",
                                           "tags": ["bishop-placement"],
                                           "mistakes": [
-                                            { "san": "Bg4", "grade": "inaccuracy", "note": "White plays h3 and g4 and the bishop ends up on g6 anyway, having handed White a free kingside advance." },
+                                            { "san": "Bg4", "grade": "mistake", "note": "The queen on d1 is looking straight at g4 down an open diagonal: 6.Qxg4 wins the bishop. The retreat has to be to g6." },
                                             { "san": "Be6", "grade": "inaccuracy", "note": "The bishop blocks the square its own e-pawn wants and does very little from there." }
                                           ],
                                           "children": [
@@ -162,7 +162,7 @@
                                                                                                   "note": "Modest and correct. The bishop covers f6 and g5 and clears the way to castle.",
                                                                                                   "tags": ["king-safety"],
                                                                                                   "mistakes": [
-                                                                                                    { "san": "Qa5", "grade": "inaccuracy", "note": "It looks active, but Kb1 and Ne4 chase the queen and Black loses the time needed to castle." },
+                                                                                                    { "san": "Qa5", "grade": "mistake", "note": "It loses the queen. The bishop went to d2 two moves ago and covers a5, so 13.Bxa5 simply takes her and nothing recaptures." },
                                                                                                     { "san": "Qc7", "grade": "playable", "note": "A normal square, and it keeps queenside castling available. Getting the bishop out first is simpler." }
                                                                                                   ],
                                                                                                   "children": [
