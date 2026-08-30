@@ -34,6 +34,8 @@ export interface Node {
   variant?: string
   weight?: number
   plan?: string
+  /** Leaf only: what this whole line is called in the Study table. */
+  name?: string
   tags?: string[]
   mistakes?: Mistake[]
   shapes?: Shape[]

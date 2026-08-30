@@ -209,7 +209,15 @@ function fakeCourse(note: string): LoadedCourse {
         title: 'Only',
         intro: 'Lead.\n\n## Typical mistakes at this level\n\nNone.',
         stem: [],
-        tree: [{ san: 'd4', note, tags: ['development'], plan: 'Play on.' }],
+        tree: [
+          {
+            san: 'd4',
+            note,
+            tags: ['development'],
+            name: 'The one-move line',
+            plan: 'Play on.',
+          },
+        ],
       },
     },
   )

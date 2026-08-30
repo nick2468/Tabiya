@@ -32,7 +32,7 @@ const chapterOne = load({
               note: 'A Black reply in the fixture.',
               weight: 7,
               children: [
-                { san: 'Nf3', note: 'Develop.', tags: ['development'], plan: 'Bd3 and castle.' },
+                { san: 'Nf3', note: 'Develop.', tags: ['development'], name: 'The Nf3 line', plan: 'Bd3 and castle.' },
               ],
             },
             {
@@ -40,7 +40,7 @@ const chapterOne = load({
               note: 'A Black reply in the fixture.',
               weight: 5,
               children: [
-                { san: 'c3', note: 'Hold d4.', tags: ['vs-c5'], plan: 'Nbd2 next.' },
+                { san: 'c3', note: 'Hold d4.', tags: ['vs-c5'], name: 'The c3 line', plan: 'Nbd2 next.' },
               ],
             },
           ],
@@ -67,6 +67,7 @@ const chapterTwo = load({
           note: 'The same move by another route.',
           tags: ['bishop-placement'],
           mistakes: [{ san: 'Nc3', grade: 'inaccuracy', note: 'It blocks the c-pawn.' }],
+          name: 'The Bf4 line',
           plan: 'Play Nf3, Bd3, c3 and castle.',
         },
       ],
@@ -159,7 +160,7 @@ describe('buildCards', () => {
           san: 'd5',
           note: 'A Black reply in the fixture.',
           weight: 7,
-          children: [{ san: 'Nf3', note: 'A different answer here.', plan: 'e3 next.' }],
+          children: [{ san: 'Nf3', note: 'A different answer here.', name: 'The other answer', plan: 'e3 next.' }],
         },
       ],
     })
@@ -208,6 +209,7 @@ describe('cards across courses', () => {
             san: 'e3',
             note: 'This course completes the triangle.',
             tags: ['development'],
+            name: 'The first route',
             plan: 'Nf3, Bd3, c3 and castle.',
           },
         ],
@@ -224,6 +226,7 @@ describe('cards across courses', () => {
             san: 'Nf3',
             note: 'This course develops the knight first.',
             tags: ['development'],
+            name: 'The second route',
             plan: 'e3 next, and the same setup a move later.',
           },
         ],

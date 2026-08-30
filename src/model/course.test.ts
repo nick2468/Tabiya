@@ -21,6 +21,7 @@ const CHAPTER = {
       san: 'Bf4',
       note: 'Out with the bishop before e3 shuts it in.',
       tags: ['bishop-placement'],
+      name: 'The London setup',
       plan: 'Follow with e3, c3 and Nf3.',
     },
   ],
@@ -268,7 +269,7 @@ describe('a course that contradicts itself', () => {
               note: 'Develop.',
               weight: 7,
               children: [
-                { san: second, note: 'The follow-up.', tags: ['development'], plan: 'Play on.' },
+                { san: second, note: 'The follow-up.', tags: ['development'], name: 'The follow-up line', plan: 'Play on.' },
               ],
             },
           ],

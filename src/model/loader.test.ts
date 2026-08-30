@@ -38,6 +38,7 @@ function chapter(overrides: Record<string, unknown> = {}) {
               {
                 san: 'e3',
                 note: 'Complete the triangle and give the king a home.',
+                name: 'The ...Nf6 line',
                 plan: 'Develop with Nf3, Bd3 and c3, then castle short.',
               },
             ],
@@ -50,6 +51,7 @@ function chapter(overrides: Record<string, unknown> = {}) {
               {
                 san: 'e3',
                 note: 'Hold the centre. Black cannot win the d-pawn by force.',
+                name: 'The ...c5 line',
                 plan: 'Meet ...Qb6 with Nc3, keeping b2 defended by tactics rather than passivity.',
               },
             ],
@@ -115,6 +117,7 @@ describe('loadChapter, valid content', () => {
                   {
                     san: 'e3',
                     note: 'Complete the triangle and give the king a home.',
+                    name: 'The deep line',
                     plan: 'Develop with Nf3, Bd3 and c3, then castle short.',
                   },
                 ],
@@ -161,6 +164,7 @@ describe('loadChapter, valid content', () => {
         {
           san: 'd4',
           note: 'The move order this repertoire uses.',
+          name: 'The stemless line',
           plan: 'Answer almost anything with Bf4, e3, c3 and Nf3.',
         },
       ],
@@ -207,6 +211,32 @@ describe('loadChapter, negative fixtures', () => {
     expect(firstError(bad)).toBe('leaves need a plan saying how White continues')
   })
 
+  it('rejects a name on a move that is not a leaf', () => {
+    const bad = chapter()
+    ;(bad.tree[0] as Record<string, unknown>).name = 'Not a whole line'
+    expect(firstError(bad)).toBe(
+      'name belongs on leaves only: it names a whole line, and this move continues',
+    )
+  })
+
+  it('rejects two lines in one chapter sharing a name', () => {
+    const bad = chapter()
+    ;(bad.tree[0].children![1].children![0] as Record<string, unknown>).name = 'The ...Nf6 line'
+    expect(firstError(bad)).toContain('another line in this chapter is already called')
+  })
+
+  it('rejects a name too long for the lines table', () => {
+    const bad = chapter()
+    ;(bad.tree[0].children![0].children![0] as Record<string, unknown>).name = 'x'.repeat(41)
+    expect(firstError(bad)).toContain('40 characters or fewer')
+  })
+
+  it('rejects a name holding the bracket that ends its own token', () => {
+    const bad = chapter()
+    ;(bad.tree[0].children![0].children![0] as Record<string, unknown>).name = 'The ...Nf6] line'
+    expect(firstError(bad)).toContain('[%line ...] token ends at one')
+  })
+
   it('rejects a White move with no note', () => {
     const bad = chapter()
     delete (bad.tree[0] as Record<string, unknown>).note
@@ -224,6 +254,7 @@ describe('loadChapter, negative fixtures', () => {
     bad.tree.push({
       san: 'Nf3',
       note: 'A second White move at the same point, which v1 does not allow.',
+      name: 'The first branch',
       plan: 'Follow up with Bf4 anyway.',
     } as never)
     expect(firstError(bad)).toContain('two White moves share the variant "modern"')
@@ -235,6 +266,7 @@ describe('loadChapter, negative fixtures', () => {
       san: 'Nf3',
       variant: 'classical',
       note: 'The classical move order, kept out of v1 content but allowed by the schema.',
+      name: 'The classical branch',
       plan: 'Play Bf4 next.',
     } as never)
     expect(loadChapter(bad, whiteContext()).ok).toBe(true)
@@ -250,6 +282,7 @@ describe('loadChapter, negative fixtures', () => {
         {
           san: 'e3',
           note: 'A duplicated branch, which the validator must refuse.',
+          name: 'The duplicated branch',
           plan: 'Never reached.',
         },
       ],
@@ -385,7 +418,7 @@ describe('loadChapter, a Black course', () => {
       san: 'd4',
       note: 'A duplicated reply.',
       weight: 2,
-      children: [{ san: 'd5', note: 'Never reached.', plan: 'Never reached.' }],
+      children: [{ san: 'd5', note: 'Never reached.', name: 'The duplicated White reply', plan: 'Never reached.' }],
     })
     const result = loadChapter(bad, blackContext())
     expect(result.errors[0].message).toContain('two White replies play "d4"')

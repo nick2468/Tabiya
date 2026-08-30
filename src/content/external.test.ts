@@ -21,6 +21,7 @@ const CHAPTER = {
       san: 'Bf4',
       note: 'Out with the bishop before e3 shuts it in.',
       tags: ['bishop-placement'],
+      name: 'The London setup',
       plan: 'Follow with e3, c3 and Nf3.',
     },
   ],

@@ -21,6 +21,14 @@ export interface Line {
   path: string[]
   /** A short label for lists: the moves after the stem, numbered. */
   label: string
+  /**
+   * What the line is called: "Black trades on g3", from the leaf's own `name`.
+   *
+   * The validator requires one on every leaf, so the fall back to the move list
+   * is only ever reached by content that failed to load - and a row reading its
+   * moves is the old behaviour rather than an empty cell.
+   */
+  name: string
 }
 
 /**
@@ -47,6 +55,7 @@ export function chapterLines(chapter: LoadedChapter): Line[] {
           leaf: node,
           path: node.path,
           label: moveList(next),
+          name: node.name ?? moveList(next),
         })
       } else {
         visit(node.children, next)

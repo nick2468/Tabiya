@@ -1,6 +1,6 @@
 # Content schema
 
-v2.5, 2026-08-30 (v1.0 written in phase 1 from SPEC.md section 4). SPEC.md rules
+v2.6, 2026-08-30 (v1.0 written in phase 1 from SPEC.md section 4). SPEC.md rules
 where the two disagree; section 10 governs the course model. Refinements land here
 with one line of why in the change log at the bottom.
 
@@ -115,6 +115,7 @@ those functions.
   "variant": "modern",
   "weight": 7,
   "plan": "Castle short, then decide between Ne5 with f4, or c4 hitting the centre.",
+  "name": "The ...c5 break, with ...Qb6",
   "tags": ["development"],
   "mistakes": [
     { "san": "Nf3", "grade": "playable", "note": "Fine, but it lets Black play ...Nh5 before e3 covers f4." }
@@ -146,6 +147,7 @@ the rules below attach to.
 | `variant` | string | Student nodes only. Defaults to `modern`. Sibling student nodes must carry distinct variants, so there is at most one repertoire move per position. |
 | `weight` | integer | Opponent nodes only. 1-10, the club-level frequency estimate, default 1. Drives Play steering. |
 | `plan` | string | Required on every leaf: how the student continues from here. |
+| `name` | string | Required on every leaf, and rejected anywhere else: what the Study table calls the whole line. Unique within its chapter, 40 characters at most, and it may not contain `]`. |
 | `tags` | string[] | Student nodes only. Every tag from the vocabulary below. |
 | `mistakes` | object[] | Student nodes only. Each entry `{ san, grade, note }`; `san` legal from this node's own parent position (the mistake is an alternative to this move, not a reply to it); `grade` one of `playable`, `inaccuracy`, `mistake`; `note` required, saying why. The validator checks the move; two scripts check the judgement, and neither is optional: `scripts/engine-mistakes.mjs` compares the grade with what the engine says the alternative costs, and `scripts/note-claims.mjs` plays out any material the note claims. |
 | `shapes` | object[] | Optional board highlights for Study. Each `{ orig, dest?, brush }`; squares like `f4`; brush one of `green`, `red`, `blue`, `yellow`. |
@@ -154,6 +156,18 @@ the rules below attach to.
 Siblings must be distinct moves. The student's siblings are separated by `variant`, so
 there is at most one repertoire move per position. The opponent's have no such field,
 so two replies playing the same move are simply a duplicated branch and are rejected.
+
+### What a leaf carries
+
+A leaf ends a line, and two fields belong to it alone. `plan` says how the student
+continues once the book runs out. `name` says what the line is, in the words a person
+would use: "Black trades on g3", not "2...e6 3.e3 Nf6 4.Nf3 Bd6 5.Bg3 Bxg3". Study
+lists a chapter's lines by name, which is why the name has to be unique within the
+chapter and short enough to read in a table column.
+
+Naming a line changes no identity. A line id is built from its moves and a card key
+from the course and the position, so a name can be rewritten at any time without
+moving a single key in the trainee's progress file.
 
 Unknown fields are rejected, so a typo like `notes` fails loudly instead of vanishing.
 
@@ -284,6 +298,11 @@ recognise were meant to mean.
   older courses found nineteen grades the engine disagreed with and four notes naming
   a punishment that does not exist. The rule for an author is short: a grade is a
   claim about a number and a note is a claim about a board, and both get checked.
+- 2026-08-30: every leaf carries a `name`. Nick opened the London for the first time
+  and could not tell the lines apart: all seven in chapter 1 begin `2...e6 3.e3 Nf6
+  4.Nf3`, so a list of move strings names nothing. The name is the leaf's, because a
+  line is its leaf, and it is unique within the chapter because two rows reading the
+  same thing are the fault this replaces.
 - 2026-08-29: a third course, and the first rule about sharing tag NAMES between
   courses. The Slav reuses `light-squares` and `c5-break` from the Caro-Kann because
   they mean the same thing, and spells out `vs-exchange-slav` rather than reusing

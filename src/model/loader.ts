@@ -41,6 +41,7 @@ const NODE_FIELDS = new Set([
   'variant',
   'weight',
   'plan',
+  'name',
   'tags',
   'mistakes',
   'shapes',
@@ -49,6 +50,8 @@ const NODE_FIELDS = new Set([
 const MISTAKE_FIELDS = new Set(['san', 'grade', 'note'])
 const SHAPE_FIELDS = new Set(['orig', 'dest', 'brush'])
 const SQUARE = /^[a-h][1-8]$/
+/** A line name has to fit the Study table's column without wrapping. */
+const NAME_LIMIT = 40
 /** A chapter id becomes a filename when a bundle is installed. See loadChapter. */
 const CHAPTER_ID = /^[a-z0-9][a-z0-9-]*$/
 
@@ -160,7 +163,19 @@ export function loadChapter(raw: unknown, context: ChapterContext): LoadResult {
   }
   const stemFen = chess.fen()
 
-  const tree = walk(chapter.tree, stemFen, chapter.stem.length, stemPath, defaultTags, roles, errors)
+  // Line names are unique across the WHOLE chapter, not just among siblings, so
+  // the registry is made here and handed down.
+  const names = new Map<string, string>()
+  const tree = walk(
+    chapter.tree,
+    stemFen,
+    chapter.stem.length,
+    stemPath,
+    defaultTags,
+    roles,
+    names,
+    errors,
+  )
 
   if (errors.any) return { ok: false, chapter: null, errors: errors.list }
 
@@ -203,6 +218,7 @@ function walk(
   parentPath: string[],
   defaultTags: string[],
   roles: Roles,
+  names: Map<string, string>,
   errors: Errors,
 ): LoadedNode[] {
   // White always moves first, so parity still gives the colour. Whether it is
@@ -255,6 +271,7 @@ function walk(
 
     checkNote(raw, isStudent, roles, path, errors)
     checkPlan(raw, roles, path, errors)
+    checkName(raw, path, names, errors)
     node.tags = checkTags(raw, isStudent, roles, path, defaultTags, errors)
     checkWeight(raw, isStudent, roles, path, errors)
     checkMistakes(raw, isStudent, roles, parentFen, path, errors)
@@ -287,7 +304,7 @@ function walk(
       if (!Array.isArray(children)) {
         errors.add(path, 'children must be an array of nodes')
       } else if (children.length > 0) {
-        node.children = walk(children, fen, ply + 1, path, defaultTags, roles, errors)
+        node.children = walk(children, fen, ply + 1, path, defaultTags, roles, names, errors)
         node.isLeaf = false
       }
     }
@@ -337,6 +354,53 @@ function checkPlan(
     return
   }
   if (!isString(plan) || plan.trim() === '') errors.add(path, 'plan must be a non-empty string')
+}
+
+/**
+ * The line name: what the Study table calls this line.
+ *
+ * It sits on the LEAF because a line is its leaf. Naming anything higher would
+ * name a prefix that several lines share, which is the fault the name exists to
+ * fix: seven rows of one London chapter all begin "2...e6 3.e3 Nf6 4.Nf3", so
+ * the move that tells them apart is buried mid-string. For the same reason the
+ * name is unique across the chapter - two rows reading the same thing say
+ * nothing.
+ *
+ * Naming a line changes no identity. A line id is its moves and a card key is
+ * the course plus the position, so nothing in the progress file moves.
+ */
+function checkName(
+  raw: Record<string, unknown>,
+  path: string[],
+  names: Map<string, string>,
+  errors: Errors,
+) {
+  const isLeaf = !Array.isArray(raw.children) || raw.children.length === 0
+  const name = raw.name
+  if (name === undefined) return
+  if (!isLeaf) {
+    errors.add(path, 'name belongs on leaves only: it names a whole line, and this move continues')
+    return
+  }
+  if (!isString(name) || name.trim() === '') {
+    errors.add(path, 'name must be a non-empty string')
+    return
+  }
+  if (name.length > NAME_LIMIT) {
+    errors.add(path, `name must be ${NAME_LIMIT} characters or fewer, so the lines table can show it`)
+  }
+  // Same rule as plan, for the same reason: the [%line ...] token of the bundle
+  // format ends at the first closing bracket, so a name holding one is a name
+  // that cannot survive its own format.
+  if (name.includes(']')) {
+    errors.add(path, 'name cannot contain "]", because the [%line ...] token ends at one')
+  }
+  const clash = names.get(name)
+  if (clash !== undefined) {
+    errors.add(path, `another line in this chapter is already called "${name}": the one ending ${clash}`)
+    return
+  }
+  names.set(name, path.join(' '))
 }
 
 function checkVariant(
