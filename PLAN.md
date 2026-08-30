@@ -1283,17 +1283,30 @@ Goal: the fourth course, and the first that arrives the way a community course w
 Its chip is written after gate 11, so it can describe the format as built rather than
 as planned.
 
-- [ ] 12.1 Chapter list for a club-level Exchange Ruy (4.Bxc6 dxc6), agreed with Nick
+Chipped as `chips/phase-12-ruy-lopez.md`. Nick ruled the chapter list and both forks
+on 2026-08-30 before any drafting: **5.O-O** after 4.Bxc6 dxc6, and **4.Bxc6 dxc6
+against the Berlin** so the course teaches one structure rather than two. Course id
+`ruy-lopez-exchange`, permanent. Seven chapters: the idea, `5...f6`, `5...Bg4`, the
+flexible tries, `4...bxc6`, Black avoiding `3...a6`, and the exercises.
+
+- [x] 12.1 Chapter list for a club-level Exchange Ruy (4.Bxc6 dxc6), agreed with Nick
   before drafting, in the shape the other three courses use.
 - [ ] 12.2 Draft to the SPEC.md section 3 bar, student White.
-- [ ] 12.3 Both engine passes and the note checker, run after the last content edit.
-- [ ] 12.4 Export it as `docs/bundles/ruy-lopez-exchange.pgn`, the reference bundle
-  and the documentation's worked example, and prove the round trip.
-- [ ] 12.5 Install it through the app's own importer on a clean profile, which is the
-  end-to-end proof that a course needs no reinstall.
+- [ ] 12.3 All three checkers - both engine passes and the note checker - run after
+  the last content edit, then the by-hand read of the entries a capture answers,
+  which is the class no checker sees.
+- [ ] 12.4 Add the course's block to the content suite and export the bundle to
+  `docs/bundles/ruy-lopez-exchange.pgn`; the phase 11 round-trip test picks the course
+  up automatically, so confirm it does.
+- [ ] 12.5 Install the bundle by hand the way the importer would, prove the course
+  works in the packaged app, then remove it so Nick's own import lands clean.
+  **The importer's file dialog needs a human**, so the final click is his, like the
+  installer click. The phase records it as owed rather than blocking on it.
 
-Acceptance: the course meets the section 3 bar with both passes recorded; it installs
-from its bundle through the app; the other three courses are untouched; vitest green.
+Acceptance: the course meets the section 3 bar with all three checkers recorded; it
+round-trips through its own bundle; installing that bundle by hand produces a working
+course in the packaged app; the other three courses are untouched; vitest green and
+`tsc -b` clean.
 
 - [ ] **Review gate 12 passed**
 
