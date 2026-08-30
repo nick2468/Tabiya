@@ -1,5 +1,14 @@
 import { describe, expect, it } from 'vitest'
-import { chapterLines, fullMoveNumber, lineId, moveList, nodesForPath } from './lines'
+import {
+  chapterLines,
+  courseLineIds,
+  fullMoveNumber,
+  lineId,
+  moveList,
+  nodesForPath,
+  survivingLines,
+} from './lines'
+import { bundledCourses } from '../content'
 import { loadFixture } from '../test/fixtures'
 import type { LoadedChapter } from './types'
 
@@ -125,5 +134,37 @@ describe('the loaded node squares', () => {
     expect(chain[0].to).toBe('f6')
     expect(chain[1].from).toBe('e2')
     expect(chain[1].to).toBe('e3')
+  })
+})
+
+describe('what a replacement course would keep', () => {
+  /**
+   * The count SPEC.md section 11 puts in front of the trainee before a course
+   * is overwritten. A line id carries its own moves, so a line whose moves
+   * changed is a different line, and the old id resolves to nothing.
+   */
+  const course = bundledCourses.find((c) => c.id === 'london-white')!
+  const ids = [...courseLineIds(course)]
+
+  it('keeps every line when the incoming course has them all', () => {
+    expect(survivingLines(course, ids.slice(0, 3))).toMatchObject({ kept: 3, total: 3 })
+  })
+
+  it('counts a line the incoming course no longer has as lost', () => {
+    const learnt = [ids[0], `${course.id}/ch1-classical:d4 d5 Bf4 e6 e3 Nf6 Nf3 Bd6 Bg3 Qe7`]
+    const survive = survivingLines(course, learnt)
+    expect(survive).toMatchObject({ kept: 1, total: 2 })
+    expect(survive.lost).toHaveLength(1)
+  })
+
+  it('ignores learnt lines that belong to other courses', () => {
+    expect(survivingLines(course, ['slav-black/ch0:d4 d5', ids[0]])).toMatchObject({
+      kept: 1,
+      total: 1,
+    })
+  })
+
+  it('says nothing is at stake when none of the course is learnt', () => {
+    expect(survivingLines(course, [])).toMatchObject({ kept: 0, total: 0 })
   })
 })
