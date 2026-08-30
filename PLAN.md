@@ -1095,28 +1095,28 @@ records the reasoning. Nick ruled the format (a PGN file), the re-import behavio
 (ask, showing what survives) and the proving course (the Ruy Lopez Exchange) on
 2026-08-30, so this phase runs unattended.
 
-- [ ] 11.1 The PGN parser: variations, comments, glyphs and header tags, keeping the
+- [x] 11.1 The PGN parser: variations, comments, glyphs and header tags, keeping the
   tree. **chess.js discards variations silently - verified at design time - so this
   is ours.** Pure, in `src/model`, with tests over a hand-written PGN covering a
   branch, a nested variation, a glyph, a comment with tokens and a malformed file.
-- [ ] 11.2 PGN to course: header tags to manifest, games to chapters, the pre-move
+- [x] 11.2 PGN to course: header tags to manifest, games to chapters, the pre-move
   comment to the intro, `[%tags]`, `[%weight]`, `[%plan]`, `[%cal]` and `[%csl]` to
   their fields, glyphs to mistake grades. Errors collected, never thrown, in the
   loader's own style; a `{` or `}` in prose is a named error.
-- [ ] 11.3 Course to PGN, and the round-trip test: exporting every bundled course and
+- [x] 11.3 Course to PGN, and the round-trip test: exporting every bundled course and
   parsing it back must reproduce the course exactly. This is the test that keeps the
   parser and the writer honest at the same time.
-- [ ] 11.4 Import in the app: a file picker, validation with every error listed, and
+- [x] 11.4 Import in the app: a file picker, validation with every error listed, and
   compilation into the AppData folder shape phase 7 already loads. Nothing written on
   failure. Refuses to shadow a built-in course, as now.
-- [ ] 11.5 The re-import check: before writing over an installed course, count how
+- [x] 11.5 The re-import check: before writing over an installed course, count how
   many learnt lines still resolve against the incoming one and say so, then confirm
   or cancel. Cancel writes nothing.
-- [ ] 11.6 Export in the app: any course in the catalog, built-in or added, to a
+- [x] 11.6 Export in the app: any course in the catalog, built-in or added, to a
   `.pgn` the trainee chooses. Reuses the dialog plumbing progress backup already has.
-- [ ] 11.7 Course prose renders markdown links as plain text (SPEC.md section 11): a
+- [x] 11.7 Course prose renders markdown links as plain text (SPEC.md section 11): a
   link would navigate the Tauri window itself, and an opening note does not need one.
-- [ ] 11.8 `docs/authoring-a-course.md` for a chess player, not a programmer: build
+- [x] 11.8 `docs/authoring-a-course.md` for a chess player, not a programmer: build
   it in a study, one chapter per chapter, glyphs for alternatives, the optional
   tokens, what the app checks and refuses, and how to send it to someone.
 
@@ -1125,7 +1125,97 @@ installer rebuilt; Nick's progress file unchanged, hash-verified.
 
 - [ ] **Review gate 11 passed**
 
-Open items (phase 11): none yet.
+Open items (phase 11):
+
+1. **chess.js really does lose variations, checked here rather than taken on
+   trust.** `loadPgn` on a file containing `3. Nc3 (3. e5 {The Advance.} Bf5)`
+   returns the mainline with the sideline gone, no error and no warning, and
+   `pgn()` writes it back out without it. That is the whole reason the parser is
+   ours. It tokenises and descends by hand, keeps variations, comments and
+   glyphs, and refuses a file rather than half-reading it: an unterminated
+   comment, an unclosed variation, a brace in prose, a stray bracket, a repeated
+   header tag and junk it cannot read are each a named error with a line number.
+2. **The round trip earned its keep on the first run.** Exporting the London and
+   reading it back reordered an arrow and a circle on one node, because writing
+   all the circles and then all the arrows is the obvious thing to do and it is
+   wrong. Shapes now go out in the order they were drawn, in one token per run
+   of a kind, and a test pins it. That is exactly the asymmetry the test exists
+   to find, and nothing but a round trip would have found it.
+3. **Two additions to the mapping table in SPEC.md section 11, for the gate to
+   rule on.** The table has nowhere to put two things the schema holds, and
+   without them a course cannot survive a trip through its own format:
+   - `defaultTags`, a chapter-level field all three courses use, is the header
+     tag `[DefaultTags "development"]`. Without it every node needs its tags
+     written out, and the round trip fails on all three courses.
+   - `variant`, a node field no course uses today, is the comment token
+     `[%variant classical]`. It is in the schema, so the format can carry it.
+   Both are implemented and documented in `docs/authoring-a-course.md`. The
+   escalation rule says a format that cannot express the schema is a finding
+   rather than a reason to edit the schema quietly, so SPEC.md section 11 is
+   left as written and this is the finding.
+4. **Format decisions the spec did not settle, each made once and written down.**
+   - **The stem is the leading run of moves that carry no comment, no glyph and
+     no variation.** Every tree node needs a note, so the first annotated move is
+     where a chapter's own content starts, and that makes the split reversible.
+   - **`??` is read as a mistake; `!` and `!!` are refused** with a message
+     naming the three glyphs a bundle uses. Guessing what "good move" means for
+     a graded alternative would be inventing meaning.
+   - **Prose may not contain `{`, `}` or `[%`, and a plan may not contain `]`.**
+     The first would end the comment, the second would be read back as a token,
+     the third would end the plan token. Export refuses with a named error rather
+     than writing something that reads back wrong.
+   - **Unknown tokens are ignored.** Lichess writes `[%clk]` and `[%eval]` into
+     study comments; refusing a bundle because it remembers how long a move took
+     would be absurd.
+   - **Lines are wrapped between tokens and never inside a comment**, so a note
+     with paragraphs in it survives exactly and a chapter is still readable in
+     an editor.
+   - **`[FormatVersion]` defaults to 1 when absent**, because a person writing a
+     bundle by hand should not have to know the field exists.
+5. **A rule moved into the loader, which is a behaviour change worth a ruling.**
+   Two chapters expecting different moves in one position means one of them can
+   never be asked, because drill cards are keyed by position. The card builder
+   has reported it since phase 1 and the content suite fails on it, but only for
+   the courses in this repo. A dropped-in folder or an imported file was never
+   checked, and the trainee cannot run the suite. The check is now in
+   `loadCourse`, so every course gets it. Found by writing the documentation,
+   which claimed the app checked this.
+6. **What a session cannot verify, and what was verified instead.** Import and
+   export both go through a native file dialog, which no headless session can
+   drive. So the packaged app was used to prove the parts around them:
+   - the capability grants, by invoking the same `plugin:fs` commands the
+     importer uses, in the same order, against the real courses folder: mkdir,
+     write, read back and remove all succeeded, and the probe folder was
+     deleted. This is the phase 7 hazard, and the grants are listed at each
+     depth because that phase found these patterns are matched literally.
+   - a course in exactly the shape the importer writes, appearing in the catalog
+     after a restart with "Added by you", and its notes, its weights and its
+     `[%plan]` rendering in Study.
+   What is left for a human is one click in each dialog. The dialog plumbing
+   itself is the same code progress backup has used since phase 5.
+7. **The fixture was written by hand, which is the documentation's own claim
+   under test.** A two-chapter PGN typed in a text editor, no chess GUI
+   involved. It failed twice before it loaded: a weight on a White move and tags
+   on a Black one in a White course, and a bishop capture through its own pawn.
+   The loader named all three precisely, which is the promise the guide makes
+   about error messages. The fixture was installed into AppData, opened in the
+   packaged app, then deleted, and Nick's progress file came back byte for byte
+   at SHA256 DB071A7F...A741.
+8. **No test drives the import component itself.** This repo has no DOM test
+   environment, and adding jsdom and a testing library for one component is a
+   bigger change than this phase should make. The model underneath it is tested
+   hard: the parser, the mapping both ways, the round trip over three real
+   courses, the surviving-lines count and the link stripping, which is rendered
+   to a string with `react-dom/server` rather than to a DOM. The component's own
+   branching - refuse, confirm, cancel, write - is read rather than run.
+9. **Installing clears the JSON already in the course folder first.** A
+   replacement with fewer chapters would leave one behind, and a file the
+   manifest does not list is a load error, so the course would vanish from the
+   catalog and the reason would be a file nobody remembers writing.
+10. **Import is desktop only and export is not.** There is nowhere to install a
+   course in a browser, so the import section is hidden there; export offers a
+   download, because a bundle is just a file and getting one out of the browser
+   build costs nothing.
 
 ---
 

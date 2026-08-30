@@ -1,6 +1,6 @@
 # Content schema
 
-v2.4, 2026-08-29 (v1.0 written in phase 1 from SPEC.md section 4). SPEC.md rules
+v2.5, 2026-08-30 (v1.0 written in phase 1 from SPEC.md section 4). SPEC.md rules
 where the two disagree; section 10 governs the course model. Refinements land here
 with one line of why in the change log at the bottom.
 
@@ -265,6 +265,19 @@ recognise were meant to mean.
   "Where a course lives" section above says on what terms. The shadowing rules are
   not tidiness: a course id is written into every progress key hanging off it, so
   two courses sharing an id would share a drill schedule.
+- 2026-08-30: a course is also a file. SPEC.md section 11 adds a PGN bundle, which
+  is the same content in the format chess players already author in, and
+  `docs/authoring-a-course.md` is the guide for writing one. Nothing in this schema
+  changed to make that work: the bundle reader produces exactly the shape a course
+  folder holds and hands it to the same loader. Two fields needed somewhere to live
+  in a PGN and got one, which is a fact about the bundle format rather than about
+  this schema: `defaultTags` is the header tag `[DefaultTags]`, and `variant` is the
+  comment token `[%variant]`.
+- 2026-08-30: two chapters expecting different moves in one position is now a load
+  error rather than a rule only the content suite applied. Drill cards are keyed by
+  position, so one of the two could never be asked, and a course arriving as a
+  dropped-in folder or an imported file had never been checked for it. The rule has
+  not changed since 2026-08-27; what changed is that every course gets it.
 - 2026-08-29: a mistake entry now has three things checked rather than one. The
   validator has always checked that the alternative move is legal. Phase 9 added a
   pass over the GRADE, and phase 10 added one over the NOTE, after a sweep of the two
