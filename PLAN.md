@@ -1308,7 +1308,7 @@ round-trips through its own bundle; installing that bundle by hand produces a wo
 course in the packaged app; the other three courses are untouched; vitest green and
 `tsc -b` clean.
 
-- [ ] **Review gate 12 passed**
+- [x] **Review gate 12 passed** (2026-08-30)
 
 Open items (phase 12):
 
@@ -1329,6 +1329,15 @@ Open items (phase 12):
    **Nick's ruling:** either the Ruy stays bundled and its PGN is a reference and a
    worked example rather than something to import, or it ships only as a bundle and the
    repo folder goes. The import path itself is proven either way.
+   **The gate confirmed the refusal at source** (`mergeCourses`, `src/model/course.ts:234`,
+   on SPEC.md section 10) and recommends the first: the Ruy stays bundled. Dropping the
+   folder would cost the course everything that has caught a real error in every phase -
+   its content-suite block, both engine passes, the round-trip and export tests - and it
+   would ship three courses instead of four to buy one click. Nick's click is a two-line
+   edit away: change `[CourseId]` and `[CourseTitle]` in `docs/bundles/ruy-lopez-exchange.pgn`
+   and import that, which tests the importer and the author's guide in the same minute.
+   What is genuinely still untested is a course that only ever exists as a bundle, and
+   that wants its own small course rather than a renamed copy of this one.
 
 2. **Engine findings kept rather than fixed**, all re-checked at 2500 ms:
    - Taking on c6 costs half a pawn or so in the chapter 5 sidelines: 0.51 against the
@@ -1357,3 +1366,23 @@ Open items (phase 12):
    Black. The engine has White at +3.28 after it. Black's move is 7...Kd7, and 6.Nxe5
    is a mistake for a quieter reason: a piece for a pawn with no attack. Both notes now
    say that, and say what happens to a trainee who plays ...g6 from the other side.
+
+5. **The gate found one graded alternative the phase's own final run did not, and
+   fixed it** (commit `07f7b8c`). Chapter 4, after 7.Qxd8+ Kxd8: `8.Nc3` was graded an
+   inaccuracy. Re-checked at 2500 ms, `8.Nxe5` is +2.58 and `8.Nc3` is +0.52, so it
+   costs 2.06 - past the top of the inaccuracy band at 1.80, and not a judgement call.
+   The pawn on e5 is undefended for exactly one move, and Nc3 spends it. Grade now
+   `mistake`, note rewritten, bundle re-exported, suite green.
+   **The lesson is about the 500 ms pass, not about this move.** It is a sampler, and
+   two entries in this course sit on its border: the phase's run flagged the chapter 1
+   `9.Qxd8+` entry and not this one, the gate's independent run flagged this one and
+   not that. Neither run was wrong. A borderline entry needs a second run or a slower
+   one, and a phase that reports "two disagreements" is reporting one sample of them.
+
+6. **The move pass agreed, with the same borderline behaviour.** The gate's independent
+   run found five moves over 0.5, four of them the same four the phase recorded. The
+   fifth, chapter 1 `9.Nc3` after 8...Bd7, measured 0.64 at 500 ms and 0.32 at 2500 ms,
+   which is inside the noise band and needs nothing. The note checker returned zero
+   unsupported claims and one claim for a human to read, which holds: after
+   4...dxc6 5.O-O Bd6 6.d4 exd4, `7.e5` is +2.38 against `7.Qxd4` at +0.20, and the
+   fork is worth the piece the note says it is.
