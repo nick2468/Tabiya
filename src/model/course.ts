@@ -1,3 +1,4 @@
+import { allCards } from './cards'
 import { loadChapter } from './loader'
 import {
   CORE_TAGS,
@@ -154,6 +155,25 @@ export function loadCourse(rawManifest: unknown, files: Record<string, unknown>)
     tags,
     chapters,
   }
+
+  // Two chapters expecting different moves in one position is a fault the
+  // chapter loader cannot see, because it is a disagreement BETWEEN chapters.
+  // Drill cards are keyed by position, so one of the two would silently never
+  // be asked. The bundled courses have been held to this since phase 1 by the
+  // content suite; a course that arrives as a folder or a file gets the same
+  // rule here, because the trainee cannot run the suite.
+  for (const clash of allCards(course).conflicts) {
+    errors.push({
+      course: manifest.id,
+      chapter: clash.keptChapter,
+      path: '',
+      message:
+        `this chapter plays ${clash.kept} in a position where ${clash.otherChapter} plays ` +
+        `${clash.other}. Drill asks by position, so one of the two could never be asked.`,
+    })
+  }
+  if (errors.length > 0) return { ok: false, course: null, errors }
+
   return { ok: true, course, errors: [] }
 }
 

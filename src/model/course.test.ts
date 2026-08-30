@@ -241,3 +241,52 @@ describe('mergeCourses', () => {
     expect(mergeCourses(bundled, [])).toEqual(bundled)
   })
 })
+
+describe('a course that contradicts itself', () => {
+  /**
+   * Two chapters reaching one position and expecting different moves. Drill
+   * asks by position, so one of them could never be asked, and until phase 11
+   * only the content suite caught it - which a trainee importing a course
+   * cannot run.
+   */
+  const INTRO = 'Lead.\n\n## Typical mistakes at this level\n\nNone.'
+
+  it('is refused, naming both chapters and both moves', () => {
+    const chapter = (id: string, second: string) => ({
+      id,
+      title: id,
+      intro: INTRO,
+      stem: ['d4', 'd5'],
+      tree: [
+        {
+          san: 'Bf4',
+          note: 'Out with the bishop.',
+          tags: ['development'],
+          children: [
+            {
+              san: 'Nf6',
+              note: 'Develop.',
+              weight: 7,
+              children: [
+                { san: second, note: 'The follow-up.', tags: ['development'], plan: 'Play on.' },
+              ],
+            },
+          ],
+        },
+      ],
+    })
+    const result = loadCourse(
+      {
+        id: 'clash-white',
+        title: 'Clash',
+        colour: 'white',
+        tagline: 'Two answers to one position.',
+        formatVersion: 1,
+        chapters: ['a.json', 'b.json'],
+      },
+      { 'a.json': chapter('ch-a', 'e3'), 'b.json': chapter('ch-b', 'Nf3') },
+    )
+    expect(result.course).toBeNull()
+    expect(result.errors.some((error) => error.message.includes('could never be asked'))).toBe(true)
+  })
+})
