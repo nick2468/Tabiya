@@ -133,7 +133,16 @@ export function ImportCourse() {
           'your courses.',
       })
     } catch (error) {
-      setStage({ kind: 'done', message: `Nothing was written: ${message(error)}` })
+      // Not "nothing was written". Installing clears the folder's old chapter
+      // files before writing the new ones, so a failure part way through can
+      // leave a replacement half done. Say what is actually known.
+      setStage({
+        kind: 'done',
+        message:
+          `${course.title} was not installed: ${message(error)} If you were replacing a ` +
+          'course you already had, open it in the catalog to check it, and import the file ' +
+          'again if it is incomplete.',
+      })
     }
   }
 
