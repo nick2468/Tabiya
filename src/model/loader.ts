@@ -49,6 +49,8 @@ const NODE_FIELDS = new Set([
 const MISTAKE_FIELDS = new Set(['san', 'grade', 'note'])
 const SHAPE_FIELDS = new Set(['orig', 'dest', 'brush'])
 const SQUARE = /^[a-h][1-8]$/
+/** A chapter id becomes a filename when a bundle is installed. See loadChapter. */
+const CHAPTER_ID = /^[a-z0-9][a-z0-9-]*$/
 
 const isObject = (value: unknown): value is Record<string, unknown> =>
   typeof value === 'object' && value !== null && !Array.isArray(value)
@@ -125,6 +127,14 @@ export function loadChapter(raw: unknown, context: ChapterContext): LoadResult {
     if (!CHAPTER_FIELDS.has(field)) errors.add([], `unknown chapter field "${field}"`)
   }
   if (!isString(raw.id)) errors.add([], 'id must be a string')
+  else if (!CHAPTER_ID.test(raw.id)) {
+    // Not cosmetic, and not only about ids. A bundle names its chapters, and
+    // the importer writes each one as "<id>.json" inside the course folder, so
+    // an id holding a slash or a "." escapes that folder and lands wherever it
+    // points - progress.json included. The id also travels into every line id
+    // in the progress file. Same shape as a course id, for the same reasons.
+    errors.add([], 'id must be lower case letters, numbers and hyphens')
+  }
   if (!isString(raw.title)) errors.add([], 'title must be a string')
   if (!isString(raw.intro)) errors.add([], 'intro must be a string')
   if (!Array.isArray(raw.stem) || !raw.stem.every(isString)) {
