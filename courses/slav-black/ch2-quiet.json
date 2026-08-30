@@ -137,6 +137,7 @@
                                                           "note": "Connect the rooks and keep both castling options open while White commits first.",
                                                           "tags": ["development"],
                                                           "plan": "Castle long and use the open h-file, or castle short and prepare ...e5. The doubled g-pawns are not a weakness while the centre stays closed.",
+                                                          "name": "The 4.e3 build-up, with 10.h3",
                                                           "mistakes": [
                                                             {
                                                               "san": "O-O",
@@ -173,7 +174,8 @@
                                                                   "san": "Bd6+",
                                                                   "note": "Step away with discovered check from the rook. Black is a pawn up, the attack is still running and White's king has nowhere safe to go.",
                                                                   "tags": ["h-file", "tactics"],
-                                                                  "plan": "Bring the knight to g4 and the queen to h4 or h5. Keep the bishop on the diagonal that ends on h2 and do not hurry: White cannot untangle."
+                                                                  "plan": "Bring the knight to g4 and the queen to h4 or h5. Keep the bishop on the diagonal that ends on h2 and do not hurry: White cannot untangle.",
+                                                                  "name": "4.e3 and the h2 pawn"
                                                                 }
                                                               ]
                                                             }
@@ -290,6 +292,7 @@
                                                                   "note": "Hit the queen and develop at the same time, which is exactly the tempo Black needs.",
                                                                   "tags": ["development"],
                                                                   "plan": "Castle, then play ...c5 to trade the last central pawn off. With the light-squared bishops gone, an equal endgame is a fine outcome.",
+                                                                  "name": "4.e3 and the 5.Bd3 trade",
                                                                   "mistakes": [
                                                                     {
                                                                       "san": "O-O",
@@ -405,6 +408,7 @@
                                                   "note": "Develop and prepare to castle. Black has no weaknesses and a rook heading for the c-file.",
                                                   "tags": ["development", "king-safety"],
                                                   "plan": "Castle, then play ...a6 to question the bishop on b5 and put a rook on c8. The pawn on d5 is solid and the file is Black's to use.",
+                                                  "name": "4.e3 and the 5.cxd5 trade",
                                                   "mistakes": [
                                                     {
                                                       "san": "a6",
@@ -443,6 +447,7 @@
                                           "note": "Finish the pawn structure. Black is solid, with the better bishop and the open file.",
                                           "tags": ["development"],
                                           "plan": "Play ...Nc6, ...Be7 and castle, then double on the c-file. The queen on c7 is already the first piece on it.",
+                                          "name": "5.cxd5 with 7.Bd2",
                                           "mistakes": [
                                             {
                                               "san": "Nc6",
@@ -467,6 +472,7 @@
                                   "note": "Solid, and the trap stays set: the bishop on c1 is still facing a queen down an open file.",
                                   "tags": ["c-file"],
                                   "plan": "Develop with ...Nc6, ...Be7 and ...O-O, then put a rook on c8. Keep watching c1: any queen move that leaves it undefended runs into a check on that square.",
+                                  "name": "5.cxd5 with 7.Nc3",
                                   "mistakes": [
                                     {
                                       "san": "Qxc3+",
@@ -548,6 +554,7 @@
                                   "note": "Develop and get ready to castle. Black is a pawn up and every piece has a square.",
                                   "tags": ["development", "king-safety"],
                                   "plan": "Castle, play ...a5 to hold the chain and ...Bb7 on the long diagonal, and give the pawn on c4 back for the open file when White finally attacks it.",
+                                  "name": "The 4.Bf4 build-up",
                                   "mistakes": [
                                     {
                                       "san": "a5",
@@ -610,6 +617,7 @@
                                   "note": "Offer the trade. With the dark-squared bishops off, the knight on d5 has nothing left to fear.",
                                   "tags": ["development"],
                                   "plan": "Trade on g5 or e7, castle, then play ...b5 to hold the extra pawn or ...Nd7 and ...c5 to give it back for the centre.",
+                                  "name": "4.Bf4 and the 5.a4 clamp",
                                   "mistakes": [
                                     {
                                       "san": "f6",
@@ -643,6 +651,7 @@
                       "note": "White stops ...b5 before taking the pawn, and the position is now the 5.a4 line above by another order.",
                       "weight": 6,
                       "plan": "Play ...Nd5, hitting the bishop on f4, then ...Be7 and castle. This is the same position the 5.a4 line reaches a move earlier.",
+                      "name": "4.Bf4 and 5.Nc3",
                       "children": []
                     }
                   ]

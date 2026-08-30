@@ -115,7 +115,8 @@
                                                                       "san": "exf5",
                                                                       "note": "Take with the pawn here. The knight is needed on c6, and the pawn on f5 takes e4 away from White for good.",
                                                                       "tags": ["light-squares"],
-                                                                      "plan": "Play ...Be7 or ...Qb6 and castle, then hit e5 with ...f6. White has a little more space and no way to attack, which is the bargain the Caro-Kann always offers."
+                                                                      "plan": "Play ...Be7 or ...Qb6 and castle, then hit e5 with ...f6. White has a little more space and no way to attack, which is the bargain the Caro-Kann always offers.",
+                                                                      "name": "The full main line, with 6.Be3"
                                                                     }
                                                                   ]
                                                                 }
@@ -139,7 +140,8 @@
                                                       "mistakes": [
                                                         { "san": "exf5", "grade": "mistake", "note": "It buries the light squares and lets White hold e5 in peace with f4. The engine puts it nearly two pawns behind the knight recapture." }
                                                       ],
-                                                      "plan": "Nothing defends the pawn on e5, so take it. If White plays 10.c3 first, 10...Nxe3 is stronger still: chapter 6 runs that line to the end."
+                                                      "plan": "Nothing defends the pawn on e5, so take it. If White plays 10.c3 first, 10...Nxe3 is stronger still: chapter 6 runs that line to the end.",
+                                                      "name": "White's 9.Nxf5 trade"
                                                     }
                                                   ]
                                                 }
@@ -190,7 +192,8 @@
                                               "san": "Nge7",
                                               "note": "Now the knight comes out, heading for g6 or f5 where it hits the pawns White has left behind.",
                                               "tags": ["development"],
-                                              "plan": "Play ...Ng6, ...Be7 and castle, then use the half open c-file and press d4. White has the space and the only two targets on the board."
+                                              "plan": "Play ...Ng6, ...Be7 and castle, then use the half open c-file and press d4. White has the space and the only two targets on the board.",
+                                              "name": "6.c3, holding the centre"
                                             }
                                           ]
                                         }
@@ -221,7 +224,8 @@
                                       "san": "Ne7",
                                       "note": "The knight heads for c6 or g6 without blocking anything.",
                                       "tags": ["development"],
-                                      "plan": "Castle, then play ...Nbc6 and ...Qb6 with pressure on d4 and f2. White has given up the centre for nothing."
+                                      "plan": "Castle, then play ...Nbc6 and ...Qb6 with pressure on d4 and f2. White has given up the centre for nothing.",
+                                      "name": "6.dxc5, giving up the tension"
                                     }
                                   ]
                                 }
@@ -262,7 +266,8 @@
                                       "san": "Nc6",
                                       "note": "Develop with pressure on d4.",
                                       "tags": ["development"],
-                                      "plan": "Play ...Nge7 and ...Ng6, castle, and keep the pressure on d4 and e5. With the light-squared bishops off, White has no attacking piece left."
+                                      "plan": "Play ...Nge7 and ...Ng6, castle, and keep the pressure on d4 and e5. With the light-squared bishops off, White has no attacking piece left.",
+                                      "name": "5.Bd3, the bishop trade"
                                     }
                                   ]
                                 }
@@ -293,7 +298,8 @@
                               "san": "Nc6",
                               "note": "Develop and hit d4.",
                               "tags": ["development"],
-                              "plan": "Play ...Nge7 and ...Ng6 and castle. This is the same structure as the 5.Be2 c5 6.c3 line, reached in a different order."
+                              "plan": "Play ...Nge7 and ...Ng6 and castle. This is the same structure as the 5.Be2 c5 6.c3 line, reached in a different order.",
+                              "name": "The quiet 5.c3"
                             }
                           ]
                         }
@@ -366,7 +372,8 @@
                                               "san": "Nc6",
                                               "note": "Pile on d4. White's king has no safe square left on either wing.",
                                               "tags": ["development"],
-                                              "plan": "Take on d4 when it helps, develop with ...Nge7 and ...Qb6, and aim at the weakened light squares. White has spent five moves on pawn moves and still has to find a home for the king."
+                                              "plan": "Take on d4 when it helps, develop with ...Nge7 and ...Qb6, and aim at the weakened light squares. White has spent five moves on pawn moves and still has to find a home for the king.",
+                                              "name": "4.Nc3 and the g4 push"
                                             }
                                           ]
                                         }
@@ -401,7 +408,8 @@
                               "san": "Nd7",
                               "note": "The last minor piece gets a square, and c5 is coming next.",
                               "tags": ["development"],
-                              "plan": "Play ...c5 and ...Qb6, hitting d4 and b2 together. If White ever trades on c5, recapture with a piece and use the half open c-file."
+                              "plan": "Play ...c5 and ...Qb6, hitting d4 and b2 together. If White ever trades on c5, recapture with a piece and use the half open c-file.",
+                              "name": "4.Nc3 with the quiet 5.Be3"
                             }
                           ]
                         }
@@ -472,7 +480,8 @@
                                               "san": "Nge7",
                                               "note": "The last knight comes out behind the pawns, heading for g6 or f5.",
                                               "tags": ["development"],
-                                              "plan": "Castle, then decide between ...f6 against e5 and ...Qb6 against d4 and b2. With the light-squared bishops gone, White has no attack to build."
+                                              "plan": "Castle, then decide between ...f6 against e5 and ...Qb6 against d4 and b2. With the light-squared bishops gone, White has no attack to build.",
+                                              "name": "4.Bd3, trading at once"
                                             }
                                           ]
                                         }
@@ -534,7 +543,8 @@
                                       "san": "c5",
                                       "note": "The break, as always.",
                                       "tags": ["c5-break"],
-                                      "plan": "Develop with ...Nc6 and ...Nge7, castle short, and remember that the pawn on h4 means White cannot castle kingside comfortably."
+                                      "plan": "Develop with ...Nc6 and ...Nge7, castle short, and remember that the pawn on h4 means White cannot castle kingside comfortably.",
+                                      "name": "The 4.h4 chase"
                                     }
                                   ]
                                 }
@@ -586,7 +596,8 @@
                                 { "san": "cxd5", "grade": "inaccuracy", "note": "It keeps the wall and gives up the ...c5 break, which is the move this whole chapter is built around." },
                                 { "san": "exd5", "grade": "inaccuracy", "note": "It buries the bishop that was just developed and hands White the e-file." }
                               ],
-                              "plan": "Play ...c5 next, hitting d4 with the c-pawn after all, then ...Nc6 and ...Be7. White's pawn on e5 has no supporters left."
+                              "plan": "Play ...c5 next, hitting d4 with the c-pawn after all, then ...Nc6 and ...Be7. White's pawn on e5 has no supporters left.",
+                              "name": "The 4.c4 space grab"
                             }
                           ]
                         }

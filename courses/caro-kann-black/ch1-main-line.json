@@ -147,7 +147,8 @@
                                                                                           "san": "O-O",
                                                                                           "note": "Castle. Opposite sides, both kings safe for now, and Black has the faster plan.",
                                                                                           "tags": ["king-safety"],
-                                                                                          "plan": "Play ...c5 to hit d4 and open the c-file at White's king. Follow with ...Rc8 and ...Qa5 or ...Qc7 and the attack plays itself."
+                                                                                          "plan": "Play ...c5 to hit d4 and open the c-file at White's king. Follow with ...Rc8 and ...Qa5 or ...Qc7 and the attack plays itself.",
+                                                                                          "name": "The full main line, with 13.Kb1"
                                                                                         }
                                                                                       ]
                                                                                     },
@@ -172,7 +173,8 @@
                                                                                                 {
                                                                                                   "san": "Nf6",
                                                                                                   "note": "The other knight comes out with tempo and moves the queen along.",
-                                                                                                  "plan": "Chase the queen, castle short, then hit d4 with ...c5. There is nothing to defend and one thing to do."
+                                                                                                  "plan": "Chase the queen, castle short, then hit d4 with ...c5. There is nothing to defend and one thing to do.",
+                                                                                                  "name": "White's 13.Ne4 trade"
                                                                                                 }
                                                                                               ]
                                                                                             }
@@ -209,7 +211,8 @@
                                                                                   "san": "Be7",
                                                                                   "note": "Complete the development. The bishop guards the dark squares around Black's own king.",
                                                                                   "tags": ["king-safety"],
-                                                                                  "plan": "Castle short and then play ...c5. With White's bishop on f4 rather than d2, watch for ...Nd5 hitting it once the centre opens."
+                                                                                  "plan": "Castle short and then play ...c5. With White's bishop on f4 rather than d2, watch for ...Nd5 hitting it once the centre opens.",
+                                                                                  "name": "White's 11.Bf4 instead of Bd2"
                                                                                 }
                                                                               ]
                                                                             }
@@ -247,7 +250,8 @@
                                                         {
                                                           "san": "e6",
                                                           "note": "The pawn comes out and the dark-squared bishop is free.",
-                                                          "plan": "Play ...Ngf6, ...Be7 and castle, then ...c5. This is the main line without the pawn on h5, which suits Black if anything."
+                                                          "plan": "Play ...Ngf6, ...Be7 and castle, then ...c5. This is the main line without the pawn on h5, which suits Black if anything.",
+                                                          "name": "The early 8.Bd3 trade"
                                                         }
                                                       ]
                                                     }
@@ -277,7 +281,8 @@
                                                 {
                                                   "san": "Nd7",
                                                   "note": "Cover e5 and leave f6 for the other knight, exactly as in the main line.",
-                                                  "plan": "This is the main line by a different order. Expect 9.Bd3 Bxd3 10.Qxd3 e6 and play on as in the main line."
+                                                  "plan": "This is the main line by a different order. Expect 9.Bd3 Bxd3 10.Qxd3 e6 and play on as in the main line.",
+                                                  "name": "The immediate 7.h5"
                                                 }
                                               ]
                                             }
@@ -307,7 +312,8 @@
                                           "san": "h6",
                                           "note": "Room for the bishop and no square on g5 for White.",
                                           "tags": ["king-safety"],
-                                          "plan": "The main line by a different order. Expect 8.h5 Bh7 9.Bd3 Bxd3 10.Qxd3 e6 and follow the main line from there."
+                                          "plan": "The main line by a different order. Expect 8.h5 Bh7 9.Bd3 Bxd3 10.Qxd3 e6 and follow the main line from there.",
+                                          "name": "6.Nf3 before h4"
                                         }
                                       ]
                                     }
@@ -349,7 +355,8 @@
                                         {
                                           "san": "Nf6",
                                           "note": "Develop towards the centre. Black is comfortable and slightly better placed.",
-                                          "plan": "Play ...Be7, castle, then ...c5. The knight on b3 is out of play, so the central break is even stronger than usual."
+                                          "plan": "Play ...Be7, castle, then ...c5. The knight on b3 is out of play, so the central break is even stronger than usual.",
+                                          "name": "The 5.Nc5 lunge at b7"
                                         }
                                       ]
                                     }
@@ -392,7 +399,8 @@
                                           "mistakes": [
                                             { "san": "e6", "grade": "inaccuracy", "note": "Solid and passive. It declines a free pawn in a position where White cannot chase the queen with anything." }
                                           ],
-                                          "plan": "Expect 8.Nf3 and answer ...Qb6, keeping the queen active and defended. Finish developing with ...Nbd7 and ...e6 and give the pawn back only if it buys the safe king."
+                                          "plan": "Expect 8.Nf3 and answer ...Qb6, keeping the queen active and defended. Finish developing with ...Nbd7 and ...e6 and give the pawn back only if it buys the safe king.",
+                                          "name": "5.Bd3, offering the bishop"
                                         }
                                       ]
                                     }
@@ -433,7 +441,8 @@
                   "san": "Bf5",
                   "note": "Out it comes. Nothing about the move order changes what Black is doing.",
                   "tags": ["bishop-placement", "light-squares"],
-                  "plan": "This is the main line by transposition. Expect 5.Ng3 Bg6 6.h4 h6 7.Nf3 Nd7 and follow the main line of this chapter."
+                  "plan": "This is the main line by transposition. Expect 5.Ng3 Bg6 6.h4 h6 7.Nf3 Nd7 and follow the main line of this chapter.",
+                  "name": "The 3.Nd2 move order"
                 }
               ]
             }

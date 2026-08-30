@@ -250,19 +250,29 @@ game.} )
 The refutation is prose inside the note. It cannot be moves on the board,
 because a graded move ends its line.
 
-**A plan on a leaf.** Every line that stops has to say what to do next:
+**A plan and a name on a leaf.** Every line that stops has to say what to do
+next, and what it is called:
 
 ```
 5. Nxe5
 {A clean pawn: the bishop on c5 does not defend it, and with the d-pawn at home
 there is no ...Qd4. [%tags tactics] [%plan Play d4 with tempo on the bishop,
-then Nc3 and castle. A pawn up with the better structure.]}
+then Nc3 and castle. A pawn up with the better structure.] [%line 3...Bc5 and
+...bxc6]}
 ```
+
+That name is what Study shows in its list of the chapter's lines, and it is why
+it reads as a choice Black made rather than as a plan White has. The line beside
+it in the same chapter is called `3...Bc5, the Classical`, so the pair say what
+tells them apart: this one is the version where Black takes back towards the
+edge.
 
 **What it cost.** The course took one sitting to write and the app found six
 errors in it, all of them mine: two moves that were illegal on the board, a
 castling move Black could not make with the queen still on d8, and three
-chapters that were short of the ten marked mistakes the bar asks for. Each one
+chapters that were short of the ten marked mistakes the bar asks for. The names
+came later, in a pass of their own, and the check that mattered was the one for
+two lines in a chapter called the same thing. Each one
 came back naming the chapter and the move. That is the loop this format is
 for.
 

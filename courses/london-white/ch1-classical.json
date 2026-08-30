@@ -242,7 +242,8 @@
                                                                               "brush": "red"
                                                                             }
                                                                           ],
-                                                                          "plan": "Lift the rook with Rf3 and Rh3, bring the queen to h5 or g4, and look for Bxh7+ once Black's pieces have drifted to the queenside. Keep an eye on ...cxd4 opening the c-file towards your own king."
+                                                                          "plan": "Lift the rook with Rf3 and Rh3, bring the queen to h5 or g4, and look for Bxh7+ once Black's pieces have drifted to the queenside. Keep an eye on ...cxd4 opening the c-file towards your own king.",
+                                                                          "name": "The full main line, with ...b6"
                                                                         }
                                                                       ],
                                                                       "note": "The rook goes behind the c-pawn before the file opens: Black intends ...cxd4 and play down the c-file."
@@ -331,7 +332,8 @@
                                                         {
                                                           "san": "Nbd2",
                                                           "note": "Finish developing. Every piece now has a job and White can choose between Ne5 and Qc2.",
-                                                          "plan": "Castle long or leave the king in the centre and play Qc2, Ne5 and g4. The open h-file means even a slow attack becomes dangerous."
+                                                          "plan": "Castle long or leave the king in the centre and play Qc2, Ne5 and g4. The open h-file means even a slow attack becomes dangerous.",
+                                                          "name": "Black trades on g3"
                                                         }
                                                       ],
                                                       "note": "Develop with pressure on d4, keeping the queenside counterplay moving."
@@ -380,7 +382,8 @@
                                 {
                                   "san": "Nbd2",
                                   "note": "The standard square. White is one move from the full setup and Black has no way to disturb it.",
-                                  "plan": "Play c3 and castle, then decide between Ne5 with f4 for a kingside attack, or e4 in one go if Black leaves the centre alone."
+                                  "plan": "Play c3 and castle, then decide between Ne5 with f4 for a kingside attack, or e4 in one go if Black leaves the centre alone.",
+                                  "name": "The modest ...Be7"
                                 }
                               ],
                               "note": "Black tucks the king away. The quiet setup is complete, and both sides now turn to their plans."
@@ -446,7 +449,8 @@
                                                   "tags": [
                                                     "bishop-placement"
                                                   ],
-                                                  "plan": "Castle, then Ne5 and f4 for the attack, or take on c5 and play e4 if Black lets the centre go."
+                                                  "plan": "Castle, then Ne5 and f4 for the attack, or take on c5 and play e4 if Black lets the centre go.",
+                                                  "name": "...c5 before the bishop"
                                                 }
                                               ],
                                               "note": "Castled, developed, and ready for ...b6 or ...cxd4. Black has a perfectly sound game."
@@ -512,7 +516,8 @@
                                   "tags": [
                                     "bishop-placement"
                                   ],
-                                  "plan": "Play Nbd2, c3 and castle, then Ne5 and f4. Black's bishop on d6 will be traded on g3 sooner or later, which opens the h-file for you."
+                                  "plan": "Play Nbd2, c3 and castle, then Ne5 and f4. Black's bishop on d6 will be traded on g3 sooner or later, which opens the h-file for you.",
+                                  "name": "...Bd6 in one move"
                                 }
                               ],
                               "note": "Black castles. Everything is transposing to the chapter's main line."
@@ -549,7 +554,8 @@
                         {
                           "san": "Nf3",
                           "note": "Nothing has changed. Develop and complete the setup.",
-                          "plan": "Play Nbd2, Bd3 and castle. If Black takes on d4, recapture with the pawn and keep the triangle intact."
+                          "plan": "Play Nbd2, Bd3 and castle. If Black takes on d4, recapture with the pawn and keep the triangle intact.",
+                          "name": "The early ...c5"
                         }
                       ],
                       "note": "Develop and keep the options open: Black can still choose between the ...Nc6, ...Qb6 and ...Bd6 setups."
@@ -586,7 +592,8 @@
                 {
                   "san": "Nf3",
                   "note": "This is the main line of the chapter by transposition, so there is nothing new to learn.",
-                  "plan": "Follow the main line: Bd6 is met by Bg3, then Bd3, c3, Nbd2 and castle, with Ne5 and f4 to come."
+                  "plan": "Follow the main line: Bd6 is met by Bg3, then Bd3, c3, Nbd2 and castle, with Ne5 and f4 to come.",
+                  "name": "The ...Nf6 move order"
                 }
               ]
             }

@@ -243,7 +243,8 @@
                                                                               "note": "Also fine. The queen recapture keeps the b1 knight free to choose its square later."
                                                                             }
                                                                           ],
-                                                                          "plan": "Play Nc3 or Nd2 with the other knight, then Rad1 and look for the e4 or d5 break. Black attack needs ...g5, which loosens a king you can already reach down the d-file."
+                                                                          "plan": "Play Nc3 or Nd2 with the other knight, then Rad1 and look for the e4 or d5 break. Black attack needs ...g5, which loosens a king you can already reach down the d-file.",
+                                                                          "name": "The Dutch, 1...f5"
                                                                         }
                                                                       ],
                                                                       "note": "Black trades before the knight is pushed back: on e4 it was the best piece, and there was no good way to keep it there."
@@ -366,7 +367,8 @@
                                   "tags": [
                                     "development"
                                   ],
-                                  "plan": "Play Bd3 or Be2, castle, and hold d4 with c3. The pawn on d4 is isolated in some lines, so keep pieces on it and remember the e5 square is yours."
+                                  "plan": "Play Bd3 or Be2, castle, and hold d4 with c3. The pawn on d4 is isolated in some lines, so keep pieces on it and remember the e5 square is yours.",
+                                  "name": "The ...c5 first move"
                                 }
                               ],
                               "note": "Normal development in a normal position: the sting of 1...c5 has gone."
@@ -473,7 +475,8 @@
                                           "tags": [
                                             "development"
                                           ],
-                                          "plan": "Castle, play c3, then Ne5 and f4 as usual. Black's bishop on b7 is looking at a pawn on d5 that is not there yet, so it is the quieter piece."
+                                          "plan": "Castle, play c3, then Ne5 and f4 as usual. Black's bishop on b7 is looking at a pawn on d5 that is not there yet, so it is the quieter piece.",
+                                          "name": "The ...b6 fianchetto"
                                         }
                                       ],
                                       "note": "The quiet square again: Black finishes developing and will castle next."
@@ -531,7 +534,8 @@
                   "tags": [
                     "development"
                   ],
-                  "plan": "If Black plays ...d6, you are in chapter 3: bishop to e2 and take the centre with c4. If ...d5, you are in chapter 4: bishop to e2 and hold with c3."
+                  "plan": "If Black plays ...d6, you are in chapter 3: bishop to e2 and take the centre with c4. If ...d5, you are in chapter 4: bishop to e2 and hold with c3.",
+                  "name": "The ...g6 fianchetto"
                 }
               ],
               "note": "The fianchetto completes. Which chapter this becomes still depends on the d-pawn."
@@ -569,7 +573,8 @@
                   "tags": [
                     "development"
                   ],
-                  "plan": "If Black plays ...d5 you are in chapter 1. If ...f5, you are in the Dutch above and the bishop goes to e2. If ...b6, play Bd3 and carry on."
+                  "plan": "If Black plays ...d5 you are in chapter 1. If ...f5, you are in the Dutch above and the bishop goes to e2. If ...b6, play Bd3 and carry on.",
+                  "name": "The ...e6 move order"
                 }
               ],
               "note": "Black develops flexibly. This can still become a classical ...d5 game, a Dutch with ...f5, or a queenside fianchetto."

@@ -247,7 +247,8 @@
                                                                       "brush": "blue"
                                                                     }
                                                                   ],
-                                                                  "plan": "Play Nc3, Qc2 and the rooks to d1 and e1. Black's pawn on e5 is a target and the dark-squared bishop on h2 is aiming straight through it. Do not rush: this is a slow squeeze, not an attack."
+                                                                  "plan": "Play Nc3, Qc2 and the rooks to d1 and e1. Black's pawn on e5 is a target and the dark-squared bishop on h2 is aiming straight through it. Do not rush: this is a slow squeeze, not an attack.",
+                                                                  "name": "The full main line, with ...e5"
                                                                 }
                                                               ],
                                                               "note": "Black recaptures and the centre settles: the e5 pawn is Black's stake in the game, and also White's target."
@@ -297,7 +298,8 @@
                                           "tags": [
                                             "development"
                                           ],
-                                          "plan": "Play O-O, Nbd2 and Re1. The pawn on d4 needs watching, but Black's bishop on g7 is biting on granite while it stands there."
+                                          "plan": "Play O-O, Nbd2 and Re1. The pawn on d4 needs watching, but Black's bishop on g7 is biting on granite while it stands there.",
+                                          "name": "...c5 instead of ...d6"
                                         }
                                       ],
                                       "note": "Black releases the tension, hoping d4 becomes a target. It also opens the e-file for White, so the trade cuts both ways."
@@ -357,6 +359,7 @@
                                     "bishop-placement"
                                   ],
                                   "plan": "Castle, then c4 for space. From here the chapter is one line: this is the main line reached by another move order.",
+                                  "name": "...d6 before the bishop",
                                   "mistakes": [
                                     {
                                       "san": "O-O",
@@ -431,7 +434,8 @@
                           "tags": [
                             "bishop-placement"
                           ],
-                          "plan": "Castle, then h3 and c4. If Black breaks with ...e5, take and step back to h2; if with ...c5, hold with c3 and recapture towards the centre."
+                          "plan": "Castle, then h3 and c4. If Black breaks with ...e5, take and step back to h2; if with ...c5, hold with c3 and recapture towards the centre.",
+                          "name": "The ...d6 move order"
                         }
                       ],
                       "note": "The standard King's Indian picture: bishop on g7, pawn on d6, and the ...e5 break in the post."

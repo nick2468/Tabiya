@@ -1404,13 +1404,13 @@ screen runs header, board, notes, lines table, chapter text; taking a branch mov
 highlight; clicking a row is a restart on that line; and the two buttons that both said
 "play" become **Auto step this line** and **Play a game from here**.
 
-- [ ] 13.1 A `name` on every leaf in the content schema, required and unique within its
+- [x] 13.1 A `name` on every leaf in the content schema, required and unique within its
   chapter, with the validator rules and the schema doc. It changes no identity: a line
   id is its moves and a card key is course plus position, so no progress key moves.
-- [ ] 13.2 The `[%line ...]` token in the bundle format, both directions, plus the
+- [x] 13.2 The `[%line ...]` token in the bundle format, both directions, plus the
   SPEC.md section 11 mapping row and the author's guide. A named course must survive its
   own format before any names are written.
-- [ ] 13.3 Name all 183 lines: London 41, Caro-Kann 53, Slav 48, Ruy Lopez 41. Named by
+- [x] 13.3 Name all 183 lines: London 41, Caro-Kann 53, Slav 48, Ruy Lopez 41. Named by
   what makes each different from its siblings, not by its plan. Content-suite block for
   presence, uniqueness and length; bundles re-exported.
 - [ ] 13.4 The Study screen rebuilt to the ruled order and mechanics, the lone checkbox

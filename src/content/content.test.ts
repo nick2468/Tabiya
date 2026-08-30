@@ -3,6 +3,7 @@ import { bundledCourses as courses, bundledEntries as courseEntries, contentErro
 import { splitIntro } from '../model/intro'
 import { deepestFullMove, positionsWithMistakes, walkNodes } from '../model/loader'
 import { allCards } from '../model/cards'
+import { chapterLines } from '../model/lines'
 import { colourName, type LoadedChapter, type LoadedCourse } from '../model/types'
 
 /**
@@ -84,6 +85,7 @@ describe.each(courses.map((course) => [course.id, course] as const))(
           ...walkNodes(chapter).flatMap((node) => [
             node.note ?? '',
             node.plan ?? '',
+            node.name ?? '',
             ...(node.mistakes ?? []).map((mistake) => mistake.note),
           ]),
         ].join(' ')
@@ -96,6 +98,23 @@ describe.each(courses.map((course) => [course.id, course] as const))(
         for (const node of walkNodes(chapter)) {
           for (const tag of node.tags) expect(course.tags, chapter.id).toContain(tag)
         }
+      }
+    })
+
+    it('names every line, uniquely within its chapter and short enough to read', () => {
+      // The loader enforces all three. This says them again over the shipped
+      // content, because the names are the whole of the Study lines table: a
+      // missing one leaves a blank row and a duplicated one leaves two rows
+      // nobody can tell apart, which is the fault phase 13 exists to fix.
+      for (const chapter of course.chapters) {
+        const lines = chapterLines(chapter)
+        expect(lines.length, chapter.id).toBeGreaterThan(0)
+        for (const line of lines) {
+          expect(line.leaf.name, `${chapter.id} ${line.path.join(' ')}`).toBeTruthy()
+          expect(line.name.length, `${chapter.id} ${line.name}`).toBeLessThanOrEqual(40)
+        }
+        const names = lines.map((line) => line.name)
+        expect(new Set(names).size, chapter.id).toBe(names.length)
       }
     })
 

@@ -118,6 +118,7 @@
                                                     "tactics"
                                                   ],
                                                   "plan": "Take on h7 as well if Black defends with ...Rg8, then bring the rooks in. Two pawns and three pawn islands against two decide the ending.",
+                                                  "name": "The full main line, with ...d6",
                                                   "note": "The knight left g7 behind when it went to g6, and the rook on h8 does not defend it.",
                                                   "shapes": [
                                                     {
@@ -183,6 +184,7 @@
                                     "development"
                                   ],
                                   "plan": "Play Be3 and castle long, then use the d-file and the weak c-pawns.",
+                                  "name": "...Qf6, offering the trade",
                                   "note": "Everything out."
                                 }
                               ]
@@ -237,6 +239,7 @@
                                     "tactics"
                                   ],
                                   "plan": "Play Nc3 and Be3, castle the rooks, and use the king on d8. A pawn up with three pawn islands against two is exactly the ending this course is for.",
+                                  "name": "...d6, holding the pawn",
                                   "note": "Now, and it is a clean pawn: nothing defends it.",
                                   "mistakes": [
                                     {
@@ -286,6 +289,7 @@
                             "development"
                           ],
                           "plan": "Play Be3 and castle long, then work on c6 and c7 down the file.",
+                          "name": "...f6, holding the pawn",
                           "note": "With the queen, which is safe here because there is no knight to hit her.",
                           "mistakes": [
                             {

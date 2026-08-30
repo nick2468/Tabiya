@@ -58,6 +58,7 @@
                                     "development"
                                   ],
                                   "plan": "Play Nbd2 and Nc4, and recapture on f3 with the queen when the trade finally comes.",
+                                  "name": "...Bg4 and ...h5: declining",
                                   "note": "Decline and develop. The bishop is not going anywhere and the pawn on h5 has weakened Black more than White.",
                                   "mistakes": [
                                     {
@@ -163,6 +164,7 @@
                                                                             "majority"
                                                                           ],
                                                                           "plan": "Trade one pair of rooks, keep the other, and bring a knight to e3 and f5. Play a4 and a5 to fix the queenside before the kingside pawns move at all.",
+                                                                          "name": "The main line: development first",
                                                                           "note": "Development first. The majority is the plan and it moves last, when the pieces behind it are placed.",
                                                                           "mistakes": [
                                                                             {
@@ -229,6 +231,7 @@
                                                     "tactics"
                                                   ],
                                                   "plan": "Play Rb3 or Re3 hitting b7 and e5, and bring the knight to d2 and c4.",
+                                                  "name": "...f6 and ...Bg4: the rook swing",
                                                   "note": "The rook swings across and the pawn on e5 is the target.",
                                                   "mistakes": [
                                                     {
@@ -287,6 +290,7 @@
                                             "tactics"
                                           ],
                                           "plan": "Take the rook only if the queen can get back out. A pawn and the better structure is already enough.",
+                                          "name": "...Bd6: the g7 pawn",
                                           "note": "The knight has left g7 to the king alone, and the rook on h8 is next.",
                                           "shapes": [
                                             {
@@ -336,6 +340,7 @@
                                     "tactics"
                                   ],
                                   "plan": "Meet ...g6 with Qg5, retreat the knight to f3 when it is asked, and use the two moves Black has spent on the queen.",
+                                  "name": "...Ne7: answering the fork",
                                   "note": "One move defends the knight, hits f7 and looks at h7 behind it.",
                                   "shapes": [
                                     {
@@ -435,6 +440,7 @@
                                             "tactics"
                                           ],
                                           "plan": "Take the bishop back on e7 and count: a queen for a rook and a knight, with the black king in the open. Then develop and trade pieces.",
+                                          "name": "The Berlin: the f7 fork",
                                           "note": "Step aside, and the rook on e1 is looking straight through the queen at the king. 8...Kxf7 9.Rxe7+ collects her.",
                                           "shapes": [
                                             {

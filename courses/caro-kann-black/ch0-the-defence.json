@@ -175,7 +175,8 @@
                                                                                                           "san": "O-O",
                                                                                                           "note": "Castle and get on with it. Both kings are safe, and now the plans start.",
                                                                                                           "tags": ["king-safety"],
-                                                                                                          "plan": "Play ...c5 to hit d4 and open the c-file at White's king. If White takes on c5, recapture and use the half open file with ...Rc8 and ...Qc7."
+                                                                                                          "plan": "Play ...c5 to hit d4 and open the c-file at White's king. If White takes on c5, recapture and use the half open file with ...Rc8 and ...Qc7.",
+                                                                                                          "name": "The full main line, to castling"
                                                                                                         }
                                                                                                       ]
                                                                                                     },
@@ -200,7 +201,8 @@
                                                                                                                 {
                                                                                                                   "san": "Nf6",
                                                                                                                   "note": "The other knight arrives with tempo and pushes the queen off her strong square.",
-                                                                                                                  "plan": "Chase the queen, castle short, then play ...c5 against d4. Black has no weaknesses and one clear plan, which is all the opening ever promised."
+                                                                                                                  "plan": "Chase the queen, castle short, then play ...c5 against d4. Black has no weaknesses and one clear plan, which is all the opening ever promised.",
+                                                                                                                  "name": "White's 13.Ne4 trade"
                                                                                                                 }
                                                                                                               ]
                                                                                                             }

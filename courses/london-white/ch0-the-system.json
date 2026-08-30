@@ -204,6 +204,7 @@
                                                                                 "bishop-placement"
                                                                               ],
                                                                               "plan": "Play f4 next, which welds the knight to e5, then swing the rook with Rf3 and Rh3 and bring the queen across. Black's pieces are all on the queenside and cannot get back in time.",
+                                                                              "name": "The full main line, with 9.Ne5",
                                                                               "shapes": [
                                                                                 {
                                                                                   "orig": "f2",
@@ -249,6 +250,7 @@
                                                                                 "kingside-attack"
                                                                               ],
                                                                               "plan": "Double on the h-file with Kg2 and Rh1, or play Ne5 and f4 first. Black has traded away a defender of the dark squares near the king.",
+                                                                              "name": "Black's ...Nh5 trade",
                                                                               "shapes": [
                                                                                 {
                                                                                   "orig": "h1",

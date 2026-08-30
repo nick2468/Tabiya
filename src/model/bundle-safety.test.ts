@@ -28,7 +28,8 @@ function bundleWith(chapterId: string, courseId = 'test-course') {
     '',
     '{An intro. Typical mistakes at this level: none.}',
     '',
-    '1. e4 {The move. [%tags development]} 1... e5 {A reply. [%weight 5]} 2. Nf3 {Develop. [%tags development] [%plan Castle.]} *',
+    '1. e4 {The move. [%tags development]} 1... e5 {A reply. [%weight 5]} ' +
+      '2. Nf3 {Develop. [%tags development] [%plan Castle.] [%line The only line]} *',
     '',
   ].join('\n')
 }

@@ -125,9 +125,9 @@ Playing ...e6 before the bishop is out, which turns the game into the French you
 {Take. Leaving the knight on e4 lets White play Nxf6+ at whichever moment suits White best. [%tags tactics]}
 ( 13... Nd5?! {The knight is loose on d5 and c4 hits it with tempo.} ) 14. Qxe4
 {The queen takes the diagonal the bishop wanted. [%weight 10]} 14... Nf6
-{The other knight arrives with tempo and pushes the queen off her strong square. [%plan Chase the queen, castle short, then play ...c5 against d4. Black has no weaknesses and one clear plan, which is all the opening ever promised.]}
+{The other knight arrives with tempo and pushes the queen off her strong square. [%plan Chase the queen, castle short, then play ...c5 against d4. Black has no weaknesses and one clear plan, which is all the opening ever promised.] [%line White's 13.Ne4 trade]}
 ) 13... O-O
-{Castle and get on with it. Both kings are safe, and now the plans start. [%tags king-safety] [%plan Play ...c5 to hit d4 and open the c-file at White's king. If White takes on c5, recapture and use the half open file with ...Rc8 and ...Qc7.]}
+{Castle and get on with it. Both kings are safe, and now the plans start. [%tags king-safety] [%plan Play ...c5 to hit d4 and open the c-file at White's king. If White takes on c5, recapture and use the half open file with ...Rc8 and ...Qc7.] [%line The full main line, to castling]}
 *
 
 
@@ -170,7 +170,7 @@ Playing ...Bf5 on move three, before the exchange on e4, when 4.exd5 cxd5 5.Qb3 
 {Playable, and again it is a French Defence with the bishop shut in.} ) 4. Nxe4
 {The knight recaptures from d2, and the position is now identical to the 3.Nc3 main line. [%weight 10]}
 4... Bf5
-{Out it comes. Nothing about the move order changes what Black is doing. [%tags bishop-placement light-squares] [%plan This is the main line by transposition. Expect 5.Ng3 Bg6 6.h4 h6 7.Nf3 Nd7 and follow the main line of this chapter.]}
+{Out it comes. Nothing about the move order changes what Black is doing. [%tags bishop-placement light-squares] [%plan This is the main line by transposition. Expect 5.Ng3 Bg6 6.h4 h6 7.Nf3 Nd7 and follow the main line of this chapter.] [%line The 3.Nd2 move order]}
 ) 3... dxe4
 {Take, so White has to spend a move recapturing and can no longer choose between e5 and exd5.}
 ( 3... e6!?
@@ -193,7 +193,7 @@ Playing ...Bf5 on move three, before the exchange on e4, when 4.exd5 cxd5 5.Qb3 
 {The knight retreats to the edge, which is a poor square for it. [%weight 6]} 6... e6
 {Build the normal structure. Black has gained the move ...b6 for nothing.} 7. Nf3
 {White develops and tries to forget about the knight on b3. [%weight 6]} 7... Nf6
-{Develop towards the centre. Black is comfortable and slightly better placed. [%plan Play ...Be7, castle, then ...c5. The knight on b3 is out of play, so the central break is even stronger than usual.]}
+{Develop towards the centre. Black is comfortable and slightly better placed. [%plan Play ...Be7, castle, then ...c5. The knight on b3 is out of play, so the central break is even stronger than usual.] [%line The 5.Nc5 lunge at b7]}
 ) ( 5. Bd3 {White defends the knight and offers a trade on Black's terms. [%weight 2]}
 5... Bxe4
 {Take the knight. White has to recapture with the bishop, and Black gains a move on it next. [%tags tactics]}
@@ -201,7 +201,7 @@ Playing ...Bf5 on move three, before the exchange on e4, when 4.exd5 cxd5 5.Qb3 
 6... Nf6 {Develop and hit the bishop at the same time.} 7. Bd3
 {The bishop steps back to the diagonal it wanted in the first place. [%weight 5]}
 7... Qxd4
-{Take the pawn. It looks greedy and it is sound: White has one piece developed and no way to punish the queen. [%tags tactics] [%plan Expect 8.Nf3 and answer ...Qb6, keeping the queen active and defended. Finish developing with ...Nbd7 and ...e6 and give the pawn back only if it buys the safe king.]}
+{Take the pawn. It looks greedy and it is sound: White has one piece developed and no way to punish the queen. [%tags tactics] [%plan Expect 8.Nf3 and answer ...Qb6, keeping the queen active and defended. Finish developing with ...Nbd7 and ...e6 and give the pawn back only if it buys the safe king.] [%line 5.Bd3, offering the bishop]}
 ( 7... e6?!
 {Solid and passive. It declines a free pawn in a position where White cannot chase the queen with anything.}
 ) ) 5... Bg6
@@ -213,7 +213,7 @@ Playing ...Bf5 on move three, before the exchange on e4, when 4.exd5 cxd5 5.Qb3 
 ( 6. Nf3 {Quiet development, leaving the h-pawn at home for now. [%weight 3]} 6... Nd7
 {The same developing move. It covers e5 and prepares ...Ngf6.} 7. h4
 {The pawn comes after all. [%weight 6]} 7... h6
-{Room for the bishop and no square on g5 for White. [%tags king-safety] [%plan The main line by a different order. Expect 8.h5 Bh7 9.Bd3 Bxd3 10.Qxd3 e6 and follow the main line from there.]}
+{Room for the bishop and no square on g5 for White. [%tags king-safety] [%plan The main line by a different order. Expect 8.h5 Bh7 9.Bd3 Bxd3 10.Qxd3 e6 and follow the main line from there.] [%line 6.Nf3 before h4]}
 ) 6... h6
 {Room for the bishop, and g5 is taken away from White's knight and bishop for the rest of the game. [%tags king-safety]}
 ( 6... h5?!
@@ -224,7 +224,7 @@ Playing ...Bf5 on move three, before the exchange on e4, when 4.exd5 cxd5 5.Qb3 
 {White pushes first and develops afterwards. [%weight 5]} 7... Bh7
 {The same square as always, one move earlier. [%tags bishop-placement]} 8. Nf3
 {Back to normal development. [%weight 8]} 8... Nd7
-{Cover e5 and leave f6 for the other knight, exactly as in the main line. [%plan This is the main line by a different order. Expect 9.Bd3 Bxd3 10.Qxd3 e6 and play on as in the main line.]}
+{Cover e5 and leave f6 for the other knight, exactly as in the main line. [%plan This is the main line by a different order. Expect 9.Bd3 Bxd3 10.Qxd3 e6 and play on as in the main line.] [%line The immediate 7.h5]}
 ) 7... Nd7 {This knight covers e5 and leaves f6 free for the other one.} ( 7... Nf6?!
 {8.Ne5 takes the square Black meant to cover, and the queenside knight is left without a good route.}
 ) ( 7... e6!?
@@ -233,7 +233,7 @@ Playing ...Bf5 on move three, before the exchange on e4, when 4.exd5 cxd5 5.Qb3 
 {White trades before pushing the h-pawn. It changes little. [%weight 3]} 8... Bxd3
 {Take, as always. The trade is the point of the whole sequence. [%tags light-squares]}
 9. Qxd3 {The queen recaptures. [%weight 9]} 9... e6
-{The pawn comes out and the dark-squared bishop is free. [%plan Play ...Ngf6, ...Be7 and castle, then ...c5. This is the main line without the pawn on h5, which suits Black if anything.]}
+{The pawn comes out and the dark-squared bishop is free. [%plan Play ...Ngf6, ...Be7 and castle, then ...c5. This is the main line without the pawn on h5, which suits Black if anything.] [%line The early 8.Bd3 trade]}
 ) 8... Bh7
 {The only square, and a perfectly good one. The bishop wakes up as soon as White's own light-squared bishop appears. [%tags bishop-placement]}
 ( 8... Be4? {9.Nxe4 wins the bishop outright: the knight on g3 covers that square.} )
@@ -252,7 +252,7 @@ Playing ...Bf5 on move three, before the exchange on e4, when 4.exd5 cxd5 5.Qb3 
 ) 12. O-O-O
 {The same plan as ever: king to the queenside, pawns at Black's king. [%weight 8]}
 12... Be7
-{Complete the development. The bishop guards the dark squares around Black's own king. [%tags king-safety] [%plan Castle short and then play ...c5. With White's bishop on f4 rather than d2, watch for ...Nd5 hitting it once the centre opens.]}
+{Complete the development. The bishop guards the dark squares around Black's own king. [%tags king-safety] [%plan Castle short and then play ...c5. With White's bishop on f4 rather than d2, watch for ...Nd5 hitting it once the centre opens.] [%line White's 11.Bf4 instead of Bd2]}
 ) 11... Ngf6 {The second knight comes out behind the first, covering d5 and e4.} (
 11... Qc7!? {A good square for the queen later. Pieces first.} ) 12. O-O-O
 {The main plan: king to safety on the queenside, pawns forward on the kingside. [%weight 8]}
@@ -269,9 +269,9 @@ Playing ...Bf5 on move three, before the exchange on e4, when 4.exd5 cxd5 5.Qb3 
 {Take it. Left alone, the knight takes on f6 whenever it suits White. [%tags tactics]} (
 13... Nd5?! {The knight is loose there and c4 hits it with tempo.} ) 14. Qxe4
 {The queen takes the diagonal instead. [%weight 10]} 14... Nf6
-{The other knight comes out with tempo and moves the queen along. [%plan Chase the queen, castle short, then hit d4 with ...c5. There is nothing to defend and one thing to do.]}
+{The other knight comes out with tempo and moves the queen along. [%plan Chase the queen, castle short, then hit d4 with ...c5. There is nothing to defend and one thing to do.] [%line White's 13.Ne4 trade]}
 ) 13... O-O
-{Castle. Opposite sides, both kings safe for now, and Black has the faster plan. [%tags king-safety] [%plan Play ...c5 to hit d4 and open the c-file at White's king. Follow with ...Rc8 and ...Qa5 or ...Qc7 and the attack plays itself.]}
+{Castle. Opposite sides, both kings safe for now, and Black has the faster plan. [%tags king-safety] [%plan Play ...c5 to hit d4 and open the c-file at White's king. Follow with ...Rc8 and ...Qa5 or ...Qc7 and the attack plays itself.] [%line The full main line, with 13.Kb1]}
 *
 
 
@@ -319,7 +319,7 @@ Playing ...e6 before ...Bf5 and getting the French position the whole opening av
 {The restrained version: White defends d4 and leaves the pawns alone. [%weight 4]}
 5... Ne7 {The knight goes behind the pawns, heading for g6 or f5. [%tags development]}
 6. Nge2 {Simple development. [%weight 5]} 6... Nd7
-{The last minor piece gets a square, and c5 is coming next. [%tags development] [%plan Play ...c5 and ...Qb6, hitting d4 and b2 together. If White ever trades on c5, recapture with a piece and use the half open c-file.]}
+{The last minor piece gets a square, and c5 is coming next. [%tags development] [%plan Play ...c5 and ...Qb6, hitting d4 and b2 together. If White ever trades on c5, recapture with a piece and use the half open c-file.] [%line 4.Nc3 with the quiet 5.Be3]}
 ) 5... Bg6
 {Step back and stay outside the chain. Every pawn White has thrown forward is a weakness once the game opens. [%tags bishop-placement]}
 ( 5... Be4?
@@ -335,7 +335,7 @@ Playing ...e6 before ...Bf5 and getting the French position the whole opening av
 ( 7... h5?!
 {7...h5 8.gxh5 opens the g-file straight at Black's own king with the bishop still on g6.}
 ) 8. Be3 {White finally defends d4 and connects the pieces. [%weight 5]} 8... Nc6
-{Pile on d4. White's king has no safe square left on either wing. [%tags development] [%plan Take on d4 when it helps, develop with ...Nge7 and ...Qb6, and aim at the weakened light squares. White has spent five moves on pawn moves and still has to find a home for the king.]}
+{Pile on d4. White's king has no safe square left on either wing. [%tags development] [%plan Take on d4 when it helps, develop with ...Nge7 and ...Qb6, and aim at the weakened light squares. White has spent five moves on pawn moves and still has to find a home for the king.] [%line 4.Nc3 and the g4 push]}
 ) ( 4. Bd3
 {White offers the trade at once, hoping the queen on d3 will be useful on the diagonal. [%weight 4]}
 4... Bxd3
@@ -354,7 +354,7 @@ Playing ...e6 before ...Bf5 and getting the French position the whole opening av
 ) 7. O-O {White castles and leaves the centre for later. [%weight 5]} 7... Nc6
 {Develop with pressure on d4. [%tags development]} 8. c3
 {White shores up the chain. [%weight 5]} 8... Nge7
-{The last knight comes out behind the pawns, heading for g6 or f5. [%tags development] [%plan Castle, then decide between ...f6 against e5 and ...Qb6 against d4 and b2. With the light-squared bishops gone, White has no attack to build.]}
+{The last knight comes out behind the pawns, heading for g6 or f5. [%tags development] [%plan Castle, then decide between ...f6 against e5 and ...Qb6 against d4 and b2. With the light-squared bishops gone, White has no attack to build.] [%line 4.Bd3, trading at once]}
 ) ( 4. h4
 {A club favourite: throw the h-pawn at the bishop before developing anything. [%weight 3]}
 4... h5
@@ -366,7 +366,7 @@ Playing ...e6 before ...Bf5 and getting the French position the whole opening av
 6. Qxd3 {The queen recaptures. [%weight 9]} 6... e6
 {The usual structure. [%tags development]} 7. Ne2
 {White develops the knight where it does not block the f-pawn. [%weight 5]} 7... c5
-{The break, as always. [%tags c5-break] [%plan Develop with ...Nc6 and ...Nge7, castle short, and remember that the pawn on h4 means White cannot castle kingside comfortably.]}
+{The break, as always. [%tags c5-break] [%plan Develop with ...Nc6 and ...Nge7, castle short, and remember that the pawn on h4 means White cannot castle kingside comfortably.] [%line The 4.h4 chase]}
 ) ( 4. c4
 {White claims the whole centre. It is ambitious, and it leaves d4 short of defenders. [%weight 2]}
 4... e6
@@ -376,7 +376,7 @@ Playing ...e6 before ...Bf5 and getting the French position the whole opening av
 ) 5. Nc3 {Development, and White defends the c-pawn a second time. [%weight 6]} 5... Ne7
 {The knight goes to e7 so that ...c5 and ...Nbc6 come next without blocking anything. [%tags development]}
 6. cxd5 {White releases the tension. [%weight 5]} 6... Nxd5
-{Recapture with the knight. It lands in the centre with tempo on nothing in particular, and it leaves the pawn on c6 free to play ...c5 next. [%tags development] [%plan Play ...c5 next, hitting d4 with the c-pawn after all, then ...Nc6 and ...Be7. White's pawn on e5 has no supporters left.]}
+{Recapture with the knight. It lands in the centre with tempo on nothing in particular, and it leaves the pawn on c6 free to play ...c5 next. [%tags development] [%plan Play ...c5 next, hitting d4 with the c-pawn after all, then ...Nc6 and ...Be7. White's pawn on e5 has no supporters left.] [%line The 4.c4 space grab]}
 ( 6... cxd5?!
 {It keeps the wall and gives up the ...c5 break, which is the move this whole chapter is built around.}
 ) ( 6... exd5?! {It buries the bishop that was just developed and hands White the e-file.}
@@ -392,11 +392,11 @@ Playing ...e6 before ...Bf5 and getting the French position the whole opening av
 6. Qxd3 {The queen recaptures and looks at the kingside. [%weight 9]} 6... c5
 {The lever, on schedule. [%tags c5-break]} 7. c3 {White holds d4 with a pawn. [%weight 6]}
 7... Nc6
-{Develop with pressure on d4. [%tags development] [%plan Play ...Nge7 and ...Ng6, castle, and keep the pressure on d4 and e5. With the light-squared bishops off, White has no attacking piece left.]}
+{Develop with pressure on d4. [%tags development] [%plan Play ...Nge7 and ...Ng6, castle, and keep the pressure on d4 and e5. With the light-squared bishops off, White has no attacking piece left.] [%line 5.Bd3, the bishop trade]}
 ) ( 5. c3 {A quiet move keeping everything together. [%weight 3]} 5... c5
 {The break comes anyway. White's extra pawn move has not defended d4 any better. [%tags c5-break]}
 6. Be2 {Development, transposing to the main line of this chapter. [%weight 5]} 6... Nc6
-{Develop and hit d4. [%tags development] [%plan Play ...Nge7 and ...Ng6 and castle. This is the same structure as the 5.Be2 c5 6.c3 line, reached in a different order.]}
+{Develop and hit d4. [%tags development] [%plan Play ...Nge7 and ...Ng6 and castle. This is the same structure as the 5.Be2 c5 6.c3 line, reached in a different order.] [%line The quiet 5.c3]}
 ) 5... c5
 {The lever. White's chain rests on d4, so that is where the pawn goes. [%tags c5-break]} (
 5... Ne7!?
@@ -415,12 +415,12 @@ Playing ...e6 before ...Bf5 and getting the French position the whole opening av
 ) 8. cxd4
 {Forced in effect: taking with a piece would leave the pawn on e5 hanging. [%weight 9]}
 8... Nge7
-{Now the knight comes out, heading for g6 or f5 where it hits the pawns White has left behind. [%tags development] [%plan Play ...Ng6, ...Be7 and castle, then use the half open c-file and press d4. White has the space and the only two targets on the board.]}
+{Now the knight comes out, heading for g6 or f5 where it hits the pawns White has left behind. [%tags development] [%plan Play ...Ng6, ...Be7 and castle, then use the half open c-file and press d4. White has the space and the only two targets on the board.] [%line 6.c3, holding the centre]}
 ) ( 6. dxc5 {White releases the tension and hopes to hold the extra pawn. [%weight 3]}
 6... Bxc5
 {Take it straight back. The bishop reaches an excellent diagonal and Black is fully developed on the queenside. [%tags c5-break]}
 7. O-O {White castles and gets on with it. [%weight 6]} 7... Ne7
-{The knight heads for c6 or g6 without blocking anything. [%tags development] [%plan Castle, then play ...Nbc6 and ...Qb6 with pressure on d4 and f2. White has given up the centre for nothing.]}
+{The knight heads for c6 or g6 without blocking anything. [%tags development] [%plan Castle, then play ...Nbc6 and ...Qb6 with pressure on d4 and f2. White has given up the centre for nothing.] [%line 6.dxc5, giving up the tension]}
 ) 6... cxd4
 {Take now. Leaving the tension lets White play dxc5 at the moment that suits White. [%tags c5-break]}
 ( 6... Qb6!?
@@ -440,7 +440,7 @@ Playing ...e6 before ...Bf5 and getting the French position the whole opening av
 ( 9. Nxf5
 {Natural, and it gives up e5. The knight that has just left the board was, through f3, the only piece defending that pawn. [%weight 5]}
 9... Nxf5
-{Recapture with the knight, which now hits e3 and d4 and is ready to help take on e5. [%tags light-squares] [%plan Nothing defends the pawn on e5, so take it. If White plays 10.c3 first, 10...Nxe3 is stronger still: chapter 6 runs that line to the end.]}
+{Recapture with the knight, which now hits e3 and d4 and is ready to help take on e5. [%tags light-squares] [%plan Nothing defends the pawn on e5, so take it. If White plays 10.c3 first, 10...Nxe3 is stronger still: chapter 6 runs that line to the end.] [%line White's 9.Nxf5 trade]}
 ( 9... exf5?
 {It buries the light squares and lets White hold e5 in peace with f4. The engine puts it nearly two pawns behind the knight recapture.}
 ) ) 9... a6
@@ -457,7 +457,7 @@ Playing ...e6 before ...Bf5 and getting the French position the whole opening av
 11. Nxf5
 {White trades off the good bishop while the knight on c6 still guards e5. [%weight 6]}
 11... exf5
-{Take with the pawn here. The knight is needed on c6, and the pawn on f5 takes e4 away from White for good. [%tags light-squares] [%plan Play ...Be7 or ...Qb6 and castle, then hit e5 with ...f6. White has a little more space and no way to attack, which is the bargain the Caro-Kann always offers.]}
+{Take with the pawn here. The knight is needed on c6, and the pawn on f5 takes e4 away from White for good. [%tags light-squares] [%plan Play ...Be7 or ...Qb6 and castle, then hit e5 with ...f6. White has a little more space and no way to attack, which is the bargain the Caro-Kann always offers.] [%line The full main line, with 6.Be3]}
 *
 
 
@@ -500,7 +500,7 @@ Recapturing with the queen and losing a move to Nc3. Answering 7.Qb3 by defendin
 4. c4
 {The Panov. White strikes at d5 straight away and the game changes character completely. [%weight 5]}
 4... Nf6
-{Develop and defend d5. This is the start of chapter 4. [%tags vs-panov development] [%plan Go to chapter 4. In short: 5.Nc3 e6 and Black blockades the isolated pawn White ends up with after cxd5.]}
+{Develop and defend d5. This is the start of chapter 4. [%tags vs-panov development] [%plan Go to chapter 4. In short: 5.Nc3 e6 and Black blockades the isolated pawn White ends up with after cxd5.] [%line 4.c4, into the Panov]}
 ) ( 4. Bb5+
 {A check for its own sake. It gains no time once the knight blocks. [%weight 3]} 4... Nc6
 {Block with a developing move. The knight was going there anyway. [%tags development]} (
@@ -514,12 +514,12 @@ Recapturing with the queen and losing a move to Nc3. Answering 7.Qb3 by defendin
 {Take. White has to recapture with the queen or wreck the pawns, and the knight on f3 was the main defender of d4. [%tags light-squares]}
 ( 6... Bh5?! {6.g4 Bg6 7.Ne5 gains time and space, and the bishop ends up doing nothing.}
 ) 7. Qxf3 {The natural recapture, keeping the structure whole. [%weight 8]} 7... e6
-{Solid. The bishop that mattered has been traded and Black has an easy game. [%tags development] [%plan Play ...Bd6, castle and put a rook on c8. White's bishop on b5 will have to move again, which is another move Black gains.]}
+{Solid. The bishop that mattered has been traded and Black has an easy game. [%tags development] [%plan Play ...Bd6, castle and put a rook on c8. White's bishop on b5 will have to move again, which is another move Black gains.] [%line The 4.Bb5+ check]}
 ) ( 4. Nf3 {Development, keeping every setup available. [%weight 4]} 4... Nc6
 {The usual square, hitting d4. [%tags development]} ( 4... Bg4!?
 {Perfectly good and it pins the knight. Developing the knight first keeps ...Bg4 for the moment White commits the bishop.}
 ) 5. Bd3 {White returns to the main setup. [%weight 6]} 5... Nf6
-{Develop and cover d5 and e4, exactly as in the main line. [%tags development] [%plan This is the main line of this chapter by a different order. Expect 6.h3 e6 7.O-O Bd6, or 6.c3 Bg4 with the ...Na5 idea against Qb3.]}
+{Develop and cover d5 and e4, exactly as in the main line. [%tags development] [%plan This is the main line of this chapter by a different order. Expect 6.h3 e6 7.O-O Bd6, or 6.c3 Bg4 with the ...Na5 idea against Qb3.] [%line The plain 4.Nf3]}
 ) 4... Nc6
 {Develop towards the centre and put a second attacker on d4. [%tags development]} (
 4... Nf6!?
@@ -536,7 +536,7 @@ Recapturing with the queen and losing a move to Nc3. Answering 7.Qb3 by defendin
 ( 6... Bf5?
 {It does not get the bishop out, it gives it away: 7.Bxf5 and nothing recaptures, with no pawn on e6 and none on g6. Play ...e6 first.}
 ) 7. O-O {White castles. [%weight 5]} 7... Bd6
-{Get ready to castle and take the diagonal aimed at h2. [%tags bishop-placement] [%plan Castle, play ...Rc8 or ...Bd7 and ...Rc8, and look for ...Ne4 or the ...e5 break once the pieces are all out.]}
+{Get ready to castle and take the diagonal aimed at h2. [%tags bishop-placement] [%plan Castle, play ...Rc8 or ...Bd7 and ...Rc8, and look for ...Ne4 or the ...e5 break once the pieces are all out.] [%line 5.Nf3 before c3]}
 ) 5... Nf6 {Develop and cover e4 and d5. [%tags development]} ( 5... g6!?
 {A perfectly sound setup with ...Bg7. It is a different plan and it gives up on the quick ...Bg4.}
 ) ( 5... e6!? {Solid, but it shuts in the bishop on c8 before it has been given a square.}
@@ -554,7 +554,7 @@ Recapturing with the queen and losing a move to Nc3. Answering 7.Qb3 by defendin
 ) 8. O-O {White castles into a quiet, level position. [%weight 5]} 8... Bd6
 {Offer the trade. Swapping dark-squared bishops suits Black, whose remaining pieces have clear squares. [%tags bishop-placement]}
 9. Bxd6 {White takes rather than retreat. [%weight 5]} 9... Qxd6
-{Recapture with the queen, which now eyes the kingside and supports ...e5 one day. [%tags development] [%plan Castle short, put a rook on c8 and think about ...e5 once the pieces are out. The position is level and there is nothing to be afraid of.]}
+{Recapture with the queen, which now eyes the kingside and supports ...e5 one day. [%tags development] [%plan Castle short, put a rook on c8 and think about ...e5 once the pieces are out. The position is level and there is nothing to be afraid of.] [%line 7.Nf3 instead of the queen check]}
 ) 7... Na5
 {The move to remember. It attacks the queen and keeps b7 covered by getting out of the way of the rook. [%tags tactics]}
 ( 7... Qd7?!
@@ -569,7 +569,7 @@ Recapturing with the queen and losing a move to Nc3. Answering 7.Qb3 by defendin
 ( 9... Nc4?!
 {The knight looks active and 10.Bxc4 dxc4 leaves Black with a weak pawn and no compensation.}
 ) 10. Nf3 {White finally develops the kingside knight. [%weight 7]} 10... Be7
-{Quiet development. Note that 10...Bd6 would simply hang a piece: the bishop on d7 blocks the queen, so nothing recaptures after 11.Bxd6. [%tags bishop-placement] [%plan Castle, then put a rook on c8 and bring the knight back from a5 through c4 or c6. Black has gained two moves on the queen and stands at least equal.]}
+{Quiet development. Note that 10...Bd6 would simply hang a piece: the bishop on d7 blocks the queen, so nothing recaptures after 11.Bxd6. [%tags bishop-placement] [%plan Castle, then put a rook on c8 and bring the knight back from a5 through c4 or c6. Black has gained two moves on the queen and stands at least equal.] [%line The full main line, with 7.Qb3]}
 ( 10... Bd6?
 {It looks like the usual trade offer and it drops a bishop. 11.Bxd6 cannot be answered, because the queen on d8 is shut in by Black's own bishop on d7.}
 ) *
@@ -617,7 +617,7 @@ Taking on c4 and giving up the centre for a pawn that cannot be held. Recapturin
 6. Nc3
 {The knight arrives after all, and the position is the main line by transposition. [%weight 7]}
 6... Be7
-{The usual developing move, ready to castle. [%tags development] [%plan This is the main line of the chapter. Expect 7.cxd5 Nxd5 8.Bd3 O-O and blockade the isolated pawn as usual.]}
+{The usual developing move, ready to castle. [%tags development] [%plan This is the main line of the chapter. Expect 7.cxd5 Nxd5 8.Bd3 O-O and blockade the isolated pawn as usual.] [%line 5.Nf3 before Nc3]}
 ) ( 5. cxd5
 {White resolves the centre at once, which gives Black the easiest game of all. [%weight 3]}
 5... Nxd5
@@ -626,7 +626,7 @@ Taking on c4 and giving up the centre for a pawn that cannot be held. Recapturin
 {Development. [%weight 6]} 6... e6
 {Solid support for the knight on d5. [%tags development]} 7. Nc3
 {White challenges the blockading knight. [%weight 6]} 7... Be7
-{Develop and castle. If White takes on d5, recapture with the e-pawn and the blockade holds. [%tags development] [%plan Castle, then ...Nc6 and ...b6 with ...Bb7. Trade pieces whenever White offers and aim at the pawn on d4.]}
+{Develop and castle. If White takes on d5, recapture with the e-pawn and the blockade holds. [%tags development] [%plan Castle, then ...Nc6 and ...b6 with ...Bb7. Trade pieces whenever White offers and aim at the pawn on d4.] [%line 5.cxd5 at once]}
 ) 5... e6
 {Hold the pawn with a pawn. The bishop on c8 is shut in for now, and it comes out to b7 later, which is a better square anyway. [%tags development]}
 ( 5... g6!?
@@ -641,14 +641,14 @@ Taking on c4 and giving up the centre for a pawn that cannot be held. Recapturin
 7. cxd5 {White takes and accepts the isolated pawn. [%weight 6]} 7... Nxd5
 {Recapture with the knight, breaking the pin and taking the blockade square. [%tags isolated-pawn]}
 8. Bxe7 {White trades before the knight jumps away. [%weight 7]} 8... Qxe7
-{Recapture with the queen, which now looks down the e-file at White's king. [%tags development] [%plan Castle, play ...Nc6 and ...Rd8, and keep trading. A pair of bishops has already gone, which is one step closer to the ending where d4 falls.]}
+{Recapture with the queen, which now looks down the e-file at White's king. [%tags development] [%plan Castle, play ...Nc6 and ...Rd8, and keep trading. A pair of bishops has already gone, which is one step closer to the ending where d4 falls.] [%line The 6.Bg5 pin]}
 ) ( 6. cxd5 {White takes at once rather than developing first. [%weight 4]} 6... Nxd5
 {The knight takes the blockade square immediately. [%tags isolated-pawn]} ( 6... exd5?!
 {Again this hands the isolated pawn to Black, which is the wrong side of the bargain.} )
 7. Nf3 {Development. [%weight 7]} 7... Be7
 {Prepare to castle. Nothing has changed about the plan. [%tags development]} 8. Bc4
 {The bishop takes aim at the blockading knight and at f7. [%weight 6]} 8... O-O
-{Castle. If White ever trades on d5, the recapture with the e-pawn gives Black a solid extra defender in the centre. [%tags king-safety] [%plan Play ...Nc6, ...b6 and ...Bb7, and answer Nxd5 with ...exd5. Trade pieces and head for the ending.]}
+{Castle. If White ever trades on d5, the recapture with the e-pawn gives Black a solid extra defender in the centre. [%tags king-safety] [%plan Play ...Nc6, ...b6 and ...Bb7, and answer Nxd5 with ...exd5. Trade pieces and head for the ending.] [%line The early 6.cxd5]}
 ) 6... Be7
 {Quiet and flexible. Black gets ready to castle and keeps the option of ...Nc6 or ...b6. [%tags development]}
 ( 6... Bb4!?
@@ -662,7 +662,7 @@ Taking on c4 and giving up the centre for a pawn that cannot be held. Recapturin
 {The bishop recaptures on a good square, and White has the isolated pawn on d4. [%weight 9]}
 8... O-O {Castle and get on with the blockade. [%tags king-safety]} 9. O-O
 {White castles as well. [%weight 7]} 9... Nc6
-{Develop with pressure on the isolated pawn. [%tags development] [%plan Play ...b6 and ...Bb7, put a knight on d5 when it can stay there, and trade pieces. This is the same plan as the main line with a move to spare.]}
+{Develop with pressure on the isolated pawn. [%tags development] [%plan Play ...b6 and ...Bb7, put a knight on d5 when it can stay there, and trade pieces. This is the same plan as the main line with a move to spare.] [%line 7.Bd3 and the ...dxc4 grab]}
 ) 7... Nxd5
 {Recapture with the knight, which lands on the blockade square in front of White's isolated pawn. [%tags isolated-pawn]}
 ( 7... exd5?!
@@ -687,7 +687,7 @@ Taking on c4 and giving up the centre for a pawn that cannot be held. Recapturin
 ) 11. a3
 {A useful move: White takes b4 away from the knight before it ever gets there. [%weight 5]}
 11... b6
-{Now the bishop can come to b7, because the knight on f6 is holding the kingside together. [%tags development] [%plan Play ...Bb7 and ...Rc8, then watch for White lining a bishop up on c2 with the queen on d3: answer that with ...g6 before it becomes an attack. The pawn on d4 is not going anywhere.]}
+{Now the bishop can come to b7, because the knight on f6 is holding the kingside together. [%tags development] [%plan Play ...Bb7 and ...Rc8, then watch for White lining a bishop up on c2 with the queen on d3: answer that with ...g6 before it becomes an attack. The pawn on d4 is not going anywhere.] [%line The full main line, with 7.cxd5]}
 *
 
 
@@ -731,12 +731,12 @@ Taking on e4 too early against the Fantasy, before ...Bb4 has provoked a weaknes
 ( 2... e5!? {Sound, and a completely different game. This repertoire always plays ...d5.}
 ) 3. Nf3 {The Two Knights proper. White leaves the d-pawn at home. [%weight 6]} ( 3. d4
 {Straight back into the main line. [%weight 5]} 3... dxe4
-{Take, exactly as in chapter 1. [%plan This is chapter 1. White recaptures with 4.Nxe4 and Black plays 4...Bf5 with the main line.]}
+{Take, exactly as in chapter 1. [%plan This is chapter 1. White recaptures with 4.Nxe4 and Black plays 4...Bf5 with the main line.] [%line Two Knights into the main line]}
 ) ( 3. exd5 {White trades in the centre. [%weight 4]} 3... cxd5
 {Recapture with the c-pawn, as always.} 4. d4
 {White builds the centre and the game becomes the Exchange with the knight already on c3. [%weight 6]}
 4... Nf6
-{Develop and hold d5. The knight on c3 is biting on granite. [%plan Play ...Nc6, ...Bf5 or ...Bg4 and ...e6, then castle. Treat it as chapter 3 with White having committed the knight early.]}
+{Develop and hold d5. The knight on c3 is biting on granite. [%plan Play ...Nc6, ...Bf5 or ...Bg4 and ...e6, then castle. Treat it as chapter 3 with White having committed the knight early.] [%line Two Knights into the Exchange]}
 ) 3... Bg4
 {Out, and the bishop is already looking at the knight that holds White's position together. [%tags vs-two-knights bishop-placement]}
 ( 3... dxe4?!
@@ -752,31 +752,31 @@ Taking on e4 too early against the Fantasy, before ...Bb4 has provoked a weaknes
 {Solid, and it usually transposes. The knight is the piece with the obvious square.} )
 6. d3 {A modest move. White has given up on a big centre. [%weight 5]} ( 6. d4
 {White builds the centre after all. [%weight 4]} 6... e6
-{Solid, and it holds d5 for good. [%plan Play ...Bb4 or ...Be7 and castle. With the light-squared bishops already off, White's attacking chances are small.]}
+{Solid, and it holds d5 for good. [%plan Play ...Bb4 or ...Be7 and castle. With the light-squared bishops already off, White's attacking chances are small.] [%line Two Knights, with 6.d4]}
 ) 6... e6 {Build the wall. Black has a solid position and White has nothing to attack.}
 7. Be2 {Quiet development. [%weight 5]} 7... Bb4
 {Pin the knight and prepare to castle. Trading it would leave White's queenside pawns doubled.}
 8. O-O {White castles. [%weight 6]} 8... O-O
 {Castle as well. The position is level and easy to play from either side. [%tags king-safety]}
 9. Bd2 {White unpins. [%weight 5]} 9... Nbd7
-{The last piece comes out. Black is fully developed with a solid structure. [%plan Play ...Qc7 or ...Re8 and think about ...e5 or ...d4. White has the two bishops in a closed position, which is worth very little.]}
+{The last piece comes out. Black is fully developed with a solid structure. [%plan Play ...Qc7 or ...Re8 and think about ...e5 or ...d4. White has the two bishops in a closed position, which is worth very little.] [%line Two Knights, with 6.d3]}
 ) ( 2. Nf3 {A flexible move that usually transposes to something else. [%weight 4]}
 2... d5 {The same reply. Every sideline gets ...d5.} 3. exd5 {White trades. [%weight 5]} (
 3. e5 {The Advance without the pawn on d4 yet. [%weight 5]} 3... Bf5
 {Out before ...e6, as always in the Advance. [%tags bishop-placement light-squares]} 4. d4
 {White completes the Advance setup. [%weight 7]} 4... e6
-{Build the wall behind the bishop. [%plan This is chapter 2 after 4.Nf3. Expect 5.Be2 and play ...c5 against the base of the chain.]}
+{Build the wall behind the bishop. [%plan This is chapter 2 after 4.Nf3. Expect 5.Be2 and play ...c5 against the base of the chain.] [%line 2.Nf3 into the Advance]}
 ) ( 3. Nc3 {The Two Knights by the other order. [%weight 5]} 3... Bg4
-{The same answer as ever: the bishop comes out and heads for f3. [%tags vs-two-knights bishop-placement] [%plan Play ...Bxf3 when asked, then ...Nf6 and ...e6. This is the Two Knights position from earlier in this chapter.]}
+{The same answer as ever: the bishop comes out and heads for f3. [%tags vs-two-knights bishop-placement] [%plan Play ...Bxf3 when asked, then ...Nf6 and ...e6. This is the Two Knights position from earlier in this chapter.] [%line 2.Nf3 and 3.Nc3]}
 ) ( 3. d3 {White gives up on the centre entirely. [%weight 3]} 3... dxe4
 {Take. White has to recapture with a pawn and the queens come off. [%tags tactics]}
 4. dxe4
 {Forced, and now the d-file is open with the queens facing each other. [%weight 9]}
 4... Qxd1+
-{Trade queens. White's king has to take and gives up castling. [%tags tactics endgame] [%plan Play ...Bg4 and ...Nd7, castle long, and press on the open d-file. White's king in the centre is a real long-term problem.]}
+{Trade queens. White's king has to take and gives up castling. [%tags tactics endgame] [%plan Play ...Bg4 and ...Nd7, castle long, and press on the open d-file. White's king in the centre is a real long-term problem.] [%line 2.Nf3 with the quiet 3.d3]}
 ) 3... cxd5 {Recapture with the c-pawn.} 4. d4
 {And this is the Exchange Variation. [%weight 7]} 4... Nc6
-{Develop with pressure on d4, exactly as in chapter 3. [%plan This is chapter 3 after 4.Nf3. Expect 5.Bd3 Nf6 and follow the Exchange chapter from there.]}
+{Develop with pressure on d4, exactly as in chapter 3. [%plan This is chapter 3 after 4.Nf3. Expect 5.Bd3 Nf6 and follow the Exchange chapter from there.] [%line 2.Nf3 into the Exchange]}
 ) ( 2. d3
 {The King's Indian Attack. White is not fighting for the centre at all. [%weight 3]}
 2... d5 {Take what is offered.} ( 2... e5!?
@@ -792,14 +792,14 @@ Taking on e4 too early against the Fantasy, before ...Bb4 has provoked a weaknes
 {The bishop is heading for g2, which is the whole idea of the setup. [%weight 5]} 5... Nf6
 {Develop and hold d5 and e4.} 6. Bg2 {White completes the fianchetto. [%weight 7]}
 6... O-O
-{Castle. Black has the centre, easy development and nothing to defend. [%tags king-safety] [%plan Play ...Re8 and ...Bg4 or ...a5, and hold the centre. If White ever plays exd5, recapture with the c-pawn and enjoy the extra space.]}
+{Castle. Black has the centre, easy development and nothing to defend. [%tags king-safety] [%plan Play ...Re8 and ...Bg4 or ...a5, and hold the centre. If White ever plays exd5, recapture with the c-pawn and enjoy the extra space.] [%line The King's Indian Attack]}
 ) ( 2. c4 {An early Panov try. Without d4 in first it is less testing. [%weight 2]}
 2... d5 {Challenge the centre at once.} 3. exd5 {White takes. [%weight 6]} 3... cxd5
 {Recapture with the c-pawn as usual.} 4. cxd5
 {White takes again and the pawn on d5 has to be regained. [%weight 8]} 4... Nf6
 {Develop and hit the pawn rather than grabbing it with the queen.} 5. Nc3
 {White defends the pawn one more time. [%weight 6]} 5... Nxd5
-{Take. The knight sits on a fine central square and Black has an easy game. [%plan Play ...Nc6, ...e6 and ...Be7 and castle. Without a pawn on d4 White has no centre at all, so this is a comfortable version of chapter 4.]}
+{Take. The knight sits on a fine central square and Black has an easy game. [%plan Play ...Nc6, ...e6 and ...Be7 and castle. Without a pawn on d4 White has no centre at all, so this is a comfortable version of chapter 4.] [%line The 2.c4 Accelerated Panov]}
 ) 2... d5
 {The point of the opening: the pawn arrives supported and White has to make a decision. [%tags light-squares]}
 ( 2... d6?! {A Pirc where the pawn on c6 is doing very little.} ) ( 2... Nf6?!
@@ -811,7 +811,7 @@ Taking on e4 too early against the Fantasy, before ...Bb4 has provoked a weaknes
 {Develop and hit the bishop at the same time.} 5. Bf3
 {The bishop steps back. Bd3 is the other square and leads to the same sort of position. [%weight 5]}
 5... Bf5
-{The bishop comes out, which is what this opening is for. White has spent three moves on one bishop and traded it, so Black is already comfortable. [%tags bishop-placement light-squares] [%plan Play ...e6, ...Nbd7 and ...Be7 and castle, then ...c5 or ...Qb6 against d4. Black has an extra developing move and no weaknesses.]}
+{The bishop comes out, which is what this opening is for. White has spent three moves on one bishop and traded it, so Black is already comfortable. [%tags bishop-placement light-squares] [%plan Play ...e6, ...Nbd7 and ...Be7 and castle, then ...c5 or ...Qb6 against d4. Black has an extra developing move and no weaknesses.] [%line The 3.Bd3 sideline]}
 ( 5... e5?!
 {It looks like a free strike in the centre and 6.dxe5 Qxd1+ 7.Kxd1 leaves White the better placed, not Black.}
 ) ) 3... e6
@@ -826,7 +826,7 @@ Taking on e4 too early against the Fantasy, before ...Bb4 has provoked a weaknes
 5. fxe4
 {White recaptures and keeps the broad centre. The f-pawn has left f3, which is the detail that matters. [%weight 8]}
 5... Qh4+
-{The same check as in the main line of this chapter, for the same reason: with f3 empty the queen arrives with check and the pawn on e4 cannot be held. [%tags tactics] [%plan After 6.Kd2 or 6.g3 take on e4, then develop with ...Nf6 and ...Nd7. A pawn and a king stuck in the middle is a good return for one check.]}
+{The same check as in the main line of this chapter, for the same reason: with f3 empty the queen arrives with check and the pawn on e4 cannot be held. [%tags tactics] [%plan After 6.Kd2 or 6.g3 take on e4, then develop with ...Nf6 and ...Nd7. A pawn and a king stuck in the middle is a good return for one check.] [%line The Fantasy, with 4.Be3]}
 ( 5... c5?!
 {The natural break, and it lets White consolidate the extra centre pawn in peace.} ) )
 4... Bb4
@@ -839,7 +839,7 @@ Taking on e4 too early against the Fantasy, before ...Bb4 has provoked a weaknes
 {White develops and leaves the pin alone. [%weight 4]} 5... Ne7
 {Develop behind the pawns. The bishop on b4 is not going anywhere and the pin still bites. [%tags vs-fantasy]}
 6. Nge2 {The last minor piece comes out. [%weight 5]} 6... O-O
-{Castle first and decide about the centre afterwards. [%tags king-safety] [%plan Take on e4 when White has to recapture with a pawn, then hit the centre with ...c5. The pawn on f3 has left White short of squares on the kingside.]}
+{Castle first and decide about the centre afterwards. [%tags king-safety] [%plan Take on e4 when White has to recapture with a pawn, then hit the centre with ...c5. The pawn on f3 has left White short of squares on the kingside.] [%line The Fantasy, 5.Bf4 instead of a3]}
 ) 5... Bxc3+
 {Take. White's queenside pawns are doubled for the rest of the game, and c3 will not run away. [%tags vs-fantasy tactics]}
 6. bxc3
@@ -861,7 +861,7 @@ Taking on e4 too early against the Fantasy, before ...Bb4 has provoked a weaknes
 8. Kd2
 {The other way. White keeps the pawn on e4 for a moment and puts the king on an even stranger square. [%weight 4]}
 8... Nf6
-{Develop and hit e4 again. There is no need to grab anything: White's king is the target. [%plan Play ...Nd7, ...b6 and ...Ba6, and open the position where the king is. If White pushes e5, the knight comes to e4 with check.]}
+{Develop and hit e4 again. There is no need to grab anything: White's king is the target. [%plan Play ...Nd7, ...b6 and ...Ba6, and open the position where the king is. If White pushes e5, the knight comes to e4 with check.] [%line The Fantasy, with 8.Kd2]}
 ) 8... Qxe4+
 {Collect the pawn with check. White's king has nowhere good to go and will never castle. [%tags tactics]}
 9. Kf2 {The king steps back towards its own pieces. [%weight 8]} 9... Qh4+
@@ -869,7 +869,7 @@ Taking on e4 too early against the Fantasy, before ...Bb4 has provoked a weaknes
 10. g3
 {Now the pawn has to block, and the dark squares around White's king are permanently loose. [%weight 8]}
 10... Qd8
-{Home again, a pawn up, with White's king stuck in the middle and the pawns on c3 and g3 to work on. [%plan Develop with ...Nf6, ...Nd7 and ...b6, and castle either side. Do not hurry: White cannot castle, so every quiet move makes the position better.]}
+{Home again, a pawn up, with White's king stuck in the middle and the pawns on c3 and g3 to work on. [%plan Develop with ...Nf6, ...Nd7 and ...b6, and castle either side. Do not hurry: White cannot castle, so every quiet move makes the position better.] [%line The Fantasy, with 8.Ke2]}
 *
 
 
@@ -933,7 +933,7 @@ Reaching a good position and then having nothing to do, because ...c5 or ...f6 w
 {White steps off the c-file, which says exactly where Black is going. [%weight 5]}
 13... O-O {Castle and start. [%tags king-safety]} 14. Rhe1
 {White brings the last rook to the middle before pushing pawns. [%weight 5]} 14... c5
-{The lever, at the moment it is needed. It hits d4 and opens the c-file straight at the white king. [%tags c5-break] [%plan Follow with ...Rc8 and ...Qa5, or take on d4 if White allows it. Black's attack comes down an open file while White still needs two pawn moves to get going.]}
+{The lever, at the moment it is needed. It hits d4 and opens the c-file straight at the white king. [%tags c5-break] [%plan Follow with ...Rc8 and ...Qa5, or take on d4 if White allows it. Black's attack comes down an open file while White still needs two pawn moves to get going.] [%line The main line: the ...c5 break]}
 ) ( 3. exd5
 {The Exchange and the Panov both start here. Exercises 3 and 4 split at White's fourth move. [%weight 6]}
 3... cxd5
@@ -960,7 +960,7 @@ Reaching a good position and then having nothing to do, because ...c5 or ...f6 w
 13. Bc2 {The bishop steps aside, and this is the move to notice. [%weight 5]} 13... Rc8
 {The rook takes the open file while White finishes the setup. [%tags development]} 14. Qd3
 {There it is: bishop on c2, queen behind it, both aimed at h7. [%weight 6]} 14... g6
-{Stop it before it starts. That battery on the b1-h7 diagonal is the only real attack White's isolated pawn buys, and one pawn move takes it away for good. [%plan Now play against d4 with ...Nd5 or ...Bf6 and a rook on d8. With the diagonal shut, every trade brings the ending closer and the isolated pawn is a permanent target.]}
+{Stop it before it starts. That battery on the b1-h7 diagonal is the only real attack White's isolated pawn buys, and one pawn move takes it away for good. [%plan Now play against d4 with ...Nd5 or ...Bf6 and a rook on d8. With the diagonal shut, every trade brings the ending closer and the isolated pawn is a permanent target.] [%line The Panov: holding h7 with ...g6]}
 ) 4... Nc6 {Develop with pressure on d4. [%tags development vs-exchange]} 5. c3
 {White props up the centre. [%weight 6]} 5... Nf6
 {Develop and cover d5. [%tags development]} 6. Bf4
@@ -977,7 +977,7 @@ Reaching a good position and then having nothing to do, because ...c5 or ...f6 w
 11. O-O {White castles. [%weight 8]} 11... O-O
 {So does Black, and the position is level with one asset on each side. [%tags king-safety]}
 12. Re1 {White takes the open file on the other side of the board. [%weight 6]} 12... Rc8
-{The whole plan of the Exchange Variation in one move: the rook takes the half open file and points at c3 and c2. [%plan Bring the knight back through c4 or c6, double on the c-file if White allows it, and look for ...Ne4 or ...b5 to fix a target on c3.]}
+{The whole plan of the Exchange Variation in one move: the rook takes the half open file and points at c3 and c2. [%plan Bring the knight back through c4 or c6, double on the c-file if White allows it, and look for ...Ne4 or ...b5 to fix a target on c3.] [%line The Exchange: the c-file rook]}
 ) 3... Bf5 {Out before the door shuts. [%tags bishop-placement vs-advance]} 4. Nf3
 {Quiet development. [%weight 6]} 4... e6
 {The wall goes up behind the bishop. [%tags development]} 5. Be2
@@ -999,5 +999,5 @@ Reaching a good position and then having nothing to do, because ...c5 or ...f6 w
 ) 11. fxe3
 {Forced. Taking with the queen would drop the pawn on e5 with check to follow. [%weight 9]}
 11... Qg5
-{The point. The queen hits e5 and e3 at once, and White cannot hold both. [%plan Take on e5 next, then castle and play against the ruined pawns on e3 and e5. Two extra weaknesses and a pawn is more than an opening advantage.]}
+{The point. The queen hits e5 and e3 at once, and White cannot hold both. [%plan Take on e5 next, then castle and play against the ruined pawns on e3 and e5. Two extra weaknesses and a pawn is more than an opening advantage.] [%line The Advance: the ...Qg5 hit]}
 *

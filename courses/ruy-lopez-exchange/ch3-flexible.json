@@ -106,6 +106,7 @@
                                             "d4-break"
                                           ],
                                           "plan": "Play Ne3 and Nf5, or push d5 and shut the long diagonal. Bishops need open lines and this structure does not give them any.",
+                                          "name": "...Qd6, the flexible queen",
                                           "note": "The pawn recapture, which builds the centre and keeps the knights.",
                                           "mistakes": [
                                             {
@@ -159,6 +160,7 @@
                             "development"
                           ],
                           "plan": "Take on d6 if Black allows it, then play d4 and use the file. The ending is where this structure pays.",
+                          "name": "...Qd6 and then ...Be6",
                           "note": "Now it arrives with the hit on the queen."
                         }
                       ]
@@ -251,6 +253,7 @@
                                             "development"
                                           ],
                                           "plan": "Trade queens if Black offers, put a knight on e3 and f5, and only then start the kingside pawns.",
+                                          "name": "...Bd6, holding e5",
                                           "note": "The rook takes the file the queen opened.",
                                           "mistakes": [
                                             {
@@ -281,6 +284,7 @@
                             "tactics"
                           ],
                           "plan": "Take on h8 only if the queen can get out afterwards. A pawn and the better structure is enough; a trapped queen is not.",
+                          "name": "...Bd6 and the g7 blunder",
                           "note": "And the rook on h8 is next, so Black has to give the exchange or lose more."
                         }
                       ]
@@ -335,6 +339,7 @@
                             "development"
                           ],
                           "plan": "Play Nc3 and Rad1, trade queens on d6 if offered, and go for the ending.",
+                          "name": "...Qf6, defending the pawn",
                           "note": "Recapture, a clear move ahead of the 5...Qd6 line.",
                           "mistakes": [
                             {
@@ -373,6 +378,7 @@
                             "development"
                           ],
                           "plan": "Trade queens on g6 if Black allows it, then Nbd2 and use the space. The pawn on e5 cramps Black all game.",
+                          "name": "...Qf6 and then ...Bg4",
                           "note": "Defend both and offer the trade she cannot take."
                         }
                       ]
@@ -470,6 +476,7 @@
                                             "development"
                                           ],
                                           "plan": "Play Nc3 and d3, and use the lead in development while the king sits on e8.",
+                                          "name": "...Ne7, dropping the pawn",
                                           "note": "With tempo on the queen, and every white piece is about to be out while the black king is not.",
                                           "mistakes": [
                                             {
@@ -535,6 +542,7 @@
                                     "endgame"
                                   ],
                                   "plan": "Play d3, Nc3 and Be3, castle the rooks and trade into the ending a pawn up.",
+                                  "name": "...Ne7 and then ...Ng6",
                                   "note": "Back to safety, a pawn up, with Black's kingside pawns in three pieces."
                                 }
                               ]

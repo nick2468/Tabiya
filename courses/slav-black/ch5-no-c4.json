@@ -161,6 +161,7 @@
                                                                           "note": "Finish developing. Black has the space, the file and the better long-term chances.",
                                                                           "tags": ["development", "king-safety"],
                                                                           "plan": "Castle, double on the a-file and play ...b5 and ...b4 when the rooks are ready. White's counter is b3; meet it by keeping the pawn on c4 defended.",
+                                                                          "name": "The London, with 6.Qb3",
                                                                           "mistakes": [
                                                                             {
                                                                               "san": "b5",
@@ -241,6 +242,7 @@
                                                   "san": "Nc6",
                                                   "note": "Develop with the pawn chain already set. The knight heads for a5 to hold c4 in place.",
                                                   "plan": "Play ...Bf5, ...e6 and ...Be7, castle, and answer b3 with ...Na5 so the pawn on c4 stays where it is.",
+                                                  "name": "The London, with 4.c3",
                                                   "mistakes": [
                                                     {
                                                       "san": "b5",
@@ -273,6 +275,7 @@
                           "note": "Open the path to c5 and take the pawn back next move with the bishop, fully developed.",
                           "tags": ["c5-break"],
                           "plan": "Recapture with ...Bxc5 next move. If White tries to hold the pawn with b4, hit the chain with ...a5 before anything else.",
+                          "name": "The London, with 4.dxc5",
                           "mistakes": [
                             {
                               "san": "Qa5+",
@@ -302,6 +305,7 @@
                       "note": "White is back in the main line of this chapter, one move order later.",
                       "weight": 8,
                       "plan": "Play ...Nc6, then ...Qb6 hitting b2, and answer Qb3 with ...c4 rather than the trade.",
+                      "name": "The London, 3.Nf3 first",
                       "children": []
                     }
                   ]
@@ -376,6 +380,7 @@
                                   "note": "Take the centre instead of the pawn. With pawns on d5 and e5 Black has more space than White has extra material.",
                                   "tags": ["e5-break"],
                                   "plan": "Play ...Be7 or ...Bxc5, castle, and only then decide about the pawn. If White holds it with b4, the queenside squares White gave up are worth more than the pawn.",
+                                  "name": "The Colle, with 5.dxc5",
                                   "mistakes": [
                                     {
                                       "san": "Qa5+",
@@ -444,6 +449,7 @@
                                                           "note": "Castle and let the break come. Black is ready for it and White is not.",
                                                           "tags": ["king-safety"],
                                                           "plan": "When e4 comes, take on e4 and trade the knights. Then remove the knight on f3 with ...Bxf3 before hitting d4 with ...cxd4, and the pawn on d4 falls.",
+                                                          "name": "The Colle, with 5.Bd3",
                                                           "mistakes": [
                                                             {
                                                               "san": "cxd4",
@@ -571,6 +577,7 @@
                                                                           "note": "Finish the development. Black has the two bishops pointing at a queenside White has not organised.",
                                                                           "tags": ["development", "king-safety"],
                                                                           "plan": "Castle, then play ...Rfd8 and ...cxd4 at a moment when the recapture leaves White with a weak pawn. The bishop on e4 is the best piece on the board.",
+                                                                          "name": "The Torre, with 4.Bf4",
                                                                           "mistakes": [
                                                                             {
                                                                               "san": "cxd4",
@@ -620,6 +627,7 @@
                               "note": "White props up d4 and the game settles into the same shape as the 4.Bf4 line.",
                               "weight": 7,
                               "plan": "Play ...Nc6 and ...Qb6 as usual, and remember the bishop on h4 is not defending b2 either.",
+                              "name": "The Torre, with 4.Bh4",
                               "children": []
                             }
                           ]
@@ -635,6 +643,7 @@
               "note": "The London by another route, with the knight already on f3.",
               "weight": 5,
               "plan": "Play ...c5 and follow the London lines above: ...Nc6, ...Qb6, and ...c4 against Qb3.",
+              "name": "2.Nf3 into the London",
               "children": []
             }
           ]
@@ -674,6 +683,7 @@
                               "note": "White is now in the Colle from the section above, by a different order.",
                               "weight": 7,
                               "plan": "Play ...Bg4 at once, before ...e6. That is the move the whole Colle set-up is designed to prevent.",
+                              "name": "The 2.e3 move order",
                               "children": []
                             }
                           ]
@@ -787,6 +797,7 @@
                                                                           "note": "Castle. Black has no weaknesses and a clear plan, which is more than White has.",
                                                                           "tags": ["king-safety"],
                                                                           "plan": "Play ...c5 to open the centre while White's rook sits on a file that is about to be blocked, then use the d5 pawn's extra space.",
+                                                                          "name": "The Jobava London",
                                                                           "mistakes": [
                                                                             {
                                                                               "san": "b5",

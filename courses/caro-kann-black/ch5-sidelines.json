@@ -112,7 +112,8 @@
                                                                         {
                                                                           "san": "Qd8",
                                                                           "note": "Home again, a pawn up, with White's king stuck in the middle and the pawns on c3 and g3 to work on.",
-                                                                          "plan": "Develop with ...Nf6, ...Nd7 and ...b6, and castle either side. Do not hurry: White cannot castle, so every quiet move makes the position better."
+                                                                          "plan": "Develop with ...Nf6, ...Nd7 and ...b6, and castle either side. Do not hurry: White cannot castle, so every quiet move makes the position better.",
+                                                                          "name": "The Fantasy, with 8.Ke2"
                                                                         }
                                                                       ]
                                                                     }
@@ -132,7 +133,8 @@
                                                         {
                                                           "san": "Nf6",
                                                           "note": "Develop and hit e4 again. There is no need to grab anything: White's king is the target.",
-                                                          "plan": "Play ...Nd7, ...b6 and ...Ba6, and open the position where the king is. If White pushes e5, the knight comes to e4 with check."
+                                                          "plan": "Play ...Nd7, ...b6 and ...Ba6, and open the position where the king is. If White pushes e5, the knight comes to e4 with check.",
+                                                          "name": "The Fantasy, with 8.Kd2"
                                                         }
                                                       ]
                                                     }
@@ -167,7 +169,8 @@
                                           "san": "O-O",
                                           "note": "Castle first and decide about the centre afterwards.",
                                           "tags": ["king-safety"],
-                                          "plan": "Take on e4 when White has to recapture with a pawn, then hit the centre with ...c5. The pawn on f3 has left White short of squares on the kingside."
+                                          "plan": "Take on e4 when White has to recapture with a pawn, then hit the centre with ...c5. The pawn on f3 has left White short of squares on the kingside.",
+                                          "name": "The Fantasy, 5.Bf4 instead of a3"
                                         }
                                       ]
                                     }
@@ -201,7 +204,8 @@
                                   "mistakes": [
                                     { "san": "c5", "grade": "inaccuracy", "note": "The natural break, and it lets White consolidate the extra centre pawn in peace." }
                                   ],
-                                  "plan": "After 6.Kd2 or 6.g3 take on e4, then develop with ...Nf6 and ...Nd7. A pawn and a king stuck in the middle is a good return for one check."
+                                  "plan": "After 6.Kd2 or 6.g3 take on e4, then develop with ...Nf6 and ...Nd7. A pawn and a king stuck in the middle is a good return for one check.",
+                                  "name": "The Fantasy, with 4.Be3"
                                 }
                               ]
                             }
@@ -244,7 +248,8 @@
                                   "mistakes": [
                                     { "san": "e5", "grade": "inaccuracy", "note": "It looks like a free strike in the centre and 6.dxe5 Qxd1+ 7.Kxd1 leaves White the better placed, not Black." }
                                   ],
-                                  "plan": "Play ...e6, ...Nbd7 and ...Be7 and castle, then ...c5 or ...Qb6 against d4. Black has an extra developing move and no weaknesses."
+                                  "plan": "Play ...e6, ...Nbd7 and ...Be7 and castle, then ...c5 or ...Qb6 against d4. Black has an extra developing move and no weaknesses.",
+                                  "name": "The 3.Bd3 sideline"
                                 }
                               ]
                             }
@@ -348,7 +353,8 @@
                                                                 {
                                                                   "san": "Nbd7",
                                                                   "note": "The last piece comes out. Black is fully developed with a solid structure.",
-                                                                  "plan": "Play ...Qc7 or ...Re8 and think about ...e5 or ...d4. White has the two bishops in a closed position, which is worth very little."
+                                                                  "plan": "Play ...Qc7 or ...Re8 and think about ...e5 or ...d4. White has the two bishops in a closed position, which is worth very little.",
+                                                                  "name": "Two Knights, with 6.d3"
                                                                 }
                                                               ]
                                                             }
@@ -372,7 +378,8 @@
                                         {
                                           "san": "e6",
                                           "note": "Solid, and it holds d5 for good.",
-                                          "plan": "Play ...Bb4 or ...Be7 and castle. With the light-squared bishops already off, White's attacking chances are small."
+                                          "plan": "Play ...Bb4 or ...Be7 and castle. With the light-squared bishops already off, White's attacking chances are small.",
+                                          "name": "Two Knights, with 6.d4"
                                         }
                                       ]
                                     }
@@ -396,7 +403,8 @@
                 {
                   "san": "dxe4",
                   "note": "Take, exactly as in chapter 1.",
-                  "plan": "This is chapter 1. White recaptures with 4.Nxe4 and Black plays 4...Bf5 with the main line."
+                  "plan": "This is chapter 1. White recaptures with 4.Nxe4 and Black plays 4...Bf5 with the main line.",
+                  "name": "Two Knights into the main line"
                 }
               ]
             },
@@ -417,7 +425,8 @@
                         {
                           "san": "Nf6",
                           "note": "Develop and hold d5. The knight on c3 is biting on granite.",
-                          "plan": "Play ...Nc6, ...Bf5 or ...Bg4 and ...e6, then castle. Treat it as chapter 3 with White having committed the knight early."
+                          "plan": "Play ...Nc6, ...Bf5 or ...Bg4 and ...e6, then castle. Treat it as chapter 3 with White having committed the knight early.",
+                          "name": "Two Knights into the Exchange"
                         }
                       ]
                     }
@@ -455,7 +464,8 @@
                         {
                           "san": "Nc6",
                           "note": "Develop with pressure on d4, exactly as in chapter 3.",
-                          "plan": "This is chapter 3 after 4.Nf3. Expect 5.Bd3 Nf6 and follow the Exchange chapter from there."
+                          "plan": "This is chapter 3 after 4.Nf3. Expect 5.Bd3 Nf6 and follow the Exchange chapter from there.",
+                          "name": "2.Nf3 into the Exchange"
                         }
                       ]
                     }
@@ -481,7 +491,8 @@
                         {
                           "san": "e6",
                           "note": "Build the wall behind the bishop.",
-                          "plan": "This is chapter 2 after 4.Nf3. Expect 5.Be2 and play ...c5 against the base of the chain."
+                          "plan": "This is chapter 2 after 4.Nf3. Expect 5.Be2 and play ...c5 against the base of the chain.",
+                          "name": "2.Nf3 into the Advance"
                         }
                       ]
                     }
@@ -498,7 +509,8 @@
                   "san": "Bg4",
                   "note": "The same answer as ever: the bishop comes out and heads for f3.",
                   "tags": ["vs-two-knights", "bishop-placement"],
-                  "plan": "Play ...Bxf3 when asked, then ...Nf6 and ...e6. This is the Two Knights position from earlier in this chapter."
+                  "plan": "Play ...Bxf3 when asked, then ...Nf6 and ...e6. This is the Two Knights position from earlier in this chapter.",
+                  "name": "2.Nf3 and 3.Nc3"
                 }
               ]
             },
@@ -521,7 +533,8 @@
                           "san": "Qxd1+",
                           "note": "Trade queens. White's king has to take and gives up castling.",
                           "tags": ["tactics", "endgame"],
-                          "plan": "Play ...Bg4 and ...Nd7, castle long, and press on the open d-file. White's king in the centre is a real long-term problem."
+                          "plan": "Play ...Bg4 and ...Nd7, castle long, and press on the open d-file. White's king in the centre is a real long-term problem.",
+                          "name": "2.Nf3 with the quiet 3.d3"
                         }
                       ]
                     }
@@ -587,7 +600,8 @@
                                           "san": "O-O",
                                           "note": "Castle. Black has the centre, easy development and nothing to defend.",
                                           "tags": ["king-safety"],
-                                          "plan": "Play ...Re8 and ...Bg4 or ...a5, and hold the centre. If White ever plays exd5, recapture with the c-pawn and enjoy the extra space."
+                                          "plan": "Play ...Re8 and ...Bg4 or ...a5, and hold the centre. If White ever plays exd5, recapture with the c-pawn and enjoy the extra space.",
+                                          "name": "The King's Indian Attack"
                                         }
                                       ]
                                     }
@@ -642,7 +656,8 @@
                                 {
                                   "san": "Nxd5",
                                   "note": "Take. The knight sits on a fine central square and Black has an easy game.",
-                                  "plan": "Play ...Nc6, ...e6 and ...Be7 and castle. Without a pawn on d4 White has no centre at all, so this is a comfortable version of chapter 4."
+                                  "plan": "Play ...Nc6, ...e6 and ...Be7 and castle. Without a pawn on d4 White has no centre at all, so this is a comfortable version of chapter 4.",
+                                  "name": "The 2.c4 Accelerated Panov"
                                 }
                               ]
                             }

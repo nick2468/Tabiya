@@ -135,6 +135,7 @@
                                                                                                           "note": "Strike the wedge. The pawn on e5 is what makes Black's position uncomfortable, and it has to be challenged before White builds around it.",
                                                                                                           "tags": ["e5-break", "c-file"],
                                                                                                           "plan": "After exf6 recapture with a knight or the queen and use the half-open f-file. If White leaves the tension, take on e5 yourself and the cramp is gone.",
+                                                                                                          "name": "The main line: the ...f6 break",
                                                                                                           "mistakes": [
                                                                                                             {
                                                                                                               "san": "Be7",
@@ -242,6 +243,7 @@
                                                                                   "note": "Hold the knight on e5 with a pawn. Taking on c4 instead loses the queen to Bxc7, because the knight on e5 is the only thing keeping that diagonal shut.",
                                                                                   "tags": ["tactics", "e5-break"],
                                                                                   "plan": "Follow with ...Be7, ...O-O and ...Rd8. The knight on e5 is a permanent asset once a pawn is holding it there.",
+                                                                                  "name": "6.Ne5: the ...e5 push",
                                                                                   "mistakes": [
                                                                                     {
                                                                                       "san": "Nxc4",
@@ -355,6 +357,7 @@
                                                                           "note": "The bishop cannot be captured. The rook on h8 defends h2 down the file that ...hxg6 opened, so 11.Kxh2 is not a legal move at all.",
                                                                           "tags": ["tactics", "h-file"],
                                                                           "plan": "After the forced 11.Kh1, play ...Bd6+ with discovered check from the rook, then bring the knight to g4 and the queen to h4.",
+                                                                          "name": "The quiet lines: the h2 pawn",
                                                                           "mistakes": [
                                                                             {
                                                                               "san": "Qe7",
@@ -443,6 +446,7 @@
                                                   "note": "Defend by attacking. The knight covers b7 by attacking it, so 8.Qxb7 loses the queen to 8...Nxb7, and White has to check on a4 instead.",
                                                   "tags": ["tactics"],
                                                   "plan": "Meet 8.Qa4+ with 8...Bd7, gaining another move, and bring the knight back into the game through c4 or c6 once the queen has gone home.",
+                                                  "name": "The Exchange: the ...Na5 hit",
                                                   "mistakes": [
                                                     {
                                                       "san": "Qd7",
@@ -533,6 +537,7 @@
                                           "note": "Push past. The queen has to take on b6 on Black's terms, and the pawn on c4 shuts the bishop on f1 out of the game for the rest of it.",
                                           "tags": ["c5-break", "vs-london"],
                                           "plan": "Recapture on b6 with the a-pawn, then ...Bf5, ...e6 and ...Be7. The plan is the a-file and a later ...b5 and ...b4.",
+                                          "name": "The London: the ...c4 clamp",
                                           "mistakes": [
                                             {
                                               "san": "Qxb3",

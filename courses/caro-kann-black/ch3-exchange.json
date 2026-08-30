@@ -107,7 +107,8 @@
                                                               "mistakes": [
                                                                 { "san": "Bd6", "grade": "mistake", "note": "It looks like the usual trade offer and it drops a bishop. 11.Bxd6 cannot be answered, because the queen on d8 is shut in by Black's own bishop on d7." }
                                                               ],
-                                                              "plan": "Castle, then put a rook on c8 and bring the knight back from a5 through c4 or c6. Black has gained two moves on the queen and stands at least equal."
+                                                              "plan": "Castle, then put a rook on c8 and bring the knight back from a5 through c4 or c6. Black has gained two moves on the queen and stands at least equal.",
+                                                              "name": "The full main line, with 7.Qb3"
                                                             }
                                                           ]
                                                         }
@@ -155,7 +156,8 @@
                                                       "san": "Qxd6",
                                                       "note": "Recapture with the queen, which now eyes the kingside and supports ...e5 one day.",
                                                       "tags": ["development"],
-                                                      "plan": "Castle short, put a rook on c8 and think about ...e5 once the pieces are out. The position is level and there is nothing to be afraid of."
+                                                      "plan": "Castle short, put a rook on c8 and think about ...e5 once the pieces are out. The position is level and there is nothing to be afraid of.",
+                                                      "name": "7.Nf3 instead of the queen check"
                                                     }
                                                   ]
                                                 }
@@ -210,7 +212,8 @@
                                       "san": "Bd6",
                                       "note": "Get ready to castle and take the diagonal aimed at h2.",
                                       "tags": ["bishop-placement"],
-                                      "plan": "Castle, play ...Rc8 or ...Bd7 and ...Rc8, and look for ...Ne4 or the ...e5 break once the pieces are all out."
+                                      "plan": "Castle, play ...Rc8 or ...Bd7 and ...Rc8, and look for ...Ne4 or the ...e5 break once the pieces are all out.",
+                                      "name": "5.Nf3 before c3"
                                     }
                                   ]
                                 }
@@ -235,7 +238,8 @@
               "san": "Nf6",
               "note": "Develop and defend d5. This is the start of chapter 4.",
               "tags": ["vs-panov", "development"],
-              "plan": "Go to chapter 4. In short: 5.Nc3 e6 and Black blockades the isolated pawn White ends up with after cxd5."
+              "plan": "Go to chapter 4. In short: 5.Nc3 e6 and Black blockades the isolated pawn White ends up with after cxd5.",
+              "name": "4.c4, into the Panov"
             }
           ]
         },
@@ -285,7 +289,8 @@
                                       "san": "e6",
                                       "note": "Solid. The bishop that mattered has been traded and Black has an easy game.",
                                       "tags": ["development"],
-                                      "plan": "Play ...Bd6, castle and put a rook on c8. White's bishop on b5 will have to move again, which is another move Black gains."
+                                      "plan": "Play ...Bd6, castle and put a rook on c8. White's bishop on b5 will have to move again, which is another move Black gains.",
+                                      "name": "The 4.Bb5+ check"
                                     }
                                   ]
                                 }
@@ -323,7 +328,8 @@
                       "san": "Nf6",
                       "note": "Develop and cover d5 and e4, exactly as in the main line.",
                       "tags": ["development"],
-                      "plan": "This is the main line of this chapter by a different order. Expect 6.h3 e6 7.O-O Bd6, or 6.c3 Bg4 with the ...Na5 idea against Qb3."
+                      "plan": "This is the main line of this chapter by a different order. Expect 6.h3 e6 7.O-O Bd6, or 6.c3 Bg4 with the ...Na5 idea against Qb3.",
+                      "name": "The plain 4.Nf3"
                     }
                   ]
                 }

@@ -210,6 +210,7 @@
                                                                               "note": "Take towards the centre. The pawn on d5 is solid and the c-file opens for a rook.",
                                                                               "tags": ["c-file"],
                                                                               "plan": "Play ...Be7 to keep the bishop, bring a rook to c8, and hit the pawn on e5 with ...f6 once the pieces are ready.",
+                                                                              "name": "The full main line, with 6.e3",
                                                                               "mistakes": [
                                                                                 {
                                                                                   "san": "exd5",
@@ -372,6 +373,7 @@
                                                                       "note": "Take the open file first. From d8 the rook stops White's queen settling anywhere useful.",
                                                                       "tags": ["development"],
                                                                       "plan": "Finish with ...Be7 and ...O-O. The knight on e5 and the pawn on f6 hold the centre; look for ...c5 once the king is safe, or trade on c4 and put the bishop on d6.",
+                                                                      "name": "White's 6.Ne5 jump",
                                                                       "mistakes": [
                                                                         {
                                                                           "san": "O-O-O",
@@ -488,6 +490,7 @@
                                                       "san": "Nbd7",
                                                       "note": "Develop the last piece. From d7 the knight heads for b6 to ask the bishop on c4 a question.",
                                                       "plan": "Play ...Nb6 to hit the bishop, put a rook on e8 and think about ...Ne4. With a pawn on f5, White will never get the e4 break in.",
+                                                      "name": "White's 6.Nh4, hunting the bishop",
                                                       "mistakes": [
                                                         {
                                                           "san": "Ne4",
@@ -603,6 +606,7 @@
                                               "note": "Castle. Black has the extra queenside space and White has the freer pieces.",
                                               "tags": ["king-safety"],
                                               "plan": "Put the bishop on b7 or a6, a rook on the c-file, and play ...c5 to open the position while the pawn on b4 still cramps White.",
+                                              "name": "5.e3, holding the pawn back",
                                               "mistakes": [
                                                 {
                                                   "san": "Nbd7",
@@ -713,6 +717,7 @@
                                               "san": "cxb5",
                                               "note": "Take back. Black is a pawn up with a chain on b5 and c4 that is hard to get at.",
                                               "plan": "Develop with ...Bb7 and ...Nd7, castle, and be ready to give the pawn on c4 back for the two bishops or a rook on the c-file.",
+                                              "name": "The 5.e4 centre",
                                               "mistakes": [
                                                 {
                                                   "san": "Bb7",

@@ -241,7 +241,8 @@
                                                                       "brush": "green"
                                                                     }
                                                                   ],
-                                                                  "plan": "Play f4 to weld the knight in place, then Qf3 or Rf3 and swing at the king. Keep an eye on ...cxd4 and ...Nxe5: if the knight is traded, recapture with a pawn so the outpost stays occupied."
+                                                                  "plan": "Play f4 to weld the knight in place, then Qf3 or Rf3 and swing at the king. Keep an eye on ...cxd4 and ...Nxe5: if the knight is traded, recapture with a pawn so the outpost stays occupied.",
+                                                                  "name": "The full main line, with ...b6"
                                                                 }
                                                               ],
                                                               "note": "The second bishop fianchettos too. Black's pressure runs along both long diagonals, all of it pointed at the centre White is holding."
@@ -280,7 +281,8 @@
                                                               "brush": "blue"
                                                             }
                                                           ],
-                                                          "plan": "Play Nbd2 and Ne5, and remember Black's knight on h5 is not defending anything. If it comes back to f6 you have gained two free moves."
+                                                          "plan": "Play Nbd2 and Ne5, and remember Black's knight on h5 is not defending anything. If it comes back to f6 you have gained two free moves.",
+                                                          "name": "Black's ...Nh5 trade"
                                                         }
                                                       ]
                                                     }
@@ -347,7 +349,8 @@
                                   "tags": [
                                     "king-safety"
                                   ],
-                                  "plan": "Play c3 and h3, then Nbd2 and Ne5 with f4 behind it. Do not open the centre while Black's bishop is on g7 looking through it."
+                                  "plan": "Play c3 and h3, then Nbd2 and Ne5 with f4 behind it. Do not open the centre while Black's bishop is on g7 looking through it.",
+                                  "name": "...Bg7 before ...d5"
                                 }
                               ],
                               "note": "Black castles behind the fianchetto, solid as ever. A slow manoeuvring game is coming."
@@ -429,7 +432,8 @@
                                   "tags": [
                                     "king-safety"
                                   ],
-                                  "plan": "Play c3, h3 and Nbd2, then Ne5 with f4. If Black breaks with ...c5, hold with c3 and never take on c5 while that bishop sits on g7."
+                                  "plan": "Play c3, h3 and Nbd2, then Ne5 with f4. If Black breaks with ...c5, hold with c3 and never take on c5 while that bishop sits on g7.",
+                                  "name": "The ...d5 move order"
                                 }
                               ],
                               "note": "Black castles, and the third route in arrives at the same position as the others."

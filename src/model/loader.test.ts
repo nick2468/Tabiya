@@ -219,6 +219,14 @@ describe('loadChapter, negative fixtures', () => {
     )
   })
 
+  it('rejects a leaf with no name', () => {
+    const bad = chapter()
+    delete (bad.tree[0].children![0].children![0] as Record<string, unknown>).name
+    expect(firstError(bad)).toBe(
+      'leaves need a name saying what tells this line apart from its siblings',
+    )
+  })
+
   it('rejects a name on a move that is not a leaf', () => {
     const bad = chapter()
     ;(bad.tree[0] as Record<string, unknown>).name = 'Not a whole line'

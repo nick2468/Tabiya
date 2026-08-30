@@ -118,6 +118,7 @@
                                             "majority"
                                           ],
                                           "plan": "Trade queens on f3 or f6 if Black offers, put the bishop on e3 and a rook on d1, and only then start the kingside pawns.",
+                                          "name": "...h5, offering the bishop",
                                           "note": "With the queen, always."
                                         }
                                       ]
@@ -202,6 +203,7 @@
                                             "development"
                                           ],
                                           "plan": "Play Be3 and f4, or Ne2 and Ng3 aiming at f5 and h5. Trade queens whenever Black allows it.",
+                                          "name": "Black trades on f3",
                                           "note": "The last piece. White has two knights against a bishop and a knight, and a structure that says the ending is fine."
                                         }
                                       ]
@@ -286,6 +288,7 @@
                                             "endgame"
                                           ],
                                           "plan": "Play d3 and Nc3, tuck the king on g2 behind the pawn, and trade into the ending a pawn up.",
+                                          "name": "...Bh5 and the g4 push",
                                           "note": "Defending e4 from the square where the queen also faces down the file Black has opened. A pawn up with the better structure.",
                                           "mistakes": [
                                             {

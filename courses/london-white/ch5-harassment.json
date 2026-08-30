@@ -69,7 +69,8 @@
                       "brush": "green"
                     }
                   ],
-                  "plan": "You are a piece up. Play Nf3 and Be2, castle, and trade whenever you can. The rule to take away: before you move an attacked piece, check whether the attacker is defended."
+                  "plan": "You are a piece up. Play Nf3 and Be2, castle, and trade whenever you can. The rule to take away: before you move an attacked piece, check whether the attacker is defended.",
+                  "name": "The immediate ...Nh5"
                 }
               ]
             },
@@ -171,7 +172,8 @@
                                                     "bishop-placement",
                                                     "kingside-attack"
                                                   ],
-                                                  "plan": "Castle short or leave the king in the centre and play Qc2, Ne5 and g4. With the h-file open, doubling rooks on it is usually stronger than anything Black has on the queenside."
+                                                  "plan": "Castle short or leave the king in the centre and play Qc2, Ne5 and g4. With the h-file open, doubling rooks on it is usually stronger than anything Black has on the queenside.",
+                                                  "name": "...Nh5 and the g3 trade"
                                                 }
                                               ],
                                               "note": "Develop and press on d4, Black's normal queenside play."
@@ -208,7 +210,8 @@
                                       "note": "Useful in itself, and it lets Black settle: developing first is worth about a pawn and a half here, because the knight on the rim has to be answered before it is helped."
                                     }
                                   ],
-                                  "plan": "Play c3, Nbd2 and castle. If the knight comes back to f6 you have gained two free moves; if it takes on g3, recapture with the h-pawn and take the file."
+                                  "plan": "Play c3, Nbd2 and castle. If the knight comes back to f6 you have gained two free moves; if it takes on g3, recapture with the h-pawn and take the file.",
+                                  "name": "...Nh5 and then ...Be7"
                                 }
                               ]
                             }
@@ -313,7 +316,8 @@
                                                   "tags": [
                                                     "bishop-placement"
                                                   ],
-                                                  "plan": "Castle, then Ne5 and f4 as usual. With fewer pieces on the board, keep the bishop pair and remember the endgame is pleasant for White here."
+                                                  "plan": "Castle, then Ne5 and f4 as usual. With fewer pieces on the board, keep the bishop pair and remember the endgame is pleasant for White here.",
+                                                  "name": "The ...Ne4 lunge"
                                                 }
                                               ],
                                               "note": "The knight backs the c5 pawn and the queenside play is properly under way."
@@ -544,7 +548,8 @@
                                                                   "tags": [
                                                                     "development"
                                                                   ],
-                                                                  "plan": "Play Qc2 or Re1, then Ne5 with f4 behind it. The black king has one fewer pawn in front of it, but the open file belongs to Black, so build before you attack."
+                                                                  "plan": "Play Qc2 or Re1, then Ne5 with f4 behind it. The black king has one fewer pawn in front of it, but the open file belongs to Black, so build before you attack.",
+                                                                  "name": "The early ...Bf5"
                                                                 }
                                                               ],
                                                               "note": "Black takes back towards the centre, the tidy recapture: the g6 pawn now covers f5 and h5."
@@ -638,7 +643,8 @@
                                                   "tags": [
                                                     "development"
                                                   ],
-                                                  "plan": "Castle, play c3, then Ne5 and f4. The queen on d3 is already pointing at h7, so a knight on e5 and a rook lift is often enough to create real threats."
+                                                  "plan": "Castle, play c3, then Ne5 and f4. The queen on d3 is already pointing at h7, so a knight on e5 and a rook lift is often enough to create real threats.",
+                                                  "name": "...Bf5 and the d3 trade"
                                                 }
                                               ],
                                               "note": "Black castles into a quiet position. The play from here is about the e5 square and the queenside pawns."

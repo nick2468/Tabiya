@@ -168,6 +168,7 @@
                                                             "majority"
                                                           ],
                                                           "plan": "Trade one pair of rooks on the d-file, keep the other, and bring a knight to e3 and f5. Play a4 and a5 to fix the queenside before you start the kingside pawns.",
+                                                          "name": "The full main line, with 10.Bf4",
                                                           "note": "Every piece is out and the structure is the whole story from here.",
                                                           "mistakes": [
                                                             {
@@ -217,6 +218,7 @@
                                                     "development"
                                                   ],
                                                   "plan": "Play Be3 and Rd2, double on the d-file, and advance the majority with f4 once the pieces are placed.",
+                                                  "name": "Black's ...Bg4 pin at move nine",
                                                   "note": "Develop, and the position is the main line with f3 thrown in."
                                                 }
                                               ]
@@ -248,6 +250,7 @@
                                                     "bishop-placement"
                                                   ],
                                                   "plan": "Trade a pair of rooks on the d-file, then play a4 and a5 to fix Black's queenside before touching the kingside.",
+                                                  "name": "The modest 9...Bd7",
                                                   "note": "The bishop lands on the diagonal that looks at c7."
                                                 }
                                               ]
@@ -283,6 +286,7 @@
                                             "bishop-placement"
                                           ],
                                           "plan": "Play f4 and f5 to gain space, or trade on c5 and use the d-file. The majority is still the plan.",
+                                          "name": "...Qe7, keeping the queens on",
                                           "note": "The last piece out, hitting c5."
                                         }
                                       ]
@@ -325,6 +329,7 @@
                                     "bishop-placement"
                                   ],
                                   "plan": "Castle the rooks to d1 and e1, trade a pair, and start the majority with f4.",
+                                  "name": "The early ...Bd6",
                                   "note": "The bishop takes the diagonal that looks at c5 and a7."
                                 }
                               ]
@@ -356,6 +361,7 @@
                                     "bishop-placement"
                                   ],
                                   "plan": "Play a4 and a5 to fix the queenside, then offer the queen trade and go into the ending.",
+                                  "name": "The early ...Bd7",
                                   "note": "Aiming at a7 and c5 with the queen unable to leave the e-file easily."
                                 }
                               ]
@@ -410,6 +416,7 @@
                                     "tactics"
                                   ],
                                   "plan": "Play Rb3 or Re3 hitting b7 and e5, and remember Nbd2 and Nc4 with the e5 pawn to aim at.",
+                                  "name": "...Bg4 before taking",
                                   "note": "The rook swings across. Black's bishop on g4 has to answer for itself and the pawn on e5 is loose.",
                                   "mistakes": [
                                     {
@@ -464,6 +471,7 @@
                                     "tactics"
                                   ],
                                   "plan": "Take on e5 next move. If Black blocks with 9...g6 the queen takes with check and the rook on h8 falls with it.",
+                                  "name": "...Bd6 and the e5 recapture",
                                   "note": "The check that collects the pawn.",
                                   "mistakes": [
                                     {

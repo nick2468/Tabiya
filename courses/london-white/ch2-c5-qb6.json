@@ -129,7 +129,8 @@
                               "brush": "red"
                             }
                           ],
-                          "plan": "Follow up with Rb1 and rapid development, and look for Nc7 or Nd6 tricks. You gave a pawn and got much more than a pawn back: Black has a queen with no good squares and no development at all. Keep making threats and do not hurry to win the material back."
+                          "plan": "Follow up with Rb1 and rapid development, and look for Nc7 or Nd6 tricks. You gave a pawn and got much more than a pawn back: Black has a queen with no good squares and no development at all. Keep making threats and do not hurry to win the material back.",
+                          "name": "...Qxb2, the pawn grab"
                         }
                       ]
                     },
@@ -191,7 +192,8 @@
                                           "tags": [
                                             "development"
                                           ],
-                                          "plan": "Play c4 or c3 and Bd3, castle, and think about b4 to gain space with the rook already behind the pawn. Black's queen on b6 and knight on a6 are both awkwardly placed."
+                                          "plan": "Play c4 or c3 and Bd3, castle, and think about b4 to gain space with the rook already behind the pawn. Black's queen on b6 and knight on a6 are both awkwardly placed.",
+                                          "name": "...Qb6 and then ...e6"
                                         }
                                       ],
                                       "note": "With the queenside holding for the moment, Black develops and hopes to castle before anything opens."
@@ -216,6 +218,7 @@
                             "tactics"
                           ],
                           "plan": "You are a clean pawn up with the better position. Meet ...Qxb2 with Nc3 or Rb1, get the king castled, and trade pieces when you can: an extra pawn is worth more once the queens come off.",
+                          "name": "...Qb6 and then ...Nc6",
                           "shapes": [
                             {
                               "orig": "c3",
@@ -367,7 +370,8 @@
                                               "brush": "red"
                                             }
                                           ],
-                                          "plan": "Play Nbd2, Bd3 and castle, then use the a-file with Ra1 to a7 ideas. The queens are off, so simply out-develop Black and squeeze."
+                                          "plan": "Play Nbd2, Bd3 and castle, then use the a-file with Ra1 to a7 ideas. The queens are off, so simply out-develop Black and squeeze.",
+                                          "name": "...Nc6 first, with the queen trade"
                                         }
                                       ],
                                       "note": "Black takes, which is the consistent choice: the queen came out to be active, and retreating now would hand back the time it cost."
@@ -496,7 +500,8 @@
                                                                       "brush": "red"
                                                                     }
                                                                   ],
-                                                                  "plan": "Play f4, then lift the rook with Rf3 and Rh3 and bring the queen across. Watch for ...cxd4 opening the c-file towards your own king, and recapture with the c-pawn when it helps."
+                                                                  "plan": "Play f4, then lift the rook with Rf3 and Rh3 and bring the queen across. Watch for ...cxd4 opening the c-file towards your own king, and recapture with the c-pawn when it helps.",
+                                                                  "name": "...Nc6 first, and the full setup"
                                                                 }
                                                               ],
                                                               "note": "The bishop lands on the long diagonal. Black's pieces point at the queenside and centre, White's at the kingside."
@@ -553,7 +558,8 @@
                                   "tags": [
                                     "development"
                                   ],
-                                  "plan": "Play Bd3, Nbd2 and castle, then consider Ne5 or the e4 break. The open e-file suits White, whose pieces get there first."
+                                  "plan": "Play Bd3, Nbd2 and castle, then consider Ne5 or the e4 break. The open e-file suits White, whose pieces get there first.",
+                                  "name": "...Nc6 and an early ...cxd4"
                                 }
                               ],
                               "note": "Black develops against the new pawn centre. The open e-file belongs to White, so Black has to catch up quickly."
@@ -587,7 +593,8 @@
                           "tags": [
                             "development"
                           ],
-                          "plan": "Play Nbd2, Bd3 and castle, then Ne5 and f4. If Black tries ...Qb6 now, the answer is Qb3 offering the trade."
+                          "plan": "Play Nbd2, Bd3 and castle, then Ne5 and f4. If Black tries ...Qb6 now, the answer is Qb3 offering the trade.",
+                          "name": "...c5 with ...Nf6 first"
                         }
                       ],
                       "note": "Black settles for the solid setup. The sting of ...Qb6 fades once both sides are developed."
@@ -615,7 +622,8 @@
                       "note": "The queen comes out early and Black gains time with ...Nc6, hitting it straight away."
                     }
                   ],
-                  "plan": "Follow with Nf3, c3, Bd3 and castle. Black has given up the tension for nothing, so simply develop and take the e-file."
+                  "plan": "Follow with Nf3, c3, Bd3 and castle. Black has given up the tension for nothing, so simply develop and take the e-file.",
+                  "name": "The immediate ...cxd4"
                 }
               ]
             }
@@ -683,7 +691,8 @@
                               "note": "It opens the position while White's queen sits awkwardly on c1 and the king is still in the centre."
                             }
                           ],
-                          "plan": "Play c3, Bd3 and castle. Once the pawn reaches c3 the Qb3 trade offer is available whenever you want it, and Black's queen has to keep watching for it."
+                          "plan": "Play c3, Bd3 and castle. Once the pawn reaches c3 the Qb3 trade offer is available whenever you want it, and Black's queen has to keep watching for it.",
+                          "name": "...c6 and ...Qb6"
                         }
                       ],
                       "note": "With b2 defended, the queen sortie is over for now, so Black develops normally."

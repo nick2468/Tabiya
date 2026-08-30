@@ -385,7 +385,12 @@ function checkName(
 ) {
   const isLeaf = !Array.isArray(raw.children) || raw.children.length === 0
   const name = raw.name
-  if (name === undefined) return
+  if (name === undefined) {
+    if (isLeaf) {
+      errors.add(path, 'leaves need a name saying what tells this line apart from its siblings')
+    }
+    return
+  }
   if (!isLeaf) {
     errors.add(path, 'name belongs on leaves only: it names a whole line, and this move continues')
     return

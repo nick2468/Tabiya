@@ -95,7 +95,8 @@
                                                                         {
                                                                           "san": "Qg5",
                                                                           "note": "The point. The queen hits e5 and e3 at once, and White cannot hold both.",
-                                                                          "plan": "Take on e5 next, then castle and play against the ruined pawns on e3 and e5. Two extra weaknesses and a pawn is more than an opening advantage."
+                                                                          "plan": "Take on e5 next, then castle and play against the ruined pawns on e3 and e5. Two extra weaknesses and a pawn is more than an opening advantage.",
+                                                                          "name": "The Advance: the ...Qg5 hit"
                                                                         }
                                                                       ]
                                                                     }
@@ -250,7 +251,8 @@
                                                                                                   "san": "c5",
                                                                                                   "note": "The lever, at the moment it is needed. It hits d4 and opens the c-file straight at the white king.",
                                                                                                   "tags": ["c5-break"],
-                                                                                                  "plan": "Follow with ...Rc8 and ...Qa5, or take on d4 if White allows it. Black's attack comes down an open file while White still needs two pawn moves to get going."
+                                                                                                  "plan": "Follow with ...Rc8 and ...Qa5, or take on d4 if White allows it. Black's attack comes down an open file while White still needs two pawn moves to get going.",
+                                                                                                  "name": "The main line: the ...c5 break"
                                                                                                 }
                                                                                               ]
                                                                                             }
@@ -395,7 +397,8 @@
                                                                                 {
                                                                                   "san": "Rc8",
                                                                                   "note": "The whole plan of the Exchange Variation in one move: the rook takes the half open file and points at c3 and c2.",
-                                                                                  "plan": "Bring the knight back through c4 or c6, double on the c-file if White allows it, and look for ...Ne4 or ...b5 to fix a target on c3."
+                                                                                  "plan": "Bring the knight back through c4 or c6, double on the c-file if White allows it, and look for ...Ne4 or ...b5 to fix a target on c3.",
+                                                                                  "name": "The Exchange: the c-file rook"
                                                                                 }
                                                                               ]
                                                                             }
@@ -539,7 +542,8 @@
                                                                                                 {
                                                                                                   "san": "g6",
                                                                                                   "note": "Stop it before it starts. That battery on the b1-h7 diagonal is the only real attack White's isolated pawn buys, and one pawn move takes it away for good.",
-                                                                                                  "plan": "Now play against d4 with ...Nd5 or ...Bf6 and a rook on d8. With the diagonal shut, every trade brings the ending closer and the isolated pawn is a permanent target."
+                                                                                                  "plan": "Now play against d4 with ...Nd5 or ...Bf6 and a rook on d8. With the diagonal shut, every trade brings the ending closer and the isolated pawn is a permanent target.",
+                                                                                                  "name": "The Panov: holding h7 with ...g6"
                                                                                                 }
                                                                                               ]
                                                                                             }

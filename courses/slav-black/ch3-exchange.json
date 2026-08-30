@@ -167,6 +167,7 @@
                                                                               "note": "Contest the file at once. Whoever gets a rook to c8 or c1 without being traded off has the better game.",
                                                                               "tags": ["c-file"],
                                                                               "plan": "Trade one pair of rooks on the c-file and keep the other. Then bring the knight to a5 and on to c4, and hit b2 with the queen once White's pieces are tied down.",
+                                                                              "name": "The full main line, with 7.Bd3",
                                                                               "mistakes": [
                                                                                 {
                                                                                   "san": "Rac8",
@@ -298,6 +299,7 @@
                                                                               "note": "Castle. Black has the file, the better minor piece plan and no weaknesses.",
                                                                               "tags": ["king-safety"],
                                                                               "plan": "Bring the knight from a5 to c4, put the second rook on c8, and hit b2 with the queen once the dark-squared bishops come off.",
+                                                                              "name": "White's 7.Qb3 hit on b7",
                                                                               "mistakes": [
                                                                                 {
                                                                                   "san": "Nc4",
@@ -338,6 +340,7 @@
                                       "note": "Solid, and now the position is the same one the 7.Bd3 line reaches a move later.",
                                       "tags": ["development"],
                                       "plan": "Play ...Bd6 to offer the bishop trade, castle, and put a rook on c8. This is the main line of the chapter by another move order.",
+                                      "name": "The quiet 7.Nf3",
                                       "mistakes": [
                                         {
                                           "san": "Nb4",
@@ -376,6 +379,7 @@
                               "note": "Out it goes. The bishops mirror each other and neither side can claim anything from it.",
                               "tags": ["bishop-placement", "light-squares"],
                               "plan": "Play ...e6, then ...Bd6 or ...Be7, castle, and take the c-file. If Qb3 arrives, ...Na5 is still the answer.",
+                              "name": "5.Nf3 before the bishop",
                               "mistakes": [
                                 {
                                   "san": "e6",
@@ -421,6 +425,7 @@
                       "note": "Develop and hit d4. Black is a move away from the main line of the chapter.",
                       "tags": ["development"],
                       "plan": "Answer 6.e3 with ...Bf5, then ...e6, ...Bd6 and castle. This is the same chapter by another road.",
+                      "name": "4.Bf4 first",
                       "mistakes": [
                         {
                           "san": "e6",
@@ -455,6 +460,7 @@
                       "note": "The last minor piece with an obvious square. Black is now a move from the chapter's main position.",
                       "tags": ["development"],
                       "plan": "Meet Bf4 with ...Bf5 and e3 with ...e6, then ...Bd6, castle and take the c-file.",
+                      "name": "4.Nf3 first",
                       "mistakes": [
                         {
                           "san": "Bf5",

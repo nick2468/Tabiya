@@ -105,7 +105,8 @@
                                                               "san": "b6",
                                                               "note": "Now the bishop can come to b7, because the knight on f6 is holding the kingside together.",
                                                               "tags": ["development"],
-                                                              "plan": "Play ...Bb7 and ...Rc8, then watch for White lining a bishop up on c2 with the queen on d3: answer that with ...g6 before it becomes an attack. The pawn on d4 is not going anywhere."
+                                                              "plan": "Play ...Bb7 and ...Rc8, then watch for White lining a bishop up on c2 with the queen on d3: answer that with ...g6 before it becomes an attack. The pawn on d4 is not going anywhere.",
+                                                              "name": "The full main line, with 7.cxd5"
                                                             }
                                                           ]
                                                         }
@@ -154,7 +155,8 @@
                                               "san": "Nc6",
                                               "note": "Develop with pressure on the isolated pawn.",
                                               "tags": ["development"],
-                                              "plan": "Play ...b6 and ...Bb7, put a knight on d5 when it can stay there, and trade pieces. This is the same plan as the main line with a move to spare."
+                                              "plan": "Play ...b6 and ...Bb7, put a knight on d5 when it can stay there, and trade pieces. This is the same plan as the main line with a move to spare.",
+                                              "name": "7.Bd3 and the ...dxc4 grab"
                                             }
                                           ]
                                         }
@@ -202,7 +204,8 @@
                                       "san": "Qxe7",
                                       "note": "Recapture with the queen, which now looks down the e-file at White's king.",
                                       "tags": ["development"],
-                                      "plan": "Castle, play ...Nc6 and ...Rd8, and keep trading. A pair of bishops has already gone, which is one step closer to the ending where d4 falls."
+                                      "plan": "Castle, play ...Nc6 and ...Rd8, and keep trading. A pair of bishops has already gone, which is one step closer to the ending where d4 falls.",
+                                      "name": "The 6.Bg5 pin"
                                     }
                                   ]
                                 }
@@ -246,7 +249,8 @@
                                       "san": "O-O",
                                       "note": "Castle. If White ever trades on d5, the recapture with the e-pawn gives Black a solid extra defender in the centre.",
                                       "tags": ["king-safety"],
-                                      "plan": "Play ...Nc6, ...b6 and ...Bb7, and answer Nxd5 with ...exd5. Trade pieces and head for the ending."
+                                      "plan": "Play ...Nc6, ...b6 and ...Bb7, and answer Nxd5 with ...exd5. Trade pieces and head for the ending.",
+                                      "name": "The early 6.cxd5"
                                     }
                                   ]
                                 }
@@ -284,7 +288,8 @@
                       "san": "Be7",
                       "note": "The usual developing move, ready to castle.",
                       "tags": ["development"],
-                      "plan": "This is the main line of the chapter. Expect 7.cxd5 Nxd5 8.Bd3 O-O and blockade the isolated pawn as usual."
+                      "plan": "This is the main line of the chapter. Expect 7.cxd5 Nxd5 8.Bd3 O-O and blockade the isolated pawn as usual.",
+                      "name": "5.Nf3 before Nc3"
                     }
                   ]
                 }
@@ -324,7 +329,8 @@
                               "san": "Be7",
                               "note": "Develop and castle. If White takes on d5, recapture with the e-pawn and the blockade holds.",
                               "tags": ["development"],
-                              "plan": "Castle, then ...Nc6 and ...b6 with ...Bb7. Trade pieces whenever White offers and aim at the pawn on d4."
+                              "plan": "Castle, then ...Nc6 and ...b6 with ...Bb7. Trade pieces whenever White offers and aim at the pawn on d4.",
+                              "name": "5.cxd5 at once"
                             }
                           ]
                         }

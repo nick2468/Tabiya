@@ -142,6 +142,7 @@
                                                             "development"
                                                           ],
                                                           "plan": "Play Nf3 or Nc4 and trade a pair of knights, then advance the kingside majority. Black's bishops need lines that are not there.",
+                                                          "name": "The Berlin, with 7...Be7",
                                                           "note": "Everything out, and the knight heads for f3 or c4."
                                                         }
                                                       ]
@@ -196,6 +197,7 @@
                                                     "tactics"
                                                   ],
                                                   "plan": "Take the bishop back after ...Bxe7 and count: a queen for a rook and a knight, with the black king in the open. Then develop and trade.",
+                                                  "name": "The Berlin, with the Nxf7 fork",
                                                   "note": "The point."
                                                 }
                                               ]
@@ -266,6 +268,7 @@
                                             "tactics"
                                           ],
                                           "plan": "Answer 8...Bxf6 with Re1+ and Nbd2, and collect the pawn on d4 when it suits. A knight for a pawn, with the better structure on top.",
+                                          "name": "The Berlin, with 5...Bd6",
                                           "note": "Take."
                                         }
                                       ]
@@ -301,6 +304,7 @@
                                     "development"
                                   ],
                                   "plan": "Play Nbd2 and Nc4, or g4 and Nxe5 when the diagonal to d1 is safe. Never take on e5 while a bishop looks at d1.",
+                                  "name": "The Berlin, with 5...Bg4",
                                   "note": "Solid. Now g4 and Nxe5 become ideas, once the diagonal to d1 is no longer the problem."
                                 }
                               ]
@@ -402,6 +406,7 @@
                                                     "development"
                                                   ],
                                                   "plan": "Play Re1 and c4, trade a pair, and go for the ending where the pawns decide.",
+                                                  "name": "3...Bc5, the Classical",
                                                   "note": "With the knight that made the trip.",
                                                   "mistakes": [
                                                     {
@@ -440,6 +445,7 @@
                     "tactics"
                   ],
                   "plan": "Play d4 with tempo on the bishop, then Nc3 and castle. A pawn up with the better structure.",
+                  "name": "3...Bc5 and ...bxc6",
                   "note": "A clean pawn: the bishop on c5 does not defend it, and with the d-pawn at home there is no ...Qd4."
                 }
               ]
@@ -533,6 +539,7 @@
                                                     "king-safety"
                                                   ],
                                                   "plan": "Play Rhe1 and e5, or h4 and h5. Pawns on a6, c6 and c7 cannot be defended by other pawns.",
+                                                  "name": "The Steinitz, 3...d6",
                                                   "note": "Towards the weak pawns, and the rook lands on the file Black has to watch.",
                                                   "mistakes": [
                                                     {
@@ -618,6 +625,7 @@
                                     "development"
                                   ],
                                   "plan": "Play d3 and Bg5, castle, and use the open e-file against a king that has not moved.",
+                                  "name": "The Schliemann, 3...f5",
                                   "note": "Holding the knight and eyeing the file Black opened himself.",
                                   "mistakes": [
                                     {
@@ -750,6 +758,7 @@
                                                     "majority"
                                                   ],
                                                   "plan": "Castle, play Re1 and a4, and keep the extra pawn. Black has opened lines at his own king to win it back.",
+                                                  "name": "The fianchetto, 3...g6",
                                                   "note": "Back, a pawn up, and the hole on e6 is worth as much as the pawn."
                                                 }
                                               ]
@@ -765,6 +774,7 @@
                                                     "majority"
                                                   ],
                                                   "plan": "Castle, then f4 and Nf3 or Nc4. The extra pawn is on the side that can make a passer.",
+                                                  "name": "3...g6 and the e5 recapture",
                                                   "note": "A clean pawn, and the bishop Black spent two moves on has gone with it."
                                                 }
                                               ]
@@ -855,6 +865,7 @@
                                             "king-safety"
                                           ],
                                           "plan": "Play Be3 or Nde2 and Ng3, castle the rooks, and trade into the ending. The structure has not changed since move four.",
+                                          "name": "The Cozio, 3...Nge7",
                                           "note": "King first: the knight has enough defenders.",
                                           "mistakes": [
                                             {

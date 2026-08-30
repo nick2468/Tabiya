@@ -279,6 +279,7 @@
                                                                                                           "note": "Take towards the centre. The pawn on d5 is solid and the c-file opens for a rook.",
                                                                                                           "tags": ["c-file"],
                                                                                                           "plan": "Play ...Be7 to keep the bishop, bring a rook to c8, and hit the pawn on e5 with ...f6 once the pieces are ready.",
+                                                                                                          "name": "The full main line, to 13...cxd5",
                                                                                                           "mistakes": [
                                                                                                             {
                                                                                                               "san": "exd5",
@@ -364,6 +365,7 @@
                                                                   "note": "The break, played while White's king bishop is still at home. Black gets a pawn to the centre for free.",
                                                                   "tags": ["e5-break"],
                                                                   "plan": "After 9.dxe5 Nxe5 recapture with the knight, then play ...Nfd7 and ...f6 and hold the strong point on e5.",
+                                                                  "name": "White's 6.Ne5",
                                                                   "mistakes": [
                                                                     {
                                                                       "san": "e6",

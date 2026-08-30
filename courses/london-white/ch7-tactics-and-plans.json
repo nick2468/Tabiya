@@ -154,7 +154,8 @@
                                                                                               "brush": "red"
                                                                                             }
                                                                                           ],
-                                                                                          "plan": "Play Rh3, then bring the queen to h5 or g4. Watch for ...Nxe5: recapture with the f-pawn if the rook has already left f1, and with the d-pawn if you want the e5 square kept."
+                                                                                          "plan": "Play Rh3, then bring the queen to h5 or g4. Watch for ...Nxe5: recapture with the f-pawn if the rook has already left f1, and with the d-pawn if you want the e5 square kept.",
+                                                                                          "name": "The classical: the rook lift"
                                                                                         }
                                                                                       ]
                                                                                     }
@@ -317,7 +318,8 @@
                                                                                       "brush": "green"
                                                                                     }
                                                                                   ],
-                                                                                  "plan": "After the bishop moves, play f4 to hold e5 and think about Qg4 or Rf3 and Rh3. The pawn on e5 takes f6 and d6 away from Black's pieces, which is worth more than the bishop you did not trade."
+                                                                                  "plan": "After the bishop moves, play f4 to hold e5 and think about Qg4 or Rf3 and Rh3. The pawn on e5 takes f6 and d6 away from Black's pieces, which is worth more than the bishop you did not trade.",
+                                                                                  "name": "The ...c5 lines: the e5 wedge"
                                                                                 }
                                                                               ]
                                                                             }
@@ -417,7 +419,8 @@
                                               "brush": "red"
                                             }
                                           ],
-                                          "plan": "Meet ...Qxa2 or ...Qb4 by carrying on: Bd3, Nf3, castle, and look for Nc7 or Nd6 once the knight on a6 moves. Play for the initiative and do not count material."
+                                          "plan": "Meet ...Qxa2 or ...Qb4 by carrying on: Bd3, Nf3, castle, and look for Nc7 or Nd6 once the knight on a6 moves. Play for the initiative and do not count material.",
+                                          "name": "The ...Qb6 grab: trapping her"
                                         }
                                       ]
                                     }
@@ -544,7 +547,8 @@
                                                                               "brush": "blue"
                                                                             }
                                                                           ],
-                                                                          "plan": "After the forced ...Kh8, retreat the bishop to d3 or e4 and bring the knight to e5. You are a pawn up, the black king has no cover, and the h-file is still yours. Do not hunt for a mate: play Ne5, Qg4 or Qf3, and let the extra pawn and the open file do the work."
+                                                                          "plan": "After the forced ...Kh8, retreat the bishop to d3 or e4 and bring the knight to e5. You are a pawn up, the black king has no cover, and the h-file is still yours. Do not hunt for a mate: play Ne5, Qg4 or Qf3, and let the extra pawn and the open file do the work.",
+                                                                          "name": "The h-file: the Greek gift"
                                                                         }
                                                                       ]
                                                                     }
