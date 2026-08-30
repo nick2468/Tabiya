@@ -343,6 +343,91 @@ describe('the Slav course', () => {
   })
 })
 
+describe('the Ruy Lopez Exchange course', () => {
+  const ruy = courseById('ruy-lopez-exchange')
+
+  it('is a White course of seven chapters', () => {
+    expect(ruy.colour).toBe('white')
+    expect(ruy.opponentColour).toBe('black')
+    expect(ruy.chapters.length).toBe(7)
+  })
+
+  it('declares the tags it uses beyond the core set', () => {
+    expect(ruy.tags).toContain('majority')
+    expect(ruy.tags).toContain('doubled-pawns')
+    expect(ruy.tags).toContain('vs-berlin')
+    expect(ruy.tags).not.toContain('vs-london')
+  })
+
+  it('takes on c6 in every chapter, which is the whole course', () => {
+    // The one claim that is really about this course rather than the format.
+    // The Exchange is a structural choice, and a chapter that reached the
+    // structure some other way would be teaching a different opening.
+    for (const chapter of ruy.chapters) {
+      // The capture is usually in the stem, which walkNodes does not visit,
+      // so both halves of the chapter have to be looked at.
+      const moves = [...chapter.stem, ...walkNodes(chapter).map((node) => node.san)]
+      expect(moves.some((san) => san.startsWith('Bxc6')), chapter.id).toBe(true)
+    }
+  })
+
+  describe('chapter 0, the exchange', () => {
+    it('has an intro of 300 to 500 words', () => {
+      const intro = chapterOf(ruy, 'ch0').intro
+      expect(words(intro)).toBeGreaterThanOrEqual(300)
+      expect(words(intro)).toBeLessThanOrEqual(500)
+    })
+
+    it('carries mistake entries on its core setup decisions', () => {
+      expect(positionsWithMistakes(chapterOf(ruy, 'ch0'))).toBeGreaterThanOrEqual(4)
+    })
+  })
+
+  describe('the repertoire chapters', () => {
+    for (const id of ['ch1', 'ch2', 'ch3', 'ch4', 'ch5']) {
+      it(`${id} runs its deepest line to move 10 or beyond`, () => {
+        expect(deepestFullMove(chapterOf(ruy, id))).toBeGreaterThanOrEqual(10)
+      })
+
+      it(`${id} carries mistake entries on at least ten positions`, () => {
+        expect(positionsWithMistakes(chapterOf(ruy, id))).toBeGreaterThanOrEqual(10)
+      })
+
+      it(`${id} weights every Black reply by club frequency`, () => {
+        for (const node of walkNodes(chapterOf(ruy, id))) {
+          if (!node.isStudent) {
+            expect(node.weight ?? 1, node.path.join(' ')).toBeGreaterThanOrEqual(1)
+            expect(node.weight ?? 1, node.path.join(' ')).toBeLessThanOrEqual(10)
+          }
+        }
+      })
+
+      it(`${id} tags every White move with at least one concept`, () => {
+        for (const node of walkNodes(chapterOf(ruy, id))) {
+          if (node.isStudent) expect(node.tags.length, node.path.join(' ')).toBeGreaterThan(0)
+        }
+      })
+    }
+  })
+
+  describe('chapter 6, the exercises', () => {
+    it('ends every exercise on a White move worth drilling', () => {
+      for (const line of walkNodes(chapterOf(ruy, 'ch6')).filter((node) => node.isLeaf)) {
+        expect(line.isStudent, line.path.join(' ')).toBe(true)
+      }
+    })
+
+    it('carries at least four exercises', () => {
+      const leaves = walkNodes(chapterOf(ruy, 'ch6')).filter((node) => node.isLeaf)
+      expect(leaves.length).toBeGreaterThanOrEqual(4)
+    })
+
+    it('runs each exercise deep enough to be a real position', () => {
+      expect(deepestFullMove(chapterOf(ruy, 'ch6'))).toBeGreaterThanOrEqual(10)
+    })
+  })
+})
+
 describe('the courses together', () => {
   // Course scoping makes this structural rather than lucky: a card key is the
   // course id and the position. The acceptance asks for it proved anyway,
@@ -367,8 +452,9 @@ describe('the courses together', () => {
     // turn, so a White course and a Black course cannot share one whatever
     // they teach. The Slav is the sharpest case there is: its chapter 5 is
     // the London seen from the other side, and the two courses walk through
-    // a dozen of the same positions. Scoping earns its place against a
-    // second course of the same colour, which does not exist yet.
+    // a dozen of the same positions. The Ruy Lopez Exchange is the second
+    // White course, so scoping is now load bearing in principle; in practice
+    // 1.e4 and 1.d4 never meet, and the test above is what proves it.
     for (const course of courses) {
       const turn = course.colour === 'white' ? 'w' : 'b'
       for (const card of allCards(course).cards) {
