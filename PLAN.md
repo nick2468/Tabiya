@@ -1458,3 +1458,32 @@ Open items (phase 13):
    engine passes were not re-run: 13.3 added prose and moved no move.
 
 - [ ] **Review gate 13 passed**
+
+## Phase 14 - the Colle-Zukertort
+
+Goal: the fifth course, and Nick's second White system against 1...d5 - chosen for
+depth, because the Zukertort against the London teaches both structures. Runs AFTER
+phase 13, so the course is born with named lines.
+
+Chipped as `chips/phase-14-colle.md`. Nick ruled it on 2026-08-30 before drafting:
+the **Colle-Zukertort** (b3 and Bb2) over the Koltanowski, because the c3 triangle
+would duplicate the London; the ...g6 hole **covered in-course** (b3, Bb2, c4, the
+solid centre) so the course stands alone as a bundle; course id `colle-zukertort`,
+permanent. Seven chapters: the idea (contrasted with the London), the main line with
+the Ne5/f4/Rf3 attack, ...Bf5/...Bg4 early, the ...b6 mirror, the ...g6 setups,
+everything else, and the exercises with the Greek gift engine-verified per position.
+
+- [ ] 14.1 Variation, ...g6 policy and chapter list ruled with Nick before drafting.
+- [ ] 14.2 Draft the seven chapters to the section 3 bar, student White, named lines.
+- [ ] 14.3 All three checkers after the last content edit, run as samplers (twice, or
+  2500 ms near band edges), then the by-hand read of capture-answered entries. The
+  Greek gift positions each verified at 2500 ms.
+- [ ] 14.4 Content-suite block and the exported bundle; the round-trip test picks the
+  course up automatically.
+- [ ] 14.5 Proven in the packaged app; fixtures deleted; progress file hash-verified.
+
+Acceptance: section 3 bar met including names; bundle round-trips at
+`docs/bundles/colle-zukertort.pgn`; other four courses untouched; vitest green and
+`tsc -b` clean; Nick's progress file unchanged.
+
+- [ ] **Review gate 14 passed**
