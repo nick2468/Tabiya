@@ -185,15 +185,18 @@ dashes, in every file including JSON prose.
 
 Not in v1: other openings and the classical move order (the data model allows both),
 a Black repertoire, online play, accounts or sync, mobile, video. The first two of
-those arrived in v2: the Caro-Kann shipped at phase 8 and is a Black repertoire.
+those arrived in v2: the Caro-Kann shipped at phase 8 and is a Black repertoire, the
+Slav followed at phase 9, and the Ruy Lopez Exchange at phase 12 as the first course
+delivered as a bundle. Four courses, two colours.
 
 Deferred with reasons (the register; a later phase working nearby may take one along):
 
 - **Plan quizzes** (multiple-choice "find the plan"): ruled 2026-08-27 to keep v1 to
   graded drills + weak areas. Natural v2 on top of the tags machinery.
-- **PGN import/export**: ruled 2026-08-27; content is Claude-drafted, so the importer
-  earns nothing yet. Export becomes interesting for sharing; import for own-game
-  analysis below.
+- **PGN import/export**: ruled 2026-08-27, and **delivered at phase 11**. A course is
+  one PGN file, section 11 has the format, and the Catalog imports and exports one.
+  What is still deferred is the *own-game* half below: reading your own played games
+  to find where you left the repertoire.
 - **Own online-game import** (find your real London deviations): high value, needs PGN
   import first. Strong v2 candidate.
 - **Lichess opening-explorer overlay** (real-world popularity and results per move):

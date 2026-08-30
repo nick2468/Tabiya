@@ -1291,14 +1291,14 @@ flexible tries, `4...bxc6`, Black avoiding `3...a6`, and the exercises.
 
 - [x] 12.1 Chapter list for a club-level Exchange Ruy (4.Bxc6 dxc6), agreed with Nick
   before drafting, in the shape the other three courses use.
-- [ ] 12.2 Draft to the SPEC.md section 3 bar, student White.
-- [ ] 12.3 All three checkers - both engine passes and the note checker - run after
+- [x] 12.2 Draft to the SPEC.md section 3 bar, student White.
+- [x] 12.3 All three checkers - both engine passes and the note checker - run after
   the last content edit, then the by-hand read of the entries a capture answers,
   which is the class no checker sees.
-- [ ] 12.4 Add the course's block to the content suite and export the bundle to
+- [x] 12.4 Add the course's block to the content suite and export the bundle to
   `docs/bundles/ruy-lopez-exchange.pgn`; the phase 11 round-trip test picks the course
   up automatically, so confirm it does.
-- [ ] 12.5 Install the bundle by hand the way the importer would, prove the course
+- [x] 12.5 Install the bundle by hand the way the importer would, prove the course
   works in the packaged app, then remove it so Nick's own import lands clean.
   **The importer's file dialog needs a human**, so the final click is his, like the
   installer click. The phase records it as owed rather than blocking on it.
@@ -1310,4 +1310,50 @@ course in the packaged app; the other three courses are untouched; vitest green 
 
 - [ ] **Review gate 12 passed**
 
-Open items (phase 12): none yet.
+Open items (phase 12):
+
+1. **A course cannot import its own bundle, so the click owed to Nick needs a ruling.**
+   Task 12.2 puts the Ruy in `courses/`, so it ships with the app. Task 12.5 then asks
+   for it to be installed from its bundle and imported by Nick. Those two cannot both
+   happen: `mergeCourses` (`src/model/course.ts:234`) refuses a dropped-in copy of a
+   bundled id, by design and rightly. Verified live, with the app's own words: `"ruy-lopez-exchange"
+   is a course this app has built in, so a dropped-in copy cannot replace it.` This is
+   true of all four files under `docs/bundles/`, because all four courses ship.
+   What was proved instead, in the packaged app: the same bundle with its id and title
+   changed to `scratch-import-check` installs into the AppData courses folder, appears
+   in the catalog marked **Added by you** with all 41 lines, and **Study, Drill and Play
+   all work in it** (Study renders the chapter prose, Play starts a game as White, and a
+   line marked learnt produced 12 due cards that Drill served). The unchanged copy sitting
+   beside it was refused with the message above while every other course kept working.
+   Both fixtures were deleted afterwards and the catalog is back to four courses.
+   **Nick's ruling:** either the Ruy stays bundled and its PGN is a reference and a
+   worked example rather than something to import, or it ships only as a bundle and the
+   repo folder goes. The import path itself is proven either way.
+
+2. **Engine findings kept rather than fixed**, all re-checked at 2500 ms:
+   - Taking on c6 costs half a pawn or so in the chapter 5 sidelines: 0.51 against the
+     Berlin, 0.71 against 3...Bc5, 0.50 against 3...g6, 0.96 against 3...Nge7. That is
+     the course's whole premise, and chapter 5's intro says so in its own section.
+   - ch1, 8.Nxe5 in the 6...Bd6 line, 0.63 at 500 ms, inside the noise band, and White
+     is still close to a pawn ahead after it.
+   - ch1, `9.Qxd8+` graded an inaccuracy: 2.03 at 500 ms but 1.62 at 2500 ms, which is
+     inside the inaccuracy band. The grade stands on the slower number.
+   - ch2, `9.hxg4` graded a mistake at a measured cost of 0.36. Kept deliberately: the
+     engine finds 10.Re1 and holds, but 10.Ne1 is the natural move and 10...Qh4 is mate,
+     which the engine confirms at -100. A grade that says "this loses" is right for a
+     move whose obvious follow-up loses.
+
+3. **The note checker cannot read a capture that gives something back.** Four of its
+   five first-round findings were notes that were true: "7...Bxd1 wins the queen" is
+   what happens, but the queen goes for a bishop and a pawn, and the checker reads the
+   claim as the net cost. The notes were reworded to state the net. Two things follow
+   for whoever runs it next. A note that names the compensation is not checked at all,
+   because the phrase no longer matches a claim pattern. And the pattern for a lost
+   queen matched "the queen goes hunting", which is a queen going somewhere.
+
+4. **The by-hand read of the capture entries earned its place again.** It found a note
+   the three checkers all passed: chapter 0 and chapter 1 both illustrated 6.Nxe5 with
+   the line 6...fxe5 7.Qh5+ g6 8.Qxe5+, which is not a refutation but a blunder by
+   Black. The engine has White at +3.28 after it. Black's move is 7...Kd7, and 6.Nxe5
+   is a mistake for a quieter reason: a piece for a pawn with no attack. Both notes now
+   say that, and say what happens to a trainee who plays ...g6 from the other side.

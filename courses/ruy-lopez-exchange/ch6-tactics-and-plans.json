@@ -63,7 +63,7 @@
                                     {
                                       "san": "hxg4",
                                       "grade": "mistake",
-                                      "note": "The knight on f3 then cannot move, because ...Qh4 mates on h1 down the file Black has just opened. 8.Ne1 Qh4 is mate in a few, and the best 8.Re1 gxf3 9.Qxf3 leaves White level on material with a shattered king."
+                                      "note": "The knight on f3 then cannot move, because ...Qh4 mates on h1 down the file Black has just opened. 8.Ne1 Qh4 is mate in a few, and the best 8.d3 gxf3 9.Qxf3 leaves White level on material with a shattered king."
                                     },
                                     {
                                       "san": "Nxe5",

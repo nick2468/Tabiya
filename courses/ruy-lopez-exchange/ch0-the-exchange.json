@@ -120,7 +120,7 @@
                                                 {
                                                   "san": "Nxe5",
                                                   "grade": "mistake",
-                                                  "note": "A piece for nothing: 6...fxe5 and the queen check on h5 wins only a pawn back. 7.Qh5+ g6 8.Qxe5+ Qe7 9.Qxh8 takes the rook and strands the queen, and the engine has Black three pawns ahead."
+                                                  "note": "6...fxe5 wins a piece for a pawn, because the pawn on f6 was put there to defend e5. White's one try is 7.Qh5+, and the king walks: 7...Kd7 keeps everything. Only 7...g6?? hands it back to 8.Qxe5+, which forks the king and the rook on h8."
                                                 }
                                               ],
                                               "children": [
