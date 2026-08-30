@@ -211,6 +211,14 @@ describe('loadChapter, negative fixtures', () => {
     expect(firstError(bad)).toBe('leaves need a plan saying how White continues')
   })
 
+  it('rejects a plan on a move that is not a leaf', () => {
+    const bad = chapter()
+    ;(bad.tree[0] as Record<string, unknown>).plan = 'A plan nobody would ever see.'
+    expect(firstError(bad)).toBe(
+      'plan belongs on leaves only: this move continues, so its plan is the line below it',
+    )
+  })
+
   it('rejects a name on a move that is not a leaf', () => {
     const bad = chapter()
     ;(bad.tree[0] as Record<string, unknown>).name = 'Not a whole line'

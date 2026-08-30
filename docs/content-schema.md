@@ -146,7 +146,7 @@ the rules below attach to.
 | `note` | string | Required on every node: 1-3 plain sentences. The student's moves say the idea or the plan; the opponent's say what the move is doing. |
 | `variant` | string | Student nodes only. Defaults to `modern`. Sibling student nodes must carry distinct variants, so there is at most one repertoire move per position. |
 | `weight` | integer | Opponent nodes only. 1-10, the club-level frequency estimate, default 1. Drives Play steering. |
-| `plan` | string | Required on every leaf: how the student continues from here. |
+| `plan` | string | Required on every leaf, and rejected anywhere else: how the student continues from here. |
 | `name` | string | Required on every leaf, and rejected anywhere else: what the Study table calls the whole line. Unique within its chapter, 40 characters at most, and it may not contain `]`. |
 | `tags` | string[] | Student nodes only. Every tag from the vocabulary below. |
 | `mistakes` | object[] | Student nodes only. Each entry `{ san, grade, note }`; `san` legal from this node's own parent position (the mistake is an alternative to this move, not a reply to it); `grade` one of `playable`, `inaccuracy`, `mistake`; `note` required, saying why. The validator checks the move; two scripts check the judgement, and neither is optional: `scripts/engine-mistakes.mjs` compares the grade with what the engine says the alternative costs, and `scripts/note-claims.mjs` plays out any material the note claims. |
@@ -298,6 +298,10 @@ recognise were meant to mean.
   older courses found nineteen grades the engine disagreed with and four notes naming
   a punishment that does not exist. The rule for an author is short: a grade is a
   claim about a number and a note is a claim about a board, and both get checked.
+- 2026-08-30: `plan` is rejected on a move that is not a leaf. It had only ever been
+  required on leaves, never refused above them, so a plan written on a move that
+  continues was authored prose the app silently ignored - which is the failure mode
+  the unknown-field rule exists to prevent. No bundled course had one.
 - 2026-08-30: every leaf carries a `name`. Nick opened the London for the first time
   and could not tell the lines apart: all seven in chapter 1 begin `2...e6 3.e3 Nf6
   4.Nf3`, so a list of move strings names nothing. The name is the leaf's, because a

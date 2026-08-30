@@ -353,6 +353,14 @@ function checkPlan(
     }
     return
   }
+  // Leaf only, the same rule name follows. Study shows a plan when the line
+  // ends, so a plan on a move that continues is prose nobody will ever read,
+  // and silently ignored authored content is what the unknown-field rule
+  // exists to prevent.
+  if (!isLeaf) {
+    errors.add(path, 'plan belongs on leaves only: this move continues, so its plan is the line below it')
+    return
+  }
   if (!isString(plan) || plan.trim() === '') errors.add(path, 'plan must be a non-empty string')
 }
 
