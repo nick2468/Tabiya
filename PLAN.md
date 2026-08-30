@@ -1386,3 +1386,41 @@ Open items (phase 12):
    unsupported claims and one claim for a human to read, which holds: after
    4...dxc6 5.O-O Bd6 6.d4 exd4, `7.e5` is +2.38 against `7.Qxd4` at +0.20, and the
    fork is worth the piece the note says it is.
+
+## Phase 13 - named lines, and the Study screen rebuilt around them
+
+Goal: the first phase driven by Nick actually using the app. He opened the London,
+landed on Study and could not tell what the three checkboxes were for or how to step
+through a line. Naming the lines is the change everything else hangs off.
+
+Chipped as `chips/phase-13-line-names.md`. Designed over four rounds with Nick on
+2026-08-30 against a working prototype
+(https://claude.ai/code/artifact/31434baa-b2ef-44b9-8fa8-192b67fb0b60), which holds the
+real London chapter 1 with every ruled behaviour in it.
+
+The rulings: every line gets a name; the lone "I have learnt this line" checkbox is
+retired because the per-line boxes cover it once the table shows where you are; the
+screen runs header, board, notes, lines table, chapter text; taking a branch moves the
+highlight; clicking a row is a restart on that line; and the two buttons that both said
+"play" become **Auto step this line** and **Play a game from here**.
+
+- [ ] 13.1 A `name` on every leaf in the content schema, required and unique within its
+  chapter, with the validator rules and the schema doc. It changes no identity: a line
+  id is its moves and a card key is course plus position, so no progress key moves.
+- [ ] 13.2 The `[%line ...]` token in the bundle format, both directions, plus the
+  SPEC.md section 11 mapping row and the author's guide. A named course must survive its
+  own format before any names are written.
+- [ ] 13.3 Name all 183 lines: London 41, Caro-Kann 53, Slav 48, Ruy Lopez 41. Named by
+  what makes each different from its siblings, not by its plan. Content-suite block for
+  presence, uniqueness and length; bundles re-exported.
+- [ ] 13.4 The Study screen rebuilt to the ruled order and mechanics, the lone checkbox
+  retired, both buttons renamed, Forward following the chosen line rather than the first
+  child.
+- [ ] 13.5 Prove it in the packaged app: the table sits where it should, Auto step walks
+  a line, a branch moves the highlight, a tick still makes drill cards.
+
+Acceptance: every line named, unique and under 40 characters; names survive the bundle
+round trip; the screen matches the ruled order and mechanics; vitest green and `tsc -b`
+clean; bundles current; Nick's progress file unchanged and hash-verified.
+
+- [ ] **Review gate 13 passed**
