@@ -72,14 +72,21 @@ export function chapterLines(chapter: LoadedChapter): Line[] {
  * 4.Bg3 O-O". The first move carries its number even when Black played it.
  */
 export function moveList(nodes: LoadedNode[]): string {
-  const parts: string[] = []
-  nodes.forEach((node, index) => {
+  return moveTexts(nodes).join(' ')
+}
+
+/**
+ * The same moves, one string each, so a caller can style them separately. The
+ * Study table colours the ones already walked and leaves the rest quiet, which
+ * turns the move column into a progress bar for the line.
+ */
+export function moveTexts(nodes: LoadedNode[]): string[] {
+  return nodes.map((node, index) => {
     const moveNumber = Math.floor(node.ply / 2) + 1
-    if (node.colour === 'white') parts.push(`${moveNumber}.${node.san}`)
-    else if (index === 0) parts.push(`${moveNumber}...${node.san}`)
-    else parts.push(node.san)
+    if (node.colour === 'white') return `${moveNumber}.${node.san}`
+    if (index === 0) return `${moveNumber}...${node.san}`
+    return node.san
   })
-  return parts.join(' ')
 }
 
 /** The full move number a node belongs to: ply 0 and 1 are both move 1. */

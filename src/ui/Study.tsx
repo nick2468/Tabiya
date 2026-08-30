@@ -2,9 +2,11 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Prose } from './Prose'
 import { Board } from './Board'
 import { useProgress } from './progress-context'
+import { activeLineIndex, nextOnLine, walkedOn } from './study-lines'
 import { splitIntro } from '../model/intro'
-import { chapterLines, fullMoveNumber, lineId, moveList } from '../model/lines'
+import { chapterLines, fullMoveNumber, moveList, moveTexts } from '../model/lines'
 import { nodeShapes } from '../model/shapes'
+import type { Line } from '../model/lines'
 import type { LoadedChapter, LoadedCourse, LoadedNode } from '../model/types'
 import type { PlayRequest } from './Play'
 import './study.css'
@@ -16,9 +18,13 @@ import './study.css'
  * that course's, in course order.
  *
  * The current position is a chain of nodes from the tree root down. An empty
- * chain is the start of the chapter, at the end of its stem. Everything else -
- * the board, the note, the branch choices, the learnt toggle - is derived from
- * that chain, so there is only one piece of state to get right.
+ * chain is the start of the chapter, at the end of its stem. The board, the
+ * note and the branch choices are all derived from that chain.
+ *
+ * The one other piece of state is which line the trainee CHOSE in the table
+ * below. The highlighted line is derived from the two together, in
+ * `study-lines.ts`. Rebuilt at phase 13, after Nick opened the London for the
+ * first time and could not tell what the screen wanted him to do.
  */
 export function Study({
   course,
@@ -65,6 +71,9 @@ export function Study({
   )
 }
 
+/** One move every 850 ms: slow enough to read the note, fast enough to watch. */
+const STEP_MS = 850
+
 function ChapterStudy({
   course,
   chapter,
@@ -75,6 +84,8 @@ function ChapterStudy({
   onPlayFrom: (request: PlayRequest) => void
 }) {
   const [chain, setChain] = useState<LoadedNode[]>([])
+  const [chosen, setChosen] = useState(0)
+  const [stepping, setStepping] = useState(false)
   const { learnt, toggle } = useProgress()
 
   const current = chain.at(-1)
@@ -82,13 +93,26 @@ function ChapterStudy({
   const lines = useMemo(() => chapterLines(chapter), [chapter])
   const intro = useMemo(() => splitIntro(chapter.intro), [chapter])
 
-  const goBack = useCallback(() => setChain((previous) => previous.slice(0, -1)), [])
+  const active = activeLineIndex(lines, chain, chosen)
+  const next = nextOnLine(lines, chain, chosen)
+
+  // Every manual step stops the automatic one. Nothing is more confusing than
+  // a board that keeps moving after you have taken hold of it.
+  const stop = useCallback(() => setStepping(false), [])
+  const goBack = useCallback(() => {
+    stop()
+    setChain((previous) => previous.slice(0, -1))
+  }, [stop])
+  // Forward follows the CHOSEN line, not the first child. The two used to
+  // disagree, so pressing Forward after picking a row walked off into a
+  // different line without saying so.
   const goForward = useCallback(() => {
+    stop()
     setChain((previous) => {
-      const next = (previous.at(-1)?.children ?? chapter.tree)[0]
-      return next ? [...previous, next] : previous
+      const step = nextOnLine(lines, previous, chosen)
+      return step ? [...previous, step] : previous
     })
-  }, [chapter])
+  }, [stop, lines, chosen])
 
   // Left and right arrows step through the line, the way a board viewer should.
   useEffect(() => {
@@ -104,10 +128,44 @@ function ChapterStudy({
     return () => window.removeEventListener('keydown', onKey)
   }, [goBack, goForward])
 
+  // Auto step, one timer per move rather than one interval: the effect reruns
+  // after each step, so it always reads the line the board is actually on, and
+  // it turns itself off as the last move lands rather than a beat later.
+  useEffect(() => {
+    if (!stepping || !next) return
+    const last = chain.length + 1 === lines[active]?.nodes.length
+    const timer = setTimeout(() => {
+      setChain((previous) => [...previous, next])
+      if (last) setStepping(false)
+    }, STEP_MS)
+    return () => clearTimeout(timer)
+  }, [stepping, next, chain, lines, active])
+
+  const jump = useCallback(
+    (to: LoadedNode[]) => {
+      stop()
+      setChain(to)
+    },
+    [stop],
+  )
+
+  /**
+   * Clicking a row is a restart on that line: the board goes back to the top of
+   * the chapter and that row becomes the chosen one, wherever you were. Nick
+   * ruled this against a version that kept whatever the two lines shared, which
+   * saved a few clicks and cost a rule nobody could predict from the screen.
+   */
+  const pickLine = useCallback(
+    (index: number) => {
+      stop()
+      setChain([])
+      setChosen(index)
+    },
+    [stop],
+  )
+
   const fen = current?.fen ?? chapter.stemFen
   const shapes = useMemo(() => nodeShapes(current), [current])
-
-  const atLine = current?.isLeaf ? lineId(chapter.id, current.path) : null
   const learntCount = lines.filter((line) => learnt(line.id)).length
 
   return (
@@ -131,13 +189,13 @@ function ChapterStudy({
             size={384}
           />
           <div className="study-controls">
-            <button type="button" onClick={() => setChain([])} disabled={chain.length === 0}>
+            <button type="button" onClick={() => jump([])} disabled={chain.length === 0}>
               Start
             </button>
             <button type="button" onClick={goBack} disabled={chain.length === 0}>
               Back
             </button>
-            <button type="button" onClick={goForward} disabled={choices.length === 0}>
+            <button type="button" onClick={goForward} disabled={!next}>
               Forward
             </button>
           </div>
@@ -145,7 +203,7 @@ function ChapterStudy({
         </div>
 
         <div className="study-side">
-          <MoveTrail chapter={chapter} chain={chain} onJump={setChain} />
+          <MoveTrail chapter={chapter} chain={chain} onJump={jump} />
 
           {choices.length > 0 ? (
             <div className="choices">
@@ -162,7 +220,7 @@ function ChapterStudy({
                     key={node.san}
                     type="button"
                     className="choice"
-                    onClick={() => setChain((previous) => [...previous, node])}
+                    onClick={() => jump([...chain, node])}
                   >
                     {node.san}
                     {node.colour === 'black' && node.weight ? (
@@ -179,18 +237,6 @@ function ChapterStudy({
           <NotePanel chapter={chapter} node={current} />
 
           <div className="line-actions">
-            <label className={atLine ? 'learnt-toggle' : 'learnt-toggle disabled'}>
-              <input
-                type="checkbox"
-                disabled={!atLine}
-                checked={atLine ? learnt(atLine) : false}
-                onChange={() => atLine && toggle(atLine)}
-              />
-              I have learnt this line
-            </label>
-            {!atLine ? (
-              <p className="hint">Play the line to its end to mark it learnt.</p>
-            ) : null}
             <button
               type="button"
               className="play-from-here"
@@ -203,11 +249,24 @@ function ChapterStudy({
                 })
               }
             >
-              Play from here
+              Play a game from here
             </button>
           </div>
         </div>
       </div>
+
+      <LinesTable
+        lines={lines}
+        chain={chain}
+        active={active}
+        learntCount={learntCount}
+        stepping={stepping}
+        canStep={next !== undefined}
+        isLearnt={learnt}
+        onToggle={toggle}
+        onPick={pickLine}
+        onStep={() => setStepping((running) => !running)}
+      />
 
       <hr className="study-separator" />
 
@@ -217,28 +276,108 @@ function ChapterStudy({
             <Prose>{intro.rest}</Prose>
           </div>
         ) : null}
+      </div>
+    </section>
+  )
+}
 
-        <section className="lines">
+/**
+ * The chapter's lines, by name.
+ *
+ * This table is the only thing on the screen that creates a drill card, so it
+ * sits above the chapter prose rather than under it, and it says what it is
+ * doing: the name column tells the lines apart, the moves column doubles as a
+ * progress bar for the highlighted one, and the tick is what feeds Drill.
+ *
+ * Exported because it is the whole of what phase 13 changed and it takes every
+ * input as a prop, so a test can render it without a store behind it.
+ */
+export function LinesTable({
+  lines,
+  chain,
+  active,
+  learntCount,
+  stepping,
+  canStep,
+  isLearnt,
+  onToggle,
+  onPick,
+  onStep,
+}: {
+  lines: Line[]
+  chain: LoadedNode[]
+  active: number
+  learntCount: number
+  stepping: boolean
+  canStep: boolean
+  isLearnt: (id: string) => boolean
+  onToggle: (id: string) => void
+  onPick: (index: number) => void
+  onStep: () => void
+}) {
+  return (
+    <section className="lines">
+      <div className="lines-head">
         <h3>
-          Lines in this chapter <span className="count">{learntCount} of {lines.length} learnt</span>
+          Lines in this chapter{' '}
+          <span className="count">
+            {learntCount} of {lines.length} learnt
+          </span>
         </h3>
-        <ul>
-          {lines.map((line) => (
-            <li key={line.id}>
-              <label className="learnt-toggle">
-                <input
-                  type="checkbox"
-                  checked={learnt(line.id)}
-                  onChange={() => toggle(line.id)}
-                />
-              </label>
-              <button type="button" className="line-link" onClick={() => setChain(line.nodes)}>
-                {line.label}
-              </button>
-            </li>
-          ))}
-        </ul>
-        </section>
+        <button type="button" className="auto-step" onClick={onStep} disabled={!canStep}>
+          {stepping ? 'Stop stepping' : 'Auto step this line'}
+        </button>
+      </div>
+      <div className="lines-table">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Line</th>
+              <th scope="col">Moves</th>
+              <th scope="col" className="tick-head">
+                Learnt
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {lines.map((line, index) => {
+              const walked = index === active ? walkedOn(line, chain) : 0
+              return (
+                <tr
+                  key={line.id}
+                  className={index === active ? 'active' : undefined}
+                  onClick={() => onPick(index)}
+                >
+                  <td className="line-name">
+                    {/* The whole row is the target, and the button is how a
+                        keyboard reaches it. */}
+                    <button type="button" className="line-link" onClick={() => onPick(index)}>
+                      {line.name}
+                    </button>
+                  </td>
+                  <td className="line-moves">
+                    {moveTexts(line.nodes).map((text, at) => (
+                      <span key={text + at} className={at < walked ? 'walked' : undefined}>
+                        {text}{' '}
+                      </span>
+                    ))}
+                  </td>
+                  {/* Ticking a line must not also restart the board on it. */}
+                  <td className="tick-cell" onClick={(event) => event.stopPropagation()}>
+                    <label className="learnt-toggle">
+                      <input
+                        type="checkbox"
+                        checked={isLearnt(line.id)}
+                        onChange={() => onToggle(line.id)}
+                        aria-label={`I have learnt ${line.name}`}
+                      />
+                    </label>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
       </div>
     </section>
   )
@@ -289,8 +428,8 @@ function NotePanel({ chapter, node }: { chapter: LoadedChapter; node: LoadedNode
         <h3>The starting position</h3>
         <p>
           {chapter.stem.length > 0
-            ? `This chapter starts after ${stemLabel(chapter)}. Pick a reply below to begin.`
-            : 'Pick a move below to begin.'}
+            ? `This chapter starts after ${stemLabel(chapter)}. Pick a reply above, or auto step a line from the table below.`
+            : 'Pick a move above, or auto step a line from the table below.'}
         </p>
       </div>
     )

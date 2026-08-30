@@ -1413,7 +1413,7 @@ highlight; clicking a row is a restart on that line; and the two buttons that bo
 - [x] 13.3 Name all 183 lines: London 41, Caro-Kann 53, Slav 48, Ruy Lopez 41. Named by
   what makes each different from its siblings, not by its plan. Content-suite block for
   presence, uniqueness and length; bundles re-exported.
-- [ ] 13.4 The Study screen rebuilt to the ruled order and mechanics, the lone checkbox
+- [x] 13.4 The Study screen rebuilt to the ruled order and mechanics, the lone checkbox
   retired, both buttons renamed, Forward following the chosen line rather than the first
   child.
 - [ ] 13.5 Prove it in the packaged app: the table sits where it should, Auto step walks

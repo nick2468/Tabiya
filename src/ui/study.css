@@ -51,6 +51,13 @@
 
 /* --------------------------------------------------------------- chapter */
 
+/* A grid item is as wide as its content by default, and the lines table has a
+   minimum width. Without this the chapter stretches past the window and the
+   PAGE scrolls sideways instead of the table. */
+.chapter {
+  min-width: 0;
+}
+
 .chapter-head {
   display: flex;
   align-items: baseline;
@@ -250,21 +257,30 @@
   cursor: pointer;
 }
 
-.learnt-toggle.disabled {
-  color: var(--text-faint);
-  cursor: default;
-}
-
 .learnt-toggle input {
   accent-color: var(--accent);
   width: 16px;
   height: 16px;
 }
 
-/* -------------------------------------------------------- the line list */
+/* ------------------------------------------------------- the lines table */
 
+/* The one thing on this screen that makes a drill card, so it sits above the
+   chapter prose rather than under it. */
 .lines {
-  margin-top: 24px;
+  margin-top: 22px;
+}
+
+.lines-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.lines-head h3 {
+  flex: 1;
+  margin: 0 0 8px;
 }
 
 .lines .count {
@@ -275,35 +291,105 @@
   margin-left: 8px;
 }
 
-.lines ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  columns: 2;
-  column-gap: 32px;
+.auto-step {
+  margin-bottom: 8px;
 }
 
-.lines li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  break-inside: avoid;
-  padding: 2px 0;
+/* The table scrolls sideways in here on a narrow window. The page body must
+   not: a horizontal scrollbar on the whole screen is how a layout goes wrong
+   without anybody noticing which part did it. */
+.lines-table {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.lines table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 560px;
+}
+
+.lines thead th {
+  background: var(--chip);
+  border-bottom: 1px solid var(--line);
+  padding: 6px 12px;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
+}
+
+.lines tbody td {
+  border-bottom: 1px solid var(--line);
+  padding: 5px 12px;
+  vertical-align: middle;
+}
+
+.lines tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.lines tbody tr {
+  cursor: pointer;
+}
+
+.lines tbody tr:hover td {
+  background: var(--surface-hover);
+}
+
+.lines tbody tr.active td {
+  background: var(--accent-wash);
+}
+
+.lines tbody tr.active .line-link {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.line-name {
+  white-space: nowrap;
 }
 
 .line-link {
   background: none;
   border: none;
-  padding: 2px 4px;
+  padding: 0;
   color: var(--text-soft);
   text-align: left;
   cursor: pointer;
-  font-variant-numeric: tabular-nums;
+  font: inherit;
 }
 
 .line-link:hover {
-  background: var(--surface-hover);
-  color: var(--text);
+  background: none;
+  text-decoration: underline;
+}
+
+.line-moves {
+  color: var(--text-faint);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+}
+
+/* The moves already walked, on the highlighted row: the move column doubles as
+   a progress bar, so you can see how much of the line is behind you. */
+.line-moves .walked {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.tick-head,
+.tick-cell {
+  width: 1%;
+  text-align: center;
+}
+
+.tick-cell .learnt-toggle {
+  display: inline-flex;
 }
 
 .empty {
@@ -313,10 +399,6 @@
 @media (max-width: 899px) {
   .study {
     grid-template-columns: 1fr;
-  }
-
-  .lines ul {
-    columns: 1;
   }
 }
 
@@ -340,6 +422,12 @@
     height: 100%;
     min-height: 0;
     overflow-y: auto;
+  }
+
+  /* The lines table keeps its height; the chapter prose takes what is left
+     and scrolls in its own panel. */
+  .lines {
+    flex: none;
   }
 
   .chapter-detail {
