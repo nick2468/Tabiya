@@ -427,8 +427,8 @@ Playing the quiet 5.O-O out of habit, which is sound and lets Black free the pos
 {It wins the same pawn a move later and lets Black castle. Trade the queens first, while the king still has to take.}
 ) 7... Kxd8 {Forced, and the king has lost the right to castle. [%weight 9]} 8. Nxe5
 {Now, and it is a clean pawn: nothing defends it. [%tags tactics] [%plan Play Nc3 and Be3, castle the rooks, and use the king on d8. A pawn up with three pawn islands against two is exactly the ending this course is for.]}
-( 8. Nc3?!
-{It develops and lets Black defend e5 with ...Bd6 or ...f6. Take the pawn while nothing is guarding it.}
+( 8. Nc3?
+{It develops and gives the whole point away: Black answers ...Bd6 or ...f6 and the pawn is defended for good. Take it now, while nothing is guarding it.}
 ) ) ( 5... f6
 {Holding the pawn, as in the main line but with the d-pawn still at home. [%weight 4]}
 6. Nc3 {Develop and let Black say what the centre is doing. [%tags development]} (

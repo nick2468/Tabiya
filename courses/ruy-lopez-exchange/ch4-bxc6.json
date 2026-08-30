@@ -241,8 +241,8 @@
                                   "mistakes": [
                                     {
                                       "san": "Nc3",
-                                      "grade": "inaccuracy",
-                                      "note": "It develops and lets Black defend e5 with ...Bd6 or ...f6. Take the pawn while nothing is guarding it."
+                                      "grade": "mistake",
+                                      "note": "It develops and gives the whole point away: Black answers ...Bd6 or ...f6 and the pawn is defended for good. Take it now, while nothing is guarding it."
                                     }
                                   ]
                                 }
