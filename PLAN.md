@@ -1123,7 +1123,7 @@ records the reasoning. Nick ruled the format (a PGN file), the re-import behavio
 Acceptance: SPEC.md section 11 items 1 to 5; vitest green and `tsc -b` clean; the
 installer rebuilt; Nick's progress file unchanged, hash-verified.
 
-- [ ] **Review gate 11 passed**
+- [x] **Review gate 11 passed** (2026-08-30)
 
 Open items (phase 11):
 
@@ -1216,6 +1216,64 @@ Open items (phase 11):
    course in a browser, so the import section is hidden there; export offers a
    download, because a bundle is just a file and getting one out of the browser
    build costs nothing.
+11. **A bundle could choose where its files landed, found and fixed at the gate.**
+   The bundle reader names each chapter file `<ChapterId>.json` and the installer
+   joins that onto the course folder before writing it. Nothing validated that id,
+   so `[ChapterId "../../../evil"]` passed the whole pipeline - reader, loader,
+   every check - and would have been written outside the folder. Two levels up
+   from a course folder is the app's own `progress.json`, and the write scope
+   includes `$HOME/**`, so the reach was real rather than theoretical: the file
+   this project has protected since phase 7 was reachable by a shared file.
+   Fixed in `loadChapter` rather than in the bundle reader, because that is the
+   root: the same rule now guards a folder copied in by hand, and the chapter id
+   also travels into every line id in the progress file. The rule is the one
+   course ids already follow, and all 22 shipped chapters already satisfy it.
+   `src/model/bundle-safety.test.ts` tries eight ways out of the folder.
+   **The documentation already said chapter ids were "the same kind of name" as
+   course ids.** The guide was right and the code did not enforce it, which is a
+   reminder that writing the docs is itself a check - it caught the conflict rule
+   in item 5 the same way.
+12. **What the review verified independently (gate 11).** 435 tests and
+   `tsc -b --force` green, and no course content changed. The round trip was
+   re-run from scratch rather than trusted: all three courses exported to PGN,
+   read back, loaded through `loadCourse`, and compared node by node across more
+   than 700 nodes - id, title, colour, tagline, tags, chapter order, intros,
+   stems, and every note, plan, tag, weight, variant, shape and mistake entry -
+   identical in all three. The parser was checked on the thing chess.js gets
+   wrong: it keeps a variation, and a variation nested inside a variation. Six
+   kinds of malformed input were refused with errors and no course, and nine
+   pieces of junk produced no throw.
+   The ruled re-import safety was tested against Nick's real learnt ids: an
+   unchanged course keeps 2 of 2, an unrelated course correctly reports 0 of 0
+   rather than alarming him about lines it does not own, and both a removed
+   chapter and a changed move report 1 of 2 and name the casualty.
+   Five behaviours the author guide promises were run rather than read, including
+   its claim that a marked alternative carrying a continuation is refused rather
+   than silently truncated. All five hold, which is worth saying: the guide and
+   the implementation agree.
+   **The installer was rebuilt at the gate, twice, and checked rather than
+   assumed.** The artefact the phase produced was built at 10:07 and the traversal
+   fix landed at 11:18, so the shipped installer did not contain it - and shipping
+   an installer without it would have shipped the hole in the one feature designed
+   to accept files from strangers. The first rebuild was then found to predate a
+   second, smaller fix, because `tauri build` runs the frontend build at its start
+   and the edit landed after it. Both fixes were confirmed present by searching the
+   built bundle for their own strings, rather than trusting the timestamp. Worth
+   remembering: **a rebuild proves nothing about an edit made while it was
+   running.**
+   The rebuilt app was then run: it opens with three courses and Nick's real
+   progress (2 of 142 lines, 17 due), each tile offers "Export as a file", and the
+   import panel is there with its "It is data and cannot run anything" line. His
+   progress file came back at SHA256 DB071A7F...A741 and the AppData folder holds
+   nothing but that file.
+13. **Two escalations from item 3 and item 5, ruled at the gate.** Both were
+   raised the way the escalation rule asks, rather than resolved quietly.
+   `defaultTags` as `[DefaultTags]` and `variant` as `[%variant]` are accepted and
+   are now in SPEC.md section 11's mapping table: without the first, no course
+   survives its own format, which the round trip proved on all three. Moving the
+   two-chapters-disagree check into `loadCourse` is accepted too, and it is more
+   than tidiness - the rule had only ever protected courses in this repo, and the
+   trainee cannot run the test suite.
 
 ---
 

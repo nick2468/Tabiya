@@ -446,9 +446,11 @@ Mapping, in both directions:
 | Course concept | PGN |
 |---|---|
 | Course id, title, student colour, tagline, format version, tag extensions | Header tags `[CourseId]`, `[CourseTitle]`, `[StudentColour]`, `[Tagline]`, `[FormatVersion]`, `[TagExtensions]`, repeated on every game so an extracted chapter still identifies its course; they must agree, and disagreement is an error |
-| Chapter id, title | `[ChapterId]`, `[ChapterTitle]` per game |
+| Chapter id, title | `[ChapterId]`, `[ChapterTitle]` per game. The id becomes a filename when a bundle is installed, so it is held to the same shape as a course id |
 | Chapter order | Game order in the file |
 | Chapter intro | The comment before the first move |
+| Chapter `defaultTags` | `[DefaultTags "development"]` (added at gate 11: all three courses use the field, and without it no course survives its own format) |
+| Node `variant` | `[%variant classical]` (added at gate 11: no course uses it yet, but the schema holds it, so the format carries it) |
 | Stem | The moves before the tree branches |
 | Note | A `{comment}` after the move |
 | Concept tags | `[%tags development king-safety]` inside a comment |
