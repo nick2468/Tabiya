@@ -68,7 +68,7 @@
                               "mistakes": [
                                 {
                                   "san": "Ba4",
-                                  "grade": "inaccuracy",
+                                  "grade": "playable",
                                   "note": "The main Ruy Lopez, and several times the theory. It is a fine choice and it is not this course."
                                 }
                               ],
@@ -88,7 +88,7 @@
                                       "mistakes": [
                                         {
                                           "san": "Nxe5",
-                                          "grade": "mistake",
+                                          "grade": "inaccuracy",
                                           "note": "It does not win a pawn. 5...Qd4 forks the knight and e4, and after 6.Nf3 Qxe4+ Black has it straight back with the better game."
                                         },
                                         {

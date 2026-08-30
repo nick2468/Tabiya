@@ -1,7 +1,7 @@
 {
   "id": "ch5-no-a6",
   "title": "When Black leaves out 3...a6",
-  "intro": "Black does not ask the bishop the question, so White answers it anyway. Take on c6 and play the structure you already know.\n\n## The rule for the whole chapter\n\nBxc6 in every line here. It costs a move of development compared with the lines where Black has played ...a6, and it buys the same crippled queenside and the same healthy majority. One structure understood beats five structures half known, and that is the whole argument for choosing the Exchange.\n\n## The Berlin, 3...Nf6\n\nThe one that matters, because it is much the most common. 4.Bxc6 dxc6 5.O-O and Black usually grabs on e4. Let him. 6.Re1 puts the rook on the file the knight is standing in, and after 6...Nd6 7.Nxe5 the pawn is back with the structure fixed. The trap to know is 7...Qe7, which looks like it wins a piece: 8.Nxf7 steps aside and the rook on the e-file collects the queen.\n\n## The rest\n\n3...Bc5 invites the wrong recapture: after 4.Bxc6 bxc6 5.Nxe5 is a clean pawn, because the bishop on c5 does not defend it and there is no ...Qd4 with the d-pawn at home.\n\n3...d6 is met with check, so Black has no choice: 4.Bxc6+ bxc6 5.d4, which is the 4...bxc6 chapter with a move saved.\n\n3...f5 is the only line where taking on e5 is punished by a pawn rather than a piece. Take on c6, then defend e4 with a piece: 5.Nc3.\n\n3...g6 and 3...Nge7 are slow. Take, build with d3 and Nbd2 and Nc4, and let the structure be the difference.\n\n## One honest note\n\nAgainst 3...Nge7 taking on c6 is not White's most testing move: the engine puts 4.Nc3 about half a pawn ahead. This course takes anyway, and says so rather than pretending. The position after it is a comfortable game in the structure the trainee knows.\n\n## Typical mistakes at this level\n\nTaking on e5 before counting what defends it. Grabbing on e5 against the Schliemann while e4 hangs. Forgetting that the capture is check against 3...d6. And treating the Berlin as a different opening: after 4.Bxc6 dxc6 it is this one.",
+  "intro": "Black does not ask the bishop the question, so White answers it anyway. Take on c6 and play the structure you already know.\n\n## The rule for the whole chapter\n\nBxc6 in every line here. It costs a move of development compared with the lines where Black has played ...a6, and it buys the same crippled queenside and the same healthy majority. One structure understood beats five structures half known, and that is the whole argument for choosing the Exchange.\n\n## The Berlin, 3...Nf6\n\nThe one that matters, because it is much the most common. 4.Bxc6 dxc6 5.O-O and Black usually grabs on e4. Let him. 6.Re1 puts the rook on the file the knight is standing in, and after 6...Nd6 7.Nxe5 the pawn is back with the structure fixed. The trap to know is 7...Qe7, which looks like it wins a piece: 8.Nxf7 steps aside and the rook on the e-file collects the queen. The other line worth its own look is 5...Bd6 6.d4 exd4, where 7.e5 forks the bishop and the knight on f6.\n\n## The rest\n\n3...Bc5 invites the wrong recapture: after 4.Bxc6 bxc6 5.Nxe5 is a clean pawn, because the bishop on c5 does not defend it and there is no ...Qd4 with the d-pawn at home.\n\n3...d6 is met with check, so Black has no choice: 4.Bxc6+ bxc6 5.d4, which is the 4...bxc6 chapter with a move saved.\n\n3...f5 is the only line where taking on e5 is punished by a pawn rather than a piece. Take on c6, then defend e4 with a piece: 5.Nc3.\n\n3...g6 and 3...Nge7 are slow. Take, build with d3 and Nbd2 and Nc4, and let the structure be the difference. The knight tour against 3...g6 sets a small trap of its own: once it lands on c4, e5 is attacked twice and defended once, and the count says take.\n\n## One honest note\n\nAgainst 3...Nge7 taking on c6 is not White's most testing move: the engine puts 4.Nc3 close to a pawn ahead. This course takes anyway, and says so rather than pretending. The position after it is a comfortable game in the structure the trainee knows.\n\n## Typical mistakes at this level\n\nTaking on e5 before counting what defends it. Grabbing on e5 against the Schliemann while e4 hangs. Forgetting that the capture is check against 3...d6. And treating the Berlin as a different opening: after 4.Bxc6 dxc6 it is this one.",
   "stem": [
     "e4",
     "e5",
@@ -50,7 +50,7 @@
                     {
                       "san": "Nxe5",
                       "grade": "inaccuracy",
-                      "note": "It wins a pawn and hands it straight back: 5...Nxe4 and Black is fine. Castle first."
+                      "note": "The pawn comes straight back: 5...Nxe4 and Black is fine. Castle first."
                     }
                   ],
                   "children": [
@@ -180,7 +180,7 @@
                                           "mistakes": [
                                             {
                                               "san": "Nf3",
-                                              "grade": "inaccuracy",
+                                              "grade": "mistake",
                                               "note": "It saves the knight and passes up the best moment of the chapter. Look down the e-file first."
                                             }
                                           ],
@@ -230,12 +230,47 @@
                               "note": "Black takes.",
                               "children": [
                                 {
-                                  "san": "Qxd4",
+                                  "san": "e5",
                                   "tags": [
-                                    "development"
+                                    "tactics"
                                   ],
-                                  "plan": "Play Nc3, Be3 and Rad1, trade queens if offered, and go for the ending.",
-                                  "note": "The queen is safe with no knight on c6."
+                                  "note": "A pawn fork. It hits the bishop on d6 and the knight on f6 at once, and 7...Bxe5 8.Nxe5 leaves nothing on the board to take the knight back.",
+                                  "shapes": [
+                                    {
+                                      "orig": "e5",
+                                      "dest": "d6",
+                                      "brush": "green"
+                                    },
+                                    {
+                                      "orig": "e5",
+                                      "dest": "f6",
+                                      "brush": "green"
+                                    }
+                                  ],
+                                  "mistakes": [
+                                    {
+                                      "san": "Qxd4",
+                                      "grade": "mistake",
+                                      "note": "It wins the pawn back and passes up the fork, which is worth a piece."
+                                    }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Be7",
+                                      "weight": 7,
+                                      "note": "Saving the bishop and giving up the knight.",
+                                      "children": [
+                                        {
+                                          "san": "exf6",
+                                          "tags": [
+                                            "tactics"
+                                          ],
+                                          "plan": "Answer 8...Bxf6 with Re1+ and Nbd2, and collect the pawn on d4 when it suits. A knight for a pawn, with the better structure on top.",
+                                          "note": "Take."
+                                        }
+                                      ]
+                                    }
+                                  ]
                                 }
                               ]
                             }
@@ -308,8 +343,8 @@
                   "mistakes": [
                     {
                       "san": "Nxe5",
-                      "grade": "mistake",
-                      "note": "Now the bishop covers it and the queen comes: 5...Qd4 forks the knight and f2 and wins a piece."
+                      "grade": "inaccuracy",
+                      "note": "The bishop on c5 covers d4, so the queen comes with tempo: 5...Qd4 hits the knight and f2, and after 6.Nd3 Qxe4+ Black has the pawn back with the better game."
                     }
                   ],
                   "children": [
@@ -339,8 +374,8 @@
                                   "mistakes": [
                                     {
                                       "san": "Nxd4",
-                                      "grade": "inaccuracy",
-                                      "note": "It lets Black trade into a comfortable ending. The knight tour is worth the move."
+                                      "grade": "mistake",
+                                      "note": "The bishop on c5 is defending d4: 7...Qxd4 8.Qxd4 Bxd4 wins a piece for a pawn. The knight tour by way of b3 is worth the move."
                                     }
                                   ],
                                   "children": [
@@ -674,17 +709,65 @@
                                       "note": "Black castles.",
                                       "children": [
                                         {
-                                          "san": "O-O",
+                                          "san": "Ncxe5",
                                           "tags": [
-                                            "king-safety"
+                                            "tactics"
                                           ],
-                                          "plan": "Play a4 and a5 to fix the queenside, then Ne3 and Nd5 or f4. The bishop on g7 has nothing to bite on.",
-                                          "note": "And so does White, with a small and permanent structural edge.",
+                                          "note": "Count before you take, and the count says take: the pawn is attacked twice and defended once.",
+                                          "shapes": [
+                                            {
+                                              "orig": "c4",
+                                              "dest": "e5",
+                                              "brush": "green"
+                                            },
+                                            {
+                                              "orig": "f3",
+                                              "dest": "e5",
+                                              "brush": "green"
+                                            }
+                                          ],
                                           "mistakes": [
+                                            {
+                                              "san": "O-O",
+                                              "grade": "inaccuracy",
+                                              "note": "Safe, and it passes up a pawn. Counting the defenders is the habit this course is built on."
+                                            },
                                             {
                                               "san": "Ne3",
                                               "grade": "inaccuracy",
-                                              "note": "It is going there anyway, and the king comes first."
+                                              "note": "It is going there anyway, and there is a pawn to take first."
+                                            }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "f6",
+                                              "weight": 6,
+                                              "note": "The best try: kick the knight before recapturing.",
+                                              "children": [
+                                                {
+                                                  "san": "Nc4",
+                                                  "tags": [
+                                                    "majority"
+                                                  ],
+                                                  "plan": "Castle, play Re1 and a4, and keep the extra pawn. Black has opened lines at his own king to win it back.",
+                                                  "note": "Back, a pawn up, and the hole on e6 is worth as much as the pawn."
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "san": "Bxe5",
+                                              "weight": 5,
+                                              "note": "The natural recapture.",
+                                              "children": [
+                                                {
+                                                  "san": "Nxe5",
+                                                  "tags": [
+                                                    "majority"
+                                                  ],
+                                                  "plan": "Castle, then f4 and Nf3 or Nc4. The extra pawn is on the side that can make a passer.",
+                                                  "note": "A clean pawn, and the bishop Black spent two moves on has gone with it."
+                                                }
+                                              ]
                                             }
                                           ]
                                         }
@@ -721,7 +804,7 @@
             {
               "san": "Nc3",
               "grade": "playable",
-              "note": "The engine's move, and about half a pawn better. It is also a different opening from the rest of this course."
+              "note": "The engine's move, and close to a pawn better. It is also a different opening from the rest of this course."
             }
           ],
           "children": [

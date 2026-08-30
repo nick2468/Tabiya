@@ -1,7 +1,7 @@
 {
   "id": "ch3-flexible",
   "title": "The flexible fifth moves",
-  "intro": "Black neither props up e5 with a pawn nor pins the knight, but develops and waits. Four moves come up often enough to know: 5...Qd6, 5...Bd6, 5...Qf6 and 5...Ne7.\n\n## What they have in common\n\nAll four leave the pawn on e5 defended by a piece rather than a pawn, so d4 is nearly always the answer. Once White plays it Black has to take, and the moment the e-pawns come off the majority is fixed and the rest of the game is the one this course is about.\n\n## Where each one goes\n\n5...Qd6 is the most solid. The queen holds e5 and gets out of the rooks' way, and the answer is 6.Na3, which looks wrong and is heading for c4 with a hit on her.\n\n5...Bd6 and 5...Qf6 both hold e5 with a piece that can be hit, so d4 comes with tempo. After 5...Bd6 6.d4 exd4 7.Qxd4, watch what happens to g7: 7...Ne7 loses a pawn to 8.Qxg7, and it is exactly the move a club player makes without a thought.\n\n5...Ne7 is the one with a capture in it. The knight walks away from the defence of e5 and leaves it to a pawn that is still at home, so 6.Nxe5 is on. Black's only try is 6...Qd4, hitting the knight and e4 at once, and 7.Qh5 defends the knight and threatens f7 in the same move.\n\n## The habit this chapter is really teaching\n\nCount what is defending e5 before every capture. In four of this course's six chapters something is, and taking loses a piece. Here it is not, and taking wins a pawn. The difference is one look.\n\n## Typical mistakes at this level\n\nPlaying d4 without counting first. Taking a queen trade that did not have to be taken. Recapturing on d4 with a pawn and handing Black a target. And missing 8.Qxg7 when the knight leaves g7 undefended.",
+  "intro": "Black neither props up e5 with a pawn nor pins the knight, but develops and waits. Four moves come up often enough to know: 5...Qd6, 5...Bd6, 5...Qf6 and 5...Ne7.\n\n## What they have in common\n\nAll four leave the pawn on e5 defended by a piece rather than a pawn, so d4 is nearly always the answer. Once White plays it Black has to take, and the moment the e-pawns come off the majority is fixed and the rest of the game is the one this course is about.\n\n## Where each one goes\n\n5...Qd6 is the most solid. The queen holds e5 and gets out of the rooks' way, and the answer is 6.Na3, which looks wrong and is heading for c4 with a hit on her.\n\n5...Bd6 and 5...Qf6 both hold e5 with a piece that can be hit, so d4 comes with tempo. After 5...Bd6 6.d4 exd4 7.Qxd4, watch what happens to g7: 7...Ne7 loses a pawn to 8.Qxg7, and it is exactly the move a club player makes without a thought.\n\n5...Ne7 is the one with a capture in it. The knight walks away from the defence of e5 and leaves it to a pawn that is still at home, so 6.Nxe5 is on. Black's main try is 6...Qd4, hitting the knight and e4 at once, and 7.Qh5 defends the knight and threatens f7 in the same move.\n\n## The habit this chapter is really teaching\n\nCount what is defending e5 before every capture. In four of this course's six chapters something is, and taking loses a piece. Here it is not, and taking wins a pawn. The difference is one look.\n\n## Typical mistakes at this level\n\nPlaying d4 without counting first. Taking a queen trade that did not have to be taken. Recapturing on d4 with the knight and losing it to the pawn on c5. And missing 8.Qxg7 when the knight leaves g7 undefended.",
   "stem": [
     "e4",
     "e5",
@@ -101,17 +101,17 @@
                                       "note": "Black takes.",
                                       "children": [
                                         {
-                                          "san": "Nfxd4",
+                                          "san": "cxd4",
                                           "tags": [
-                                            "development"
+                                            "d4-break"
                                           ],
-                                          "plan": "Play Ne3 and Nef5, or trade on d4 and use the open file. Bishops need open lines and this structure does not give them any.",
-                                          "note": "With the knight that is not needed on c2.",
+                                          "plan": "Play Ne3 and Nf5, or push d5 and shut the long diagonal. Bishops need open lines and this structure does not give them any.",
+                                          "note": "The pawn recapture, which builds the centre and keeps the knights.",
                                           "mistakes": [
                                             {
-                                              "san": "cxd4",
-                                              "grade": "inaccuracy",
-                                              "note": "It gives Black a target on d4 and shuts in the bishop on c1. Recapture with a piece."
+                                              "san": "Nfxd4",
+                                              "grade": "mistake",
+                                              "note": "The pawn on c5 takes it and only the pawn on c3 takes back: 10...cxd4 11.cxd4 and White has given a knight for two pawns."
                                             }
                                           ]
                                         }
@@ -143,8 +143,8 @@
                   "mistakes": [
                     {
                       "san": "Nc4",
-                      "grade": "inaccuracy",
-                      "note": "Black takes it: ...Bxc4 and the two bishops are gone along with the plan."
+                      "grade": "mistake",
+                      "note": "Nothing on the board recaptures on c4: 7...Bxc4 wins a piece. Connect first and let the knight come next move."
                     }
                   ],
                   "children": [
@@ -499,24 +499,47 @@
               "note": "Challenging the knight instead.",
               "children": [
                 {
-                  "san": "Nxg6",
+                  "san": "Qh5",
                   "tags": [
-                    "doubled-pawns"
+                    "tactics"
                   ],
-                  "note": "Take, and Black gets another doubled pair.",
+                  "note": "Defend the knight and hit g6 a second time, so that the recapture has to be with the f-pawn.",
+                  "shapes": [
+                    {
+                      "orig": "h5",
+                      "dest": "g6",
+                      "brush": "green"
+                    }
+                  ],
                   "children": [
                     {
-                      "san": "hxg6",
-                      "weight": 9,
-                      "note": "Forced.",
+                      "san": "Bd6",
+                      "weight": 6,
+                      "note": "Black develops and asks the knight again.",
                       "children": [
                         {
-                          "san": "d3",
+                          "san": "Nxg6",
                           "tags": [
-                            "endgame"
+                            "doubled-pawns"
                           ],
-                          "plan": "Play Nc3 and Be3, castle the rooks and trade into the ending a pawn up.",
-                          "note": "Solid, a pawn up, and the file Black opened runs into nothing."
+                          "note": "Now take.",
+                          "children": [
+                            {
+                              "san": "fxg6",
+                              "weight": 9,
+                              "note": "Forced: 8...hxg6 9.Qxh8 collects the rook down the file Black has just opened.",
+                              "children": [
+                                {
+                                  "san": "Qe2",
+                                  "tags": [
+                                    "endgame"
+                                  ],
+                                  "plan": "Play d3, Nc3 and Be3, castle the rooks and trade into the ending a pawn up.",
+                                  "note": "Back to safety, a pawn up, with Black's kingside pawns in three pieces."
+                                }
+                              ]
+                            }
+                          ]
                         }
                       ]
                     }

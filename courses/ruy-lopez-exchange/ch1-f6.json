@@ -36,7 +36,7 @@
             {
               "san": "Nxe5",
               "grade": "mistake",
-              "note": "A piece: 6...fxe5 and there is no follow-up. 7.Qh5+ g6 8.Qxe5+ Qe7 9.Qxh8 wins a rook and buries the queen, and the engine has Black three pawns ahead."
+              "note": "6...fxe5 wins a piece, because the pawn on f6 was put there to defend e5. The greedy 7.Qh5+ g6 8.Qxe5+ Qe7 9.Qxh8 collects a rook and buries the queen in the corner, and Black is still much better."
             },
             {
               "san": "d3",
@@ -172,8 +172,8 @@
                                                           "mistakes": [
                                                             {
                                                               "san": "e5",
-                                                              "grade": "inaccuracy",
-                                                              "note": "The majority moves last. Pushing its front pawn now fixes Black's structure for him and hands the bishops the d5 square."
+                                                              "grade": "mistake",
+                                                              "note": "The pawn walks into 12...c5, hitting the knight on d4 with nothing left behind to hold the pawn on e5. The majority moves last, when the pieces are placed."
                                                             }
                                                           ]
                                                         }
@@ -190,19 +190,19 @@
                                     {
                                       "san": "Bg4",
                                       "weight": 4,
-                                      "note": "Hitting f3, which is the trade to be careful about.",
+                                      "note": "The knight has gone to b3, so the bishop is looking straight at the rook on d1 down an empty diagonal.",
                                       "children": [
                                         {
                                           "san": "f3",
                                           "tags": [
                                             "majority"
                                           ],
-                                          "note": "Ask the bishop the question with a pawn, not with the knight.",
+                                          "note": "Block the diagonal and ask the question in one move, with the pawn that is doing no other work.",
                                           "mistakes": [
                                             {
                                               "san": "h3",
-                                              "grade": "inaccuracy",
-                                              "note": "It invites 10...Bxf3, and now the only recapture that does not wreck the kingside majority is with a piece. Push the bishop away with f3 instead."
+                                              "grade": "mistake",
+                                              "note": "It asks the question on the wrong square and leaves the diagonal open: 10...Bxd1 wins the exchange. Nothing stands between g4 and d1 once the knight has left f3."
                                             }
                                           ],
                                           "children": [
@@ -463,13 +463,13 @@
                                   "tags": [
                                     "tactics"
                                   ],
-                                  "plan": "Take on e5 with check, trade queens, and play the ending a clean pawn up with the better structure.",
+                                  "plan": "Take on e5 next move. If Black blocks with 9...g6 the queen takes with check and the rook on h8 falls with it.",
                                   "note": "The check that collects the pawn.",
                                   "mistakes": [
                                     {
                                       "san": "Qxd8+",
                                       "grade": "inaccuracy",
-                                      "note": "It trades into an ending a pawn down for nothing. The check on h5 wins the pawn on e5 first."
+                                      "note": "It trades into a level ending when there was a pawn to be had. Check on h5 first: the pawn on e5 has nothing defending it and the king cannot come to its aid."
                                     }
                                   ]
                                 }

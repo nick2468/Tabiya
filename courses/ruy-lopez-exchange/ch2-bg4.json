@@ -233,7 +233,7 @@
                     {
                       "san": "Nxe5",
                       "grade": "mistake",
-                      "note": "The diagonal from h5 to d1 has been open since move five: 7...Bxd1 wins the queen. Look down the whole diagonal before taking."
+                      "note": "The diagonal from h5 to d1 has been open since move five: 7...Bxd1, and after the recapture White has given the queen for a bishop and a pawn. Look down the whole diagonal before taking."
                     }
                   ],
                   "children": [
@@ -281,12 +281,12 @@
                                       "note": "Forced.",
                                       "children": [
                                         {
-                                          "san": "Qe2",
+                                          "san": "Qf3",
                                           "tags": [
                                             "endgame"
                                           ],
-                                          "plan": "Play d3 and Nc3, castle the rooks to d1 and e1, and trade into the ending a pawn up.",
-                                          "note": "Defending e4 and connecting. White is a pawn up with the better structure.",
+                                          "plan": "Play d3 and Nc3, tuck the king on g2 behind the pawn, and trade into the ending a pawn up.",
+                                          "note": "Defending e4 from the square where the queen also faces down the file Black has opened. A pawn up with the better structure.",
                                           "mistakes": [
                                             {
                                               "san": "Nc3",

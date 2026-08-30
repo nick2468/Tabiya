@@ -1,7 +1,7 @@
 {
   "id": "ch4-bxc6",
   "title": "4...bxc6, the other recapture",
-  "intro": "Black recaptures towards the edge. It keeps a pawn on d7 and a route for the knight to e7 and g6, and it leaves the queenside pawns in a heap: a6, c6 and c7 with nothing on b7.\n\n## Why this is good news\n\nThe doubled pawns are worse here than in the main line, because Black has three pawn islands from move four and the c-pawns can never advance without help. What Black gets in return is the half-open b-file and a bishop that can come to a6 or b7. It is playable and it is a concession, and the engine agrees: this is the one line in the course where White is close to half a pawn better straight out of the opening.\n\n## Your answer\n\n5.d4 at once. Black's e-pawn has nothing but the queen behind it, so the centre opens on White's terms, and the queen recapture on d4 is safe here because Black has no knight on c6 to gain time against her. Then Nc3, Be3, castle long, and play down the file at the pawns that cannot defend themselves.\n\n## Typical mistakes at this level\n\nPlaying the quiet 5.O-O out of habit, which is sound and lets Black free the position with ...d5. Recapturing on d4 with the knight, which offers Black exactly the trade that helps him. Castling short, away from the side where Black is weak. And forgetting which pawn is the target: it is c6 and c7, not a6.",
+  "intro": "Black recaptures towards the edge. It keeps a pawn on d7 and a route for the knight to e7 and g6, and it leaves the queenside pawns in a heap: a6, c6 and c7 with nothing on b7.\n\n## Why this is good news\n\nThe doubled pawns are worse here than in the main line, because Black has three pawn islands from move four and the c-pawns can never advance without help. What Black gets in return is the half-open b-file and a bishop that can come to a6 or b7. It is playable and it is a concession, and the engine agrees: this is the one line in the course where White is close to half a pawn better straight out of the opening.\n\n## Your answer\n\nLook at g7 as well, once the knight goes to g6: in the main line of this chapter it is a free pawn, because the rook on h8 has never defended it.\n\n5.d4 at once. Black's e-pawn has nothing but the queen behind it, so the centre opens on White's terms, and the queen recapture on d4 is safe here because Black has no knight on c6 to gain time against her. Then Nc3, Be3, castle long, and play down the file at the pawns that cannot defend themselves.\n\n## Typical mistakes at this level\n\nPlaying the quiet 5.O-O out of habit, which is sound and lets Black free the position with ...d5. Recapturing on d4 with the knight, which offers Black exactly the trade that helps him. Castling short, away from the side where Black is weak. And forgetting which pawn is the target: it is c6 and c7, not a6.",
   "stem": [
     "e4",
     "e5",
@@ -113,17 +113,29 @@
                                               "note": "Black finishes developing.",
                                               "children": [
                                                 {
-                                                  "san": "h4",
+                                                  "san": "Qxg7",
                                                   "tags": [
-                                                    "kingside-attack"
+                                                    "tactics"
                                                   ],
-                                                  "plan": "Play h5 to push the knight back, then Qd3 or Qa4 hitting c6 and a6. Pawns cannot defend doubled pawns.",
-                                                  "note": "Space, and a route for the rook. The knight on g6 has to answer for itself.",
+                                                  "plan": "Take on h7 as well if Black defends with ...Rg8, then bring the rooks in. Two pawns and three pawn islands against two decide the ending.",
+                                                  "note": "The knight left g7 behind when it went to g6, and the rook on h8 does not defend it.",
+                                                  "shapes": [
+                                                    {
+                                                      "orig": "d4",
+                                                      "dest": "g7",
+                                                      "brush": "green"
+                                                    }
+                                                  ],
                                                   "mistakes": [
+                                                    {
+                                                      "san": "h4",
+                                                      "grade": "inaccuracy",
+                                                      "note": "Space, and it passes up a free pawn on the square the knight has just left."
+                                                    },
                                                     {
                                                       "san": "Qa4",
                                                       "grade": "inaccuracy",
-                                                      "note": "The queen goes hunting before the rest of the pieces are ready. Take the space first and let the weak pawns sit where they are."
+                                                      "note": "The queen sets off hunting before the rest of the pieces are ready, and there is a pawn to take on the other side."
                                                     }
                                                   ]
                                                 }
