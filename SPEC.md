@@ -459,6 +459,7 @@ Mapping, in both directions:
 | Concept tags | `[%tags development king-safety]` inside a comment |
 | Opponent frequency weight | `[%weight 7]` |
 | Leaf plan | `[%plan ...]` |
+| Line name (on the leaf) | `[%line The Nh5 trade]` |
 | Study highlights (`shapes`) | `[%cal Gc1f4]` and `[%csl Gd4]`, the format Lichess already writes |
 | Mistake entry and its grade | A variation whose move carries a glyph: `!?` playable, `?!` inaccuracy, `?` mistake |
 | A genuine alternative line | A variation with no glyph |
@@ -511,7 +512,7 @@ distribution product, and this is an offline single-user app.
 
 `docs/authoring-a-course.md`, written for a chess player and not a programmer: build
 it in a study, one chapter per study chapter, how to mark an alternative with a glyph,
-the three optional tokens, what the app checks and what it refuses, and how to send it
+the comment tokens, what the app checks and what it refuses, and how to send it
 to somebody. The Ruy Lopez bundle is its worked example.
 
 ### The bundle that proves it: the Ruy Lopez, Exchange Variation (ruled)

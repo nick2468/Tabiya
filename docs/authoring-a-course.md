@@ -109,15 +109,15 @@ you so rather than silently dropping the moves.
 A variation with **no** mark is different: that is a second real line, and the
 app will teach it as one.
 
-## The three optional tokens
+## The tokens
 
-Inside a comment you can add these. They are optional. A course made of nothing
-but moves and notes works.
+Inside a comment you can add these. Two of them go on the last move of a line and
+are required there; the rest are optional.
 
 ```
 {Out before ...e6 shuts it in. [%tags bishop-placement development]}
 {White's main try at club level. [%weight 7]}
-{Castle, then break with ...c5 when the pieces are ready. [%plan Play ...Rc8 and ...c5.]}
+{Castle, then break with ...c5 when the pieces are ready. [%plan Play ...Rc8 and ...c5.] [%line The ...c5 break]}
 ```
 
 - **`[%tags ...]`** the concepts this move is about, separated by spaces. They
@@ -129,7 +129,15 @@ but moves and notes works.
 - **`[%weight 1]` to `[%weight 10]`** how often a club opponent plays this move.
   It goes on the **opponent's** moves and decides what the engine picks in Play.
 - **`[%plan ...]`** goes on the **last move of a line**, and says what to do from
-  there. The app shows it when the trainee reaches the end.
+  there. The app shows it when the trainee reaches the end. It is required there,
+  and it is refused anywhere else.
+- **`[%line ...]`** goes on the **last move of a line** too, and names the line:
+  "Black trades on g3", "The modest ...Be7". Study lists a chapter's lines by name,
+  so this is what the trainee reads instead of a string of moves. It is required,
+  it has to be different from every other name in the chapter, and it has to fit in
+  40 characters. Name a line by what makes it different from the ones beside it,
+  which is usually the opponent's choice at the branch - not by the plan, and not by
+  the chapter, whose title is already on the screen above the list.
 
 If you drew arrows or circles in your study, they come across too: Lichess writes
 them as `[%cal Gc1f4]` and `[%csl Gd4]` and the app understands both.
@@ -144,7 +152,8 @@ The app checks that:
 
 - every move is legal in the position it is played in, including the marked
   alternatives;
-- every move has a note, and every line ends with a plan;
+- every move has a note, and every line ends with a plan and a name;
+- no two lines in one chapter carry the same name;
 - every tag is one of the shared ones or one you declared;
 - two chapters do not expect different moves in the same position, which would
   make one of them impossible to drill;

@@ -293,7 +293,10 @@ function readLine(
 }
 
 /** What a token found inside a comment adds to a node. */
-type CommentFields = Pick<Node, 'note' | 'tags' | 'weight' | 'plan' | 'variant' | 'shapes'>
+type CommentFields = Pick<
+  Node,
+  'note' | 'tags' | 'weight' | 'plan' | 'name' | 'variant' | 'shapes'
+>
 
 /**
  * A comment into a note and the fields its tokens name.
@@ -363,6 +366,10 @@ function applyToken(
     }
     case 'plan': {
       if (value) fields.plan = value
+      return
+    }
+    case 'line': {
+      if (value) fields.name = value
       return
     }
     case 'variant': {
@@ -511,6 +518,16 @@ function nodeComment(
       )
     }
     parts.push(`[%plan ${plan}]`)
+  }
+  if (node.name) {
+    const name = checkedProse(node.name, `the name on ${node.san}`, fail)
+    if (name.includes(']')) {
+      fail(
+        'a line name cannot contain a closing bracket, because the [%line ...] token ends at one',
+        path,
+      )
+    }
+    parts.push(`[%line ${name}]`)
   }
   parts.push(...shapeTokens(node.shapes ?? []))
   return parts.join(' ')

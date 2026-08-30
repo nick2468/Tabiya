@@ -96,6 +96,12 @@ describe('reading a bundle', () => {
     })
   })
 
+  it('reads the line name off a leaf', () => {
+    const chapter = chapterOf(bundle('1. d4 {Out. [%line The Nh5 trade] [%plan Play on.]} *'))
+    expect(chapter.tree[0].name).toBe('The Nh5 trade')
+    expect(chapter.tree[0].note).toBe('Out.')
+  })
+
   it('ignores a token it has no use for rather than refusing the file', () => {
     // Lichess writes clocks and evaluations into study comments.
     const chapter = chapterOf(bundle('1. d4 {Out. [%clk 0:05:00] [%eval 0.2]} *'))
@@ -270,6 +276,21 @@ describe('the round trip', () => {
       expect(reloaded.course).toEqual(course)
     },
   )
+
+  it('carries a line name out and back', () => {
+    // The bundled courses cover this too, once they are named. This one says
+    // so on its own, so the token is tested by something smaller than 183
+    // lines of content.
+    const course = fakeCourse('A note that says something.')
+    const written = courseToPgn(course)
+    expect(written.errors).toEqual([])
+    expect(written.text).toContain('[%line The one-move line]')
+
+    const read = pgnToCourse(written.text)
+    const reloaded = loadCourse(read.manifest, read.files)
+    expect(reloaded.errors).toEqual([])
+    expect(reloaded.course).toEqual(course)
+  })
 
   it('keeps board shapes in the order they were drawn', () => {
     // The round trip caught this one: the London draws an arrow and then a
