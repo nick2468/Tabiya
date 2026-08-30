@@ -120,8 +120,8 @@ export function Drill() {
       <div className="drill">
         <h2>Drill</h2>
         <p className="empty-state">
-          Nothing to drill yet. Open a course, study a line, tick "I have learnt this
-          line", and every move of yours in it becomes a card here.
+          Nothing to drill yet. Open a course, find a line in the table on the Study
+          screen, tick it as learnt, and every move of yours in it becomes a card here.
         </p>
       </div>
     )
