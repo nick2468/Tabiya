@@ -1416,11 +1416,45 @@ highlight; clicking a row is a restart on that line; and the two buttons that bo
 - [x] 13.4 The Study screen rebuilt to the ruled order and mechanics, the lone checkbox
   retired, both buttons renamed, Forward following the chosen line rather than the first
   child.
-- [ ] 13.5 Prove it in the packaged app: the table sits where it should, Auto step walks
+- [x] 13.5 Prove it in the packaged app: the table sits where it should, Auto step walks
   a line, a branch moves the highlight, a tick still makes drill cards.
 
 Acceptance: every line named, unique and under 40 characters; names survive the bundle
 round trip; the screen matches the ruled order and mechanics; vitest green and `tsc -b`
 clean; bundles current; Nick's progress file unchanged and hash-verified.
+
+Open items (phase 13):
+
+1. **The chip said `name` should be rejected on a non-leaf "like `plan` is", and
+   `plan` was not.** The validator had only ever REQUIRED a plan on a leaf, never
+   refused one above it, so a plan written on a move that continues was authored
+   prose the app silently ignored. Recorded rather than guessed at, then fixed in
+   its own commit, because it is the same fault the unknown-field rule exists to
+   catch. No bundled course had one, so nothing that exists today is refused.
+2. **The required rule landed with the names, not with the field.** Task 13.1 as
+   written makes `name` required, which would have left the four courses failing to
+   load until 13.3 named them. The chip also says each task lands green on its own,
+   and the two cannot both hold. The field, its rules and the schema doc landed at
+   13.1; the "required on every leaf" error landed at 13.3 in the same commit as the
+   183 names. End state is exactly what the chip asks for and no commit in the phase
+   leaves the suite red.
+3. **Nick's two learnt lines survived, which is the proof the safety claim was
+   right.** A line id is its moves and a card key is course plus position, so naming
+   183 lines moved no key. Read back out of the packaged app after the run:
+   `db071a7f...`, 315 bytes, byte-identical to the backup, both line ids still
+   resolving.
+4. **The app's nav bar overflows below about 600px wide, so the page scrolls
+   sideways there.** Found while checking the lines table's own scrolling, which is
+   correct: the table scrolls in its container and the chapter no longer stretches
+   the page. What sticks out at 480px is `.app-nav` in the shell, which this phase
+   did not touch and which the chip puts out of scope. It is also below the Tauri
+   window's own minimum, so only a browser can reach it. Not taken.
+5. **The line name is not shown in Drill or Progress.** Now possible and worth
+   doing; it needs a ruling about how much Drill should give away before an answer,
+   so it went to the SPEC section 6 register rather than into this phase.
+6. **`scripts/note-claims.mjs` over all four courses after the last content edit:**
+   0 claims the board does not support. Nine claims with no sequence to check, for a
+   human, all of them the ones gates 9, 10 and 12 already read and kept. The two
+   engine passes were not re-run: 13.3 added prose and moved no move.
 
 - [ ] **Review gate 13 passed**

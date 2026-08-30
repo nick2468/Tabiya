@@ -262,6 +262,13 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   10 ran it over the two older courses and added `scripts/note-claims.mjs` for the
   prose. The opponent's own moves and the weights are still unchecked, and that is
   now the whole of what is left in this item.
+- **Line names in Drill and Progress**: phase 13 named every line, and the name is
+  now the readable way to say which line a card came from or which one a weak-area
+  figure is about. Both screens still say it in moves. Not taken at phase 13 because
+  the chip scoped that phase to the schema, the format and the Study screen, and
+  because Drill deliberately does not tell the trainee which line they are in before
+  they answer: showing the name is a design question about how much to give away,
+  not a rendering change. Recorded 2026-08-30.
 - **A gap in the London course, found from the other side**: the Slav's chapter 5
   answers 5.c3 Qb6 6.Qb3 with 6...c4, and the London course's chapter 2 covers only
   6...Qxb3. That is a hole in White's preparation rather than an error in it, and the
