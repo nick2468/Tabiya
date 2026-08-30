@@ -1457,7 +1457,16 @@ Open items (phase 13):
    human, all of them the ones gates 9, 10 and 12 already read and kept. The two
    engine passes were not re-run: 13.3 added prose and moved no move.
 
-- [ ] **Review gate 13 passed**
+- [x] **Review gate 13 passed** (2026-08-30)
+
+7. **Gate 13 verified independently**: 502 tests and tsc -b re-run clean; all 183
+   names re-checked by script against every rule (present on every leaf, absent on
+   non-leaves, unique per chapter, 40-char cap, no brackets, no em dashes) - all
+   hold; 183 [%line] tokens counted across the four bundles; the packaged dist
+   carries "Auto step this line" and no trace of the retired checkbox; the
+   progress file byte-identical at db071a7f and the AppData courses folder gone.
+   The highlight rule lives in src/ui/study-lines.ts with its own tests, and
+   Forward and Auto step share nextOnLine, so they cannot disagree again.
 
 ## Phase 14 - the Colle-Zukertort
 
