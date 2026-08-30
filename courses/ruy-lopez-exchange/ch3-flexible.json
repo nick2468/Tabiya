@@ -1,0 +1,535 @@
+{
+  "id": "ch3-flexible",
+  "title": "The flexible fifth moves",
+  "intro": "Black neither props up e5 with a pawn nor pins the knight, but develops and waits. Four moves come up often enough to know: 5...Qd6, 5...Bd6, 5...Qf6 and 5...Ne7.\n\n## What they have in common\n\nAll four leave the pawn on e5 defended by a piece rather than a pawn, so d4 is nearly always the answer. Once White plays it Black has to take, and the moment the e-pawns come off the majority is fixed and the rest of the game is the one this course is about.\n\n## Where each one goes\n\n5...Qd6 is the most solid. The queen holds e5 and gets out of the rooks' way, and the answer is 6.Na3, which looks wrong and is heading for c4 with a hit on her.\n\n5...Bd6 and 5...Qf6 both hold e5 with a piece that can be hit, so d4 comes with tempo. After 5...Bd6 6.d4 exd4 7.Qxd4, watch what happens to g7: 7...Ne7 loses a pawn to 8.Qxg7, and it is exactly the move a club player makes without a thought.\n\n5...Ne7 is the one with a capture in it. The knight walks away from the defence of e5 and leaves it to a pawn that is still at home, so 6.Nxe5 is on. Black's only try is 6...Qd4, hitting the knight and e4 at once, and 7.Qh5 defends the knight and threatens f7 in the same move.\n\n## The habit this chapter is really teaching\n\nCount what is defending e5 before every capture. In four of this course's six chapters something is, and taking loses a piece. Here it is not, and taking wins a pawn. The difference is one look.\n\n## Typical mistakes at this level\n\nPlaying d4 without counting first. Taking a queen trade that did not have to be taken. Recapturing on d4 with a pawn and handing Black a target. And missing 8.Qxg7 when the knight leaves g7 undefended.",
+  "stem": [
+    "e4",
+    "e5",
+    "Nf3",
+    "Nc6",
+    "Bb5",
+    "a6",
+    "Bxc6",
+    "dxc6",
+    "O-O"
+  ],
+  "tree": [
+    {
+      "san": "Qd6",
+      "weight": 5,
+      "note": "The solid one. The queen holds e5 and clears the back rank.",
+      "children": [
+        {
+          "san": "Na3",
+          "tags": [
+            "development"
+          ],
+          "note": "Odd looking and exactly right: the knight is going to c4 with a hit on the queen.",
+          "shapes": [
+            {
+              "orig": "a3",
+              "dest": "c4",
+              "brush": "green"
+            }
+          ],
+          "mistakes": [
+            {
+              "san": "d4",
+              "grade": "inaccuracy",
+              "note": "It opens the position while the queen sits opposite the rook that is about to reach d1, and Black is happy to trade into it."
+            },
+            {
+              "san": "Re1",
+              "grade": "playable",
+              "note": "Sound and slow. The knight tour asks Black a question first."
+            }
+          ],
+          "children": [
+            {
+              "san": "b5",
+              "weight": 6,
+              "note": "Stopping the knight before it arrives, at the cost of more queenside light squares.",
+              "children": [
+                {
+                  "san": "c3",
+                  "tags": [
+                    "development"
+                  ],
+                  "note": "Take d4 and b4 away, and give the knight the c2 square.",
+                  "mistakes": [
+                    {
+                      "san": "d4",
+                      "grade": "inaccuracy",
+                      "note": "Too early. With a pawn on b5 Black answers ...c5 and the knight on a3 has nowhere to go."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "c5",
+                      "weight": 6,
+                      "note": "More space, and the knight is shut out further.",
+                      "children": [
+                        {
+                          "san": "Nc2",
+                          "tags": [
+                            "development"
+                          ],
+                          "note": "Back into the game, heading for e3 and then d5 or f5.",
+                          "mistakes": [
+                            {
+                              "san": "d4",
+                              "grade": "inaccuracy",
+                              "note": "It gives Black a free trade on d4 while the knight is still on the edge."
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "Bb7",
+                              "weight": 6,
+                              "note": "The bishop takes the long diagonal the trade on c6 opened.",
+                              "children": [
+                                {
+                                  "san": "d4",
+                                  "tags": [
+                                    "d4-break"
+                                  ],
+                                  "note": "Now, with every piece able to join in.",
+                                  "children": [
+                                    {
+                                      "san": "exd4",
+                                      "weight": 7,
+                                      "note": "Black takes.",
+                                      "children": [
+                                        {
+                                          "san": "Nfxd4",
+                                          "tags": [
+                                            "development"
+                                          ],
+                                          "plan": "Play Ne3 and Nef5, or trade on d4 and use the open file. Bishops need open lines and this structure does not give them any.",
+                                          "note": "With the knight that is not needed on c2.",
+                                          "mistakes": [
+                                            {
+                                              "san": "cxd4",
+                                              "grade": "inaccuracy",
+                                              "note": "It gives Black a target on d4 and shuts in the bishop on c1. Recapture with a piece."
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Be6",
+              "weight": 5,
+              "note": "Developing and covering c4.",
+              "children": [
+                {
+                  "san": "Qe2",
+                  "tags": [
+                    "development"
+                  ],
+                  "note": "Connecting, and preparing d4 or Nc4 anyway.",
+                  "mistakes": [
+                    {
+                      "san": "Nc4",
+                      "grade": "inaccuracy",
+                      "note": "Black takes it: ...Bxc4 and the two bishops are gone along with the plan."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "Ne7",
+                      "weight": 6,
+                      "note": "Black finishes developing.",
+                      "children": [
+                        {
+                          "san": "Nc4",
+                          "tags": [
+                            "development"
+                          ],
+                          "plan": "Take on d6 if Black allows it, then play d4 and use the file. The ending is where this structure pays.",
+                          "note": "Now it arrives with the hit on the queen."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Bd6",
+      "weight": 4,
+      "note": "The bishop holds e5 and shuts in Black's own queen for a move.",
+      "children": [
+        {
+          "san": "d4",
+          "tags": [
+            "d4-break"
+          ],
+          "note": "The break, and the bishop is the piece defending e5.",
+          "mistakes": [
+            {
+              "san": "Nxe5",
+              "grade": "mistake",
+              "note": "The bishop is defending it: 6...Bxe5 and White is a piece down for a pawn."
+            }
+          ],
+          "children": [
+            {
+              "san": "exd4",
+              "weight": 7,
+              "note": "Black takes.",
+              "children": [
+                {
+                  "san": "Qxd4",
+                  "tags": [
+                    "development"
+                  ],
+                  "note": "The queen, because Black has no knight on c6 to gain time on her.",
+                  "mistakes": [
+                    {
+                      "san": "Nxd4",
+                      "grade": "playable",
+                      "note": "Also good. The queen in the middle is worth more while nothing can hit her."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "f6",
+                      "weight": 6,
+                      "note": "Covering g7 and e5 with one move, which is the correct answer.",
+                      "children": [
+                        {
+                          "san": "Be3",
+                          "tags": [
+                            "bishop-placement"
+                          ],
+                          "note": "The last minor piece, watching a7 and c5.",
+                          "mistakes": [
+                            {
+                              "san": "Qd3",
+                              "grade": "inaccuracy",
+                              "note": "It steps back before it is asked. The queen is fine on d4 while Black has nothing to hit her with."
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "Ne7",
+                              "weight": 6,
+                              "note": "Now the knight comes, with g7 covered.",
+                              "children": [
+                                {
+                                  "san": "Nc3",
+                                  "tags": [
+                                    "development"
+                                  ],
+                                  "note": "Everything out.",
+                                  "children": [
+                                    {
+                                      "san": "O-O",
+                                      "weight": 6,
+                                      "note": "Black castles into safety.",
+                                      "children": [
+                                        {
+                                          "san": "Rad1",
+                                          "tags": [
+                                            "development"
+                                          ],
+                                          "plan": "Trade queens if Black offers, put a knight on e3 and f5, and only then start the kingside pawns.",
+                                          "note": "The rook takes the file the queen opened.",
+                                          "mistakes": [
+                                            {
+                                              "san": "Rfd1",
+                                              "grade": "inaccuracy",
+                                              "note": "The other rook has the better claim: the one on a1 has nothing else to do."
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "Ne7",
+                      "weight": 2,
+                      "note": "Natural, and it drops a pawn.",
+                      "children": [
+                        {
+                          "san": "Qxg7",
+                          "tags": [
+                            "tactics"
+                          ],
+                          "plan": "Take on h8 only if the queen can get out afterwards. A pawn and the better structure is enough; a trapped queen is not.",
+                          "note": "And the rook on h8 is next, so Black has to give the exchange or lose more."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Qf6",
+      "weight": 4,
+      "note": "The queen holds e5 from a square the knight wanted.",
+      "children": [
+        {
+          "san": "d4",
+          "tags": [
+            "d4-break"
+          ],
+          "note": "The break again.",
+          "children": [
+            {
+              "san": "exd4",
+              "weight": 7,
+              "note": "Black takes.",
+              "children": [
+                {
+                  "san": "Bg5",
+                  "tags": [
+                    "bishop-placement"
+                  ],
+                  "note": "Develop with a hit on the queen.",
+                  "mistakes": [
+                    {
+                      "san": "Nxd4",
+                      "grade": "inaccuracy",
+                      "note": "Also fine, and it lets the queen sit on f6 in peace. Hitting her first is worth a move."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "Qd6",
+                      "weight": 6,
+                      "note": "She steps to the square she wanted anyway.",
+                      "children": [
+                        {
+                          "san": "Qxd4",
+                          "tags": [
+                            "development"
+                          ],
+                          "plan": "Play Nc3 and Rad1, trade queens on d6 if offered, and go for the ending.",
+                          "note": "Recapture, a clear move ahead of the 5...Qd6 line.",
+                          "mistakes": [
+                            {
+                              "san": "Nxd4",
+                              "grade": "inaccuracy",
+                              "note": "It leaves the queen at home and gives Black time for ...Be7 and castling."
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Bg4",
+              "weight": 4,
+              "note": "Pinning instead, with the queen already committed.",
+              "children": [
+                {
+                  "san": "dxe5",
+                  "tags": [
+                    "d4-break"
+                  ],
+                  "note": "Take, and the queen has to move a second time.",
+                  "children": [
+                    {
+                      "san": "Qg6",
+                      "weight": 6,
+                      "note": "She sidesteps and eyes e4 and c2.",
+                      "children": [
+                        {
+                          "san": "Qd3",
+                          "tags": [
+                            "development"
+                          ],
+                          "plan": "Trade queens on g6 if Black allows it, then Nbd2 and use the space. The pawn on e5 cramps Black all game.",
+                          "note": "Defend both and offer the trade she cannot take."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Ne7",
+      "weight": 4,
+      "note": "The knight walks away from the defence of e5.",
+      "children": [
+        {
+          "san": "Nxe5",
+          "tags": [
+            "tactics"
+          ],
+          "note": "Take. Nothing is defending it.",
+          "mistakes": [
+            {
+              "san": "Nc3",
+              "grade": "playable",
+              "note": "Quiet and sound, and it passes up a free pawn."
+            }
+          ],
+          "children": [
+            {
+              "san": "Qd4",
+              "weight": 7,
+              "note": "The only try: the queen hits the knight and e4 together.",
+              "children": [
+                {
+                  "san": "Qh5",
+                  "tags": [
+                    "tactics"
+                  ],
+                  "note": "Defends the knight, hits f7, and looks at h7 behind it.",
+                  "shapes": [
+                    {
+                      "orig": "h5",
+                      "dest": "f7",
+                      "brush": "green"
+                    }
+                  ],
+                  "mistakes": [
+                    {
+                      "san": "Nf3",
+                      "grade": "inaccuracy",
+                      "note": "It gives the pawn straight back after ...Qxe4 and Black is comfortable."
+                    },
+                    {
+                      "san": "Nd3",
+                      "grade": "inaccuracy",
+                      "note": "It saves the knight and blocks the pawn White most needs to play."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "g6",
+                      "weight": 6,
+                      "note": "Black has to answer f7 first.",
+                      "children": [
+                        {
+                          "san": "Qg5",
+                          "tags": [
+                            "development"
+                          ],
+                          "note": "Sidestep, and offer a trade Black cannot take without helping White.",
+                          "children": [
+                            {
+                              "san": "Bg7",
+                              "weight": 6,
+                              "note": "Developing and hitting the knight again.",
+                              "children": [
+                                {
+                                  "san": "Nf3",
+                                  "tags": [
+                                    "development"
+                                  ],
+                                  "note": "Back, two moves to the good.",
+                                  "children": [
+                                    {
+                                      "san": "Qxe4",
+                                      "weight": 7,
+                                      "note": "Black finally collects the pawn.",
+                                      "children": [
+                                        {
+                                          "san": "Re1",
+                                          "tags": [
+                                            "development"
+                                          ],
+                                          "plan": "Play Nc3 and d3, and use the lead in development while the king sits on e8.",
+                                          "note": "With tempo on the queen, and every white piece is about to be out while the black king is not.",
+                                          "mistakes": [
+                                            {
+                                              "san": "d3",
+                                              "grade": "inaccuracy",
+                                              "note": "It lets the queen settle. Hit her with the rook and gain the move."
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Ng6",
+              "weight": 4,
+              "note": "Challenging the knight instead.",
+              "children": [
+                {
+                  "san": "Nxg6",
+                  "tags": [
+                    "doubled-pawns"
+                  ],
+                  "note": "Take, and Black gets another doubled pair.",
+                  "children": [
+                    {
+                      "san": "hxg6",
+                      "weight": 9,
+                      "note": "Forced.",
+                      "children": [
+                        {
+                          "san": "d3",
+                          "tags": [
+                            "endgame"
+                          ],
+                          "plan": "Play Nc3 and Be3, castle the rooks and trade into the ending a pawn up.",
+                          "note": "Solid, a pawn up, and the file Black opened runs into nothing."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "defaultTags": [
+    "development"
+  ]
+}

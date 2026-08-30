@@ -1,0 +1,494 @@
+{
+  "id": "ch1-f6",
+  "title": "5...f6, holding the pawn",
+  "intro": "Black props up e5 with a pawn. It is the most common answer at club level and it is the one Fischer met most often, so it is the line to know cold.\n\n## Why Black plays it\n\nThe pawn on e5 is the only thing stopping White from taking over the centre, and a pawn is the cheapest defender there is. The cost is that f6 takes the square away from Black's own knight and puts a hole on e6 and g6 that a white knight would love.\n\n## Your answer\n\n6.d4 straight away. Black's centre pawn now has to decide, and every answer suits White. If Black takes, recapture with the knight and you have the healthy majority you came for. If Black leaves the tension, take on e5 yourself and the f-pawn has to recapture, which leaves Black with a weak pawn instead of a strong one.\n\n## The line to remember\n\n6.d4 exd4 7.Nxd4 c5 8.Nb3 Qxd1 9.Rxd1 and the queens are off with the structure fixed. Then Bf4 hits at c7, the knights go to c3 and d4, and White plays on the kingside where the healthy pawns are. Nothing here is sharp. It is a slow squeeze and it is exactly the game the Exchange was chosen to reach.\n\n## Typical mistakes at this level\n\nTaking on e5 with the knight, which loses a piece to ...fxe5. Putting the knight on f5, where it is traded off and leaves White with a useless pawn there. Recapturing on f3 with the g-pawn if Black offers the trade. And forgetting the queen: after 8...Qxd1 the recapture is not optional.",
+  "stem": [
+    "e4",
+    "e5",
+    "Nf3",
+    "Nc6",
+    "Bb5",
+    "a6",
+    "Bxc6",
+    "dxc6",
+    "O-O"
+  ],
+  "tree": [
+    {
+      "san": "f6",
+      "weight": 8,
+      "note": "Black holds e5 with a pawn, which is the club player's answer and a perfectly sound one.",
+      "children": [
+        {
+          "san": "d4",
+          "tags": [
+            "d4-break"
+          ],
+          "note": "Straight at the centre. Black has to decide what the e-pawn is doing, and both answers hand White the structure.",
+          "shapes": [
+            {
+              "orig": "d2",
+              "dest": "d4",
+              "brush": "green"
+            }
+          ],
+          "mistakes": [
+            {
+              "san": "Nxe5",
+              "grade": "mistake",
+              "note": "A piece: 6...fxe5 and there is no follow-up. 7.Qh5+ g6 8.Qxe5+ Qe7 9.Qxh8 wins a rook and buries the queen, and the engine has Black three pawns ahead."
+            },
+            {
+              "san": "d3",
+              "grade": "playable",
+              "note": "Solid and slow. It gives up the chance to open the position while Black's kingside is loose."
+            },
+            {
+              "san": "Re1",
+              "grade": "playable",
+              "note": "Also playable. The rook has nothing to do on e1 while a black pawn sits on e5."
+            }
+          ],
+          "children": [
+            {
+              "san": "exd4",
+              "weight": 7,
+              "note": "Black takes, which is the main move and the one that fixes the majority.",
+              "children": [
+                {
+                  "san": "Nxd4",
+                  "tags": [
+                    "development"
+                  ],
+                  "note": "The piece recapture. The knight eyes f5 and b5 and the queens stay on for now.",
+                  "mistakes": [
+                    {
+                      "san": "Qxd4",
+                      "grade": "playable",
+                      "note": "Sound, and it offers the queen trade a move early. Keeping the queens on is worth more against the two bishops."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "c5",
+                      "weight": 6,
+                      "note": "Gaining time and taking d4 away. It also loosens d5 and b5 for good.",
+                      "children": [
+                        {
+                          "san": "Nb3",
+                          "tags": [
+                            "development"
+                          ],
+                          "note": "Back, and pointing at c5 and d4. Black has spent a move to loosen the queenside further.",
+                          "mistakes": [
+                            {
+                              "san": "Nf5",
+                              "grade": "inaccuracy",
+                              "note": "It looks active. 8...Bxf5 9.exf5 hands over the two bishops and leaves White a pawn on f5 that blocks the majority it was meant to lead."
+                            },
+                            {
+                              "san": "Nf3",
+                              "grade": "playable",
+                              "note": "Also fine, and the knight is passive there. On b3 it eyes c5 and comes back to d4."
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "Qxd1",
+                              "weight": 7,
+                              "note": "The trade most club players take.",
+                              "children": [
+                                {
+                                  "san": "Rxd1",
+                                  "tags": [
+                                    "endgame",
+                                    "majority"
+                                  ],
+                                  "note": "Take. Every trade is a step towards the ending the structure decides.",
+                                  "mistakes": [
+                                    {
+                                      "san": "Nc3",
+                                      "grade": "mistake",
+                                      "note": "Recapture first. Anything else leaves White a queen down."
+                                    }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Be6",
+                                      "weight": 6,
+                                      "note": "Developing and covering the light squares the trade on c6 left thin.",
+                                      "children": [
+                                        {
+                                          "san": "Bf4",
+                                          "tags": [
+                                            "bishop-placement"
+                                          ],
+                                          "note": "The last piece, on the diagonal that keeps Black's king unsettled.",
+                                          "mistakes": [
+                                            {
+                                              "san": "Nc3",
+                                              "grade": "playable",
+                                              "note": "Also natural, and it usually transposes. The bishop is the piece with only one good square."
+                                            },
+                                            {
+                                              "san": "Be3",
+                                              "grade": "inaccuracy",
+                                              "note": "It stares at a pawn on c5 that is defended, and the bishop wants the c7 diagonal."
+                                            }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "c4",
+                                              "weight": 5,
+                                              "note": "Chasing the knight again, and giving up d4 for good.",
+                                              "children": [
+                                                {
+                                                  "san": "Nd4",
+                                                  "tags": [
+                                                    "development"
+                                                  ],
+                                                  "note": "Back into the middle, hitting the bishop on e6.",
+                                                  "mistakes": [
+                                                    {
+                                                      "san": "N3d2",
+                                                      "grade": "inaccuracy",
+                                                      "note": "It undevelops and blocks the bishop. The knight belongs on d4 where it hits e6 and f5."
+                                                    }
+                                                  ],
+                                                  "children": [
+                                                    {
+                                                      "san": "O-O-O",
+                                                      "weight": 6,
+                                                      "note": "Black castles towards the queenside pawns.",
+                                                      "children": [
+                                                        {
+                                                          "san": "Nc3",
+                                                          "tags": [
+                                                            "endgame",
+                                                            "majority"
+                                                          ],
+                                                          "plan": "Trade one pair of rooks on the d-file, keep the other, and bring a knight to e3 and f5. Play a4 and a5 to fix the queenside before you start the kingside pawns.",
+                                                          "note": "Every piece is out and the structure is the whole story from here.",
+                                                          "mistakes": [
+                                                            {
+                                                              "san": "e5",
+                                                              "grade": "inaccuracy",
+                                                              "note": "The majority moves last. Pushing its front pawn now fixes Black's structure for him and hands the bishops the d5 square."
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "san": "Bg4",
+                                      "weight": 4,
+                                      "note": "Hitting f3, which is the trade to be careful about.",
+                                      "children": [
+                                        {
+                                          "san": "f3",
+                                          "tags": [
+                                            "majority"
+                                          ],
+                                          "note": "Ask the bishop the question with a pawn, not with the knight.",
+                                          "mistakes": [
+                                            {
+                                              "san": "h3",
+                                              "grade": "inaccuracy",
+                                              "note": "It invites 10...Bxf3, and now the only recapture that does not wreck the kingside majority is with a piece. Push the bishop away with f3 instead."
+                                            }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "Be6",
+                                              "weight": 7,
+                                              "note": "The bishop comes back to the good square anyway.",
+                                              "children": [
+                                                {
+                                                  "san": "Nc3",
+                                                  "tags": [
+                                                    "development"
+                                                  ],
+                                                  "plan": "Play Be3 and Rd2, double on the d-file, and advance the majority with f4 once the pieces are placed.",
+                                                  "note": "Develop, and the position is the main line with f3 thrown in."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "san": "Bd7",
+                                      "weight": 4,
+                                      "note": "Modest, and it keeps the bishop out of the way of a knight coming to f5.",
+                                      "children": [
+                                        {
+                                          "san": "Nc3",
+                                          "tags": [
+                                            "development"
+                                          ],
+                                          "note": "Everything out.",
+                                          "children": [
+                                            {
+                                              "san": "O-O-O",
+                                              "weight": 6,
+                                              "note": "Castling into the majority.",
+                                              "children": [
+                                                {
+                                                  "san": "Bf4",
+                                                  "tags": [
+                                                    "bishop-placement"
+                                                  ],
+                                                  "plan": "Trade a pair of rooks on the d-file, then play a4 and a5 to fix Black's queenside before touching the kingside.",
+                                                  "note": "The bishop lands on the diagonal that looks at c7."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "san": "Qe7",
+                              "weight": 3,
+                              "note": "Keeping the queens on, which is what Black should want.",
+                              "children": [
+                                {
+                                  "san": "Nc3",
+                                  "tags": [
+                                    "development"
+                                  ],
+                                  "note": "Develop and let Black show what the queen is doing on e7.",
+                                  "children": [
+                                    {
+                                      "san": "Be6",
+                                      "weight": 6,
+                                      "note": "Covering the light squares.",
+                                      "children": [
+                                        {
+                                          "san": "Be3",
+                                          "tags": [
+                                            "bishop-placement"
+                                          ],
+                                          "plan": "Play f4 and f5 to gain space, or trade on c5 and use the d-file. The majority is still the plan.",
+                                          "note": "The last piece out, hitting c5."
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "Bd6",
+                      "weight": 4,
+                      "note": "Developing towards the kingside.",
+                      "children": [
+                        {
+                          "san": "Nc3",
+                          "tags": [
+                            "development"
+                          ],
+                          "note": "Bring the last piece out before deciding anything.",
+                          "mistakes": [
+                            {
+                              "san": "Nf5",
+                              "grade": "inaccuracy",
+                              "note": "The knight is traded off at once by 8...Bxf5 9.exf5, and the pawn on f5 does nothing but block your own majority."
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "Ne7",
+                              "weight": 6,
+                              "note": "Black finishes developing.",
+                              "children": [
+                                {
+                                  "san": "Be3",
+                                  "tags": [
+                                    "bishop-placement"
+                                  ],
+                                  "plan": "Castle the rooks to d1 and e1, trade a pair, and start the majority with f4.",
+                                  "note": "The bishop takes the diagonal that looks at c5 and a7."
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "Bd7",
+                      "weight": 3,
+                      "note": "Quiet development.",
+                      "children": [
+                        {
+                          "san": "Nc3",
+                          "tags": [
+                            "development"
+                          ],
+                          "note": "Everything out first.",
+                          "children": [
+                            {
+                              "san": "Qe7",
+                              "weight": 6,
+                              "note": "Connecting the rooks before deciding which way the king goes. The queen cannot stay on d8 if Black wants to castle long.",
+                              "children": [
+                                {
+                                  "san": "Be3",
+                                  "tags": [
+                                    "bishop-placement"
+                                  ],
+                                  "plan": "Play a4 and a5 to fix the queenside, then offer the queen trade and go into the ending.",
+                                  "note": "Aiming at a7 and c5 with the queen unable to leave the e-file easily."
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Bg4",
+              "weight": 4,
+              "note": "Pinning the knight instead of resolving the centre.",
+              "children": [
+                {
+                  "san": "dxe5",
+                  "tags": [
+                    "d4-break"
+                  ],
+                  "note": "Take. The pin is only a problem while the knight matters, and now the f-pawn has to recapture.",
+                  "mistakes": [
+                    {
+                      "san": "Be3",
+                      "grade": "inaccuracy",
+                      "note": "Slow, and it lets Black take on f3 with the pin still on. Resolve the centre first."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "Qxd1",
+                      "weight": 6,
+                      "note": "Black trades and hopes the pin holds things together.",
+                      "children": [
+                        {
+                          "san": "Rxd1",
+                          "tags": [
+                            "endgame"
+                          ],
+                          "note": "Take.",
+                          "children": [
+                            {
+                              "san": "fxe5",
+                              "weight": 6,
+                              "note": "Recapturing with the pawn, which is what the pin was for.",
+                              "children": [
+                                {
+                                  "san": "Rd3",
+                                  "tags": [
+                                    "tactics"
+                                  ],
+                                  "plan": "Play Rb3 or Re3 hitting b7 and e5, and remember Nbd2 and Nc4 with the e5 pawn to aim at.",
+                                  "note": "The rook swings across. Black's bishop on g4 has to answer for itself and the pawn on e5 is loose.",
+                                  "mistakes": [
+                                    {
+                                      "san": "Nxe5",
+                                      "grade": "mistake",
+                                      "note": "The rook on d1 and the bishop on g4 are on the same diagonal with only the knight between them: 9...Bxd1 wins a rook for a pawn."
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Bd6",
+              "weight": 3,
+              "note": "Defending the pawn a second time.",
+              "children": [
+                {
+                  "san": "dxe5",
+                  "tags": [
+                    "d4-break"
+                  ],
+                  "note": "Take, and note which recapture Black is forced into.",
+                  "children": [
+                    {
+                      "san": "Bxe5",
+                      "weight": 6,
+                      "note": "The bishop takes, because 7...fxe5 leaves f7 and the whole diagonal loose.",
+                      "children": [
+                        {
+                          "san": "Nxe5",
+                          "tags": [
+                            "tactics"
+                          ],
+                          "note": "Trade into it.",
+                          "children": [
+                            {
+                              "san": "fxe5",
+                              "weight": 9,
+                              "note": "Forced.",
+                              "children": [
+                                {
+                                  "san": "Qh5+",
+                                  "tags": [
+                                    "tactics"
+                                  ],
+                                  "plan": "Take on e5 with check, trade queens, and play the ending a clean pawn up with the better structure.",
+                                  "note": "The check that collects the pawn.",
+                                  "mistakes": [
+                                    {
+                                      "san": "Qxd8+",
+                                      "grade": "inaccuracy",
+                                      "note": "It trades into an ending a pawn down for nothing. The check on h5 wins the pawn on e5 first."
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "defaultTags": [
+    "vs-f6"
+  ]
+}

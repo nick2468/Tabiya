@@ -1,0 +1,320 @@
+{
+  "id": "ch2-bg4",
+  "title": "5...Bg4, pinning the knight",
+  "intro": "Black develops with a threat instead of a pawn move. The bishop on g4 pins the knight against the queen and offers a trade that would ruin White's kingside if White took it back the wrong way.\n\n## What the pin is worth\n\nNot much, as long as White answers it properly. The knight on f3 is not doing anything urgent, and the pin is only a nuisance while the queen sits on d1. What the bishop is really after is the trade on f3: if White ever recaptures with the g-pawn, the four healthy kingside pawns become three and a doubled pair, and the whole reason for playing the Exchange goes with them.\n\n## Your answer\n\n6.h3, asking the bishop what it intends. Then whatever it does, recapture on f3 with the QUEEN if the trade comes.\n\nBlack has three tries. 6...h5 is the critical one and the only one with teeth: Black offers the bishop and threatens to open the h-file. Do not take it. 7.d3 develops and leaves Black to prove the sacrifice, which the engine says is nothing. 6...Bxf3 7.Qxf3 gives White the two knights against two bishops in a position with no open lines, which is a fair trade for White here. 6...Bh5 walks into 7.g4, and it also sets the trap below.\n\n## The trap that decides the chapter\n\nAfter 6...Bh5 the knight on f3 is still pinned, and taking on e5 is losing: 7.Nxe5?? Bxd1 and the bishop that has been staring down the diagonal since move five takes the queen. Look at the whole diagonal before capturing, every time.\n\n## Typical mistakes at this level\n\nTaking the bishop on g4 after ...h5. Recapturing on f3 with the g-pawn. Taking on e5 while the diagonal to d1 is open. And playing h3 and then g4 without noticing that the king is being opened up for nothing.",
+  "stem": [
+    "e4",
+    "e5",
+    "Nf3",
+    "Nc6",
+    "Bb5",
+    "a6",
+    "Bxc6",
+    "dxc6",
+    "O-O"
+  ],
+  "tree": [
+    {
+      "san": "Bg4",
+      "weight": 6,
+      "note": "The pin. Black develops and asks a question at the same time.",
+      "children": [
+        {
+          "san": "h3",
+          "tags": [
+            "light-squares"
+          ],
+          "note": "Ask it back. The bishop has to say whether it means the sacrifice, the trade or a retreat.",
+          "mistakes": [
+            {
+              "san": "d3",
+              "grade": "playable",
+              "note": "Solid, and it leaves the pin in place for as long as Black wants it."
+            },
+            {
+              "san": "Re1",
+              "grade": "playable",
+              "note": "Playable and slow. The rook on e1 does nothing while Black's pawn sits on e5."
+            }
+          ],
+          "children": [
+            {
+              "san": "h5",
+              "weight": 5,
+              "note": "The critical answer. Black offers the bishop to open the h-file.",
+              "children": [
+                {
+                  "san": "d3",
+                  "tags": [
+                    "development"
+                  ],
+                  "note": "Develop and decline. The bishop on g4 is not going anywhere and the h-pawn has weakened Black more than White.",
+                  "mistakes": [
+                    {
+                      "san": "hxg4",
+                      "grade": "mistake",
+                      "note": "The knight on f3 then cannot move, because ...Qh4 mates on h1 down the file Black has just opened. 8.Ne1 Qh4 is mate in a few, and even the best 8.Re1 gxf3 9.Qxf3 leaves White level on material with a shattered king."
+                    },
+                    {
+                      "san": "d4",
+                      "grade": "inaccuracy",
+                      "note": "It opens the position with Black's pieces aimed at the king. Finish developing first."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "Qf6",
+                      "weight": 6,
+                      "note": "Black eyes the kingside and keeps the option of the sacrifice.",
+                      "children": [
+                        {
+                          "san": "Nbd2",
+                          "tags": [
+                            "development"
+                          ],
+                          "note": "The knight heads for c4, where it hits e5 and b6 and cannot be traded by a bishop.",
+                          "mistakes": [
+                            {
+                              "san": "Be3",
+                              "grade": "inaccuracy",
+                              "note": "Also playable, and it walks into ...Bxf3 followed by ...Qxb2 ideas. Bring the knight out first."
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "Bd6",
+                              "weight": 6,
+                              "note": "Black holds e5 and points at h2.",
+                              "children": [
+                                {
+                                  "san": "Nc4",
+                                  "tags": [
+                                    "development"
+                                  ],
+                                  "note": "The knight arrives with a hit on the bishop.",
+                                  "shapes": [
+                                    {
+                                      "orig": "d2",
+                                      "dest": "c4",
+                                      "brush": "green"
+                                    }
+                                  ],
+                                  "mistakes": [
+                                    {
+                                      "san": "hxg4",
+                                      "grade": "mistake",
+                                      "note": "Still losing, and for the same reason: the file is open and the knight on f3 is what holds h1 together."
+                                    }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Bxf3",
+                                      "weight": 6,
+                                      "note": "Black trades before the knight settles.",
+                                      "children": [
+                                        {
+                                          "san": "Qxf3",
+                                          "tags": [
+                                            "majority"
+                                          ],
+                                          "plan": "Trade queens on f3 or f6 if Black offers, put the bishop on e3 and a rook on d1, and only then start the kingside pawns.",
+                                          "note": "With the queen, always."
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Bxf3",
+              "weight": 6,
+              "note": "The trade, which is what the pin was always aiming at.",
+              "children": [
+                {
+                  "san": "Qxf3",
+                  "tags": [
+                    "majority"
+                  ],
+                  "note": "With the queen. The g-pawn stays where it is, and so does the majority.",
+                  "mistakes": [
+                    {
+                      "san": "gxf3",
+                      "grade": "mistake",
+                      "note": "It doubles the pawns on the wing this whole opening exists to exploit, and opens the king for nothing. The queen recapture is not a preference, it is the point."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "Qf6",
+                      "weight": 6,
+                      "note": "Black offers the queens off and eyes the loose pawn on b2 in some lines.",
+                      "children": [
+                        {
+                          "san": "Qg3",
+                          "tags": [
+                            "development"
+                          ],
+                          "note": "Sidestep and hit e5 and g7. The queen is better placed than Black's.",
+                          "mistakes": [
+                            {
+                              "san": "Qxf6",
+                              "grade": "inaccuracy",
+                              "note": "The trade Black wants: it takes the pressure off e5 and hands Black an open g-file after ...gxf6."
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "Ne7",
+                              "weight": 6,
+                              "note": "Black develops towards g6 and f5.",
+                              "children": [
+                                {
+                                  "san": "d3",
+                                  "tags": [
+                                    "development"
+                                  ],
+                                  "note": "Quiet and correct. The bishop comes to e3 or g5 next.",
+                                  "mistakes": [
+                                    {
+                                      "san": "d4",
+                                      "grade": "inaccuracy",
+                                      "note": "It opens the position for the bishop pair while Black still has both bishops. Here the slow build is worth more."
+                                    }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Ng6",
+                                      "weight": 6,
+                                      "note": "The knight arrives.",
+                                      "children": [
+                                        {
+                                          "san": "Nc3",
+                                          "tags": [
+                                            "development"
+                                          ],
+                                          "plan": "Play Be3 and f4, or Ne2 and Ng3 aiming at f5 and h5. Trade queens whenever Black allows it.",
+                                          "note": "The last piece. White has two knights against a bishop and a knight, and a structure that says the ending is fine."
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Bh5",
+              "weight": 4,
+              "note": "Keeping the pin and inviting the pawn forward.",
+              "children": [
+                {
+                  "san": "g4",
+                  "tags": [
+                    "kingside-attack"
+                  ],
+                  "note": "Take the space. The bishop has to go to g6 where it is out of play.",
+                  "mistakes": [
+                    {
+                      "san": "Nxe5",
+                      "grade": "mistake",
+                      "note": "The diagonal from h5 to d1 has been open since move five: 7...Bxd1 wins the queen. Look down the whole diagonal before taking."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "Bg6",
+                      "weight": 8,
+                      "note": "Forced, and the bishop is now a spectator.",
+                      "children": [
+                        {
+                          "san": "Nxe5",
+                          "tags": [
+                            "tactics"
+                          ],
+                          "note": "Now it works, because the queen is no longer at the end of that diagonal. A clean pawn.",
+                          "mistakes": [
+                            {
+                              "san": "d3",
+                              "grade": "inaccuracy",
+                              "note": "Sound, and it passes up the pawn that g4 was played to win."
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "Qd4",
+                              "weight": 6,
+                              "note": "Black hits the knight and e4 at once, which is the only try.",
+                              "children": [
+                                {
+                                  "san": "Nxg6",
+                                  "tags": [
+                                    "doubled-pawns"
+                                  ],
+                                  "note": "Take, and the doubled pawns get worse.",
+                                  "mistakes": [
+                                    {
+                                      "san": "Nf3",
+                                      "grade": "inaccuracy",
+                                      "note": "It hands the pawn back and undoes what g4 was played for. Take the bishop while it has nowhere to go."
+                                    }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "hxg6",
+                                      "weight": 8,
+                                      "note": "Forced.",
+                                      "children": [
+                                        {
+                                          "san": "Qe2",
+                                          "tags": [
+                                            "endgame"
+                                          ],
+                                          "plan": "Play d3 and Nc3, castle the rooks to d1 and e1, and trade into the ending a pawn up.",
+                                          "note": "Defending e4 and connecting. White is a pawn up with the better structure.",
+                                          "mistakes": [
+                                            {
+                                              "san": "Nc3",
+                                              "grade": "inaccuracy",
+                                              "note": "It leaves e4 hanging to the queen on d4. Defend the pawn first and develop after."
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "defaultTags": [
+    "vs-bg4"
+  ]
+}

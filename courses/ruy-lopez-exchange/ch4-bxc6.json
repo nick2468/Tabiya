@@ -1,0 +1,300 @@
+{
+  "id": "ch4-bxc6",
+  "title": "4...bxc6, the other recapture",
+  "intro": "Black recaptures towards the edge. It keeps a pawn on d7 and a route for the knight to e7 and g6, and it leaves the queenside pawns in a heap: a6, c6 and c7 with nothing on b7.\n\n## Why this is good news\n\nThe doubled pawns are worse here than in the main line, because Black has three pawn islands from move four and the c-pawns can never advance without help. What Black gets in return is the half-open b-file and a bishop that can come to a6 or b7. It is playable and it is a concession, and the engine agrees: this is the one line in the course where White is close to half a pawn better straight out of the opening.\n\n## Your answer\n\n5.d4 at once. Black's e-pawn has nothing but the queen behind it, so the centre opens on White's terms, and the queen recapture on d4 is safe here because Black has no knight on c6 to gain time against her. Then Nc3, Be3, castle long, and play down the file at the pawns that cannot defend themselves.\n\n## Typical mistakes at this level\n\nPlaying the quiet 5.O-O out of habit, which is sound and lets Black free the position with ...d5. Recapturing on d4 with the knight, which offers Black exactly the trade that helps him. Castling short, away from the side where Black is weak. And forgetting which pawn is the target: it is c6 and c7, not a6.",
+  "stem": [
+    "e4",
+    "e5",
+    "Nf3",
+    "Nc6",
+    "Bb5",
+    "a6",
+    "Bxc6"
+  ],
+  "tree": [
+    {
+      "san": "bxc6",
+      "weight": 3,
+      "note": "Towards the edge. It keeps the d-pawn and leaves three pawn islands.",
+      "children": [
+        {
+          "san": "d4",
+          "tags": [
+            "d4-break"
+          ],
+          "note": "Straight at the centre, because Black's e-pawn has only the queen behind it.",
+          "mistakes": [
+            {
+              "san": "O-O",
+              "grade": "playable",
+              "note": "The move the rest of the course plays, and here it is a shade less testing: Black gets ...d5 in and frees the position."
+            }
+          ],
+          "children": [
+            {
+              "san": "exd4",
+              "weight": 7,
+              "note": "Black takes.",
+              "children": [
+                {
+                  "san": "Qxd4",
+                  "tags": [
+                    "development"
+                  ],
+                  "note": "The queen takes and stands well, because Black has no knight on c6 to chase her.",
+                  "mistakes": [
+                    {
+                      "san": "Nxd4",
+                      "grade": "playable",
+                      "note": "Sound, and it offers Black a trade that eases the position. The queen is in no danger here."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "d6",
+                      "weight": 6,
+                      "note": "Black gives the queen something to think about and opens the bishop.",
+                      "children": [
+                        {
+                          "san": "Nc3",
+                          "tags": [
+                            "development"
+                          ],
+                          "note": "Develop and take d5 away.",
+                          "mistakes": [
+                            {
+                              "san": "Bf4",
+                              "grade": "inaccuracy",
+                              "note": "It develops into ...c5 with a hit on the queen. Bring the knight out first."
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "Ne7",
+                              "weight": 6,
+                              "note": "Heading for g6.",
+                              "children": [
+                                {
+                                  "san": "Be3",
+                                  "tags": [
+                                    "bishop-placement"
+                                  ],
+                                  "note": "The last minor piece, aiming at a7 and c5.",
+                                  "mistakes": [
+                                    {
+                                      "san": "Bg5",
+                                      "grade": "inaccuracy",
+                                      "note": "It hits nothing: the knight is on e7 and the f-pawn is at home. On e3 the bishop covers c5 and supports castling long."
+                                    }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Ng6",
+                                      "weight": 6,
+                                      "note": "The knight arrives.",
+                                      "children": [
+                                        {
+                                          "san": "O-O-O",
+                                          "tags": [
+                                            "king-safety"
+                                          ],
+                                          "note": "Castle towards the pawns Black cannot defend, and the rook lands on the file the queen is stuck on.",
+                                          "mistakes": [
+                                            {
+                                              "san": "O-O",
+                                              "grade": "inaccuracy",
+                                              "note": "It castles away from the play. The queenside is where Black is weak and where the rooks belong."
+                                            }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "Be7",
+                                              "weight": 6,
+                                              "note": "Black finishes developing.",
+                                              "children": [
+                                                {
+                                                  "san": "h4",
+                                                  "tags": [
+                                                    "kingside-attack"
+                                                  ],
+                                                  "plan": "Play h5 to push the knight back, then Qd3 or Qa4 hitting c6 and a6. Pawns cannot defend doubled pawns.",
+                                                  "note": "Space, and a route for the rook. The knight on g6 has to answer for itself.",
+                                                  "mistakes": [
+                                                    {
+                                                      "san": "Qa4",
+                                                      "grade": "inaccuracy",
+                                                      "note": "The queen goes hunting before the rest of the pieces are ready. Take the space first and let the weak pawns sit where they are."
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "Qf6",
+                      "weight": 5,
+                      "note": "Offering the trade at once.",
+                      "children": [
+                        {
+                          "san": "Qd3",
+                          "tags": [
+                            "development"
+                          ],
+                          "note": "Decline. Black's structure is the worse one, so keeping the queens on keeps the pressure where it is.",
+                          "mistakes": [
+                            {
+                              "san": "Qxf6",
+                              "grade": "inaccuracy",
+                              "note": "It trades into an ending where the pawns are ugly and the bishops are free. Keep the queens on and the pawns stay a target."
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "Ne7",
+                              "weight": 6,
+                              "note": "Black develops.",
+                              "children": [
+                                {
+                                  "san": "Nc3",
+                                  "tags": [
+                                    "development"
+                                  ],
+                                  "plan": "Play Be3 and castle long, then use the d-file and the weak c-pawns.",
+                                  "note": "Everything out."
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "d6",
+              "weight": 4,
+              "note": "Holding the pawn with the pawn that is still at home. The bishop on c8 is shut in for now.",
+              "children": [
+                {
+                  "san": "dxe5",
+                  "tags": [
+                    "d4-break"
+                  ],
+                  "note": "Take, and the queens come off with Black's king in the middle.",
+                  "children": [
+                    {
+                      "san": "dxe5",
+                      "weight": 8,
+                      "note": "Forced, or the pawn is simply lost.",
+                      "children": [
+                        {
+                          "san": "Qxd8+",
+                          "tags": [
+                            "endgame"
+                          ],
+                          "note": "Take. The king has to recapture, because nothing else can.",
+                          "mistakes": [
+                            {
+                              "san": "Nxe5",
+                              "grade": "inaccuracy",
+                              "note": "It wins the same pawn a move later and lets Black castle. Trade the queens first, while the king still has to take."
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "Kxd8",
+                              "weight": 9,
+                              "note": "Forced, and the king has lost the right to castle.",
+                              "children": [
+                                {
+                                  "san": "Nxe5",
+                                  "tags": [
+                                    "tactics"
+                                  ],
+                                  "plan": "Play Nc3 and Be3, castle the rooks, and use the king on d8. A pawn up with three pawn islands against two is exactly the ending this course is for.",
+                                  "note": "Now, and it is a clean pawn: nothing defends it.",
+                                  "mistakes": [
+                                    {
+                                      "san": "Nc3",
+                                      "grade": "inaccuracy",
+                                      "note": "It develops and lets Black defend e5 with ...Bd6 or ...f6. Take the pawn while nothing is guarding it."
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "f6",
+              "weight": 4,
+              "note": "Holding the pawn, as in the main line but with the d-pawn still at home.",
+              "children": [
+                {
+                  "san": "Nc3",
+                  "tags": [
+                    "development"
+                  ],
+                  "note": "Develop and let Black say what the centre is doing.",
+                  "mistakes": [
+                    {
+                      "san": "dxe5",
+                      "grade": "inaccuracy",
+                      "note": "It opens the position for the two bishops and gives up the tension for nothing."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "exd4",
+                      "weight": 6,
+                      "note": "Black resolves it.",
+                      "children": [
+                        {
+                          "san": "Qxd4",
+                          "tags": [
+                            "development"
+                          ],
+                          "plan": "Play Be3 and castle long, then work on c6 and c7 down the file.",
+                          "note": "With the queen, which is safe here because there is no knight to hit her.",
+                          "mistakes": [
+                            {
+                              "san": "Nxd4",
+                              "grade": "inaccuracy",
+                              "note": "It offers the trade on d4 that eases the position for Black. Here the queen is the better recapture."
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "defaultTags": [
+    "doubled-pawns"
+  ]
+}

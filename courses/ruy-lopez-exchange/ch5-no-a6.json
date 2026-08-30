@@ -1,0 +1,806 @@
+{
+  "id": "ch5-no-a6",
+  "title": "When Black leaves out 3...a6",
+  "intro": "Black does not ask the bishop the question, so White answers it anyway. Take on c6 and play the structure you already know.\n\n## The rule for the whole chapter\n\nBxc6 in every line here. It costs a move of development compared with the lines where Black has played ...a6, and it buys the same crippled queenside and the same healthy majority. One structure understood beats five structures half known, and that is the whole argument for choosing the Exchange.\n\n## The Berlin, 3...Nf6\n\nThe one that matters, because it is much the most common. 4.Bxc6 dxc6 5.O-O and Black usually grabs on e4. Let him. 6.Re1 puts the rook on the file the knight is standing in, and after 6...Nd6 7.Nxe5 the pawn is back with the structure fixed. The trap to know is 7...Qe7, which looks like it wins a piece: 8.Nxf7 steps aside and the rook on the e-file collects the queen.\n\n## The rest\n\n3...Bc5 invites the wrong recapture: after 4.Bxc6 bxc6 5.Nxe5 is a clean pawn, because the bishop on c5 does not defend it and there is no ...Qd4 with the d-pawn at home.\n\n3...d6 is met with check, so Black has no choice: 4.Bxc6+ bxc6 5.d4, which is the 4...bxc6 chapter with a move saved.\n\n3...f5 is the only line where taking on e5 is punished by a pawn rather than a piece. Take on c6, then defend e4 with a piece: 5.Nc3.\n\n3...g6 and 3...Nge7 are slow. Take, build with d3 and Nbd2 and Nc4, and let the structure be the difference.\n\n## One honest note\n\nAgainst 3...Nge7 taking on c6 is not White's most testing move: the engine puts 4.Nc3 about half a pawn ahead. This course takes anyway, and says so rather than pretending. The position after it is a comfortable game in the structure the trainee knows.\n\n## Typical mistakes at this level\n\nTaking on e5 before counting what defends it. Grabbing on e5 against the Schliemann while e4 hangs. Forgetting that the capture is check against 3...d6. And treating the Berlin as a different opening: after 4.Bxc6 dxc6 it is this one.",
+  "stem": [
+    "e4",
+    "e5",
+    "Nf3",
+    "Nc6",
+    "Bb5"
+  ],
+  "tree": [
+    {
+      "san": "Nf6",
+      "weight": 6,
+      "note": "The Berlin. Black develops and hits e4 instead of asking the bishop anything.",
+      "children": [
+        {
+          "san": "Bxc6",
+          "tags": [
+            "doubled-pawns",
+            "bishop-pair"
+          ],
+          "note": "Take anyway. The structure is what this course is about.",
+          "mistakes": [
+            {
+              "san": "O-O",
+              "grade": "playable",
+              "note": "The main Berlin, and an enormous amount of theory. Not this course."
+            },
+            {
+              "san": "d3",
+              "grade": "playable",
+              "note": "Solid and quiet, and it gives up the structure the whole repertoire is built on."
+            }
+          ],
+          "children": [
+            {
+              "san": "dxc6",
+              "weight": 8,
+              "note": "Towards the centre, as always.",
+              "children": [
+                {
+                  "san": "O-O",
+                  "tags": [
+                    "king-safety"
+                  ],
+                  "note": "The same move as everywhere else.",
+                  "mistakes": [
+                    {
+                      "san": "Nxe5",
+                      "grade": "inaccuracy",
+                      "note": "It wins a pawn and hands it straight back: 5...Nxe4 and Black is fine. Castle first."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "Nxe4",
+                      "weight": 6,
+                      "note": "Black grabs the pawn, which is the main line and correct.",
+                      "children": [
+                        {
+                          "san": "Re1",
+                          "tags": [
+                            "development"
+                          ],
+                          "note": "The rook lands on the file the knight is standing in, and it has to move.",
+                          "shapes": [
+                            {
+                              "orig": "e1",
+                              "dest": "e4",
+                              "brush": "green"
+                            }
+                          ],
+                          "mistakes": [
+                            {
+                              "san": "Nxe5",
+                              "grade": "playable",
+                              "note": "Also playable, and it invites a queen trade that suits Black. The rook keeps more control."
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "Nd6",
+                              "weight": 6,
+                              "note": "Back, and blocking the file.",
+                              "children": [
+                                {
+                                  "san": "Nxe5",
+                                  "tags": [
+                                    "majority",
+                                    "vs-berlin"
+                                  ],
+                                  "note": "The pawn comes back and the structure is the one this course wants.",
+                                  "mistakes": [
+                                    {
+                                      "san": "Rxe5+",
+                                      "grade": "inaccuracy",
+                                      "note": "The wrong recapture: ...Be7 comes with tempo on the rook."
+                                    }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Be7",
+                                      "weight": 6,
+                                      "note": "Black develops and blocks.",
+                                      "children": [
+                                        {
+                                          "san": "d4",
+                                          "tags": [
+                                            "d4-break"
+                                          ],
+                                          "note": "The centre, with the knight on e5 supported.",
+                                          "children": [
+                                            {
+                                              "san": "O-O",
+                                              "weight": 7,
+                                              "note": "Black castles.",
+                                              "children": [
+                                                {
+                                                  "san": "Bf4",
+                                                  "tags": [
+                                                    "bishop-placement"
+                                                  ],
+                                                  "note": "The last minor piece, aiming at the knight on d6.",
+                                                  "mistakes": [
+                                                    {
+                                                      "san": "Nc3",
+                                                      "grade": "inaccuracy",
+                                                      "note": "Also fine. The bishop is the piece with one good square and should take it first."
+                                                    }
+                                                  ],
+                                                  "children": [
+                                                    {
+                                                      "san": "Re8",
+                                                      "weight": 6,
+                                                      "note": "Black takes the file back.",
+                                                      "children": [
+                                                        {
+                                                          "san": "Nd2",
+                                                          "tags": [
+                                                            "development"
+                                                          ],
+                                                          "plan": "Play Nf3 or Nc4 and trade a pair of knights, then advance the kingside majority. Black's bishops need lines that are not there.",
+                                                          "note": "Everything out, and the knight heads for f3 or c4."
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "san": "Qe7",
+                                      "weight": 2,
+                                      "note": "It looks like it wins the knight, and it loses the queen.",
+                                      "children": [
+                                        {
+                                          "san": "Nxf7",
+                                          "tags": [
+                                            "tactics"
+                                          ],
+                                          "note": "The knight steps aside and the rook on e1 is looking straight at the queen: 8...Kxf7 9.Rxe7+.",
+                                          "shapes": [
+                                            {
+                                              "orig": "e5",
+                                              "dest": "f7",
+                                              "brush": "green"
+                                            },
+                                            {
+                                              "orig": "e1",
+                                              "dest": "e7",
+                                              "brush": "green"
+                                            }
+                                          ],
+                                          "mistakes": [
+                                            {
+                                              "san": "Nf3",
+                                              "grade": "inaccuracy",
+                                              "note": "It saves the knight and passes up the best moment of the chapter. Look down the e-file first."
+                                            }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "Kxf7",
+                                              "weight": 8,
+                                              "note": "Forced, or the knight escapes with the extra pawn.",
+                                              "children": [
+                                                {
+                                                  "san": "Rxe7+",
+                                                  "tags": [
+                                                    "tactics"
+                                                  ],
+                                                  "plan": "Take the bishop back after ...Bxe7 and count: a queen for a rook and a knight, with the black king in the open. Then develop and trade.",
+                                                  "note": "The point."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "Bd6",
+                      "weight": 5,
+                      "note": "Holding e5 and developing.",
+                      "children": [
+                        {
+                          "san": "d4",
+                          "tags": [
+                            "d4-break"
+                          ],
+                          "note": "The break, as everywhere.",
+                          "children": [
+                            {
+                              "san": "exd4",
+                              "weight": 7,
+                              "note": "Black takes.",
+                              "children": [
+                                {
+                                  "san": "Qxd4",
+                                  "tags": [
+                                    "development"
+                                  ],
+                                  "plan": "Play Nc3, Be3 and Rad1, trade queens if offered, and go for the ending.",
+                                  "note": "The queen is safe with no knight on c6."
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "Bg4",
+                      "weight": 4,
+                      "note": "The pin, with the knight still on f6.",
+                      "children": [
+                        {
+                          "san": "h3",
+                          "tags": [
+                            "vs-bg4"
+                          ],
+                          "note": "Ask the question, exactly as in the 5...Bg4 chapter.",
+                          "children": [
+                            {
+                              "san": "Bh5",
+                              "weight": 5,
+                              "note": "Keeping it.",
+                              "children": [
+                                {
+                                  "san": "d3",
+                                  "tags": [
+                                    "development"
+                                  ],
+                                  "plan": "Play Nbd2 and Nc4, or g4 and Nxe5 when the diagonal to d1 is safe. Never take on e5 while a bishop looks at d1.",
+                                  "note": "Solid. Now g4 and Nxe5 become ideas, once the diagonal to d1 is no longer the problem."
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Bc5",
+      "weight": 4,
+      "note": "Developing and leaving the bishop alone.",
+      "children": [
+        {
+          "san": "Bxc6",
+          "tags": [
+            "doubled-pawns"
+          ],
+          "note": "Take.",
+          "children": [
+            {
+              "san": "dxc6",
+              "weight": 7,
+              "note": "The right recapture, and the course's structure.",
+              "children": [
+                {
+                  "san": "O-O",
+                  "tags": [
+                    "king-safety"
+                  ],
+                  "note": "As always.",
+                  "mistakes": [
+                    {
+                      "san": "Nxe5",
+                      "grade": "mistake",
+                      "note": "Now the bishop covers it and the queen comes: 5...Qd4 forks the knight and f2 and wins a piece."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "f6",
+                      "weight": 6,
+                      "note": "Holding e5, the natural answer.",
+                      "children": [
+                        {
+                          "san": "d4",
+                          "tags": [
+                            "d4-break"
+                          ],
+                          "note": "The break.",
+                          "children": [
+                            {
+                              "san": "exd4",
+                              "weight": 7,
+                              "note": "Black takes.",
+                              "children": [
+                                {
+                                  "san": "Nbd2",
+                                  "tags": [
+                                    "development"
+                                  ],
+                                  "note": "Heading for b3, where it hits the bishop and takes back on d4.",
+                                  "mistakes": [
+                                    {
+                                      "san": "Nxd4",
+                                      "grade": "inaccuracy",
+                                      "note": "It lets Black trade into a comfortable ending. The knight tour is worth the move."
+                                    }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Ne7",
+                                      "weight": 6,
+                                      "note": "Black develops.",
+                                      "children": [
+                                        {
+                                          "san": "Nb3",
+                                          "tags": [
+                                            "development"
+                                          ],
+                                          "note": "Hitting the bishop and eyeing d4.",
+                                          "children": [
+                                            {
+                                              "san": "Bd6",
+                                              "weight": 6,
+                                              "note": "Black steps back to the good square.",
+                                              "children": [
+                                                {
+                                                  "san": "Nbxd4",
+                                                  "tags": [
+                                                    "development"
+                                                  ],
+                                                  "plan": "Play Re1 and c4, trade a pair, and go for the ending where the pawns decide.",
+                                                  "note": "With the knight that made the trip.",
+                                                  "mistakes": [
+                                                    {
+                                                      "san": "Nfxd4",
+                                                      "grade": "inaccuracy",
+                                                      "note": "The other knight has somewhere better to be."
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "bxc6",
+              "weight": 3,
+              "note": "The wrong one here.",
+              "children": [
+                {
+                  "san": "Nxe5",
+                  "tags": [
+                    "tactics"
+                  ],
+                  "plan": "Play d4 with tempo on the bishop, then Nc3 and castle. A pawn up with the better structure.",
+                  "note": "A clean pawn: the bishop on c5 does not defend it, and with the d-pawn at home there is no ...Qd4."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "d6",
+      "weight": 3,
+      "note": "The Steinitz. Solid, passive, and it hands White a check.",
+      "children": [
+        {
+          "san": "Bxc6+",
+          "tags": [
+            "doubled-pawns"
+          ],
+          "note": "With check, so Black cannot choose the recapture.",
+          "children": [
+            {
+              "san": "bxc6",
+              "weight": 9,
+              "note": "Forced.",
+              "children": [
+                {
+                  "san": "d4",
+                  "tags": [
+                    "d4-break"
+                  ],
+                  "note": "The centre at once, as in the 4...bxc6 chapter.",
+                  "mistakes": [
+                    {
+                      "san": "O-O",
+                      "grade": "playable",
+                      "note": "Also fine and a shade slower. With a pawn on d6 the break is the right first move."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "exd4",
+                      "weight": 6,
+                      "note": "Black takes.",
+                      "children": [
+                        {
+                          "san": "Qxd4",
+                          "tags": [
+                            "development"
+                          ],
+                          "note": "The queen, with no knight to chase her.",
+                          "children": [
+                            {
+                              "san": "Be7",
+                              "weight": 6,
+                              "note": "Black develops.",
+                              "children": [
+                                {
+                                  "san": "Nc3",
+                                  "tags": [
+                                    "development"
+                                  ],
+                                  "note": "Everything out.",
+                                  "children": [
+                                    {
+                                      "san": "Nf6",
+                                      "weight": 6,
+                                      "note": "Black develops.",
+                                      "children": [
+                                        {
+                                          "san": "Bf4",
+                                          "tags": [
+                                            "bishop-placement"
+                                          ],
+                                          "note": "Hitting d6 and taking the dark squares.",
+                                          "mistakes": [
+                                            {
+                                              "san": "Bg5",
+                                              "grade": "inaccuracy",
+                                              "note": "It pins nothing useful and invites ...h6 with tempo. On f4 it hits the pawn on d6."
+                                            }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "O-O",
+                                              "weight": 6,
+                                              "note": "Black castles.",
+                                              "children": [
+                                                {
+                                                  "san": "O-O-O",
+                                                  "tags": [
+                                                    "king-safety"
+                                                  ],
+                                                  "plan": "Play Rhe1 and e5, or h4 and h5. Pawns on a6, c6 and c7 cannot be defended by other pawns.",
+                                                  "note": "Towards the weak pawns, and the rook lands on the file Black has to watch.",
+                                                  "mistakes": [
+                                                    {
+                                                      "san": "O-O",
+                                                      "grade": "inaccuracy",
+                                                      "note": "It castles away from the play."
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "f5",
+      "weight": 2,
+      "note": "The Schliemann. Black hits e4 and lets the bishop take.",
+      "children": [
+        {
+          "san": "Bxc6",
+          "tags": [
+            "doubled-pawns"
+          ],
+          "note": "Take first, which removes the defender of e5 as well.",
+          "children": [
+            {
+              "san": "dxc6",
+              "weight": 7,
+              "note": "Towards the centre.",
+              "children": [
+                {
+                  "san": "Nc3",
+                  "tags": [
+                    "development"
+                  ],
+                  "note": "Defend the pawn with a piece and develop in the same move.",
+                  "mistakes": [
+                    {
+                      "san": "Nxe5",
+                      "grade": "inaccuracy",
+                      "note": "It grabs and gives it back with interest: Black takes on e4 with a free centre and lines at the king."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "fxe4",
+                      "weight": 7,
+                      "note": "Black resolves it.",
+                      "children": [
+                        {
+                          "san": "Nxe4",
+                          "tags": [
+                            "development"
+                          ],
+                          "note": "The knight lands in the middle.",
+                          "children": [
+                            {
+                              "san": "Nf6",
+                              "weight": 6,
+                              "note": "Black challenges it.",
+                              "children": [
+                                {
+                                  "san": "Qe2",
+                                  "tags": [
+                                    "development"
+                                  ],
+                                  "plan": "Play d3 and Bg5, castle, and use the open e-file against a king that has not moved.",
+                                  "note": "Holding the knight and eyeing the file Black opened himself.",
+                                  "mistakes": [
+                                    {
+                                      "san": "Nxf6+",
+                                      "grade": "inaccuracy",
+                                      "note": "It relieves the pressure and develops Black. Keep the knight and let Black do the trading."
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "g6",
+      "weight": 2,
+      "note": "The fianchetto. Slow and playable.",
+      "children": [
+        {
+          "san": "Bxc6",
+          "tags": [
+            "doubled-pawns"
+          ],
+          "note": "Take.",
+          "children": [
+            {
+              "san": "dxc6",
+              "weight": 7,
+              "note": "Towards the centre.",
+              "children": [
+                {
+                  "san": "d3",
+                  "tags": [
+                    "development"
+                  ],
+                  "note": "Quiet. The pawn on e4 is held and the position stays closed for the bishop that is coming to g7.",
+                  "mistakes": [
+                    {
+                      "san": "d4",
+                      "grade": "inaccuracy",
+                      "note": "It opens the diagonal for the bishop about to arrive on g7. Keep it shut."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "Bg7",
+                      "weight": 8,
+                      "note": "Black finishes the fianchetto.",
+                      "children": [
+                        {
+                          "san": "Nbd2",
+                          "tags": [
+                            "development"
+                          ],
+                          "note": "The knight heads for c4.",
+                          "shapes": [
+                            {
+                              "orig": "d2",
+                              "dest": "c4",
+                              "brush": "green"
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "Ne7",
+                              "weight": 6,
+                              "note": "Black develops towards g6.",
+                              "children": [
+                                {
+                                  "san": "Nc4",
+                                  "tags": [
+                                    "development"
+                                  ],
+                                  "note": "It arrives, eyeing e5 and b6.",
+                                  "children": [
+                                    {
+                                      "san": "O-O",
+                                      "weight": 7,
+                                      "note": "Black castles.",
+                                      "children": [
+                                        {
+                                          "san": "O-O",
+                                          "tags": [
+                                            "king-safety"
+                                          ],
+                                          "plan": "Play a4 and a5 to fix the queenside, then Ne3 and Nd5 or f4. The bishop on g7 has nothing to bite on.",
+                                          "note": "And so does White, with a small and permanent structural edge.",
+                                          "mistakes": [
+                                            {
+                                              "san": "Ne3",
+                                              "grade": "inaccuracy",
+                                              "note": "It is going there anyway, and the king comes first."
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Nge7",
+      "weight": 2,
+      "note": "The knight heads for g6 the long way round.",
+      "children": [
+        {
+          "san": "Bxc6",
+          "tags": [
+            "doubled-pawns"
+          ],
+          "note": "Take, and accept a comfortable game rather than a small pull.",
+          "mistakes": [
+            {
+              "san": "Nc3",
+              "grade": "playable",
+              "note": "The engine's move, and about half a pawn better. It is also a different opening from the rest of this course."
+            }
+          ],
+          "children": [
+            {
+              "san": "dxc6",
+              "weight": 7,
+              "note": "Towards the centre.",
+              "children": [
+                {
+                  "san": "Nc3",
+                  "tags": [
+                    "development"
+                  ],
+                  "note": "Develop and hold e4.",
+                  "children": [
+                    {
+                      "san": "Ng6",
+                      "weight": 6,
+                      "note": "The knight arrives.",
+                      "children": [
+                        {
+                          "san": "d4",
+                          "tags": [
+                            "d4-break"
+                          ],
+                          "note": "The break, with everything ready for it.",
+                          "children": [
+                            {
+                              "san": "exd4",
+                              "weight": 7,
+                              "note": "Black takes.",
+                              "children": [
+                                {
+                                  "san": "Nxd4",
+                                  "tags": [
+                                    "development"
+                                  ],
+                                  "note": "Recapture, eyeing f5.",
+                                  "children": [
+                                    {
+                                      "san": "Qf6",
+                                      "weight": 6,
+                                      "note": "Black develops with a hit on the knight.",
+                                      "children": [
+                                        {
+                                          "san": "O-O",
+                                          "tags": [
+                                            "king-safety"
+                                          ],
+                                          "plan": "Play Be3 or Nde2 and Ng3, castle the rooks, and trade into the ending. The structure has not changed since move four.",
+                                          "note": "King first: the knight has enough defenders.",
+                                          "mistakes": [
+                                            {
+                                              "san": "Nxc6",
+                                              "grade": "mistake",
+                                              "note": "The knight is not hanging: 8...bxc6 and White has given a piece for a pawn."
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "defaultTags": [
+    "development"
+  ]
+}

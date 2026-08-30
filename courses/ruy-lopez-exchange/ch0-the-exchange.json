@@ -1,0 +1,271 @@
+{
+  "id": "ch0-the-exchange",
+  "title": "The Exchange and its idea",
+  "intro": "The Exchange Ruy Lopez gives up a bishop for a knight on move four and asks one question for the rest of the game: whose pawn majority is worth more.\n\n## The trade, and what it buys\n\nAfter 1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Bxc6 dxc6 Black has the two bishops, which are worth something real in an open position. What White has is a structure that does not change for the rest of the game. Once the centre pawns come off, White has four pawns against three on the kingside and every one of them healthy. Black has four against three on the queenside and two of them stand on the c-file.\n\nOnly one of those majorities can make a passed pawn. Push Black's queenside and the c-pawns stay in each other's way; the a-pawn cannot outrun two white pawns on its own. Push White's kingside and a passer appears.\n\nSo White plays towards an endgame and Black plays to avoid one. That single sentence explains most of the moves in this course.\n\n## Your plan, in four steps\n\nCastle. Play d4 to make Black's centre pawn commit, and recapture on d4 with a piece. Take every queen trade you are offered, because each one is a step towards the ending the structure decides. Then advance the kingside majority with f4 and e5, or bring a knight to c4 and f5 while Black's bishops have nothing to bite on.\n\n## The one thing never to do\n\nDo not recapture on f3 with the g-pawn. Black offers that trade in three different chapters, and every time it doubles pawns on the very wing this whole opening exists to exploit. Recapture with the queen.\n\n## What Black is up to\n\nKeep pieces on, open lines for the bishops, and hit e4 and f3 with ...f6, ...Bg4 and ...Qf6. Black is not worse here. This is a fight and not a technique, and it is a fight where one wrong trade by Black leads to a lost ending.\n\n## Typical mistakes at this level\n\nTaking on e5 with the knight before the position allows it. Recapturing towards the centre with the g-pawn and wrecking the majority. Playing d4 before castling. And trading pieces cheerfully because trades are usually good: here they are good because of the structure, and against the two bishops in an open position they are not good at all.",
+  "stem": [],
+  "tree": [
+    {
+      "san": "e4",
+      "note": "The first move of the course, and the only one Black gets a free choice against.",
+      "mistakes": [
+        {
+          "san": "d4",
+          "grade": "inaccuracy",
+          "note": "A perfectly good move and a different repertoire. Everything in this course starts with the king's pawn."
+        }
+      ],
+      "children": [
+        {
+          "san": "e5",
+          "weight": 9,
+          "note": "The move this course is built to meet.",
+          "children": [
+            {
+              "san": "Nf3",
+              "tags": [
+                "development"
+              ],
+              "note": "Attack the pawn and develop towards the king.",
+              "children": [
+                {
+                  "san": "Nc6",
+                  "weight": 9,
+                  "note": "Black defends the pawn with a piece, which is the main move by a distance.",
+                  "children": [
+                    {
+                      "san": "Bb5",
+                      "tags": [
+                        "bishop-placement"
+                      ],
+                      "note": "The Ruy Lopez. The bishop hits the knight that is holding e5 up.",
+                      "shapes": [
+                        {
+                          "orig": "b5",
+                          "dest": "c6",
+                          "brush": "green"
+                        }
+                      ],
+                      "mistakes": [
+                        {
+                          "san": "Bc4",
+                          "grade": "inaccuracy",
+                          "note": "The Italian, which is sound and is a different course. This one is about the trade on c6."
+                        }
+                      ],
+                      "children": [
+                        {
+                          "san": "a6",
+                          "weight": 7,
+                          "note": "Black asks the question. Nearly every club player plays this.",
+                          "children": [
+                            {
+                              "san": "Bxc6",
+                              "tags": [
+                                "doubled-pawns",
+                                "bishop-pair"
+                              ],
+                              "note": "The Exchange, and the whole point. White takes the bishop pair off the board in return for a structure that lasts to the end of the game.",
+                              "mistakes": [
+                                {
+                                  "san": "Ba4",
+                                  "grade": "inaccuracy",
+                                  "note": "The main Ruy Lopez, and several times the theory. It is a fine choice and it is not this course."
+                                }
+                              ],
+                              "children": [
+                                {
+                                  "san": "dxc6",
+                                  "weight": 8,
+                                  "note": "Towards the centre, which is right: it opens the bishop on c8 and keeps a pawn on e5.",
+                                  "children": [
+                                    {
+                                      "san": "O-O",
+                                      "tags": [
+                                        "king-safety",
+                                        "development"
+                                      ],
+                                      "note": "King safety first, and the rook comes to e1 or d1 in every line from here.",
+                                      "mistakes": [
+                                        {
+                                          "san": "Nxe5",
+                                          "grade": "mistake",
+                                          "note": "It does not win a pawn. 5...Qd4 forks the knight and e4, and after 6.Nf3 Qxe4+ Black has it straight back with the better game."
+                                        },
+                                        {
+                                          "san": "d4",
+                                          "grade": "playable",
+                                          "note": "The immediate endgame after 5...exd4 6.Qxd4 Qxd4 7.Nxd4. Sound, and it gives up the winning chances that keeping the queens on is worth."
+                                        }
+                                      ],
+                                      "children": [
+                                        {
+                                          "san": "f6",
+                                          "weight": 6,
+                                          "note": "Holding e5 with a pawn, which is the most common answer at every level below master.",
+                                          "children": [
+                                            {
+                                              "san": "d4",
+                                              "tags": [
+                                                "d4-break"
+                                              ],
+                                              "note": "The break. Black's centre pawn has to make a decision, and every answer helps White's majority.",
+                                              "shapes": [
+                                                {
+                                                  "orig": "d2",
+                                                  "dest": "d4",
+                                                  "brush": "green"
+                                                }
+                                              ],
+                                              "mistakes": [
+                                                {
+                                                  "san": "Nxe5",
+                                                  "grade": "mistake",
+                                                  "note": "A piece for nothing: 6...fxe5 and the queen check on h5 wins only a pawn back. 7.Qh5+ g6 8.Qxe5+ Qe7 9.Qxh8 takes the rook and strands the queen, and the engine has Black three pawns ahead."
+                                                }
+                                              ],
+                                              "children": [
+                                                {
+                                                  "san": "exd4",
+                                                  "weight": 7,
+                                                  "note": "Black takes, which is the move that hands White the healthy majority.",
+                                                  "children": [
+                                                    {
+                                                      "san": "Nxd4",
+                                                      "tags": [
+                                                        "development"
+                                                      ],
+                                                      "note": "Recapture with the piece. The knight on d4 eyes f5 and b5 and keeps the queens on.",
+                                                      "mistakes": [
+                                                        {
+                                                          "san": "Qxd4",
+                                                          "grade": "playable",
+                                                          "note": "Also good, and it invites the queen trade a move early. The knight recapture keeps more pieces on for the same structure."
+                                                        }
+                                                      ],
+                                                      "children": [
+                                                        {
+                                                          "san": "c5",
+                                                          "weight": 6,
+                                                          "note": "Black gains time on the knight and takes d4 away for good.",
+                                                          "children": [
+                                                            {
+                                                              "san": "Nb3",
+                                                              "tags": [
+                                                                "development"
+                                                              ],
+                                                              "note": "Back, and towards c5 and d4 later. The knight is not badly placed and Black has loosened the queenside to chase it.",
+                                                              "mistakes": [
+                                                                {
+                                                                  "san": "Nf5",
+                                                                  "grade": "inaccuracy",
+                                                                  "note": "It looks active and 8...Bxf5 9.exf5 hands Black the two bishops AND leaves White with a pawn on f5 doing nothing."
+                                                                }
+                                                              ],
+                                                              "children": [
+                                                                {
+                                                                  "san": "Qxd1",
+                                                                  "weight": 7,
+                                                                  "note": "Black offers the trade, which is what most players do here.",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Rxd1",
+                                                                      "tags": [
+                                                                        "endgame",
+                                                                        "majority"
+                                                                      ],
+                                                                      "note": "Take. Every queen trade is a step towards the ending the structure decides.",
+                                                                      "mistakes": [
+                                                                        {
+                                                                          "san": "Nc3",
+                                                                          "grade": "mistake",
+                                                                          "note": "Take the queen back first. Anything else is simply a queen down."
+                                                                        }
+                                                                      ],
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Be6",
+                                                                          "weight": 6,
+                                                                          "note": "Developing and covering the light squares the trade on c6 weakened.",
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Bf4",
+                                                                              "tags": [
+                                                                                "bishop-placement"
+                                                                              ],
+                                                                              "note": "The last piece, on the diagonal that looks at c7 and keeps Black's king from settling.",
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "c4",
+                                                                                  "weight": 5,
+                                                                                  "note": "Black gains another move on the knight.",
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "Nd4",
+                                                                                      "tags": [
+                                                                                        "development"
+                                                                                      ],
+                                                                                      "note": "Back to the middle, hitting the bishop on e6.",
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "O-O-O",
+                                                                                          "weight": 6,
+                                                                                          "note": "Black castles into the queenside, where the pawns are.",
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "san": "Nc3",
+                                                                                              "tags": [
+                                                                                                "endgame",
+                                                                                                "majority"
+                                                                                              ],
+                                                                                              "plan": "Trade a pair of rooks on the d-file, put a knight on e3 and f5 or play f4 and e5, and remember that a4 and a5 fix Black's queenside before you touch the kingside.",
+                                                                                              "note": "Every piece is out and the structure is the whole story from here."
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "defaultTags": [
+    "development"
+  ]
+}

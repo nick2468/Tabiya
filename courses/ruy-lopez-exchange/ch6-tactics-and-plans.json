@@ -1,0 +1,481 @@
+{
+  "id": "ch6-tactics-and-plans",
+  "title": "Typical tactics and plans",
+  "intro": "Six positions from the lines you have just learnt, each stopping on the move that matters. Play through the moves and find the last one.\n\n## What these are\n\nThree of them end on a capture that wins material, and three end on a decision. That is roughly the balance of the opening itself: the Exchange is a structural choice with a handful of concrete moments in it, and the concrete moments nearly all come from the same question.\n\n## The question\n\nWhat is defending e5, and what is looking at d1.\n\nHalf of this course is one habit: before you take on e5, count the defenders, and before you take anything, look down the diagonal that ends at your own queen. The 5...Ne7 line is a free pawn because nothing defends e5. The 5...Bg4 line loses a queen for the same capture, because the bishop has been staring at d1 since move five. The move is identical. The position is not.\n\n## The other three\n\nDo not take the bishop on g4 after ...h5, because the file Black has opened is worth more than the piece. Recapture on f3 with the queen and not the g-pawn, in every line, every time. And in the main line, when the pieces are placed and the queens are off, the move is still development rather than a pawn: the majority goes last.\n\n## Typical mistakes at this level\n\nTaking a piece because it is there. Grabbing the h-file bishop and then finding the knight on f3 cannot move. Recapturing towards the centre out of habit and wrecking the majority. And pushing the kingside pawns before the pieces behind them are ready.",
+  "stem": [
+    "e4",
+    "e5",
+    "Nf3",
+    "Nc6",
+    "Bb5"
+  ],
+  "tree": [
+    {
+      "san": "a6",
+      "weight": 8,
+      "note": "The usual move, and where five of the six exercises start.",
+      "children": [
+        {
+          "san": "Bxc6",
+          "tags": [
+            "doubled-pawns",
+            "bishop-pair"
+          ],
+          "note": "The Exchange.",
+          "children": [
+            {
+              "san": "dxc6",
+              "weight": 8,
+              "note": "Towards the centre.",
+              "children": [
+                {
+                  "san": "O-O",
+                  "tags": [
+                    "king-safety"
+                  ],
+                  "note": "King safety, and every exercise below starts here.",
+                  "children": [
+                    {
+                      "san": "Bg4",
+                      "weight": 5,
+                      "note": "Exercise one. Black pins the knight, and after 6.h3 offers the bishop. White to play at move seven: the offer is the exercise.",
+                      "children": [
+                        {
+                          "san": "h3",
+                          "tags": [
+                            "light-squares"
+                          ],
+                          "note": "Ask the bishop what it means.",
+                          "children": [
+                            {
+                              "san": "h5",
+                              "weight": 5,
+                              "note": "The offer. Taking the bishop opens the h-file at the white king, and the knight on f3 is what holds h1. White to play.",
+                              "children": [
+                                {
+                                  "san": "d3",
+                                  "tags": [
+                                    "development"
+                                  ],
+                                  "plan": "Play Nbd2 and Nc4, and recapture on f3 with the queen when the trade finally comes.",
+                                  "note": "Decline and develop. The bishop is not going anywhere and the pawn on h5 has weakened Black more than White.",
+                                  "mistakes": [
+                                    {
+                                      "san": "hxg4",
+                                      "grade": "mistake",
+                                      "note": "The knight on f3 then cannot move, because ...Qh4 mates on h1 down the file Black has just opened. 8.Ne1 Qh4 is mate in a few, and the best 8.Re1 gxf3 9.Qxf3 leaves White level on material with a shattered king."
+                                    },
+                                    {
+                                      "san": "Nxe5",
+                                      "grade": "mistake",
+                                      "note": "The diagonal from g4 to d1 has only the knight on it: 7...Bxd1 wins the queen."
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "f6",
+                      "weight": 7,
+                      "note": "Exercise four and exercise five both live here.",
+                      "children": [
+                        {
+                          "san": "d4",
+                          "tags": [
+                            "d4-break"
+                          ],
+                          "note": "The break.",
+                          "children": [
+                            {
+                              "san": "exd4",
+                              "weight": 7,
+                              "note": "Exercise five: play on to move twelve and choose between finishing development and starting the pawns.",
+                              "children": [
+                                {
+                                  "san": "Nxd4",
+                                  "tags": [
+                                    "development"
+                                  ],
+                                  "note": "The piece recapture.",
+                                  "children": [
+                                    {
+                                      "san": "c5",
+                                      "weight": 6,
+                                      "note": "Gaining time.",
+                                      "children": [
+                                        {
+                                          "san": "Nb3",
+                                          "tags": [
+                                            "development"
+                                          ],
+                                          "note": "Back.",
+                                          "children": [
+                                            {
+                                              "san": "Qxd1",
+                                              "weight": 7,
+                                              "note": "The trade.",
+                                              "children": [
+                                                {
+                                                  "san": "Rxd1",
+                                                  "tags": [
+                                                    "endgame",
+                                                    "majority"
+                                                  ],
+                                                  "note": "Take.",
+                                                  "children": [
+                                                    {
+                                                      "san": "Be6",
+                                                      "weight": 6,
+                                                      "note": "Developing.",
+                                                      "children": [
+                                                        {
+                                                          "san": "Bf4",
+                                                          "tags": [
+                                                            "bishop-placement"
+                                                          ],
+                                                          "note": "The last piece.",
+                                                          "children": [
+                                                            {
+                                                              "san": "c4",
+                                                              "weight": 5,
+                                                              "note": "Another move on the knight.",
+                                                              "children": [
+                                                                {
+                                                                  "san": "Nd4",
+                                                                  "tags": [
+                                                                    "development"
+                                                                  ],
+                                                                  "note": "Back into the middle.",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "O-O-O",
+                                                                      "weight": 6,
+                                                                      "note": "Black castles into the pawns. White to play: the position is ready and the temptation is to start pushing.",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Nc3",
+                                                                          "tags": [
+                                                                            "endgame",
+                                                                            "majority"
+                                                                          ],
+                                                                          "plan": "Trade one pair of rooks, keep the other, and bring a knight to e3 and f5. Play a4 and a5 to fix the queenside before the kingside pawns move at all.",
+                                                                          "note": "Development first. The majority is the plan and it moves last, when the pieces behind it are placed.",
+                                                                          "mistakes": [
+                                                                            {
+                                                                              "san": "e5",
+                                                                              "grade": "inaccuracy",
+                                                                              "note": "The front pawn of the majority, pushed before the pieces are ready. It fixes Black's structure for him and hands the bishops the d5 square."
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "san": "Bg4",
+                              "weight": 4,
+                              "note": "Exercise four. Play to move nine and find the move that does not drop a rook.",
+                              "children": [
+                                {
+                                  "san": "dxe5",
+                                  "tags": [
+                                    "d4-break"
+                                  ],
+                                  "note": "Take.",
+                                  "children": [
+                                    {
+                                      "san": "Qxd1",
+                                      "weight": 6,
+                                      "note": "Black trades.",
+                                      "children": [
+                                        {
+                                          "san": "Rxd1",
+                                          "tags": [
+                                            "endgame"
+                                          ],
+                                          "note": "Take.",
+                                          "children": [
+                                            {
+                                              "san": "fxe5",
+                                              "weight": 6,
+                                              "note": "And now White has a choice, and one of the two loses material.",
+                                              "children": [
+                                                {
+                                                  "san": "Rd3",
+                                                  "tags": [
+                                                    "tactics"
+                                                  ],
+                                                  "plan": "Play Rb3 or Re3 hitting b7 and e5, and bring the knight to d2 and c4.",
+                                                  "note": "The rook swings across and the pawn on e5 is the target.",
+                                                  "mistakes": [
+                                                    {
+                                                      "san": "Nxe5",
+                                                      "grade": "mistake",
+                                                      "note": "The rook on d1 and the bishop on g4 are on one diagonal with only the knight between them: 9...Bxd1 wins a rook for a pawn."
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "Bd6",
+                      "weight": 4,
+                      "note": "Exercise three. Play to move eight and look at what Black has just stopped defending.",
+                      "children": [
+                        {
+                          "san": "d4",
+                          "tags": [
+                            "d4-break"
+                          ],
+                          "note": "The break.",
+                          "children": [
+                            {
+                              "san": "exd4",
+                              "weight": 7,
+                              "note": "Black takes.",
+                              "children": [
+                                {
+                                  "san": "Qxd4",
+                                  "tags": [
+                                    "development"
+                                  ],
+                                  "note": "The queen recapture.",
+                                  "children": [
+                                    {
+                                      "san": "Ne7",
+                                      "weight": 2,
+                                      "note": "Natural development, and it drops something. White to play.",
+                                      "children": [
+                                        {
+                                          "san": "Qxg7",
+                                          "tags": [
+                                            "tactics"
+                                          ],
+                                          "plan": "Take the rook only if the queen can get back out. A pawn and the better structure is already enough.",
+                                          "note": "The knight has left g7 to the king alone, and the rook on h8 is next.",
+                                          "shapes": [
+                                            {
+                                              "orig": "d4",
+                                              "dest": "g7",
+                                              "brush": "green"
+                                            }
+                                          ],
+                                          "mistakes": [
+                                            {
+                                              "san": "Be3",
+                                              "grade": "inaccuracy",
+                                              "note": "Solid, and it passes up a free pawn and an attack on the rook."
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "Ne7",
+                      "weight": 4,
+                      "note": "Exercise six. Play to move seven and answer the fork.",
+                      "children": [
+                        {
+                          "san": "Nxe5",
+                          "tags": [
+                            "tactics"
+                          ],
+                          "note": "Nothing defends it, so take it.",
+                          "children": [
+                            {
+                              "san": "Qd4",
+                              "weight": 7,
+                              "note": "The fork: the knight on e5 and the pawn on e4 at once. White to play, and retreating gives everything back.",
+                              "children": [
+                                {
+                                  "san": "Qh5",
+                                  "tags": [
+                                    "tactics"
+                                  ],
+                                  "plan": "Meet ...g6 with Qg5, retreat the knight to f3 when it is asked, and use the two moves Black has spent on the queen.",
+                                  "note": "One move defends the knight, hits f7 and looks at h7 behind it.",
+                                  "shapes": [
+                                    {
+                                      "orig": "h5",
+                                      "dest": "e5",
+                                      "brush": "green"
+                                    },
+                                    {
+                                      "orig": "h5",
+                                      "dest": "f7",
+                                      "brush": "green"
+                                    }
+                                  ],
+                                  "mistakes": [
+                                    {
+                                      "san": "Nf3",
+                                      "grade": "inaccuracy",
+                                      "note": "It hands the pawn straight back after ...Qxe4 and Black is comfortable."
+                                    },
+                                    {
+                                      "san": "Nd3",
+                                      "grade": "inaccuracy",
+                                      "note": "It saves the knight, blocks the pawn White most needs, and leaves e4 hanging anyway."
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Nf6",
+      "weight": 6,
+      "note": "The Berlin, and exercise two. Play to move eight and find what the rook on e1 is really doing.",
+      "children": [
+        {
+          "san": "Bxc6",
+          "tags": [
+            "doubled-pawns"
+          ],
+          "note": "Take.",
+          "children": [
+            {
+              "san": "dxc6",
+              "weight": 8,
+              "note": "Towards the centre.",
+              "children": [
+                {
+                  "san": "O-O",
+                  "tags": [
+                    "king-safety"
+                  ],
+                  "note": "As always.",
+                  "children": [
+                    {
+                      "san": "Nxe4",
+                      "weight": 6,
+                      "note": "Black grabs.",
+                      "children": [
+                        {
+                          "san": "Re1",
+                          "tags": [
+                            "development"
+                          ],
+                          "note": "The rook lands on the file.",
+                          "children": [
+                            {
+                              "san": "Nd6",
+                              "weight": 6,
+                              "note": "Back.",
+                              "children": [
+                                {
+                                  "san": "Nxe5",
+                                  "tags": [
+                                    "majority"
+                                  ],
+                                  "note": "The pawn comes back.",
+                                  "children": [
+                                    {
+                                      "san": "Qe7",
+                                      "weight": 2,
+                                      "note": "It looks like it wins the knight. White to play: the knight is attacked twice and defended once, so do not defend it.",
+                                      "children": [
+                                        {
+                                          "san": "Nxf7",
+                                          "tags": [
+                                            "tactics"
+                                          ],
+                                          "plan": "Take the bishop back on e7 and count: a queen for a rook and a knight, with the black king in the open. Then develop and trade pieces.",
+                                          "note": "Step aside, and the rook on e1 is looking straight through the queen at the king. 8...Kxf7 9.Rxe7+ collects her.",
+                                          "shapes": [
+                                            {
+                                              "orig": "e5",
+                                              "dest": "f7",
+                                              "brush": "green"
+                                            }
+                                          ],
+                                          "mistakes": [
+                                            {
+                                              "san": "Nf3",
+                                              "grade": "inaccuracy",
+                                              "note": "It saves the knight and misses the whole point of the rook move two moves ago."
+                                            },
+                                            {
+                                              "san": "d4",
+                                              "grade": "inaccuracy",
+                                              "note": "It defends the knight and lets Black off. The knight was never the piece in danger."
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "defaultTags": [
+    "tactics"
+  ]
+}

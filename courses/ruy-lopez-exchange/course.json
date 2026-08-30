@@ -1,0 +1,26 @@
+{
+  "id": "ruy-lopez-exchange",
+  "title": "The Ruy Lopez, Exchange Variation",
+  "colour": "white",
+  "tagline": "One structure to understand, as White against 1...e5.",
+  "formatVersion": 1,
+  "chapters": [
+    "ch0-the-exchange.json",
+    "ch1-f6.json",
+    "ch2-bg4.json",
+    "ch3-flexible.json",
+    "ch4-bxc6.json",
+    "ch5-no-a6.json",
+    "ch6-tactics-and-plans.json"
+  ],
+  "tagExtensions": [
+    "majority",
+    "doubled-pawns",
+    "bishop-pair",
+    "d4-break",
+    "vs-f6",
+    "vs-bg4",
+    "vs-berlin",
+    "light-squares"
+  ]
+}
