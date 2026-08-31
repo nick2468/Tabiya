@@ -47,7 +47,7 @@
 
 /* Each rank number sits at the top of its own row, hard against the left. */
 .board coords.ranks {
-  left: 3px;
+  left: 2px;
   top: 0;
   width: auto;
 }
@@ -61,13 +61,13 @@
    its own file. */
 .board coords.files {
   left: 0;
-  bottom: 3px;
+  bottom: 1px;
   height: auto;
   text-align: right;
 }
 
 .board coords.files coord {
-  padding-right: 3px;
+  padding-right: 2px;
 }
 
 /* White's view: ranks 1, 3, 5, 7 and files a, c, e, g sit on dark squares. */
