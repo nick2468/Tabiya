@@ -74,16 +74,20 @@
   line-height: 1;
 }
 
-/* Each rank number sits at the top of its own row, hard against the left. */
+/* Each rank number sits in the top left of its own square, as snug there as a
+   file letter is in its bottom right. The two are set the same way round: the
+   letters' row sits on the board's bottom edge with each glyph 1px in from the
+   right of its file, so the numbers' column sits 1px in from the left edge
+   with each glyph on the top of its own rank. */
 .board coords.ranks {
-  left: 2px;
+  left: 1px;
   top: 0;
   width: auto;
 }
 
 .board coords.ranks coord {
   transform: none;
-  padding-top: 3px;
+  padding-top: 0;
 }
 
 /* Each file letter sits at the bottom of the board, hard against the right of

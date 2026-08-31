@@ -2016,5 +2016,11 @@ with the app started from `src-tauri/target/release`:
    below - and at `--piece-size: 90%` the bases now end above the letters. Measure that
    way round if it comes up again: the letters are about 10px of a 48px square, and a
    centred shrink buys half of what it looks like it should.
+10. **Both labels are now set the same way round**, which is what makes the two corners
+    match: the letters' row sits on the board's bottom edge with each glyph 1px in from
+    the right of its file, so the numbers' column sits 1px in from the left edge with
+    each glyph on the top of its own rank. Measured on a1 in the packaged window: the
+    number 1px from the left and 0 from the top of its square, the letter 1px from the
+    right and 0 from the bottom. Still right flipped for the Caro-Kann.
 
 - [ ] **Review gate 17 passed**
