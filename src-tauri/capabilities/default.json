@@ -1,7 +1,7 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "What the Repertoire Trainer window is allowed to do: keep its own progress file, read courses dropped into its own courses folder, install a course the trainee imports into that same folder, and let them pick a file to import or a place to export.",
+  "description": "What the Repertoire Trainer window is allowed to do: keep its own progress file and courses in its own data folder, read the older folder named after the bundle identifier so the data can be carried across once, install and remove courses in the new folder, and let the trainee pick a file to import or a place to export. The old folder is readable and not writable, which is what makes the migration a copy.",
   "windows": [
     "main"
   ],
@@ -12,6 +12,12 @@
     {
       "identifier": "fs:allow-read-text-file",
       "allow": [
+        {
+          "path": "$DATA/Repertoire Trainer/progress.json"
+        },
+        {
+          "path": "$DATA/Repertoire Trainer/courses/**"
+        },
         {
           "path": "$APPDATA/progress.json"
         },
@@ -27,25 +33,40 @@
       "identifier": "fs:allow-write-text-file",
       "allow": [
         {
-          "path": "$APPDATA/progress.json"
+          "path": "$DATA/Repertoire Trainer/progress.json"
         },
         {
           "path": "$HOME/**"
         },
         {
-          "path": "$APPDATA/courses/*"
+          "path": "$DATA/Repertoire Trainer/courses/*"
         },
         {
-          "path": "$APPDATA/courses/*/*"
+          "path": "$DATA/Repertoire Trainer/courses/*/*"
         },
         {
-          "path": "$APPDATA/courses/**"
+          "path": "$DATA/Repertoire Trainer/courses/**"
         }
       ]
     },
     {
       "identifier": "fs:allow-exists",
       "allow": [
+        {
+          "path": "$DATA/Repertoire Trainer"
+        },
+        {
+          "path": "$DATA/Repertoire Trainer/progress.json"
+        },
+        {
+          "path": "$DATA/Repertoire Trainer/courses"
+        },
+        {
+          "path": "$DATA/Repertoire Trainer/courses/*"
+        },
+        {
+          "path": "$DATA/Repertoire Trainer/courses/**"
+        },
         {
           "path": "$APPDATA"
         },
@@ -67,19 +88,25 @@
       "identifier": "fs:allow-mkdir",
       "allow": [
         {
-          "path": "$APPDATA"
+          "path": "$DATA/Repertoire Trainer"
         },
         {
-          "path": "$APPDATA/courses"
+          "path": "$DATA/Repertoire Trainer/courses"
         },
         {
-          "path": "$APPDATA/courses/*"
+          "path": "$DATA/Repertoire Trainer/courses/*"
         }
       ]
     },
     {
       "identifier": "fs:allow-read-dir",
       "allow": [
+        {
+          "path": "$DATA/Repertoire Trainer/courses"
+        },
+        {
+          "path": "$DATA/Repertoire Trainer/courses/*"
+        },
         {
           "path": "$APPDATA/courses"
         },
@@ -92,13 +119,16 @@
       "identifier": "fs:allow-remove",
       "allow": [
         {
-          "path": "$APPDATA/courses/*"
+          "path": "$DATA/Repertoire Trainer/progress.json"
         },
         {
-          "path": "$APPDATA/courses/*/*"
+          "path": "$DATA/Repertoire Trainer/courses/*"
         },
         {
-          "path": "$APPDATA/courses/**"
+          "path": "$DATA/Repertoire Trainer/courses/*/*"
+        },
+        {
+          "path": "$DATA/Repertoire Trainer/courses/**"
         }
       ]
     }

@@ -21,7 +21,7 @@ import './progress.css'
  * describes neither.
  */
 export function Progress() {
-  const { state, exportJson, importJson } = useProgress()
+  const { state, note, exportJson, importJson } = useProgress()
   const { courses } = useCatalog()
 
   const cards = useMemo(
@@ -53,6 +53,8 @@ export function Progress() {
   return (
     <div className="progress">
       <h2>Progress</h2>
+
+      {note ? <p className="notice">{note}</p> : null}
 
       <p className="totals">
         <strong>{rollup.learnt}</strong> of {rollup.lines} lines learnt across{' '}

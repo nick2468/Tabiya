@@ -40,6 +40,11 @@ export interface Progress {
    * set nothing is written, so whatever is on disk stays there.
    */
   failure: string | null
+  /**
+   * Something that happened on the way to loading and is worth saying once,
+   * such as the data folder moving. Null when there is nothing to say.
+   */
+  note: string | null
   learnt: (lineId: string) => boolean
   toggle: (lineId: string) => void
   /**
@@ -62,6 +67,7 @@ export function useProgressStateFor(store: ProgressStore): Progress {
   const [state, setState] = useState<ProgressState>(emptyProgress)
   const [loaded, setLoaded] = useState(false)
   const [failure, setFailure] = useState<string | null>(null)
+  const [note, setNote] = useState<string | null>(null)
 
   useEffect(() => {
     let cancelled = false
@@ -69,6 +75,7 @@ export function useProgressStateFor(store: ProgressStore): Progress {
       if (cancelled) return
       setState(saved.state)
       setFailure(saved.failure ?? null)
+      setNote(saved.note ?? null)
       setLoaded(true)
     })
     return () => {
@@ -125,7 +132,18 @@ export function useProgressStateFor(store: ProgressStore): Progress {
     [store],
   )
 
-  return { state, loaded, failure, learnt, toggle, answer, recordPlay, exportJson, importJson }
+  return {
+    state,
+    loaded,
+    failure,
+    note,
+    learnt,
+    toggle,
+    answer,
+    recordPlay,
+    exportJson,
+    importJson,
+  }
 }
 
 export function ProgressProvider({
@@ -137,7 +155,8 @@ export function ProgressProvider({
 }) {
   // Built once, and only when the app runs: the browser store touches
   // localStorage, which does not exist under the node test environment. In the
-  // wrapped Windows app the same interface is backed by a file in AppData.
+  // wrapped Windows app the same interface is backed by a file in the app's
+  // own data folder.
   const resolved = useMemo(
     () => store ?? (isDesktop() ? new TauriProgressStore() : new LocalStorageProgressStore()),
     [store],

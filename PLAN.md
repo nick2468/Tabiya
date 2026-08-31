@@ -1614,7 +1614,7 @@ appears on imported tiles only, because a bundled course would be back at the ne
 restart; and the confirm says the truth, which is that progress survives a delete and
 comes back on re-import.
 
-- [ ] 15.1 The data folder moves by copying, with one shared root function, literal
+- [x] 15.1 The data folder moves by copying, with one shared root function, literal
   capability grants for the new location, the old grants kept because they are what
   the migration reads, verification before the new location goes live, and a failed
   migration taking the existing blocked-saving route rather than starting blank.

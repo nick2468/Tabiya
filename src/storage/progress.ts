@@ -102,6 +102,12 @@ export interface LoadedProgress {
   state: ProgressState
   /** Why the saved progress could not be read, when it could not. */
   failure?: string
+  /**
+   * Something that happened on the way to reading it that the trainee should
+   * be told about once, such as the data folder moving. Not a problem: a
+   * problem is a failure.
+   */
+  note?: string
 }
 
 export interface ProgressStore {

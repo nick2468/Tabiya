@@ -271,6 +271,14 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   because Drill deliberately does not tell the trainee which line they are in before
   they answer: showing the name is a design question about how much to give away,
   not a rendering change. Recorded 2026-08-30.
+- **Renaming the binary** (`london-trainer.exe`, named in `src-tauri/Cargo.toml`): the
+  same wart as the data folder, which phase 15 fixed by moving the folder. The exe name
+  was left alone deliberately. It is what the installer writes and what the uninstaller
+  knows to remove, so changing it in an upgrade over an existing install risks leaving
+  the old `london-trainer.exe` orphaned in the install folder, taking up space and
+  running nothing. That is a worse outcome than a filename nobody reads, and unlike the
+  data folder it is not a name Nick sees. Worth doing on a clean uninstall and
+  reinstall, checked in the install folder afterwards. Recorded at phase 15.
 - **A gap in the London course, found from the other side**: the Slav's chapter 5
   answers 5.c3 Qb6 6.Qb3 with 6...c4, and the London course's chapter 2 covers only
   6...Qxb3. That is a hole in White's preparation rather than an error in it, and the
@@ -396,6 +404,19 @@ second, separate application. Nothing is lost - progress lives in the
 identifier's AppData folder and neither installer touches it - but Nick
 uninstalls "London Trainer" once, by hand, or keeps two entries in Apps and
 Features. The ruling stands; only the reasoning behind one clause was wrong.
+
+**The folder moved at phase 15, and the identifier still did not.** "Progress stays
+exactly where it is" held for three phases and then stopped being worth it: Nick opened
+his data folder and found it called `com.nick.london-trainer` for an app called
+Repertoire Trainer. So the app now builds its data folder from the user's roaming data
+folder plus the literal name `Repertoire Trainer`, instead of calling `appDataDir()`,
+which is Tauri's identifier folder. The identifier itself is unchanged, for the reason
+the correction above found: NSIS keys the install on the product name and the identifier
+is invisible, so changing it buys nothing and one identity change has already installed
+a second application beside the first. The move is a COPY, verified by reading it back
+and counting the learnt lines before the new folder counts as live, and the old folder
+is left exactly as it was for Nick to delete himself. A migration that deletes has one
+chance to be right.
 
 ### The second course: the Caro-Kann (ruled)
 

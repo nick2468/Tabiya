@@ -1,3 +1,5 @@
+import { dataRoots, isDesktop, oldDataRoots, type DataRoots } from './paths'
+import { migrateDataFolder, migrationNote, tauriFiles, type Migration } from './migrate'
 import {
   describe,
   emptyProgress,
@@ -8,7 +10,7 @@ import {
 } from './progress'
 
 /**
- * The desktop store: progress in a file under AppData.
+ * The desktop store: progress in a file in the app's data folder.
  *
  * This is the whole reason ProgressStore was an interface with async methods
  * from phase 2. Nothing above it changes: the same load, save, export and
@@ -19,19 +21,20 @@ import {
  * alone, and the trainee can copy it or read it.
  *
  * Paths are resolved in full rather than left relative to a base directory.
- * The app data folder does not exist until something creates it, and creating
- * it needs a real path to create.
+ * The data folder does not exist until something creates it, and creating it
+ * needs a real path to create. Where that folder is lives in `paths.ts`, which
+ * is the one place that answers the question for the whole app.
+ *
+ * The first read of the session also carries the file across from the folder
+ * the app used before phase 15. A migration that cannot be completed blocks
+ * saving through the same `failure` route a bad read takes, which is the point:
+ * the app must never start blank and then save over something real.
  *
  * Tauri is imported lazily so this module can be pulled into a browser build
  * without dragging in an API that is not there.
  */
 
-const FILE = 'progress.json'
-
-/** True when the app is running inside the Tauri window rather than a browser. */
-export function isDesktop(): boolean {
-  return typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window
-}
+export { isDesktop }
 
 interface FsApi {
   exists: (path: string) => Promise<boolean>
@@ -40,53 +43,64 @@ interface FsApi {
   mkdir: (path: string, options?: { recursive?: boolean }) => Promise<void>
 }
 
-interface PathApi {
-  appDataDir: () => Promise<string>
-  join: (...parts: string[]) => Promise<string>
-}
-
 export class TauriProgressStore implements ProgressStore {
   private fsApi: Promise<FsApi> | null = null
-  private pathApi: Promise<PathApi> | null = null
-  private resolved: Promise<{ dir: string; file: string }> | null = null
+  private moved: Promise<Migration> | null = null
 
   private fs(): Promise<FsApi> {
     if (!this.fsApi) this.fsApi = import('@tauri-apps/plugin-fs') as unknown as Promise<FsApi>
     return this.fsApi
   }
 
-  private paths(): Promise<{ dir: string; file: string }> {
-    if (!this.resolved) {
-      this.resolved = (async () => {
-        if (!this.pathApi) this.pathApi = import('@tauri-apps/api/path') as unknown as Promise<PathApi>
-        const path = await this.pathApi
-        const dir = await path.appDataDir()
-        return { dir, file: await path.join(dir, FILE) }
+  private paths(): Promise<DataRoots> {
+    return dataRoots()
+  }
+
+  /** Run once per session, before anything reads or writes. */
+  private migrate(): Promise<Migration> {
+    if (!this.moved) {
+      this.moved = (async () => {
+        const [from, to] = await Promise.all([oldDataRoots(), dataRoots()])
+        return migrateDataFolder(tauriFiles(), from, to)
       })()
     }
-    return this.resolved
+    return this.moved
   }
 
   async load(): Promise<LoadedProgress> {
+    let moved: Migration
     try {
-      const [fs, { file }] = await Promise.all([this.fs(), this.paths()])
+      moved = await this.migrate()
+    } catch (error) {
+      // The migration is written not to throw, so this is the belt to its
+      // braces. It still takes the blocked-saving route rather than a blank one.
+      moved = { kind: 'failed', reason: describe(error) }
+    }
+    if (moved.kind === 'failed') {
+      console.warn('The data folder could not be moved:', moved.reason)
+      return { state: emptyProgress(), failure: moved.reason }
+    }
+    const note = moved.kind === 'migrated' ? migrationNote(moved) : undefined
+
+    try {
+      const [fs, { progress }] = await Promise.all([this.fs(), this.paths()])
       // No file yet is a new trainee, not a failure.
-      if (!(await fs.exists(file))) return { state: emptyProgress() }
-      return { state: parseProgressJson(await fs.readTextFile(file)) }
+      if (!(await fs.exists(progress))) return { state: emptyProgress(), note }
+      return { state: parseProgressJson(await fs.readTextFile(progress)), note }
     } catch (error) {
       // A file that cannot be read must not stop the app from opening, and
       // must not be written over either. The caller stops saving until the
       // trainee resolves it.
       console.warn('Saved progress could not be read:', error)
-      return { state: emptyProgress(), failure: describe(error) }
+      return { state: emptyProgress(), failure: describe(error), note }
     }
   }
 
   async save(state: ProgressState): Promise<void> {
-    const [fs, { dir, file }] = await Promise.all([this.fs(), this.paths()])
+    const [fs, { root, progress }] = await Promise.all([this.fs(), this.paths()])
     // The folder does not exist until the first save creates it.
-    if (!(await fs.exists(dir))) await fs.mkdir(dir, { recursive: true })
-    await fs.writeTextFile(file, JSON.stringify(state, null, 2))
+    if (!(await fs.exists(root))) await fs.mkdir(root, { recursive: true })
+    await fs.writeTextFile(progress, JSON.stringify(state, null, 2))
   }
 
   async exportJson(): Promise<string> {
@@ -101,6 +115,6 @@ export class TauriProgressStore implements ProgressStore {
 
   /** Where the file lives, for showing the trainee. */
   async location(): Promise<string> {
-    return (await this.paths()).file
+    return (await this.paths()).progress
   }
 }

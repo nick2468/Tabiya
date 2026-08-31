@@ -1,5 +1,4 @@
-import { isDesktop } from '../storage/tauri-store'
-import { COURSES_FOLDER } from '../content/external'
+import { dataRoots, isDesktop } from '../storage/paths'
 import { MANIFEST_FILE } from '../model/course'
 import type { CourseManifest } from '../model/types'
 
@@ -75,9 +74,9 @@ export async function installCourse(
   files: Record<string, unknown>,
 ): Promise<string> {
   if (!isDesktop()) throw new Error('installing a course needs the installed app')
-  const { appDataDir, join } = await import('@tauri-apps/api/path')
+  const { join } = await import('@tauri-apps/api/path')
   const fs = await import('@tauri-apps/plugin-fs')
-  const folder = await join(await appDataDir(), COURSES_FOLDER, manifest.id)
+  const folder = await courseFolder(manifest.id)
 
   await fs.mkdir(folder, { recursive: true })
   if (await fs.exists(folder)) {
@@ -97,11 +96,16 @@ export async function installCourse(
 /** The course folders already installed, so a replacement can be recognised. */
 export async function installedCourseIds(): Promise<string[]> {
   if (!isDesktop()) return []
-  const { appDataDir, join } = await import('@tauri-apps/api/path')
   const fs = await import('@tauri-apps/plugin-fs')
-  const root = await join(await appDataDir(), COURSES_FOLDER)
+  const root = (await dataRoots()).courses
   if (!(await fs.exists(root))) return []
   return (await fs.readDir(root)).filter((entry) => entry.isDirectory).map((entry) => entry.name)
+}
+
+/** One course's folder inside the app's courses folder. */
+async function courseFolder(courseId: string): Promise<string> {
+  const { join } = await import('@tauri-apps/api/path')
+  return join((await dataRoots()).courses, courseId)
 }
 
 /** Written the way the bundled courses are, so a person can read it after. */

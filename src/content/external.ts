@@ -1,8 +1,9 @@
 import { loadCourse, MANIFEST_FILE } from '../model/course'
+import { COURSES_FOLDER, dataRoots, isDesktop } from '../storage/paths'
 import type { CourseEntry } from '../model/types'
 
 /**
- * Courses dropped into a folder under AppData, read at startup.
+ * Courses dropped into a folder in the app's data folder, read at startup.
  *
  * This is the hybrid delivery ruled in SPEC.md section 10. Built-in courses
  * stay bundled and behind the test suite; adding an opening to the installed
@@ -23,8 +24,12 @@ import type { CourseEntry } from '../model/types'
  * that is not there.
  */
 
-/** The folder under AppData that courses are dropped into. */
-export const COURSES_FOLDER = 'courses'
+/**
+ * The folder that courses are dropped into, and where the app's data folder is.
+ * Both come from `storage/paths`, which is the one place that answers it, and
+ * are re-exported here because this is where callers look for them.
+ */
+export { COURSES_FOLDER, isDesktop }
 
 /** Where the scan gets its files. One implementation reads Tauri, one is a fake. */
 export interface CourseFiles {
@@ -115,39 +120,23 @@ interface FsApi {
   readTextFile: (path: string) => Promise<string>
 }
 
-interface PathApi {
-  appDataDir: () => Promise<string>
-  join: (...parts: string[]) => Promise<string>
-}
-
-/** True when the app is running inside the Tauri window rather than a browser. */
-export function isDesktop(): boolean {
-  return typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window
-}
-
 let fsApi: Promise<FsApi> | null = null
-let pathApi: Promise<PathApi> | null = null
 
 function fs(): Promise<FsApi> {
   if (!fsApi) fsApi = import('@tauri-apps/plugin-fs') as unknown as Promise<FsApi>
   return fsApi
 }
 
-function paths(): Promise<PathApi> {
-  if (!pathApi) pathApi = import('@tauri-apps/api/path') as unknown as Promise<PathApi>
-  return pathApi
-}
-
 /** Where dropped-in courses go, for telling the trainee. Null in a browser. */
 export async function coursesFolder(): Promise<string | null> {
   if (!isDesktop()) return null
-  const api = await paths()
-  return api.join(await api.appDataDir(), COURSES_FOLDER)
+  return (await dataRoots()).courses
 }
 
-/** The desktop source: the courses folder under this app's own AppData. */
+/** The desktop source: the courses folder inside the app's data folder. */
 function desktopFiles(root: string): CourseFiles {
-  const at = async (...parts: string[]) => (await paths()).join(root, ...parts)
+  const at = async (...parts: string[]) =>
+    (await import('@tauri-apps/api/path')).join(root, ...parts)
   return {
     async folders() {
       const api = await fs()
@@ -169,7 +158,7 @@ function desktopFiles(root: string): CourseFiles {
   }
 }
 
-/** Every course dropped into the AppData folder. Nothing at all in a browser. */
+/** Every course dropped into the courses folder. Nothing at all in a browser. */
 export async function loadExternalCourses(): Promise<CourseEntry[]> {
   if (!isDesktop()) return []
   const root = await coursesFolder()
