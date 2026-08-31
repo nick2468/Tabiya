@@ -1683,4 +1683,32 @@ Open items from phase 15:
    a version of the course they may no longer have. That is the honest number for
    "what stays saved", and it is the same number the re-import confirm uses.
 
-- [ ] **Review gate 15 passed**
+8. **Gate 15 drove the migration itself, against real copies of Nick's file.** The
+   phase's own tests are thorough, but this phase moves the file the project has already
+   lost once, so the gate ran the real `migrateDataFolder` through a node-backed
+   filesystem over real folders holding a real copy of `progress.json`. Seventeen
+   checks, all passing: the copy is byte-identical and counts two learnt lines, the old
+   file stays, a second run reports not-needed and does NOT overwrite live data that has
+   moved on, and each of the four failure shapes (unreadable source, unparseable source,
+   uncheckable target, corrupted copy) ends blocked with nothing left behind. The
+   corrupted-copy case is the one that matters most and it holds: the bad file is
+   removed, so the next start cannot mistake it for live data.
+9. **The delete promise checked at the model layer.** Marking a Colle line learnt gives
+   8 cards; removing the course from the catalog gives 0 while the line id stays in
+   progress; putting it back gives 8 again. That is open item 3's unproved half answered
+   as far as it can be without a drill answer, and it is the claim the confirm dialog
+   makes.
+10. **The remove grant reviewed, as item 4 asks.** `fs:allow-remove` names four literal
+   paths and only one is a progress file. Exactly one call site touches it
+   (`src/storage/migrate.ts:124`) and it is unreachable unless the app wrote that file
+   itself moments earlier: the function returns not-needed if the target already exists,
+   and treats an unanswerable existence check as failure rather than as a no. So it can
+   sweep its own bad copy and nothing else. The literal `exists` grant on the new
+   progress file is present, which is the phase 7 lesson applied.
+11. **Verified for the gate:** 561 tests and `tsc -b` clean, both re-run; the new folder
+   at `%APPDATA%\Roaming\Repertoire Trainer` holding both learnt lines; the old
+   folder still there, still `db071a7f`, 315 bytes, mtime unchanged at 11:10; the new
+   courses folder empty, so every fixture was removed; no write, mkdir or remove grant
+   anywhere on the old folder; no em dashes; trailers naming the actual model.
+
+- [x] **Review gate 15 passed** (2026-08-31)
