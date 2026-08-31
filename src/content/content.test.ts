@@ -544,6 +544,104 @@ describe('the Colle-Zukertort course', () => {
   })
 })
 
+describe('the Vienna Gambit course', () => {
+  const vienna = courseById('vienna-gambit')
+
+  it('is a White course of seven chapters', () => {
+    expect(vienna.colour).toBe('white')
+    expect(vienna.opponentColour).toBe('black')
+    expect(vienna.chapters.length).toBe(7)
+  })
+
+  it('declares the tags it uses beyond the core set', () => {
+    expect(vienna.tags).toContain('f-file')
+    expect(vienna.tags).toContain('e5-wedge')
+    expect(vienna.tags).toContain('gambit-pawn')
+    expect(vienna.tags).not.toContain('vs-c5')
+  })
+
+  it('moves the f-pawn off f2 in every chapter', () => {
+    // The claim that is really about this course. A Vienna where White never
+    // plays f4 is one of the two QUIET Viennas, which Nick ruled out on the
+    // grounds that he already owns a quiet answer to 1...e5 in the Ruy Lopez
+    // Exchange. If somebody softened this course into that one, this fails.
+    for (const chapter of vienna.chapters) {
+      const paths = walkNodes(chapter).map((node) => node.path)
+      const pushed = paths.some((path) => path.filter((_, ply) => ply % 2 === 0).includes('f4'))
+      expect(pushed, `${chapter.id} never plays f4`).toBe(true)
+    }
+  })
+
+  it('never plays f4 before the knight reaches c3', () => {
+    // The move order is the gambit. The knight on c3 is what guards e4 once
+    // the f-pawn stops doing it, so f4 first is a King's Gambit with a hole
+    // in the centre, and 2.f4 d5 is the refutation.
+    for (const chapter of vienna.chapters) {
+      for (const node of walkNodes(chapter)) {
+        if (!node.isStudent || node.san !== 'f4') continue
+        const before = node.path.slice(0, -1)
+        expect(before, `${chapter.id} ${node.path.join(' ')}`).toContain('Nc3')
+      }
+    }
+  })
+
+  describe('chapter 0, the gambit', () => {
+    it('has an intro of 300 to 500 words', () => {
+      const intro = chapterOf(vienna, 'ch0').intro
+      expect(words(intro)).toBeGreaterThanOrEqual(300)
+      expect(words(intro)).toBeLessThanOrEqual(500)
+    })
+
+    it('carries mistake entries on its core setup decisions', () => {
+      expect(positionsWithMistakes(chapterOf(vienna, 'ch0'))).toBeGreaterThanOrEqual(4)
+    })
+  })
+
+  describe('the repertoire chapters', () => {
+    for (const id of ['ch1', 'ch2', 'ch3', 'ch4', 'ch5']) {
+      it(`${id} runs its deepest line to move 10 or beyond`, () => {
+        expect(deepestFullMove(chapterOf(vienna, id))).toBeGreaterThanOrEqual(10)
+      })
+
+      it(`${id} carries mistake entries on at least ten positions`, () => {
+        expect(positionsWithMistakes(chapterOf(vienna, id))).toBeGreaterThanOrEqual(10)
+      })
+
+      it(`${id} weights every Black reply by club frequency`, () => {
+        for (const node of walkNodes(chapterOf(vienna, id))) {
+          if (!node.isStudent) {
+            expect(node.weight ?? 1, node.path.join(' ')).toBeGreaterThanOrEqual(1)
+            expect(node.weight ?? 1, node.path.join(' ')).toBeLessThanOrEqual(10)
+          }
+        }
+      })
+
+      it(`${id} tags every White move with at least one concept`, () => {
+        for (const node of walkNodes(chapterOf(vienna, id))) {
+          if (node.isStudent) expect(node.tags.length, node.path.join(' ')).toBeGreaterThan(0)
+        }
+      })
+    }
+  })
+
+  describe('chapter 6, the exercises', () => {
+    it('ends every exercise on a White move worth drilling', () => {
+      for (const line of walkNodes(chapterOf(vienna, 'ch6')).filter((node) => node.isLeaf)) {
+        expect(line.isStudent, line.path.join(' ')).toBe(true)
+      }
+    })
+
+    it('carries at least four exercises', () => {
+      const leaves = walkNodes(chapterOf(vienna, 'ch6')).filter((node) => node.isLeaf)
+      expect(leaves.length).toBeGreaterThanOrEqual(4)
+    })
+
+    it('runs each exercise deep enough to be a real position', () => {
+      expect(deepestFullMove(chapterOf(vienna, 'ch6'))).toBeGreaterThanOrEqual(10)
+    })
+  })
+})
+
 describe('the courses together', () => {
   // Course scoping makes this structural rather than lucky: a card key is the
   // course id and the position. The acceptance asks for it proved anyway,
@@ -595,5 +693,29 @@ describe('the courses together', () => {
     const disagree = shared.filter((position) => london.get(position) !== colle.get(position))
     expect(shared.length).toBeGreaterThan(0)
     expect(disagree.length).toBeGreaterThan(0)
+  })
+
+  it('has the Ruy and the Vienna agreeing on 1.e4 and parting after 1...e5', () => {
+    // The cleaner instance of the same point, added at phase 18. Both courses
+    // start their concept chapter from the initial position, so they share the
+    // very first card and answer it the same way, and then hand the same
+    // position after 1...e5 two different moves: 2.Nf3 for the Ruy, 2.Nc3 for
+    // the Vienna. One repertoire's schedule must not answer for the other's.
+    const answers = (id: string) =>
+      new Map(allCards(courseById(id)).cards.map((card) => [card.position, card.san]))
+    const ruy = answers('ruy-lopez-exchange')
+    const vienna = answers('vienna-gambit')
+
+    const shared = [...vienna.keys()].filter((position) => ruy.has(position))
+    const agree = shared.filter((position) => ruy.get(position) === vienna.get(position))
+    const disagree = shared.filter((position) => ruy.get(position) !== vienna.get(position))
+    expect(shared.length).toBeGreaterThan(0)
+    expect(agree.length, 'both courses open 1.e4').toBeGreaterThan(0)
+    expect(disagree.length).toBeGreaterThan(0)
+
+    const afterE5 = shared.find(
+      (position) => ruy.get(position) === 'Nf3' && vienna.get(position) === 'Nc3',
+    )
+    expect(afterE5, 'the two courses answer 1...e5 differently').toBeTruthy()
   })
 })
