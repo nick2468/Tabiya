@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { bundledEntries } from '../content'
 import { coursesFolder, loadExternalCourses } from '../content/external'
 import { loadedCourses, mergeCourses } from '../model/course'
@@ -12,10 +12,13 @@ import type { CourseEntry, LoadedChapter, LoadedCourse } from '../model/types'
  * for the London to wait on it: the courses that ship with the app are already
  * in memory when the window opens.
  *
- * Scanned once, at startup. Adding a course means dropping a folder in and
- * restarting, which is what SPEC.md section 10 promises and is also the honest
- * story - a course discovered halfway through a drill session would change the
- * queue under the trainee's hands.
+ * Scanned at startup, and again whenever the app itself changes the folder.
+ * Importing a course used to ask for a restart, on the worry that a course
+ * appearing mid-session would change the drill queue under the trainee's hands.
+ * It cannot: a course that has just arrived has no learnt lines, so it builds
+ * no cards and the queue is exactly what it was. A folder copied in by hand
+ * behind the app's back is still only noticed at the next start, because
+ * nothing tells the app to look.
  */
 
 export interface Catalog {
@@ -31,6 +34,8 @@ export interface Catalog {
   folder: string | null
   /** The course with this id, or undefined. */
   find: (id: string) => LoadedCourse | undefined
+  /** Reads the courses folder again, after the app has written to it. */
+  rescan: () => Promise<void>
 }
 
 const CatalogContext = createContext<Catalog | null>(null)
@@ -40,18 +45,24 @@ export function useCatalogValue(): Catalog {
   const [scanned, setScanned] = useState(false)
   const [folder, setFolder] = useState<string | null>(null)
 
-  useEffect(() => {
-    let cancelled = false
-    void Promise.all([loadExternalCourses(), coursesFolder()]).then(([found, where]) => {
-      if (cancelled) return
-      setExternal(found)
-      setFolder(where)
-      setScanned(true)
-    })
-    return () => {
-      cancelled = true
-    }
+  // Which scan is the current one. Two can be in flight at once - the one at
+  // startup and one an import asked for - and the older must not put its own
+  // answer back afterwards.
+  const run = useRef(0)
+
+  const rescan = useCallback(async () => {
+    const mine = run.current + 1
+    run.current = mine
+    const [found, where] = await Promise.all([loadExternalCourses(), coursesFolder()])
+    if (mine !== run.current) return
+    setExternal(found)
+    setFolder(where)
+    setScanned(true)
   }, [])
+
+  useEffect(() => {
+    void rescan()
+  }, [rescan])
 
   return useMemo(() => {
     const entries = mergeCourses(bundledEntries, external)
@@ -63,8 +74,9 @@ export function useCatalogValue(): Catalog {
       scanned,
       folder,
       find: (id: string) => courses.find((course) => course.id === id),
+      rescan,
     }
-  }, [external, folder, scanned])
+  }, [external, folder, rescan, scanned])
 }
 
 export function CatalogProvider({ children }: { children: React.ReactNode }) {

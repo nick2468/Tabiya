@@ -38,7 +38,7 @@ type Stage =
   | { kind: 'done'; message: string }
 
 export function ImportCourse() {
-  const { entries, folder } = useCatalog()
+  const { entries, folder, rescan } = useCatalog()
   const { state } = useProgress()
   const [stage, setStage] = useState<Stage>({ kind: 'idle' })
 
@@ -126,11 +126,13 @@ export function ImportCourse() {
     setStage({ kind: 'busy' })
     try {
       const where = await installCourse(manifest, files)
+      // Read the folder again rather than asking for a restart. A course that
+      // has just arrived has no learnt lines, so nothing that is running can
+      // change under the trainee: the catalog gains a tile and that is all.
+      await rescan()
       setStage({
         kind: 'done',
-        message:
-          `${course.title} was installed into ${where}. Restart the app to see it in ` +
-          'your courses.',
+        message: `${course.title} was installed into ${where} and is ready in your courses.`,
       })
     } catch (error) {
       // Not "nothing was written". Installing clears the folder's old chapter

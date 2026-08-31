@@ -188,9 +188,10 @@ function DropInNote({ folder, scanned }: { folder: string | null; scanned: boole
   }
   return (
     <p className="hint">
-      To add a course, put its folder in <code>{folder}</code> and restart the app. It
-      needs a <code>course.json</code> and its chapter files. A course you add cannot
-      replace one that ships with the app.
+      To add a course, put its folder in <code>{folder}</code> and restart the app; a
+      course added from a file below turns up straight away. It needs a{' '}
+      <code>course.json</code> and its chapter files. A course you add cannot replace
+      one that ships with the app.
     </p>
   )
 }

@@ -1618,7 +1618,7 @@ comes back on re-import.
   capability grants for the new location, the old grants kept because they are what
   the migration reads, verification before the new location goes live, and a failed
   migration taking the existing blocked-saving route rather than starting blank.
-- [ ] 15.2 Import refreshes the catalog; no restart. A new course has no learnt lines,
+- [x] 15.2 Import refreshes the catalog; no restart. A new course has no learnt lines,
   so it cannot change a running drill queue.
 - [ ] 15.3 Delete on imported tiles, in the actions row (the tile itself is a button,
   so a corner X cannot nest), with the confirm and an "Export it first" button rather

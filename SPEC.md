@@ -374,7 +374,9 @@ validated at load by the same collect-every-error discipline: a failing course
 appears in the catalog with its errors listed and loads nothing else, and an
 external course cannot shadow a bundled course id. The browser dev build sees the
 bundled set only. Adding an opening to the installed app means dropping a course
-folder in and restarting - no source change, no rebuild. Courses authored in this
+folder in and restarting - no source change, no rebuild. A course the app installs
+itself, through the file picker of section 11, appears without one: the app knows it
+wrote the folder, so it reads it again (phase 15). Courses authored in this
 repo still pass the full quality bar (suite plus engine pass) before being handed
 over as files.
 
@@ -558,8 +560,10 @@ worked example.
 
 1. A PGN with variations, comments and glyphs parses into a course, and a course
    exports to a PGN that parses back into an identical course.
-2. Import from the app installs a course that appears in the catalog after a restart,
-   with no reinstall and no source change.
+2. Import from the app installs a course that appears in the catalog straight away,
+   with no reinstall and no source change. It asked for a restart until phase 15,
+   which found the restart was never needed: a course that has just arrived has no
+   learnt lines, so it cannot change a running drill queue.
 3. Importing over an installed course reports how many learnt lines survive and does
    nothing at all if cancelled.
 4. A malformed or invalid bundle is refused with its errors listed and writes nothing.
