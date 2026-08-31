@@ -2023,4 +2023,62 @@ with the app started from `src-tauri/target/release`:
     number 1px from the left and 0 from the top of its square, the letter 1px from the
     right and 0 from the bottom. Still right flipped for the Caro-Kann.
 
-- [ ] **Review gate 17 passed**
+Gate 17 findings (2026-08-31):
+
+11. **The hook's guard was re-proved at the gate, including the mutant.** Both halves of
+    the guard are character-identical to the stock block, which the generated script
+    puts three lines above the `!insertmacro` at `installer.nsi:838`, and the hook is
+    included at line 31 of that script, so it is genuinely wired in. Running
+    `scripts/check-uninstall-hook.mjs` unchanged passed all four cases; running it with
+    the `${AndIf} $UpdateMode <> 1` line deleted failed case two - ticked, but an
+    upgrade - and nothing else. The builder's claim holds exactly as written. The hook
+    also fails closed on an uninitialised checkbox: NSIS reads an empty variable as 0 in
+    a numeric compare, so a silent uninstall removes nothing.
+12. **The folder names had nothing holding them, and now do.** The literals in
+    `installer-hooks.nsh` match `DATA_FOLDER` in `src/storage/paths.ts` and
+    `LOCAL_FOLDER` in `src-tauri/src/lib.rs`, checked by hand at the gate - but only a
+    comment said they had to. `check-uninstall-hook.mjs` cannot cover it, because it
+    redirects both names at scratch folders in order to run at all, and it needs
+    makensis so it is run by hand. Phase 17 added a test to hold three version strings
+    together and left the more dangerous constant on trust. `src/storage/installer-hook.test.ts`
+    now holds both folder names and both halves of the guard on every `npm test`, and
+    was verified to FAIL on a renamed folder rather than merely to pass. Landed at the
+    gate as its own commit.
+13. **`vite.config.ts` still fell back to 5173.** `package.json`'s `dev` script and
+    `devUrl` both name 5175, so `npm run dev` was safe, but a bare `npx vite` would have
+    served this app where another project answers - the exact setup that once showed
+    DataCrafter inside a window titled Repertoire Trainer. One line, fixed at the gate as
+    its own commit. Pre-existing, not phase 17's doing.
+14. **The seven presentation items were re-measured at the gate**, in the browser build
+    at 1280x900 rather than the packaged window, so they are a second and independent
+    reading: the header shows `v1.5.0`; the Course label and select share a centre at
+    y=121.3; the control row is Reset, an arrow labelled "Back one move", an arrow
+    labelled "Forward one move", Play from here, with `.line-actions` gone and only the
+    move trail's "Start" chip left in the side column; "Auto step this line" starts at
+    x=684 and the side column starts at x=684; the chapter panel carries 14px of padding
+    inside a 15px scrollbar. Every number matches the builder's record.
+15. **17.6 was verified numerically in both orientations, which is the case that could
+    have gone wrong.** White, the London: every rank number sits 1px from the left edge
+    at the exact top of its own rank, every file letter on the board's bottom edge, and
+    rank 1 and file a read `#fff6e3` on their dark squares while rank 2 and file b read
+    `#6b4c30` on their light ones. Flipped, the Caro-Kann: rank 1 is now on h1 and reads
+    dark, file a is now on a8 and reads dark, and the alternation is right the whole way
+    round. The DOM order does not flip - chessground writes ranks 1-8 and files a-h and
+    turns the flex direction round instead - so the `.black` rules are what carry it, and
+    they do.
+16. **The chip was wrong about the brown theme and the builder was right.** The chip said
+    it colours only `coords.squares`. It also colours `.orientation-white .ranks` and
+    `.files` by `nth-child`, at `chessground.brown.css:46-62`, which is why rank 1 read
+    dark grey on the dark a1 before this phase. The app's rules beat it on specificity,
+    (0,3,2) against (0,3,0), and the `.black` ones by more. Removing `.board .cg-wrap` was
+    also right: chessground adds `cg-wrap` to the host div rather than building a child,
+    and the host carries its size inline from `Board.tsx`.
+17. **Verified for the gate from the repo:** 613 tests and `tsc -b` clean, both re-run
+    after the gate's own two commits; oxlint reports only the six warnings that predate
+    the phase; no em dashes; six builder commits with trailers naming the actual model.
+18. **Still Nick's to run**, and it cannot honestly be anyone else's: install 1.5.0 over
+    the top and check both data folders survive; uninstall with the box unticked and
+    check the same; uninstall with it ticked and check they are gone; reinstall for a
+    clean first start. Take an export from the Progress screen first.
+
+- [x] **Review gate 17 passed** (2026-08-31)
