@@ -2105,24 +2105,118 @@ a memorisation contest, so the chip recommends 3.Bc4 reaching the same ground by
 door, and lets the builder take a different branch on evidence as long as chapter 4
 answers 2...Nc6 completely.
 
-- [ ] 18.1 The variation, the chapter list and the 2...Nc6 policy - ruled in the chip.
-- [ ] 18.2 Draft the seven chapters to the section 3 bar, names on every leaf.
-- [ ] 18.3 Say honestly where the gambit is only equal.
-- [ ] 18.4 All three checkers, run twice at 500 ms, every finding re-checked at 2500 ms.
-- [ ] 18.5 One regression pass over the five courses that already shipped, recorded.
-- [ ] 18.6 The course's block in `src/content/content.test.ts`, with one claim that is
+- [x] 18.1 The variation, the chapter list and the 2...Nc6 policy - ruled in the chip.
+- [x] 18.2 Draft the seven chapters to the section 3 bar, names on every leaf.
+- [x] 18.3 Say honestly where the gambit is only equal.
+- [x] 18.4 All three checkers, run twice at 500 ms, every finding re-checked at 2500 ms.
+- [x] 18.5 One regression pass over the five courses that already shipped, recorded.
+- [x] 18.6 The course's block in `src/content/content.test.ts`, with one claim that is
   really about this course.
-- [ ] 18.7 Extend the course-scoping test: the Ruy and the Vienna agree on 1.e4 and
+- [x] 18.7 Extend the course-scoping test: the Ruy and the Vienna agree on 1.e4 and
   disagree after 1...e5.
-- [ ] 18.8 Export `docs/bundles/vienna-gambit.pgn` and confirm the round trip picked it
+- [x] 18.8 Export `docs/bundles/vienna-gambit.pgn` and confirm the round trip picked it
   up.
-- [ ] 18.9 Version 1.6.0 in all three files, held by `src/version.test.ts`.
-- [ ] 18.10 Prove it in the packaged app; delete every fixture.
+- [x] 18.9 Version 1.6.0 in all three files, held by `src/version.test.ts`.
+- [x] 18.10 Prove it in the packaged app; delete every fixture.
 
 Acceptance: the course meets the section 3 bar with names on every leaf; all three
 checkers run and recorded with the 2500 ms re-checks; the gambit's concessions measured
 rather than asserted; it round-trips through its own bundle; the scoping test covers the
 Ruy against the Vienna; 1.6.0 in all three files; it works in the packaged app; the
 other five courses untouched; vitest green and `tsc -b` clean.
+
+Open items (phase 18):
+
+1. **The gambit's concessions, measured rather than asserted.** At 2500 ms the position
+   after 3.f4 is **-0.22** for White, inside the chip's -0.3 floor, and the engine's own
+   preference at move three is only +0.24, so `engine-pass.mjs` never flagged the entry
+   move at all in six runs. The other f-pawn pushes: 2...d6 3.f4 costs 0.32 and leaves
+   **+0.20**; 3...Nf6 4.d3 Bc5 5.f4 costs 0.38 and leaves **-0.12**. All three are kept
+   and all three numbers are in the course, not just in this list.
+2. **The 500 ms passes are samplers, and this course says so again.** Four runs over an
+   identical move set reported 4, 4, 5 and 2 findings; only one move was flagged in all
+   four. Every finding was re-checked at 2500 ms before anything changed, and three of
+   the four run-specific ones came back under the threshold: ch6's `9.Bd2` at 0.37,
+   ch6's `10.O-O` at 0.29, ch3's `7.exd6` at 0.07 against 0.63 on the run that found it.
+3. **Two things the checkers found, and the course changed for them.**
+   - ch5, `2...f5 3.exf5 Nf6 4.Nf3`, cost 0.51 at 2500 ms. Replaced by **4.g4**, which
+     holds the extra pawn with a pawn and prepares g5 to drive the knight home. That
+     branch is now four lines instead of one and White is a pawn up in all of them.
+   - ch4, the `4.Bxf7+` sacrifice was oversold and the best defence was missing. After
+     `4...Kxf7 5.Qh5+ g6 6.Qxe5`, 6...Bg7 7.Qxa5 wins a knight and two pawns for the
+     bishop, but Black's best is **6...Nc6**, when 7.Qxh8 is the only good move (7.Qd5+
+     is -1.41 and 7.Qf4+ is -1.59) and White still needs 8.Nd5 and 9.Qh7 to free the
+     queen, ending about **+0.5**. That whole line is now the main branch and the
+     chapter intro says what the sacrifice is really worth.
+4. **Five findings kept, with their numbers.** ch2's `7.Nxf3` costs 1.51 at 2500 ms
+   against 7.Ke3 and is the only move flagged in every run (see item 5). ch4's `4.Bxf7+`
+   costs 0.58, which is the horizon effect of a sacrifice: the engine picks Bxf7+ itself
+   at the parent and then re-values the child from a piece down. ch6's `9.Bd2` (0.37),
+   ch6's `10.O-O` (0.29) and ch3's `7.exd6` (0.07) are all under the threshold at 2500 ms.
+5. **The chip's grading rule and SPEC section 3 disagree about one move, and it is
+   recorded rather than resolved.** The chip says any non-gambit student move still
+   costing 0.5 at 2500 ms is a real fault; SPEC section 3 says that where two choices
+   are both sound, take the one needing less memorisation. ch2's `7.Nxf3` is both: it
+   costs 1.51 against 7.Ke3, and it leaves White **+1.07** with the king reaching f2 next
+   move instead of walking to e3 in a sharp position. The course keeps 7.Nxf3, authors
+   7.Ke3 as a graded alternative that names both numbers, and leaves the rule question
+   for the gate. Nothing was softened: the ruled line is unchanged.
+6. **Eleven mistake grades were wrong and `engine-mistakes.mjs` said so.** The first run
+   found six disagreements, all "graded too kindly" except one band-edge "too harshly".
+   Two were real blunders sold as inaccuracies: ch0 and ch1's `10.Bc4+`, which loses a
+   piece to 10...Nxc3 11.bxc3 dxc4, and ch0's `12.Bxb7`, which drops the bishop straight
+   back. One was the opposite: `2.f4` instead of 2.Nc3 costs 0.64, under the mistake
+   band's floor, and is now an inaccuracy. A second run flagged ch4's `Bxf7+` alternative
+   at 1.88 against the 1.80 band edge, and it turned out to be worse than a band edge:
+   at 2500 ms that sacrifice leaves White **-1.72**, so it is graded a mistake now. The
+   last two runs over the finished content found **0 and 0**.
+7. **`note-claims.mjs` did work on this course, which is a finding about the checker.**
+   Gate 14 recorded 0 parseable claims in 77 Colle entries, because that course's prose
+   used idioms the checker does not read. Here it parsed 7 claims out of 100 entries and
+   said 4 of them were not supported by the board. Three were real prose faults and one
+   was the checker's documented baseline effect: ch4's "loses a bishop" is true in
+   absolute terms, and the checker measures against the repertoire line, where White has
+   already given the bishop for two pawns on f7. All four notes were rewritten anyway,
+   and the final runs report **0 unsupported** with 5 claims checked. So the difference
+   between the Colle and this course is the prose, not the checker.
+8. **The by-hand read found two more notes the board does not support**, both the class
+   no checker sees. ch1's `6.Bb5` entry said 6.d3 lets Black "take on e5", when
+   6...Nxc3 7.bxc3 Nxe5 8.Nxe5 loses a piece for Black; the real answer is 7...d4, and
+   the note says so now. ch5's `4.g4` entry claimed Black "wins the pawn on f5 back"
+   after 4.Nf3, which the engine does not show in either main try. Both rewritten.
+9. **18.5, one pass over the five courses that already shipped: 12 findings, none
+   fixed.** The Caro-Kann reported 0. The Colle reported 2 (`d4 c5 e3` at 0.51 and a b3
+   at 0.50), the London 4 (the 2.02 on `Nb5` after ...Qxb2 is the pawn-grab punishment,
+   plus three around 0.5), the Slav 3 and the Ruy 3. **The Ruy's three are all `Bxc6`**,
+   which is the Exchange Variation's defining move: the checker penalises a repertoire's
+   own concession in every course, not only in a gambit. Their content is settled and
+   swept, so this is a regression read, not a to-do list.
+10. **The 2...Nc6 branch took the chip's door and not its move.** 3.f4 exf4 4.Nf3 g5
+    measures -0.5 for White with every try, so 3.Bc4 stands. But the chip's follow-up,
+    "play f4 next when Black plays ...Nf6 anyway", loses a pawn: 3.Bc4 Nf6 4.f4 Nxe4
+    5.Nxe4 d5 forks bishop and knight, and after 6.Bd3 dxe4 7.Bxe4 exf4 Black is a pawn
+    up. So the f-pawn waits for **d3** first, and against an early ...Bc5 it waits for
+    **Na4** to trade the bishop off, because 3...Bc5 4.d3 d6 5.f4 runs into 5...Bxg1 and
+    6...Qh4+. Both are authored as graded mistakes with the reason, and the chapter's
+    rule is one sentence: deal with the bishop on c5 before the pawn moves.
+11. **The bundle landed with the content**, for the reason gate 14 recorded: the suite
+    holds `docs/bundles/*.pgn` to the writer's current output, so content without its
+    bundle is a red commit. The round trip picked the new course up on its own, checked
+    rather than assumed: `exports vienna-gambit and reads it back as the same course`.
+12. **Proved in the packaged 1.6.0 app, driven over the DevTools port.** Six tiles with
+    the Vienna last, "0 of 89 lines learnt"; the header reads v1.6.0; Study opens all
+    seven chapters and auto step walked `4...Nd5 and the king walk` to 10.Bd3 with the
+    note, the plan and the `bishop-placement` tag showing and the forward arrow disabled;
+    Play from here started a game from that exact position and Stockfish answered
+    10...g5. Ticking one Vienna line took Drill from 17 cards to 24 and offered "The
+    Vienna Gambit 7 due" as its own queue, seven cards for the line's seven White moves,
+    and a card rendered saying "White to move. Play the move the repertoire plays."
+13. **The fixture was one tick, and it is gone.** Nothing was dropped into AppData,
+    because the course is bundled. The one write was the learnt flag, and the app's own
+    screens read the same numbers before and after: 2 of 308 lines learnt across 6
+    courses, 17 cards, 17 due now, 17 never answered, and the Vienna tile back at 0 of
+    89. No drill card was answered and no game was finished, so nothing else could have
+    been written. **Nick's own files are still his to check**: this session cannot list
+    his folders honestly and did not try.
 
 - [ ] **Review gate 18 passed**

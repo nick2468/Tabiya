@@ -187,9 +187,11 @@ Not in v1: other openings and the classical move order (the data model allows bo
 a Black repertoire, online play, accounts or sync, mobile, video. The first two of
 those arrived in v2: the Caro-Kann shipped at phase 8 and is a Black repertoire, the
 Slav followed at phase 9, and the Ruy Lopez Exchange at phase 12 as the first course
-delivered as a bundle, and the Colle-Zukertort at phase 14 as Nick's second White
-system against 1...d5, chosen so that the two structures teach each other. Five
-courses, two colours, three of them White.
+delivered as a bundle, the Colle-Zukertort at phase 14 as Nick's second White
+system against 1...d5, chosen so that the two structures teach each other, and the
+Vienna Gambit at phase 18 as his second White answer to 1...e5, chosen so that the
+two ask opposite questions about the same first move. Six courses, two colours, four
+of them White.
 
 Deferred with reasons (the register; a later phase working nearby may take one along):
 
@@ -335,6 +337,13 @@ number of built-in courses, the third is the patch number. So the five-course bu
 build time, and a test holds `package.json`, `src-tauri/tauri.conf.json` and
 `src-tauri/Cargo.toml` to the same string - they said 0.0.0, 1.1.0 and 1.1.0 when the
 phase started, which did not matter while nothing displayed it and matters now.
+
+2026-08-31, phase 18: **the Vienna Gambit**, 1.e4 e5 2.Nc3 Nf6 3.f4, over the two quiet
+Viennas (3.g3 and 3.Bc4). Same reasoning that picked the Zukertort over the Koltanowski:
+the Ruy Lopez Exchange already teaches the quiet, structural answer to 1...e5, so a
+second one would teach a shape Nick has, and a gambit teaches a different kind of chess.
+Course id `vienna-gambit`, permanent, because it is written into every line id and card
+key in the progress file.
 
 ## 9. v1 acceptance
 
