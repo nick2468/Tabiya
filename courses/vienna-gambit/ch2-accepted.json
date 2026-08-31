@@ -18,8 +18,8 @@
         },
         {
           "san": "Bc4",
-          "grade": "playable",
-          "note": "Sound, and it lets Black solve his problems with ...c6 and ...d5. Pushing the pawn keeps him tied up, which is worth more than a diagonal."
+          "grade": "inaccuracy",
+          "note": "It hands the edge back. Black answers ...c6 and ...d5, solves his problems and is already a shade better, where 4.e5 leaves White clearly on top. Keeping him tied up is worth more than the diagonal."
         }
       ],
       "children": [
@@ -62,8 +62,8 @@
                               "mistakes": [
                                 {
                                   "san": "Bd3",
-                                  "grade": "playable",
-                                  "note": "Perfectly reasonable, and it lets Black consolidate with ...exd4. The check is worth a tempo and the tempo is worth the pawn."
+                                  "grade": "inaccuracy",
+                                  "note": "It lets Black consolidate with ...exd4, and that is worth more than a pawn here. The check comes first for a reason: the tempo is what holds the extra pawn together."
                                 }
                               ],
                               "children": [

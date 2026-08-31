@@ -380,8 +380,8 @@ Blocking the check on move six with 6.g3, which throws away everything the posit
 {The point of the whole gambit. The pawn goes forward with a hit on the knight, and Black loses time before he has developed a single piece. [%tags e5-wedge] [%cal Re5f6]}
 ( 4. Nf3?!
 {This is the King's Gambit, a move order late. Black plays ...g5 and holds the extra pawn, and White has walked into several times the theory for a worse position.}
-) ( 4. Bc4!?
-{Sound, and it lets Black solve his problems with ...c6 and ...d5. Pushing the pawn keeps him tied up, which is worth more than a diagonal.}
+) ( 4. Bc4?!
+{It hands the edge back. Black answers ...c6 and ...d5, solves his problems and is already a shade better, where 4.e5 leaves White clearly on top. Keeping him tied up is worth more than the diagonal.}
 ) 4... Ng8
 {The honest retreat. Black gives back two tempi to keep the extra pawn and a sound position. [%weight 7]}
 ( 4... Qe7
@@ -485,8 +485,8 @@ Blocking the check on move six with 6.g3, which throws away everything the posit
 {Pile onto the e-file with the king still in the middle. Black's extra pawn is worth nothing while he cannot castle. [%tags development] [%plan Play d5 to kick the knight, take on e5, and open the f-file with Bxf4. Development is the currency here, not pawns.] [%line 6...Nc6 with the tension kept]}
 ) 7. Bb5+
 {The check first. Black must block or move the king, and every block puts a piece somewhere it did not want to go. [%tags bishop-placement]}
-( 7. Bd3!?
-{Perfectly reasonable, and it lets Black consolidate with ...exd4. The check is worth a tempo and the tempo is worth the pawn.}
+( 7. Bd3?!
+{It lets Black consolidate with ...exd4, and that is worth more than a pawn here. The check comes first for a reason: the tempo is what holds the extra pawn together.}
 ) 7... c6
 {The natural block, and it hits the bishop while gaining a square for the queen. [%weight 6]}
 ( 7... Bd7
