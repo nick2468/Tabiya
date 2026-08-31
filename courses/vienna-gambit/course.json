@@ -1,0 +1,26 @@
+{
+  "id": "vienna-gambit",
+  "title": "The Vienna Gambit",
+  "colour": "white",
+  "tagline": "A pawn for the f-file and the centre, as White against 1...e5.",
+  "formatVersion": 1,
+  "chapters": [
+    "ch0-the-gambit.json",
+    "ch1-d5.json",
+    "ch2-accepted.json",
+    "ch3-declined.json",
+    "ch4-nc6.json",
+    "ch5-everything-else.json",
+    "ch6-tactics-and-plans.json"
+  ],
+  "tagExtensions": [
+    "f-file",
+    "e5-wedge",
+    "gambit-pawn",
+    "big-centre",
+    "vs-d5",
+    "vs-accepted",
+    "vs-declined",
+    "vs-nc6"
+  ]
+}

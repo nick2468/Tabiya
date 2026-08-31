@@ -1,0 +1,223 @@
+{
+  "id": "ch0-the-gambit",
+  "title": "The gambit and its idea",
+  "intro": "The Vienna Gambit gives a pawn away on move three to open the f-file and take the centre: 1.e4 e5 2.Nc3 Nf6 3.f4. The move order is the whole trick. The knight on c3 guards e4, which is exactly the square the f-pawn stops covering the moment it moves.\n\n## What the pawn buys\n\nThree things. The f-file opens for a rook that is already sitting on f1, so the attack needs no preparation. The pawn that lands on e5 becomes a wedge in front of Black's king, taking f6 and d6 away from his pieces. And d4 follows, so White finishes with pawns on d4 and e5 against a centre that has been cleared out.\n\nThe piece homes are short enough to remember: knights to c3 and f3, bishop to d3, pawn to d4, castle short, and the rook is already on the file it wants.\n\n## Your second answer to 1...e5\n\nYou already play the Ruy Lopez Exchange against 1...e5, and this is the opposite question asked in the same position. The Exchange asks what a structure is worth in an endgame: trade on c6, keep the healthier majority, and grind. The Gambit asks what a pawn is worth for a file and a centre, and that question is answered by move fifteen or not at all. A second quiet system would only teach you a shape you already have.\n\n## Where it is honest\n\nAgainst the best reply, 3...d5, White is not better. The main lines of chapter 1 measure level, and a chapter promising more than that would be lying to you. What White gets is a position where every piece has a job and Black has to know what he is doing. Against everything else, from 3...exf4 to the third moves that decline, White is genuinely better, and often much better.\n\n## Typical mistakes at this level\n\nPlaying f4 before Nc3, so that ...d5 hits e4 with nothing guarding it. Taking on e4 with a knight when the pawn on e5 is doing more work than a knight would. Starting the attack before d4 and castling are in. And treating every Black reply as if it were 3...d5: most of the others lose material to a plain recapture, and this course shows which.",
+  "defaultTags": ["development"],
+  "stem": [],
+  "tree": [
+    {
+      "san": "e4",
+      "note": "The first move of the repertoire. Everything here follows from the king's pawn and the knight that comes next.",
+      "children": [
+        {
+          "san": "e5",
+          "weight": 8,
+          "note": "The reply this course answers. Black takes his share of the centre and opens his own bishop.",
+          "children": [
+            {
+              "san": "Nc3",
+              "note": "The Vienna move, and the reason the gambit works at all. The knight guards e4 so that the f-pawn can leave it.",
+              "shapes": [{ "orig": "c3", "dest": "e4", "brush": "green" }],
+              "mistakes": [
+                {
+                  "san": "f4",
+                  "grade": "inaccuracy",
+                  "note": "The King's Gambit, which is a different opening and a much bigger one. Here it is out of order: after 2.f4 d5 the e4 pawn has nobody looking after it."
+                },
+                {
+                  "san": "Nf3",
+                  "grade": "playable",
+                  "note": "Perfectly good, and it is the move your Ruy Lopez plays. This course exists to ask the other question."
+                }
+              ],
+              "children": [
+                {
+                  "san": "Nf6",
+                  "weight": 8,
+                  "note": "Black develops and hits e4. This is the main move and the one the course is built around.",
+                  "children": [
+                    {
+                      "san": "f4",
+                      "note": "The gambit. White offers the e-pawn a target and opens the f-file, trusting the knight on c3 to hold e4 for one more move.",
+                      "tags": ["gambit-pawn", "f-file"],
+                      "shapes": [{ "orig": "f4", "dest": "e5", "brush": "red" }],
+                      "mistakes": [
+                        {
+                          "san": "Bc4",
+                          "grade": "playable",
+                          "note": "The quiet Vienna. Sound, and it teaches the same slow chess your Ruy already teaches, which is why it is not the course."
+                        },
+                        {
+                          "san": "g3",
+                          "grade": "playable",
+                          "note": "The other quiet Vienna, with the bishop going to g2. Also sound, also a different course."
+                        }
+                      ],
+                      "children": [
+                        {
+                          "san": "d5",
+                          "weight": 8,
+                          "note": "The correct answer, and the only one that keeps Black level. Black hits back in the centre instead of taking the pawn.",
+                          "children": [
+                            {
+                              "san": "fxe5",
+                              "note": "Take. The pawn that lands on e5 is the wedge the whole system leans on, and it drives the f6 knight away from the centre.",
+                              "tags": ["e5-wedge"],
+                              "children": [
+                                {
+                                  "san": "Nxe4",
+                                  "weight": 9,
+                                  "note": "Black grabs back rather than retreat. The knight on e4 looks strong and is really just short of squares.",
+                                  "children": [
+                                    {
+                                      "san": "Nf3",
+                                      "note": "Develop and hold e5. The modern main line: White finishes the setup instead of chasing the knight.",
+                                      "mistakes": [
+                                        {
+                                          "san": "Nxe4",
+                                          "grade": "inaccuracy",
+                                          "note": "This hands Black the centre back after 5...dxe4, and the pawn on e5 loses its support. Leave the knight alone and build."
+                                        },
+                                        {
+                                          "san": "Qf3",
+                                          "grade": "playable",
+                                          "note": "The old main line, hitting e4 and d5 at once. Playable, and it costs more memorising than Nf3 does."
+                                        }
+                                      ],
+                                      "children": [
+                                        {
+                                          "san": "Be7",
+                                          "weight": 6,
+                                          "note": "Black develops and prepares to castle, keeping the knight on e4 for now.",
+                                          "children": [
+                                            {
+                                              "san": "d4",
+                                              "note": "The other half of the centre. Pawns on d4 and e5 take every good square from Black's minor pieces.",
+                                              "tags": ["big-centre"],
+                                              "children": [
+                                                {
+                                                  "san": "O-O",
+                                                  "weight": 7,
+                                                  "note": "Black tucks the king away before anything opens up.",
+                                                  "children": [
+                                                    {
+                                                      "san": "Bd3",
+                                                      "note": "The bishop aims at h7 and challenges the knight on e4 at the same time.",
+                                                      "tags": ["bishop-placement"],
+                                                      "children": [
+                                                        {
+                                                          "san": "f5",
+                                                          "weight": 6,
+                                                          "note": "Black props the knight up with a pawn and stops Bxe4 being an option.",
+                                                          "children": [
+                                                            {
+                                                              "san": "exf6",
+                                                              "note": "Take en passant. Leaving the pawn on e5 would let Black seal the position, and taking keeps the f-file open, which is what White paid for.",
+                                                              "tags": ["f-file"],
+                                                              "mistakes": [
+                                                                {
+                                                                  "san": "Ne2",
+                                                                  "grade": "inaccuracy",
+                                                                  "note": "Retreating lets Black play ...c5 and seal the centre. The f-file is the asset, so keep it open."
+                                                                }
+                                                              ],
+                                                              "children": [
+                                                                {
+                                                                  "san": "Bxf6",
+                                                                  "weight": 7,
+                                                                  "note": "Black recaptures with the bishop, which keeps the knight on e4 and eyes d4.",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "O-O",
+                                                                      "note": "Castle, and the rook lands on the open f-file without being moved.",
+                                                                      "tags": ["king-safety", "f-file"],
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Nc6",
+                                                                          "weight": 7,
+                                                                          "note": "Black brings the last minor piece out and adds a second attacker to d4.",
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Nxe4",
+                                                                              "note": "Now the trade is right. Black's knight is the piece holding his position together, and taking it opens the long light diagonal for the bishop.",
+                                                                              "mistakes": [
+                                                                                {
+                                                                                  "san": "Bc4+",
+                                                                                  "grade": "mistake",
+                                                                                  "note": "The check loses a piece. 10...Nxc3 11.bxc3 dxc4 takes the bishop, because the knight on e4 was the only thing holding d5."
+                                                                                }
+                                                                              ],
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "dxe4",
+                                                                                  "weight": 8,
+                                                                                  "note": "Black must take back with the pawn, which leaves that pawn loose on e4.",
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "Bxe4",
+                                                                                      "note": "Collect it. White is level on material with the better minor pieces and the open file.",
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "Nxd4",
+                                                                                          "weight": 6,
+                                                                                          "note": "Black takes the d-pawn back at once rather than let White settle.",
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "san": "Be3",
+                                                                                              "note": "Develop with a hit on the knight. Everything White owns is now on a good square and the game is balanced.",
+                                                                                              "mistakes": [
+                                                                                                {
+                                                                                                  "san": "Bxb7",
+                                                                                                  "grade": "mistake",
+                                                                                                  "note": "The pawn is not free. 12...Bxb7 takes the bishop straight back, and the knight on d4 still comes to f3 with check on top of it."
+                                                                                                }
+                                                                                              ],
+                                                                                              "plan": "Finish with c3 or Qd2 and double on the f-file. The bishop pair and the file are worth about what Black's activity is worth, so play for the small edge and do not force it.",
+                                                                                              "name": "The main line, move by move"
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

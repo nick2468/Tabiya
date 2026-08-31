@@ -1,0 +1,855 @@
+{
+  "id": "ch3-declined",
+  "title": "Third moves that decline",
+  "intro": "Black can neither take on f4 nor hit back with ...d5, and instead develop a piece: 3...d6, 3...Bc5, 3...Nc6 or 3...Bb4. Three of the four lose material to a plain recapture, and the fourth gives White the centre.\n\nOne rule sorts them. If Black has not defended the e5 pawn with something that also holds f6, take it. 4.fxe5 hits the knight, and the knight has no good answer.\n\n## The four answers\n\n3...d6 is the sound one. It guards e5 with a pawn, so taking helps Black. Play 4.Nf3 instead and follow with d4: Black has spent a move on a modest pawn and White gets the full centre for it.\n\n3...Bc5, 3...Nc6 and 3...Bb4 all meet 4.fxe5. After 4...Nxe4 the knight on e4 has no defender either, so 5.Nxe4 wins a piece outright in two of the three lines. Count what is hanging before you look for anything cleverer.\n\n## Why the bishop moves fail\n\n3...Bc5 and 3...Bb4 develop at the pawn on e5 rather than defending it. 3...Bc5 4.fxe5 Nxe4 5.Nxe4 Bxg1 6.Rxg1 leaves White a bishop up, because Black gave a bishop for a knight and a knight for a pawn. 3...Bb4 4.fxe5 Nxe4 5.Nxe4 is the same idea with an extra pin that does not save anything.\n\n## Typical mistakes at this level\n\nPlaying 4.Nf3 against 3...Bc5 out of habit, which turns a won position into an equal one. Taking on e5 against 3...d6, which is the one time the recapture helps Black. Reaching for 5.Qg4 when 5.Nxe4 simply wins. And, after 3...Nc6 4.fxe5 Nxe5 5.d4, being afraid to push the pawn to e5 again because it looks loose.",
+  "defaultTags": ["vs-declined"],
+  "stem": ["e4", "e5", "Nc3", "Nf6", "f4"],
+  "tree": [
+    {
+      "san": "d6",
+      "weight": 7,
+      "note": "The sound decline. The pawn holds e5, so taking would only help Black develop.",
+      "children": [
+        {
+          "san": "Nf3",
+          "note": "Develop instead. Black has used a move on a modest pawn, and White collects the centre with d4 next.",
+          "tags": ["development"],
+          "mistakes": [
+            {
+              "san": "fxe5",
+              "grade": "inaccuracy",
+              "note": "The one position in this chapter where taking is wrong. After 4...dxe5 Black recaptures with a pawn, has an equal share of the centre and the freer game."
+            },
+            {
+              "san": "d4",
+              "grade": "playable",
+              "note": "Also good, and it commits the centre before the knight is out. The move order costs nothing either way."
+            }
+          ],
+          "children": [
+            {
+              "san": "Nc6",
+              "weight": 7,
+              "note": "Black develops and adds a second guard to e5.",
+              "children": [
+                {
+                  "san": "d4",
+                  "note": "Now push. Black has to release the tension or watch White take twice on e5.",
+                  "tags": ["big-centre"],
+                  "mistakes": [
+                    {
+                      "san": "Bb5",
+                      "grade": "playable",
+                      "note": "Sound, and slower. The pawn push is worth more here because Black has no way to hit the centre back."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "exd4",
+                      "weight": 7,
+                      "note": "Black takes rather than allow dxe5 with a hit on the knight.",
+                      "children": [
+                        {
+                          "san": "Nxd4",
+                          "note": "Recapture with the knight, which lands in the centre and eyes c6 and f5.",
+                          "mistakes": [
+                            {
+                              "san": "Nd5",
+                              "grade": "inaccuracy",
+                              "note": "It looks like a fork and is not: 6...Nxe4 and Black has taken the pawn back with a good game. Take the pawn on d4 first."
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "g6",
+                              "weight": 6,
+                              "note": "Black heads for a fianchetto, which is the sensible plan against a pawn on f4.",
+                              "children": [
+                                {
+                                  "san": "Nxc6",
+                                  "note": "Trade first. Black's pawns are doubled and the b-file opens for a rook.",
+                                  "children": [
+                                    {
+                                      "san": "bxc6",
+                                      "weight": 7,
+                                      "note": "The right recapture for Black, and it still leaves a weak pawn on c6.",
+                                      "children": [
+                                        {
+                                          "san": "Bd3",
+                                          "note": "The bishop takes its diagonal and covers e4, so the f-pawn is free to advance later.",
+                                          "tags": ["bishop-placement"],
+                                          "children": [
+                                            {
+                                              "san": "Bg7",
+                                              "weight": 7,
+                                              "note": "Black completes the fianchetto and eyes the long diagonal.",
+                                              "children": [
+                                                {
+                                                  "san": "O-O",
+                                                  "note": "Castle. The rook lands on the f-file and the pawn there is going forward.",
+                                                  "tags": ["king-safety", "f-file"],
+                                                  "children": [
+                                                    {
+                                                      "san": "O-O",
+                                                      "weight": 7,
+                                                      "note": "Black castles into the file White is about to open.",
+                                                      "children": [
+                                                        {
+                                                          "san": "f5",
+                                                          "note": "Push. The pawn takes g6 away, opens the f-file when Black takes, and starts an attack that costs nothing.",
+                                                          "tags": ["kingside-attack", "f-file"],
+                                                          "plan": "Follow with Qg4 or Qe1 and Bh6 to trade the fianchetto bishop. Black's doubled c-pawns mean there is no counterplay to come.",
+                                                          "name": "3...d6 and the fianchetto"
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "exf4",
+              "weight": 6,
+              "note": "Black takes after all, one move later than usual and with the pawn already on d6.",
+              "children": [
+                {
+                  "san": "d4",
+                  "note": "Build. There is no rush to take the pawn back on f4, because it is not going anywhere.",
+                  "tags": ["big-centre"],
+                  "mistakes": [
+                    {
+                      "san": "Bc4",
+                      "grade": "playable",
+                      "note": "Fine, and it lets Black play ...g5 to hold the pawn. Taking the centre first makes ...g5 far less appealing."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "Nh5",
+                      "weight": 6,
+                      "note": "Black props the pawn up from the side.",
+                      "children": [
+                        {
+                          "san": "Nd5",
+                          "note": "The knight jumps in with a hit on c7, so Black has to spend the move he wanted for ...g5.",
+                          "tags": ["development"],
+                          "children": [
+                            {
+                              "san": "Be7",
+                              "weight": 6,
+                              "note": "Black covers c7 and develops in one.",
+                              "children": [
+                                {
+                                  "san": "Nxf4",
+                                  "note": "Now take, on White's terms, with a trade that leaves the knight on h5 looking silly.",
+                                  "tags": ["development"],
+                                  "plan": "Recapture with the bishop when Black trades, then Qd2 and castle long. The centre and the file are both White's.",
+                                  "name": "3...d6 and the late ...exf4"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "d5",
+                      "weight": 6,
+                      "note": "Black hits back in the centre before White consolidates.",
+                      "children": [
+                        {
+                          "san": "exd5",
+                          "note": "Take. The pawn on d5 will fall or be traded, and White keeps the extra centre pawn.",
+                          "children": [
+                            {
+                              "san": "Nxd5",
+                              "weight": 7,
+                              "note": "Black recaptures with the knight to keep the position open.",
+                              "children": [
+                                {
+                                  "san": "Nxd5",
+                                  "note": "Trade. Black's queen is dragged to d5 where the bishop can hit it.",
+                                  "children": [
+                                    {
+                                      "san": "Qxd5",
+                                      "weight": 7,
+                                      "note": "Forced, and the queen is now on a square White would like to attack.",
+                                      "children": [
+                                        {
+                                          "san": "Bd3",
+                                          "note": "Develop with the c2 pawn behind it, so c4 comes next with a gain of time on the queen.",
+                                          "tags": ["bishop-placement"],
+                                          "plan": "Play Bxf4 and castle, then c4 to push the queen back. A safe extra pawn in the centre and no weaknesses.",
+                                          "name": "3...d6 then ...exf4 and ...d5"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Bg4",
+              "weight": 5,
+              "note": "Black pins the knight to remove the guard on d4 and e5.",
+              "children": [
+                {
+                  "san": "Be2",
+                  "note": "Break the pin at once. The bishop was going here anyway and the knight goes back to work.",
+                  "tags": ["bishop-placement"],
+                  "children": [
+                    {
+                      "san": "Nc6",
+                      "weight": 7,
+                      "note": "Black develops and leans on e5 and d4.",
+                      "children": [
+                        {
+                          "san": "O-O",
+                          "note": "Castle. There is nothing to fear on the f-file with the king on g1.",
+                          "tags": ["king-safety"],
+                          "children": [
+                            {
+                              "san": "Be7",
+                              "weight": 7,
+                              "note": "Black develops and gets ready to castle.",
+                              "children": [
+                                {
+                                  "san": "Kh1",
+                                  "note": "The quiet move that makes everything work. It steps off the a7 to g1 diagonal so that fxe5 and d4 can follow without any checks.",
+                                  "tags": ["king-safety"],
+                                  "plan": "Then d3 and Qe1, or fxe5 followed by d4. Black has no break, so build the attack at your own pace.",
+                                  "name": "3...d6 with the pin on f3"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Be7",
+              "weight": 5,
+              "note": "Black develops quietly and waits for White to commit.",
+              "children": [
+                {
+                  "san": "d4",
+                  "note": "Take the centre while it is free. Every move Black spends not challenging it makes it stronger.",
+                  "tags": ["big-centre"],
+                  "children": [
+                    {
+                      "san": "exd4",
+                      "weight": 7,
+                      "note": "Black releases the tension before it becomes uncomfortable.",
+                      "children": [
+                        {
+                          "san": "Nxd4",
+                          "note": "Recapture with the knight and finish developing. White has a pleasant space edge and the f-file to work with.",
+                          "tags": ["development"],
+                          "plan": "Bd3, castle and Qe1, then push f5 or e5 depending on where Black's king goes. Nothing forcing, just more space.",
+                          "name": "3...d6 with a quiet ...Be7"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Bc5",
+      "weight": 6,
+      "note": "Black develops at f2 and ignores the pawn on e5, which is the most common way to go wrong here.",
+      "children": [
+        {
+          "san": "fxe5",
+          "note": "Take. The bishop on c5 does not defend e5, and the knight on f6 now has to move without a good square to go to.",
+          "tags": ["tactics"],
+          "shapes": [{ "orig": "e5", "dest": "f6", "brush": "red" }],
+          "mistakes": [
+            {
+              "san": "Nf3",
+              "grade": "mistake",
+              "note": "The natural developing move gives away a free pawn and a large edge. Take the pawn: Black has not defended it and cannot recapture."
+            }
+          ],
+          "children": [
+            {
+              "san": "Nxe4",
+              "weight": 7,
+              "note": "Black grabs back and relies on the bishop on c5 hitting g1.",
+              "children": [
+                {
+                  "san": "Nxe4",
+                  "note": "Take. The knight on e4 has no defender, and Black's counter on g1 wins only a knight for a bishop.",
+                  "tags": ["tactics"],
+                  "mistakes": [
+                    {
+                      "san": "Qg4",
+                      "grade": "mistake",
+                      "note": "It goes hunting for g7 when there is a whole piece on offer. Take on e4 and count the material afterwards."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "Bxg1",
+                      "weight": 7,
+                      "note": "Black takes what he can, giving a bishop for a knight to justify the last two moves.",
+                      "children": [
+                        {
+                          "san": "Rxg1",
+                          "note": "Recapture with the rook. Count it up: White is a clean piece ahead and the rook on g1 is not badly placed.",
+                          "children": [
+                            {
+                              "san": "d5",
+                              "weight": 7,
+                              "note": "Black hits the knight and opens the bishop, which is all he can do.",
+                              "children": [
+                                {
+                                  "san": "Ng3",
+                                  "note": "Step back to a good square. The knight guards e4 and f5 and keeps the extra piece.",
+                                  "tags": ["development"],
+                                  "children": [
+                                    {
+                                      "san": "O-O",
+                                      "weight": 6,
+                                      "note": "Black castles and hopes for something on the f-file.",
+                                      "children": [
+                                        {
+                                          "san": "d4",
+                                          "note": "Build a wall. With the centre closed and a piece in hand, there is nothing for Black to attack.",
+                                          "tags": ["big-centre"],
+                                          "plan": "Play Be3 and Qd2, castle long, and trade pieces whenever Black offers. A piece is a piece.",
+                                          "name": "3...Bc5 and 4...Nxe4"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Ng8",
+              "weight": 6,
+              "note": "The honest retreat. Black is a pawn down with a piece back on its starting square.",
+              "children": [
+                {
+                  "san": "d4",
+                  "note": "Push, hitting the bishop and taking the whole centre in one move.",
+                  "tags": ["big-centre"],
+                  "mistakes": [
+                    {
+                      "san": "Qg4",
+                      "grade": "playable",
+                      "note": "Also strong, and it starts an attack before the pieces are out. The pawn move is simpler and just as good."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "Bb6",
+                      "weight": 7,
+                      "note": "The bishop keeps the diagonal, where it looks at a pawn on d4 that is well defended.",
+                      "children": [
+                        {
+                          "san": "Nf3",
+                          "note": "Develop and hold everything. White is a pawn up with a big centre and a lead of several moves.",
+                          "tags": ["development"],
+                          "children": [
+                            {
+                              "san": "Ne7",
+                              "weight": 6,
+                              "note": "The knight comes out on the passive square, since f6 is taken by the pawn on e5.",
+                              "children": [
+                                {
+                                  "san": "Bc4",
+                                  "note": "The bishop takes aim at f7, which is exactly where Black is weakest with a knight on e7.",
+                                  "tags": ["bishop-placement"],
+                                  "children": [
+                                    {
+                                      "san": "O-O",
+                                      "weight": 7,
+                                      "note": "Black castles into the attack because there is nowhere better.",
+                                      "children": [
+                                        {
+                                          "san": "Ng5",
+                                          "note": "The knight joins in with a hit on f7 and h7 at once. Black has to give material or the king.",
+                                          "tags": ["kingside-attack"],
+                                          "plan": "Follow with Qh5 or Nxf7, and bring the second rook across. Black has no defenders on that side of the board.",
+                                          "name": "3...Bc5 and the knight retreats"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "d6",
+              "weight": 4,
+              "note": "Black tries to hold the knight by undermining the pawn, and forgets what the pawn is attacking.",
+              "children": [
+                {
+                  "san": "exf6",
+                  "note": "Take the knight. The pawn on f6 also hits g7, so Black cannot even recapture in peace.",
+                  "tags": ["tactics"],
+                  "mistakes": [
+                    {
+                      "san": "d4",
+                      "grade": "playable",
+                      "note": "Good and less good. Taking the piece is the whole point of the position."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "Nc6",
+                      "weight": 6,
+                      "note": "Black develops and hopes the pawn on f6 falls next move.",
+                      "children": [
+                        {
+                          "san": "Nf3",
+                          "note": "Develop and hold f6 in reserve. White is a piece up with a pawn wedged on f6.",
+                          "tags": ["development"],
+                          "plan": "Take on g7 when it wins the rook, or leave the pawn there and finish developing. Either way, trade down.",
+                          "name": "3...Bc5 and 4...d6"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Ng4",
+              "weight": 3,
+              "note": "The knight jumps forward instead of back, to a square that nothing defends.",
+              "children": [
+                {
+                  "san": "Qxg4",
+                  "note": "Take it. There is no pawn on h5 and no piece covering g4, so this is simply a free knight.",
+                  "tags": ["tactics"],
+                  "mistakes": [
+                    {
+                      "san": "d4",
+                      "grade": "playable",
+                      "note": "Very strong too, and it lets the knight run. Take the piece."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "O-O",
+                      "weight": 6,
+                      "note": "Black castles and hopes for something down the f-file.",
+                      "children": [
+                        {
+                          "san": "Qg3",
+                          "note": "Step back and guard everything. The queen holds the pawn on e5 and covers f2 and g2.",
+                          "tags": ["development"],
+                          "plan": "Play d4 or Nf3 and finish developing. Nothing on the f-file works when White is a whole piece ahead.",
+                          "name": "3...Bc5 and 4...Ng4"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Nc6",
+      "weight": 6,
+      "note": "Black develops with a second guard on e5. It looks solid and it does not hold the pawn.",
+      "children": [
+        {
+          "san": "fxe5",
+          "note": "Take anyway. The knight on c6 can take back, but then White pushes it around with d4 and e5.",
+          "tags": ["e5-wedge"],
+          "mistakes": [
+            {
+              "san": "Nf3",
+              "grade": "inaccuracy",
+              "note": "It lets Black take on f4 and hold the pawn with ...g5, which is the King's Gambit theory this course exists to avoid."
+            }
+          ],
+          "children": [
+            {
+              "san": "Nxe5",
+              "weight": 7,
+              "note": "Black recaptures with the knight, which is the only way to stay level on material.",
+              "children": [
+                {
+                  "san": "d4",
+                  "note": "Push with a hit on the knight, taking the centre and a tempo together.",
+                  "tags": ["big-centre"],
+                  "mistakes": [
+                    {
+                      "san": "Nf3",
+                      "grade": "playable",
+                      "note": "Sound, and it trades off Black's best placed piece for nothing. The pawn move gains time and space instead."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "Ng6",
+                      "weight": 7,
+                      "note": "The knight steps aside to a square where it watches f4 and e5.",
+                      "children": [
+                        {
+                          "san": "e5",
+                          "note": "Push again. The pawn drives the last developed piece back to g8 and Black has nothing out at all.",
+                          "tags": ["e5-wedge"],
+                          "mistakes": [
+                            {
+                              "san": "Bd3",
+                              "grade": "playable",
+                              "note": "Perfectly good. Pushing is stronger because it wins a whole move and takes f6 away for good."
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "Ng8",
+                              "weight": 7,
+                              "note": "Back it goes. Black has moved two knights four times and has nothing to show for it.",
+                              "children": [
+                                {
+                                  "san": "Nf3",
+                                  "note": "Develop and hold the wedge. Every White piece now has a natural square.",
+                                  "tags": ["development"],
+                                  "children": [
+                                    {
+                                      "san": "Bb4",
+                                      "weight": 6,
+                                      "note": "Black pins the knight on c3 to make something happen.",
+                                      "children": [
+                                        {
+                                          "san": "h4",
+                                          "note": "The rook's pawn joins in, because Black's only developed piece is the knight on g6 and this drives it away.",
+                                          "tags": ["h-file", "kingside-attack"],
+                                          "children": [
+                                            {
+                                              "san": "d5",
+                                              "weight": 7,
+                                              "note": "Black grabs space in the centre before the h-pawn arrives.",
+                                              "children": [
+                                                {
+                                                  "san": "h5",
+                                                  "note": "Push it home. The knight has to go to f8, where it does nothing at all, and White has a free hand.",
+                                                  "tags": ["kingside-attack"],
+                                                  "plan": "Bring the queen to e2 or g4 and the bishop to d3, and attack down the h-file. Black has one piece out and it is on f8.",
+                                                  "name": "3...Nc6 and the knight to g6"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "Nc6",
+                      "weight": 5,
+                      "note": "The knight goes back instead, keeping an eye on d4 and e5.",
+                      "children": [
+                        {
+                          "san": "e5",
+                          "note": "Push. The knight on f6 has to go home and White has a free hand for several moves.",
+                          "tags": ["e5-wedge"],
+                          "children": [
+                            {
+                              "san": "Ng8",
+                              "weight": 7,
+                              "note": "Forced. Black is now three tempi down with no pieces developed.",
+                              "children": [
+                                {
+                                  "san": "Nf3",
+                                  "note": "Develop. There is no hurry, because Black cannot get at the centre.",
+                                  "tags": ["development"],
+                                  "children": [
+                                    {
+                                      "san": "d5",
+                                      "weight": 7,
+                                      "note": "Black stakes out the centre, which also shuts his own light-squared bishop in.",
+                                      "children": [
+                                        {
+                                          "san": "Bb5",
+                                          "note": "Pin the knight, which is the only piece holding Black's centre together.",
+                                          "tags": ["bishop-placement"],
+                                          "plan": "Castle, play Be3 and Qd2, and use the extra space. Black has no break and no counterplay.",
+                                          "name": "3...Nc6 and the knight goes back"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Nxe4",
+              "weight": 4,
+              "note": "Black takes the other pawn, which loses a piece for the same reason it does everywhere else in this chapter.",
+              "children": [
+                {
+                  "san": "Nxe4",
+                  "note": "Take. Nothing defends the knight on e4, and the pawn on e5 is defended by nothing Black can use.",
+                  "tags": ["tactics"],
+                  "mistakes": [
+                    {
+                      "san": "Nf3",
+                      "grade": "mistake",
+                      "note": "It defends a pawn and misses a piece. Look at what is attacked and undefended before you look at anything else."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "d6",
+                      "weight": 7,
+                      "note": "Black undermines the pawn on e5, hoping to open lines against White's king.",
+                      "children": [
+                        {
+                          "san": "exd6",
+                          "note": "Take. Giving the pawn back to finish developing is the right trade when a piece up.",
+                          "tags": ["tactics"],
+                          "plan": "Meet the checks with Nf2, then develop with Nf3 and Be2 and castle. A piece up with the king safe is winning.",
+                          "name": "3...Nc6 and 4...Nxe4"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Bb4",
+      "weight": 5,
+      "note": "Black pins the knight that guards e4, hoping to win the pawn after taking on c3.",
+      "children": [
+        {
+          "san": "fxe5",
+          "note": "Take first. The pin is not a threat yet, and the knight on f6 has to answer the pawn.",
+          "tags": ["tactics"],
+          "mistakes": [
+            {
+              "san": "Nf3",
+              "grade": "mistake",
+              "note": "It ignores a free pawn and lets Black solve everything with ...exf4. Take on e5 while the knight on f6 has to answer for it."
+            }
+          ],
+          "children": [
+            {
+              "san": "Nxe4",
+              "weight": 7,
+              "note": "Black grabs back and relies on the pin to hold the knight on e4.",
+              "children": [
+                {
+                  "san": "Nxe4",
+                  "note": "Take. The pin is worthless, because after ...Bxc3 White is a piece up and the doubled pawn does not matter.",
+                  "tags": ["tactics"],
+                  "mistakes": [
+                    {
+                      "san": "Qg4",
+                      "grade": "mistake",
+                      "note": "It plays for the attack and gives back the piece. Take on e4 first and attack afterwards."
+                    },
+                    {
+                      "san": "Qf3",
+                      "grade": "mistake",
+                      "note": "Same fault. There is a piece hanging on e4 and nothing on the board is worth more than that."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "d6",
+                      "weight": 7,
+                      "note": "Black hits the wedge and tries to open lines while White's king is at home.",
+                      "children": [
+                        {
+                          "san": "c3",
+                          "note": "Push the bishop away and take away the checks on d4 and e1 in one move.",
+                          "tags": ["development"],
+                          "children": [
+                            {
+                              "san": "Ba5",
+                              "weight": 7,
+                              "note": "The bishop keeps the diagonal rather than retreat all the way.",
+                              "children": [
+                                {
+                                  "san": "exd6",
+                                  "note": "Take. Handing the pawn back finishes the argument: White is a piece up with no loose ends.",
+                                  "tags": ["tactics"],
+                                  "children": [
+                                    {
+                                      "san": "O-O",
+                                      "weight": 7,
+                                      "note": "Black castles and takes back on d6 later.",
+                                      "children": [
+                                        {
+                                          "san": "Be2",
+                                          "note": "Develop simply. Nothing fancy is needed when a piece up.",
+                                          "tags": ["development"],
+                                          "plan": "Castle, then d3 and Nf3, and trade pieces at every chance. Black has no attack and a piece less.",
+                                          "name": "3...Bb4 and 4...Nxe4"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Bxc3",
+              "weight": 6,
+              "note": "Black takes first, removing the guard on e4 before grabbing the pawn.",
+              "children": [
+                {
+                  "san": "dxc3",
+                  "note": "Take with the d-pawn. It opens the queen and the c1 bishop at once, which is exactly what the next few moves need.",
+                  "mistakes": [
+                    {
+                      "san": "bxc3",
+                      "grade": "playable",
+                      "note": "Just as good on the scoreboard, and it leaves the queen and the dark bishop shut in. Here the pieces matter more than the pawns."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "Nxe4",
+                      "weight": 7,
+                      "note": "Now Black takes the pawn, which is what the whole idea was for.",
+                      "children": [
+                        {
+                          "san": "Qg4",
+                          "note": "The queen hits the knight on e4 and the pawn on g7 at once. Black cannot hold both.",
+                          "tags": ["tactics"],
+                          "shapes": [{ "orig": "g4", "dest": "g7", "brush": "red" }],
+                          "children": [
+                            {
+                              "san": "d5",
+                              "weight": 7,
+                              "note": "Black props the knight up and lets the g-pawn go.",
+                              "children": [
+                                {
+                                  "san": "Qxg7",
+                                  "note": "Take. The rook on h8 is next, and Black's king has nowhere safe to go.",
+                                  "tags": ["kingside-attack"],
+                                  "children": [
+                                    {
+                                      "san": "Rf8",
+                                      "weight": 7,
+                                      "note": "Black saves the rook and blocks the king in.",
+                                      "children": [
+                                        {
+                                          "san": "Bh6",
+                                          "note": "Bring the last piece in with a hit on the rook. This is the move the d-pawn recapture was for.",
+                                          "tags": ["kingside-attack"],
+                                          "plan": "Take on f8 or keep the bishop, develop with Nf3 and castle long. Black has a knight in the centre and a king that will not survive.",
+                                          "name": "3...Bb4 and the trade on c3"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Ng8",
+              "weight": 4,
+              "note": "Black retreats without taking, a pawn down and two moves behind.",
+              "children": [
+                {
+                  "san": "Nf3",
+                  "note": "Develop. There is no need for anything more: White is a pawn up with every piece about to come out.",
+                  "tags": ["development"],
+                  "plan": "Play d4, Bc4 or Bd3, and castle. Black has to spend several moves getting a piece back into the game.",
+                  "name": "3...Bb4 and a plain retreat"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
