@@ -1489,10 +1489,67 @@ everything else, and the exercises with the Greek gift engine-verified per posit
   Greek gift positions each verified at 2500 ms.
 - [x] 14.4 Content-suite block and the exported bundle; the round-trip test picks the
   course up automatically.
-- [ ] 14.5 Proven in the packaged app; fixtures deleted; progress file hash-verified.
+- [x] 14.5 Proven in the packaged app; fixtures deleted; progress file hash-verified.
 
 Acceptance: section 3 bar met including names; bundle round-trips at
 `docs/bundles/colle-zukertort.pgn`; other four courses untouched; vitest green and
 `tsc -b` clean; Nick's progress file unchanged.
+
+Open items (phase 14):
+
+1. **The 500 ms passes are samplers, and this phase is the clearest evidence yet.**
+   Four runs of `engine-pass.mjs` over the same course reported 4, then 3, then 2,
+   then 0 findings. Every finding was re-checked at 2500 ms before anything was
+   changed. Four were real and the course changed; the rest were band-edge noise or
+   are kept with reasons below.
+2. **Four moves the engine found, and the course changed:**
+   - ch2, `3...Bf5 4.Bd3 c6 5.O-O`, cost 3.98. With no Black pawn yet on e6 or g6,
+     NOTHING recaptures on f5, so 5.Bxf5 simply wins a bishop. That line is now the
+     punished blunder rather than a quiet sideline, and the chapter intro states the
+     rule: look at the recapture before assuming a trade is a trade.
+   - ch4, `3...c5 ... 6.O-O O-O 7.b3`, cost 0.74 at 2500 ms. With no Black pawn on d5
+     the pawn on d4 IS White's centre, and the rook belongs on e1 first. Now 7.Re1,
+     with 7.b3 kept as a graded alternative that says why.
+   - ch5, `1...c5 ... 5.Bd3 Nf6 6.b3`, cost 0.83. It allows ...Bg4, pinning the knight
+     that defends an isolated d-pawn. Now 6.h3 first, the one place in the course where
+     h3 comes before b3, and the note says so.
+   - ch2, `... Bf5 Bd3 c6 O-O e6 b3`, cost 0.51. Removed with the line above.
+3. **Four kept, with reasons.** `1.d4 c5 2.e3` costs 0.41 against 2.d5, which is a
+   Benoni and the theory this course exists to avoid; the alternative is authored and
+   says so. `3...Bg4 4.h3 Bh5 5.Be2` costs 0.45 against 5.g4, which is the critical try
+   and opens the front door of the king White is about to castle behind; the g4 entry
+   was regraded from an inaccuracy to playable because the engine prefers it.
+   `...Bxd3 5.Qxd3 e6 6.O-O Be7 7.b3` costs 0.51 against 7.Qb5+, which wins the b7 pawn
+   because the bishop that guarded it left on move four; the setup move is kept and the
+   pawn grab is named in its note. And ch6's `9.Ne5` costs 0.41 at 2500 ms (0.52 at
+   500 ms) in an exercise whose question is the move after it.
+4. **The Greek gift is engine-verified per position, and in this repertoire it is
+   mostly not there.** It needs a knight that can reach g5 with check or a rook already
+   on the third rank, and the Zukertort's knight is committed to e5. Two exercises say
+   so with numbers, both checked at 2500 ms: in one the sacrifice works (+1.46) and
+   simply taking the hanging bishop is worth far more (+4.21); in the other it fails
+   outright (-0.86 after ...Kxh7 Qh5+ Kg8, where playing Qh5 first is +0.66). The chip
+   asked for the unsound case to be stated rather than cut, and it is, in the chapter
+   intro and in both exercises.
+5. **The by-hand read found two faults no checker sees**, both notes whose grade was
+   right and whose reason was wrong. One offered `...Nd5` as a way to save a knight in
+   a position where Black has a pawn on d5. The other named `...Nxe5` where no Black
+   knight attacks e5, and claimed a fork that is not there. Both fixed.
+6. **`note-claims.mjs` did no work on this course, and that is a finding.** 77 mistake
+   entries, 0 with a material claim it could parse, 0 unsupported. Its patterns are
+   "wins a piece", "loses a pawn", "a pawn down"; this course's notes say things like
+   "White has given a bishop for a pawn and has nothing to show for it". So a clean run
+   means less here than it does for the other four courses, and item 5 is what carried
+   the load. Worth deciding later whether the checker should learn the other idioms or
+   the house style should adopt its.
+7. **Course scoping became load bearing in practice, and is now proved.** The Ruy was
+   the second White course and opens 1.e4, so it never met the London. This one opens
+   1.d4 and does: eight positions appear in both White courses and five are answered
+   differently, because both meet an early ...c5 with 2.e3. Landed as its own commit
+   with a test.
+8. **The bundle landed with the content rather than as its own commit.** The chip asks
+   for content, test block and bundle as three commits; the suite holds
+   `docs/bundles/*.pgn` to the writer's current output, so content without the bundle
+   is a red commit. Content plus bundle, then the test block, keeps every commit green.
 
 - [ ] **Review gate 14 passed**

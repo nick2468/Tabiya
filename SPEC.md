@@ -187,7 +187,9 @@ Not in v1: other openings and the classical move order (the data model allows bo
 a Black repertoire, online play, accounts or sync, mobile, video. The first two of
 those arrived in v2: the Caro-Kann shipped at phase 8 and is a Black repertoire, the
 Slav followed at phase 9, and the Ruy Lopez Exchange at phase 12 as the first course
-delivered as a bundle. Four courses, two colours.
+delivered as a bundle, and the Colle-Zukertort at phase 14 as Nick's second White
+system against 1...d5, chosen so that the two structures teach each other. Five
+courses, two colours, three of them White.
 
 Deferred with reasons (the register; a later phase working nearby may take one along):
 
