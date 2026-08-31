@@ -19,6 +19,15 @@
   font-size: 1.5rem;
 }
 
+/* Beside the name, not competing with it: the number is there when you look
+   for it and out of the way when you are not. */
+.app-version {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--text-faint);
+  vertical-align: middle;
+}
+
 .app-nav {
   display: flex;
   gap: 4px;
