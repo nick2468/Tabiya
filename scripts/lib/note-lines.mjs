@@ -256,26 +256,37 @@ function readNote(note, stations, { anchored = true, line = [] } = {}) {
  */
 export function checkChapter(chapter) {
   const findings = []
-  const consider = (note, field, where, line) => {
+  const consider = (note, field, where, stations, line) => {
     if (!note) return
-    const stations = stationsOf(line)
     for (const finding of readNote(note, stations, { line })) {
       findings.push({ chapter: chapter.id, where, field, note, ...finding })
     }
   }
 
-  const walk = (node, path) => {
+  // The stations of a line are built once and extended, rather than replayed
+  // from move one for every note on it. Over the catalogue that is the
+  // difference between the suite noticing this check and not.
+  const after = (stations, san) => {
+    const board = new Chess(stations[stations.length - 1].fen)
+    board.move(san)
+    return [...stations, station(board)]
+  }
+
+  const walk = (node, path, before) => {
     const line = [...path, node.san]
+    const stations = after(before, node.san)
     const where = line.join(' ')
-    consider(node.note, 'note', where, line)
-    consider(node.plan, 'plan', where, line)
+    consider(node.note, 'note', where, stations, line)
+    consider(node.plan, 'plan', where, stations, line)
     for (const mistake of node.mistakes ?? []) {
       const alt = [...path, mistake.san]
-      consider(mistake.note, `mistake ${mistake.san}`, `${where} not ${mistake.san}`, alt)
+      const label = `${where} not ${mistake.san}`
+      consider(mistake.note, `mistake ${mistake.san}`, label, after(before, mistake.san), alt)
     }
-    for (const child of node.children ?? []) walk(child, line)
+    for (const child of node.children ?? []) walk(child, line, stations)
   }
-  for (const node of chapter.tree) walk(node, chapter.stem)
+  const stem = stationsOf(chapter.stem)
+  for (const node of chapter.tree) walk(node, chapter.stem, stem)
   return findings
 }
 

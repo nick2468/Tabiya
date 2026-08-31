@@ -6,6 +6,7 @@ import { deepestFullMove, positionsWithMistakes, walkNodes } from '../model/load
 import { allCards } from '../model/cards'
 import { chapterLines } from '../model/lines'
 import { colourName, type LoadedChapter, type LoadedCourse } from '../model/types'
+import { HARD, checkChapter } from '../../scripts/lib/note-lines.mjs'
 
 /**
  * The gate on the authored content. Every rule here comes from SPEC.md
@@ -85,6 +86,30 @@ describe.each(courses.map((course) => [course.id, course] as const))(
             expect(marked(alternative.san), `${where} / ${alternative.san}`).toBe(marked(canonical))
           }
         }
+      }
+    })
+
+    /**
+     * The lines the prose names, played on a board.
+     *
+     * A note can describe a real idea and name a line that cannot be played,
+     * usually because the line was copied from a position that was nearly the
+     * same. Nothing here reads it: the engine passes never see a word, and
+     * `note-claims.mjs` plays a note's moves only when the note also promises
+     * material in its own vocabulary, which is one entry in twenty.
+     *
+     * Only the three categories that reach zero across every course are held
+     * here. The rest - a note pointing at another chapter, a note naming an
+     * illegal move in order to say it is illegal, a note leaving out an
+     * obvious recapture - stay in `scripts/note-lines.mjs`, where a person
+     * reads them, because a test that fails on good prose is worse than no
+     * test at all.
+     */
+    it('never names a line in prose that the board refuses', () => {
+      for (const chapter of course.chapters) {
+        const faults = checkChapter(chapter).filter((finding) => HARD.includes(finding.category))
+        const report = faults.map((finding) => `${finding.where}: "${finding.moves}" ${finding.detail}`)
+        expect(report, chapter.id).toEqual([])
       }
     })
 
