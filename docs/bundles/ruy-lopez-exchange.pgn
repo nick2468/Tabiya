@@ -351,7 +351,7 @@ Playing d4 without counting first. Taking a queen trade that did not have to be 
 {Defend the knight and hit g6 a second time, so that the recapture has to be with the f-pawn. [%tags tactics] [%cal Gh5g6]}
 7... Bd6 {Black develops and asks the knight again. [%weight 6]} 8. Nxg6
 {Now take. [%tags doubled-pawns]} 8... fxg6
-{Forced: 8...hxg6 9.Qxh8 collects the rook down the file Black has just opened. [%weight 9]}
+{Forced: 8...hxg6 9.Qxh8+ collects the rook down the file Black has just opened. [%weight 9]}
 9. Qe2
 {Back to safety, a pawn up, with Black's kingside pawns in three pieces. [%tags endgame] [%plan Play d3, Nc3 and Be3, castle the rooks and trade into the ending a pawn up.] [%line ...Ne7 and then ...Ng6]}
 ) 7. Qh5

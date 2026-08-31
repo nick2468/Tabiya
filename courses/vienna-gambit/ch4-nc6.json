@@ -79,7 +79,7 @@
                                         {
                                           "san": "Bxf7+",
                                           "grade": "mistake",
-                                          "note": "It works in the 3...Na5 line and loses here: 8...Kxf7 9.fxe5 dxe5 10.Nxe5+ Kg8 and White has a bishop for two pawns with no attack, because ...d6 and ...Bc5 already cover the squares. Retreat and keep the bishop."
+                                          "note": "It works in the 3...Na5 line and loses here: 7...Kxf7 8.fxe5 dxe5 9.Nxe5+ Kg8 and White has a bishop for two pawns with no attack, because ...d6 and ...Bc5 already cover the squares. Retreat and keep the bishop."
                                         }
                                       ],
                                       "children": [

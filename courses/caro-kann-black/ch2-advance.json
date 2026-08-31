@@ -89,7 +89,7 @@
                                                       "note": "Ask the bishop to commit. While it sits on b5 the knight on c6 is pinned to the king and cannot touch e5.",
                                                       "tags": ["development"],
                                                       "mistakes": [
-                                                        { "san": "Qb6", "grade": "mistake", "note": "It walks onto a discovered attack. The bishop on e3 is aimed at b6 through the knight, so 17.Nxf5 Nxf5 18.Bxb6 wins the queen for a bishop." },
+                                                        { "san": "Qb6", "grade": "mistake", "note": "It walks onto a discovered attack. The bishop on e3 is aimed at b6 through the knight, so 10.Nxf5 Nxf5 11.Bxb6 wins the queen for a bishop." },
                                                         { "san": "Rc8", "grade": "playable", "note": "The rook belongs there eventually, but the knight stays pinned for another move." }
                                                       ],
                                                       "children": [

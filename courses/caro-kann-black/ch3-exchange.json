@@ -277,7 +277,7 @@
                               "note": "Take. White has to recapture with the queen or wreck the pawns, and the knight on f3 was the main defender of d4.",
                               "tags": ["light-squares"],
                               "mistakes": [
-                                { "san": "Bh5", "grade": "inaccuracy", "note": "6.g4 Bg6 7.Ne5 gains time and space, and the bishop ends up doing nothing." }
+                                { "san": "Bh5", "grade": "inaccuracy", "note": "7.g4 Bg6 8.Ne5 gains time and space, and the bishop ends up doing nothing." }
                               ],
                               "children": [
                                 {

@@ -89,7 +89,7 @@
                                                             {
                                                               "san": "Qe2",
                                                               "grade": "mistake",
-                                                              "note": "It lets the queen out with 11...Qxb2 and hands back a pawn and the initiative. Hit the queen while it is loose."
+                                                              "note": "It lets the queen out with 10...Qxb2 and hands back a pawn and the initiative. Hit the queen while it is loose."
                                                             }
                                                           ],
                                                           "plan": "Chase the queen, castle long, and trade pieces with the extra bishop. Do not go looking for mate when the material does the work.",
@@ -623,7 +623,7 @@
                                                     {
                                                       "san": "O-O-O",
                                                       "grade": "mistake",
-                                                      "note": "It leaves a knight on g5 for free: 10...Rg8 and Black is winning. Recapture with check first."
+                                                      "note": "It leaves a knight on g5 for free: 9...Rg8 and Black is winning. Recapture with check first."
                                                     }
                                                   ],
                                                   "children": [

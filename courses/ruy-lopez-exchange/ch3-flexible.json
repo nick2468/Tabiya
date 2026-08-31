@@ -534,7 +534,7 @@
                             {
                               "san": "fxg6",
                               "weight": 9,
-                              "note": "Forced: 8...hxg6 9.Qxh8 collects the rook down the file Black has just opened.",
+                              "note": "Forced: 8...hxg6 9.Qxh8+ collects the rook down the file Black has just opened.",
                               "children": [
                                 {
                                   "san": "Qe2",

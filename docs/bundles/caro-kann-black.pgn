@@ -448,7 +448,7 @@ Playing ...e6 before ...Bf5 and getting the French position the whole opening av
 ) ) 9... a6
 {Ask the bishop to commit. While it sits on b5 the knight on c6 is pinned to the king and cannot touch e5. [%tags development]}
 ( 9... Qb6?
-{It walks onto a discovered attack. The bishop on e3 is aimed at b6 through the knight, so 17.Nxf5 Nxf5 18.Bxb6 wins the queen for a bishop.}
+{It walks onto a discovered attack. The bishop on e3 is aimed at b6 through the knight, so 10.Nxf5 Nxf5 11.Bxb6 wins the queen for a bishop.}
 ) ( 9... Rc8!?
 {The rook belongs there eventually, but the knight stays pinned for another move.} )
 10. Bxc6+ {White takes rather than retreat and lose the pin for nothing. [%weight 7]}
@@ -514,7 +514,7 @@ Recapturing with the queen and losing a move to Nc3. Answering 7.Qb3 by defendin
 {Out and active, pinning the knight against the queen. [%tags bishop-placement light-squares]}
 6. h3 {White asks the question. [%weight 5]} 6... Bxf3
 {Take. White has to recapture with the queen or wreck the pawns, and the knight on f3 was the main defender of d4. [%tags light-squares]}
-( 6... Bh5?! {6.g4 Bg6 7.Ne5 gains time and space, and the bishop ends up doing nothing.}
+( 6... Bh5?! {7.g4 Bg6 8.Ne5 gains time and space, and the bishop ends up doing nothing.}
 ) 7. Qxf3 {The natural recapture, keeping the structure whole. [%weight 8]} 7... e6
 {Solid. The bishop that mattered has been traded and Black has an easy game. [%tags development] [%plan Play ...Bd6, castle and put a rook on c8. White's bishop on b5 will have to move again, which is another move Black gains.] [%line The 4.Bb5+ check]}
 ) ( 4. Nf3 {Development, keeping every setup available. [%weight 4]} 4... Nc6
@@ -658,7 +658,7 @@ Taking on c4 and giving up the centre for a pawn that cannot be held. Recapturin
 ( 6... Bb4!?
 {The main line of the Panov and completely sound. The pin gains time and it comes with far more to remember.}
 ) ( 6... dxc4?!
-{8.Bxc4 hands White a free centre and a developed bishop for a pawn Black cannot keep.} )
+{7.Bxc4 hands White a free centre and a developed bishop for a pawn Black cannot keep.} )
 7. cxd5 {White releases the tension and takes on the isolated pawn. [%weight 6]} ( 7. Bd3
 {White develops and keeps the tension on d5. [%weight 4]} 7... dxc4
 {Now taking is right: the bishop has to move again to recapture, so Black gains a move. [%tags tactics]}

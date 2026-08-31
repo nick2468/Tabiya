@@ -920,7 +920,7 @@ Playing 4.Nge2 or 4.Qh5 against 3...Na5 and simply losing the bishop on c4. Push
 7. Bb3
 {Step back and keep the diagonal. The knight on a5 is now on the edge of the board doing nothing. [%tags bishop-placement]}
 ( 7. Bxf7+?
-{It works in the 3...Na5 line and loses here: 8...Kxf7 9.fxe5 dxe5 10.Nxe5+ Kg8 and White has a bishop for two pawns with no attack, because ...d6 and ...Bc5 already cover the squares. Retreat and keep the bishop.}
+{It works in the 3...Na5 line and loses here: 7...Kxf7 8.fxe5 dxe5 9.Nxe5+ Kg8 and White has a bishop for two pawns with no attack, because ...d6 and ...Bc5 already cover the squares. Retreat and keep the bishop.}
 ) 7... Nxb3 {Black trades off the bishop that was aiming at f7. [%weight 7]} 8. axb3
 {Take towards the centre and open the a-file for the rook. The doubled pawn is worth the file.}
 ( 8. cxb3?!
@@ -1323,7 +1323,7 @@ Blocking with g3 out of habit. Taking with the knight on g5 and then castling lo
 9. Qxg5+
 {Take back with check. The check is what keeps the initiative and stops Black getting the king organised.}
 ( 9. O-O-O?
-{It leaves a knight on g5 for free: 10...Rg8 and Black is winning. Recapture with check first.}
+{It leaves a knight on g5 for free: 9...Rg8 and Black is winning. Recapture with check first.}
 ) 9... Ke8 {The king goes back, since anything else runs into more checks. [%weight 7]}
 10. Qg3
 {Step back and hold everything: the queen covers c7, g7 and the pawn on e5. White is two pawns up with the safer king. [%plan Castle long, bring the rooks to the open files, and push the pawns. Black's king is stuck in the middle and his queenside has not moved.] [%line The queen raid on g7]}
@@ -1352,5 +1352,5 @@ Blocking with g3 out of habit. Taking with the knight on g5 and then castling lo
 10. Bc3
 {The move. The bishop comes out with a hit on the queen, so White develops and gains time at once and keeps the extra piece. [%plan Chase the queen, castle long, and trade pieces with the extra bishop. Do not go looking for mate when the material does the work.] [%line The check you block with a piece] [%cal Rc3d4]}
 ( 10. Qe2?
-{It lets the queen out with 11...Qxb2 and hands back a pawn and the initiative. Hit the queen while it is loose.}
+{It lets the queen out with 10...Qxb2 and hands back a pawn and the initiative. Hit the queen while it is loose.}
 ) *
