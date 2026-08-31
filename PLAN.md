@@ -2489,3 +2489,47 @@ Gate 19 findings (2026-09-01):
 23. **Nick's own files were not listed and not reported.**
 
 - [x] **Review gate 19 passed** (2026-09-01)
+
+## Phase 20 - the note-line checker
+
+Goal: build the fourth checker, the one that plays the lines the prose names, and fix
+what it finds. No new content, no repertoire move touched.
+
+Chipped as `chips/phase-20-note-line-checker.md`. This is the register entry SPEC section
+6 opened at phase 19 and gate 19 turned into a design brief. `note-claims.mjs` plays a
+note's moves only when the note also makes a material claim it recognises, which reaches
+40 of 797 mistake entries, so "0 unsupported claims" is a statement about five per cent of
+the prose. Phase 19 found four entries naming an unplayable line; gate 19's probe found
+two more the phase had missed.
+
+**The decisions taken in the chip.** A script first and a test second, the test carrying
+only the rules that reach zero across all six courses. Reuse `note-claims.mjs`'s parser
+through a shared module rather than copying it. Place a sequence by its own move number
+and side, which is the technique that takes the report from 36 false positives to 12 with
+two real faults among them. Mistake notes and node notes are checked; chapter intros are
+a separate mode that reports and never fails, because an intro has no anchor position.
+
+The chip lists the ten lines gate 19's probe reports, four real and six false, so the tool
+can be held to classifying them correctly rather than merely to running.
+
+- [ ] 20.1 Legality: every move in a named sequence plays from where the note places it.
+- [ ] 20.2 The first token's move number and side match the board.
+- [ ] 20.3 Check and mate markers in prose, both directions.
+- [ ] 20.4 Handle the back-reference class: report unplaceable, do not report illegal.
+- [ ] 20.5 Handle the deliberate illegality class, with clause-scoped negation.
+- [ ] 20.6 Handle the omitted-recapture class by widening the start, and say so.
+- [ ] 20.7 Fix the real faults, in their own commit.
+- [ ] 20.8 Promote the clean rules into `content.test.ts`, each proved to fail on a
+  restored fault.
+- [ ] 20.9 Re-run the other three checkers over any course whose prose changed.
+- [ ] 20.10 Re-export the bundles; version 1.6.2 if anything changed.
+- [ ] 20.11 Close the register entry with what the checker does and does not cover.
+
+Acceptance: the script exists, shares its parser, and classifies all ten known lines
+correctly; the intro mode runs and its verdict is recorded; real faults fixed and false
+positives silent without loosening the legality rule; the clean rules in the test suite,
+each proved to fail on a restored fault; the other checkers re-run where prose changed;
+bundles re-exported and the version at 1.6.2 if anything changed; 308 line ids before and
+after; the register entry closed; vitest green and `tsc -b` clean.
+
+- [ ] **Review gate 20 passed**
