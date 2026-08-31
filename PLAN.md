@@ -1999,5 +1999,14 @@ with the app started from `src-tauri/target/release`:
    behind his back.
 7. **`scripts/packaged-eval.mjs` grew a `--shot` mode**, because the board is the one
    thing in this phase a measurement cannot settle.
+8. **Three adjustments after that record was written**, all from Nick looking at the
+   packaged window and all inside item 17.6's ground. The file letters went right 1px
+   and down 2px, then 1px further each way, so they now sit in the corner of their
+   square with the row on the board's bottom edge; the rank numbers went left 1px. And
+   the pieces are drawn at 95% of their square, centred, which is a `--piece-size`
+   custom property on `.board`. The piece BOX keeps its full square: chessground writes
+   `transform: translate(...)` onto every piece on every move and the box is what a
+   click and a drag land on, so only the background image shrinks. The installer was
+   rebuilt after each.
 
 - [ ] **Review gate 17 passed**

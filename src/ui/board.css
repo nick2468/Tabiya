@@ -13,6 +13,28 @@
      own: light squares are #f0d9b5, dark ones #b58863. */
   --coord-on-dark: #fff6e3;
   --coord-on-light: #6b4c30;
+
+  /* How much of its square a piece is drawn at. Chessground fills the square
+     edge to edge, which crowds the board and buries the coordinates in the
+     corners. */
+  --piece-size: 95%;
+}
+
+/* Drawn smaller, but in the same box.
+
+   Chessground positions every piece by writing `transform: translate(...)`
+   straight onto the element, and it writes it again on every move, so a scale
+   added here would be wiped. The box also decides where a click and a drag
+   land. So the box keeps its full square and only the IMAGE shrinks, centred:
+   nothing about hit areas, dragging or animation changes.
+
+   `no-repeat` is not optional. Chessground uses `background-size: cover`,
+   which leaves nothing to repeat; anything smaller tiles a sliver of the next
+   copy along both edges without it. */
+.board.cg-wrap piece {
+  background-size: var(--piece-size) var(--piece-size);
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* -------------------------------------------------------- coordinates
