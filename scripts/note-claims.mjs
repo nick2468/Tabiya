@@ -19,7 +19,8 @@
  *    a pawn". Playing only the first move reports a lost knight that the next
  *    move takes back. So the whole run of moves is parsed and played, and the
  *    run ends where the prose resumes: moves separated by nothing but spaces
- *    and move numbers belong to the sequence, and anything else ends it.
+ *    and move numbers belong to the sequence, and anything else ends it. That
+ *    parsing now lives in `lib/note-parse.mjs`, shared with `note-lines.mjs`.
  * 2. The alternative move is often ITSELF a capture, like ...Bxc3 answered by
  *    bxc3. Material is therefore measured from the position BEFORE the
  *    alternative, so an even trade nets zero instead of reading as a blunder.
@@ -47,6 +48,7 @@
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { Chess } from 'chess.js'
+import { sequenceIn } from './lib/note-parse.mjs'
 
 const folder = process.argv[2] ?? 'courses/london-white'
 
@@ -92,36 +94,6 @@ function claimOf(note) {
     return claim
   }
   return null
-}
-
-const SAN = String.raw`(?:O-O-O|O-O|[KQRBN][a-h]?[1-8]?x?[a-h][1-8]|[a-h]x[a-h][1-8]|[a-h][1-8])(?:=[QRBN])?[+#]?`
-const TOKEN = new RegExp(String.raw`(\d+)?\s*(?:\.{1,3})?\s*(${SAN})`, 'g')
-
-/**
- * The move tokens a note names, as one run.
- *
- * The run starts at the first NUMBERED move, because a bare square in prose
- * ("the e4 break") is indistinguishable from a pawn move and every claim in
- * this content numbers its first move. It ends where the prose resumes:
- * moves joined by spaces and move numbers are one sequence, and any other
- * word between two moves closes it.
- */
-function sequenceIn(note) {
-  TOKEN.lastIndex = 0
-  const found = []
-  let match
-  while ((match = TOKEN.exec(note)) !== null) {
-    found.push({ number: match[1] ? Number(match[1]) : null, san: match[2], start: match.index, end: TOKEN.lastIndex })
-  }
-  const first = found.findIndex((token) => token.number !== null)
-  if (first === -1) return { moves: [], number: null }
-  const run = [found[first]]
-  for (let i = first + 1; i < found.length; i += 1) {
-    const gap = note.slice(found[i - 1].end, found[i].start)
-    if (!/^[\s.\d]*$/.test(gap)) break
-    run.push(found[i])
-  }
-  return { moves: run.map((token) => token.san), number: found[first].number }
 }
 
 /** Material from the student's point of view, in pawns. */
