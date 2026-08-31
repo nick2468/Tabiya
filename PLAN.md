@@ -1482,12 +1482,12 @@ permanent. Seven chapters: the idea (contrasted with the London), the main line 
 the Ne5/f4/Rf3 attack, ...Bf5/...Bg4 early, the ...b6 mirror, the ...g6 setups,
 everything else, and the exercises with the Greek gift engine-verified per position.
 
-- [ ] 14.1 Variation, ...g6 policy and chapter list ruled with Nick before drafting.
-- [ ] 14.2 Draft the seven chapters to the section 3 bar, student White, named lines.
-- [ ] 14.3 All three checkers after the last content edit, run as samplers (twice, or
+- [x] 14.1 Variation, ...g6 policy and chapter list ruled with Nick before drafting.
+- [x] 14.2 Draft the seven chapters to the section 3 bar, student White, named lines.
+- [x] 14.3 All three checkers after the last content edit, run as samplers (twice, or
   2500 ms near band edges), then the by-hand read of capture-answered entries. The
   Greek gift positions each verified at 2500 ms.
-- [ ] 14.4 Content-suite block and the exported bundle; the round-trip test picks the
+- [x] 14.4 Content-suite block and the exported bundle; the round-trip test picks the
   course up automatically.
 - [ ] 14.5 Proven in the packaged app; fixtures deleted; progress file hash-verified.
 

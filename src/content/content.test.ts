@@ -447,6 +447,103 @@ describe('the Ruy Lopez Exchange course', () => {
   })
 })
 
+describe('the Colle-Zukertort course', () => {
+  const colle = courseById('colle-zukertort')
+
+  it('is a White course of seven chapters', () => {
+    expect(colle.colour).toBe('white')
+    expect(colle.opponentColour).toBe('black')
+    expect(colle.chapters.length).toBe(7)
+  })
+
+  it('declares the tags it uses beyond the core set', () => {
+    expect(colle.tags).toContain('long-diagonal')
+    expect(colle.tags).toContain('e5-outpost')
+    expect(colle.tags).toContain('rook-lift')
+    expect(colle.tags).not.toContain('vs-c5')
+  })
+
+  it('puts the bishop on b2 in every chapter and never builds the c3 triangle', () => {
+    // The one claim that is really about this course rather than the format.
+    // b3 and Bb2 instead of c3 is the whole reason it exists beside the
+    // London: a course that reached for c3 would be teaching the structure
+    // Nick already knows.
+    for (const chapter of colle.chapters) {
+      const white = walkNodes(chapter).filter((node) => node.isStudent)
+      expect(white.map((node) => node.san), chapter.id).toContain('b3')
+      expect(white.map((node) => node.san), chapter.id).not.toContain('c3')
+    }
+  })
+
+  it('never puts the knight on e5 before the bishop reaches b2', () => {
+    // The chapter 1 rule, stated as an invariant: the bishop on b2 is what
+    // holds the outpost, so a knight that arrives first is a knight Black
+    // trades off.
+    for (const chapter of colle.chapters) {
+      for (const node of walkNodes(chapter)) {
+        if (!node.isStudent || node.san !== 'Ne5') continue
+        expect(node.path.slice(0, -1), `${chapter.id} ${node.path.join(' ')}`).toContain('Bb2')
+      }
+    }
+  })
+
+  describe('chapter 0, the system', () => {
+    it('has an intro of 300 to 500 words', () => {
+      const intro = chapterOf(colle, 'ch0').intro
+      expect(words(intro)).toBeGreaterThanOrEqual(300)
+      expect(words(intro)).toBeLessThanOrEqual(500)
+    })
+
+    it('carries mistake entries on its core setup decisions', () => {
+      expect(positionsWithMistakes(chapterOf(colle, 'ch0'))).toBeGreaterThanOrEqual(4)
+    })
+  })
+
+  describe('the repertoire chapters', () => {
+    for (const id of ['ch1', 'ch2', 'ch3', 'ch4', 'ch5']) {
+      it(`${id} runs its deepest line to move 10 or beyond`, () => {
+        expect(deepestFullMove(chapterOf(colle, id))).toBeGreaterThanOrEqual(10)
+      })
+
+      it(`${id} carries mistake entries on at least ten positions`, () => {
+        expect(positionsWithMistakes(chapterOf(colle, id))).toBeGreaterThanOrEqual(10)
+      })
+
+      it(`${id} weights every Black reply by club frequency`, () => {
+        for (const node of walkNodes(chapterOf(colle, id))) {
+          if (!node.isStudent) {
+            expect(node.weight ?? 1, node.path.join(' ')).toBeGreaterThanOrEqual(1)
+            expect(node.weight ?? 1, node.path.join(' ')).toBeLessThanOrEqual(10)
+          }
+        }
+      })
+
+      it(`${id} tags every White move with at least one concept`, () => {
+        for (const node of walkNodes(chapterOf(colle, id))) {
+          if (node.isStudent) expect(node.tags.length, node.path.join(' ')).toBeGreaterThan(0)
+        }
+      })
+    }
+  })
+
+  describe('chapter 6, the exercises', () => {
+    it('ends every exercise on a White move worth drilling', () => {
+      for (const line of walkNodes(chapterOf(colle, 'ch6')).filter((node) => node.isLeaf)) {
+        expect(line.isStudent, line.path.join(' ')).toBe(true)
+      }
+    })
+
+    it('carries at least four exercises', () => {
+      const leaves = walkNodes(chapterOf(colle, 'ch6')).filter((node) => node.isLeaf)
+      expect(leaves.length).toBeGreaterThanOrEqual(4)
+    })
+
+    it('runs each exercise deep enough to be a real position', () => {
+      expect(deepestFullMove(chapterOf(colle, 'ch6'))).toBeGreaterThanOrEqual(10)
+    })
+  })
+})
+
 describe('the courses together', () => {
   // Course scoping makes this structural rather than lucky: a card key is the
   // course id and the position. The acceptance asks for it proved anyway,
