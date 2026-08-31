@@ -31,10 +31,15 @@ const PORT = Number(process.env.CDP_PORT ?? 9333)
 import fs from 'node:fs'
 // An expression starting with @ names a file, so nothing has to survive shell
 // quoting - which mangled backslashes in Windows paths the first time round.
-const arg = process.argv[2]
+// --shot writes a PNG of the window instead of evaluating anything. Reading a
+// screen is not the same as measuring it, and phase 17 changed where things sit
+// on the board, which is a question a person answers by looking.
+const SHOT = process.argv[2] === '--shot' ? process.argv[3] : undefined
+const arg = SHOT ? undefined : process.argv[2]
 const EXPRESSION = arg?.startsWith('@') ? fs.readFileSync(arg.slice(1), 'utf8') : arg
-if (!EXPRESSION) {
-  console.error('usage: node cdp.mjs "<javascript expression>"')
+if (!EXPRESSION && !SHOT) {
+  console.error('usage: node packaged-eval.mjs "<javascript expression>"')
+  console.error('       node packaged-eval.mjs --shot <file.png>')
   process.exit(2)
 }
 
@@ -130,6 +135,7 @@ const done = new Promise((resolve, reject) => {
       const message = JSON.parse(text)
       if (message.id !== 1) continue
       if (message.error) return reject(new Error(JSON.stringify(message.error)))
+      if (SHOT) return resolve(message.result?.data ?? null)
       const result = message.result?.result
       if (message.result?.exceptionDetails) {
         return reject(new Error(JSON.stringify(message.result.exceptionDetails)))
@@ -143,15 +149,25 @@ const done = new Promise((resolve, reject) => {
 
 socket.write(
   frame(
-    JSON.stringify({
-      id: 1,
-      method: 'Runtime.evaluate',
-      params: { expression: EXPRESSION, returnByValue: true, awaitPromise: true },
-    }),
+    JSON.stringify(
+      SHOT
+        ? { id: 1, method: 'Page.captureScreenshot', params: { format: 'png' } }
+        : {
+            id: 1,
+            method: 'Runtime.evaluate',
+            params: { expression: EXPRESSION, returnByValue: true, awaitPromise: true },
+          },
+    ),
   ),
 )
 
 const value = await done
-console.log(typeof value === 'string' ? value : JSON.stringify(value, null, 2))
+if (SHOT) {
+  if (!value) throw new Error('the page returned no image')
+  fs.writeFileSync(SHOT, Buffer.from(value, 'base64'))
+  console.log(`wrote ${SHOT}`)
+} else {
+  console.log(typeof value === 'string' ? value : JSON.stringify(value, null, 2))
+}
 socket.destroy()
 process.exit(0)
