@@ -1,0 +1,420 @@
+{
+  "id": "ch4-g6",
+  "title": "The ...g6 setups",
+  "intro": "This is the system's least comfortable ground and the chapter says so honestly. Black plays ...g6 and ...Bg7, and the two ideas the Zukertort is built on both lose their point.\n\n## Why the usual plan misfires\n\nThe bishop on d3 aims at h7. A pawn on g6 defends h7, so the bishop is aiming at a square that is already covered, and it can be hit by ...Nh5 and ...Bf5 into the bargain. Put it on e2 instead, where it is modest and useful.\n\nThe knight on e5 wants to be a permanent guest. Against a bishop on g7 it is not: ...Nfd7 or ...Nc6 challenges it, and every trade on e5 helps Black, because the bishop on g7 is aiming down the same diagonal your knight is standing on.\n\n## What to play instead\n\nb3, Bb2, and then c4. Hold the centre with pawns on c4 and d4, castle, and play a normal, solid game in what is close to a Queen's Indian with colours reversed. The bishop on b2 is a good piece here even without an attack behind it, because it stares straight at the bishop on g7 and neutralises it.\n\nThat is the whole recipe: swap the attacking setup for a sound one, and take a small pull instead of a big one. The position is roughly level and it is easy to play, which for a club game is worth more than a plan that does not work.\n\n## Move order\n\nBe2 before b3. It costs nothing, it prepares castling, and it keeps the option of meeting an early ...c5 or ...d5 without having committed the queenside.\n\n## Typical mistakes at this level\n\nPlaying Bd3 out of habit against a fianchetto. Playing Ne5 and letting Black trade it off with tempo on the bishop. Pushing pawns on the kingside where Black is solid and you are not. And drifting: this chapter is about getting a sound game, not about winning in twenty moves.",
+  "stem": [
+    "d4",
+    "Nf6",
+    "Nf3",
+    "g6",
+    "e3"
+  ],
+  "tree": [
+    {
+      "san": "Bg7",
+      "weight": 9,
+      "note": "The fianchetto. Black will castle and hit the centre with ...d5 or ...c5.",
+      "children": [
+        {
+          "san": "Be2",
+          "tags": [
+            "bishop-placement"
+          ],
+          "note": "The bishop goes to e2, not d3. A pawn on g6 already covers h7, so the aggressive square is aiming at nothing and invites ...Nh5 as well.",
+          "mistakes": [
+            {
+              "san": "Bd3",
+              "grade": "inaccuracy",
+              "note": "Habit. Against a kingside fianchetto the bishop on d3 points at a square Black has already defended, and it gets hit by ...Nh5 and ...Bf5 for the trouble."
+            },
+            {
+              "san": "c4",
+              "grade": "playable",
+              "note": "A Queen's Gambit setup, and a good one. It is also not this course, and it needs the theory this course exists to avoid."
+            }
+          ],
+          "children": [
+            {
+              "san": "O-O",
+              "weight": 8,
+              "note": "Black castles.",
+              "children": [
+                {
+                  "san": "O-O",
+                  "tags": [
+                    "king-safety"
+                  ],
+                  "note": "Castle.",
+                  "mistakes": [
+                    {
+                      "san": "b3",
+                      "grade": "playable",
+                      "note": "It commits the queenside before Black has said what the centre will be. Castling first keeps every option open."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "d5",
+                      "weight": 6,
+                      "note": "The Grunfeld shape: Black takes the centre with the pawn as well as the bishop.",
+                      "children": [
+                        {
+                          "san": "b3",
+                          "tags": [
+                            "long-diagonal"
+                          ],
+                          "note": "The setup, on schedule.",
+                          "mistakes": [
+                            {
+                              "san": "Ne5",
+                              "grade": "inaccuracy",
+                              "note": "The outpost, and Black takes it apart with ...Nfd7 or ...Nc6. Against a bishop on g7 the knight on e5 is a target, not a guest."
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "c5",
+                              "weight": 7,
+                              "note": "Black hits the base of the centre.",
+                              "children": [
+                                {
+                                  "san": "Bb2",
+                                  "tags": [
+                                    "long-diagonal"
+                                  ],
+                                  "note": "Home.",
+                                  "mistakes": [
+                                    {
+                                      "san": "c4",
+                                      "grade": "inaccuracy",
+                                      "note": "The break, one move early. The bishop on b2 is what holds d4 once the centre opens."
+                                    }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Nc6",
+                                      "weight": 7,
+                                      "note": "Development, with a second attacker on d4.",
+                                      "children": [
+                                        {
+                                          "san": "c4",
+                                          "tags": [
+                                            "c4-break"
+                                          ],
+                                          "note": "The move this chapter is really about. Two pawns abreast in the centre, both defended, and the game becomes a sound one rather than an attacking one.",
+                                          "mistakes": [
+                                            {
+                                              "san": "Nbd2",
+                                              "grade": "inaccuracy",
+                                              "note": "It develops and lets Black play ...cxd4 and ...e5 with a free hand. The c-pawn is what holds this position together."
+                                            }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "cxd4",
+                                              "weight": 6,
+                                              "note": "Black releases the tension.",
+                                              "children": [
+                                                {
+                                                  "san": "exd4",
+                                                  "tags": [
+                                                    "long-diagonal"
+                                                  ],
+                                                  "note": "Towards the centre.",
+                                                  "mistakes": [
+                                                    {
+                                                      "san": "Nxd4",
+                                                      "grade": "inaccuracy",
+                                                      "note": "It gives up the centre and puts the knight where ...Nxd4 and ...e5 come with tempo."
+                                                    }
+                                                  ],
+                                                  "children": [
+                                                    {
+                                                      "san": "dxc4",
+                                                      "weight": 5,
+                                                      "note": "Black takes again.",
+                                                      "children": [
+                                                        {
+                                                          "san": "bxc4",
+                                                          "tags": [
+                                                            "c4-break",
+                                                            "long-diagonal"
+                                                          ],
+                                                          "plan": "Play Nc3, Rb1 and Qa4 or Qd3. The b7 pawn is a target and the pawn on d4 is the thing to look after. A small, safe pull is what this chapter is for.",
+                                                          "name": "The Grunfeld shape, and c4",
+                                                          "note": "Recapture towards the middle. White has two pawns in the centre, the half open b-file and a bishop on b2 that faces its opposite number down the diagonal.",
+                                                          "mistakes": [
+                                                            {
+                                                              "san": "Bxc4",
+                                                              "grade": "playable",
+                                                              "note": "It recaptures with a piece and leaves the pawn on c4 gone from the centre. The pawn recapture is what keeps two abreast."
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "d6",
+                      "weight": 6,
+                      "note": "The King's Indian shape. Black keeps the centre flexible and aims for ...e5.",
+                      "children": [
+                        {
+                          "san": "b3",
+                          "tags": [
+                            "long-diagonal"
+                          ],
+                          "note": "The setup.",
+                          "children": [
+                            {
+                              "san": "Nbd7",
+                              "weight": 7,
+                              "note": "Black prepares the break.",
+                              "children": [
+                                {
+                                  "san": "Bb2",
+                                  "tags": [
+                                    "long-diagonal"
+                                  ],
+                                  "note": "Home, and the bishop is now looking straight down the diagonal at its opposite number.",
+                                  "children": [
+                                    {
+                                      "san": "e5",
+                                      "weight": 6,
+                                      "note": "The break Black has been building towards.",
+                                      "children": [
+                                        {
+                                          "san": "c4",
+                                          "tags": [
+                                            "c4-break"
+                                          ],
+                                          "plan": "Play Nc3 and Qc2, keep the tension on e5, and only take when the recapture leaves Black with a weakness. This is a Queen's Indian with the colours turned round and White has the extra move.",
+                                          "name": "The King's Indian shape, with ...e5",
+                                          "note": "Hold the centre with pawns rather than trading into an open game where the bishop on g7 comes alive.",
+                                          "mistakes": [
+                                            {
+                                              "san": "dxe5",
+                                              "grade": "playable",
+                                              "note": "It opens the diagonal for the bishop on g7 and hands Black the better version of the position."
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "c5",
+                      "weight": 5,
+                      "note": "The other break.",
+                      "children": [
+                        {
+                          "san": "b3",
+                          "tags": [
+                            "long-diagonal"
+                          ],
+                          "note": "The setup.",
+                          "children": [
+                            {
+                              "san": "cxd4",
+                              "weight": 6,
+                              "note": "Black takes.",
+                              "children": [
+                                {
+                                  "san": "exd4",
+                                  "tags": [
+                                    "long-diagonal"
+                                  ],
+                                  "note": "Towards the centre, as always.",
+                                  "mistakes": [
+                                    {
+                                      "san": "Nxd4",
+                                      "grade": "inaccuracy",
+                                      "note": "It gives up the pawn centre to a bishop that is already aiming down the diagonal at it."
+                                    }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "d5",
+                                      "weight": 6,
+                                      "note": "Black takes the centre too.",
+                                      "children": [
+                                        {
+                                          "san": "Bb2",
+                                          "tags": [
+                                            "long-diagonal"
+                                          ],
+                                          "plan": "Play c4, Nbd2 and Re1. The pawn on d4 is a little loose and the bishop on b2 is the piece that holds it.",
+                                          "name": "...c5 and the open d-file",
+                                          "note": "Home. The position is symmetrical and White has the move and the half open e-file."
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "b6",
+              "weight": 3,
+              "note": "Black fianchettos on both sides.",
+              "children": [
+                {
+                  "san": "O-O",
+                  "tags": [
+                    "king-safety"
+                  ],
+                  "note": "Castle.",
+                  "children": [
+                    {
+                      "san": "Bb7",
+                      "weight": 8,
+                      "note": "The second bishop.",
+                      "children": [
+                        {
+                          "san": "b3",
+                          "tags": [
+                            "long-diagonal"
+                          ],
+                          "note": "The setup, and now all four bishops are on the two long diagonals.",
+                          "children": [
+                            {
+                              "san": "O-O",
+                              "weight": 8,
+                              "note": "Black castles.",
+                              "children": [
+                                {
+                                  "san": "Bb2",
+                                  "tags": [
+                                    "long-diagonal"
+                                  ],
+                                  "plan": "Play c4 and Nbd2, then Qc2 and the rooks. Break with d5 or e4 only when Black's pieces have left the centre.",
+                                  "name": "The double fianchetto",
+                                  "note": "Home. Neither bishop can achieve much against the other, which is exactly the sort of quiet position this chapter is trying to reach."
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "c5",
+      "weight": 3,
+      "note": "Black breaks first and leaves the bishop for later.",
+      "children": [
+        {
+          "san": "Be2",
+          "tags": [
+            "bishop-placement"
+          ],
+          "note": "Develop the bishop to the square it belongs on here.",
+          "children": [
+            {
+              "san": "cxd4",
+              "weight": 6,
+              "note": "Black takes.",
+              "children": [
+                {
+                  "san": "exd4",
+                  "tags": [
+                    "long-diagonal"
+                  ],
+                  "note": "Towards the centre. The pawn on d4 will be defended by the bishop on b2 in a move or two.",
+                  "mistakes": [
+                    {
+                      "san": "Nxd4",
+                      "grade": "inaccuracy",
+                      "note": "It puts the knight where ...Bg7 and ...Nc6 hit it with tempo and gives up the pawn centre."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "Bg7",
+                      "weight": 8,
+                      "note": "The bishop comes out at last, and it is looking at the pawn on d4.",
+                      "children": [
+                        {
+                          "san": "O-O",
+                          "tags": [
+                            "king-safety"
+                          ],
+                          "note": "Castle.",
+                          "children": [
+                            {
+                              "san": "O-O",
+                              "weight": 8,
+                              "note": "So does Black.",
+                              "children": [
+                                {
+                                  "san": "Re1",
+                                  "tags": [
+                                    "development"
+                                  ],
+                                  "plan": "Play c3 or b3 and Bb2 next, and use the half open e-file. Do not hurry b3 here: with no pawn on d5 to fix the centre, the rook and the pawns come first.",
+                                  "name": "...c5 before the bishop",
+                                  "note": "The rook to the file the trade opened. With no Black pawn on d5 the pawn on d4 IS White's centre, and the rook behind the e-pawn is what supports it.",
+                                  "mistakes": [
+                                    {
+                                      "san": "b3",
+                                      "grade": "inaccuracy",
+                                      "note": "The setup on autopilot, and a move too slow. The engine puts the rook and the centre ahead of tidying the queenside in this particular position."
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "defaultTags": [
+    "vs-g6"
+  ]
+}

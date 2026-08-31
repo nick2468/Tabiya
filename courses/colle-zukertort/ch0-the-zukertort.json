@@ -1,0 +1,282 @@
+{
+  "id": "ch0-the-zukertort",
+  "title": "The Zukertort and its idea",
+  "intro": "The Colle-Zukertort is a system, not a sequence to memorise. Eight moves build the same little structure against almost anything Black does after 1...d5: d4, Nf3, e3, Bd3, b3, Bb2, Nbd2 and castle. Then the position tells you which of two plans to take.\n\n## Why a second system\n\nYou already play the London, and this is the same idea seen from the other side. Both put a knight on e5, both attack with f4, and both keep the theory small. They differ on one decision: which bishop leaves the pawn chain, and what holds the centre behind it.\n\nIn the London the dark-squared bishop goes OUT to f4 before e3 shuts it in, and the c3 pawn holds d4 from the side. In the Zukertort it goes to b2, behind its own pawns, where it looks down the long diagonal at e5 and g7, and the knight on d2 holds the centre instead. The London bishop watches Black's kingside from the edge. The Zukertort bishop watches it through the middle of the board.\n\nThat is a genuinely different structure, and learning it teaches you both. Play the London and you will notice what the pawn on c3 costs. Play this and you will notice what the bishop on b2 cannot do.\n\n## The two plans\n\n**Ne5 and f4.** The knight lands on e5 held by the d4 pawn and the b2 bishop, the f-pawn comes up behind it, and the rook lifts to f3 and swings to h3. This is the attack the system is known for and most of this course is about it.\n\n**dxc5 and c4.** When Black organises to trade on e5, which usually means the queen to c7 with a bishop on d6, the outpost is not worth having. Take on c5 instead, play c4, and use the bishop on b2 against a queenside that has just been opened.\n\nKnowing which of the two the position wants is the whole skill. Everything else in this course is the same setup with that one question asked in different positions.\n\n## Typical mistakes at this level\n\nPlaying Ne5 because the square is there, when Black can trade on it and be happy. Recapturing on e5 with the d-pawn when the f-pawn would open a file. Putting the bishop on d3 against a kingside fianchetto, where it bites on nothing. And starting the attack before the knight on d2 and the rook on f1 have joined in.",
+  "stem": [],
+  "tree": [
+    {
+      "san": "d4",
+      "note": "The move order this repertoire uses. Black is invited to take the centre and White builds the same structure whatever comes back.",
+      "children": [
+        {
+          "san": "d5",
+          "weight": 8,
+          "note": "The main reply at club level, and the one this course is written against.",
+          "children": [
+            {
+              "san": "Nf3",
+              "note": "Out first, before anything commits. The knight covers e5 and d4 from the square it wants anyway.",
+              "children": [
+                {
+                  "san": "Nf6",
+                  "weight": 8,
+                  "note": "Black mirrors.",
+                  "children": [
+                    {
+                      "san": "e3",
+                      "note": "The move that names the system. It shuts the c1 bishop in on purpose, because that bishop is going to b2 instead.",
+                      "shapes": [
+                        {
+                          "orig": "c1",
+                          "dest": "b2",
+                          "brush": "green"
+                        }
+                      ],
+                      "mistakes": [
+                        {
+                          "san": "c4",
+                          "grade": "playable",
+                          "note": "The Queen's Gambit, and a fine opening. It is also several times the theory of this one, which is the reason it is not here."
+                        },
+                        {
+                          "san": "Bf4",
+                          "grade": "playable",
+                          "note": "The London, the other system you play. Same spirit, opposite decision about this bishop."
+                        }
+                      ],
+                      "children": [
+                        {
+                          "san": "e6",
+                          "weight": 7,
+                          "note": "The classical setup. Black builds a wall on the light squares and accepts a passive bishop on c8.",
+                          "children": [
+                            {
+                              "san": "Bd3",
+                              "tags": [
+                                "bishop-placement"
+                              ],
+                              "note": "The bishop takes aim at h7 while Black's kingside is still bare. Against a Black pawn on g6 it would go to e2 instead.",
+                              "children": [
+                                {
+                                  "san": "c5",
+                                  "weight": 8,
+                                  "note": "The standard break at the base of White's centre.",
+                                  "children": [
+                                    {
+                                      "san": "b3",
+                                      "tags": [
+                                        "long-diagonal"
+                                      ],
+                                      "note": "The Zukertort move. The bishop is going to b2, not to c1 and not out to f4.",
+                                      "mistakes": [
+                                        {
+                                          "san": "c3",
+                                          "grade": "playable",
+                                          "note": "The Colle-Koltanowski. Sound, and it builds the same triangle the London already taught you, so it teaches you nothing you do not know."
+                                        },
+                                        {
+                                          "san": "c4",
+                                          "grade": "playable",
+                                          "note": "A Queen's Gambit a move late. Playable, and a different course."
+                                        }
+                                      ],
+                                      "children": [
+                                        {
+                                          "san": "Nc6",
+                                          "weight": 7,
+                                          "note": "The knight backs up the c5 pawn and adds a second attacker on d4.",
+                                          "children": [
+                                            {
+                                              "san": "O-O",
+                                              "tags": [
+                                                "king-safety"
+                                              ],
+                                              "note": "Tuck the king away before opening lines. An attack launched from an unsafe king usually rebounds.",
+                                              "children": [
+                                                {
+                                                  "san": "Bd6",
+                                                  "weight": 7,
+                                                  "note": "Black takes the diagonal that fights for e5. This is the move that decides which of White's two plans is right.",
+                                                  "children": [
+                                                    {
+                                                      "san": "Bb2",
+                                                      "tags": [
+                                                        "long-diagonal"
+                                                      ],
+                                                      "note": "Home. From here the bishop holds d4, supports the knight's trip to e5 and looks at g7 for the rest of the game.",
+                                                      "shapes": [
+                                                        {
+                                                          "orig": "b2",
+                                                          "dest": "g7",
+                                                          "brush": "green"
+                                                        }
+                                                      ],
+                                                      "mistakes": [
+                                                        {
+                                                          "san": "Ne5",
+                                                          "grade": "inaccuracy",
+                                                          "note": "The square is there and the support is not. Take the bishop to b2 first, then the knight can stand on e5 and stay there."
+                                                        },
+                                                        {
+                                                          "san": "c4",
+                                                          "grade": "playable",
+                                                          "note": "Playable, and it changes the opening. The bishop on b2 is what you came for."
+                                                        }
+                                                      ],
+                                                      "children": [
+                                                        {
+                                                          "san": "O-O",
+                                                          "weight": 8,
+                                                          "note": "Black castles and the position is symmetrical in everything but plan.",
+                                                          "children": [
+                                                            {
+                                                              "san": "Nbd2",
+                                                              "note": "The queen's knight comes to d2, not c3, so the c-pawn stays free and the knight can come to f3 or e4 later.",
+                                                              "mistakes": [
+                                                                {
+                                                                  "san": "Nc3",
+                                                                  "grade": "inaccuracy",
+                                                                  "note": "It blocks the c-pawn and takes away the square the other knight will want. In this system the knight belongs on d2."
+                                                                }
+                                                              ],
+                                                              "children": [
+                                                                {
+                                                                  "san": "b6",
+                                                                  "weight": 6,
+                                                                  "note": "Black solves the bishop's one problem by going round the pawn wall to the long diagonal. It also takes a defender away from the kingside.",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Ne5",
+                                                                      "tags": [
+                                                                        "e5-outpost"
+                                                                      ],
+                                                                      "note": "Now. The knight is held by the d4 pawn and the bishop on b2, and Black cannot trade it off without helping White.",
+                                                                      "shapes": [
+                                                                        {
+                                                                          "orig": "b2",
+                                                                          "dest": "e5",
+                                                                          "brush": "green"
+                                                                        }
+                                                                      ],
+                                                                      "mistakes": [
+                                                                        {
+                                                                          "san": "c4",
+                                                                          "grade": "playable",
+                                                                          "note": "Solid and slow. The outpost is available and it is the reason for the whole setup."
+                                                                        }
+                                                                      ],
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Bb7",
+                                                                          "weight": 7,
+                                                                          "note": "The bishop arrives, and it is aiming at a square White has already occupied.",
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "f4",
+                                                                              "tags": [
+                                                                                "kingside-attack"
+                                                                              ],
+                                                                              "note": "The pawn comes up behind the knight. Now the knight on e5 is permanent, the f-file is White's, and a trade on e5 is answered by the f-pawn.",
+                                                                              "mistakes": [
+                                                                                {
+                                                                                  "san": "Qf3",
+                                                                                  "grade": "playable",
+                                                                                  "note": "Direct, and a move early. The pawn on f4 is what makes the knight permanent."
+                                                                                }
+                                                                              ],
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "Ne7",
+                                                                                  "weight": 5,
+                                                                                  "note": "Black reroutes towards g6 and f5 to hold the kingside.",
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "Rf3",
+                                                                                      "tags": [
+                                                                                        "rook-lift"
+                                                                                      ],
+                                                                                      "note": "The lift. The rook leaves the file it opened and heads for h3, which is the whole point of playing f4 before this.",
+                                                                                      "shapes": [
+                                                                                        {
+                                                                                          "orig": "f3",
+                                                                                          "dest": "h3",
+                                                                                          "brush": "green"
+                                                                                        }
+                                                                                      ],
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "cxd4",
+                                                                                          "weight": 6,
+                                                                                          "note": "Black takes in the centre before White gets any further.",
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "san": "Rh3",
+                                                                                              "tags": [
+                                                                                                "kingside-attack",
+                                                                                                "h-file"
+                                                                                              ],
+                                                                                              "plan": "Play Ng4 or Qh5 and take on d4 with the bishop when there is time. If Black holds the kingside with ...h6 and ...Nf5, switch to c4 and the queenside, where the bishop on b2 is still the better piece.",
+                                                                                              "name": "The whole system, to the lift",
+                                                                                              "note": "There. The rook, the bishop on d3 and the knight on e5 all point at Black's king, and the queen comes to h5 or g4 next.",
+                                                                                              "mistakes": [
+                                                                                                {
+                                                                                                  "san": "exd4",
+                                                                                                  "grade": "playable",
+                                                                                                  "note": "Solid, and it stops the attack to fix the centre. The rook on f3 was already on its way."
+                                                                                                },
+                                                                                                {
+                                                                                                  "san": "Bxd4",
+                                                                                                  "grade": "playable",
+                                                                                                  "note": "It recaptures with the better piece and gives up the tempo the rook lift was buying."
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "defaultTags": [
+    "development"
+  ]
+}

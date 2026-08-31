@@ -1,0 +1,710 @@
+[CourseId "colle-zukertort"]
+[CourseTitle "The Colle-Zukertort"]
+[StudentColour "white"]
+[Tagline "A second structure against 1...d5, with the bishop on b2."]
+[FormatVersion "1"]
+[TagExtensions "long-diagonal e5-outpost rook-lift vs-e6 vs-bf5 vs-b6 vs-g6 light-squares"]
+[ChapterId "ch0-the-zukertort"]
+[ChapterTitle "The Zukertort and its idea"]
+[DefaultTags "development"]
+
+{The Colle-Zukertort is a system, not a sequence to memorise. Eight moves build the same little structure against almost anything Black does after 1...d5: d4, Nf3, e3, Bd3, b3, Bb2, Nbd2 and castle. Then the position tells you which of two plans to take.
+
+## Why a second system
+
+You already play the London, and this is the same idea seen from the other side. Both put a knight on e5, both attack with f4, and both keep the theory small. They differ on one decision: which bishop leaves the pawn chain, and what holds the centre behind it.
+
+In the London the dark-squared bishop goes OUT to f4 before e3 shuts it in, and the c3 pawn holds d4 from the side. In the Zukertort it goes to b2, behind its own pawns, where it looks down the long diagonal at e5 and g7, and the knight on d2 holds the centre instead. The London bishop watches Black's kingside from the edge. The Zukertort bishop watches it through the middle of the board.
+
+That is a genuinely different structure, and learning it teaches you both. Play the London and you will notice what the pawn on c3 costs. Play this and you will notice what the bishop on b2 cannot do.
+
+## The two plans
+
+**Ne5 and f4.** The knight lands on e5 held by the d4 pawn and the b2 bishop, the f-pawn comes up behind it, and the rook lifts to f3 and swings to h3. This is the attack the system is known for and most of this course is about it.
+
+**dxc5 and c4.** When Black organises to trade on e5, which usually means the queen to c7 with a bishop on d6, the outpost is not worth having. Take on c5 instead, play c4, and use the bishop on b2 against a queenside that has just been opened.
+
+Knowing which of the two the position wants is the whole skill. Everything else in this course is the same setup with that one question asked in different positions.
+
+## Typical mistakes at this level
+
+Playing Ne5 because the square is there, when Black can trade on it and be happy. Recapturing on e5 with the d-pawn when the f-pawn would open a file. Putting the bishop on d3 against a kingside fianchetto, where it bites on nothing. And starting the attack before the knight on d2 and the rook on f1 have joined in.}
+1. d4
+{The move order this repertoire uses. Black is invited to take the centre and White builds the same structure whatever comes back.}
+1... d5
+{The main reply at club level, and the one this course is written against. [%weight 8]}
+2. Nf3
+{Out first, before anything commits. The knight covers e5 and d4 from the square it wants anyway.}
+2... Nf6 {Black mirrors. [%weight 8]} 3. e3
+{The move that names the system. It shuts the c1 bishop in on purpose, because that bishop is going to b2 instead. [%cal Gc1b2]}
+( 3. c4!?
+{The Queen's Gambit, and a fine opening. It is also several times the theory of this one, which is the reason it is not here.}
+) ( 3. Bf4!?
+{The London, the other system you play. Same spirit, opposite decision about this bishop.}
+) 3... e6
+{The classical setup. Black builds a wall on the light squares and accepts a passive bishop on c8. [%weight 7]}
+4. Bd3
+{The bishop takes aim at h7 while Black's kingside is still bare. Against a Black pawn on g6 it would go to e2 instead. [%tags bishop-placement]}
+4... c5 {The standard break at the base of White's centre. [%weight 8]} 5. b3
+{The Zukertort move. The bishop is going to b2, not to c1 and not out to f4. [%tags long-diagonal]}
+( 5. c3!?
+{The Colle-Koltanowski. Sound, and it builds the same triangle the London already taught you, so it teaches you nothing you do not know.}
+) ( 5. c4!? {A Queen's Gambit a move late. Playable, and a different course.} ) 5... Nc6
+{The knight backs up the c5 pawn and adds a second attacker on d4. [%weight 7]} 6. O-O
+{Tuck the king away before opening lines. An attack launched from an unsafe king usually rebounds. [%tags king-safety]}
+6... Bd6
+{Black takes the diagonal that fights for e5. This is the move that decides which of White's two plans is right. [%weight 7]}
+7. Bb2
+{Home. From here the bishop holds d4, supports the knight's trip to e5 and looks at g7 for the rest of the game. [%tags long-diagonal] [%cal Gb2g7]}
+( 7. Ne5?!
+{The square is there and the support is not. Take the bishop to b2 first, then the knight can stand on e5 and stay there.}
+) ( 7. c4!? {Playable, and it changes the opening. The bishop on b2 is what you came for.}
+) 7... O-O
+{Black castles and the position is symmetrical in everything but plan. [%weight 8]}
+8. Nbd2
+{The queen's knight comes to d2, not c3, so the c-pawn stays free and the knight can come to f3 or e4 later.}
+( 8. Nc3?!
+{It blocks the c-pawn and takes away the square the other knight will want. In this system the knight belongs on d2.}
+) 8... b6
+{Black solves the bishop's one problem by going round the pawn wall to the long diagonal. It also takes a defender away from the kingside. [%weight 6]}
+9. Ne5
+{Now. The knight is held by the d4 pawn and the bishop on b2, and Black cannot trade it off without helping White. [%tags e5-outpost] [%cal Gb2e5]}
+( 9. c4!?
+{Solid and slow. The outpost is available and it is the reason for the whole setup.} )
+9... Bb7
+{The bishop arrives, and it is aiming at a square White has already occupied. [%weight 7]}
+10. f4
+{The pawn comes up behind the knight. Now the knight on e5 is permanent, the f-file is White's, and a trade on e5 is answered by the f-pawn. [%tags kingside-attack]}
+( 10. Qf3!? {Direct, and a move early. The pawn on f4 is what makes the knight permanent.}
+) 10... Ne7 {Black reroutes towards g6 and f5 to hold the kingside. [%weight 5]} 11. Rf3
+{The lift. The rook leaves the file it opened and heads for h3, which is the whole point of playing f4 before this. [%tags rook-lift] [%cal Gf3h3]}
+11... cxd4 {Black takes in the centre before White gets any further. [%weight 6]} 12. Rh3
+{There. The rook, the bishop on d3 and the knight on e5 all point at Black's king, and the queen comes to h5 or g4 next. [%tags kingside-attack h-file] [%plan Play Ng4 or Qh5 and take on d4 with the bishop when there is time. If Black holds the kingside with ...h6 and ...Nf5, switch to c4 and the queenside, where the bishop on b2 is still the better piece.] [%line The whole system, to the lift]}
+( 12. exd4!?
+{Solid, and it stops the attack to fix the centre. The rook on f3 was already on its way.}
+) ( 12. Bxd4!?
+{It recaptures with the better piece and gives up the tempo the rook lift was buying.} ) *
+
+
+[CourseId "colle-zukertort"]
+[CourseTitle "The Colle-Zukertort"]
+[StudentColour "white"]
+[Tagline "A second structure against 1...d5, with the bishop on b2."]
+[FormatVersion "1"]
+[TagExtensions "long-diagonal e5-outpost rook-lift vs-e6 vs-bf5 vs-b6 vs-g6 light-squares"]
+[ChapterId "ch1-classical"]
+[ChapterTitle "The classical: ...e6 and ...c5"]
+[DefaultTags "vs-e6"]
+
+{This is the setup you will meet most often. Black plays ...e6 and ...c5, hits the base of White's centre, and develops behind a solid wall. Nothing is threatened, nothing is sharp, and the game is decided by who understands the structure better.
+
+## What Black is doing
+
+The pawns on d5 and e6 hold the centre and take e4 and c4 away for a while. The cost is the bishop on c8, which is shut in behind them. Black usually solves that with ...b6 and ...Bb7, and those two moves take time and take a defender away from the kingside. That is the trade the whole chapter turns on.
+
+## Your setup, in order
+
+b3 and Bb2, castle, knight to d2, then Ne5. The order barely matters as long as the bishop reaches b2 BEFORE the knight goes to e5, because the bishop is what holds the knight there. Once the knight stands on e5 with the bishop behind it, f4 makes the outpost permanent and opens the f-file, and the rook lifts to f3 and swings to h3.
+
+## The fork you must not miss
+
+Once White has a knight on e5 and Black has a bishop on d6 and a knight on f6, taking on e5 loses material. After ...Nxe5 the recapture dxe5 attacks BOTH the bishop on d6 and the knight on f6, and Black cannot save them both. If f4 has already been played, fxe5 does the same thing. Count that fork before you allow the trade, and take it when Black allows it.
+
+## When to change plan
+
+If Black gets the queen to c7 with the bishop on d6, the trade on e5 stops working for you. Then do not play Ne5 at all: take on c5 instead, play c4, and use the bishop on b2 down a diagonal that has just been opened.
+
+## Typical mistakes at this level
+
+Playing Ne5 before Bb2. Recapturing on e5 with a piece when the pawn forks two of them. Playing Ne5 into ...Qc7 and ...Bd6 and letting the trade happen on Black's terms. And recapturing on e4 with the bishop when the knight is the piece that should take.}
+1. d4 d5 2. Nf3 Nf6 3. e3 e6 4. Bd3 c5
+{The standard break at the base of the centre, and the main line of the chapter. [%weight 8]}
+( 4... c6
+{The solid setup. Black holds the centre and gives up on ...c5 for now. [%weight 4]} 5. b3
+{The same answer as ever. [%tags long-diagonal]} 5... Bd6
+{Black takes the diagonal that fights for e5. [%weight 6]} 6. Bb2 {Home.} 6... O-O
+{Black castles. [%weight 8]} 7. O-O {So does White. [%tags king-safety]} 7... Nbd7
+{The knight comes to d7 rather than c6, because the c-pawn is in the way. [%weight 7]}
+8. Ne5
+{The outpost, and here it comes with an extra point: taking on e5 would hang the bishop on d6 to the recapture. [%tags e5-outpost] [%plan Play f4 and Nbd2, then the rook lift. Black's pawn on c6 keeps the queenside quiet, so the whole game is on the other wing.] [%line The solid ...c6]}
+) 5. b3
+{The Zukertort move. The bishop goes behind the pawns, not out in front of them. [%tags long-diagonal]}
+( 5. c3?!
+{The Koltanowski triangle. It is sound, and it is the London structure you already know, so it gives up the second structure this course exists to teach.}
+) ( 5. dxc5!?
+{It gives up the tension far too early and hands Black the bishop on c5 with a free move.}
+) 5... Nc6 {The knight backs up c5 and adds an attacker to d4. [%weight 7]} ( 5... cxd4
+{Black resolves the centre at once. [%weight 4]} 6. exd4
+{Take towards the centre. The bishop on b2 will defend d4 along the diagonal, so the pawn is not weak. [%tags long-diagonal]}
+( 6. Nxd4?!
+{It puts the knight where Black's pieces come with tempo and gives up the pawn centre that supports Ne5.}
+) 6... Bd6 {Black develops and eyes e5. [%weight 6]} 7. Bb2
+{Home, and now the pawn on d4 has a second defender.} 7... O-O
+{Black castles. [%weight 8]} 8. O-O
+{So does White, and the setup is complete a move early. [%tags king-safety] [%plan Play Nbd2 and Ne5, and keep c4 in reserve. With the centre already resolved the attack arrives faster than usual.] [%line ...cxd4 at move five]}
+) ( 5... Bd6 {Black develops before deciding about the c-pawn or the knight. [%weight 5]}
+6. Bb2 {Home.} 6... O-O {Black castles. [%weight 8]} 7. O-O
+{So does White. [%tags king-safety]} 7... Nbd7
+{The knight goes to d7, where it does not block the c-pawn and does not fight for d4 either. [%weight 5]}
+8. Ne5
+{Now, and the fork is in the air: if Black ever takes on e5 the recapture hits the bishop on d6 and the knight on f6 at once. [%tags e5-outpost] [%plan Play f4, then Nbd2 and the rook lift. If Black plays ...Nxe5, answer dxe5 and collect the piece.] [%line ...Bd6 before ...Nc6] [%cal Ge5d6,Ge5f6]}
+) 6. O-O {King safety first. [%tags king-safety]} 6... Bd6
+{The move that decides which of White's two plans is right. Black takes the diagonal that fights for e5. [%weight 7]}
+( 6... Be7
+{The modest square. It does not fight for e5, which makes White's job simpler. [%weight 5]}
+7. Bb2 {Home.} 7... O-O {Black castles. [%weight 8]} 8. Nbd2 {The last minor piece.}
+8... b6 {The bishop heads for the long diagonal. [%weight 6]} 9. Ne5
+{The outpost. [%tags e5-outpost]} 9... Bb7 {Black completes the setup. [%weight 7]} 10. f4
+{The pawn behind the knight. With the bishop on e7 rather than d6 there is no fork to be had, so this is a pure attacking position. [%tags kingside-attack] [%plan Play Rf3 and Rh3, and meet ...Nxe5 with fxe5, which drives the knight off f6 and opens the file. Then Qh5 or Qg4.] [%line The modest ...Be7]}
+) 7. Bb2
+{Home. The bishop holds d4 and looks at e5 and g7 for the rest of the game. [%tags long-diagonal] [%cal Gb2g7]}
+( 7. Ne5?!
+{A move too early. The bishop on b2 is what holds the knight on e5, and it is still on c1.}
+) 7... O-O {Black castles. [%weight 8]} 8. Nbd2
+{The queen's knight to d2, which keeps the c-pawn free.} ( 8. Nc3?!
+{It blocks the c-pawn and takes the square the f3 knight will want. In this system the knight belongs on d2.}
+) 8... b6
+{Black solves the bishop and takes a defender off the kingside in one move. [%weight 6]} (
+8... Qc7
+{The move that stops the whole plan. With the queen behind the bishop on d6, Black can meet Ne5 with ...Nxe5 and recapture twice. [%weight 5]}
+9. dxc5
+{So change plan. Take on c5 while it costs Black a move, and turn to the queenside. [%tags c4-break]}
+( 9. Ne5?
+{It walks into the trade Black has just prepared: 9...Nxe5 10.dxe5 Bxe5 11.Bxe5 Qxe5 and Black comes out a pawn up with the better pieces.}
+) 9... Bxc5
+{Black recaptures with the bishop, which is now off the diagonal that was fighting for e5. [%weight 8]}
+10. c4
+{Open the position for the bishop on b2 while Black's pieces are still sorting themselves out. [%tags c4-break long-diagonal] [%plan Play Qe2 and Rfd1, take on d5 when it helps, and use the half open c-file. The knight can still reach e5 later, once ...Qc7 has stopped meaning anything.] [%line ...Qc7, and the trade on c5]}
+) ( 8... cxd4 {Black releases the tension. [%weight 5]} 9. exd4
+{Towards the centre, with the bishop on b2 behind the pawn. [%tags long-diagonal]} (
+9. Nxd4?!
+{It hands Black ...e5 with tempo and gives up the pawn that supports the outpost.} )
+9... b6 {The bishop heads for b7 as usual. [%weight 6]} 10. Ne5
+{The outpost, and with the centre already fixed there is nothing left to wait for. [%tags e5-outpost] [%plan Play f4 and the rook lift. The pawn on d4 is isolated in name only while the bishop on b2 defends it.] [%line The early ...cxd4]}
+) 9. Ne5
+{Now. The knight is held by the pawn on d4 and the bishop on b2. [%tags e5-outpost] [%cal Gb2e5]}
+( 9. c4!? {Solid, slow, and it passes up the square the whole setup was built for.} )
+9... Bb7 {The bishop arrives on the diagonal. [%weight 7]} ( 9... Nxe5
+{The trade Black should not make. [%weight 3]} 10. dxe5
+{Take with the pawn, and look at what it attacks: the bishop on d6 and the knight on f6 at the same time. [%tags tactics] [%cal Ge5d6,Ge5f6]}
+( 10. Bxh7+?
+{The gift instead of the fork. Recapture on e5 with the pawn first: it attacks the bishop on d6 and the knight on f6 at once, and a free piece beats a speculative one.}
+) 10... Be7 {Black saves the bishop and gives up the knight. [%weight 7]} 11. exf6
+{Collect it. Black takes back with the bishop and White is a knight for a pawn ahead. [%tags tactics] [%plan Trade a pair of bishops on f6 if Black allows it, castle the rooks and play c4. A piece is a piece: simplify, and do not go looking for more.] [%line The ...Nxe5 fork]}
+) 10. f4
+{The pawn comes up behind the knight. The outpost is permanent, the f-file is White's, and a trade on e5 is answered by the f-pawn. [%tags kingside-attack]}
+( 10. Qf3?!
+{A move early. Without the pawn on f4 the knight can be traded off and the queen has nothing left to attack with.}
+) 10... Ne7 {Black reroutes towards g6 and f5 to hold the kingside. [%weight 5]} (
+10... Nb4 {Black's best. The knight hits the bishop on d3 and gains a move. [%weight 6]}
+11. Be2
+{Step back and keep the bishop. It is worth more than the move Black gained. [%tags bishop-placement] [%plan Play a3 to send the knight home, then Rf3 and the lift. Nothing has changed except that Black has spent two moves on a knight that has to come back.] [%line ...Nb4, hitting the bishop]}
+( 11. Bb5?!
+{It keeps the bishop and puts it where ...a6 hits it again. On e2 it is out of the way and still useful.}
+) ) ( 10... Ne4 {Black plants a knight in the middle and offers a trade. [%weight 4]}
+11. Nxe4
+{Take with the KNIGHT, so the pawn recaptures away from the centre and the bishop on d3 keeps its diagonal. [%tags tactics]}
+( 11. Bxe4?!
+{It recaptures with the wrong piece. After ...dxe4 the knight on d2 has nowhere good to go and the bishop that was aiming at h7 has gone.}
+) 11... dxe4 {Forced, or Black is simply a piece down. [%weight 8]} 12. Bxe4
+{The bishop lands on the long diagonal, pointing at h7 with the queen able to follow. [%tags bishop-placement] [%plan Play Qf3 or Qe2, then c4, and watch for the trade on b7. White is a clear pawn to the good in the centre and Black has no counterplay yet.] [%line ...Ne4, and the right recapture]}
+) 11. Rf3
+{The lift. The rook leaves the file it opened and heads for h3. [%tags rook-lift] [%cal Gf3h3]}
+( 11. Qe2!?
+{Sensible development, and it lets Black play ...Nf5 and ...h6 in peace. The rook is the fastest piece to the kingside here.}
+) 11... cxd4 {Black takes in the centre before White gets any further. [%weight 6]}
+12. Rh3
+{There. Rook, bishop and knight all point at Black's king, and the queen comes to h5 or g4 next. [%tags kingside-attack h-file] [%plan Play Ng4 and Qh5, and take back on d4 with the bishop when there is a moment. If Black holds with ...h6 and ...Nf5, turn to c4 and the queenside, where the bishop on b2 is still the better piece.] [%line The full main line, with the lift]}
+( 12. exd4!?
+{It fixes the centre and stops the attack. The rook on f3 was already committed.} ) *
+
+
+[CourseId "colle-zukertort"]
+[CourseTitle "The Colle-Zukertort"]
+[StudentColour "white"]
+[Tagline "A second structure against 1...d5, with the bishop on b2."]
+[FormatVersion "1"]
+[TagExtensions "long-diagonal e5-outpost rook-lift vs-e6 vs-bf5 vs-b6 vs-g6 light-squares"]
+[ChapterId "ch2-bishop-out"]
+[ChapterTitle "Black gets the bishop out first"]
+[DefaultTags "vs-bf5"]
+
+{Black plays ...Bf5 or ...Bg4 before ...e6, so the bishop that is normally stuck behind the pawn wall gets out first. It is the sensible thing to do and it is the reason a Colle player has to know this chapter: the bishop that would have been Black's problem is now a piece.
+
+## What changes
+
+Not the setup. b3, Bb2, castle, knight to d2: all of it still happens. What changes is where White's own light-squared bishop belongs, and the answer depends on which square Black chose.
+
+Against ...Bf5 the bishops stare at each other on the b1-h7 diagonal, so put yours on d3 and offer the trade. Black either takes, which develops your queen for nothing, or allows Bxf5, which leaves Black with doubled f-pawns and a permanent weakness on e6 and h7.
+
+There is a trap in that offer, and it is worth a piece. Until Black has a pawn on e6 or g6, NOTHING recaptures on f5. So after 3...Bf5 4.Bd3, a natural move like 4...c6 simply loses the bishop to 5.Bxf5. Look at the recapture before you assume a trade is a trade.
+
+Against ...Bg4 the bishop is not on your diagonal at all, it is pinning your knight. Ask it the question with h3. If Black takes on f3, recapture with the QUEEN, never with the pawn: the queen lands on f3 pointing at b7 and d5, which is exactly where the bishop on b2 will be pointing too. If Black keeps the pin with ...Bh5, put your own bishop on e2, break the pin, and carry on as usual.
+
+## The one thing worth memorising
+
+Recapture on f3 with the queen. Recapture on d3 with the queen. In both cases the queen comes to a good square with a free move, and in both cases the pawn recapture would wreck a structure you spent the whole opening building.
+
+## Typical mistakes at this level
+
+Taking on f3 with the g-pawn and opening your own king. Playing h3 and then g4 without a reason, which weakens the squares your knight wants. Leaving the bishop on d3 when Black's bishop has gone to g4, where it is doing nothing. And forgetting that after Bxf5 exf5 the pawn on f5 is a target, not a strength.}
+1. d4 d5 2. Nf3 Nf6 3. e3 Bf5
+{Out before ...e6 shuts it in. The bishop takes the diagonal White wants. [%weight 5]} (
+3... Bg4 {The other way out, and this one comes with a pin. [%weight 5]} 4. h3
+{Ask the question at once, before Black has time to support the bishop. [%tags light-squares]}
+( 4. Bd3?!
+{The bishop on g4 is not on that diagonal, so this develops at nothing while the pin stays.}
+) 4... Bxf3
+{Black gives up the bishop pair to damage the structure, or so the plan goes. [%weight 7]}
+( 4... Bh5 {Black keeps the pin and dares White to chase the bishop further. [%weight 6]}
+5. Be2
+{Break the pin by blocking it. The bishop is a little passive on e2 and it is doing the one job that matters. [%tags bishop-placement]}
+( 5. g4!?
+{The critical move, and the engine's choice: the bishop is chased to g6 and then Ne5 hits it again. It also opens the front door of the king you are about to castle behind, which is why this course plays the quiet move instead. Take it if you like sharp positions.}
+) 5... e6 {Black settles the centre. [%weight 7]} 6. b3
+{The setup, unchanged. [%tags long-diagonal]} 6... c5 {The usual break. [%weight 7]}
+7. Bb2 {Home.} 7... Nc6 {Development. [%weight 7]} 8. O-O
+{King safety. [%tags king-safety]} ( 8. c4?!
+{It opens the centre with the king still standing in it. Castle first: nothing here is running away.}
+) 8... Bd6 {Black takes the diagonal that fights for e5. [%weight 6]} 9. Nbd2
+{The last piece, and the bishop on h5 is now out of the game on the wrong side of the board. [%tags development] [%plan Play Ne5 when Black cannot answer it well, or c4 if the centre suits you better. The bishop on h5 has to come back before Black has a full set of pieces.] [%line ...Bh5, keeping the pin]}
+( 9. Ne5!?
+{The outpost, a move early. With the knight still on b1 the piece on e5 has one defender fewer than it should.}
+) ) 5. Qxf3
+{With the QUEEN. She lands looking at b7 and d5, which is where the bishop on b2 will be looking too. [%tags long-diagonal] [%cal Gf3b7]}
+( 5. gxf3?!
+{It doubles the pawns in front of the king White is about to castle behind, with no attack to show for it. The engine rates it about two thirds of a pawn worse, which is a lot for a move you never have to play.}
+) 5... e6 {Black closes the diagonal. [%weight 7]} 6. b3
+{The setup, as always. [%tags long-diagonal]} 6... c6
+{Black shores up d5 rather than breaking with ...c5. [%weight 6]} 7. Bb2
+{Home, and the queen and bishop now point at the same squares.} 7... Nbd7
+{Development. [%weight 7]} 8. Bd3
+{The last minor piece, and the one that has to move before White can castle. [%tags bishop-placement]}
+8... Bd6 {Black takes the diagonal. [%weight 6]} 9. O-O {Castle. [%tags king-safety]}
+9... O-O {So does Black. [%weight 8]} 10. c4
+{With the bishop pair and no bishop of Black's to trade, open the position rather than aiming at a kingside that is fully defended. [%tags c4-break] [%plan Play Nd2 or Nc3, then the rooks to c1 and d1, and take on d5 when it wins time. The attack with Ne5 and f4 is second choice here, because Black's kingside still has all its defenders.] [%line Black trades on f3]}
+( 10. Nd2!?
+{Quiet development, and it leaves the position closed. Two bishops are worth having only when there are lines for them, so open one.}
+) ) 4. Bd3
+{Offer the trade. Black's bishop and yours are on one diagonal and yours is worth less here. [%tags bishop-placement]}
+( 4. c4!?
+{The Queen's Gambit answer, and a fine move. It is also a different opening from the one you came to play.}
+) 4... e6 {Black keeps the bishop and shuts the diagonal. [%weight 7]} ( 4... Bxd3
+{Black trades at once. [%weight 6]} 5. Qxd3
+{With the queen, which arrives on a good square with a free move. [%tags development]} (
+5. cxd3?!
+{It fixes White's pawns and gives up the whole idea of b3 and Bb2, because the c-pawn can no longer go to c4.}
+) 5... e6 {Black settles the centre. [%weight 7]} 6. O-O {Castle. [%tags king-safety]} (
+6. Ne5?!
+{Far too early: the bishop is on c1, the king is in the middle, and the knight has nothing behind it.}
+) 6... Be7 {Development. [%weight 6]} 7. b3
+{The setup. There is a greedier move here: 7.Qb5+ Nbd7 8.Qxb7 wins a pawn, because the bishop that used to guard b7 left the board on move four. The engine prefers it. This course plays the setup move, because a queen on b7 needs accurate handling and the pawn is not going anywhere in a club game. [%tags long-diagonal]}
+7... O-O {Black castles. [%weight 8]} 8. Bb2 {Home.} 8... c5 {The break. [%weight 7]}
+9. c4
+{Open it up. With the light-squared bishops off, Black's remaining bishop is the passive one and an open centre suits White. [%tags c4-break long-diagonal] [%plan Play Nc3 and the rooks to c1 and d1. The knight can still reach e5, and with no bishop on c8 Black cannot easily challenge it.] [%line Black trades on d3 at once]}
+) ( 4... c6
+{A natural developing move that loses a piece. With no pawn yet on e6 or g6, nothing can recapture on f5. [%weight 3]}
+5. Bxf5
+{Just take it. Count the defenders of a bishop before you leave it standing, and count your opponent's for them. [%tags tactics] [%cal Gd3f5]}
+( 5. O-O?
+{It castles, Black plays ...e6, the bishop is defended and the free piece has gone. Take first.}
+) 5... e6 {Black shuts the diagonal and plays on a piece down. [%weight 7]} 6. Bd3
+{Step back. There is nothing to hurry here: a piece is a piece. [%tags bishop-placement] [%plan Play b3, Bb2, Nbd2 and castle exactly as usual, then trade pieces whenever Black offers. A quiet extra piece decides the game without an attack.] [%line The ...c6 blunder]}
+) 5. O-O {Castle first. Black's bishop is not going anywhere. [%tags king-safety]}
+5... Be7 {Development. [%weight 6]} 6. Bxf5
+{Now. Black's recapture has to be with a pawn, and that pawn is a weakness for the rest of the game. [%tags bishop-placement]}
+( 6. Nbd2?!
+{It leaves the trade to Black, who will take on d3 and get the better version of it.} )
+6... exf5 {Forced in effect: taking with the knight would drop the d-pawn. [%weight 8]}
+7. b3 {The setup, and now with a target to aim at. [%tags long-diagonal]} 7... O-O
+{Black castles. [%weight 8]} 8. Bb2 {Home.} 8... c5 {The break. [%weight 7]} 9. Nbd2
+{The last piece. [%tags development]} 9... Nc6 {Development. [%weight 7]} 10. c4
+{Open the centre while Black's structure is the worse one. The pawn on f5 cannot be defended by another pawn, and e5 and e6 belong to White. [%tags c4-break] [%plan Play Rc1 and Qe2, trade on d5 when it opens the file, and put a knight on e5. Black's kingside pawns look active and cannot advance without giving up more squares.] [%line ...Bf5, and the trade on f5]}
+( 10. Ne5!?
+{The outpost, and a move early. Opening the centre while Black's structure is damaged is worth more than the square.}
+) *
+
+
+[CourseId "colle-zukertort"]
+[CourseTitle "The Colle-Zukertort"]
+[StudentColour "white"]
+[Tagline "A second structure against 1...d5, with the bishop on b2."]
+[FormatVersion "1"]
+[TagExtensions "long-diagonal e5-outpost rook-lift vs-e6 vs-bf5 vs-b6 vs-g6 light-squares"]
+[ChapterId "ch3-mirror"]
+[ChapterTitle "Black mirrors: ...b6 and ...Bd6"]
+[DefaultTags "vs-b6"]
+
+{Black plays ...b6 and ...Bb7 and builds the same structure you are building, one move behind. It is the most sensible answer to the Zukertort and the one that asks the hardest question: if both bishops point down the long diagonal, whose is doing more?
+
+## Whose diagonal is it
+
+Yours, for one reason: you are a move ahead, and the square in the middle of both diagonals is e5, not e4. Your knight can stand on e5 supported by the d4 pawn. Black's knight cannot stand on e4 supported by a d5 pawn, because a pawn on d5 does not defend e4. That single asymmetry is the whole difference between the two setups.
+
+## What that means over the board
+
+Get to Ne5 first. Once the knight is there with the bishop on b2 behind it, the mirror stops being a mirror: Black has a bishop staring at a square White already owns.
+
+## The bishop on d6
+
+Black often adds ...Bd6, which is the honest attempt to fight for e5. Then the fork from chapter 1 is back on: if Black ever takes on e5, the recapture with the d-pawn attacks the bishop on d6 and the knight on f6 at once. Watch for it every time, because a mirror position makes trades look automatic and this one is not.
+
+## The bishop to a6
+
+Some players go ...Ba6 instead, offering to trade off White's attacking bishop. Take it: the trade costs Black time, the knight is left on a6 where it does nothing, and the b2 bishop and the knight on e5 were always the pieces that mattered here.
+
+## Typical mistakes at this level
+
+Letting Black play ...Ne4 and ...f5 unchallenged, which turns the mirror into a Stonewall and gives Black the square you wanted. Trading on b7 for no reason and helping Black's knight to a good square. Playing Ne5 without the bishop on b2 behind it. And missing the fork on d6 and f6 because both sides look the same.}
+1. d4 d5 2. Nf3 Nf6 3. e3 e6 4. Bd3 b6
+{The mirror. Black solves the c8 bishop before it gets shut in and heads for the same diagonal White wants. [%weight 6]}
+( 4... Bd6
+{Black takes the diagonal that fights for e5 before deciding about the queenside. [%weight 5]}
+5. b3 {The setup, unchanged. [%tags long-diagonal]} 5... O-O {Black castles. [%weight 8]}
+( 5... Ne4
+{Black grabs the middle first, usually heading for a Stonewall with ...f5. [%weight 4]}
+6. Bb2
+{Home, and now the knight on e4 has nothing behind it: a pawn on d5 does not defend e4. [%tags long-diagonal]}
+( 6. Nfd2?!
+{It challenges the knight and undevelops the piece that was going to e5. Let Black keep the square and take e5 instead.}
+) 6... f5
+{The Stonewall. Black fixes the knight in place at the cost of the dark squares and the bishop on c8. [%weight 6]}
+7. Nbd2
+{Offer to trade the knight that is holding everything together. [%tags development]} (
+7. Ne5?!
+{It takes the square before the knight on e4 has been challenged, and that knight is the piece holding the Stonewall together. Black answers ...Bxe5, and after dxe5 the pawn forks nothing, because Black's knight sits on e4 rather than f6. Offer the trade on e4 first.}
+) 7... O-O {Black castles. [%weight 8]} 8. Ne5
+{Now, with the knight on d2 ready to recapture on e4 and the bishop on b2 behind everything. [%tags e5-outpost] [%plan Trade on e4 when Black allows it, then play f3 or c4 and break the Stonewall from underneath. The dark squares e5 and c5 are permanently yours.] [%line The Stonewall with ...Ne4 and ...f5]}
+) 6. Bb2 {Home.} 6... Nbd7 {The knight to d7 keeps the c-pawn free for ...c5. [%weight 6]}
+7. O-O {Castle. [%tags king-safety]} ( 7. Ne5!?
+{The square, one move before the king is safe. The rook on f1 is part of the attack, so castle first.}
+) 7... Re8
+{Black prepares ...e5, which is the break this setup is really after. [%weight 5]} 8. Ne5
+{Take the square before Black can contest it, and note the fork that is now in the air: ...Nxe5 dxe5 would hit the bishop on d6 and the knight on f6 at once. [%tags e5-outpost] [%plan Play f4 and Nbd2, and answer ...e5 with dxe5. Keep a knight on e5 for as long as Black lets you.] [%line ...Bd6 with the rook to e8] [%cal Ge5d6,Ge5f6]}
+) 5. O-O {Castle first and let Black say where the bishop is going. [%tags king-safety]} (
+5. Ne5?! {Far too early. The bishop is on c1 and the knight has nothing behind it.} )
+5... Bb7 {The bishop arrives on the diagonal. [%weight 8]} ( 5... Ba6
+{The other idea: trade off the bishop that is aiming at Black's king. [%weight 4]} 6. Bxa6
+{Take it. The trade costs Black a move and leaves a knight on a6 doing nothing. [%tags bishop-placement]}
+( 6. c4?!
+{It blocks the attack on the bishop and gives up the b3 and Bb2 setup in one move.} )
+6... Nxa6 {Forced, and the knight is offside. [%weight 8]} 7. b3
+{The setup, on time. [%tags long-diagonal]} 7... Be7 {Development. [%weight 6]} 8. Bb2
+{Home.} 8... O-O {Black castles. [%weight 8]} 9. Nbd2
+{The last piece. Black has a knight on the rim and no light-squared bishop to trouble the long diagonal. [%tags development] [%plan Play c4 and Ne5, and aim at the light squares Black can no longer defend with a bishop. The knight on a6 needs two moves to rejoin the game.] [%line ...Ba6, trading the good bishop]}
+) 6. b3
+{The setup. Both sides now want the same diagonal, and White gets there first. [%tags long-diagonal]}
+( 6. c4?!
+{It opens the position for the bishop Black has just put on b7. Against the mirror, keep the centre closed and take e5 instead.}
+) 6... Bd6 {Black fights for e5. [%weight 6]} ( 6... Be7
+{The quieter square, which gives up the fight for e5 without a struggle. [%weight 5]}
+7. Bb2 {Home.} 7... O-O {Black castles. [%weight 8]} 8. Nbd2
+{The last minor piece. [%tags development]} 8... c5 {The break. [%weight 7]} 9. Ne5
+{The square, uncontested. With no bishop on d6 there is nothing to challenge the knight and nothing to fork. [%tags e5-outpost] [%plan Play f4 and the rook lift, exactly as in chapter one. The bishop on b7 is biting on the knight, not on anything behind it.] [%line The mirror, with ...Be7]}
+) 7. Bb2 {Home.} ( 7. Ne5!?
+{A move early. The bishop belongs on b2 before the knight sits on e5, and in a mirror position the tempo matters.}
+) 7... O-O {Black castles. [%weight 8]} 8. Nbd2 {The last minor piece.} ( 8. Ne5?!
+{One move early. With the knight still on b1 the piece on e5 has one defender and Black can trade into a comfortable game.}
+) 8... Nbd7 {The knight to d7 rather than c6, so the c-pawn stays free. [%weight 6]}
+9. Ne5
+{The square, and White gets there a move before Black could contest it. [%tags e5-outpost] [%cal Gb2e5]}
+( 9. c4!?
+{Solid, and it opens a diagonal Black has a bishop on too. The square is the point of the mirror.}
+) 9... c5 {Black hits the centre at last. [%weight 6]} 10. f4
+{The pawn behind the knight, and the mirror is over: White has a knight on e5 that will not move, and Black has a bishop on b7 looking at it. [%tags kingside-attack] [%plan Play Rf3 and Rh3 as usual, and meet ...Nxe5 with fxe5, which hits the bishop on d6 and the knight on f6 at the same time. Watch for ...Ne4 and answer it with Nxe4.] [%line The mirror, with ...Bd6]}
+( 10. c4!?
+{Solid, and it opens the position for the bishop Black also has. The kingside is where White is a move ahead.}
+) *
+
+
+[CourseId "colle-zukertort"]
+[CourseTitle "The Colle-Zukertort"]
+[StudentColour "white"]
+[Tagline "A second structure against 1...d5, with the bishop on b2."]
+[FormatVersion "1"]
+[TagExtensions "long-diagonal e5-outpost rook-lift vs-e6 vs-bf5 vs-b6 vs-g6 light-squares"]
+[ChapterId "ch4-g6"]
+[ChapterTitle "The ...g6 setups"]
+[DefaultTags "vs-g6"]
+
+{This is the system's least comfortable ground and the chapter says so honestly. Black plays ...g6 and ...Bg7, and the two ideas the Zukertort is built on both lose their point.
+
+## Why the usual plan misfires
+
+The bishop on d3 aims at h7. A pawn on g6 defends h7, so the bishop is aiming at a square that is already covered, and it can be hit by ...Nh5 and ...Bf5 into the bargain. Put it on e2 instead, where it is modest and useful.
+
+The knight on e5 wants to be a permanent guest. Against a bishop on g7 it is not: ...Nfd7 or ...Nc6 challenges it, and every trade on e5 helps Black, because the bishop on g7 is aiming down the same diagonal your knight is standing on.
+
+## What to play instead
+
+b3, Bb2, and then c4. Hold the centre with pawns on c4 and d4, castle, and play a normal, solid game in what is close to a Queen's Indian with colours reversed. The bishop on b2 is a good piece here even without an attack behind it, because it stares straight at the bishop on g7 and neutralises it.
+
+That is the whole recipe: swap the attacking setup for a sound one, and take a small pull instead of a big one. The position is roughly level and it is easy to play, which for a club game is worth more than a plan that does not work.
+
+## Move order
+
+Be2 before b3. It costs nothing, it prepares castling, and it keeps the option of meeting an early ...c5 or ...d5 without having committed the queenside.
+
+## Typical mistakes at this level
+
+Playing Bd3 out of habit against a fianchetto. Playing Ne5 and letting Black trade it off with tempo on the bishop. Pushing pawns on the kingside where Black is solid and you are not. And drifting: this chapter is about getting a sound game, not about winning in twenty moves.}
+1. d4 Nf6 2. Nf3 g6 3. e3 Bg7
+{The fianchetto. Black will castle and hit the centre with ...d5 or ...c5. [%weight 9]} (
+3... c5 {Black breaks first and leaves the bishop for later. [%weight 3]} 4. Be2
+{Develop the bishop to the square it belongs on here. [%tags bishop-placement]} 4... cxd4
+{Black takes. [%weight 6]} 5. exd4
+{Towards the centre. The pawn on d4 will be defended by the bishop on b2 in a move or two. [%tags long-diagonal]}
+( 5. Nxd4?!
+{It puts the knight where ...Bg7 and ...Nc6 hit it with tempo and gives up the pawn centre.}
+) 5... Bg7
+{The bishop comes out at last, and it is looking at the pawn on d4. [%weight 8]} 6. O-O
+{Castle. [%tags king-safety]} 6... O-O {So does Black. [%weight 8]} 7. Re1
+{The rook to the file the trade opened. With no Black pawn on d5 the pawn on d4 IS White's centre, and the rook behind the e-pawn is what supports it. [%tags development] [%plan Play c3 or b3 and Bb2 next, and use the half open e-file. Do not hurry b3 here: with no pawn on d5 to fix the centre, the rook and the pawns come first.] [%line ...c5 before the bishop]}
+( 7. b3?!
+{The setup on autopilot, and a move too slow. The engine puts the rook and the centre ahead of tidying the queenside in this particular position.}
+) ) 4. Be2
+{The bishop goes to e2, not d3. A pawn on g6 already covers h7, so the aggressive square is aiming at nothing and invites ...Nh5 as well. [%tags bishop-placement]}
+( 4. Bd3?!
+{Habit. Against a kingside fianchetto the bishop on d3 points at a square Black has already defended, and it gets hit by ...Nh5 and ...Bf5 for the trouble.}
+) ( 4. c4!?
+{A Queen's Gambit setup, and a good one. It is also not this course, and it needs the theory this course exists to avoid.}
+) 4... O-O {Black castles. [%weight 8]} ( 4... b6
+{Black fianchettos on both sides. [%weight 3]} 5. O-O {Castle. [%tags king-safety]}
+5... Bb7 {The second bishop. [%weight 8]} 6. b3
+{The setup, and now all four bishops are on the two long diagonals. [%tags long-diagonal]}
+6... O-O {Black castles. [%weight 8]} 7. Bb2
+{Home. Neither bishop can achieve much against the other, which is exactly the sort of quiet position this chapter is trying to reach. [%tags long-diagonal] [%plan Play c4 and Nbd2, then Qc2 and the rooks. Break with d5 or e4 only when Black's pieces have left the centre.] [%line The double fianchetto]}
+) 5. O-O {Castle. [%tags king-safety]} ( 5. b3!?
+{It commits the queenside before Black has said what the centre will be. Castling first keeps every option open.}
+) 5... d5
+{The Grunfeld shape: Black takes the centre with the pawn as well as the bishop. [%weight 6]}
+( 5... d6
+{The King's Indian shape. Black keeps the centre flexible and aims for ...e5. [%weight 6]}
+6. b3 {The setup. [%tags long-diagonal]} 6... Nbd7 {Black prepares the break. [%weight 7]}
+7. Bb2
+{Home, and the bishop is now looking straight down the diagonal at its opposite number. [%tags long-diagonal]}
+7... e5 {The break Black has been building towards. [%weight 6]} 8. c4
+{Hold the centre with pawns rather than trading into an open game where the bishop on g7 comes alive. [%tags c4-break] [%plan Play Nc3 and Qc2, keep the tension on e5, and only take when the recapture leaves Black with a weakness. This is a Queen's Indian with the colours turned round and White has the extra move.] [%line The King's Indian shape, with ...e5]}
+( 8. dxe5!?
+{It opens the diagonal for the bishop on g7 and hands Black the better version of the position.}
+) ) ( 5... c5 {The other break. [%weight 5]} 6. b3 {The setup. [%tags long-diagonal]}
+6... cxd4 {Black takes. [%weight 6]} 7. exd4
+{Towards the centre, as always. [%tags long-diagonal]} ( 7. Nxd4?!
+{It gives up the pawn centre to a bishop that is already aiming down the diagonal at it.}
+) 7... d5 {Black takes the centre too. [%weight 6]} 8. Bb2
+{Home. The position is symmetrical and White has the move and the half open e-file. [%tags long-diagonal] [%plan Play c4, Nbd2 and Re1. The pawn on d4 is a little loose and the bishop on b2 is the piece that holds it.] [%line ...c5 and the open d-file]}
+) 6. b3 {The setup, on schedule. [%tags long-diagonal]} ( 6. Ne5?!
+{The outpost, and Black takes it apart with ...Nfd7 or ...Nc6. Against a bishop on g7 the knight on e5 is a target, not a guest.}
+) 6... c5 {Black hits the base of the centre. [%weight 7]} 7. Bb2
+{Home. [%tags long-diagonal]} ( 7. c4?!
+{The break, one move early. The bishop on b2 is what holds d4 once the centre opens.} )
+7... Nc6 {Development, with a second attacker on d4. [%weight 7]} 8. c4
+{The move this chapter is really about. Two pawns abreast in the centre, both defended, and the game becomes a sound one rather than an attacking one. [%tags c4-break]}
+( 8. Nbd2?!
+{It develops and lets Black play ...cxd4 and ...e5 with a free hand. The c-pawn is what holds this position together.}
+) 8... cxd4 {Black releases the tension. [%weight 6]} 9. exd4
+{Towards the centre. [%tags long-diagonal]} ( 9. Nxd4?!
+{It gives up the centre and puts the knight where ...Nxd4 and ...e5 come with tempo.} )
+9... dxc4 {Black takes again. [%weight 5]} 10. bxc4
+{Recapture towards the middle. White has two pawns in the centre, the half open b-file and a bishop on b2 that faces its opposite number down the diagonal. [%tags c4-break long-diagonal] [%plan Play Nc3, Rb1 and Qa4 or Qd3. The b7 pawn is a target and the pawn on d4 is the thing to look after. A small, safe pull is what this chapter is for.] [%line The Grunfeld shape, and c4]}
+( 10. Bxc4!?
+{It recaptures with a piece and leaves the pawn on c4 gone from the centre. The pawn recapture is what keeps two abreast.}
+) *
+
+
+[CourseId "colle-zukertort"]
+[CourseTitle "The Colle-Zukertort"]
+[StudentColour "white"]
+[Tagline "A second structure against 1...d5, with the bishop on b2."]
+[FormatVersion "1"]
+[TagExtensions "long-diagonal e5-outpost rook-lift vs-e6 vs-bf5 vs-b6 vs-g6 light-squares"]
+[ChapterId "ch5-everything-else"]
+[ChapterTitle "Everything else"]
+[DefaultTags "development"]
+
+{Black does not play 1...d5, or does not play it yet. One safe recipe each, and most of them come back to a position you already know.
+
+## The rule that covers nearly all of it
+
+Build the same house. Nf3, e3, Bd3 or Be2, b3, Bb2, castle, knight to d2. There is no move order Black can choose that stops all seven of those, and most first moves that are not 1...d5 simply arrive at chapter 1 or chapter 4 a move or two later.
+
+## The two that need a decision
+
+**The Dutch, 1...f5.** Black takes e4 away and weakens the light squares to do it. Keep the bishop on d3, where it aims at h7 down a diagonal Black has just stopped defending with a knight, and put the other one on b2. Do not rush g4 or h3 and g4: the position is better for White by structure, not by force.
+
+**An early ...c5.** Meet it with 2.e3, hold the pawn on d4, and recapture towards the centre when Black takes. That gives White the half open e-file and a normal position, and it avoids the sharp gambit lines that follow 2.d5 or 2.Nf3 cxd4.
+
+## Transpositions
+
+1...Nf6 with a later ...d5 is chapter 1. 1...Nf6 with ...g6 is chapter 4. 1...e6 nearly always becomes chapter 1 as soon as Black plays ...d5. Notice the transposition early and you have already learnt the position.
+
+## Typical mistakes at this level
+
+Meeting the Dutch with an immediate g4 or h3, which loses the structure that made White better. Taking on c5 without a reason and handing Black a free developing move. Playing Bd3 into a fianchetto out of habit. And treating a move order you have not seen before as new theory when it is a chapter you already know one move later.}
+1. d4 f5
+{The Dutch. Black takes e4 away and gives up the light squares to do it. [%weight 3]} (
+1... c5 {Black hits the centre before developing anything. [%weight 5]} 2. e3
+{Hold the pawn on d4 with a pawn. Simple, and it keeps the game in the shape this course is about.}
+( 2. d5!?
+{Space, and a Benoni. The engine slightly prefers it, and it is a real opening with real theory behind it, which is the one thing this course is built to avoid.}
+) 2... cxd4 {Black takes. [%weight 6]} 3. exd4
+{Towards the centre, and the e-file is White's.} 3... d5
+{Black claims the centre back. [%weight 7]} 4. Nf3 {Develop.} ( 4. c4!?
+{A Queen's Gambit with a tempo already spent on e3 and exd4. Playable, and a different game from the one you prepared.}
+) 4... Nc6 {Development, with pressure on d4. [%weight 7]} 5. Bd3
+{The usual square. [%tags bishop-placement]} ( 5. c3!?
+{It defends d4 with a pawn, and the engine likes it a shade better than the bishop move. It also shuts the bishop out of the diagonal it was going to, which is the London structure rather than this one.}
+) 5... Nf6 {Development. [%weight 7]} 6. h3
+{First, and this is the one place in the course where h3 comes before b3. The pawn on d4 is isolated and the knight on f3 is its main defender, so ...Bg4 would pin the piece that holds the centre. [%tags light-squares]}
+( 6. b3?!
+{The setup on autopilot. It allows ...Bg4, pinning the knight that defends the isolated pawn. Ask the bishop the question first.}
+) 6... e6 {Black closes the centre. [%weight 7]} 7. b3
+{The setup, now that the pin is off the table. [%tags long-diagonal]} 7... Be7
+{Development. [%weight 7]} 8. Bb2
+{Home. A second defender for d4, which is the point of the whole formation. [%tags long-diagonal]}
+( 8. c3?!
+{It defends d4 with a pawn and shuts the bishop out of the diagonal it was going to. That is the London, not this.}
+) 8... O-O {Black castles. [%weight 8]} 9. O-O {Castle. [%tags king-safety]} 9... b6
+{Black solves the last piece. [%weight 6]} 10. c4
+{Open the position while White is the better developed side. The pawn on d4 is isolated only in name while the bishop on b2 stands behind it. [%tags c4-break long-diagonal] [%plan Play Rc1 and Qe2, take on d5 when it wins time, and put a knight on e5. This is a normal isolated queen's pawn position and White has all the active pieces.] [%line The early ...c5]}
+) ( 1... e6
+{A move order that keeps every option open, including a French if White plays e4. [%weight 4]}
+2. Nf3 {Develop, and decline the French.} 2... Nf6 {Development. [%weight 7]} 3. e3
+{The system.} 3... c5 {Black breaks first. [%weight 6]} 4. Bd3
+{The usual square. [%tags bishop-placement]} 4... d5
+{And there is chapter one, by transposition. [%weight 7]} 5. b3
+{The setup. [%tags long-diagonal]} 5... Nc6 {Development. [%weight 7]} 6. O-O
+{Castle, in the order chapter one uses. [%tags king-safety]} 6... Bd6
+{Black takes the diagonal that fights for e5. [%weight 7]} 7. Bb2
+{Home, and the position is exactly chapter one reached by another road. [%tags long-diagonal] [%plan Play Nbd2 and then Ne5 with f4, or dxc5 and c4 if Black gets the queen to c7. Nothing here is new: it is the main line with the moves in a different order.] [%line ...e6 first, into chapter one]}
+) ( 1... b6 {Black fianchettos first. [%weight 2]} 2. Nf3 {Develop.} 2... Bb7
+{The bishop takes the diagonal. [%weight 8]} 3. e3
+{The system, and the pawn on e3 takes the sting out of the bishop straight away.} 3... e6
+{Black settles the centre. [%weight 7]} 4. Bd3
+{The usual square. [%tags bishop-placement]} ( 4. Be2?!
+{Modest, and the wrong square here. Black has no pawn on g6, so the diagonal to h7 is worth taking.}
+) 4... Nf6 {Development. [%weight 7]} 5. O-O {Castle. [%tags king-safety]} 5... c5
+{The break. [%weight 7]} 6. b3
+{The setup. Both bishops now want the long diagonal and White will get there with a knight. [%tags long-diagonal]}
+6... Be7 {Development. [%weight 6]} 7. Bb2
+{Home. This is chapter three without a Black pawn on d5, which makes the knight on e5 even harder to challenge. [%tags long-diagonal] [%plan Play Nbd2 and Ne5, then f4 and the rook lift. Black has no pawn on d5, so meet ...d5 with c4 and open the position for the bishop on b2.] [%line The ...b6 move order]}
+) ( 1... Nf6
+{The most common move order of all, and it usually comes back to the same positions. [%weight 7]}
+2. Nf3 {Develop and wait.} 2... d5
+{Black commits, and the game is chapter one. [%weight 7]} 3. e3
+{The system, and there is nothing new here: play e3, Bd3, b3, Bb2, Nbd2 and castle, exactly as before. [%plan Follow chapter one: Bd3 and b3, Bb2, Nbd2, castle, then Ne5 and f4. If Black plays ...g6 instead of ...e6, it is chapter four and the bishop goes to e2.] [%line The ...Nf6 move order]}
+) 2. Nf3 {Develop and stop ...e5 in one move.} ( 2. g4?!
+{The Staunton Gambit spirit without the gambit. It is a real try and it is a different opening with real theory behind it.}
+) 2... Nf6 {Development. [%weight 8]} 3. e3 {The system.} ( 3. Bg5!?
+{A real anti-Dutch try, and a different opening with its own theory. This course builds the same house every time.}
+) 3... e6 {Black builds the Stonewall or the classical setup. [%weight 7]} 4. Bd3
+{The bishop belongs here. Black has just given up the light squares on the kingside and this is the piece that uses them. [%tags bishop-placement light-squares]}
+( 4. Be2?!
+{Modest, and the wrong square. Against ...f5 the bishop on d3 is looking at h7 and g6, which Black has just weakened.}
+) 4... d5 {The Stonewall. [%weight 7]} 5. O-O {Castle. [%tags king-safety]} ( 5. Ne5!?
+{The outpost, before the king is safe. Castle first: against a Stonewall the knight is not going anywhere.}
+) 5... Bd6 {Black takes the diagonal. [%weight 7]} 6. b3
+{The setup. [%tags long-diagonal]} 6... O-O {Black castles. [%weight 8]} 7. Bb2
+{Home, and now trade the piece that holds the Stonewall together.} ( 7. Ne5!?
+{The square, and Black answers ...Nbd7 and trades on terms that help the attack. Finish the setup.}
+) 7... Qe8 {The standard plan: the queen heads for h5. [%weight 5]} 8. c4
+{Open the queenside while Black looks the other way. The Stonewall has one weakness, e5, and one strength, the kingside attack. Take the play to the side Black has left. [%tags c4-break] [%plan Play Ne5 or Ba3 and trade the dark-squared bishops, then use e5 and c5. Meet ...Qh5 with Nbd2 and Nf3 or a timely g3, and never open the h-file yourself.] [%line The Dutch, and c4 on the other wing]}
+( 8. Ne5!?
+{Playable, and it invites the trade that helps Black's attack. Open the other wing first.}
+) *
+
+
+[CourseId "colle-zukertort"]
+[CourseTitle "The Colle-Zukertort"]
+[StudentColour "white"]
+[Tagline "A second structure against 1...d5, with the bishop on b2."]
+[FormatVersion "1"]
+[TagExtensions "long-diagonal e5-outpost rook-lift vs-e6 vs-bf5 vs-b6 vs-g6 light-squares"]
+[ChapterId "ch6-tactics-and-plans"]
+[ChapterTitle "Typical tactics and plans"]
+[DefaultTags "tactics"]
+
+{Five positions from the lines you have just learnt, each stopping on the move that matters. Play through the moves and find the last one.
+
+## What these are
+
+Two of them end on a capture that wins a piece, two end on a choice between a sacrifice and something better, and one ends on the quiet move that starts the attack. All five come from the same tabiya, because that is what a system opening is: one position asked over and over.
+
+## The question behind three of them
+
+What does the pawn on e5 attack after I recapture.
+
+The knight on e5 is the point of the whole setup, and the moment Black takes it, a PAWN arrives on e5. That pawn attacks d6 and f6. If Black has a bishop on d6 and a knight on f6, it attacks both and one of them is lost. Count that before you allow the trade and take it the moment Black allows it. It happens with dxe5 when f4 has not been played and with fxe5 when it has, and it is the single most common way this opening wins a game.
+
+## The Greek gift, honestly
+
+Bxh7+ is the tactic the Colle is famous for, and in this repertoire it is usually not there. It needs a knight that can reach g5 with check or a rook already on the third rank, and the Zukertort's knight is committed to e5. Two of the five exercises are about resisting it: in one the sacrifice works and a plain capture wins twice as much, and in the other it simply fails.
+
+That is not a reason to forget the pattern. It is a reason to check it. If your knight cannot follow the bishop and your rook is not on the third rank, the sacrifice is a hope, not a combination.
+
+## Typical mistakes at this level
+
+Recapturing with a piece when the pawn forks two of them. Sacrificing on h7 because the position looks like a Colle. Taking on e4 with the bishop when the knight should take. And starting the rook lift before f4 has opened the file it needs.}
+1. d4 d5 2. Nf3 Nf6 3. e3 e6
+{The classical setup, where four of the five exercises start. [%weight 7]} 4. Bd3
+{The usual square. [%tags bishop-placement]} 4... c5 {The usual break. [%weight 8]} 5. b3
+{The Zukertort. [%tags long-diagonal]} 5... Nc6
+{The usual development, and the road to four of the exercises. [%weight 7]} ( 5... Bd6
+{Exercise three. Play on to move ten and choose between a sacrifice and something plainer. [%weight 5]}
+6. Bb2 {Home. [%tags long-diagonal]} 6... O-O {Black castles. [%weight 8]} 7. O-O
+{So does White. [%tags king-safety]} 7... Nbd7
+{The knight to d7, where it can be traded for the one on e5. [%weight 6]} 8. Ne5
+{The outpost. [%tags e5-outpost]} 8... Nxe5 {Black trades. [%weight 6]} 9. dxe5
+{Take with the pawn, which now attacks the bishop on d6 and the knight on f6. [%cal Ge5d6,Ge5f6]}
+9... Nd7
+{Black saves the knight and forgets the bishop. White to play, and the pretty move is not the best one. [%weight 5]}
+10. exd6
+{Just take the bishop. A piece for nothing beats a sacrifice that is only worth a pawn or two, and this is the discipline the whole chapter is about. [%plan Recapture calmly if Black takes back on d6, then play c4 and bring the rooks to the centre. You are a piece up: trade pieces, not pawns, and do not go looking for a second combination.] [%line Take the piece, not the gift]}
+( 10. Bxh7+?
+{The gift, and it does work: after 10...Kxh7 11.exd6 White is better. It is worth about a pawn and a half. Taking the bishop first is worth a whole piece, and no sacrifice was needed for it.}
+) ) 6. O-O {Castle. [%tags king-safety]} 6... Bd6
+{The critical square, and the road to three exercises. [%weight 7]} ( 6... Be7
+{Exercise two. Play on to move eleven, when Black's knight has left f6 and the kingside looks bare. [%weight 5]}
+7. Bb2 {Home. [%tags long-diagonal]} 7... O-O {Black castles. [%weight 8]} 8. Nbd2
+{The last minor piece. [%tags development]} 8... Qc7
+{The queen comes out, and with the bishop on e7 there is nothing to fork. [%weight 5]}
+9. Ne5 {The outpost. [%tags e5-outpost]} 9... Nxe5 {Black trades. [%weight 6]} 10. dxe5
+{Take with the pawn. Here it hits only the knight, because the bishop went to e7.}
+10... Nd7
+{The knight steps back and Black's kingside has no defender on f6. White to play. [%weight 6]}
+11. Qh5
+{The queen, not the bishop. She arrives with a threat on h7 and Black has to weaken something to answer it. [%tags kingside-attack] [%plan Meet ...g6 with Qh6 and then f4 and Rf3, and keep the pawn on e5 as the wedge that stops the knight coming back to f6. Build the attack with pieces; there is no sacrifice here yet.] [%line The gift that is not there]}
+( 11. Bxh7+?
+{The gift, and this time it is a mirage. After 11...Kxh7 12.Qh5+ Kg8 there is no third attacker: the knight is a pawn now and the rook is still on f1. White has given a bishop for a pawn and has nothing to show for it.}
+) ) 7. Bb2 {Home. [%tags long-diagonal]} 7... O-O {Black castles. [%weight 8]} 8. Nbd2
+{The last minor piece. [%tags development]} 8... b6
+{The bishop heads for the long diagonal. [%weight 6]} 9. Ne5
+{The outpost. [%tags e5-outpost]} 9... Bb7 {Black completes the setup. [%weight 7]} 10. f4
+{The pawn behind the knight, and the position all three remaining exercises start from. [%tags kingside-attack]}
+10... Nxe5
+{Exercise one. Black trades on e5 with f4 already played. White to play, and the recapture is the exercise. [%weight 4]}
+( 10... Ne4
+{Exercise four. Black plants a knight in the middle. White to play: both captures look the same and only one is right. [%weight 4]}
+11. Nxe4
+{With the knight. Now the recapture pulls Black's d-pawn away from the centre and White's bishop keeps the diagonal to h7.}
+( 11. Bxe4?!
+{With the bishop, and it trades off the piece that was aiming at Black's king while leaving the knight on d2 with nowhere to go.}
+) 11... dxe4 {Forced. [%weight 8]} 12. Bxe4
+{The bishop lands on the long diagonal with a pawn to the good and Black's queenside hanging. [%tags bishop-placement] [%plan Play Qf3 or Qe2 and then c4, and watch the trade on b7. There is no attack yet and there is a pawn, which is enough.] [%line The right piece takes on e4]}
+) ( 10... Ne7
+{Exercise five. Black holds the kingside. Play on to move twelve and find the move that turns a good position into an attack. [%weight 5]}
+11. Rf3
+{The lift. The rook leaves the file it opened, because the file was never the target: the king was. [%tags rook-lift] [%cal Gf3h3]}
+11... cxd4 {Black takes in the centre. [%weight 6]} 12. Rh3
+{There. Three pieces point at Black's king and the queen comes next. [%tags kingside-attack h-file] [%plan Play Ng4 and Qh5, and recapture on d4 with the bishop when there is a moment. If Black holds with ...h6 and ...Nf5, switch to c4 and the queenside.] [%line The rook lift]}
+( 12. Rg3?!
+{The other square, and it walks into ...Nf5 hitting the rook. The h-file is where the rook belongs.}
+) ) 11. fxe5
+{With the F-PAWN, not the d-pawn. The pawn on e5 now attacks the bishop on d6 and the knight on f6 at once, and the f-file is open behind it. [%cal Ge5d6,Ge5f6]}
+( 11. dxe5?!
+{It recaptures towards the centre and forks the same two pieces, and it shuts the rook out of the open file the whole plan was built on.}
+) 11... Be7 {Black saves the bishop and gives up the knight. [%weight 7]} 12. exf6
+{Collect it. Black recaptures with the bishop and White is a knight for a pawn ahead with the f-file open. [%plan Take on f6 back if Black recaptures, put a rook on f1 and the queen on h5 or g4, and trade into the ending when the attack runs out. A piece is enough.] [%line The fork after f4]}
+( 12. Qh5?
+{The attacking move, played on autopilot, and it throws away a whole knight: the piece on f6 is hanging and Black saves it with ...Ne4 or ...Nd7. Take the material first and attack afterwards.}
+) *

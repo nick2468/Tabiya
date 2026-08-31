@@ -1,0 +1,520 @@
+{
+  "id": "ch2-bishop-out",
+  "title": "Black gets the bishop out first",
+  "intro": "Black plays ...Bf5 or ...Bg4 before ...e6, so the bishop that is normally stuck behind the pawn wall gets out first. It is the sensible thing to do and it is the reason a Colle player has to know this chapter: the bishop that would have been Black's problem is now a piece.\n\n## What changes\n\nNot the setup. b3, Bb2, castle, knight to d2: all of it still happens. What changes is where White's own light-squared bishop belongs, and the answer depends on which square Black chose.\n\nAgainst ...Bf5 the bishops stare at each other on the b1-h7 diagonal, so put yours on d3 and offer the trade. Black either takes, which develops your queen for nothing, or allows Bxf5, which leaves Black with doubled f-pawns and a permanent weakness on e6 and h7.\n\nThere is a trap in that offer, and it is worth a piece. Until Black has a pawn on e6 or g6, NOTHING recaptures on f5. So after 3...Bf5 4.Bd3, a natural move like 4...c6 simply loses the bishop to 5.Bxf5. Look at the recapture before you assume a trade is a trade.\n\nAgainst ...Bg4 the bishop is not on your diagonal at all, it is pinning your knight. Ask it the question with h3. If Black takes on f3, recapture with the QUEEN, never with the pawn: the queen lands on f3 pointing at b7 and d5, which is exactly where the bishop on b2 will be pointing too. If Black keeps the pin with ...Bh5, put your own bishop on e2, break the pin, and carry on as usual.\n\n## The one thing worth memorising\n\nRecapture on f3 with the queen. Recapture on d3 with the queen. In both cases the queen comes to a good square with a free move, and in both cases the pawn recapture would wreck a structure you spent the whole opening building.\n\n## Typical mistakes at this level\n\nTaking on f3 with the g-pawn and opening your own king. Playing h3 and then g4 without a reason, which weakens the squares your knight wants. Leaving the bishop on d3 when Black's bishop has gone to g4, where it is doing nothing. And forgetting that after Bxf5 exf5 the pawn on f5 is a target, not a strength.",
+  "stem": [
+    "d4",
+    "d5",
+    "Nf3",
+    "Nf6",
+    "e3"
+  ],
+  "tree": [
+    {
+      "san": "Bf5",
+      "weight": 5,
+      "note": "Out before ...e6 shuts it in. The bishop takes the diagonal White wants.",
+      "children": [
+        {
+          "san": "Bd3",
+          "tags": [
+            "bishop-placement"
+          ],
+          "note": "Offer the trade. Black's bishop and yours are on one diagonal and yours is worth less here.",
+          "mistakes": [
+            {
+              "san": "c4",
+              "grade": "playable",
+              "note": "The Queen's Gambit answer, and a fine move. It is also a different opening from the one you came to play."
+            }
+          ],
+          "children": [
+            {
+              "san": "e6",
+              "weight": 7,
+              "note": "Black keeps the bishop and shuts the diagonal.",
+              "children": [
+                {
+                  "san": "O-O",
+                  "tags": [
+                    "king-safety"
+                  ],
+                  "note": "Castle first. Black's bishop is not going anywhere.",
+                  "children": [
+                    {
+                      "san": "Be7",
+                      "weight": 6,
+                      "note": "Development.",
+                      "children": [
+                        {
+                          "san": "Bxf5",
+                          "tags": [
+                            "bishop-placement"
+                          ],
+                          "note": "Now. Black's recapture has to be with a pawn, and that pawn is a weakness for the rest of the game.",
+                          "mistakes": [
+                            {
+                              "san": "Nbd2",
+                              "grade": "inaccuracy",
+                              "note": "It leaves the trade to Black, who will take on d3 and get the better version of it."
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "exf5",
+                              "weight": 8,
+                              "note": "Forced in effect: taking with the knight would drop the d-pawn.",
+                              "children": [
+                                {
+                                  "san": "b3",
+                                  "tags": [
+                                    "long-diagonal"
+                                  ],
+                                  "note": "The setup, and now with a target to aim at.",
+                                  "children": [
+                                    {
+                                      "san": "O-O",
+                                      "weight": 8,
+                                      "note": "Black castles.",
+                                      "children": [
+                                        {
+                                          "san": "Bb2",
+                                          "note": "Home.",
+                                          "children": [
+                                            {
+                                              "san": "c5",
+                                              "weight": 7,
+                                              "note": "The break.",
+                                              "children": [
+                                                {
+                                                  "san": "Nbd2",
+                                                  "tags": [
+                                                    "development"
+                                                  ],
+                                                  "note": "The last piece.",
+                                                  "children": [
+                                                    {
+                                                      "san": "Nc6",
+                                                      "weight": 7,
+                                                      "note": "Development.",
+                                                      "children": [
+                                                        {
+                                                          "san": "c4",
+                                                          "tags": [
+                                                            "c4-break"
+                                                          ],
+                                                          "plan": "Play Rc1 and Qe2, trade on d5 when it opens the file, and put a knight on e5. Black's kingside pawns look active and cannot advance without giving up more squares.",
+                                                          "name": "...Bf5, and the trade on f5",
+                                                          "note": "Open the centre while Black's structure is the worse one. The pawn on f5 cannot be defended by another pawn, and e5 and e6 belong to White.",
+                                                          "mistakes": [
+                                                            {
+                                                              "san": "Ne5",
+                                                              "grade": "playable",
+                                                              "note": "The outpost, and a move early. Opening the centre while Black's structure is damaged is worth more than the square."
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Bxd3",
+              "weight": 6,
+              "note": "Black trades at once.",
+              "children": [
+                {
+                  "san": "Qxd3",
+                  "tags": [
+                    "development"
+                  ],
+                  "note": "With the queen, which arrives on a good square with a free move.",
+                  "mistakes": [
+                    {
+                      "san": "cxd3",
+                      "grade": "inaccuracy",
+                      "note": "It fixes White's pawns and gives up the whole idea of b3 and Bb2, because the c-pawn can no longer go to c4."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "e6",
+                      "weight": 7,
+                      "note": "Black settles the centre.",
+                      "children": [
+                        {
+                          "san": "O-O",
+                          "tags": [
+                            "king-safety"
+                          ],
+                          "note": "Castle.",
+                          "mistakes": [
+                            {
+                              "san": "Ne5",
+                              "grade": "inaccuracy",
+                              "note": "Far too early: the bishop is on c1, the king is in the middle, and the knight has nothing behind it."
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "Be7",
+                              "weight": 6,
+                              "note": "Development.",
+                              "children": [
+                                {
+                                  "san": "b3",
+                                  "tags": [
+                                    "long-diagonal"
+                                  ],
+                                  "note": "The setup. There is a greedier move here: 7.Qb5+ Nbd7 8.Qxb7 wins a pawn, because the bishop that used to guard b7 left the board on move four. The engine prefers it. This course plays the setup move, because a queen on b7 needs accurate handling and the pawn is not going anywhere in a club game.",
+                                  "children": [
+                                    {
+                                      "san": "O-O",
+                                      "weight": 8,
+                                      "note": "Black castles.",
+                                      "children": [
+                                        {
+                                          "san": "Bb2",
+                                          "note": "Home.",
+                                          "children": [
+                                            {
+                                              "san": "c5",
+                                              "weight": 7,
+                                              "note": "The break.",
+                                              "children": [
+                                                {
+                                                  "san": "c4",
+                                                  "tags": [
+                                                    "c4-break",
+                                                    "long-diagonal"
+                                                  ],
+                                                  "plan": "Play Nc3 and the rooks to c1 and d1. The knight can still reach e5, and with no bishop on c8 Black cannot easily challenge it.",
+                                                  "name": "Black trades on d3 at once",
+                                                  "note": "Open it up. With the light-squared bishops off, Black's remaining bishop is the passive one and an open centre suits White."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "c6",
+              "weight": 3,
+              "note": "A natural developing move that loses a piece. With no pawn yet on e6 or g6, nothing can recapture on f5.",
+              "children": [
+                {
+                  "san": "Bxf5",
+                  "tags": [
+                    "tactics"
+                  ],
+                  "note": "Just take it. Count the defenders of a bishop before you leave it standing, and count your opponent's for them.",
+                  "shapes": [
+                    {
+                      "orig": "d3",
+                      "dest": "f5",
+                      "brush": "green"
+                    }
+                  ],
+                  "mistakes": [
+                    {
+                      "san": "O-O",
+                      "grade": "mistake",
+                      "note": "It castles, Black plays ...e6, the bishop is defended and the free piece has gone. Take first."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "e6",
+                      "weight": 7,
+                      "note": "Black shuts the diagonal and plays on a piece down.",
+                      "children": [
+                        {
+                          "san": "Bd3",
+                          "tags": [
+                            "bishop-placement"
+                          ],
+                          "plan": "Play b3, Bb2, Nbd2 and castle exactly as usual, then trade pieces whenever Black offers. A quiet extra piece decides the game without an attack.",
+                          "name": "The ...c6 blunder",
+                          "note": "Step back. There is nothing to hurry here: a piece is a piece."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Bg4",
+      "weight": 5,
+      "note": "The other way out, and this one comes with a pin.",
+      "children": [
+        {
+          "san": "h3",
+          "tags": [
+            "light-squares"
+          ],
+          "note": "Ask the question at once, before Black has time to support the bishop.",
+          "mistakes": [
+            {
+              "san": "Bd3",
+              "grade": "inaccuracy",
+              "note": "The bishop on g4 is not on that diagonal, so this develops at nothing while the pin stays."
+            }
+          ],
+          "children": [
+            {
+              "san": "Bxf3",
+              "weight": 7,
+              "note": "Black gives up the bishop pair to damage the structure, or so the plan goes.",
+              "children": [
+                {
+                  "san": "Qxf3",
+                  "tags": [
+                    "long-diagonal"
+                  ],
+                  "note": "With the QUEEN. She lands looking at b7 and d5, which is where the bishop on b2 will be looking too.",
+                  "shapes": [
+                    {
+                      "orig": "f3",
+                      "dest": "b7",
+                      "brush": "green"
+                    }
+                  ],
+                  "mistakes": [
+                    {
+                      "san": "gxf3",
+                      "grade": "inaccuracy",
+                      "note": "It doubles the pawns in front of the king White is about to castle behind, with no attack to show for it. The engine rates it about two thirds of a pawn worse, which is a lot for a move you never have to play."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "e6",
+                      "weight": 7,
+                      "note": "Black closes the diagonal.",
+                      "children": [
+                        {
+                          "san": "b3",
+                          "tags": [
+                            "long-diagonal"
+                          ],
+                          "note": "The setup, as always.",
+                          "children": [
+                            {
+                              "san": "c6",
+                              "weight": 6,
+                              "note": "Black shores up d5 rather than breaking with ...c5.",
+                              "children": [
+                                {
+                                  "san": "Bb2",
+                                  "note": "Home, and the queen and bishop now point at the same squares.",
+                                  "children": [
+                                    {
+                                      "san": "Nbd7",
+                                      "weight": 7,
+                                      "note": "Development.",
+                                      "children": [
+                                        {
+                                          "san": "Bd3",
+                                          "tags": [
+                                            "bishop-placement"
+                                          ],
+                                          "note": "The last minor piece, and the one that has to move before White can castle.",
+                                          "children": [
+                                            {
+                                              "san": "Bd6",
+                                              "weight": 6,
+                                              "note": "Black takes the diagonal.",
+                                              "children": [
+                                                {
+                                                  "san": "O-O",
+                                                  "tags": [
+                                                    "king-safety"
+                                                  ],
+                                                  "note": "Castle.",
+                                                  "children": [
+                                                    {
+                                                      "san": "O-O",
+                                                      "weight": 8,
+                                                      "note": "So does Black.",
+                                                      "children": [
+                                                        {
+                                                          "san": "c4",
+                                                          "tags": [
+                                                            "c4-break"
+                                                          ],
+                                                          "plan": "Play Nd2 or Nc3, then the rooks to c1 and d1, and take on d5 when it wins time. The attack with Ne5 and f4 is second choice here, because Black's kingside still has all its defenders.",
+                                                          "name": "Black trades on f3",
+                                                          "note": "With the bishop pair and no bishop of Black's to trade, open the position rather than aiming at a kingside that is fully defended.",
+                                                          "mistakes": [
+                                                            {
+                                                              "san": "Nd2",
+                                                              "grade": "playable",
+                                                              "note": "Quiet development, and it leaves the position closed. Two bishops are worth having only when there are lines for them, so open one."
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Bh5",
+              "weight": 6,
+              "note": "Black keeps the pin and dares White to chase the bishop further.",
+              "children": [
+                {
+                  "san": "Be2",
+                  "tags": [
+                    "bishop-placement"
+                  ],
+                  "note": "Break the pin by blocking it. The bishop is a little passive on e2 and it is doing the one job that matters.",
+                  "mistakes": [
+                    {
+                      "san": "g4",
+                      "grade": "playable",
+                      "note": "The critical move, and the engine's choice: the bishop is chased to g6 and then Ne5 hits it again. It also opens the front door of the king you are about to castle behind, which is why this course plays the quiet move instead. Take it if you like sharp positions."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "e6",
+                      "weight": 7,
+                      "note": "Black settles the centre.",
+                      "children": [
+                        {
+                          "san": "b3",
+                          "tags": [
+                            "long-diagonal"
+                          ],
+                          "note": "The setup, unchanged.",
+                          "children": [
+                            {
+                              "san": "c5",
+                              "weight": 7,
+                              "note": "The usual break.",
+                              "children": [
+                                {
+                                  "san": "Bb2",
+                                  "note": "Home.",
+                                  "children": [
+                                    {
+                                      "san": "Nc6",
+                                      "weight": 7,
+                                      "note": "Development.",
+                                      "children": [
+                                        {
+                                          "san": "O-O",
+                                          "tags": [
+                                            "king-safety"
+                                          ],
+                                          "note": "King safety.",
+                                          "mistakes": [
+                                            {
+                                              "san": "c4",
+                                              "grade": "inaccuracy",
+                                              "note": "It opens the centre with the king still standing in it. Castle first: nothing here is running away."
+                                            }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "Bd6",
+                                              "weight": 6,
+                                              "note": "Black takes the diagonal that fights for e5.",
+                                              "children": [
+                                                {
+                                                  "san": "Nbd2",
+                                                  "tags": [
+                                                    "development"
+                                                  ],
+                                                  "plan": "Play Ne5 when Black cannot answer it well, or c4 if the centre suits you better. The bishop on h5 has to come back before Black has a full set of pieces.",
+                                                  "name": "...Bh5, keeping the pin",
+                                                  "note": "The last piece, and the bishop on h5 is now out of the game on the wrong side of the board.",
+                                                  "mistakes": [
+                                                    {
+                                                      "san": "Ne5",
+                                                      "grade": "playable",
+                                                      "note": "The outpost, a move early. With the knight still on b1 the piece on e5 has one defender fewer than it should."
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "defaultTags": [
+    "vs-bf5"
+  ]
+}

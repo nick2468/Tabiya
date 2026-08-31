@@ -1,0 +1,459 @@
+{
+  "id": "ch6-tactics-and-plans",
+  "title": "Typical tactics and plans",
+  "intro": "Five positions from the lines you have just learnt, each stopping on the move that matters. Play through the moves and find the last one.\n\n## What these are\n\nTwo of them end on a capture that wins a piece, two end on a choice between a sacrifice and something better, and one ends on the quiet move that starts the attack. All five come from the same tabiya, because that is what a system opening is: one position asked over and over.\n\n## The question behind three of them\n\nWhat does the pawn on e5 attack after I recapture.\n\nThe knight on e5 is the point of the whole setup, and the moment Black takes it, a PAWN arrives on e5. That pawn attacks d6 and f6. If Black has a bishop on d6 and a knight on f6, it attacks both and one of them is lost. Count that before you allow the trade and take it the moment Black allows it. It happens with dxe5 when f4 has not been played and with fxe5 when it has, and it is the single most common way this opening wins a game.\n\n## The Greek gift, honestly\n\nBxh7+ is the tactic the Colle is famous for, and in this repertoire it is usually not there. It needs a knight that can reach g5 with check or a rook already on the third rank, and the Zukertort's knight is committed to e5. Two of the five exercises are about resisting it: in one the sacrifice works and a plain capture wins twice as much, and in the other it simply fails.\n\nThat is not a reason to forget the pattern. It is a reason to check it. If your knight cannot follow the bishop and your rook is not on the third rank, the sacrifice is a hope, not a combination.\n\n## Typical mistakes at this level\n\nRecapturing with a piece when the pawn forks two of them. Sacrificing on h7 because the position looks like a Colle. Taking on e4 with the bishop when the knight should take. And starting the rook lift before f4 has opened the file it needs.",
+  "stem": [
+    "d4",
+    "d5",
+    "Nf3",
+    "Nf6",
+    "e3"
+  ],
+  "tree": [
+    {
+      "san": "e6",
+      "weight": 7,
+      "note": "The classical setup, where four of the five exercises start.",
+      "children": [
+        {
+          "san": "Bd3",
+          "tags": [
+            "bishop-placement"
+          ],
+          "note": "The usual square.",
+          "children": [
+            {
+              "san": "c5",
+              "weight": 8,
+              "note": "The usual break.",
+              "children": [
+                {
+                  "san": "b3",
+                  "tags": [
+                    "long-diagonal"
+                  ],
+                  "note": "The Zukertort.",
+                  "children": [
+                    {
+                      "san": "Nc6",
+                      "weight": 7,
+                      "note": "The usual development, and the road to four of the exercises.",
+                      "children": [
+                        {
+                          "san": "O-O",
+                          "tags": [
+                            "king-safety"
+                          ],
+                          "note": "Castle.",
+                          "children": [
+                            {
+                              "san": "Bd6",
+                              "weight": 7,
+                              "note": "The critical square, and the road to three exercises.",
+                              "children": [
+                                {
+                                  "san": "Bb2",
+                                  "tags": [
+                                    "long-diagonal"
+                                  ],
+                                  "note": "Home.",
+                                  "children": [
+                                    {
+                                      "san": "O-O",
+                                      "weight": 8,
+                                      "note": "Black castles.",
+                                      "children": [
+                                        {
+                                          "san": "Nbd2",
+                                          "tags": [
+                                            "development"
+                                          ],
+                                          "note": "The last minor piece.",
+                                          "children": [
+                                            {
+                                              "san": "b6",
+                                              "weight": 6,
+                                              "note": "The bishop heads for the long diagonal.",
+                                              "children": [
+                                                {
+                                                  "san": "Ne5",
+                                                  "tags": [
+                                                    "e5-outpost"
+                                                  ],
+                                                  "note": "The outpost.",
+                                                  "children": [
+                                                    {
+                                                      "san": "Bb7",
+                                                      "weight": 7,
+                                                      "note": "Black completes the setup.",
+                                                      "children": [
+                                                        {
+                                                          "san": "f4",
+                                                          "tags": [
+                                                            "kingside-attack"
+                                                          ],
+                                                          "note": "The pawn behind the knight, and the position all three remaining exercises start from.",
+                                                          "children": [
+                                                            {
+                                                              "san": "Nxe5",
+                                                              "weight": 4,
+                                                              "note": "Exercise one. Black trades on e5 with f4 already played. White to play, and the recapture is the exercise.",
+                                                              "children": [
+                                                                {
+                                                                  "san": "fxe5",
+                                                                  "tags": [
+                                                                    "tactics"
+                                                                  ],
+                                                                  "note": "With the F-PAWN, not the d-pawn. The pawn on e5 now attacks the bishop on d6 and the knight on f6 at once, and the f-file is open behind it.",
+                                                                  "shapes": [
+                                                                    {
+                                                                      "orig": "e5",
+                                                                      "dest": "d6",
+                                                                      "brush": "green"
+                                                                    },
+                                                                    {
+                                                                      "orig": "e5",
+                                                                      "dest": "f6",
+                                                                      "brush": "green"
+                                                                    }
+                                                                  ],
+                                                                  "mistakes": [
+                                                                    {
+                                                                      "san": "dxe5",
+                                                                      "grade": "inaccuracy",
+                                                                      "note": "It recaptures towards the centre and forks the same two pieces, and it shuts the rook out of the open file the whole plan was built on."
+                                                                    }
+                                                                  ],
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Be7",
+                                                                      "weight": 7,
+                                                                      "note": "Black saves the bishop and gives up the knight.",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "exf6",
+                                                                          "tags": [
+                                                                            "tactics"
+                                                                          ],
+                                                                          "plan": "Take on f6 back if Black recaptures, put a rook on f1 and the queen on h5 or g4, and trade into the ending when the attack runs out. A piece is enough.",
+                                                                          "name": "The fork after f4",
+                                                                          "note": "Collect it. Black recaptures with the bishop and White is a knight for a pawn ahead with the f-file open.",
+                                                                          "mistakes": [
+                                                                            {
+                                                                              "san": "Qh5",
+                                                                              "grade": "mistake",
+                                                                              "note": "The attacking move, played on autopilot, and it throws away a whole knight: the piece on f6 is hanging and Black saves it with ...Ne4 or ...Nd7. Take the material first and attack afterwards."
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "san": "Ne4",
+                                                              "weight": 4,
+                                                              "note": "Exercise four. Black plants a knight in the middle. White to play: both captures look the same and only one is right.",
+                                                              "children": [
+                                                                {
+                                                                  "san": "Nxe4",
+                                                                  "tags": [
+                                                                    "tactics"
+                                                                  ],
+                                                                  "note": "With the knight. Now the recapture pulls Black's d-pawn away from the centre and White's bishop keeps the diagonal to h7.",
+                                                                  "mistakes": [
+                                                                    {
+                                                                      "san": "Bxe4",
+                                                                      "grade": "inaccuracy",
+                                                                      "note": "With the bishop, and it trades off the piece that was aiming at Black's king while leaving the knight on d2 with nowhere to go."
+                                                                    }
+                                                                  ],
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "dxe4",
+                                                                      "weight": 8,
+                                                                      "note": "Forced.",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Bxe4",
+                                                                          "tags": [
+                                                                            "bishop-placement"
+                                                                          ],
+                                                                          "plan": "Play Qf3 or Qe2 and then c4, and watch the trade on b7. There is no attack yet and there is a pawn, which is enough.",
+                                                                          "name": "The right piece takes on e4",
+                                                                          "note": "The bishop lands on the long diagonal with a pawn to the good and Black's queenside hanging."
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "san": "Ne7",
+                                                              "weight": 5,
+                                                              "note": "Exercise five. Black holds the kingside. Play on to move twelve and find the move that turns a good position into an attack.",
+                                                              "children": [
+                                                                {
+                                                                  "san": "Rf3",
+                                                                  "tags": [
+                                                                    "rook-lift"
+                                                                  ],
+                                                                  "note": "The lift. The rook leaves the file it opened, because the file was never the target: the king was.",
+                                                                  "shapes": [
+                                                                    {
+                                                                      "orig": "f3",
+                                                                      "dest": "h3",
+                                                                      "brush": "green"
+                                                                    }
+                                                                  ],
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "cxd4",
+                                                                      "weight": 6,
+                                                                      "note": "Black takes in the centre.",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Rh3",
+                                                                          "tags": [
+                                                                            "kingside-attack",
+                                                                            "h-file"
+                                                                          ],
+                                                                          "plan": "Play Ng4 and Qh5, and recapture on d4 with the bishop when there is a moment. If Black holds with ...h6 and ...Nf5, switch to c4 and the queenside.",
+                                                                          "name": "The rook lift",
+                                                                          "note": "There. Three pieces point at Black's king and the queen comes next.",
+                                                                          "mistakes": [
+                                                                            {
+                                                                              "san": "Rg3",
+                                                                              "grade": "inaccuracy",
+                                                                              "note": "The other square, and it walks into ...Nf5 hitting the rook. The h-file is where the rook belongs."
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "san": "Be7",
+                              "weight": 5,
+                              "note": "Exercise two. Play on to move eleven, when Black's knight has left f6 and the kingside looks bare.",
+                              "children": [
+                                {
+                                  "san": "Bb2",
+                                  "tags": [
+                                    "long-diagonal"
+                                  ],
+                                  "note": "Home.",
+                                  "children": [
+                                    {
+                                      "san": "O-O",
+                                      "weight": 8,
+                                      "note": "Black castles.",
+                                      "children": [
+                                        {
+                                          "san": "Nbd2",
+                                          "tags": [
+                                            "development"
+                                          ],
+                                          "note": "The last minor piece.",
+                                          "children": [
+                                            {
+                                              "san": "Qc7",
+                                              "weight": 5,
+                                              "note": "The queen comes out, and with the bishop on e7 there is nothing to fork.",
+                                              "children": [
+                                                {
+                                                  "san": "Ne5",
+                                                  "tags": [
+                                                    "e5-outpost"
+                                                  ],
+                                                  "note": "The outpost.",
+                                                  "children": [
+                                                    {
+                                                      "san": "Nxe5",
+                                                      "weight": 6,
+                                                      "note": "Black trades.",
+                                                      "children": [
+                                                        {
+                                                          "san": "dxe5",
+                                                          "tags": [
+                                                            "tactics"
+                                                          ],
+                                                          "note": "Take with the pawn. Here it hits only the knight, because the bishop went to e7.",
+                                                          "children": [
+                                                            {
+                                                              "san": "Nd7",
+                                                              "weight": 6,
+                                                              "note": "The knight steps back and Black's kingside has no defender on f6. White to play.",
+                                                              "children": [
+                                                                {
+                                                                  "san": "Qh5",
+                                                                  "tags": [
+                                                                    "kingside-attack"
+                                                                  ],
+                                                                  "plan": "Meet ...g6 with Qh6 and then f4 and Rf3, and keep the pawn on e5 as the wedge that stops the knight coming back to f6. Build the attack with pieces; there is no sacrifice here yet.",
+                                                                  "name": "The gift that is not there",
+                                                                  "note": "The queen, not the bishop. She arrives with a threat on h7 and Black has to weaken something to answer it.",
+                                                                  "mistakes": [
+                                                                    {
+                                                                      "san": "Bxh7+",
+                                                                      "grade": "mistake",
+                                                                      "note": "The gift, and this time it is a mirage. After 11...Kxh7 12.Qh5+ Kg8 there is no third attacker: the knight is a pawn now and the rook is still on f1. White has given a bishop for a pawn and has nothing to show for it."
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "Bd6",
+                      "weight": 5,
+                      "note": "Exercise three. Play on to move ten and choose between a sacrifice and something plainer.",
+                      "children": [
+                        {
+                          "san": "Bb2",
+                          "tags": [
+                            "long-diagonal"
+                          ],
+                          "note": "Home.",
+                          "children": [
+                            {
+                              "san": "O-O",
+                              "weight": 8,
+                              "note": "Black castles.",
+                              "children": [
+                                {
+                                  "san": "O-O",
+                                  "tags": [
+                                    "king-safety"
+                                  ],
+                                  "note": "So does White.",
+                                  "children": [
+                                    {
+                                      "san": "Nbd7",
+                                      "weight": 6,
+                                      "note": "The knight to d7, where it can be traded for the one on e5.",
+                                      "children": [
+                                        {
+                                          "san": "Ne5",
+                                          "tags": [
+                                            "e5-outpost"
+                                          ],
+                                          "note": "The outpost.",
+                                          "children": [
+                                            {
+                                              "san": "Nxe5",
+                                              "weight": 6,
+                                              "note": "Black trades.",
+                                              "children": [
+                                                {
+                                                  "san": "dxe5",
+                                                  "tags": [
+                                                    "tactics"
+                                                  ],
+                                                  "note": "Take with the pawn, which now attacks the bishop on d6 and the knight on f6.",
+                                                  "shapes": [
+                                                    {
+                                                      "orig": "e5",
+                                                      "dest": "d6",
+                                                      "brush": "green"
+                                                    },
+                                                    {
+                                                      "orig": "e5",
+                                                      "dest": "f6",
+                                                      "brush": "green"
+                                                    }
+                                                  ],
+                                                  "children": [
+                                                    {
+                                                      "san": "Nd7",
+                                                      "weight": 5,
+                                                      "note": "Black saves the knight and forgets the bishop. White to play, and the pretty move is not the best one.",
+                                                      "children": [
+                                                        {
+                                                          "san": "exd6",
+                                                          "tags": [
+                                                            "tactics"
+                                                          ],
+                                                          "plan": "Recapture calmly if Black takes back on d6, then play c4 and bring the rooks to the centre. You are a piece up: trade pieces, not pawns, and do not go looking for a second combination.",
+                                                          "name": "Take the piece, not the gift",
+                                                          "note": "Just take the bishop. A piece for nothing beats a sacrifice that is only worth a pawn or two, and this is the discipline the whole chapter is about.",
+                                                          "mistakes": [
+                                                            {
+                                                              "san": "Bxh7+",
+                                                              "grade": "mistake",
+                                                              "note": "The gift, and it does work: after 10...Kxh7 11.exd6 White is better. It is worth about a pawn and a half. Taking the bishop first is worth a whole piece, and no sacrifice was needed for it."
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "defaultTags": [
+    "tactics"
+  ]
+}

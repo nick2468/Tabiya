@@ -1,0 +1,26 @@
+{
+  "id": "colle-zukertort",
+  "title": "The Colle-Zukertort",
+  "colour": "white",
+  "tagline": "A second structure against 1...d5, with the bishop on b2.",
+  "formatVersion": 1,
+  "chapters": [
+    "ch0-the-zukertort.json",
+    "ch1-classical.json",
+    "ch2-bishop-out.json",
+    "ch3-mirror.json",
+    "ch4-g6.json",
+    "ch5-everything-else.json",
+    "ch6-tactics-and-plans.json"
+  ],
+  "tagExtensions": [
+    "long-diagonal",
+    "e5-outpost",
+    "rook-lift",
+    "vs-e6",
+    "vs-bf5",
+    "vs-b6",
+    "vs-g6",
+    "light-squares"
+  ]
+}

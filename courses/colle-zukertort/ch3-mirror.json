@@ -1,0 +1,413 @@
+{
+  "id": "ch3-mirror",
+  "title": "Black mirrors: ...b6 and ...Bd6",
+  "intro": "Black plays ...b6 and ...Bb7 and builds the same structure you are building, one move behind. It is the most sensible answer to the Zukertort and the one that asks the hardest question: if both bishops point down the long diagonal, whose is doing more?\n\n## Whose diagonal is it\n\nYours, for one reason: you are a move ahead, and the square in the middle of both diagonals is e5, not e4. Your knight can stand on e5 supported by the d4 pawn. Black's knight cannot stand on e4 supported by a d5 pawn, because a pawn on d5 does not defend e4. That single asymmetry is the whole difference between the two setups.\n\n## What that means over the board\n\nGet to Ne5 first. Once the knight is there with the bishop on b2 behind it, the mirror stops being a mirror: Black has a bishop staring at a square White already owns.\n\n## The bishop on d6\n\nBlack often adds ...Bd6, which is the honest attempt to fight for e5. Then the fork from chapter 1 is back on: if Black ever takes on e5, the recapture with the d-pawn attacks the bishop on d6 and the knight on f6 at once. Watch for it every time, because a mirror position makes trades look automatic and this one is not.\n\n## The bishop to a6\n\nSome players go ...Ba6 instead, offering to trade off White's attacking bishop. Take it: the trade costs Black time, the knight is left on a6 where it does nothing, and the b2 bishop and the knight on e5 were always the pieces that mattered here.\n\n## Typical mistakes at this level\n\nLetting Black play ...Ne4 and ...f5 unchallenged, which turns the mirror into a Stonewall and gives Black the square you wanted. Trading on b7 for no reason and helping Black's knight to a good square. Playing Ne5 without the bishop on b2 behind it. And missing the fork on d6 and f6 because both sides look the same.",
+  "stem": [
+    "d4",
+    "d5",
+    "Nf3",
+    "Nf6",
+    "e3",
+    "e6",
+    "Bd3"
+  ],
+  "tree": [
+    {
+      "san": "b6",
+      "weight": 6,
+      "note": "The mirror. Black solves the c8 bishop before it gets shut in and heads for the same diagonal White wants.",
+      "children": [
+        {
+          "san": "O-O",
+          "tags": [
+            "king-safety"
+          ],
+          "note": "Castle first and let Black say where the bishop is going.",
+          "mistakes": [
+            {
+              "san": "Ne5",
+              "grade": "inaccuracy",
+              "note": "Far too early. The bishop is on c1 and the knight has nothing behind it."
+            }
+          ],
+          "children": [
+            {
+              "san": "Bb7",
+              "weight": 8,
+              "note": "The bishop arrives on the diagonal.",
+              "children": [
+                {
+                  "san": "b3",
+                  "tags": [
+                    "long-diagonal"
+                  ],
+                  "note": "The setup. Both sides now want the same diagonal, and White gets there first.",
+                  "mistakes": [
+                    {
+                      "san": "c4",
+                      "grade": "inaccuracy",
+                      "note": "It opens the position for the bishop Black has just put on b7. Against the mirror, keep the centre closed and take e5 instead."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "Bd6",
+                      "weight": 6,
+                      "note": "Black fights for e5.",
+                      "children": [
+                        {
+                          "san": "Bb2",
+                          "note": "Home.",
+                          "mistakes": [
+                            {
+                              "san": "Ne5",
+                              "grade": "playable",
+                              "note": "A move early. The bishop belongs on b2 before the knight sits on e5, and in a mirror position the tempo matters."
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "O-O",
+                              "weight": 8,
+                              "note": "Black castles.",
+                              "children": [
+                                {
+                                  "san": "Nbd2",
+                                  "note": "The last minor piece.",
+                                  "mistakes": [
+                                    {
+                                      "san": "Ne5",
+                                      "grade": "inaccuracy",
+                                      "note": "One move early. With the knight still on b1 the piece on e5 has one defender and Black can trade into a comfortable game."
+                                    }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Nbd7",
+                                      "weight": 6,
+                                      "note": "The knight to d7 rather than c6, so the c-pawn stays free.",
+                                      "children": [
+                                        {
+                                          "san": "Ne5",
+                                          "tags": [
+                                            "e5-outpost"
+                                          ],
+                                          "note": "The square, and White gets there a move before Black could contest it.",
+                                          "shapes": [
+                                            {
+                                              "orig": "b2",
+                                              "dest": "e5",
+                                              "brush": "green"
+                                            }
+                                          ],
+                                          "mistakes": [
+                                            {
+                                              "san": "c4",
+                                              "grade": "playable",
+                                              "note": "Solid, and it opens a diagonal Black has a bishop on too. The square is the point of the mirror."
+                                            }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "c5",
+                                              "weight": 6,
+                                              "note": "Black hits the centre at last.",
+                                              "children": [
+                                                {
+                                                  "san": "f4",
+                                                  "tags": [
+                                                    "kingside-attack"
+                                                  ],
+                                                  "plan": "Play Rf3 and Rh3 as usual, and meet ...Nxe5 with fxe5, which hits the bishop on d6 and the knight on f6 at the same time. Watch for ...Ne4 and answer it with Nxe4.",
+                                                  "name": "The mirror, with ...Bd6",
+                                                  "note": "The pawn behind the knight, and the mirror is over: White has a knight on e5 that will not move, and Black has a bishop on b7 looking at it.",
+                                                  "mistakes": [
+                                                    {
+                                                      "san": "c4",
+                                                      "grade": "playable",
+                                                      "note": "Solid, and it opens the position for the bishop Black also has. The kingside is where White is a move ahead."
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "Be7",
+                      "weight": 5,
+                      "note": "The quieter square, which gives up the fight for e5 without a struggle.",
+                      "children": [
+                        {
+                          "san": "Bb2",
+                          "note": "Home.",
+                          "children": [
+                            {
+                              "san": "O-O",
+                              "weight": 8,
+                              "note": "Black castles.",
+                              "children": [
+                                {
+                                  "san": "Nbd2",
+                                  "tags": [
+                                    "development"
+                                  ],
+                                  "note": "The last minor piece.",
+                                  "children": [
+                                    {
+                                      "san": "c5",
+                                      "weight": 7,
+                                      "note": "The break.",
+                                      "children": [
+                                        {
+                                          "san": "Ne5",
+                                          "tags": [
+                                            "e5-outpost"
+                                          ],
+                                          "plan": "Play f4 and the rook lift, exactly as in chapter one. The bishop on b7 is biting on the knight, not on anything behind it.",
+                                          "name": "The mirror, with ...Be7",
+                                          "note": "The square, uncontested. With no bishop on d6 there is nothing to challenge the knight and nothing to fork."
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Ba6",
+              "weight": 4,
+              "note": "The other idea: trade off the bishop that is aiming at Black's king.",
+              "children": [
+                {
+                  "san": "Bxa6",
+                  "tags": [
+                    "bishop-placement"
+                  ],
+                  "note": "Take it. The trade costs Black a move and leaves a knight on a6 doing nothing.",
+                  "mistakes": [
+                    {
+                      "san": "c4",
+                      "grade": "inaccuracy",
+                      "note": "It blocks the attack on the bishop and gives up the b3 and Bb2 setup in one move."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "Nxa6",
+                      "weight": 8,
+                      "note": "Forced, and the knight is offside.",
+                      "children": [
+                        {
+                          "san": "b3",
+                          "tags": [
+                            "long-diagonal"
+                          ],
+                          "note": "The setup, on time.",
+                          "children": [
+                            {
+                              "san": "Be7",
+                              "weight": 6,
+                              "note": "Development.",
+                              "children": [
+                                {
+                                  "san": "Bb2",
+                                  "note": "Home.",
+                                  "children": [
+                                    {
+                                      "san": "O-O",
+                                      "weight": 8,
+                                      "note": "Black castles.",
+                                      "children": [
+                                        {
+                                          "san": "Nbd2",
+                                          "tags": [
+                                            "development"
+                                          ],
+                                          "plan": "Play c4 and Ne5, and aim at the light squares Black can no longer defend with a bishop. The knight on a6 needs two moves to rejoin the game.",
+                                          "name": "...Ba6, trading the good bishop",
+                                          "note": "The last piece. Black has a knight on the rim and no light-squared bishop to trouble the long diagonal."
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Bd6",
+      "weight": 5,
+      "note": "Black takes the diagonal that fights for e5 before deciding about the queenside.",
+      "children": [
+        {
+          "san": "b3",
+          "tags": [
+            "long-diagonal"
+          ],
+          "note": "The setup, unchanged.",
+          "children": [
+            {
+              "san": "O-O",
+              "weight": 8,
+              "note": "Black castles.",
+              "children": [
+                {
+                  "san": "Bb2",
+                  "note": "Home.",
+                  "children": [
+                    {
+                      "san": "Nbd7",
+                      "weight": 6,
+                      "note": "The knight to d7 keeps the c-pawn free for ...c5.",
+                      "children": [
+                        {
+                          "san": "O-O",
+                          "tags": [
+                            "king-safety"
+                          ],
+                          "note": "Castle.",
+                          "mistakes": [
+                            {
+                              "san": "Ne5",
+                              "grade": "playable",
+                              "note": "The square, one move before the king is safe. The rook on f1 is part of the attack, so castle first."
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "Re8",
+                              "weight": 5,
+                              "note": "Black prepares ...e5, which is the break this setup is really after.",
+                              "children": [
+                                {
+                                  "san": "Ne5",
+                                  "tags": [
+                                    "e5-outpost"
+                                  ],
+                                  "plan": "Play f4 and Nbd2, and answer ...e5 with dxe5. Keep a knight on e5 for as long as Black lets you.",
+                                  "name": "...Bd6 with the rook to e8",
+                                  "note": "Take the square before Black can contest it, and note the fork that is now in the air: ...Nxe5 dxe5 would hit the bishop on d6 and the knight on f6 at once.",
+                                  "shapes": [
+                                    {
+                                      "orig": "e5",
+                                      "dest": "d6",
+                                      "brush": "green"
+                                    },
+                                    {
+                                      "orig": "e5",
+                                      "dest": "f6",
+                                      "brush": "green"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Ne4",
+              "weight": 4,
+              "note": "Black grabs the middle first, usually heading for a Stonewall with ...f5.",
+              "children": [
+                {
+                  "san": "Bb2",
+                  "tags": [
+                    "long-diagonal"
+                  ],
+                  "note": "Home, and now the knight on e4 has nothing behind it: a pawn on d5 does not defend e4.",
+                  "mistakes": [
+                    {
+                      "san": "Nfd2",
+                      "grade": "inaccuracy",
+                      "note": "It challenges the knight and undevelops the piece that was going to e5. Let Black keep the square and take e5 instead."
+                    }
+                  ],
+                  "children": [
+                    {
+                      "san": "f5",
+                      "weight": 6,
+                      "note": "The Stonewall. Black fixes the knight in place at the cost of the dark squares and the bishop on c8.",
+                      "children": [
+                        {
+                          "san": "Nbd2",
+                          "tags": [
+                            "development"
+                          ],
+                          "note": "Offer to trade the knight that is holding everything together.",
+                          "mistakes": [
+                            {
+                              "san": "Ne5",
+                              "grade": "inaccuracy",
+                              "note": "It takes the square before the knight on e4 has been challenged, and that knight is the piece holding the Stonewall together. Black answers ...Bxe5, and after dxe5 the pawn forks nothing, because Black's knight sits on e4 rather than f6. Offer the trade on e4 first."
+                            }
+                          ],
+                          "children": [
+                            {
+                              "san": "O-O",
+                              "weight": 8,
+                              "note": "Black castles.",
+                              "children": [
+                                {
+                                  "san": "Ne5",
+                                  "tags": [
+                                    "e5-outpost"
+                                  ],
+                                  "plan": "Trade on e4 when Black allows it, then play f3 or c4 and break the Stonewall from underneath. The dark squares e5 and c5 are permanently yours.",
+                                  "name": "The Stonewall with ...Ne4 and ...f5",
+                                  "note": "Now, with the knight on d2 ready to recapture on e4 and the bishop on b2 behind everything."
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "defaultTags": [
+    "vs-b6"
+  ]
+}
