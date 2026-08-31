@@ -1898,3 +1898,41 @@ Gate 16 findings (2026-08-31):
     build drops a cosmetic flag instead of refusing the file.
 
 - [x] **Review gate 16 passed** (2026-08-31)
+
+## Phase 17 - screen polish, a visible version, and an uninstaller that finishes the job
+
+Goal: eight items from Nick using the app on 2026-08-31. Seven are presentation; one is
+the uninstaller ruling the gate 16 register was waiting for.
+
+Chipped as `chips/phase-17-polish-and-uninstall.md`. The dangerous item is 17.7. Tauri's
+`installerHooks` can define `NSIS_HOOK_POSTUNINSTALL`, which the generated script already
+calls, but the stock data-removal block is guarded by `$DeleteAppDataCheckboxState = 1`
+and `$UpdateMode <> 1`, and a hook without the same guard would delete the progress file,
+its marker and its backup on every routine upgrade. The chip says so twice and tells the
+builder to ship the other seven and leave 17.7 undone rather than guess.
+
+Nick's version ruling: **1.5.0**, five built-in courses, last digit the patch number.
+Three files carry a version and all three disagree today (`package.json` 0.0.0,
+`tauri.conf.json` and `Cargo.toml` 1.1.0), so the phase aligns them and adds a test.
+
+- [ ] 17.1 Centre the Course dropdown in its row.
+- [ ] 17.2 Board controls: Start becomes Reset, Back and Forward become arrows with real
+  accessible names, and "Play a game from here" joins that row as "Play from here".
+- [ ] 17.3 Left-justify "Auto step this line" with the moves column.
+- [ ] 17.4 Show the version after the heading, injected at build time so the browser
+  build has it too.
+- [ ] 17.5 Version 1.5.0 in all three files, with a test that holds them together.
+- [ ] 17.6 Board coordinates snug to the top left and bottom right of their squares, and
+  contrasting with them: rank 1 light because a1 is dark. Correct when flipped for Black.
+- [ ] 17.7 The uninstaller removes the real data folders when the trainee asks it to, and
+  never on an upgrade. Its own commit, proved four ways against fixtures.
+- [ ] 17.8 Right padding inside the scrolling chapter prose.
+- [ ] 17.9 The seven presentation items proved in the packaged app, with a screenshot of
+  the board for 17.6.
+
+Acceptance: the eight items done as described; 1.5.0 in all three files, held by a test
+and visible in the app; coordinates snug and contrasting in both orientations; ticked
+uninstall removes both data folders while an upgrade and an unticked uninstall leave them
+alone, each proved against fixtures; vitest green and `tsc -b` clean.
+
+- [ ] **Review gate 17 passed**
