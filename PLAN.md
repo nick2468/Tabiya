@@ -1712,3 +1712,42 @@ Open items from phase 15:
    anywhere on the old folder; no em dashes; trailers naming the actual model.
 
 - [x] **Review gate 15 passed** (2026-08-31)
+
+## Phase 16 - never start blank, one name everywhere, and hiding a course
+
+Goal: close the hole that cost Nick his learnt lines on 2026-08-31, finish the renaming
+phase 15 started, and give him a way to get a course out of his way without deleting it.
+
+Chipped as `chips/phase-16-safety-names-hide.md`. Two findings sit behind it. The data
+loss was the app's own design: a missing progress file is indistinguishable from a new
+trainee, so deleting the data folder and reopening the app started blank and saved blank
+over the gap. And the reason nobody caught it for a day is that an agent shell's view of
+the filesystem OUTSIDE this repo can be a stale overlay, proved by Nick's own `cmd.exe`
+listing 23 directories in Roaming where the agent's tools listed 26. Both are written
+into the chip, the second as the rule that governs how this phase is verified at all.
+
+Rulings of 2026-08-31: blank is a claim, not a default; a backup copy goes in a SECOND
+folder, because a marker inside the data folder dies with it; the executable, the crate
+and the WebView2 profile folder are renamed while the Tauri identifier still is not; the
+version bumps to 1.1.0 and bumps per installer thereafter; and courses are HIDDEN rather
+than deleted, without bumping the progress version, because an older build refuses a
+newer file outright and a cosmetic flag should not become a downgrade wall.
+
+- [ ] 16.1 Never start blank when there is evidence of a previous run: a marker beside
+  the progress file, the blocked-saving banner rather than a fresh blank file, and a
+  backup copy under `%LOCALAPPDATA%` offered for restore when the main file has gone.
+- [ ] 16.2 One name everywhere: the Cargo package and lib, the installed executable, and
+  the WebView2 profile folder, which needs the first real Rust in the project because
+  the window is built entirely from config today. Version to 1.1.0.
+- [ ] 16.3 Hide a course, reversibly, on any tile; hidden courses leave the catalog, the
+  switcher and the drill queue, and leave every learnt line exactly where it was.
+- [ ] 16.4 All three proved in the packaged app, with the names proved across a CLEAN
+  uninstall and reinstall so an orphaned `london-trainer.exe` cannot hide, and every
+  claim about Nick's own data folder confirmed by Nick rather than by a shell.
+
+Acceptance: the app refuses to start blank when it has evidence it should not and offers
+the backup; the exe, crate and WebView2 folder all say Repertoire Trainer with no orphan
+left behind; the version reads 1.1.0; any course hides and unhides with its progress
+untouched; vitest green and `tsc -b` clean.
+
+- [ ] **Review gate 16 passed**
