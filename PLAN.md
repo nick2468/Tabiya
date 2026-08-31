@@ -2381,7 +2381,7 @@ Open items (phase 19):
    The Caro-Kann's Panov note said 5.Bxc4 develops with tempo, and the bishop on c4
    attacks nothing at all. Both rewritten, both grades kept. The Ruy's single finding is
    the mate shorthand gate 18 ruled on, and it was checked here rather than inherited:
-   after 10.Ne1 Qh4 the position is not mate, White has eighteen legal replies, and at
+   after 10.Ne1 Qh4 the position is not mate, White has nineteen legal replies, and at
    2500 ms every one of them is a forced mate. The shorthand stands.
 7. **19.5, and the counts matter more than the verdict.** `note-claims.mjs` reports 0
    unsupported claims in all six courses, out of 797 mistake entries. It reached **40 of
