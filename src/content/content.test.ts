@@ -563,19 +563,37 @@ describe('the courses together', () => {
 
   it('reaches the same positions across colours and still cannot collide', () => {
     // Worth stating plainly, because it is easy to read the test above as
-    // proof that course scoping is load bearing. It is not, yet. A card
-    // records whose turn it is, and every card in a course is the student's
-    // turn, so a White course and a Black course cannot share one whatever
-    // they teach. The Slav is the sharpest case there is: its chapter 5 is
-    // the London seen from the other side, and the two courses walk through
-    // a dozen of the same positions. The Ruy Lopez Exchange is the second
-    // White course, so scoping is now load bearing in principle; in practice
-    // 1.e4 and 1.d4 never meet, and the test above is what proves it.
+    // proof that course scoping is load bearing. Across COLOURS it is not. A
+    // card records whose turn it is, and every card in a course is the
+    // student's turn, so a White course and a Black course cannot share one
+    // whatever they teach. The Slav is the sharpest case there is: its
+    // chapter 5 is the London seen from the other side, and the two courses
+    // walk through a dozen of the same positions.
     for (const course of courses) {
       const turn = course.colour === 'white' ? 'w' : 'b'
       for (const card of allCards(course).cards) {
         expect(card.position.split(' ')[1], `${course.id} ${card.position}`).toBe(turn)
       }
     }
+  })
+
+  it('has two White courses that answer the same position differently', () => {
+    // Scoping became load bearing IN PRACTICE at phase 14. The Ruy Lopez was
+    // the second White course and it opens 1.e4, so it never met the London.
+    // The Colle-Zukertort is the third and it opens 1.d4, so it does: both
+    // meet an early ...c5 with 2.e3 and both reach the same positions after
+    // it, and there the London plays Bf4 while the Zukertort plays Nf3.
+    // Without the course id in the key, one course would answer for the
+    // other's schedule and Nick would be marked as knowing a move he has
+    // never been asked for.
+    const answers = (id: string) =>
+      new Map(allCards(courseById(id)).cards.map((card) => [card.position, card.san]))
+    const london = answers('london-white')
+    const colle = answers('colle-zukertort')
+
+    const shared = [...colle.keys()].filter((position) => london.has(position))
+    const disagree = shared.filter((position) => london.get(position) !== colle.get(position))
+    expect(shared.length).toBeGreaterThan(0)
+    expect(disagree.length).toBeGreaterThan(0)
   })
 })
