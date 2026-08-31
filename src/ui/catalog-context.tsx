@@ -1,7 +1,8 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { bundledEntries } from '../content'
 import { coursesFolder, loadExternalCourses } from '../content/external'
-import { loadedCourses, mergeCourses } from '../model/course'
+import { loadedCourses, mergeCourses, splitByHidden } from '../model/course'
+import { useProgress } from './progress-context'
 import type { CourseEntry, LoadedChapter, LoadedCourse } from '../model/types'
 
 /**
@@ -19,20 +20,35 @@ import type { CourseEntry, LoadedChapter, LoadedCourse } from '../model/types'
  * no cards and the queue is exactly what it was. A folder copied in by hand
  * behind the app's back is still only noticed at the next start, because
  * nothing tells the app to look.
+ *
+ * Hiding is applied here, in one place, and that is why `courses` means the
+ * VISIBLE courses. Every screen that asks the catalog what courses there are -
+ * the switcher, Drill, Progress - wants the same answer, and a hidden course
+ * that leaked into any one of them would break the promise hiding makes. The
+ * full list stays available as `entries`, for the catalog itself and for the
+ * checks that must see every course whether it is showing or not, such as an
+ * import refusing to shadow a bundled id.
  */
 
 export interface Catalog {
-  /** Every course folder, valid or not, bundled first. */
+  /** Every course folder, valid or not, bundled first, hidden ones included. */
   entries: CourseEntry[]
-  /** Only the ones that loaded, in catalog order. */
+  /** The entries that are showing: everything except the hidden ones. */
+  visible: CourseEntry[]
+  /**
+   * The entries the trainee has hidden. Loaded courses only: a folder that
+   * would not load has no id to hide it by, and its errors are the point.
+   */
+  hidden: CourseEntry[]
+  /** Only the visible ones that loaded, in catalog order. */
   courses: LoadedCourse[]
-  /** Every chapter of every loaded course. */
+  /** Every chapter of every visible, loaded course. */
   chapters: LoadedChapter[]
   /** False until the folder scan has finished. */
   scanned: boolean
   /** Where dropped-in courses go. Null in a browser, which has no such folder. */
   folder: string | null
-  /** The course with this id, or undefined. */
+  /** The visible course with this id, or undefined. */
   find: (id: string) => LoadedCourse | undefined
   /** Reads the courses folder again, after the app has written to it. */
   rescan: () => Promise<void>
@@ -41,6 +57,7 @@ export interface Catalog {
 const CatalogContext = createContext<Catalog | null>(null)
 
 export function useCatalogValue(): Catalog {
+  const { state } = useProgress()
   const [external, setExternal] = useState<CourseEntry[]>([])
   const [scanned, setScanned] = useState(false)
   const [folder, setFolder] = useState<string | null>(null)
@@ -64,11 +81,16 @@ export function useCatalogValue(): Catalog {
     void rescan()
   }, [rescan])
 
+  const hiddenIds = state.hiddenCourses
+
   return useMemo(() => {
     const entries = mergeCourses(bundledEntries, external)
-    const courses = loadedCourses(entries)
+    const { visible, hidden } = splitByHidden(entries, hiddenIds)
+    const courses = loadedCourses(visible)
     return {
       entries,
+      visible,
+      hidden,
       courses,
       chapters: courses.flatMap((course) => course.chapters),
       scanned,
@@ -76,7 +98,7 @@ export function useCatalogValue(): Catalog {
       find: (id: string) => courses.find((course) => course.id === id),
       rescan,
     }
-  }, [external, folder, rescan, scanned])
+  }, [external, folder, hiddenIds, rescan, scanned])
 }
 
 export function CatalogProvider({ children }: { children: React.ReactNode }) {

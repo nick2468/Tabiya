@@ -276,3 +276,27 @@ export function loadedCourses(entries: CourseEntry[]): LoadedCourse[] {
     .map((entry) => entry.course)
     .filter((course): course is LoadedCourse => course !== null)
 }
+
+/**
+ * Splits a catalog into what is showing and what the trainee has hidden.
+ *
+ * Hiding is reversible and takes nothing: a hidden course keeps every learnt
+ * line, card schedule and concept answer, because all of those are keyed by
+ * course id and nothing prunes them. What it does is leave the catalog, the
+ * course switcher and the drill queue, and it does all three by leaving the
+ * VISIBLE list that every screen reads.
+ *
+ * A course folder that would not load cannot be hidden. It has no id to hide it
+ * by, and its errors are the reason it has a tile at all.
+ */
+export function splitByHidden(
+  entries: CourseEntry[],
+  hiddenIds: string[],
+): { visible: CourseEntry[]; hidden: CourseEntry[] } {
+  const away = new Set(hiddenIds)
+  const isHidden = (entry: CourseEntry) => entry.course !== null && away.has(entry.course.id)
+  return {
+    visible: entries.filter((entry) => !isHidden(entry)),
+    hidden: entries.filter(isHidden),
+  }
+}

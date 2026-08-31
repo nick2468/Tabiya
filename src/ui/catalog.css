@@ -160,6 +160,21 @@
   gap: 12px;
 }
 
+/* The same quiet link as Export, because hiding is the same size of decision. */
+.tile-hide {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.tile-hide:hover {
+  color: var(--text);
+}
+
 .tile-delete {
   background: none;
   border: none;
@@ -207,6 +222,43 @@
   font-size: 0.85rem;
   color: var(--text-soft);
   word-break: break-all;
+}
+
+/* The way back from hiding. Small on purpose: a shorter catalog is the point. */
+.hidden-courses {
+  margin-top: 16px;
+}
+
+.hidden-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.hidden-toggle:hover {
+  color: var(--text);
+}
+
+.hidden-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+
+.hidden-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0;
+  border-top: 1px solid var(--line);
+}
+
+.hidden-title {
+  flex: 1;
 }
 
 .import-course {

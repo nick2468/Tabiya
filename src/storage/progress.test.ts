@@ -6,6 +6,7 @@ import {
   PROGRESS_VERSION,
   TAG_WINDOW,
   emptyProgress,
+  isHidden,
   isLearnt,
   parseProgress,
   parseProgressJson,
@@ -14,6 +15,7 @@ import {
   scheduleFor,
   tagAccuracy,
   tagAnswerCount,
+  toggleHidden,
   toggleLearnt,
 } from './progress'
 import { newSchedule, review } from '../scheduler'
@@ -47,6 +49,7 @@ describe('parseProgress', () => {
       cards: {},
       tagHistory: {},
       playGames: [],
+      hiddenCourses: [],
     })
   })
 
@@ -391,5 +394,47 @@ describe('play history', () => {
     const before = emptyProgress()
     recordGame(before, game)
     expect(before.playGames).toEqual([])
+  })
+})
+
+describe('hidden courses', () => {
+  it('starts with none', () => {
+    expect(emptyProgress().hiddenCourses).toEqual([])
+  })
+
+  it('hides and shows again, and touches nothing else', () => {
+    const before = { ...emptyProgress(), learntLines: ['london-white/ch1:d4'] }
+
+    const hidden = toggleHidden(before, 'london-white')
+
+    expect(isHidden(hidden, 'london-white')).toBe(true)
+    expect(hidden.learntLines).toEqual(before.learntLines)
+    expect(hidden.cards).toEqual(before.cards)
+    expect(hidden.tagHistory).toEqual(before.tagHistory)
+    expect(toggleHidden(hidden, 'london-white').hiddenCourses).toEqual([])
+    expect(toggleHidden(hidden, 'london-white').learntLines).toEqual(before.learntLines)
+  })
+
+  it('reads a list of ids and drops anything that is not one', () => {
+    const state = parseProgress({
+      version: 4,
+      hiddenCourses: ['london-white', 7, null, 'slav-black', 'london-white'],
+    })
+
+    expect(state.hiddenCourses).toEqual(['london-white', 'slav-black'])
+  })
+
+  it('reads a file that predates it as hiding nothing', () => {
+    expect(parseProgress({ version: 4 }).hiddenCourses).toEqual([])
+    expect(parseProgress({ version: 3, learntLines: [] }).hiddenCourses).toEqual([])
+  })
+
+  it('does not bump the version', () => {
+    // Ruled 2026-08-31. parseProgress refuses any file from a newer build
+    // outright, so a bump would make a cosmetic flag a wall between this build
+    // and the last one. An older build drops the field and shows every course,
+    // which is the right way for this to fail.
+    expect(PROGRESS_VERSION).toBe(4)
+    expect(toggleHidden(emptyProgress(), 'london-white').version).toBe(4)
   })
 })

@@ -3,9 +3,11 @@ import { TauriProgressStore, isDesktop } from '../storage/tauri-store'
 import {
   LocalStorageProgressStore,
   emptyProgress,
+  isHidden,
   isLearnt,
   recordAnswer,
   recordGame,
+  toggleHidden as hideOrShow,
   toggleLearnt,
   type PlayRecord,
   type ProgressState,
@@ -60,6 +62,10 @@ export interface Progress {
   putBack: () => void
   learnt: (lineId: string) => boolean
   toggle: (lineId: string) => void
+  /** True when the trainee has put this course out of the way. */
+  hidden: (courseId: string) => boolean
+  /** Hides the course, or shows it again. Nothing else in the state moves. */
+  toggleHidden: (courseId: string) => void
   /**
    * Records a drill answer: reschedules the card and marks its concepts.
    * `rating` overrides the one the verdict earns, which is how the Easy
@@ -108,6 +114,12 @@ export function useProgressStateFor(store: ProgressStore): Progress {
   }, [])
 
   const learnt = useCallback((lineId: string) => isLearnt(state, lineId), [state])
+
+  const hidden = useCallback((courseId: string) => isHidden(state, courseId), [state])
+
+  const toggleHidden = useCallback((courseId: string) => {
+    setState((previous) => hideOrShow(previous, courseId))
+  }, [])
 
   const answer = useCallback((card: Card, verdict: Verdict, rating?: Rating) => {
     const now = new Date()
@@ -167,6 +179,8 @@ export function useProgressStateFor(store: ProgressStore): Progress {
     putBack,
     learnt,
     toggle,
+    hidden,
+    toggleHidden,
     answer,
     recordPlay,
     exportJson,

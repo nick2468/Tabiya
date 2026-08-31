@@ -1739,7 +1739,7 @@ newer file outright and a cosmetic flag should not become a downgrade wall.
 - [x] 16.2 One name everywhere: the Cargo package and lib, the installed executable, and
   the WebView2 profile folder, which needs the first real Rust in the project because
   the window is built entirely from config today. Version to 1.1.0.
-- [ ] 16.3 Hide a course, reversibly, on any tile; hidden courses leave the catalog, the
+- [x] 16.3 Hide a course, reversibly, on any tile; hidden courses leave the catalog, the
   switcher and the drill queue, and leave every learnt line exactly where it was.
 - [ ] 16.4 All three proved in the packaged app, with the names proved across a CLEAN
   uninstall and reinstall so an orphaned `london-trainer.exe` cannot hide, and every

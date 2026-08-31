@@ -20,9 +20,15 @@ import './catalog.css'
  *
  * A course that would not load gets a tile too, saying what is wrong with it.
  * A folder someone dropped in should never simply fail to appear.
+ *
+ * A course the trainee has HIDDEN is the one exception, and it is their own
+ * choice rather than a failure. The hidden ones sit behind a quiet control at
+ * the bottom, so the catalog can be got down to the repertoire being worked on
+ * without anything being lost. The totals above count what is showing, which is
+ * what the Progress screen counts too.
  */
 export function Catalog({ onOpen }: { onOpen: (courseId: string) => void }) {
-  const { entries, courses, scanned, folder } = useCatalog()
+  const { visible, hidden, courses, scanned, folder } = useCatalog()
   const { state } = useProgress()
 
   const cards = useMemo(
@@ -57,7 +63,7 @@ export function Catalog({ onOpen }: { onOpen: (courseId: string) => void }) {
       </header>
 
       <ul className="course-tiles">
-        {entries.map((entry) =>
+        {visible.map((entry) =>
           entry.course ? (
             <CourseTile
               key={entry.course.id}
@@ -72,6 +78,7 @@ export function Catalog({ onOpen }: { onOpen: (courseId: string) => void }) {
         )}
       </ul>
 
+      <HiddenCourses hidden={hidden} />
       <DropInNote folder={folder} scanned={scanned} />
       <ImportCourse />
     </div>
@@ -136,6 +143,11 @@ function CourseTile({
  * so, because it is the difference between a small decision and a frightening
  * one.
  *
+ * Hiding is on every course, bundled or added, because it is the answer for
+ * the one that cannot be deleted. It needs no confirm: it takes nothing, it
+ * says what it does on the button, and the way back is a control at the bottom
+ * of the same screen.
+ *
  * Exported for its test.
  */
 export function TileActions({
@@ -146,7 +158,7 @@ export function TileActions({
   course: LoadedCourse
 }) {
   const { rescan } = useCatalog()
-  const { state } = useProgress()
+  const { state, toggleHidden } = useProgress()
   const [said, setSaid] = useState<string | null>(null)
   const [asking, setAsking] = useState(false)
   const [busy, setBusy] = useState(false)
@@ -188,6 +200,14 @@ export function TileActions({
       <div className="tile-buttons">
         <button type="button" className="tile-export" onClick={() => void write()}>
           Export as a file
+        </button>
+        <button
+          type="button"
+          className="tile-hide"
+          title="Take it off this screen. Nothing is lost."
+          onClick={() => toggleHidden(course.id)}
+        >
+          Hide
         </button>
         {entry.origin === 'external' ? (
           <button
@@ -269,6 +289,63 @@ export function DeleteConfirm({
           Cancel
         </button>
       </div>
+    </div>
+  )
+}
+
+/**
+ * The courses put out of the way, behind one quiet line.
+ *
+ * It says nothing at all when nothing is hidden, which is the normal case. The
+ * point of hiding is a shorter catalog, so the way back has to be small enough
+ * not to undo that.
+ *
+ * Exported for its test: this wording is a promise, the same way the delete
+ * confirm's is.
+ */
+export function HiddenCourses({ hidden }: { hidden: CourseEntry[] }) {
+  const { toggleHidden } = useProgress()
+  const [showing, setShowing] = useState(false)
+
+  if (hidden.length === 0) return null
+
+  return (
+    <div className="hidden-courses">
+      <button
+        type="button"
+        className="hidden-toggle"
+        aria-expanded={showing}
+        onClick={() => setShowing(!showing)}
+      >
+        {hidden.length} hidden
+      </button>
+      {showing ? (
+        <>
+          <p className="hint">
+            A hidden course keeps everything. Its learnt lines and drill schedule are
+            exactly where they were, and unhiding brings its cards back to the queue.
+          </p>
+          <ul className="hidden-list">
+            {hidden.map((entry) =>
+              entry.course ? (
+                <li key={entry.course.id}>
+                  <span className={`tile-colour ${entry.course.colour}`}>
+                    {colourName(entry.course.colour)}
+                  </span>
+                  <span className="hidden-title">{entry.course.title}</span>
+                  <button
+                    type="button"
+                    className="tile-hide"
+                    onClick={() => toggleHidden(entry.course!.id)}
+                  >
+                    Unhide
+                  </button>
+                </li>
+              ) : null,
+            )}
+          </ul>
+        </>
+      ) : null}
     </div>
   )
 }

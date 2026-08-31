@@ -63,6 +63,24 @@ export interface ProgressState {
   tagHistory: Record<string, Record<string, number[]>>
   /** Finished games, newest last, capped at PLAY_HISTORY. */
   playGames: PlayRecord[]
+  /**
+   * Course ids the trainee has put out of the way.
+   *
+   * Hiding is not deleting. A hidden course keeps every learnt line, card
+   * schedule and concept answer, because all of those are keyed by course id
+   * and nothing here prunes them. It leaves the catalog, the course switcher
+   * and the drill queue, and unhiding brings it and its cards back exactly as
+   * they were. That is why hiding works on a bundled course, which cannot be
+   * deleted at all: a bundled course is compiled into the app and would be
+   * back at the next start.
+   *
+   * This field does NOT bump the version, deliberately (ruled 2026-08-31).
+   * `parseProgress` refuses any file from a newer build outright, so bumping
+   * would turn a cosmetic flag into a wall between this build and the last
+   * one. An older build drops the field it does not know and shows every
+   * course, which is the right way for this to fail.
+   */
+  hiddenCourses: string[]
 }
 
 /** What one finished game is worth remembering. */
@@ -84,7 +102,14 @@ export interface PlayRecord {
 }
 
 export function emptyProgress(): ProgressState {
-  return { version: PROGRESS_VERSION, learntLines: [], cards: {}, tagHistory: {}, playGames: [] }
+  return {
+    version: PROGRESS_VERSION,
+    learntLines: [],
+    cards: {},
+    tagHistory: {},
+    playGames: [],
+    hiddenCourses: [],
+  }
 }
 
 /**
@@ -167,7 +192,18 @@ export function parseProgress(raw: unknown): ProgressState {
     cards: readCards(record.cards, preCourses),
     tagHistory: readTagHistory(record.tagHistory, preCourses),
     playGames: readPlayGames(record.playGames, preCourses),
+    hiddenCourses: readIds(record.hiddenCourses),
   }
+}
+
+/**
+ * A list of ids, read with the same care as the learnt lines: anything that is
+ * not a string goes, and a missing list is an empty one. A file written before
+ * phase 16 simply has no hidden courses, which is the right answer for it.
+ */
+function readIds(raw: unknown): string[] {
+  if (!Array.isArray(raw)) return []
+  return [...new Set(raw.filter((id): id is string => typeof id === 'string'))]
 }
 
 /** A pre-course line id, moved into the course it always belonged to. */
@@ -340,6 +376,25 @@ export function toggleLearnt(state: ProgressState, lineId: string): ProgressStat
     ? state.learntLines.filter((id) => id !== lineId)
     : [...state.learntLines, lineId]
   return { ...state, learntLines }
+}
+
+/** True when the trainee has put this course out of the way. */
+export function isHidden(state: ProgressState, courseId: string): boolean {
+  return state.hiddenCourses.includes(courseId)
+}
+
+/**
+ * Returns a new state with the course hidden, or shown again.
+ *
+ * Nothing else in the state moves. That is the whole promise hiding makes, and
+ * it is the same promise deleting a course folder already keeps: learnt lines
+ * and card schedules are keyed by course id and nothing prunes them.
+ */
+export function toggleHidden(state: ProgressState, courseId: string): ProgressState {
+  const hiddenCourses = isHidden(state, courseId)
+    ? state.hiddenCourses.filter((id) => id !== courseId)
+    : [...state.hiddenCourses, courseId]
+  return { ...state, hiddenCourses }
 }
 
 /** The schedule for a card, or undefined when it has never been answered. */
