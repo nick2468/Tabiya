@@ -329,6 +329,35 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   a single run can miss a real finding, so one clean-ish sweep is not proof these five
   are clean. Whoever runs it again should compare against this record rather than start
   fresh. Recorded and half-taken at review gate 18.
+  **Done at phase 19, and the second pass earned its hour.** It was run once at 2500 ms,
+  the movetime every gate treats as the arbiter, over all six courses including the
+  Vienna: 1210 positions, 22 findings, three of them on the "graded too kindly" side
+  where the real faults sit. Two of the three were invisible to the 900 ms pass, and one
+  of those is a move that costs most of two pawns while its entry called it an
+  inaccuracy. All three are fixed, in grade and in note. Every course has now had two
+  passes: the Colle, the Ruy, the London and the Vienna came back with nothing new, and
+  the Caro-Kann and the Slav were the two the first pass had called clean. This entry is
+  closed on that evidence, and the evidence does not say the courses are clean. It says
+  each has had two passes and the second one still found things.
+- **Give `engine-pass.mjs` the same second pass, at 2500 ms.** It judges the moves the
+  course tells the trainee to play, which matters more than a grade does, and it has the
+  identical sampler problem: phase 19 proved a short run can miss a real finding and not
+  merely invent one. It is roughly three times the positions of the mistakes pass, so it
+  is a phase of work rather than a review touch, which is the only reason phase 19's chip
+  put it out of scope. Whoever takes it should save the raw output beside the plan; phase
+  19 could only compare against recorded counts, because the previous run's output was
+  gone. Recorded at phase 19.
+- **A note can name a line that cannot be played, and nothing in the repo checks it.**
+  `note-claims.mjs` plays a note's moves only when the note also makes a material claim
+  its vocabulary recognises, which is one mistake entry in twenty. A note that names a
+  line and ends "and Black is better" is never played at all. Phase 19 found four entries
+  carrying an illegal line that way, in two courses, plus one numbered a move late and
+  one writing a check where the board says mate. A scratch tool that plays every sequence
+  in every note found all six in seconds and needs no engine. It was not added to the
+  repo because phase 19's chip put the checkers out of scope; it belongs in `scripts/`
+  with the other three, and it needs a decision about how much prose it should read
+  (mistake notes only, or node notes and chapter intros too, which is where one of the
+  same faults also turned out to be). Recorded at phase 19.
 
 ## 7. Risks
 
@@ -382,6 +411,16 @@ Both are winning. 7.Nxf3 puts the king on f2 next move; 7.Ke3 walks it into the 
 the board in the sharpest position in the repertoire, and a course that teaches the
 engine's move there is teaching a line its reader will get wrong under pressure. The
 threshold exists to catch a move that is simply worse, not to make the engine the author.
+
+2026-09-01, phase 19: **2500 ms settles how big a cost is, not which side of a band edge
+it falls on.** Every gate so far has treated a number from a 2500 ms search as final. The
+second mistakes pass showed the limit of that: two of its three findings re-measured at
+0.79 and 0.80 against the checker's 0.91 and 0.94, straddling the 0.90 ceiling between
+playable and inaccuracy, and the largest re-measured at 1.37 against 1.88 across the 1.8
+ceiling. Same movetime, same engine, single PV both times. So a finding at 2500 ms is
+still worth acting on, and where it lands within about a tenth of a band edge the grade
+is a teaching judgement to be argued in the note, not a number to be read off. Phase 19
+took the stricter grade in all three, on what the lines do rather than on the measurement.
 
 ## 9. v1 acceptance
 

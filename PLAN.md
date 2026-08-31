@@ -2315,21 +2315,134 @@ silence at it is as strong as this project has ever asked for. The Vienna is inc
 because two of its grades were changed at the gate and it is the course with the least
 settled grades, not the most.
 
-- [ ] 19.1 Run the pass at 2500 ms over all six, one at a time, nothing else on the CPU.
-- [ ] 19.2 Compare against the 900 ms run: in both, only the first, only this one.
-- [ ] 19.3 Fix every "graded too kindly" finding, in grade and in note.
-- [ ] 19.4 Read every "graded too harshly" note for a false reason; keep the grades.
-- [ ] 19.5 `note-claims.mjs` over all six, plus the by-hand read of entries a capture
+- [x] 19.1 Run the pass at 2500 ms over all six, one at a time, nothing else on the CPU.
+- [x] 19.2 Compare against the 900 ms run: in both, only the first, only this one.
+- [x] 19.3 Fix every "graded too kindly" finding, in grade and in note.
+- [x] 19.4 Read every "graded too harshly" note for a false reason; keep the grades.
+- [x] 19.5 `note-claims.mjs` over all six, plus the by-hand read of entries a capture
   answers.
-- [ ] 19.6 Touch `mistakes` entries only: a `san` on a line path is a line id in Nick's
+- [x] 19.6 Touch `mistakes` entries only: a `san` on a line path is a line id in Nick's
   progress file.
-- [ ] 19.7 Re-export the bundles, and take the version to 1.6.1 if anything changed.
-- [ ] 19.8 Close or narrow the register entry with what two passes now say.
+- [x] 19.7 Re-export the bundles, and take the version to 1.6.1 if anything changed.
+- [x] 19.8 Close or narrow the register entry with what two passes now say.
 
 Acceptance: all six passed at 2500 ms with per-course results compared against the 900 ms
 run; every too-kindly finding fixed; every too-harshly note read for a false reason with
 the count recorded; `note-claims.mjs` run with its counts read; bundles re-exported and
 the version at 1.6.1 if anything changed; the register entry closed or narrowed; vitest
 green and `tsc -b` clean.
+
+Open items (phase 19):
+
+1. **The pass, once at 2500 ms over all six, one course at a time with nothing else on
+   the CPU. 1210 positions, just over 50 minutes, 22 findings, and three of them real.** Per
+   course, as findings and then as the too-kindly count that matters: Vienna 0 and 0,
+   Colle 1 and 0, Ruy 1 and 0, London 14 and 0, Caro-Kann 5 and **2**, Slav 1 and **1**.
+   The three on the too-kindly side are the whole result. The other nineteen are the
+   known noise class and none of them changed a grade.
+2. **Two of the three are new, which is the sampler lesson again and from the same
+   direction gate 18 found it.** Gate 18's 900 ms pass reported the Caro-Kann's three
+   findings all on the harmless side and the Slav's as none at all. This pass found
+   8...e6 in the Caro-Kann's Exchange costing **1.88**, over the inaccuracy band's 1.8
+   ceiling, and 5...Bg4 in the Slav at **0.94**. A 900 ms run had looked at both
+   positions and reported nothing. So a short run does not merely invent findings, and it
+   does not merely miss small ones either: it missed a grade that was wrong by most of
+   two pawns.
+3. **The comparison in 19.2 is against this plan's own record, not against a saved list,
+   and that is a gap worth naming.** Gate 18's raw 900 ms output is not on disk anywhere
+   this session can reach, so "in both, only the first, only this one" could only be done
+   at the level of counts and the two entries finding 22 names. Counts: London 15 to 14,
+   which is exactly the `3.e4` the gate fixed, so that one is "only the first pass" by
+   construction; Ruy 1 to 1, the same mate-shorthand entry read again below; Caro-Kann 3
+   to 5 with both new ones too-kindly; Slav 0 to 1; Colle 0 to 1; Vienna 2 to 0, the two
+   being the grades gate 18 fixed. **Whoever runs a third pass should save the output
+   next to the plan**, because a count is a much weaker comparison than a list.
+4. **The three fixes.** 8...e6 in the Caro-Kann Exchange goes from inaccuracy to mistake:
+   it guards d5 and leaves b7, which is what the queen came out for, and 8.Qxb7 takes the
+   pawn with the rook on a8 attacked as well. Its note said "it defends nothing", which
+   is false twice over. 6...Nf6 against the f3 lines (0.91) and 5...Bg4 in the Slav
+   (0.94) are inaccuracies now rather than playable, and both notes said "also
+   reasonable" without saying what the move gives up.
+5. **Two of the three sit on a band edge, and two runs at the same movetime disagree
+   about which side.** A single-PV re-measurement at 2500 ms, the same search the checker
+   runs, puts them at **0.79 and 0.80** against the checker's 0.91 and 0.94, so the two
+   straddle the 0.90 playable ceiling. The 1.88 finding re-measures at 1.37, likewise
+   straddling the 1.8 ceiling it crossed. **This qualifies the chip's premise**: 2500 ms
+   settles the size of a cost well enough to teach from, and it does not settle which
+   side of a band edge that cost falls. Both went to the stricter grade, decided on what
+   the lines actually do rather than on the number: one sends the knight straight back to
+   g8, the other hands White the pawn back and the centre with it.
+6. **19.4: nineteen "graded too harshly" notes read, no grades changed, two reasons
+   wrong.** The class is what SPEC section 6 says it is, positional judgements the engine
+   scores at nothing, and fourteen of the nineteen are the London's. The two faults were
+   both reasons rather than grades, which is the class no checker sees. The London's
+   5.Bg5 note said the bishop has nothing to attack, when it is looking straight at d8
+   through an empty f6, and the ...h6 the note recommends **loses the queen** to 6.Bxd8.
+   The Caro-Kann's Panov note said 5.Bxc4 develops with tempo, and the bishop on c4
+   attacks nothing at all. Both rewritten, both grades kept. The Ruy's single finding is
+   the mate shorthand gate 18 ruled on, and it was checked here rather than inherited:
+   after 10.Ne1 Qh4 the position is not mate, White has eighteen legal replies, and at
+   2500 ms every one of them is a forced mate. The shorthand stands.
+7. **19.5, and the counts matter more than the verdict.** `note-claims.mjs` reports 0
+   unsupported claims in all six courses, out of 797 mistake entries. It reached **40 of
+   them**, one in twenty: Caro-Kann 12, Slav 13, Ruy 8, Vienna 5, London 2 and the Colle
+   **0**, which is gate 14's finding standing exactly where it was. Twelve more entries
+   claim material without naming a move, and those are the human's list. So "0
+   unsupported" means the checker found nothing wrong in the twentieth of the prose it
+   can read.
+8. **The twelve claims with no sequence were each played out on a board, and eleven hold.**
+   The London's ...Nxc7 piece-loss line, its ...dxe5 knight-for-a-pawn, its ...Bxg2 and
+   its ...Nxh5 queen win all check out; so do the Caro-Kann's "nearly two pawns", which
+   measures 1.79, and its ...Nxe3 line, where Black really does win the e5 pawn a move
+   later because ...e6 defends d5 and the recapture there loses the queen. The one fault
+   is the Vienna's 5.Nxd5 note, which said taking with the bishop is what keeps a guard
+   on d5. Taking with the knight leaves the bishop guarding it to exactly the same
+   effect, and both recaptures win the piece. The real difference is 0.79 and it is that
+   the knight on d5 gets chased.
+9. **A fourth class of prose fault exists, four entries carried it, and no checker in the
+   repo can see it: a note that names a line that cannot be played.** `note-claims.mjs`
+   only plays a note's moves when the note also makes a material claim it recognises, so
+   a note that names a line and ends "and Black is better" is never played at all. A
+   scratch tool that plays **every** sequence in every mistake note found both Caro-Kann
+   notes on the premature 3...Bf5 offering "4.exd5 cxd5 5.Qb3" where Qb3 is illegal,
+   White's pawn still being on c2, and both Slav notes on 11...Re8 offering 12.Bxg6 with
+   White's own pawn on e4 in the way. The Caro-Kann pair had been borrowed from the Slav,
+   where the c-pawn has left and the queen does have the square. **The borrowed line also
+   hid the real point**: 3...Bf5 hangs the bishop to 4.exf5, which is the whole reason the
+   Caro-Kann bishop waits for the e-pawn to go. The tool is in the session scratchpad and
+   not in the repo, because changing the checkers was out of scope. It is proposed for
+   the register.
+10. **Two smaller prose faults, from the same tool.** The Vienna's greedy-order note
+    numbered its moves a full move late, saying 10...Kd8 and 11...g2+ where the board says
+    9...Kd8 and 10...g2+; the move itself is real and really is a discovered check from
+    the queen on h4. A Slav note wrote 7...Qxc1+ where the position is mate.
+11. **One change outside the chip's boundary, in its own commit so it can be dropped on
+    its own.** The illegal 5.Qb3 line is also in the Caro-Kann chapter 1 **intro**, in its
+    typical-mistakes list. The chip scoped this phase to mistake entries, and the reason
+    it gives is that a `san` on a line path is a line id in the progress file. An intro is
+    prose that no line id or card key can contain, so the reason does not reach it, and
+    leaving a known-false line two screens from the entry that now states it correctly
+    was the worse of the two errors. Commit `fa935ea` is the whole of it.
+12. **What two passes now say, per course, which is what closes the register entry.**
+    Colle: two passes, nothing on the too-kindly side either time. Ruy: two passes, one
+    finding each time and it is the same entry, read by hand at both gates and correct
+    both times. London: 15 then 14, the difference being the one real fault gate 18 fixed,
+    and nothing new. Vienna: 2 at the gate, both fixed, then 0. Caro-Kann and Slav: clean
+    at 900 ms and three real faults between them at 2500 ms, now fixed. **The honest
+    summary is not "these courses are clean"**, it is that every course has now had two
+    passes, that the second one found what the first missed in two of them, and that a
+    third would be a smaller bet than the second was.
+13. **The case for the same treatment of `engine-pass.mjs` is now made, and it is Nick's
+    to rule.** That pass judges the moves the course tells the trainee to play, it has the
+    identical sampler problem, and it is roughly three times the positions. Everything
+    this phase learnt argues for it: two of three real faults here were invisible to a
+    900 ms run, and a repertoire move that is wrong is worse than a grade that is wrong.
+    Recorded in SPEC section 6 rather than taken.
+14. **Nothing was measured beside the sweep**, which is the hazard the chip leads with.
+    The six courses ran one after another, and every other engine question in this phase
+    was asked after the last one finished. Movetime is wall clock, so a measurement taken
+    beside a running sweep weakens both and neither output shows it.
+15. **Nick's own files were not listed and not reported.** This phase needed no packaged
+    run and went nowhere near them.
 
 - [ ] **Review gate 19 passed**
