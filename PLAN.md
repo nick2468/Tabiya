@@ -1915,24 +1915,89 @@ Nick's version ruling: **1.5.0**, five built-in courses, last digit the patch nu
 Three files carry a version and all three disagree today (`package.json` 0.0.0,
 `tauri.conf.json` and `Cargo.toml` 1.1.0), so the phase aligns them and adds a test.
 
-- [ ] 17.1 Centre the Course dropdown in its row.
-- [ ] 17.2 Board controls: Start becomes Reset, Back and Forward become arrows with real
+- [x] 17.1 Centre the Course dropdown in its row.
+- [x] 17.2 Board controls: Start becomes Reset, Back and Forward become arrows with real
   accessible names, and "Play a game from here" joins that row as "Play from here".
-- [ ] 17.3 Left-justify "Auto step this line" with the moves column.
-- [ ] 17.4 Show the version after the heading, injected at build time so the browser
+- [x] 17.3 Left-justify "Auto step this line" with the moves column.
+- [x] 17.4 Show the version after the heading, injected at build time so the browser
   build has it too.
-- [ ] 17.5 Version 1.5.0 in all three files, with a test that holds them together.
-- [ ] 17.6 Board coordinates snug to the top left and bottom right of their squares, and
+- [x] 17.5 Version 1.5.0 in all three files, with a test that holds them together.
+- [x] 17.6 Board coordinates snug to the top left and bottom right of their squares, and
   contrasting with them: rank 1 light because a1 is dark. Correct when flipped for Black.
-- [ ] 17.7 The uninstaller removes the real data folders when the trainee asks it to, and
+- [x] 17.7 The uninstaller removes the real data folders when the trainee asks it to, and
   never on an upgrade. Its own commit, proved four ways against fixtures.
-- [ ] 17.8 Right padding inside the scrolling chapter prose.
-- [ ] 17.9 The seven presentation items proved in the packaged app, with a screenshot of
+- [x] 17.8 Right padding inside the scrolling chapter prose.
+- [x] 17.9 The seven presentation items proved in the packaged app, with a screenshot of
   the board for 17.6.
 
 Acceptance: the eight items done as described; 1.5.0 in all three files, held by a test
 and visible in the app; coordinates snug and contrasting in both orientations; ticked
 uninstall removes both data folders while an upgrade and an unticked uninstall leave them
 alone, each proved against fixtures; vitest green and `tsc -b` clean.
+
+**Proved in the packaged 1.5.0 window**, measured at 1280x900 through the DevTools port,
+with the app started from `src-tauri/target/release`:
+
+1. The header reads "Repertoire Trainer v1.5.0", the version at 12.8px and weight 400 in
+   the faint colour, against the heading's 24px and 700.
+2. The Course row sits 16px below the header and 16px above the view, and the label and
+   the select share a centre line at y=121.
+3. The control row under the board is Reset, an arrow labelled "Back one move", an arrow
+   labelled "Forward one move", and Play from here. Nothing named play is left in the
+   side column.
+4. "Auto step this line" starts at x=684. The column beside the board starts at x=684.
+5. The chapter panel scrolls, its scrollbar is 15px wide, and the lead paragraph's right
+   edge is 14px clear of it - padding inside the panel, so the gap does not depend on the
+   scrollbar being there.
+6. Board coordinates, white orientation: rank 1 at the top of the bottom row in the light
+   shade on the dark a1, rank 8 at the top of the top row in the dark shade on the light
+   a8, file a hard against the right edge of the a-file. Flipped for the Caro-Kann every
+   label swaps shade and stays right, which is the case that could have gone wrong.
+7. The Progress screen still reads "2 of 219 lines learnt across 5 courses. 17 cards, 17
+   due now" - the app's own view of Nick's real progress file, which is the only view of
+   it a session is allowed to report.
+
+**What the phase found, and what it left open.**
+
+1. **The chip was wrong about the board coordinates in two ways, and both mattered.** The
+   brown theme DOES colour the rank and file labels, not only `coords.squares`; it
+   colours them for a board that draws its ranks down the RIGHT edge, painting ranks 1,
+   3, 5 and 7 dark, which is exactly the set that sits on dark squares on the a-file
+   where they actually are. That is why rank 1 was dark grey on the dark a1. And
+   chessground does not build a wrapper inside its host element - it adds `cg-wrap` to
+   that same div - so the rule already in `board.css` written as `.board .cg-wrap` had
+   never applied to anything. The first attempt at 17.6 inherited that mistake and
+   changed nothing on screen.
+2. **The uninstaller hook cannot be tested end to end on this machine, and saying so is
+   the honest answer.** The shipped hook names `%APPDATA%\Repertoire Trainer` and
+   `%LOCALAPPDATA%\Repertoire Trainer Data`, which are Nick's live folders; no fixture
+   can stand in for them at those paths, and today's standing rule says a session cannot
+   verify his data folders from its own view of the filesystem anyway. What IS proved:
+   `scripts/check-uninstall-hook.mjs` compiles the same macro text with the two folder
+   names redirected at scratch folders and runs all four combinations, and the guard is
+   character-identical to the stock block three lines above where Tauri inserts the hook.
+3. **The check earned its keep twice.** It failed first on the one case that deletes,
+   because NSIS has no backslash escaping and the doubled separators in the generated
+   paths were a path `RMDir` would not take - so it can tell a working macro from a
+   broken one. Then, with the upgrade half of the guard deliberately removed, it failed
+   exactly the second case and nothing else. That is the incident this hook exists to
+   prevent, demonstrated.
+4. **For Nick to run, if he wants the fourth proof.** Install 1.5.0 over the top and
+   check both folders are still there; uninstall with the box UNTICKED and check the
+   same; uninstall with the box TICKED and check they are gone; reinstall and confirm a
+   clean first start. `dir /b "%APPDATA%\Repertoire Trainer"` and
+   `dir /b "%LOCALAPPDATA%\Repertoire Trainer Data"` answer it. Take an export first,
+   from the Progress screen, because the third step is the one that means it.
+5. **The trail's first chip still says "Start".** With the control-row button renamed to
+   Reset, "Start" now appears once on the screen, on the move trail, where it means the
+   position the line starts from. Left alone deliberately: it names a position, not an
+   action, and renaming it was not asked for.
+6. **The installer built as `Repertoire Trainer_1.5.0_x64-setup.exe`** and is in
+   `src-tauri/target/release/bundle/nsis`. Nothing was installed: the running app on this
+   machine was Nick's own installed 1.1.0 copy, and it was closed only because two
+   instances cannot share one WebView2 profile, then left closed rather than upgraded
+   behind his back.
+7. **`scripts/packaged-eval.mjs` grew a `--shot` mode**, because the board is the one
+   thing in this phase a measurement cannot settle.
 
 - [ ] **Review gate 17 passed**

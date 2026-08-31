@@ -294,6 +294,11 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   code whose whole job is deleting things, and a wrong path there deletes the wrong
   folder, so it needs a ruling and a careful test rather than a quiet edit. Found at
   review gate 16.
+  **Done at phase 17.** Nick ruled that an uninstall which offers to remove
+  application data must actually remove it, and `src-tauri/installer-hooks.nsh` now
+  names the two real folders. It carries the stock block's own guard, so it fires only
+  when the trainee ticked the box and only when the uninstall is not the one an upgrade
+  runs on its way past. See the paragraph in section 10 for what was and was not proved.
 - **A gap in the London course, found from the other side**: the Slav's chapter 5
   answers 5.c3 Qb6 6.Qb3 with 6...c4, and the London course's chapter 2 covers only
   6...Qxb3. That is a hole in White's preparation rather than an error in it, and the
@@ -323,6 +328,13 @@ content Claude-drafted (PGN import deferred). Stack ruling retained after review
 the four external briefs: three proposed .NET native UI, rejected because the
 ready-made chess components are JavaScript; Gemini's brief independently matched the
 chosen stack.
+
+2026-08-31, phase 17: **version numbering.** The first digit is 1, the second is the
+number of built-in courses, the third is the patch number. So the five-course build is
+1.5.0. The number is shown after the name in the app header, read from `package.json` at
+build time, and a test holds `package.json`, `src-tauri/tauri.conf.json` and
+`src-tauri/Cargo.toml` to the same string - they said 0.0.0, 1.1.0 and 1.1.0 when the
+phase started, which did not matter while nothing displayed it and matters now.
 
 ## 9. v1 acceptance
 
@@ -434,6 +446,25 @@ a second application beside the first. The move is a COPY, verified by reading i
 and counting the learnt lines before the new folder counts as live, and the old folder
 is left exactly as it was for Nick to delete himself. A migration that deletes has one
 chance to be right.
+
+**Phase 17 finished what that move started.** Moving the folders left the uninstaller
+offering to remove application data and then removing two abandoned folders, because
+NSIS names them after the identifier and the identifier deliberately did not move. The
+bundle now points at `src-tauri/installer-hooks.nsh`, which removes
+`$APPDATA\Repertoire Trainer` and `$LOCALAPPDATA\Repertoire Trainer Data` under the
+same guard the stock block uses: the box was ticked, AND this is not the uninstall an
+upgrade runs on its way past. Without that second half a routine version bump would
+delete the progress file, its marker and its backup copy at once. The folder names are
+literals matching `DATA_FOLDER` in `src/storage/paths.ts` and `LOCAL_FOLDER` in
+`src-tauri/src/lib.rs`, not `${PRODUCTNAME}`: the two strings are equal today by choice
+rather than by construction, and a deletion that followed a renamed product would be a
+deletion of the wrong folder.
+
+The macro is proved four ways by `scripts/check-uninstall-hook.mjs`, which compiles the
+same macro text against scratch folders and runs each combination of the two variables.
+A real install, uninstall and reinstall on Nick's own machine is NOT proved, and cannot
+honestly be: the shipped hook names his live folders and no fixture can stand in for
+them at those paths.
 
 ### The second course: the Caro-Kann (ruled)
 
