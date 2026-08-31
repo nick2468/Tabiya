@@ -1547,9 +1547,51 @@ Open items (phase 14):
    1.d4 and does: eight positions appear in both White courses and five are answered
    differently, because both meet an early ...c5 with 2.e3. Landed as its own commit
    with a test.
+   **Gate 14 re-derived the numbers and they are exact, but this reason is inverted.**
+   The ...c5 and 2.e3 positions are the three the two courses answer the SAME way
+   (1.d4; then 2.e3; then 3.exd4). All five differences are White's SECOND move, where
+   the London plays Bf4 and the Zukertort plays Nf3. The claim that scoping is load
+   bearing stands untouched and the test is right; only the sentence explaining where
+   the overlap comes from was wrong.
 8. **The bundle landed with the content rather than as its own commit.** The chip asks
    for content, test block and bundle as three commits; the suite holds
    `docs/bundles/*.pgn` to the writer's current output, so content without the bundle
    is a red commit. Content plus bundle, then the test block, keeps every commit green.
 
-- [ ] **Review gate 14 passed**
+9. **Gate 14's own runs, and what they found.** Both engine passes re-run independently
+   over the finished course, the move pass three times and the mistake pass twice. The
+   sampler behaviour held once more: the move pass reported 1 finding, then 4, then 0;
+   the mistake pass reported 0, then 1. Across the phase and the gate that is seven runs
+   of the move pass over one unchanged course returning 4, 3, 2, 0, 1, 4 and 0. Every new finding was re-checked at 2500 ms and
+   none needed a content change:
+   - ch0, `Ne5` graded an inaccuracy, flagged at 1.83 in one run - just over the 1.80
+     band top. At 2500 ms it is 1.75 (+0.24 after Bb2, -1.51 after Ne5), inside the
+     band. **The grade stands, and the deciding argument was consistency, not the
+     number**: chapter 1 holds the identical position and grades it identically, and the
+     course grades this whole "Ne5 a move early" class across playable, inaccuracy and
+     mistake according to what each one actually costs. That calibration is right.
+   - ch2, `b3` after `Bg4 h3 Bxf3 Qxf3 e6`: 0.47 at 2500 ms against `c4`. That is the
+     system's own price, the same category as the four already kept in item 3, and the
+     alternative is the Queen's Gambit structure this course exists to avoid.
+   - ch3, `f4` after `Ne5 c5`: 0.41 at 2500 ms. Noise, and it is the move that makes
+     the outpost permanent.
+   - ch2, `O-O` after `... Bd3 Bd6`: 0.51 at 500 ms but **0.10** at 2500 ms. Pure noise.
+10. **Content claims the gate re-derived rather than trusted.** Item 4's Greek gift
+   numbers hold: the "take the piece" exercise measures `exd6` +4.08 against `Bxh7+`
+   +1.36 here (the phase recorded +4.21 and +1.46), and the "gift that is not there"
+   exercise measures `Qh5` at exactly +0.66 as recorded, with `Bxh7+` nowhere in the
+   top four. The ch1 gift entry is emphatic: `dxe5` +3.40 against `Bxh7+` -2.68, a
+   six-pawn swing, which is the course's central fork working. Item 6's finding is real
+   and was reproduced: 77 mistake entries, 0 with a claim the checker can parse. Item 7
+   is exact in its numbers and wrong in its reason, corrected above.
+11. **The structural bar, checked by script rather than by reading.** All 36 lines named,
+   unique within their chapters, under 40 characters, none on a non-leaf, every leaf
+   carrying a plan and every node a note; 36 `[%line]` tokens in the exported bundle;
+   mistake entries on 13, 12, 10, 11 and 12 positions across the five repertoire
+   chapters against a bar of ten; every intro between 306 and 409 words with its
+   typical-mistakes section; no em dashes; the other four courses untouched by diff.
+   542 tests and `tsc -b` clean, both re-run. Nick's progress file byte-identical at
+   `db071a7f`, 315 bytes, and no AppData courses folder, as expected for a bundled
+   course.
+
+- [x] **Review gate 14 passed** (2026-08-31)
