@@ -44,7 +44,8 @@
     "longDescription": "Study, drill and play your opening repertoires, with a Stockfish sparring partner.",
     "windows": {
       "nsis": {
-        "installMode": "currentUser"
+        "installMode": "currentUser",
+        "installerHooks": "installer-hooks.nsh"
       }
     }
   }
