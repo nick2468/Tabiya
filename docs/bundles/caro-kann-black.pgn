@@ -559,7 +559,9 @@ Recapturing with the queen and losing a move to Nc3. Answering 7.Qb3 by defendin
 {The move to remember. It attacks the queen and keeps b7 covered by getting out of the way of the rook. [%tags tactics]}
 ( 7... Qd7?!
 {It defends b7 and leaves Black passive with the queen tied down. ...Na5 solves the same problem and gains time.}
-) ( 7... e6?! {It defends nothing: 8.Qxb7 simply wins a pawn.} ) 8. Qa4+
+) ( 7... e6?
+{8.Qxb7 wins the pawn and hits the rook on a8 at the same time, so Black loses time as well. The move guards d5 and forgets what the queen came out for.}
+) 8. Qa4+
 {The queen keeps the check available and steps away from the knight. [%weight 8]} 8... Bd7
 {Block with the bishop, gaining another move on the queen. [%tags development]} (
 8... Nc6?!
@@ -846,8 +848,8 @@ Taking on e4 too early against the Fantasy, before ...Bb4 has provoked a weaknes
 {The only recapture. Blocking with Bd2 or Qd2 instead lets Black take on d2, and White stays a piece down. [%weight 9]}
 6... dxe4
 {Now take, when the recapture leaves White with a centre that has to be defended by pieces. [%tags vs-fantasy]}
-( 6... Nf6!?
-{Also reasonable, but 7.e5 gains space with tempo. Taking first settles the centre on Black's terms.}
+( 6... Nf6?!
+{7.e5 hits the knight and the best it can do is go back to g8, so Black gives up the move the knight just made. Taking first settles the centre on Black's terms.}
 ) 7. fxe4
 {White recaptures and has a broad centre, an open f-file and a bare king. [%weight 9]}
 7... Qh4+

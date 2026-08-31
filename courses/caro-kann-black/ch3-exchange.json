@@ -66,7 +66,7 @@
                                       "tags": ["tactics"],
                                       "mistakes": [
                                         { "san": "Qd7", "grade": "inaccuracy", "note": "It defends b7 and leaves Black passive with the queen tied down. ...Na5 solves the same problem and gains time." },
-                                        { "san": "e6", "grade": "inaccuracy", "note": "It defends nothing: 8.Qxb7 simply wins a pawn." }
+                                        { "san": "e6", "grade": "mistake", "note": "8.Qxb7 wins the pawn and hits the rook on a8 at the same time, so Black loses time as well. The move guards d5 and forgets what the queen came out for." }
                                       ],
                                       "children": [
                                         {

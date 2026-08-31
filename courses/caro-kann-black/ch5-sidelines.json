@@ -67,7 +67,7 @@
                                           "note": "Now take, when the recapture leaves White with a centre that has to be defended by pieces.",
                                           "tags": ["vs-fantasy"],
                                           "mistakes": [
-                                            { "san": "Nf6", "grade": "playable", "note": "Also reasonable, but 7.e5 gains space with tempo. Taking first settles the centre on Black's terms." }
+                                            { "san": "Nf6", "grade": "inaccuracy", "note": "7.e5 hits the knight and the best it can do is go back to g8, so Black gives up the move the knight just made. Taking first settles the centre on Black's terms." }
                                           ],
                                           "children": [
                                             {
