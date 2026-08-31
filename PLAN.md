@@ -1741,7 +1741,7 @@ newer file outright and a cosmetic flag should not become a downgrade wall.
   the window is built entirely from config today. Version to 1.1.0.
 - [x] 16.3 Hide a course, reversibly, on any tile; hidden courses leave the catalog, the
   switcher and the drill queue, and leave every learnt line exactly where it was.
-- [ ] 16.4 All three proved in the packaged app, with the names proved across a CLEAN
+- [x] 16.4 All three proved in the packaged app, with the names proved across a CLEAN
   uninstall and reinstall so an orphaned `london-trainer.exe` cannot hide, and every
   claim about Nick's own data folder confirmed by Nick rather than by a shell.
 
@@ -1749,5 +1749,107 @@ Acceptance: the app refuses to start blank when it has evidence it should not an
 the backup; the exe, crate and WebView2 folder all say Repertoire Trainer with no orphan
 left behind; the version reads 1.1.0; any course hides and unhides with its progress
 untouched; vitest green and `tsc -b` clean.
+
+Also landed, on Nick's ruling of 2026-08-31 rather than as part of the phase: this repo's
+dev server moved to port 5175 with `--strictPort`, in the `dev` script, `devUrl` and
+`.claude/launch.json`. He holds 5173 and 5174 for other projects. The failure it prevents
+is silent: Vite finds 5173 taken and walks to the next free port while the window still
+loads 5173, which is how a DataCrafter page ended up inside a window titled Repertoire
+Trainer.
+
+What the packaged run showed, 2026-08-31, all of it read through the app's own screens
+and the app's own filesystem calls over the DevTools protocol:
+
+- The app opened on Nick's real data: "2 of 219 lines learnt across 5 courses. 17 of 17
+  cards due now", the London at 2 of 41. Both learnt lines are `london-white`.
+- **The marker and the second copy are real.** `progress.marker.json` sits beside the
+  progress file saying it was written with 2 learnt lines, and explaining itself to
+  whoever finds it. `progress.backup.json` is byte-identical to the progress file. The
+  Progress screen names it and says it holds 2 learnt lines, so Nick can check the
+  promise rather than believe it.
+- **The WebView2 profile moved.** The Progress screen reports the profile folder as
+  `%LOCALAPPDATA%\Repertoire Trainer Data\WebView2` and says the old
+  `com.nick.london-trainer` folder is still there for him to delete.
+- **Hiding works end to end.** Hiding the London took its tile off the catalog, took it
+  out of the course switcher, and took the catalog from "2 of 219 across 5 courses, 17
+  of 17 cards" to "0 of 178 across 4 courses, 0 of 0". Drill went from "17 cards ready"
+  to nothing to drill. The Progress rollup agreed exactly with the catalog at every
+  step. The progress file held `hiddenCourses: ["london-white"]` with `learntLines`
+  still at 2 throughout. Unhide put all of it back, to the same numbers.
+- **The names, across a clean uninstall and reinstall.** The 1.0.0 install was removed
+  with its own uninstaller, then 1.1.0 was installed from
+  `Repertoire Trainer_1.1.0_x64-setup.exe`. After the uninstall the install folder was
+  gone entirely and the uninstall registry key with it, while all four data folders
+  survived. After the install, `%LOCALAPPDATA%\Repertoire Trainer` holds exactly
+  `repertoire-trainer.exe` and `uninstall.exe`, with **no leftover `london-trainer.exe`**,
+  which is the orphan the SPEC register named when this was deferred at phase 15. The
+  registry reads `DisplayVersion 1.1.0` and `MainBinaryName repertoire-trainer.exe`.
+- **The installed app then opened on Nick's data unchanged**: 2 of 219 lines learnt
+  across 5 courses, 17 of 17 cards due, no failure banner, `hiddenCourses` empty, the
+  second copy still byte-identical to the progress file, and the learnt lines identical
+  to a copy taken before the uninstall. A Hide control on all five tiles.
+
+Open items from phase 16:
+
+1. **The blank-start block could not be triggered in the packaged app, and the reason is
+   worth keeping.** Phase 15's migration runs BEFORE the guard, and it copies the
+   progress file back from the folder the app moved away from. Removing
+   `%APPDATA%\Repertoire Trainer\progress.json` through the app's own filesystem call
+   was verified gone, the app was restarted, and it came up with both learnt lines and
+   the phase 15 migration note. So on this machine the incident cannot recur at all
+   while the old folder holds a progress file. The guard is the layer underneath, and it
+   becomes the active one the moment Nick deletes the old folder, which the app has been
+   telling him to do since phase 15. Forcing the case would have meant emptying that old
+   folder, which is the one original copy this phase must not touch.
+2. **So the guard is proved on a real filesystem instead, not in a map.**
+   `src/storage/blank-start-real.test.ts` runs the real `checkBlankStart` over real
+   folders under the OS temp folder: a new trainee starts blank; a save writes both
+   pieces of evidence into two different folders; deleting the progress file blocks with
+   the marker's reason and an offer of 2 lines; deleting the WHOLE data folder, which is
+   Nick's incident exactly, blocks on the copy alone and offers it; a copy holding
+   nothing starts blank; a copy that will not parse blocks with no offer; the guard
+   writes nothing whatever it finds; and putting the offer back gives a byte-identical
+   file. Eight cases, plus the 17 in-memory ones next door.
+3. **The second copy is NOT where the chip put it, and this is the most important
+   correction in the phase.** The chip said `%LOCALAPPDATA%\Repertoire Trainer`. That is
+   the INSTALL folder: `HKCU\...\Uninstall\Repertoire Trainer` gives `InstallLocation` as
+   exactly that path, and it held `london-trainer.exe` and `uninstall.exe`. A backup an
+   uninstall deletes is not a backup, and this phase calls for a clean uninstall. Both
+   the copy and the WebView2 profile now live in `%LOCALAPPDATA%\Repertoire Trainer Data`.
+   If the review dislikes the sibling-folder name, the name is all that changes.
+4. **The theme choice is gone, once.** It lived in `localStorage` inside the old WebView2
+   profile. Nothing else did: progress is a file. The Progress screen says so.
+5. **`package.json` still says `london-trainer`,** as do the browser-only localStorage
+   keys `london-trainer.progress` and `london-trainer.theme`. None is visible to Nick:
+   the package name is private and never published, and the two keys exist only in the
+   browser dev build, where renaming them would silently drop whatever a dev session had
+   saved. Left deliberately; the exported filename, which he DOES read, was renamed to
+   `repertoire-trainer-progress.json`.
+6. **The `WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS` trick needs a port nothing else holds.**
+   The first probe of this phase came back describing a DataCrafter page, because 9333
+   was already taken by another of Nick's projects and `packaged-eval.mjs` connects to
+   whatever answers. It reports the page title, so check that it says Repertoire Trainer
+   before believing anything it returns. That check was discarded and redone on 9666.
+   Two more notes for whoever uses it next: a debugging port that is already taken fails
+   silently rather than loudly, and a wait loop built out of `curl` against a dead port
+   returns instantly, so it waits for nothing.
+7. **The window is built in Rust now, and no setting was copied by hand.** The window is
+   still declared in `tauri.conf.json`, with `"create": false`, and
+   `WebviewWindowBuilder::from_config` reads that same declaration back. Title, size,
+   minimum size, resizable, centre and the label `main` cannot drift, because there is
+   still only one place they are written.
+8. **The silent uninstall would not run from Git Bash.** `uninstall.exe /S` returned 0
+   and did nothing, three times, including with `_?=`, whose path may not contain spaces
+   and so cannot name this install folder anyway. From PowerShell,
+   `Start-Process -FilePath ... -ArgumentList '/S' -PassThru -Wait` did the whole job at
+   once. Whoever has to drive an installer from a session again should start there. It
+   is a session-tooling problem and not a product one: Nick uninstalls from Apps and
+   Features, which is not silent.
+9. **The uninstall removed the install folder completely, which is the sibling folder's
+   receipt.** The uninstaller deletes its own two files and then calls a NON-recursive
+   `RMDir` on the install folder, so it only disappears when nothing else is in it. Had
+   the WebView2 profile been put inside it, as the chip's folder name would have meant,
+   the uninstall would have left the folder behind with about 32 MB in it, and the
+   second copy of the progress file would have been deleted outright.
 
 - [ ] **Review gate 16 passed**
