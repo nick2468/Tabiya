@@ -2082,3 +2082,47 @@ Gate 17 findings (2026-08-31):
     clean first start. Take an export from the Progress screen first.
 
 - [x] **Review gate 17 passed** (2026-08-31)
+
+## Phase 18 - the Vienna Gambit, a sixth course
+
+Goal: a sixth built-in course, and Nick's second White answer to 1...e5.
+
+Chipped as `chips/phase-18-vienna-gambit.md`. Nick ruled the variation on 2026-08-31,
+choosing the gambit (1.e4 e5 2.Nc3 Nf6 3.f4) over the two quiet Viennas for the same
+reason that picked the Zukertort over the Koltanowski: he already owns the quiet,
+structural answer to 1...e5 in the Ruy Lopez Exchange, so a second quiet one would teach
+a shape he has. The course id is `vienna-gambit` and it is permanent.
+
+Two things make this phase different from the other course builds. The checkers were
+tuned on quiet structural courses, and a gambit gives something away on purpose, so the
+chip carries a grading rule: the ruled gambit moves are kept when 2500 ms says the
+position after them is no worse than about -0.3 for White, and every other 0.5-pawn
+finding is a real fault. And the course has to be honest where the gambit is only equal,
+because a chapter that oversells it is worse than no chapter.
+
+The 2...Nc6 move order gets a decision rule rather than a ruling: 3.f4 exf4 4.Nf3 g5 is
+a memorisation contest, so the chip recommends 3.Bc4 reaching the same ground by another
+door, and lets the builder take a different branch on evidence as long as chapter 4
+answers 2...Nc6 completely.
+
+- [ ] 18.1 The variation, the chapter list and the 2...Nc6 policy - ruled in the chip.
+- [ ] 18.2 Draft the seven chapters to the section 3 bar, names on every leaf.
+- [ ] 18.3 Say honestly where the gambit is only equal.
+- [ ] 18.4 All three checkers, run twice at 500 ms, every finding re-checked at 2500 ms.
+- [ ] 18.5 One regression pass over the five courses that already shipped, recorded.
+- [ ] 18.6 The course's block in `src/content/content.test.ts`, with one claim that is
+  really about this course.
+- [ ] 18.7 Extend the course-scoping test: the Ruy and the Vienna agree on 1.e4 and
+  disagree after 1...e5.
+- [ ] 18.8 Export `docs/bundles/vienna-gambit.pgn` and confirm the round trip picked it
+  up.
+- [ ] 18.9 Version 1.6.0 in all three files, held by `src/version.test.ts`.
+- [ ] 18.10 Prove it in the packaged app; delete every fixture.
+
+Acceptance: the course meets the section 3 bar with names on every leaf; all three
+checkers run and recorded with the 2500 ms re-checks; the gambit's concessions measured
+rather than asserted; it round-trips through its own bundle; the scoping test covers the
+Ruy against the Vienna; 1.6.0 in all three files; it works in the packaged app; the
+other five courses untouched; vitest green and `tsc -b` clean.
+
+- [ ] **Review gate 18 passed**
