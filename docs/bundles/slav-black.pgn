@@ -1028,8 +1028,8 @@ Playing the Slav structure with ...c6 anyway, and drifting into a passive positi
 {9.cxd4 hands White the centre and gives up the pressure that makes this position comfortable.}
 ) ) 5... e5
 {Take the centre instead of the pawn. With pawns on d5 and e5 Black has more space than White has extra material. [%tags e5-break] [%plan Play ...Be7 or ...Bxc5, castle, and only then decide about the pawn. If White holds it with b4, the queenside squares White gave up are worth more than the pawn.] [%line The Colle, with 5.dxc5]}
-( 5... Qa5+?!
-{6.Nc3 or 6.Bd2 blocks and the queen has to move again. The pawn is not running anywhere.}
+( 5... Qa5?!
+{It is not a check: the pawn on c3 blocks the diagonal. White answers 6.b4, hitting the queen and holding the extra pawn, so the queen moves again and nothing has been won.}
 ) ) ( 2. e3
 {A quiet start that usually becomes a Colle. White has committed nothing except the bishop on c1. [%weight 3]}
 2... Nf6 {Develop and see what White is building.} 3. Bd3

@@ -77,8 +77,8 @@ Playing f4 before Nc3, so that ...d5 hits e4 with nothing guarding it. Taking on
 {Black brings the last minor piece out and adds a second attacker to d4. [%weight 7]}
 10. Nxe4
 {Now the trade is right. Black's knight is the piece holding his position together, and taking it opens the long light diagonal for the bishop.}
-( 10. Bc4+?
-{The check loses a piece. 10...Nxc3 11.bxc3 dxc4 takes the bishop, because the knight on e4 was the only thing holding d5.}
+( 10. Bc4?
+{It loses a piece: 10...Nxc3 11.bxc3 dxc4 and the bishop is gone. Black has to trade on c3 first, because 10...dxc4 straight away runs into 11.Nxe4 and White wins it back.}
 ) 10... dxe4
 {Black must take back with the pawn, which leaves that pawn loose on e4. [%weight 8]}
 11. Bxe4
@@ -338,8 +338,8 @@ Taking on e4 with the knight on move five, which gives Black the centre back for
 9... Nc6 {The last minor piece comes out and adds a second attacker to d4. [%weight 7]}
 10. Nxe4
 {Now the trade is worth making. It opens the long light diagonal for the bishop and leaves Black with a loose pawn on e4.}
-( 10. Bc4+?
-{The check loses a piece: 10...Nxc3 11.bxc3 dxc4 and the bishop is gone, because the knight on e4 was the only thing holding d5.}
+( 10. Bc4?
+{It loses a piece: 10...Nxc3 11.bxc3 dxc4 and the bishop is gone. Black has to trade on c3 first, because 10...dxc4 straight away runs into 11.Nxe4 and White wins it back.}
 ) 10... dxe4
 {Forced in practice, and it puts a pawn on e4 that nothing defends. [%weight 8]} 11. Bxe4
 {Collect the pawn. Material is level again and White's bishops are on the two best diagonals on the board.}
@@ -1014,7 +1014,7 @@ Checking on h5 when a knight covers the square. Pushing f4 against 2...Bc5 with 
 {Sound, and it lets Black round the pawn up. The bishop does two jobs at once, which is why it goes first.}
 ) 4... c6 {Black undermines the pawn on d5 rather than take it with a piece. [%weight 7]}
 ( 4... Nxd5 {The natural recapture, and it loses a piece. [%weight 4]} 5. Bxd5
-{Take. Nothing defends the knight on d5, and if the queen takes back then the knight on c3 takes the queen. [%tags tactics]}
+{Take. The queen is the knight's only defender and it cannot use the square: 5...Qxd5 6.Nxd5 wins the queen, so the knight is simply lost. [%tags tactics]}
 ( 5. Nxd5!?
 {This wins the piece too. Taking with the bishop leaves the knight on c3 guarding d5, which is what stops the queen recapturing.}
 ) 5... Bb4 {Black pins the knight and hopes to win the bishop on d5 back. [%weight 6]}

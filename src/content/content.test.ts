@@ -1,3 +1,4 @@
+import { Chess } from 'chess.js'
 import { describe, expect, it } from 'vitest'
 import { bundledCourses as courses, bundledEntries as courseEntries, contentErrors } from './index'
 import { splitIntro } from '../model/intro'
@@ -54,6 +55,37 @@ describe.each(courses.map((course) => [course.id, course] as const))(
     it('gives every chapter a unique id', () => {
       const ids = course.chapters.map((chapter) => chapter.id)
       expect(new Set(ids).size).toBe(ids.length)
+    })
+
+    /**
+     * A `+` or a `#` on a move is a claim about the board, and a false one is
+     * the kind of small lie that costs a reader trust in everything else on
+     * the screen.
+     *
+     * Nothing caught these before, because chess.js accepts a spurious marker
+     * and quietly normalises it away rather than refusing the move. Review
+     * gate 18 found three by comparing the two: two `Bc4+` in the Vienna and
+     * one `Qa5+` in the Slav, every one of them a diagonal that was already
+     * blocked, and two of the three carried a note built on the check as
+     * well. So the comparison has to be written down.
+     *
+     * Both directions, because a real check written without its marker is the
+     * same fault seen from the other side.
+     */
+    it('never marks a move as check or mate unless it is', () => {
+      const marked = (san: string) => /[+#]$/.test(san)
+      for (const chapter of course.chapters) {
+        for (const node of walkNodes(chapter)) {
+          const where = `${chapter.id} ${node.path.join(' ')}`
+          const board = new Chess(node.parentFen)
+          expect(marked(node.san), where).toBe(marked(board.move(node.san).san))
+          for (const alternative of node.mistakes ?? []) {
+            const aside = new Chess(node.parentFen)
+            const canonical = aside.move(alternative.san).san
+            expect(marked(alternative.san), `${where} / ${alternative.san}`).toBe(marked(canonical))
+          }
+        }
+      }
     })
 
     it('gives every chapter intro a typical-mistakes section', () => {

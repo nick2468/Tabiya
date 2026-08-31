@@ -90,9 +90,9 @@
                                                       "note": "Now the trade is worth making. It opens the long light diagonal for the bishop and leaves Black with a loose pawn on e4.",
                                                       "mistakes": [
                                                         {
-                                                          "san": "Bc4+",
+                                                          "san": "Bc4",
                                                           "grade": "mistake",
-                                                          "note": "The check loses a piece: 10...Nxc3 11.bxc3 dxc4 and the bishop is gone, because the knight on e4 was the only thing holding d5."
+                                                          "note": "It loses a piece: 10...Nxc3 11.bxc3 dxc4 and the bishop is gone. Black has to trade on c3 first, because 10...dxc4 straight away runs into 11.Nxe4 and White wins it back."
                                                         }
                                                       ],
                                                       "children": [

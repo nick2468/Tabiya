@@ -494,7 +494,7 @@
                       "children": [
                         {
                           "san": "Bxd5",
-                          "note": "Take. Nothing defends the knight on d5, and if the queen takes back then the knight on c3 takes the queen.",
+                          "note": "Take. The queen is the knight's only defender and it cannot use the square: 5...Qxd5 6.Nxd5 wins the queen, so the knight is simply lost.",
                           "tags": ["tactics"],
                           "mistakes": [
                             {

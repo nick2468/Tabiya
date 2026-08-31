@@ -383,9 +383,9 @@
                                   "name": "The Colle, with 5.dxc5",
                                   "mistakes": [
                                     {
-                                      "san": "Qa5+",
+                                      "san": "Qa5",
                                       "grade": "inaccuracy",
-                                      "note": "6.Nc3 or 6.Bd2 blocks and the queen has to move again. The pawn is not running anywhere."
+                                      "note": "It is not a check: the pawn on c3 blocks the diagonal. White answers 6.b4, hitting the queen and holding the extra pawn, so the queen moves again and nothing has been won."
                                     }
                                   ]
                                 }
