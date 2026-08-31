@@ -1623,7 +1623,7 @@ comes back on re-import.
 - [x] 15.3 Delete on imported tiles, in the actions row (the tile itself is a button,
   so a corner X cannot nest), with the confirm and an "Export it first" button rather
   than a pre-ticked box.
-- [ ] 15.4 All three proved in the packaged app, ending with the one claim that has to
+- [x] 15.4 All three proved in the packaged app, ending with the one claim that has to
   be seen rather than reasoned about: delete a course, import it again, and the learnt
   lines come back.
 
@@ -1631,5 +1631,56 @@ Acceptance: the app reads and writes the new folder; Nick's two learnt lines liv
 and the old folder is untouched; a failed migration blocks saving and says so; import
 needs no restart; an imported tile deletes with its progress surviving a re-import;
 bundled tiles have no delete; vitest green and `tsc -b` clean.
+
+What the packaged run showed, 2026-08-31: the app started on the new folder with Nick's
+two learnt lines and the Progress screen named both paths; the old folder kept its
+11:10 timestamp and its hash; a scratch fixture course imported and its tile appeared
+without a restart; the bundled tiles carried no delete and the added one did; Cancel
+removed nothing; Delete took the tile and the eight files and left all five learnt
+lines in the file; and re-importing brought back "3 of 41 lines learnt, 14 due now".
+Both folders finished on hash `db071a7f`, 315 bytes, and every fixture was removed.
+
+Open items from phase 15:
+
+1. **The packaged app's file picker cannot be driven from a script.** Tauri 2 defines
+   `invoke`, `ipc` and `postMessage` on `window.__TAURI_INTERNALS__` as non-writable
+   and non-configurable, so a stubbed dialog answer, which is how phase 14 would have
+   done it, silently fails and a real Open dialog appears instead. The import legs were
+   driven from OUTSIDE the page: find the window titled "Open" belonging to the
+   process, `SetForegroundWindow`, then SendKeys the full path and Enter. The picker is
+   now the second thing in this app that a script cannot work, after the board. Two
+   more notes for whoever needs this next: launched from a background shell the window
+   comes up minimized and parked off-screen, so `ShowWindow(SW_RESTORE)` plus
+   `SetWindowPos` is needed before anything can be seen; and a stray dialog can be
+   cancelled with `PostMessage(hwnd, WM_CLOSE)`.
+2. **The migration's failure path is proved by tests, not by the packaged app.**
+   Fourteen unit tests plus three cases run against copies of Nick's real folder on the
+   real filesystem: a source that will not parse, a copy that lands truncated, and a
+   target that cannot be written. Each one ends blocked rather than blank, with nothing
+   left in the new folder. Proving it inside the packaged app would mean corrupting the
+   real old file or hiding the real new one, which is the one thing this phase must not
+   do.
+3. **The drill-schedule half of the delete promise is unproved by use.** The confirm
+   says learnt lines and their drill schedule both survive. The learnt lines were seen
+   to survive a delete and a re-import. The schedule could not be: writing a card
+   schedule needs a drill answer, a drill answer needs a move on the board, and the
+   packaged build refuses synthetic moves. Nothing in this phase touches
+   `src/storage/progress.ts`, and cards are pruned by nothing, which is why the claim
+   is made.
+4. **`fs:allow-remove` now covers the new progress file.** The migration needs it to
+   sweep away a copy that fails verification, because a bad copy left behind would be
+   taken as live at the next start. It is the only place in the app that removes a
+   progress file. Worth a second look at any review that touches storage.
+5. **The old folder is deliberately still readable.** The capability keeps read, exists
+   and read-dir on `$APPDATA` and drops write, mkdir and remove, so no future build can
+   write there by mistake. When Nick has deleted the folder, those grants and
+   `oldDataRoots()` can go with it.
+6. **A folder copied in by hand still needs a restart**, which is what SPEC section 10
+   promises. Only the app's own writes trigger a rescan, because only they tell the app
+   something changed. A folder watcher was not built and is not obviously wanted.
+7. **A count that is worth watching.** `survivingLines(course, learnt).total` counts
+   learnt lines by course id, so the delete confirm counts lines the trainee learnt in
+   a version of the course they may no longer have. That is the honest number for
+   "what stays saved", and it is the same number the re-import confirm uses.
 
 - [ ] **Review gate 15 passed**
