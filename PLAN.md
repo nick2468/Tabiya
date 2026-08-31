@@ -1852,4 +1852,49 @@ Open items from phase 16:
    the uninstall would have left the folder behind with about 32 MB in it, and the
    second copy of the progress file would have been deleted outright.
 
-- [ ] **Review gate 16 passed**
+Gate 16 findings (2026-08-31):
+
+10. **The chip put the backup in the install folder, and the build caught it.** This was
+    the orchestrator's error, not the builder's. `%LOCALAPPDATA%\Repertoire Trainer` is
+    `$INSTDIR`: `src-tauri/target/release/nsis/x64/installer.nsi:504` sets it to
+    `$LOCALAPPDATA\${PRODUCTNAME}`. So the safety backup would have been written where an
+    uninstall deletes, and the 32 MB WebView2 profile would have gone there too, where
+    the uninstaller's **non-recursive** `RMDir "$INSTDIR"` (line 770) would have left it
+    orphaned for ever. Both now live in `Repertoire Trainer Data`. The deviation was
+    right and the chip was wrong.
+11. **The uninstaller's data-removal step now points at the wrong folders, and that
+    needs a ruling.** Lines 832 and 833 remove `$APPDATA\${BUNDLEID}` and
+    `$LOCALAPPDATA\${BUNDLEID}` - the *identifier* folders. Phases 15 and 16 renamed
+    every folder a person reads while deliberately keeping the identifier, so **"remove
+    my application data" no longer removes any of it**. Today that was a mercy: Nick
+    clicked Uninstall twice and his progress and its backup were untouched, because the
+    uninstaller has never heard of `Repertoire Trainer` or `Repertoire Trainer Data`. In
+    principle it is wrong, and neither phase noticed. The fix is an NSIS hook naming the
+    real folders, which is installer code that deletes things, so it wants Nick's ruling
+    rather than a quiet edit. Recorded in the SPEC section 6 register.
+12. **The guard's real-machine trigger is unproven, and the reason given does not match
+    the machine.** Open item 1 says the phase 15 migration kept restoring from
+    `Roaming\com.nick.london-trainer` and so the guard could never fire. Nick's own
+    `dir /b "%APPDATA%"` shows only `Repertoire Trainer`, and said the same hours
+    earlier. The likeliest explanation is that the builder met a migration fixture of
+    its own making. This is an evidence gap, not a code gap - the guard has 25 tests
+    including 8 on real folders - but the stated reason should not stand as written.
+13. **The gate drove the guard itself, over real folders.** Nine checks. A new trainee
+    starts blank; a deleted progress file blocks and offers the copy; **Nick's exact
+    incident - the whole data folder deleted, marker gone with it - blocks and offers
+    both learnt lines and the hidden-course list back, byte for byte, with the date it
+    was written**; both folders destroyed starts blank because nothing survives to
+    contradict it; the guard writes nothing in any path; and the copy is genuinely
+    outside the data folder. One check failed first time on the gate's own wrong guess
+    at the API (the offer carries the parsed state, not raw text) and passes as written.
+14. **Nick verified 16.2's acceptance on his own machine**, which no agent could do
+    honestly after today: `dir /b "%LOCALAPPDATA%\Repertoire Trainer"` returns
+    `repertoire-trainer.exe` and `uninstall.exe`. No orphaned `london-trainer.exe`, and
+    no `WebView2` folder inside the install folder either.
+15. **Verified for the gate from the repo:** 604 tests (up from 561) and `tsc -b` clean,
+    both re-run; five commits with trailers naming the actual model; the port change in
+    both `package.json` and `devUrl` with `--strictPort`; `hiddenCourses` parsed through
+    the same string filter as `learntLines` with no progress-version bump, so an older
+    build drops a cosmetic flag instead of refusing the file.
+
+- [x] **Review gate 16 passed** (2026-08-31)

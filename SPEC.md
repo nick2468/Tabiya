@@ -279,6 +279,21 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   running nothing. That is a worse outcome than a filename nobody reads, and unlike the
   data folder it is not a name Nick sees. Worth doing on a clean uninstall and
   reinstall, checked in the install folder afterwards. Recorded at phase 15.
+  **Done at phase 16**, on exactly that route: the executable is `repertoire-trainer.exe`
+  and Nick confirmed on his own machine that a clean uninstall and reinstall leaves no
+  orphan behind.
+- **The uninstaller no longer removes the app's data, because the data moved and the
+  identifier did not.** The generated `installer.nsi` removes `$APPDATA\${BUNDLEID}` and
+  `$LOCALAPPDATA\${BUNDLEID}`, which are the folders named after the Tauri identifier.
+  Phases 15 and 16 moved everything a person reads to `Repertoire Trainer` and
+  `Repertoire Trainer Data` while deliberately keeping the identifier, so an uninstall
+  that offers to remove application data now removes two abandoned folders and leaves
+  the real progress file, its marker and its backup copy behind for ever. On 2026-08-31
+  that saved Nick's progress across two accidental uninstalls, which is the only reason
+  it is not urgent. The fix is an NSIS hook naming the real folders. It is installer
+  code whose whole job is deleting things, and a wrong path there deletes the wrong
+  folder, so it needs a ruling and a careful test rather than a quiet edit. Found at
+  review gate 16.
 - **A gap in the London course, found from the other side**: the Slav's chapter 5
   answers 5.c3 Qb6 6.Qb3 with 6...c4, and the London course's chapter 2 covers only
   6...Qxb3. That is a hole in White's preparation rather than an error in it, and the
