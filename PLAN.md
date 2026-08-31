@@ -1736,7 +1736,7 @@ newer file outright and a cosmetic flag should not become a downgrade wall.
 - [x] 16.1 Never start blank when there is evidence of a previous run: a marker beside
   the progress file, the blocked-saving banner rather than a fresh blank file, and a
   backup copy under `%LOCALAPPDATA%` offered for restore when the main file has gone.
-- [ ] 16.2 One name everywhere: the Cargo package and lib, the installed executable, and
+- [x] 16.2 One name everywhere: the Cargo package and lib, the installed executable, and
   the WebView2 profile folder, which needs the first real Rust in the project because
   the window is built entirely from config today. Version to 1.1.0.
 - [ ] 16.3 Hide a course, reversibly, on any tile; hidden courses leave the catalog, the

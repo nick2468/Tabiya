@@ -19,7 +19,14 @@ import { parseProgressJson } from '../storage/progress'
  * is really there rather than take the app's word for it.
  */
 
-const FILE_NAME = 'london-trainer-progress.json'
+/**
+ * What an exported progress file is called by default.
+ *
+ * Renamed in phase 16 with the executable and the profile folder. It is only a
+ * suggestion in a Save dialog and nothing reads it back by name, so an older
+ * export the trainee already has still imports.
+ */
+const FILE_NAME = 'repertoire-trainer-progress.json'
 
 export interface BackupResult {
   /** Something to show the trainee. Null when they cancelled. */

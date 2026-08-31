@@ -1,7 +1,7 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "What the Repertoire Trainer window is allowed to do: keep its own progress file, its marker and its courses in its own data folder, keep one second copy of the progress file under the user's local data folder so that deleting the data folder cannot lose everything, read the older folder named after the bundle identifier so the data can be carried across once, install and remove courses in the new folder, and let the trainee pick a file to import or a place to export. The old folder is readable and not writable, which is what makes the migration a copy. Nothing may remove the second copy: it is written blind and read only when the main file has gone.",
+  "description": "What the Repertoire Trainer window is allowed to do: keep its own progress file, its marker and its courses in its own data folder, keep one second copy of the progress file under the user's local data folder so that deleting the data folder cannot lose everything, read the older folder named after the bundle identifier so the data can be carried across once, install and remove courses in the new folder, look at the window's own browser profile folder and the one it used before it was renamed so the trainee can be told which is which, and let the trainee pick a file to import or a place to export. The old folder is readable and not writable, which is what makes the migration a copy. Nothing may remove the second copy: it is written blind and read only when the main file has gone.",
   "windows": [
     "main"
   ],
@@ -31,7 +31,7 @@
           "path": "$DATA/Repertoire Trainer/progress.marker.json"
         },
         {
-          "path": "$LOCALDATA/Repertoire Trainer/progress.backup.json"
+          "path": "$LOCALDATA/Repertoire Trainer Data/progress.backup.json"
         }
       ]
     },
@@ -57,7 +57,7 @@
           "path": "$DATA/Repertoire Trainer/progress.marker.json"
         },
         {
-          "path": "$LOCALDATA/Repertoire Trainer/progress.backup.json"
+          "path": "$LOCALDATA/Repertoire Trainer Data/progress.backup.json"
         }
       ]
     },
@@ -98,10 +98,16 @@
           "path": "$DATA/Repertoire Trainer/progress.marker.json"
         },
         {
-          "path": "$LOCALDATA/Repertoire Trainer"
+          "path": "$LOCALDATA/Repertoire Trainer Data"
         },
         {
-          "path": "$LOCALDATA/Repertoire Trainer/progress.backup.json"
+          "path": "$LOCALDATA/Repertoire Trainer Data/progress.backup.json"
+        },
+        {
+          "path": "$LOCALDATA/Repertoire Trainer Data/WebView2"
+        },
+        {
+          "path": "$APPLOCALDATA"
         }
       ]
     },
@@ -118,7 +124,7 @@
           "path": "$DATA/Repertoire Trainer/courses/*"
         },
         {
-          "path": "$LOCALDATA/Repertoire Trainer"
+          "path": "$LOCALDATA/Repertoire Trainer Data"
         }
       ]
     },
@@ -160,7 +166,7 @@
       "identifier": "fs:allow-stat",
       "allow": [
         {
-          "path": "$LOCALDATA/Repertoire Trainer/progress.backup.json"
+          "path": "$LOCALDATA/Repertoire Trainer Data/progress.backup.json"
         }
       ]
     }

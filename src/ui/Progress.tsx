@@ -8,6 +8,7 @@ import { colourName, type LoadedCourse } from '../model/types'
 import type { ProgressState } from '../storage/progress'
 import type { Card } from '../model/cards'
 import { backupCopy, isDesktop, readBackup, saveBackup, type BackupCopy } from './backup'
+import { profileFolders, type ProfileFolders } from './folders'
 import './progress.css'
 
 /**
@@ -55,6 +56,7 @@ export function Progress() {
       <h2>Progress</h2>
 
       {note ? <p className="notice">{note}</p> : null}
+      <OldProfileNote />
 
       <p className="totals">
         <strong>{rollup.learnt}</strong> of {rollup.lines} lines learnt across{' '}
@@ -287,6 +289,42 @@ function BackupSection({
       </div>
       {message ? <p className={message.kind === 'ok' ? 'notice' : 'notice bad'}>{message.text}</p> : null}
     </section>
+  )
+}
+
+/**
+ * The folder the window's browser profile left behind when it was renamed.
+ *
+ * It sits beside the migration note above, which is where phase 15 says the
+ * same thing about the data folder. Both moves leave the old folder alone: a
+ * move that deletes has one chance to be right, and neither of these is worth
+ * that risk for a folder name. This says nothing once the old folder has gone.
+ */
+function OldProfileNote() {
+  const [folders, setFolders] = useState<ProfileFolders | null>(null)
+
+  useEffect(() => {
+    let cancelled = false
+    void profileFolders().then((found) => {
+      if (!cancelled) setFolders(found)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  if (!folders || !folders.before) return null
+
+  return (
+    <p className="notice">
+      The window keeps its browser profile in <code>{folders.now}</code> now, named
+      after the app rather than after an internal id.{' '}
+      {folders.moved ? '' : 'That folder appears the next time the app starts. '}
+      The old one is still at <code>{folders.before}</code> and nothing uses it. It is
+      about 32 MB. Delete it yourself once you are happy, the same as the old data
+      folder. The one thing it held that the app cannot carry across is your light or
+      dark choice, so set that again from the header.
+    </p>
   )
 }
 
