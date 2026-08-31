@@ -86,7 +86,7 @@
                                                   "tags": ["king-safety"],
                                                   "mistakes": [
                                                     { "san": "h5", "grade": "inaccuracy", "note": "It stops the pawn, but g5 becomes a hole and White's knight is glad to use it." },
-                                                    { "san": "e6", "grade": "inaccuracy", "note": "7.h5 Bh7 8.Nf3 and Black still has to spend a move on ...h6, only now with less say in when." }
+                                                    { "san": "e6", "grade": "mistake", "note": "It costs the good bishop. After 7.h5 Bf5 8.Nxf5 exf5 Black has given it up for a knight and doubled the f-pawns, because the retreat to h7 that ...h6 prepares is blocked by Black's own pawn. Play ...h6 first." }
                                                   ],
                                                   "children": [
                                                     {

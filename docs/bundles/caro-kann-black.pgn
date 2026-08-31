@@ -81,8 +81,8 @@ Playing ...e6 before the bishop is out, which turns the game into the French you
 {Make room before the pawn arrives. This gives the bishop a rest stop and takes g5 away from White's pieces for the rest of the game. [%tags king-safety]}
 ( 6... h5?!
 {It stops the pawn, but g5 becomes a hole and White's knight is glad to use it.} ) (
-6... e6?!
-{7.h5 Bh7 8.Nf3 and Black still has to spend a move on ...h6, only now with less say in when.}
+6... e6?
+{It costs the good bishop. After 7.h5 Bf5 8.Nxf5 exf5 Black has given it up for a knight and doubled the f-pawns, because the retreat to h7 that ...h6 prepares is blocked by Black's own pawn. Play ...h6 first.}
 ) 7. Nf3 {Simple development, keeping the h5 push in reserve. [%weight 7]} 7... Nd7
 {The knight covers e5 and leaves f6 free for the other one. The order matters here.} (
 7... Nf6?!
@@ -220,9 +220,9 @@ Playing ...Bf5 on move three, before the exchange on e4, when 4.exf5 simply take
 {Room for the bishop, and g5 is taken away from White's knight and bishop for the rest of the game. [%tags king-safety]}
 ( 6... h5?!
 {It stops the pawn but leaves a hole on g5, and White's pieces are glad of it.} ) (
-6... e6?!
-{7.h5 Bh7 and Black still owes the move ...h6, with less choice about when to play it.} )
-7. Nf3 {Development first, keeping h5 in hand. [%weight 7]} ( 7. h5
+6... e6?
+{It costs the good bishop. After 7.h5 Bf5 8.Nxf5 exf5 Black has given it up for a knight and doubled the f-pawns, because the retreat to h7 that ...h6 prepares is blocked by Black's own pawn. Play ...h6 first.}
+) 7. Nf3 {Development first, keeping h5 in hand. [%weight 7]} ( 7. h5
 {White pushes first and develops afterwards. [%weight 5]} 7... Bh7
 {The same square as always, one move earlier. [%tags bishop-placement]} 8. Nf3
 {Back to normal development. [%weight 8]} 8... Nd7
