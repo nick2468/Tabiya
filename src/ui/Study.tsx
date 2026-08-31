@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState, type CSSProperties } from 'react'
 import { Prose } from './Prose'
 import { Board } from './Board'
 import { useProgress } from './progress-context'
@@ -73,6 +73,16 @@ export function Study({
 
 /** One move every 850 ms: slow enough to read the note, fast enough to watch. */
 const STEP_MS = 850
+
+/**
+ * The board's edge in CSS pixels.
+ *
+ * The chapter publishes it as a custom property because two things outside the
+ * board are measured from it: the column beside the board starts one gap to its
+ * right, and the lines header lines its button up with that column. One number,
+ * read by the board and by the stylesheet, so they cannot drift apart.
+ */
+const BOARD_SIZE = 384
 
 function ChapterStudy({
   course,
@@ -169,7 +179,7 @@ function ChapterStudy({
   const learntCount = lines.filter((line) => learnt(line.id)).length
 
   return (
-    <section className="chapter">
+    <section className="chapter" style={{ '--board-size': `${BOARD_SIZE}px` } as CSSProperties}>
       <header className="chapter-head">
         <h2>{chapter.title}</h2>
       </header>
@@ -186,17 +196,47 @@ function ChapterStudy({
             orientation={course.colour}
             shapes={shapes}
             lastMove={lastMove(current)}
-            size={384}
+            size={BOARD_SIZE}
           />
           <div className="study-controls">
             <button type="button" onClick={() => jump([])} disabled={chain.length === 0}>
-              Start
+              Reset
             </button>
-            <button type="button" onClick={goBack} disabled={chain.length === 0}>
-              Back
+            {/* An arrow is not a name, so each one carries a written one for a
+                screen reader and for the tooltip. */}
+            <button
+              type="button"
+              className="step-arrow"
+              onClick={goBack}
+              disabled={chain.length === 0}
+              aria-label="Back one move"
+              title="Back one move"
+            >
+              &#8592;
             </button>
-            <button type="button" onClick={goForward} disabled={!next}>
-              Forward
+            <button
+              type="button"
+              className="step-arrow"
+              onClick={goForward}
+              disabled={!next}
+              aria-label="Forward one move"
+              title="Forward one move"
+            >
+              &#8594;
+            </button>
+            <button
+              type="button"
+              className="play-from-here"
+              onClick={() =>
+                onPlayFrom({
+                  fen,
+                  moves: current ? current.path : chapter.stem,
+                  chapterId: chapter.id,
+                  label: current ? moveList(chain) : stemLabel(chapter),
+                })
+              }
+            >
+              Play from here
             </button>
           </div>
           <p className="hint">The left and right arrow keys step through the line.</p>
@@ -235,23 +275,6 @@ function ChapterStudy({
           ) : null}
 
           <NotePanel chapter={chapter} node={current} />
-
-          <div className="line-actions">
-            <button
-              type="button"
-              className="play-from-here"
-              onClick={() =>
-                onPlayFrom({
-                  fen,
-                  moves: current ? current.path : chapter.stem,
-                  chapterId: chapter.id,
-                  label: current ? moveList(chain) : stemLabel(chapter),
-                })
-              }
-            >
-              Play a game from here
-            </button>
-          </div>
         </div>
       </div>
 

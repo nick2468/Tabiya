@@ -1,10 +1,93 @@
-/* The chessground container needs an explicit size; the widget fills it. */
+/* The chessground container needs an explicit size; the widget fills it.
+
+   Chessground does not build a wrapper INSIDE this element: it adds its own
+   cg-wrap, orientation-white or orientation-black, and manipulable classes to
+   this same div. So every rule below reads `.board`, never `.board .cg-wrap`,
+   which would look for a child that does not exist. */
 .board {
   display: block;
   max-width: 100%;
+
+  /* A label always takes the shade of the OTHER square, so it never
+     disappears into the one it sits on. The two shades are the brown theme's
+     own: light squares are #f0d9b5, dark ones #b58863. */
+  --coord-on-dark: #fff6e3;
+  --coord-on-light: #6b4c30;
 }
 
-.board .cg-wrap {
-  width: 100%;
-  height: 100%;
+/* -------------------------------------------------------- coordinates
+
+   Chessground's own stylesheet puts the rank numbers in a column lifted 20px
+   above the board with each one nudged down 39%, and the file letters half a
+   square to the right of the file they name. Both land near the middle of an
+   edge rather than in a corner of the square they belong to.
+
+   The brown theme does colour them, but for a board that draws its rank
+   numbers down the RIGHT edge: it paints ranks 1, 3, 5 and 7 dark, and those
+   are the ranks whose squares are dark on the a-file, where these numbers
+   actually sit. That is why rank 1 currently reads dark grey on the dark a1.
+
+   So the rules below put each rank number in the top left of its own square
+   and each file letter in the bottom right of its own, and colour every label
+   against the square under it. a1 is dark, so rank 1 reads light, rank 2
+   dark, and so on up; the same alternation runs along rank 1 for the letters.
+
+   Flipping the board for a Black course puts file h under the rank numbers and
+   rank 8 under the letters, which swaps the shade under every label. The DOM
+   order does NOT flip - chessground always writes ranks 1 to 8 and files a to
+   h and turns the flex direction round instead - so nth-child means the same
+   thing either way up, and the .black rules swap the colours back. */
+
+.board coords {
+  opacity: 1;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* Each rank number sits at the top of its own row, hard against the left. */
+.board coords.ranks {
+  left: 3px;
+  top: 0;
+  width: auto;
+}
+
+.board coords.ranks coord {
+  transform: none;
+  padding-top: 3px;
+}
+
+/* Each file letter sits at the bottom of the board, hard against the right of
+   its own file. */
+.board coords.files {
+  left: 0;
+  bottom: 3px;
+  height: auto;
+  text-align: right;
+}
+
+.board coords.files coord {
+  padding-right: 3px;
+}
+
+/* White's view: ranks 1, 3, 5, 7 and files a, c, e, g sit on dark squares. */
+.board coords.ranks coord:nth-child(odd),
+.board coords.files coord:nth-child(odd) {
+  color: var(--coord-on-dark);
+}
+
+.board coords.ranks coord:nth-child(even),
+.board coords.files coord:nth-child(even) {
+  color: var(--coord-on-light);
+}
+
+/* Black's view: every one of those squares is the other shade. */
+.board coords.ranks.black coord:nth-child(odd),
+.board coords.files.black coord:nth-child(odd) {
+  color: var(--coord-on-light);
+}
+
+.board coords.ranks.black coord:nth-child(even),
+.board coords.files.black coord:nth-child(even) {
+  color: var(--coord-on-dark);
 }

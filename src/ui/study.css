@@ -56,6 +56,8 @@
    PAGE scrolls sideways instead of the table. */
 .chapter {
   min-width: 0;
+  /* The board's own width arrives from Study.tsx as --board-size. */
+  --study-gap: 28px;
 }
 
 .chapter-head {
@@ -116,15 +118,30 @@
 
 .study-body {
   display: flex;
-  gap: 28px;
+  gap: var(--study-gap);
   align-items: flex-start;
   flex-wrap: wrap;
 }
 
+/* As wide as the board and no wider, so the controls under it and the hint
+   under those wrap inside the board's own edges. */
+.study-board {
+  width: var(--board-size);
+  max-width: 100%;
+}
+
 .study-controls {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-top: 12px;
+}
+
+/* An arrow needs the same box as a word next to it, not a narrower one. */
+.step-arrow {
+  min-width: 38px;
+  line-height: 1.2;
+  text-align: center;
 }
 
 .study-side {
@@ -241,15 +258,6 @@
   color: var(--text-dim);
 }
 
-/* ------------------------------------------------------- line actions */
-
-.line-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-}
-
 .learnt-toggle {
   display: flex;
   align-items: center;
@@ -271,15 +279,17 @@
   margin-top: 22px;
 }
 
+/* Two columns of the same widths as the study body above, so the button in
+   the second one starts exactly where the moves column beside the board does
+   and the eye has one line down that side of the screen. */
 .lines-head {
-  display: flex;
+  display: grid;
+  grid-template-columns: var(--board-size) minmax(0, 1fr);
+  gap: var(--study-gap);
   align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
 }
 
 .lines-head h3 {
-  flex: 1;
   margin: 0 0 8px;
 }
 
@@ -292,6 +302,7 @@
 }
 
 .auto-step {
+  justify-self: start;
   margin-bottom: 8px;
 }
 
@@ -396,6 +407,24 @@
   color: var(--bad);
 }
 
+/* The side column keeps its place beside the board only while the chapter is
+   at least board plus gap plus its own 280px minimum. With the shell's 24px
+   padding, the 220px chapter list, this panel's own padding and its scrollbar
+   taken off, that runs out at about 1020px of window. Below it the column
+   wraps under the board, so there is nothing left to line up with and the
+   header goes back to a plain row. */
+@media (max-width: 1023px) {
+  .lines-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .lines-head h3 {
+    flex: 1;
+  }
+}
+
 @media (max-width: 899px) {
   .study {
     grid-template-columns: 1fr;
@@ -416,12 +445,16 @@
     align-self: start;
   }
 
+  /* This panel is what scrolls, so the gap between the prose and the
+     scrollbar has to be padding INSIDE it. A margin on the text would leave
+     the same gap when the scrollbar is absent and none when it is there. */
   .chapter {
     display: flex;
     flex-direction: column;
     height: 100%;
     min-height: 0;
     overflow-y: auto;
+    padding-right: 14px;
   }
 
   /* The lines table keeps its height; the chapter prose takes what is left
