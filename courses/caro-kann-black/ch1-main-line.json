@@ -16,7 +16,7 @@
           "mistakes": [
             { "san": "e6", "grade": "playable", "note": "Playable, but it is a French Defence and the bishop on c8 is stuck behind its own pawns." },
             { "san": "Nf6", "grade": "inaccuracy", "note": "4.e5 kicks the knight and Black ends up in a bad French a tempo down." },
-            { "san": "Bf5", "grade": "mistake", "note": "Too early. 4.exd5 cxd5 5.Qb3 hits b7 and d5 at the same time." }
+            { "san": "Bf5", "grade": "mistake", "note": "It loses a piece: 4.exf5 takes the bishop, and that is why the bishop waits for the e-pawn to go." }
           ],
           "children": [
             {

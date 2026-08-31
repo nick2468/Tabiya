@@ -193,7 +193,7 @@
                                                     {
                                                       "san": "Nxc7+",
                                                       "grade": "mistake",
-                                                      "note": "The greedy order loses the thread: 10...Kd8 and the pawn on g3 marches, so 11...g2+ costs White the exchange and the game. Take with check first."
+                                                      "note": "The greedy order loses the thread: 9...Kd8 and White is already worse, because 10.hxg3 runs into 10...Qxg3+. Taking the rook with 10.Nxa8 is worse still: 10...g2+ uncovers the queen's check and the pawn takes the rook on h1 next move. Take with check first."
                                                     }
                                                   ],
                                                   "children": [

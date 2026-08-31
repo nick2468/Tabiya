@@ -10,7 +10,7 @@
       "note": "Develop and defend d5 at the same time. This is the move that keeps everything simple.",
       "tags": ["development"],
       "mistakes": [
-        { "san": "dxc4", "grade": "mistake", "note": "The pawn cannot be held: 5.Bxc4 develops with tempo and White owns the whole centre for nothing." },
+        { "san": "dxc4", "grade": "mistake", "note": "The pawn cannot be held: 5.Bxc4 takes it straight back, and Black has handed over the centre for nothing." },
         { "san": "e6", "grade": "playable", "note": "Sound, and it usually transposes. Developing a piece first is more useful than a pawn move." },
         { "san": "Nc6", "grade": "playable", "note": "A real line and a sharp one. It invites 5.Nf3 Bg4 with a lot of theory attached." }
       ],

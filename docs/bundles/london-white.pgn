@@ -822,8 +822,9 @@ Recapturing on g3 with the f-pawn. Retreating the bishop to d2, which throws awa
 {Step back and let Black decide. Qxh5 is not on offer this time, because the knight on f3 is standing in the queen road. Taking on g3 opens the h-file for White, which is a bargain at the price of one bishop. [%tags bishop-placement h-file]}
 ( 5. Be5!?
 {Also good and it avoids the trade, but Bg3 is one answer that works every time and needs no thought.}
-) ( 5. Bg5?! {The bishop has nothing to attack there and ...h6 chases it again.} )
-5... Nxg3 {Black takes, and gives White exactly what the h-file is worth. [%weight 6]} (
+) ( 5. Bg5?!
+{The bishop cannot be chased off it: 5...h6 6.Bxd8 costs Black the queen for a bishop, because g5 looks straight at d8 through the empty f6 square. The objection is positional. 5.Bg3 keeps the bishop on the diagonal the system is built on, and invites Nxg3, when hxg3 opens the h-file.}
+) 5... Nxg3 {Black takes, and gives White exactly what the h-file is worth. [%weight 6]} (
 5... Be7 {Black leaves the knight on h5, where it is offside. [%weight 5]} 6. Bd3
 {Ignore it and carry on. A knight on the rim defends nothing, so White is effectively a piece up where the game is. [%tags bishop-placement] [%plan Play c3, Nbd2 and castle. If the knight comes back to f6 you have gained two free moves; if it takes on g3, recapture with the h-pawn and take the file.] [%line ...Nh5 and then ...Be7]}
 ( 6. Be2!?

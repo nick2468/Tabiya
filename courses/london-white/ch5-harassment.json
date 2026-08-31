@@ -119,7 +119,7 @@
                             {
                               "san": "Bg5",
                               "grade": "inaccuracy",
-                              "note": "The bishop has nothing to attack there and ...h6 chases it again."
+                              "note": "The bishop cannot be chased off it: 5...h6 6.Bxd8 costs Black the queen for a bishop, because g5 looks straight at d8 through the empty f6 square. The objection is positional. 5.Bg3 keeps the bishop on the diagonal the system is built on, and invites Nxg3, when hxg3 opens the h-file."
                             }
                           ],
                           "children": [

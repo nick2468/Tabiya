@@ -1016,7 +1016,7 @@ Checking on h5 when a knight covers the square. Pushing f4 against 2...Bc5 with 
 ( 4... Nxd5 {The natural recapture, and it loses a piece. [%weight 4]} 5. Bxd5
 {Take. The queen is the knight's only defender and it cannot use the square: 5...Qxd5 6.Nxd5 wins the queen, so the knight is simply lost. [%tags tactics]}
 ( 5. Nxd5!?
-{This wins the piece too. Taking with the bishop leaves the knight on c3 guarding d5, which is what stops the queen recapturing.}
+{This wins the piece too, and either recapture stops the queen taking back, because whichever piece stays behind is guarding d5. It is the worse way to do it: the knight on d5 gets chased and has to move again, while the bishop can settle there.}
 ) 5... Bb4 {Black pins the knight and hopes to win the bishop on d5 back. [%weight 6]}
 6. a3
 {Break the pin. The bishop must retreat or trade, and the piece stays won. [%plan Develop with Nf3 and d3 and castle, then trade pieces. A piece up is a piece up.] [%line 2...d5 and 4...Nxd5]}
@@ -1274,7 +1274,7 @@ Blocking with g3 out of habit. Taking with the knight on g5 and then castling lo
 8... fxg3 {Black takes and opens lines at the white king. [%weight 7]} 9. exd6+
 {Take with check. The queen on e2 gives the check through the file the pawn has just left, so Black never gets to take on h2. [%cal Re2e8]}
 ( 9. Nxc7+?
-{The greedy order loses the thread: 10...Kd8 and the pawn on g3 marches, so 11...g2+ costs White the exchange and the game. Take with check first.}
+{The greedy order loses the thread: 9...Kd8 and White is already worse, because 10.hxg3 runs into 10...Qxg3+. Taking the rook with 10.Nxa8 is worse still: 10...g2+ uncovers the queen's check and the pawn takes the rook on h1 next move. Take with check first.}
 ) 9... Be6
 {Black blocks the check with the bishop, since moving the king loses more. [%weight 7]}
 10. Bg5

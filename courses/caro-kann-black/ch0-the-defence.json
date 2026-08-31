@@ -44,7 +44,7 @@
                           "mistakes": [
                             { "san": "e6", "grade": "playable", "note": "Playable, but it is a French Defence and the bishop on c8 has nowhere to go." },
                             { "san": "Nf6", "grade": "inaccuracy", "note": "4.e5 gains time on the knight and Black gets a bad French a tempo down." },
-                            { "san": "Bf5", "grade": "mistake", "note": "Too early. 4.exd5 cxd5 5.Qb3 hits b7 and d5 at the same time and Black is already uncomfortable." }
+                            { "san": "Bf5", "grade": "mistake", "note": "It loses a piece: 4.exf5 takes the bishop and nothing takes back. The bishop waits for the e-pawn to leave, which is the whole reason 3...dxe4 comes first." }
                           ],
                           "children": [
                             {

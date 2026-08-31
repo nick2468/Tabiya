@@ -129,7 +129,7 @@ Playing ...e6 before the bishop has a square, which turns the Slav into the Quee
 ( 11... Bxe4?
 {The pawn is defended twice. 12.Nxe4 Nxe4 13.Bxe4 and Black is a piece down for one pawn.}
 ) ( 11... Re8!?
-{Sensible in general, but the bishop is the piece being asked a question: 12.Bxg6 hxg6 and Black keeps the worse minor piece.}
+{Sensible, and it costs next to nothing. The difference is the bishop: from h5 it can take the knight on f3, while after 12.e5 the bishop on g6 ends up trading itself on d3 instead.}
 ) 12. e5 {White gains more space and kicks the knight away from f6. [%weight 7]} 12... Nd5
 {The knight takes the best square on the board, blocking the d-file and eyeing c3 and f4.}
 ( 12... Ne4?
@@ -362,7 +362,7 @@ Trying to hang on to c4 after 5.a4 with ...b5, when axb5 and b3 blow the queensi
 ( 11... Bxe4?
 {The pawn is defended twice. 12.Nxe4 Nxe4 13.Bxe4 and Black is a piece down for one pawn.}
 ) ( 11... Re8!?
-{Sensible in general, but the bishop is the piece being asked a question: 12.Bxg6 hxg6 and Black keeps the worse minor piece.}
+{Sensible, and it costs next to nothing. The difference is the bishop: from h5 it can take the knight on f3, while after 12.e5 the bishop on g6 ends up trading itself on d3 instead.}
 ) 12. e5 {White gains more space and kicks the knight away from f6. [%weight 7]} 12... Nd5
 {The knight takes the best square on the board, blocking the d-file and eyeing c3 and f4.}
 ( 12... Ne4?
@@ -801,7 +801,7 @@ Playing ...Bf5 before the knight is out, and running into cxd5 followed by Qb3. 
 6... Qb6
 {The familiar answer. Offering the trade solves b7 and d5 in one move, bishop on g2 or not. [%tags tactics] [%plan Trade queens if White allows it, then play ...e6, ...Nbd7 and ...Be7. With the queens off, the bishop on g2 has nothing left to aim at.] [%line 3.g3 and the 5.cxd5 trade]}
 ( 6... Qc7?!
-{7.Bf4 comes with a hit on the queen and White keeps the pull. It does not lose a pawn, because 7.Qxd5 would run into 7...Qxc1+, but the queen is misplaced on c7 here.}
+{7.Bf4 comes with a hit on the queen and White keeps the pull. It does not lose a pawn, because 7.Qxd5 would run into 7...Qxc1 mate, but the queen is misplaced on c7 here.}
 ) ( 6... b6?!
 {It defends b7 with a pawn and leaves c6 and a6 full of holes for a bishop on g2 to use. Offering the queen trade solves the whole problem.}
 ) ) 5... e6 {Now the pawn is safe to play, with the bishop already outside it.} 6. O-O

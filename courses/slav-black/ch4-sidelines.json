@@ -311,7 +311,7 @@
                                     {
                                       "san": "Qc7",
                                       "grade": "inaccuracy",
-                                      "note": "7.Bf4 comes with a hit on the queen and White keeps the pull. It does not lose a pawn, because 7.Qxd5 would run into 7...Qxc1+, but the queen is misplaced on c7 here."
+                                      "note": "7.Bf4 comes with a hit on the queen and White keeps the pull. It does not lose a pawn, because 7.Qxd5 would run into 7...Qxc1 mate, but the queen is misplaced on c7 here."
                                     },
                                     {
                                       "san": "b6",

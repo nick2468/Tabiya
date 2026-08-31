@@ -500,7 +500,7 @@
                             {
                               "san": "Nxd5",
                               "grade": "playable",
-                              "note": "This wins the piece too. Taking with the bishop leaves the knight on c3 guarding d5, which is what stops the queen recapturing."
+                              "note": "This wins the piece too, and either recapture stops the queen taking back, because whichever piece stays behind is guarding d5. It is the worse way to do it: the knight on d5 gets chased and has to move again, while the bishop can settle there."
                             }
                           ],
                           "children": [
