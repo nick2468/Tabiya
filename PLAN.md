@@ -1595,3 +1595,41 @@ Open items (phase 14):
    course.
 
 - [x] **Review gate 14 passed** (2026-08-31)
+
+## Phase 15 - a folder with the right name, and courses you can remove
+
+Goal: the second phase driven by Nick using the app. He imported the Colle bundle
+through the file picker on 2026-08-31 (it worked, first real use of the phase 11
+feature), was made to restart to see it, deleted the folder by hand because there is
+no other way, and found the data folder is called `com.nick.london-trainer` for an app
+called Repertoire Trainer.
+
+Chipped as `chips/phase-15-folder-and-courses.md`. Rulings of 2026-08-31: the folder
+becomes `%APPDATA%\Roaming\Repertoire Trainer`; the Tauri IDENTIFIER does not change,
+because it is what NSIS keys the uninstall entry on and Nick has already lived through
+one identity change that installed a second app, so the app builds its root from
+`dataDir()` plus a literal name instead of `appDataDir()`; the migration COPIES and
+never deletes; import refreshes the catalog rather than asking for a restart; delete
+appears on imported tiles only, because a bundled course would be back at the next
+restart; and the confirm says the truth, which is that progress survives a delete and
+comes back on re-import.
+
+- [ ] 15.1 The data folder moves by copying, with one shared root function, literal
+  capability grants for the new location, the old grants kept because they are what
+  the migration reads, verification before the new location goes live, and a failed
+  migration taking the existing blocked-saving route rather than starting blank.
+- [ ] 15.2 Import refreshes the catalog; no restart. A new course has no learnt lines,
+  so it cannot change a running drill queue.
+- [ ] 15.3 Delete on imported tiles, in the actions row (the tile itself is a button,
+  so a corner X cannot nest), with the confirm and an "Export it first" button rather
+  than a pre-ticked box.
+- [ ] 15.4 All three proved in the packaged app, ending with the one claim that has to
+  be seen rather than reasoned about: delete a course, import it again, and the learnt
+  lines come back.
+
+Acceptance: the app reads and writes the new folder; Nick's two learnt lines live there
+and the old folder is untouched; a failed migration blocks saving and says so; import
+needs no restart; an imported tile deletes with its progress surviving a re-import;
+bundled tiles have no delete; vitest green and `tsc -b` clean.
+
+- [ ] **Review gate 15 passed**
