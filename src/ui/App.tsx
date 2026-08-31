@@ -47,7 +47,7 @@ export function App() {
 
 function Shell() {
   const catalog = useCatalog()
-  const { failure } = useProgress()
+  const { failure, restore, putBack } = useProgress()
   const [view, setView] = useState<View>('courses')
   const [courseId, setCourseId] = useState<string | null>(null)
   const [playRequest, setPlayRequest] = useState<PlayRequest | null>(null)
@@ -142,11 +142,14 @@ function Shell() {
       ) : null}
 
       {failure ? (
-        <p className="notice bad read-failure">
-          Your saved progress could not be read: {failure} Nothing will be saved while
-          this is showing, so whatever is on disk is still there. Import a backup from
-          Progress to carry on.
-        </p>
+        <div className="notice bad read-failure">
+          <p>{failure}</p>
+          {restore ? (
+            <button type="button" className="restore-copy" onClick={putBack}>
+              Put the copy back
+            </button>
+          ) : null}
+        </div>
       ) : null}
 
       <main>

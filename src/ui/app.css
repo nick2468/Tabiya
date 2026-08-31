@@ -181,3 +181,12 @@ button:hover {
 .read-failure {
   margin: 12px 0;
 }
+
+.read-failure p {
+  margin: 0;
+}
+
+/* The way out of a blocked start, so it sits under the sentence explaining it. */
+.restore-copy {
+  margin-top: 10px;
+}

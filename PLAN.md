@@ -1733,7 +1733,7 @@ version bumps to 1.1.0 and bumps per installer thereafter; and courses are HIDDE
 than deleted, without bumping the progress version, because an older build refuses a
 newer file outright and a cosmetic flag should not become a downgrade wall.
 
-- [ ] 16.1 Never start blank when there is evidence of a previous run: a marker beside
+- [x] 16.1 Never start blank when there is evidence of a previous run: a marker beside
   the progress file, the blocked-saving banner rather than a fresh blank file, and a
   backup copy under `%LOCALAPPDATA%` offered for restore when the main file has gone.
 - [ ] 16.2 One name everywhere: the Cargo package and lib, the installed executable, and

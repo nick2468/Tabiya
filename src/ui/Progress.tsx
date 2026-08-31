@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useProgress } from './progress-context'
 import { useCatalog } from './catalog-context'
 import { buildCardsAcross } from '../model/cards'
@@ -7,7 +7,7 @@ import { dueCount, newCount } from '../model/queue'
 import { colourName, type LoadedCourse } from '../model/types'
 import type { ProgressState } from '../storage/progress'
 import type { Card } from '../model/cards'
-import { isDesktop, readBackup, saveBackup } from './backup'
+import { backupCopy, isDesktop, readBackup, saveBackup, type BackupCopy } from './backup'
 import './progress.css'
 
 /**
@@ -208,6 +208,11 @@ function CourseProgress({
 /**
  * Export and import. This is the backup story, and in phase 5 it is also the
  * way progress moves from the browser into the wrapped Windows app.
+ *
+ * Phase 16 added the app's own second copy underneath it. That copy is written
+ * after every save and read back only when the main file has gone, so a trainee
+ * would otherwise have no way of knowing it is there. Saying where it is and
+ * what it holds turns a promise into something they can check.
  */
 function BackupSection({
   exportJson,
@@ -260,6 +265,7 @@ function BackupSection({
         Export writes everything - learnt lines, card schedules and concept history - to
         one file. Import replaces all of it, so keep an export before you try one.
       </p>
+      <SecondCopy />
       <div className="backup-actions">
         <button type="button" onClick={download}>
           Export progress
@@ -281,6 +287,48 @@ function BackupSection({
       </div>
       {message ? <p className={message.kind === 'ok' ? 'notice' : 'notice bad'}>{message.text}</p> : null}
     </section>
+  )
+}
+
+/**
+ * The copy the app keeps for itself, in a second folder.
+ *
+ * It is read here and nowhere else on this screen, because the point is to
+ * show that the safety net exists rather than to do anything with it. The
+ * folder is deliberately not the data folder: deleting the data folder is what
+ * cost Nick his learnt lines, and a copy inside it would have gone too.
+ */
+function SecondCopy() {
+  const [copy, setCopy] = useState<BackupCopy | null>(null)
+
+  useEffect(() => {
+    let cancelled = false
+    void backupCopy().then((found) => {
+      if (!cancelled) setCopy(found)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  if (!copy) return null
+
+  return (
+    <p className="hint second-copy">
+      The app also keeps its own copy at <code>{copy.path}</code>, rewritten every time
+      it saves and read back only if your main progress file goes missing.{' '}
+      {copy.trouble !== null ? (
+        <>It is there but could not be read: {copy.trouble}</>
+      ) : !copy.there ? (
+        <>It is not there yet. It appears the first time the app saves.</>
+      ) : (
+        <>
+          It currently holds <strong>{copy.learntLines}</strong> learnt{' '}
+          {copy.learntLines === 1 ? 'line' : 'lines'}, and it is an ordinary progress
+          file, so Import above will read it.
+        </>
+      )}
+    </p>
   )
 }
 

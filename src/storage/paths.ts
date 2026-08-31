@@ -17,6 +17,10 @@
  * `appDataDir()` still means the identifier folder, which is exactly the old
  * location, so it is how the migration finds what to carry across.
  *
+ * Phase 16 added a second folder, under the user's LOCAL data folder, holding
+ * one file: a copy of the progress file. It is separate on purpose. See
+ * `BackupRoots` below and `safety.ts`.
+ *
  * Tauri is imported lazily so this module can be pulled into a browser build
  * without dragging in an API that is not there.
  */
@@ -30,11 +34,40 @@ export const COURSES_FOLDER = 'courses'
 /** The progress file, inside it. */
 export const PROGRESS_FILE = 'progress.json'
 
-/** One data folder: the root and the two things the app keeps in it. */
+/**
+ * The file the app leaves beside the progress file to say it has saved here.
+ *
+ * It exists so that "this folder is here and the progress file is not" can be
+ * told apart from "this trainee is new". Those two look identical otherwise,
+ * and treating the first as the second is how Nick lost his learnt lines on
+ * 2026-08-31: he deleted the data folder, the app started blank, and the blank
+ * state was saved straight over the gap.
+ */
+export const MARKER_FILE = 'progress.marker.json'
+
+/** The second copy, in the folder below. */
+export const BACKUP_FILE = 'progress.backup.json'
+
+/** One data folder: the root and the three things the app keeps in it. */
 export interface DataRoots {
   root: string
   progress: string
   courses: string
+  /** The marker beside the progress file. See MARKER_FILE. */
+  marker: string
+}
+
+/**
+ * The second copy's folder, and the file in it.
+ *
+ * It is deliberately NOT inside the data folder. A marker inside that folder
+ * dies with the folder, which is exactly the case that cost Nick his lines, so
+ * the copy goes somewhere a person deleting the data folder would not also be
+ * deleting. Two folders now have to go before anything is lost.
+ */
+export interface BackupRoots {
+  root: string
+  backup: string
 }
 
 /** True when the app is running inside the Tauri window rather than a browser. */
@@ -45,6 +78,7 @@ export function isDesktop(): boolean {
 interface PathApi {
   dataDir: () => Promise<string>
   appDataDir: () => Promise<string>
+  localDataDir: () => Promise<string>
   join: (...parts: string[]) => Promise<string>
 }
 
@@ -61,11 +95,13 @@ async function rootsAt(root: string): Promise<DataRoots> {
     root,
     progress: await join(root, PROGRESS_FILE),
     courses: await join(root, COURSES_FOLDER),
+    marker: await join(root, MARKER_FILE),
   }
 }
 
 let current: Promise<DataRoots> | null = null
 let previous: Promise<DataRoots> | null = null
+let second: Promise<BackupRoots> | null = null
 
 /** Where the app's data lives now: `<roaming>/Repertoire Trainer`. */
 export function dataRoots(): Promise<DataRoots> {
@@ -88,4 +124,23 @@ export function oldDataRoots(): Promise<DataRoots> {
     previous = (async () => rootsAt(await (await api()).appDataDir()))()
   }
   return previous
+}
+
+/**
+ * Where the second copy of the progress file lives:
+ * `<local data>/Repertoire Trainer`.
+ *
+ * The local data folder rather than the roaming one, so that the two copies
+ * are in genuinely different places. Same app name, because a person looking
+ * at either folder should be able to tell whose it is.
+ */
+export function backupRoots(): Promise<BackupRoots> {
+  if (!second) {
+    second = (async () => {
+      const { localDataDir, join } = await api()
+      const root = await join(await localDataDir(), DATA_FOLDER)
+      return { root, backup: await join(root, BACKUP_FILE) }
+    })()
+  }
+  return second
 }

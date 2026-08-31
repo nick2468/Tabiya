@@ -1,9 +1,11 @@
-import { dataRoots, isDesktop, oldDataRoots, type DataRoots } from './paths'
+import { backupRoots, dataRoots, isDesktop, oldDataRoots, type BackupRoots, type DataRoots } from './paths'
 import { migrateDataFolder, migrationNote, tauriFiles, type Migration } from './migrate'
+import { checkBlankStart, tauriSafetyFiles, writeMarkerAndBackup } from './safety'
 import {
   describe,
   emptyProgress,
   parseProgressJson,
+  readFailure,
   type LoadedProgress,
   type ProgressState,
   type ProgressStore,
@@ -29,6 +31,13 @@ import {
  * the app used before phase 15. A migration that cannot be completed blocks
  * saving through the same `failure` route a bad read takes, which is the point:
  * the app must never start blank and then save over something real.
+ *
+ * Phase 16 closed the last way that could still happen. A progress file that is
+ * simply NOT THERE used to be read as a new trainee, so deleting the data
+ * folder started the app blank and saved the blank state over the gap. Now
+ * every save also leaves a marker beside the file and a copy of it in a second
+ * folder, and a start with no progress file has to get past both before it is
+ * believed. See `safety.ts`.
  *
  * Tauri is imported lazily so this module can be pulled into a browser build
  * without dragging in an API that is not there.
@@ -78,29 +87,58 @@ export class TauriProgressStore implements ProgressStore {
     }
     if (moved.kind === 'failed') {
       console.warn('The data folder could not be moved:', moved.reason)
-      return { state: emptyProgress(), failure: moved.reason }
+      return { state: emptyProgress(), failure: readFailure(moved.reason) }
     }
     const note = moved.kind === 'migrated' ? migrationNote(moved) : undefined
 
     try {
-      const [fs, { progress }] = await Promise.all([this.fs(), this.paths()])
-      // No file yet is a new trainee, not a failure.
-      if (!(await fs.exists(progress))) return { state: emptyProgress(), note }
-      return { state: parseProgressJson(await fs.readTextFile(progress)), note }
+      const [fs, roots] = await Promise.all([this.fs(), this.paths()])
+      // No file. That is a new trainee only when nothing says the app has
+      // saved here before, which is the whole of phase 16.
+      if (!(await fs.exists(roots.progress))) {
+        const start = await checkBlankStart(tauriSafetyFiles(), roots, await this.second())
+        if (start.kind === 'fresh') return { state: emptyProgress(), note }
+        console.warn('The app refused to start blank:', start.reason)
+        return { state: emptyProgress(), failure: start.reason, restore: start.offer, note }
+      }
+      return { state: parseProgressJson(await fs.readTextFile(roots.progress)), note }
     } catch (error) {
       // A file that cannot be read must not stop the app from opening, and
       // must not be written over either. The caller stops saving until the
       // trainee resolves it.
       console.warn('Saved progress could not be read:', error)
-      return { state: emptyProgress(), failure: describe(error), note }
+      return { state: emptyProgress(), failure: readFailure(describe(error)), note }
     }
   }
 
+  /**
+   * Writes the progress file, then the marker beside it and the copy in the
+   * second folder.
+   *
+   * The progress file goes first, because it is the one that matters. The
+   * other two are best effort on purpose: a marker or a copy that cannot be
+   * written is worth a line on the console, and is not worth failing a save
+   * that has already succeeded. The cost of losing them is that the app might
+   * later believe a blank start, which is the state the app was in before this
+   * phase, so a warning is the honest response rather than an error.
+   */
   async save(state: ProgressState): Promise<void> {
-    const [fs, { root, progress }] = await Promise.all([this.fs(), this.paths()])
+    const [fs, roots] = await Promise.all([this.fs(), this.paths()])
     // The folder does not exist until the first save creates it.
-    if (!(await fs.exists(root))) await fs.mkdir(root, { recursive: true })
-    await fs.writeTextFile(progress, JSON.stringify(state, null, 2))
+    if (!(await fs.exists(roots.root))) await fs.mkdir(roots.root, { recursive: true })
+    const text = JSON.stringify(state, null, 2)
+    await fs.writeTextFile(roots.progress, text)
+
+    try {
+      await writeMarkerAndBackup(tauriSafetyFiles(), roots, await this.second(), state, text)
+    } catch (error) {
+      console.warn('The second copy of your progress could not be written:', error)
+    }
+  }
+
+  /** Where the second copy goes. Resolved once, like the data folder. */
+  private second(): Promise<BackupRoots> {
+    return backupRoots()
   }
 
   async exportJson(): Promise<string> {

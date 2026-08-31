@@ -1,4 +1,6 @@
 import { isDesktop } from '../storage/tauri-store'
+import { backupRoots } from '../storage/paths'
+import { parseProgressJson } from '../storage/progress'
 
 /**
  * Getting a progress file out of the app and back in.
@@ -9,6 +11,12 @@ import { isDesktop } from '../storage/tauri-store'
  * something to rely on, so the desktop path writes the file itself.
  *
  * Both are behind one pair of functions so the view does not care which it is.
+ *
+ * The app's OWN second copy is a third thing, added in phase 16, and it is read
+ * here only so the Progress screen can say where it is and what is in it. The
+ * app writes that copy after every save and never reads it back except when the
+ * main file has gone; showing it is how a trainee can see that the safety net
+ * is really there rather than take the app's word for it.
  */
 
 const FILE_NAME = 'london-trainer-progress.json'
@@ -59,3 +67,39 @@ export async function readBackup(): Promise<string | null> {
 }
 
 export { isDesktop }
+
+/** What the app's own second copy holds, for showing on the Progress screen. */
+export interface BackupCopy {
+  path: string
+  /** True when the file is there. */
+  there: boolean
+  /** How many learnt lines it holds, or null when it could not be read. */
+  learntLines: number | null
+  /** What went wrong reading it, when something did. */
+  trouble: string | null
+}
+
+/**
+ * Looks at the app's own second copy. Null in a browser, which has no folders.
+ *
+ * It never throws: a copy that cannot be read is a thing to say on screen, not
+ * a thing to break the Progress screen over.
+ */
+export async function backupCopy(): Promise<BackupCopy | null> {
+  if (!isDesktop()) return null
+  const { backup } = await backupRoots()
+  const fs = await import('@tauri-apps/plugin-fs')
+  try {
+    if (!(await fs.exists(backup))) {
+      return { path: backup, there: false, learntLines: null, trouble: null }
+    }
+    const state = parseProgressJson(await fs.readTextFile(backup))
+    return { path: backup, there: true, learntLines: state.learntLines.length, trouble: null }
+  } catch (error) {
+    return { path: backup, there: true, learntLines: null, trouble: asMessage(error) }
+  }
+}
+
+function asMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error)
+}

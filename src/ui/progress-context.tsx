@@ -11,6 +11,7 @@ import {
   type ProgressState,
   type ProgressStore,
 } from '../storage/progress'
+import type { BackupOffer } from '../storage/safety'
 import { newSchedule, review, type Rating } from '../scheduler'
 import { countsAsCorrect, ratingFor, type Verdict } from '../model/grade'
 import type { Card } from '../model/cards'
@@ -30,13 +31,18 @@ import type { Card } from '../model/cards'
  * and says why; writing that blank state back would destroy exactly the file
  * it could not read. So a failed read stops saving altogether until the
  * trainee replaces the state themselves, and the shell says so on screen.
+ *
+ * From phase 16 a MISSING file the app has evidence about takes the same route,
+ * and may arrive with a second copy the app found. The copy is offered, never
+ * applied: putting it back is a button the trainee presses, and pressing it is
+ * what unblocks saving.
  */
 
 export interface Progress {
   state: ProgressState
   loaded: boolean
   /**
-   * Why the saved progress could not be read, when it could not. While this is
+   * Why nothing may be saved, as a whole message ready to show. While this is
    * set nothing is written, so whatever is on disk stays there.
    */
   failure: string | null
@@ -45,6 +51,13 @@ export interface Progress {
    * such as the data folder moving. Null when there is nothing to say.
    */
   note: string | null
+  /**
+   * A second copy of the progress file the app found because the main one had
+   * gone. Null when there is none to offer.
+   */
+  restore: BackupOffer | null
+  /** Puts that copy back, which is also what starts saving again. */
+  putBack: () => void
   learnt: (lineId: string) => boolean
   toggle: (lineId: string) => void
   /**
@@ -68,6 +81,7 @@ export function useProgressStateFor(store: ProgressStore): Progress {
   const [loaded, setLoaded] = useState(false)
   const [failure, setFailure] = useState<string | null>(null)
   const [note, setNote] = useState<string | null>(null)
+  const [restore, setRestore] = useState<BackupOffer | null>(null)
 
   useEffect(() => {
     let cancelled = false
@@ -76,6 +90,7 @@ export function useProgressStateFor(store: ProgressStore): Progress {
       setState(saved.state)
       setFailure(saved.failure ?? null)
       setNote(saved.note ?? null)
+      setRestore(saved.restore ?? null)
       setLoaded(true)
     })
     return () => {
@@ -117,6 +132,16 @@ export function useProgressStateFor(store: ProgressStore): Progress {
     setState((previous) => recordGame(previous, game))
   }, [])
 
+  // Putting the copy back is the trainee replacing the state deliberately, so
+  // it clears the block the same way an import does. The saving effect above
+  // then writes it out, which is what makes the copy live again.
+  const putBack = useCallback(() => {
+    if (!restore) return
+    setState(restore.state)
+    setFailure(null)
+    setRestore(null)
+  }, [restore])
+
   // Exported from what is in memory, not from storage: the two are kept in
   // step by the effect above, and in memory is the one that cannot be stale.
   const exportJson = useCallback(async () => JSON.stringify(state, null, 2), [state])
@@ -128,6 +153,7 @@ export function useProgressStateFor(store: ProgressStore): Progress {
       // An import is the trainee deliberately replacing the state, which is
       // also how they get out of a failed read.
       setFailure(null)
+      setRestore(null)
     },
     [store],
   )
@@ -137,6 +163,8 @@ export function useProgressStateFor(store: ProgressStore): Progress {
     loaded,
     failure,
     note,
+    restore,
+    putBack,
     learnt,
     toggle,
     answer,

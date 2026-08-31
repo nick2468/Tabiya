@@ -1,5 +1,6 @@
 import { cardKey } from '../model/ids'
 import type { Schedule } from '../scheduler'
+import type { BackupOffer } from './safety'
 
 /**
  * Progress: everything the trainee has done, in one versioned JSON object.
@@ -95,13 +96,24 @@ export function emptyProgress(): ProgressState {
  * the trainee everything. Now a failed read says so, and the caller must not
  * write until it is resolved.
  *
- * A file that simply does not exist yet is NOT a failure. That is a new
- * trainee, and saving over nothing loses nothing.
+ * A file that does not exist yet is only a new trainee when nothing says
+ * otherwise. Phase 16 made the app look for evidence of an earlier save before
+ * it believes that, because Nick deleted his data folder and the app wrote a
+ * blank file over the gap. See `safety.ts`.
  */
 export interface LoadedProgress {
   state: ProgressState
-  /** Why the saved progress could not be read, when it could not. */
+  /**
+   * Why nothing may be saved, as a whole message ready to show. The store
+   * writes the whole thing rather than a fragment, because the reasons differ
+   * too much for one wrapper sentence to fit them all.
+   */
   failure?: string
+  /**
+   * A second copy of the progress file, found because the main one had gone.
+   * Offered, never applied: the trainee chooses whether to put it back.
+   */
+  restore?: BackupOffer
   /**
    * Something that happened on the way to reading it that the trainee should
    * be told about once, such as the data folder moving. Not a problem: a
@@ -268,14 +280,14 @@ export class LocalStorageProgressStore implements ProgressStore {
     try {
       text = this.storage.getItem(this.key)
     } catch (error) {
-      return { state: emptyProgress(), failure: describe(error) }
+      return { state: emptyProgress(), failure: readFailure(describe(error)) }
     }
     // Nothing saved yet is not a failure: it is a new trainee.
     if (text === null) return { state: emptyProgress() }
     try {
       return { state: parseProgressJson(text) }
     } catch (error) {
-      return { state: emptyProgress(), failure: describe(error) }
+      return { state: emptyProgress(), failure: readFailure(describe(error)) }
     }
   }
 
@@ -292,6 +304,21 @@ export class LocalStorageProgressStore implements ProgressStore {
     await this.save(state)
     return state
   }
+}
+
+/**
+ * The banner shown when the saved progress could not be read.
+ *
+ * One place writes it, because it is a promise: nothing is written while it is
+ * showing, and there is a way out. `why` is the fragment that finishes "could
+ * not be read:".
+ */
+export function readFailure(why: string): string {
+  return (
+    `Your saved progress could not be read: ${why} Nothing will be saved while this is ` +
+    'showing, so whatever is on disk is still there. Import a backup from the Progress ' +
+    'screen to carry on.'
+  )
 }
 
 /** An error as a sentence, for showing the trainee. */

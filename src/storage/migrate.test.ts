@@ -16,12 +16,14 @@ const OLD: DataRoots = {
   root: 'C:/old',
   progress: 'C:/old/progress.json',
   courses: 'C:/old/courses',
+  marker: 'C:/old/progress.marker.json',
 }
 
 const NEW: DataRoots = {
   root: 'C:/new',
   progress: 'C:/new/progress.json',
   courses: 'C:/new/courses',
+  marker: 'C:/new/progress.marker.json',
 }
 
 const SAVED = JSON.stringify(
