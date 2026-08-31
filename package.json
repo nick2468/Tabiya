@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npm run engine && vite",
+    "dev": "npm run engine && vite --port 5175 --strictPort",
     "build": "npm run engine && tsc -b && vite build",
     "preview": "vite preview",
     "engine": "node scripts/copy-engine.mjs",
