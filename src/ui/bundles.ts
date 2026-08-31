@@ -13,7 +13,9 @@ import type { CourseManifest } from '../model/types'
  * Installing writes into the folder phase 7 already scans at startup. Nothing
  * about the catalog, the merge rules or the shadowing checks changes: a course
  * that arrives through the file picker lands in exactly the place a course
- * copied in by hand would.
+ * copied in by hand would. Removing takes the same folder away again, which is
+ * why only a course that arrived this way can be deleted: a bundled course is
+ * compiled into the app and would be back at the next start.
  */
 
 export interface PickedBundle {
@@ -100,6 +102,36 @@ export async function installedCourseIds(): Promise<string[]> {
   const root = (await dataRoots()).courses
   if (!(await fs.exists(root))) return []
   return (await fs.readDir(root)).filter((entry) => entry.isDirectory).map((entry) => entry.name)
+}
+
+/**
+ * Removes an installed course's folder.
+ *
+ * The files go and nothing else does. Learnt lines, card schedules and concept
+ * history are keyed by course id and nothing prunes them, so importing the
+ * course again brings all of it back - which is what the confirm dialog
+ * promises, and the reason deleting a course is a small decision rather than a
+ * frightening one.
+ *
+ * The files are removed one at a time before the folder itself, the same way a
+ * replacement clears the folder it is about to write into. It keeps every
+ * removal inside a path the capabilities name literally.
+ *
+ * @returns the folder that was removed, for telling the trainee.
+ */
+export async function removeCourse(courseId: string): Promise<string> {
+  if (!isDesktop()) throw new Error('removing a course needs the installed app')
+  const { join } = await import('@tauri-apps/api/path')
+  const fs = await import('@tauri-apps/plugin-fs')
+  const folder = await courseFolder(courseId)
+  if (await fs.exists(folder)) {
+    for (const entry of await fs.readDir(folder)) {
+      if (entry.isDirectory) continue
+      await fs.remove(await join(folder, entry.name))
+    }
+    await fs.remove(folder)
+  }
+  return folder
 }
 
 /** One course's folder inside the app's courses folder. */

@@ -1620,7 +1620,7 @@ comes back on re-import.
   migration taking the existing blocked-saving route rather than starting blank.
 - [x] 15.2 Import refreshes the catalog; no restart. A new course has no learnt lines,
   so it cannot change a running drill queue.
-- [ ] 15.3 Delete on imported tiles, in the actions row (the tile itself is a button,
+- [x] 15.3 Delete on imported tiles, in the actions row (the tile itself is a button,
   so a corner X cannot nest), with the confirm and an "Export it first" button rather
   than a pre-ticked box.
 - [ ] 15.4 All three proved in the packaged app, ending with the one claim that has to

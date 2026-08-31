@@ -2,10 +2,11 @@ import { useMemo, useState } from 'react'
 import { useCatalog } from './catalog-context'
 import { useProgress } from './progress-context'
 import { ImportCourse } from './ImportCourse'
-import { saveBundle } from './bundles'
+import { removeCourse, saveBundle } from './bundles'
 import { courseToPgn } from '../model/bundle'
 import { buildCardsAcross } from '../model/cards'
 import { courseTotals } from '../model/stats'
+import { survivingLines } from '../model/lines'
 import { dueCount } from '../model/queue'
 import { colourName, type CourseEntry, type LoadedCourse } from '../model/types'
 import './catalog.css'
@@ -111,23 +112,48 @@ function CourseTile({
           </span>
         ) : null}
       </button>
-      <ExportCourse course={course} />
+      <TileActions entry={entry} course={course} />
     </li>
   )
 }
 
 /**
- * Writing a course out as a bundle.
+ * The row under a tile: write the course out, and remove one the trainee added.
  *
- * Any course, including the ones that ship with the app: exporting the London
- * and opening it in a chess GUI is a fair thing for a trainee to want, and it
- * is also how somebody starts a course of their own without facing an empty
- * file.
+ * Both live in the actions row rather than in the tile corner, because the tile
+ * itself is a button and a button cannot contain another one.
+ *
+ * Exporting works for any course, including the ones that ship with the app:
+ * exporting the London and opening it in a chess GUI is a fair thing for a
+ * trainee to want, and it is also how somebody starts a course of their own
+ * without facing an empty file.
+ *
+ * Deleting appears only on a course the trainee added. A bundled course is
+ * compiled into the app and would be back at the next start, so offering to
+ * delete one would be a lie. And deleting takes the files and nothing else:
+ * learnt lines and drill schedules are keyed by course id and nothing prunes
+ * them, so importing the course again brings all of it back. The confirm says
+ * so, because it is the difference between a small decision and a frightening
+ * one.
+ *
+ * Exported for its test.
  */
-function ExportCourse({ course }: { course: LoadedCourse }) {
+export function TileActions({
+  entry,
+  course,
+}: {
+  entry: CourseEntry
+  course: LoadedCourse
+}) {
+  const { rescan } = useCatalog()
+  const { state } = useProgress()
   const [said, setSaid] = useState<string | null>(null)
+  const [asking, setAsking] = useState(false)
+  const [busy, setBusy] = useState(false)
 
-  const run = async () => {
+  const learnt = survivingLines(course, state.learntLines).total
+
+  const write = async () => {
     setSaid(null)
     const written = courseToPgn(course)
     if (!written.ok) {
@@ -138,16 +164,111 @@ function ExportCourse({ course }: { course: LoadedCourse }) {
       const where = await saveBundle(course.id, written.text)
       if (where) setSaid(`Written to ${where}.`)
     } catch (error) {
-      setSaid(`Nothing was written: ${error instanceof Error ? error.message : String(error)}`)
+      setSaid(`Nothing was written: ${asText(error)}`)
+    }
+  }
+
+  const remove = async () => {
+    setBusy(true)
+    setSaid(null)
+    try {
+      await removeCourse(course.id)
+      // Read the folder again rather than asking for a restart. The tile goes
+      // with the folder, which is the whole of what the trainee expects.
+      await rescan()
+    } catch (error) {
+      setSaid(`${course.title} was not removed: ${asText(error)}`)
+      setAsking(false)
+      setBusy(false)
     }
   }
 
   return (
     <div className="tile-actions">
-      <button type="button" className="tile-export" onClick={() => void run()}>
-        Export as a file
-      </button>
+      <div className="tile-buttons">
+        <button type="button" className="tile-export" onClick={() => void write()}>
+          Export as a file
+        </button>
+        {entry.origin === 'external' ? (
+          <button
+            type="button"
+            className="tile-delete"
+            title="Delete"
+            aria-label={`Delete ${course.title}`}
+            onClick={() => setAsking(true)}
+          >
+            &#10005;
+          </button>
+        ) : null}
+      </div>
+
+      {asking ? (
+        <DeleteConfirm
+          course={course}
+          learnt={learnt}
+          busy={busy}
+          onExport={() => void write()}
+          onDelete={() => void remove()}
+          onCancel={() => setAsking(false)}
+        />
+      ) : null}
+
       {said ? <p className="tile-said">{said}</p> : null}
+    </div>
+  )
+}
+
+/**
+ * The confirm before a course is removed.
+ *
+ * It says what is actually lost, which is nothing much. Learnt lines, card
+ * schedules and concept history are keyed by course id and nothing prunes
+ * them, so the count here is a count of what STAYS. Exporting first is a
+ * button rather than a ticked box: it is a convenience, and defaulting it to
+ * yes would put a file dialog in front of the common case.
+ *
+ * Exported for its test: this wording is a promise the app has to keep.
+ */
+export function DeleteConfirm({
+  course,
+  learnt,
+  busy,
+  onExport,
+  onDelete,
+  onCancel,
+}: {
+  course: LoadedCourse
+  learnt: number
+  busy: boolean
+  onExport: () => void
+  onDelete: () => void
+  onCancel: () => void
+}) {
+  return (
+    <div className="tile-confirm">
+      <h4>Delete {course.title}?</h4>
+      <p>
+        The course files are removed.{' '}
+        {learnt === 0 ? (
+          <>You have not marked any lines of it learnt, so there is nothing else to lose.</>
+        ) : (
+          <>
+            Your <strong>{learnt}</strong> learnt {learnt === 1 ? 'line' : 'lines'} and their
+            drill schedule stay saved, and come back if you import it again.
+          </>
+        )}
+      </p>
+      <div className="tile-buttons">
+        <button type="button" onClick={onExport} disabled={busy}>
+          Export it first
+        </button>
+        <button type="button" onClick={onDelete} disabled={busy}>
+          Delete
+        </button>
+        <button type="button" onClick={onCancel} disabled={busy}>
+          Cancel
+        </button>
+      </div>
     </div>
   )
 }
@@ -194,4 +315,8 @@ function DropInNote({ folder, scanned }: { folder: string | null; scanned: boole
       one that ships with the app.
     </p>
   )
+}
+
+function asText(error: unknown): string {
+  return error instanceof Error ? error.message : String(error)
 }

@@ -154,6 +154,54 @@
   color: var(--text);
 }
 
+.tile-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tile-delete {
+  background: none;
+  border: none;
+  padding: 0 2px;
+  margin-left: auto;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.tile-delete:hover {
+  color: var(--notice-bad-text);
+}
+
+.tile-confirm {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: 0.9rem;
+}
+
+.tile-confirm h4 {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+}
+
+.tile-confirm p {
+  margin: 0;
+}
+
+.tile-confirm .tile-buttons {
+  margin-top: 10px;
+  gap: 8px;
+}
+
+.tile-confirm .tile-buttons button {
+  cursor: pointer;
+}
+
 .tile-said {
   margin: 6px 0 0;
   font-size: 0.85rem;
