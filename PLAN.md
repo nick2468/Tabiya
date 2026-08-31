@@ -2445,4 +2445,47 @@ Open items (phase 19):
 15. **Nick's own files were not listed and not reported.** This phase needed no packaged
     run and went nowhere near them.
 
-- [ ] **Review gate 19 passed**
+Gate 19 findings (2026-09-01):
+
+16. **The boundary in 19.6 held exactly, checked mechanically rather than read.** All 308
+    line ids before the phase and all 308 after, none gone and none added, so nothing in
+    Nick's progress file can have been unlearnt by this work. That is the check the item
+    deserved and the phase did not state.
+17. **Every number in the record survives re-measurement, and the ones that moved moved
+    the way the record says they do.** The Caro-Kann's `7...e6` re-measures at 1.52
+    against the checker's 1.88 and the phase's 1.37; the Slav's `5...Bg4` at 0.75 against
+    0.94 and 0.80; the Caro-Kann's `6...Nf6` at 0.85 against 0.91 and 0.79. Three
+    measurements of each, no two alike, all straddling a band edge - which is exactly the
+    ruling the phase wrote into SPEC section 8, demonstrated a third time. **All three
+    grades stand**: at those sizes both bands are legal, so the checker is content either
+    way and the call is a teaching one, which is how the phase made it.
+18. **The claims that could be settled by the board were, and every one holds.** `4.exf5`
+    really does win the bishop and `5.Qb3` really is illegal in that position, the queen
+    having only Qd2, Qd3, Qe2, Qf3, Qg4 and Qh5. `12.Bxg6` really was impossible, the
+    bishop's ten legal moves not including it. `6.Bxd8` really does win the queen through
+    the empty f6. `Qxc1` really is mate, so the rewrite from `+` to "mate" is right. The
+    Vienna renumbering is right: the position is at move 9, `g2+` is a discovered check
+    and `Qxg3+` is a check. And "the best it can do is go back to g8" is right by a hair,
+    Ng8 at +0.83 against Nfd7 at +0.96.
+19. **Item 7's counts are exact.** 797 mistake entries across the six, 40 carrying a
+    sequence the checker can play, 12 claiming material without naming a move, the Colle
+    at 0 - every figure reproduced, and 0 unsupported claims in all six.
+20. **The registered checker was probed at the gate, and the probe found two live faults
+    the phase had not.** The Caro-Kann answered `6...e6` with "7.h5 Bh7" in two chapters,
+    where h7 is Black's own pawn: the note used the point it was teaching as if it had
+    already happened. What follows is 7.h5 Bf5 8.Nxf5 exf5, the good bishop for a knight
+    with doubled f-pawns, and the move costs 1.32 rather than being a lost tempo. Both are
+    graded mistake now, in commit `c4dd1eb`.
+21. **The probe also settled that the checker is a phase and not a gate fix**, which
+    is why it was not built here. Naive, it reports 36 lines across 3269 notes and every
+    one is a false positive. Placed by the note's own move number and side it reports 12,
+    two of them real. The three remaining false-positive classes each need different
+    handling and are written into the register entry with the two extra checks the same
+    parse gives nearly free. That entry is now a design brief rather than a wish.
+22. **Verified for the gate from the repo:** 659 tests and `tsc -b` clean, re-run after
+    the gate's own commit; oxlint reports the same six warnings that predate the phase; no
+    em dashes; six builder commits with trailers naming the actual model; version 1.6.1 in
+    all three files.
+23. **Nick's own files were not listed and not reported.**
+
+- [x] **Review gate 19 passed** (2026-09-01)

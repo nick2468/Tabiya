@@ -358,6 +358,23 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   with the other three, and it needs a decision about how much prose it should read
   (mistake notes only, or node notes and chapter intros too, which is where one of the
   same faults also turned out to be). Recorded at phase 19.
+  **Gate 19 probed it and it is a design problem, not an afternoon.** The naive version -
+  reuse `note-claims.mjs`'s `sequenceIn` parser, play the sequence from the position the
+  entry sits at - reports **36 lines across 3269 notes and every one is a false
+  positive.** Placing the sequence by its own move NUMBER and side instead, against the
+  stations of the line it hangs off, cuts that to 12, and **two of the twelve were real**:
+  the Caro-Kann answered 6...e6 with "7.h5 Bh7" in two chapters, where h7 is Black's own
+  pawn. Those are fixed. The three false-positive classes left are what the phase has to
+  solve, and each is a different problem: a note that BACK-REFERENCES a move already
+  played ("the same thing as 3.Nc3"); a note that names an illegal move deliberately, to
+  say it is illegal (the Slav's "11.Kxh2 is not even legal", which negation detection
+  handles the way `claimOf` already does for material claims); and a sequence that omits
+  an obvious recapture (the Ruy's "10.Ne1 Qh4", which assumes 10...hxg4 first). The same
+  parse gives two more checks nearly free, and each has already caught a real fault: the
+  first move's number against the board, which is the Vienna renumbering phase 19 fixed,
+  and check and mate markers in prose, which is the `Qxc1+` that was mate. The probe is
+  in a session scratchpad and dies with it; the parser to reuse is
+  `scripts/note-claims.mjs:97-124`.
 
 ## 7. Risks
 
