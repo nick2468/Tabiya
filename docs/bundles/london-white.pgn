@@ -503,8 +503,8 @@ Putting the bishop on d3 out of habit, where the g6 pawn makes it useless. Playi
 {Build the triangle as always. Nothing Black has done changes the first few moves. [%tags development]}
 ( 3. Nc3?!
 {It blocks the c-pawn, and against these setups the c-pawn wants to go to c4, not c3.} ) (
-3. e4!?
-{Grabbing the big centre at once is a real try, but it leaves the London and the pawn on e4 needs looking after.}
+3. e4?!
+{It drops a pawn. Nothing is guarding e4, so 3...Nxe4 simply takes it, and 4.Bd3 hits the knight without getting the pawn back. Grabbing the centre is a real idea in other openings; here e3 is what holds the structure together.}
 ) ( 3. h4?
 {The pawn storm before any development. Black castles, opens the centre with ...c5 or ...e5, and White has nothing.}
 ) 3... Bg7

@@ -315,10 +315,20 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   playable that cost about a pawn and one of them 1.35. A grade that flatters a bad move
   teaches the wrong lesson as effectively as a wrong repertoire move does, which is the
   reason that checker exists. So the five older courses are owed one careful pass each,
-  with every finding re-checked at 2500 ms before anything changes. Not taken at the
-  gate because the sweep runs for the better part of an hour and each finding needs a
-  measurement and a prose rewrite behind it, which is a phase rather than a gate fix.
-  Recorded at review gate 18.
+  with every finding re-checked at 2500 ms before anything changes.
+  **One pass each was run at the gate after all**, and the result is better than feared.
+  The "graded too kindly" side, which is where the real faults sit, came back with
+  exactly ONE entry across all five: the London's `3.e4` against a King's Indian setup,
+  graded playable and called "a real try", where 3...Nxe4 simply takes the pawn. Measured
+  at 2500 ms it costs 0.93 against a 0.9 ceiling, and it is an inaccuracy now with a note
+  that says the pawn hangs. The Slav and the Colle reported nothing at all; the London's
+  other 14, the Caro-Kann's 3 and the Ruy's 1 are all on the "graded too harshly" side,
+  which is the known noise class on system openings whose mistake entries are positional
+  judgements the engine scores at nothing.
+  **What is still open is the second pass, not the first.** Gate 18's own lesson is that
+  a single run can miss a real finding, so one clean-ish sweep is not proof these five
+  are clean. Whoever runs it again should compare against this record rather than start
+  fresh. Recorded and half-taken at review gate 18.
 
 ## 7. Risks
 

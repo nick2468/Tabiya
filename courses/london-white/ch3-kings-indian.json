@@ -30,8 +30,8 @@
             },
             {
               "san": "e4",
-              "grade": "playable",
-              "note": "Grabbing the big centre at once is a real try, but it leaves the London and the pawn on e4 needs looking after."
+              "grade": "inaccuracy",
+              "note": "It drops a pawn. Nothing is guarding e4, so 3...Nxe4 simply takes it, and 4.Bd3 hits the knight without getting the pawn back. Grabbing the centre is a real idea in other openings; here e3 is what holds the structure together."
             },
             {
               "san": "h4",

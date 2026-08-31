@@ -2279,10 +2279,20 @@ Gate 18 findings (2026-08-31):
     the phase; no em dashes; six builder commits with trailers naming the actual model;
     the other five courses' content untouched by the builder, and touched by the gate only
     in the one Slav note above.
-22. **Started at the gate and not finished here: `engine-mistakes.mjs` over the five older
-    courses.** Item 15 shows a single run can miss a real grade error, and those five were
-    each signed off on runs of the same kind. The sweep is slow enough to be its own
-    phase rather than a gate fix, so it is registered in SPEC section 6 with that reason.
-    Nick's own files were not listed and not reported, as the standing rule requires.
+22. **`engine-mistakes.mjs` over the five older courses: run at the gate, one fault found
+    and fixed.** Item 15 shows a single run can miss a real grade error, and those five
+    were each signed off on runs of the same kind, so the sweep was worth the hour. The
+    "graded too kindly" side came back with exactly ONE entry across all five: the
+    London's `3.e4` against a King's Indian setup, graded playable and sold as "a real
+    try", where **3...Nxe4 simply takes the pawn** - nothing guards e4, and 4.Bd3 hits
+    the knight without getting it back. It costs 0.93 at 2500 ms against a 0.9 ceiling
+    and is an inaccuracy now, with a note that says the pawn hangs. The Slav and the
+    Colle reported nothing; the London's other 14, the Caro-Kann's 3 and the Ruy's 1 are
+    all "graded too harshly", the known noise class. The Ruy's was read by hand because
+    its note claims a mate: `10.hxg4 hxg4 11.Ne1 Qh4` is NOT mate, it is a mate threat,
+    but the engine scores every White reply there at forced mate, so the shorthand stands
+    and the entry is left alone. What is still open is the SECOND pass, which is what
+    would let anyone call those five clean; the register says so.
+23. **Nick's own files were not listed and not reported**, as the standing rule requires.
 
 - [x] **Review gate 18 passed** (2026-08-31)
