@@ -2008,5 +2008,13 @@ with the app started from `src-tauri/target/release`:
    `transform: translate(...)` onto every piece on every move and the box is what a
    click and a drag land on, so only the background image shrinks. The installer was
    rebuilt after each.
+9. **Shrinking the pieces was only half of what the letters needed.** At 95% the piece
+   bases still ran through the file letters, which a 3x view of rank 1 showed plainly:
+   the bishops' and the king's bases crossed C, E and F. Shrinking alone takes half its
+   room off the TOP of the piece, where nothing needed it. So the image is also anchored
+   low in its box - `--piece-lift: 30%`, meaning 30% of the freed space above and 70%
+   below - and at `--piece-size: 90%` the bases now end above the letters. Measure that
+   way round if it comes up again: the letters are about 10px of a 48px square, and a
+   centred shrink buys half of what it looks like it should.
 
 - [ ] **Review gate 17 passed**

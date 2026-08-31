@@ -14,10 +14,17 @@
   --coord-on-dark: #fff6e3;
   --coord-on-light: #6b4c30;
 
-  /* How much of its square a piece is drawn at. Chessground fills the square
-     edge to edge, which crowds the board and buries the coordinates in the
-     corners. */
-  --piece-size: 95%;
+  /* How much of its square a piece is drawn at, and where in the square that
+     smaller image sits. Chessground fills the square edge to edge, which
+     crowds the board and runs the piece bases straight through the file
+     letters in the bottom corners.
+
+     The lift is the half that matters for those letters. Shrinking alone
+     takes half its room off the TOP of the piece, where nothing needed it;
+     30% puts most of the freed space under the base, which is where the
+     letters are. */
+  --piece-size: 90%;
+  --piece-lift: 30%;
 }
 
 /* Drawn smaller, but in the same box.
@@ -33,7 +40,7 @@
    copy along both edges without it. */
 .board.cg-wrap piece {
   background-size: var(--piece-size) var(--piece-size);
-  background-position: center;
+  background-position: center var(--piece-lift);
   background-repeat: no-repeat;
 }
 
