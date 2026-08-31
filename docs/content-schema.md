@@ -143,7 +143,7 @@ the rules below attach to.
 | Field | Type | Rule |
 |---|---|---|
 | `san` | string | Required. Must be legal from the parent position. |
-| `note` | string | Required on every node: 1-3 plain sentences. The student's moves say the idea or the plan; the opponent's say what the move is doing. |
+| `note` | string | Required on every node: 1-3 plain sentences. The student's moves say the idea or the plan; the opponent's say what the move is doing. A line named in a note is checked by `scripts/note-lines.mjs`, and three of its rules are in the suite, so a note that names a line the board refuses fails the build. See below. |
 | `variant` | string | Student nodes only. Defaults to `modern`. Sibling student nodes must carry distinct variants, so there is at most one repertoire move per position. |
 | `weight` | integer | Opponent nodes only. 1-10, the club-level frequency estimate, default 1. Drives Play steering. |
 | `plan` | string | Required on every leaf, and rejected anywhere else: how the student continues from here. |
@@ -152,6 +152,26 @@ the rules below attach to.
 | `mistakes` | object[] | Student nodes only. Each entry `{ san, grade, note }`; `san` legal from this node's own parent position (the mistake is an alternative to this move, not a reply to it); `grade` one of `playable`, `inaccuracy`, `mistake`; `note` required, saying why. The validator checks the move; two scripts check the judgement, and neither is optional: `scripts/engine-mistakes.mjs` compares the grade with what the engine says the alternative costs, and `scripts/note-claims.mjs` plays out any material the note claims. |
 | `shapes` | object[] | Optional board highlights for Study. Each `{ orig, dest?, brush }`; squares like `f4`; brush one of `green`, `red`, `blue`, `yellow`. |
 | `children` | Node[] | Optional. Absent or empty means a leaf. |
+
+### Naming a line inside a note
+
+Any prose that names a move sequence is played on a board, by
+`scripts/note-lines.mjs`. Three of its rules are in the suite and will fail the
+build: a move the board refuses, a sequence numbered against a different
+position, and a check or mate mark the board does not give. So write a
+sequence the way it is played and number it the way the board numbers it.
+
+Two habits keep the checker quiet without any special effort. Number the first
+move of a sequence and keep the dots, because `7.` and `7...` are what place it
+against a position. Start the number from the position the note is written
+from, which for a mistake entry is the position after the wrong move.
+
+Three things the checker deliberately allows, and reports without failing.
+Naming a move already played on this line, which is how a note points at
+another chapter. Naming an illegal move in order to say it is illegal, as long
+as the same clause says so. And leaving out one obvious reply, usually a
+recapture. Chapter intros are checked in a reporting mode only: an intro has no
+one position to be written from, so nothing it says can fail a build.
 
 Siblings must be distinct moves. The student's siblings are separated by `variant`, so
 there is at most one repertoire move per position. The opponent's have no such field,
