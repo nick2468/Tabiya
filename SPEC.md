@@ -307,6 +307,18 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   phase 9 chip put both other courses out of scope, so it was not touched. Whoever
   works on the London next should add the branch: a trainee who plays both sides of
   this repertoire will meet it. Recorded at phase 9.
+- **Re-run `engine-mistakes.mjs` over the five courses that shipped before the Vienna.**
+  Every record in this project treats a short engine run as capable of INVENTING a
+  finding, and every course was signed off partly on runs of that kind. Review gate 18
+  found the other half of the same effect: the Vienna's last two runs reported no
+  disagreements, and a run at the gate found two real ones, both alternatives graded
+  playable that cost about a pawn and one of them 1.35. A grade that flatters a bad move
+  teaches the wrong lesson as effectively as a wrong repertoire move does, which is the
+  reason that checker exists. So the five older courses are owed one careful pass each,
+  with every finding re-checked at 2500 ms before anything changes. Not taken at the
+  gate because the sweep runs for the better part of an hour and each finding needs a
+  measurement and a prose rewrite behind it, which is a phase rather than a gate fix.
+  Recorded at review gate 18.
 
 ## 7. Risks
 
@@ -344,6 +356,22 @@ the Ruy Lopez Exchange already teaches the quiet, structural answer to 1...e5, s
 second one would teach a shape Nick has, and a gambit teaches a different kind of chess.
 Course id `vienna-gambit`, permanent, because it is written into every line id and card
 key in the progress file.
+
+2026-08-31, review gate 18: **the engine is a floor, not a chooser.** Phase 18's chip
+said any student move still costing half a pawn at two and a half seconds is a fault to
+fix. Its builder found a move that is both that and a legitimate repertoire choice, and
+recorded the conflict rather than resolving it. The ruling: the fork rule in section 3
+governs, and the threshold does not overrule it. Where two moves both leave the student
+clearly better, take the one needing less memorisation, author the other as a graded
+alternative naming both numbers, and say in the note why the harder one was passed over.
+Where only one move keeps the position, the threshold binds and the line is fixed.
+
+The case that settled it is the Vienna's ch2: after 1.e4 e5 2.Nc3 Nf6 3.f4 exf4 4.e5 Nd5
+5.Nxd5 Qh4+ 6.Ke2 f3+, the course plays 7.Nxf3 at about +1.3 where 7.Ke3 is about +2.4.
+Both are winning. 7.Nxf3 puts the king on f2 next move; 7.Ke3 walks it into the middle of
+the board in the sharpest position in the repertoire, and a course that teaches the
+engine's move there is teaching a line its reader will get wrong under pressure. The
+threshold exists to catch a move that is simply worse, not to make the engine the author.
 
 ## 9. v1 acceptance
 

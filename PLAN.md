@@ -2219,4 +2219,70 @@ Open items (phase 18):
     been written. **Nick's own files are still his to check**: this session cannot list
     his folders honestly and did not try.
 
-- [ ] **Review gate 18 passed**
+Gate 18 findings (2026-08-31):
+
+14. **Three moves claimed a check they do not give, and two of them dragged a note along.**
+    Both `Bc4+` in the Vienna sit where the pawn on d5 blocks the diagonal; the Slav's
+    second `Qa5+` sits where a pawn on c3 does, and its note went further and offered
+    6.Nc3 as a way to block a check that is not there, on a square White's own pawn is
+    standing on. Nothing caught these because **chess.js accepts a spurious marker and
+    normalises it away** rather than refusing the move, so the two have to be compared
+    explicitly. `content.test.ts` now does, in both directions, inside the per-course
+    block that every future course joins automatically. Verified to fail on a restored
+    marker. Three notes rewritten, each now leading with the line that works - which is
+    also what `note-claims.mjs` reads, as the first rewrite found out when the checker
+    measured the failing line instead. A fourth note in the same sweep said nothing
+    defended the knight on d5 and then described the queen defending it: the queen is the
+    only defender and cannot use the square, because 5...Qxd5 6.Nxd5 wins it.
+15. **Two Vienna alternatives were graded too kindly, and the phase's own last runs said
+    zero.** 4.Bc4 instead of 4.e5 costs 0.96 at 2500 ms, taking White from +0.71 to
+    -0.25, so Black gets ...c6 and ...d5 in and is the one standing better. 7.Bd3 instead
+    of 7.Bb5+ costs 1.35, from +0.72 to -0.63, because the check is what stops ...exd4
+    arriving with the pawn intact. Both are over the playable band's 0.9 ceiling and are
+    inaccuracies now, with notes that say what the move gives up. **This is the sampler
+    lesson from the direction nobody had seen it from**: every previous record treats a
+    500 ms run as capable of inventing findings, and this one missed two real ones. Two
+    independent measurements, at 900 ms and 2500 ms, agree.
+16. **The rule conflict in open item 5 is ruled: the engine is a floor, not a chooser.**
+    SPEC section 8 carries it. Where two moves both leave the student clearly better, the
+    section 3 fork rule governs and the chip's half-pawn threshold does not overrule it;
+    where only one move keeps the position, the threshold binds. So ch2 keeps 7.Nxf3 at
+    about +1.3 over 7.Ke3 at about +2.4, and 7.Ke3 stays authored with both numbers. A
+    course that teaches a king walk to e3 in the sharpest position in the repertoire is
+    teaching a line its reader will get wrong under pressure.
+17. **The gate re-ran engine-pass itself at 1200 ms and got the phase's own three**, which
+    is corroboration rather than a new finding: ch2's Nxf3 at 1.24, ch6's Bd2 at 0.62 and
+    ch3's exd6 at 0.61. Re-checked at 2500 ms the last two are **0.46 and 0.31**, both
+    under the threshold, so the phase's conclusion stands even though its numbers were
+    lower still. Open item 4's horizon-effect explanation for ch4's `4.Bxf7+` checks out
+    exactly: at the parent the engine's own first choice is Bxf7+ at **+1.37**, with Be2
+    a distant +0.59. And the replacement in open item 3 is the engine's top move: after
+    2...f5 3.exf5 Nf6, **4.g4 is +1.61** against 4.Nf3 at +1.09.
+18. **Open item 10's correction of the chip is right, and the chip was wrong.** After
+    3.Bc4 Nf6 4.f4 Nxe4 5.Nxe4 d5 White's best is 6.Bd3 at **-1.15**: the fork really
+    does win a pawn, so the f-pawn has to wait for d3. The orchestrator's suggested
+    follow-up would have shipped a pawn-down line.
+19. **The structural bar, audited independently**: 89 leaves across seven chapters, every
+    one named, planned and noted, no duplicate names, none over 40 characters; mistake
+    entries on 12, 10, 16, 13, 16 and 13 positions in ch1 to ch6 and 6 in ch0; every tag
+    in the core set or the manifest; ch0's intro 378 words. The Vienna's own test block
+    holds two claims that are really about this course - f4 is played in every chapter,
+    and never before the knight reaches c3 - and the scoping test names the two positions
+    rather than only counting them.
+20. **Verified in the browser build at 1280x900**: six tiles with the Vienna last, "0 of
+    308 lines learnt across 6 courses", the Vienna tile at 0 of 89, the header at v1.6.0,
+    and the Vienna's Study screen stepping to 3.f4 with its arrow, its note, its
+    `gambit-pawn` and `f-file` tags and "continue with d5" weighted 8. Independent of the
+    packaged run in open item 12, and every number matches it.
+21. **Verified for the gate from the repo:** 659 tests and `tsc -b` clean, both re-run
+    after the gate's own two commits; oxlint reports the same six warnings that predate
+    the phase; no em dashes; six builder commits with trailers naming the actual model;
+    the other five courses' content untouched by the builder, and touched by the gate only
+    in the one Slav note above.
+22. **Started at the gate and not finished here: `engine-mistakes.mjs` over the five older
+    courses.** Item 15 shows a single run can miss a real grade error, and those five were
+    each signed off on runs of the same kind. The sweep is slow enough to be its own
+    phase rather than a gate fix, so it is registered in SPEC section 6 with that reason.
+    Nick's own files were not listed and not reported, as the standing rule requires.
+
+- [x] **Review gate 18 passed** (2026-08-31)
