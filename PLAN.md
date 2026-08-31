@@ -2296,3 +2296,40 @@ Gate 18 findings (2026-08-31):
 23. **Nick's own files were not listed and not reported**, as the standing rule requires.
 
 - [x] **Review gate 18 passed** (2026-08-31)
+
+## Phase 19 - the second mistakes pass, at verdict strength
+
+Goal: settle whether the graded alternatives in all six courses are right. No new
+content, no change to any repertoire move.
+
+Chipped as `chips/phase-19-second-mistakes-pass.md`. This is the register entry SPEC
+section 6 has carried since gate 18, where two Vienna alternatives graded playable turned
+out to cost about a pawn while the phase's own last two runs of the mistake checker
+reported zero. That was the first proof a short run can MISS a finding rather than only
+invent one. The gate then ran one 900 ms pass over the five older courses and found one
+real fault, the London's `3.e4`. What was left open is the second pass.
+
+**The decision taken in the chip: once at 2500 ms, not twice at 900 ms.** 2500 ms is
+already the arbiter every gate uses, so a finding at that movetime needs no re-check and
+silence at it is as strong as this project has ever asked for. The Vienna is included,
+because two of its grades were changed at the gate and it is the course with the least
+settled grades, not the most.
+
+- [ ] 19.1 Run the pass at 2500 ms over all six, one at a time, nothing else on the CPU.
+- [ ] 19.2 Compare against the 900 ms run: in both, only the first, only this one.
+- [ ] 19.3 Fix every "graded too kindly" finding, in grade and in note.
+- [ ] 19.4 Read every "graded too harshly" note for a false reason; keep the grades.
+- [ ] 19.5 `note-claims.mjs` over all six, plus the by-hand read of entries a capture
+  answers.
+- [ ] 19.6 Touch `mistakes` entries only: a `san` on a line path is a line id in Nick's
+  progress file.
+- [ ] 19.7 Re-export the bundles, and take the version to 1.6.1 if anything changed.
+- [ ] 19.8 Close or narrow the register entry with what two passes now say.
+
+Acceptance: all six passed at 2500 ms with per-course results compared against the 900 ms
+run; every too-kindly finding fixed; every too-harshly note read for a false reason with
+the count recorded; `note-claims.mjs` run with its counts read; bundles re-exported and
+the version at 1.6.1 if anything changed; the register entry closed or narrowed; vitest
+green and `tsc -b` clean.
+
+- [ ] **Review gate 19 passed**
