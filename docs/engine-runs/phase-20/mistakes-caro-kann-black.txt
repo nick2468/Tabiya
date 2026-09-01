@@ -1,0 +1,14 @@
+107 mistake entries across 7 chapters, 182 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+3 entries where the grade and the engine disagree:
+
+ 0.54  mistake    graded too harshly  ch4-panov
+      e4 c6 d4 d5 exd5 cxd5 c4 Nf6 Nc3 e6 Nf3 Be7 cxd5 Nxd5 Bd3 O-O O-O Nc6 Re1 : Nf6 not b6
+      "It looks like the plan and it leaves h7 with nothing guarding it. With the knight still on d5, Bxh7+ followed by Ng5+ and Qh5 is a real attack."
+ 0.41  mistake    graded too harshly  ch3-exchange
+      e4 c6 d4 d5 exd5 : cxd5 not Qxd5
+      "4.Nc3 develops a piece and hits the queen, so White gets a free move. This is a Scandinavian, and a poor version of one."
+ 0.21  mistake    graded too harshly  ch4-panov
+      e4 c6 d4 d5 exd5 cxd5 c4 : Nf6 not dxc4
+      "The pawn cannot be held: 5.Bxc4 takes it straight back, and Black has handed over the centre for nothing."

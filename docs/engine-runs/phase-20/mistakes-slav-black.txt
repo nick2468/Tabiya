@@ -1,0 +1,5 @@
+166 mistake entries across 7 chapters, 278 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+0 entries where the grade and the engine disagree:
+

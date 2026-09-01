@@ -1,0 +1,11 @@
+86 mistake entries across 7 chapters, 158 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+2 entries where the grade and the engine disagree:
+
+ 1.90  inaccuracy graded too kindly  ch1-f6
+      e4 e5 Nf3 Nc6 Bb5 a6 Bxc6 dxc6 O-O f6 d4 Bd6 dxe5 Bxe5 Nxe5 fxe5 : Qh5+ not Qxd8+
+      "It trades into a level ending when there was a pawn to be had. Check on h5 first: the pawn on e5 has nothing defending it and the king cannot come to its aid."
+ 0.42  mistake    graded too harshly  ch2-bg4
+      e4 e5 Nf3 Nc6 Bb5 a6 Bxc6 dxc6 O-O Bg4 h3 h5 d3 Qf6 Nbd2 Bd6 : Nc4 not hxg4
+      "The same mistake two moves later, for the same reason: the file is open and the knight on f3 is the only thing holding h1. 10.Ne1 Qh4 is mate again, and the best 10.Re1 leaves White worse for nothing."

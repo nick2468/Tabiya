@@ -1,0 +1,11 @@
+123 student moves across 7 chapters, 246 positions to evaluate at 500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+3 moves cost 0.5 of a pawn or more:
+
+0.79  ch5-no-a6  e4 e5 Nf3 Nc6 Bb5 Nge7 Bxc6
+      before 0.49  after -0.30
+0.64  ch5-no-a6  e4 e5 Nf3 Nc6 Bb5 Bc5 Bxc6
+      before 0.42  after -0.22
+0.50  ch5-no-a6  e4 e5 Nf3 Nc6 Bb5 Nf6 Bxc6
+      before 0.36  after -0.14
