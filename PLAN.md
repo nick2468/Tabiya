@@ -2646,4 +2646,61 @@ Open items (phase 20):
     run and went nowhere near them.
 
 
-- [ ] **Review gate 20 passed**
+Gate 20 findings (2026-09-01):
+
+18. **The checker was run at the gate and reproduces exactly**: 3577 pieces of prose,
+    0 faults, 16 for a human, and the per-course counts sum to the record's figure. The
+    seven renumberings were then re-checked by INDEPENDENT code that only compares the
+    first token's number and side against the board, and all seven come out right.
+19. **Gate 19's own probe, which is different code, now reports only the benign classes
+    and zero markers.** It had reported two misnumberings and one marker before this
+    phase; all three are gone, and what is left is two `deliberate`, two `back-reference`
+    and three omitted-recapture lines. So the fixes are verified by something that does
+    not share a line with the tool that found them.
+20. **All three promoted rules were mutation-checked here, not taken on trust.**
+    Renumbering the Panov note fails caro-kann-black with "written as 8., the board is at
+    7."; restoring phase 19's `5.Qb3` fails it with "the board refuses Qb3, move 3 of the
+    run, at 4."; restoring the bare `Qxh8` fails ruy-lopez-exchange with "wrote Qxh8, the
+    board gives Qxh8+". Each reverted, tree clean.
+21. **The classification order is the design and it is right.** A run is read from the
+    note's own earlier readings first, then placed by number and side; only then is it
+    tested for deliberate illegality, then for one inserted reply, then against the
+    anchor for a misnumbering, then for a back-reference. `illegal` is the last resort,
+    which is what stops it being the catch-all. **The hole is real and is documented**:
+    a sequence that is legal where the number places it and wrong for the position the
+    note MEANS reads as fine, because legality is the test and sense is not.
+22. **The parser move did not change `note-claims.mjs`.** Its counts are gate 19's to the
+    entry: 797 mistake entries, 40 with a playable sequence, 12 claiming material without
+    one, the Colle at 0, and 0 unsupported in all six.
+23. **Open items 13 and 14 check out, and the numbers are closer than the record claims.**
+    At 2500 ms the Ruy's `9.Qh5+` measures 3.39 and `9.Qxd8+` measures 1.48, a cost of
+    **1.91** against the checker's 1.90 and the phase's 1.88. The ending after `9.Qxd8+
+    Kxd8` runs 1.54, 1.44 and 1.39, so the note that called it level was plainly wrong and
+    the rewrite is right.
+24. **But that entry is not a straddle, and the difference matters enough to rule on.**
+    Phase 19's band-edge ruling was written from findings whose repeated measurements
+    disagreed about which side of the edge they fell. Here 1.90, 1.88 and 1.91 all agree
+    the move is over the 1.80 ceiling. The teaching call stands and the grade stays. The
+    consequence does not: a straddle goes quiet on the next run, an overshoot is reported
+    for ever, and a checker that always complains is one people stop reading.
+25. **So the gate built the thing that was missing: `docs/engine-runs/accepted.md`.**
+    Three entries come back on every pass and each is a deliberate choice the band model
+    or the half-pawn threshold cannot express - the Ruy's `9.Qxd8+`, the Vienna's
+    `7.Nxf3` ruled at gate 18, and the Ruy's `Bxc6` in the chapter where Black has not
+    played ...a6, measured at gate 12 and again here. **Every decision already existed**,
+    scattered across three gate records and two SPEC sections, which is why each pass has
+    re-derived them and this one has now been argued twice. The file holds the number, the
+    decision and where it was taken; the phase 20 run record points at it; SPEC section 8
+    carries the rule that puts an entry there.
+26. **One structural change to the app's config, and it is sound.** `allowJs` in
+    `tsconfig.app.json`, so the test can import the checker's `.mjs`. `npm run build`
+    passes and no chunk in `dist/` contains the checker, so nothing reaches the shipped
+    app.
+27. **Verified for the gate from the repo:** 665 tests, `tsc -b` clean and `npm run build`
+    clean, all re-run after the gate's own commit; 308 line ids before the phase and 308
+    after; oxlint reports the same six warnings that predate the phase; no em dashes; ten
+    builder commits with trailers naming the actual model; version 1.6.2 in all three
+    files.
+28. **Nick's own files were not listed and not reported.**
+
+- [x] **Review gate 20 passed** (2026-09-01)
