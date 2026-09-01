@@ -14,5 +14,7 @@ The one finding that mattered is in `mistakes-ruy-lopez-exchange.txt`: `9.Qxd8+`
 an inaccuracy and costing 1.90, in a course phase 19 passed at the same movetime with
 nothing on that side. See PLAN.md phase 20, open items 13 and 14.
 
-Whoever runs these again: compare against these files, not against a remembered count,
-and save your own beside them.
+Whoever runs these again: compare against `../accepted.md` first, then against these
+files, and save your own beside them. `accepted.md` lists the entries every pass reports
+and the decision behind each, so a run only needs an hour spent on what is new. Do not
+compare against a remembered count.

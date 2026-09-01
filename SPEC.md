@@ -486,6 +486,20 @@ still worth acting on, and where it lands within about a tenth of a band edge th
 is a teaching judgement to be argued in the note, not a number to be read off. Phase 19
 took the stricter grade in all three, on what the lines do rather than on the measurement.
 
+2026-09-01, review gate 20: **a straddle and an overshoot are not the same thing, and the
+difference decides who has to record it.** The ruling above was written from three
+findings whose repeated measurements disagreed about which side of a band edge they fell.
+Phase 20 applied it to one where they agree: the Ruy's `9.Qxd8+` measures 1.90, 1.88 and
+1.91 against an inaccuracy ceiling of 1.80, so every reading puts it over. The teaching
+call still stands and the grade stays - the move trades into an ending White is much
+better in rather than throwing one away - but the consequence is different. A straddle
+goes quiet on the next run. An overshoot is reported for ever, and a checker that always
+complains is a checker people stop reading. **So when repeated measurements agree on the
+side and the grade stays anyway, the entry goes in `docs/engine-runs/accepted.md`** with
+its number and the decision, and the next pass compares against that file before spending
+an hour on it. Adding to that file is a decision to be argued, never a way to quieten a
+checker.
+
 ## 9. v1 acceptance
 
 1. Study: all eight chapters open; every line steps through with notes, arrows and
