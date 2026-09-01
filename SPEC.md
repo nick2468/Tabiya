@@ -339,6 +339,16 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   the Caro-Kann and the Slav were the two the first pass had called clean. This entry is
   closed on that evidence, and the evidence does not say the courses are clean. It says
   each has had two passes and the second one still found things.
+  **Phase 20 ran a third pass over four of them and the closure needs qualifying.** Four
+  courses, same script, same 2500 ms, prose-only changes in between, so the fields this
+  pass reads were byte-identical. The Slav and the Vienna reported nothing, the Caro-Kann
+  reported three and all three were the known harmless direction - and the Ruy reported a
+  **new "graded too kindly" entry at 1.90**, `9.Qxd8+` in chapter 1, which phase 19's own
+  2500 ms run over that unchanged course had not reported. Re-measured single-line at the
+  same movetime it costs 1.88, so it is a band-edge call and the grade stands; the note
+  beside it was wrong and is fixed. The point is not the entry. It is that "verdict
+  strength" is still a sample, and the honest reading of this item is that a course has
+  had N passes, never that it is clean.
 - **Give `engine-pass.mjs` the same second pass, at 2500 ms.** It judges the moves the
   course tells the trainee to play, which matters more than a grade does, and it has the
   identical sampler problem: phase 19 proved a short run can miss a real finding and not
@@ -347,6 +357,13 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   put it out of scope. Whoever takes it should save the raw output beside the plan; phase
   19 could only compare against recorded counts, because the previous run's output was
   gone. Recorded at phase 19.
+  **Phase 20 ran it at 500 ms over the four courses it touched, which is 1465 positions
+  and not the second pass.** Eight moves cost half a pawn or more and none of them looks
+  structural: three are the Ruy's own `Bxc6`, which is the variation the course is named
+  after, and the largest, the Vienna's 1.36, is inside a sacrificial line the engine still
+  scores at plus one and a quarter for White. Raw output is in the phase 20 record. At
+  500 ms that is a sampler and settles nothing either way, which is exactly what this
+  entry is for. Recorded at phase 20.
 - **A note can name a line that cannot be played, and nothing in the repo checks it.**
   `note-claims.mjs` plays a note's moves only when the note also makes a material claim
   its vocabulary recognises, which is one mistake entry in twenty. A note that names a
@@ -375,6 +392,36 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   and check and mate markers in prose, which is the `Qxc1+` that was mate. The probe is
   in a session scratchpad and dies with it; the parser to reuse is
   `scripts/note-claims.mjs:97-124`.
+  **Built at phase 20 as `scripts/note-lines.mjs`, and three of its rules are now in the
+  suite.** It reads 3577 node notes, plans and mistake notes across the six courses and
+  reports 8 faults and 16 lines for a human. All eight faults were real and are fixed:
+  seven notes that describe a real line correctly and count it wrongly, five of them off
+  by one, and one check written without its mark. **What fails a build** is a move the
+  board refuses, a sequence numbered against a different position, and a check or mate
+  mark the board does not give - each at zero across all six courses, and each
+  mutation-checked by restoring the fault it was written for. **What only reports** is a
+  note pointing at a move already played, a note naming an illegal move in order to say
+  it is illegal, and a note leaving out one obvious reply. Those three are good prose and
+  a test that fails on good prose gets switched off.
+  **What it cannot see**, so a future pass knows where to look. A line that is legal in
+  the position the note places it and wrong for the position the note MEANS: legality is
+  the test, not sense. Anything a note asserts without naming a move, which was already
+  `note-claims.mjs`'s gap and is still open. And a sequence more than one reply short of
+  what the board needs, because exactly one inserted move is allowed.
+  **What a course author has to keep true** is in `docs/content-schema.md` beside the
+  `note` field rule: number the first move of a sequence and keep the dots, because `7.`
+  and `7...` are what place it against a board, and count from the position the note is
+  written from.
+- **Chapter intros are checked in a reporting mode only, and it should not be promoted as
+  it stands.** An intro has no one position to be written from, so every sequence is tried
+  against every position the chapter reaches. With hundreds of candidates instead of two,
+  a sequence nearly always finds some route that plays, and the three lines it does report
+  are all benign - two naming a move from a line the chapter does not carry, and one
+  correct line the checker reaches by a coincidental route. It stays because phase 19
+  found a real intro fault by hand and because a reporting mode costs nothing. What would
+  make it worth promoting is an anchor: an intro that declared which line each sequence
+  hangs off would be checkable exactly like a node note, which is a content-format
+  decision and Nick's to take. Recorded at phase 20.
 
 ## 7. Risks
 

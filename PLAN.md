@@ -2512,18 +2512,18 @@ a separate mode that reports and never fails, because an intro has no anchor pos
 The chip lists the ten lines gate 19's probe reports, four real and six false, so the tool
 can be held to classifying them correctly rather than merely to running.
 
-- [ ] 20.1 Legality: every move in a named sequence plays from where the note places it.
-- [ ] 20.2 The first token's move number and side match the board.
-- [ ] 20.3 Check and mate markers in prose, both directions.
-- [ ] 20.4 Handle the back-reference class: report unplaceable, do not report illegal.
-- [ ] 20.5 Handle the deliberate illegality class, with clause-scoped negation.
-- [ ] 20.6 Handle the omitted-recapture class by widening the start, and say so.
-- [ ] 20.7 Fix the real faults, in their own commit.
-- [ ] 20.8 Promote the clean rules into `content.test.ts`, each proved to fail on a
+- [x] 20.1 Legality: every move in a named sequence plays from where the note places it.
+- [x] 20.2 The first token's move number and side match the board.
+- [x] 20.3 Check and mate markers in prose, both directions.
+- [x] 20.4 Handle the back-reference class: report unplaceable, do not report illegal.
+- [x] 20.5 Handle the deliberate illegality class, with clause-scoped negation.
+- [x] 20.6 Handle the omitted-recapture class by widening the start, and say so.
+- [x] 20.7 Fix the real faults, in their own commit.
+- [x] 20.8 Promote the clean rules into `content.test.ts`, each proved to fail on a
   restored fault.
-- [ ] 20.9 Re-run the other three checkers over any course whose prose changed.
-- [ ] 20.10 Re-export the bundles; version 1.6.2 if anything changed.
-- [ ] 20.11 Close the register entry with what the checker does and does not cover.
+- [x] 20.9 Re-run the other three checkers over any course whose prose changed.
+- [x] 20.10 Re-export the bundles; version 1.6.2 if anything changed.
+- [x] 20.11 Close the register entry with what the checker does and does not cover.
 
 Acceptance: the script exists, shares its parser, and classifies all ten known lines
 correctly; the intro mode runs and its verdict is recorded; real faults fixed and false
@@ -2531,5 +2531,119 @@ positives silent without loosening the legality rule; the clean rules in the tes
 each proved to fail on a restored fault; the other checkers re-run where prose changed;
 bundles re-exported and the version at 1.6.2 if anything changed; 308 line ids before and
 after; the register entry closed; vitest green and `tsc -b` clean.
+
+Open items (phase 20):
+
+1. **The checker reads 3577 pieces of prose across the six courses and reports 8 faults
+   and 16 lines for a human.** Node notes, plans and mistake notes, all of which have a
+   known position: Caro-Kann 605, Colle 436, London 583, Ruy 444, Slav 692, Vienna 817.
+   Against gate 19's probe, which reported 36 lines naively and 12 with move-number
+   placement, this reports 24 in total and gets every one of them into a category that
+   says what to do about it. **All eight faults are real**, each verified on a board
+   before the note was touched, and all eight are now fixed.
+2. **Two ideas the chip did not name were needed, and without either the tool is
+   unusable.** The first is that a note names a line in FRAGMENTS: "7.Qxd5 loses a piece
+   to 7...Qxc1+" is two runs, and the second starts where the first ended. So every
+   position a working reading reaches joins the pool the next run can be placed against.
+   That single change took the report from 45 lines for a human to 13. The second is that
+   prose BRANCHES: "7...Kd7 keeps everything. Only 7...g6?? hands it back to 8.Qxe5+"
+   names two different Black seventh moves, so two positions in the pool are at White's
+   eighth and the checker took the first. It reported the Ruy's `Qxe5+` as a wrongly
+   marked check when the fault was its own branch. A reading with no marker mismatch is
+   now preferred over one with, which removed three false markers.
+3. **The eight faults, and seven of them are one class the chip found once.** A note that
+   describes a real line correctly and counts it wrongly. Five are off by one, which is
+   the drift of counting the entry's own move twice: the Caro-Kann Panov's `8.Bxc4` at
+   move 7, the Caro-Kann Exchange's `6.g4` at 7, and three Vienna notes. Two are bigger
+   and reading was never going to catch them: the Caro-Kann Advance answers a queen
+   sortie with `17.Nxf5` where the board is at 10, and the Slav Exchange answers `13...e5`
+   with `11.dxe5`. The eighth is the Ruy's `9.Qxh8`, which is check; the board says
+   `Qxh8+` and it is not mate. **No grade changed**, because a number in front of a move
+   does not change what the move is worth.
+4. **The chip's ten lines, all classified, none of them by loosening legality.** Its three
+   real ones are here: the Caro-Kann `6.g4` and the Slav `11.dxe5` as `misnumbered`, the
+   Ruy `Qxh8` as `marker`. The two Slav `11.Kxh2` notes are `deliberate`, silenced by a
+   legality-scoped negation test that looks at the clause the move sits in. The Vienna's
+   "3...d6 line in chapter 3" is `back-reference`. The three Ruy `Ne1 Qh4` entries are
+   `widened`, each reported with the move it needed - `hxg4`, the recapture the note
+   leaves out. **One landed in a different soft category than the chip predicted**: the
+   Slav's bare `4.Nc3` on a five-ply line comes out `widened` rather than `unplaceable`,
+   because inserting the line's own next move reaches move 4. Both are soft and neither
+   fails a build, and the two cases are structurally the same as the Ruy's, so separating
+   them would have been a rule with no principle behind it.
+5. **The intro mode runs, and the verdict is that it cannot be promoted.** An intro has no
+   one position to be written from, so every sequence is tried against every position the
+   chapter reaches, and prose branching then has hundreds of candidates rather than two.
+   It reports three lines and all three are benign: two Caro-Kann intros naming a move
+   from a line the chapter does not carry, and the Slav's `7...Qxc1+`, which is correct -
+   check and not mate, verified on a board - and which the checker reaches by a coincidental
+   route because an earlier paragraph polluted the pool. **A reporting mode is still worth
+   having**: phase 19 found a real intro fault by hand, and the one parser change the mode
+   forced - a line break ends a run, so a markdown heading ending on a move does not join
+   the paragraph below it - fixed a genuine false positive.
+6. **The marker rule has to read English, and this is the part most likely to break on a
+   future course.** This content writes mate as a word: "7...Qxc1 mate" is right and
+   `Qxc1#` would be worse. So a BARE move whose clause says mate or check is accepted. The
+   reverse is never accepted: a move written `+` where the board says `#` is exactly the
+   fault gate 19 found, and no word in the clause excuses it.
+7. **Three rules are in the suite and three are not, and the split is the whole design.**
+   In: illegal, misnumbered, marker, all at zero across all six courses. Out: the
+   back-reference, the deliberate illegality and the omitted recapture, which are good
+   prose. A test that fails on good prose is worse than no test, because it reads as
+   coverage and then gets switched off.
+8. **Each promoted rule was mutation-checked, not assumed.** Restoring the Panov's
+   `8.Bxc4` fails the caro-kann-black block with "written as 8., the board is at 7.";
+   restoring the Ruy's bare `Qxh8` fails ruy-lopez-exchange with "wrote Qxh8, the board
+   gives Qxh8+"; restoring phase 19's `4.exd5 cxd5 5.Qb3` with White's pawn still on c2
+   fails caro-kann-black with "the board refuses Qb3, move 3 of the run, at 4." Each was
+   reverted and the tree left clean.
+9. **The suite costs half a second more.** The naive version cost ten, because it replayed
+   every line from move one for every note on it. Stations are built once per node and
+   extended, which is the difference between the suite carrying this check and nobody
+   agreeing to keep it.
+10. **The boundary held, checked mechanically.** 308 line ids before the phase and 308
+    after, rebuilt from `git show HEAD:courses/...` on one side and the working tree on
+    the other, none gone and none added. Only prose changed.
+11. **`note-claims.mjs` is byte-identical over all six courses after the parser moved out
+    of it**, which was checked before the new checker was written and again after the
+    line-break change. Its counts are gate 19's exactly: 797 mistake entries, 40 with a
+    sequence it can play, 12 claiming material with no sequence, the Colle at 0, and 0
+    unsupported claims in all six.
+12. **What a future course author has to keep true**, now in `docs/content-schema.md`
+    beside the `note` field rather than only in a register entry: number the first move of
+    a sequence and keep the dots, because `7.` and `7...` are what place it; count from
+    the position the note is written from, which for a mistake entry is the position after
+    the wrong move. And what the checker deliberately allows, so nobody rewrites good
+    prose to appease it.
+13. **20.9 found something the phase did not go looking for, and it is the biggest result
+    here after the checker itself.** `engine-mistakes.mjs` at 2500 ms over the four
+    courses whose prose changed: Slav 0, Vienna 0, Caro-Kann 3 and all three on the known
+    harmless side, Ruy **2 including one graded too kindly at 1.90**. That entry is
+    `9.Qxd8+` in the Ruy's chapter 1, graded an inaccuracy against a band ceiling of 1.80,
+    in a course phase 19 passed at the same 2500 ms with nothing on that side. **The
+    fields this pass reads were byte-identical** - this phase changed prose only, checked
+    by rebuilding the line-id set - so the same script gave two different answers about
+    the same content at verdict strength. SPEC section 6's closed entry now says so.
+14. **The grade stands and the note did not.** Single-line at 2500 ms: 3.39 after the
+    repertoire `9.Qh5+` against 1.51 after `9.Qxd8+`, a cost of 1.88 against the checker's
+    1.90. Within a tenth of a band edge, which SPEC section 8 already rules is a teaching
+    call rather than a number, and the teaching call is easy here because the move keeps a
+    real advantage instead of throwing one away. Its note said the move "trades into a
+    level ending"; three lines at 2500 ms put that ending at about plus one and a half for
+    White. The reason was wrong, so the reason was fixed, in its own commit with the
+    numbers in the message.
+15. **`engine-pass.mjs` at 500 ms over the same four courses, 1465 positions, eight moves
+    at half a pawn or more and nothing structural.** Three of the eight are the Ruy's own
+    `Bxc6` in the no-a6 chapter, which is the variation the course is named after. The
+    largest is the Vienna's 1.36 inside a sacrificial line the engine still scores at plus
+    one and a quarter for White. At 500 ms this is a sampler and settles nothing, which is
+    why the second pass for it is still a register entry and still Nick's to rule.
+16. **Nothing was measured beside the sweep.** The four courses ran one after another,
+    mistakes first and then the move pass, from 09:11 to 09:57, and the three
+    re-measurements that settled the Ruy entry were asked after the last one finished.
+    Movetime is wall clock and neither output would show the difference.
+17. **Nick's own files were not listed and not reported.** This phase needed no packaged
+    run and went nowhere near them.
+
 
 - [ ] **Review gate 20 passed**
