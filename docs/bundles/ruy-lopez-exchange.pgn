@@ -140,7 +140,7 @@ Taking on e5 with the knight, which gives up a piece for a pawn to ...fxe5. Putt
 8. Nxe5 {Trade into it. [%tags tactics]} 8... fxe5 {Forced. [%weight 9]} 9. Qh5+
 {The check that collects the pawn. [%tags tactics] [%plan Take on e5 next move. If Black blocks with 9...g6 the queen takes with check and the rook on h8 falls with it.] [%line ...Bd6 and the e5 recapture]}
 ( 9. Qxd8+?!
-{It trades into a level ending when there was a pawn to be had. Check on h5 first: the pawn on e5 has nothing defending it and the king cannot come to its aid.}
+{It trades into an ending White is still much better in, and gives up the free pawn to get there. Check on h5 first: the pawn on e5 has nothing defending it and the king cannot come to its aid.}
 ) ) 7. Nxd4
 {The piece recapture. The knight eyes f5 and b5 and the queens stay on for now. [%tags development]}
 ( 7. Qxd4!?
