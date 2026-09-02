@@ -2997,4 +2997,43 @@ Open items (phase 22):
 13. **No chess moved.** Nothing under `courses/` differs from the commit this phase started
     on, and the running app still counts 308 lines across six courses.
 
-- [ ] **Review gate 22 passed**
+Gate 22 findings (2026-09-02):
+
+14. **Driven from a cleared store, and every ruling holds.** With `localStorage` emptied
+    and the page reloaded, all eight nav buttons were enabled, the switcher rendered on the
+    catalog with the Caro-Kann in it, and the stored course had already healed to
+    `caro-kann-black` - the first visible course, written back by `useRememberedCourse`.
+    With two learnt lines seeded, one each in the Vienna and the Caro-Kann, the first click
+    into Drill showed "What to drill", **Drill mixed: every course, 25 due** checked and
+    **Drill selected: The Caro-Kann Defence, 13 due**, the summary at 25, and the switcher
+    disabled with the title "Drill is mixing every course. Choose Drill selected to drill
+    this one." Clicking the second radio narrowed the summary to 13, re-enabled the
+    switcher and stored `selected`. After a reload Drill came back on `selected` with the
+    switcher live, and Progress showed the rollup and the Caro-Kann's detail with no "open
+    a course" line anywhere on the screen. The store was cleared afterwards and checked
+    back to the theme key alone.
+15. **The seam deviation in open item 5 is the right call.** `useDrillScope` called in two
+    places would be two `useState`s, and the radio would not grey the switcher until a
+    reload. Called once in the shell and handed down is the same shape the shell already
+    uses for the selected course. The chip proposed the weaker design; the builder named
+    it and did better.
+16. **`resolveCourse` is derived every render against `catalog.courses`**, which
+    `catalog-context.tsx` documents as the visible, loaded list, so a hidden course is not
+    a candidate and the fall-back is the first thing a person can actually see. The
+    write-back waits for `catalog.scanned`, which matters in the installed app and not in
+    the browser, and the reasoning in `prefs.ts` says why.
+17. **The help test was mutation-checked at the gate**: renaming `Drill selected` turns it
+    red naming the string. And item 9's non-failing mutation is read correctly by the
+    phase: re-adding the old `!course` guard cannot fire because a course is always
+    resolved, so the guard is dead code rather than the test being blind.
+18. **22.7's four extra lies were real and are fixed**, and the pattern from gate 21
+    repeats: the help test holds names, not behaviour, so the whole document had to be read
+    against the new behaviour by a person. It was.
+19. **Verified for the gate from the repo:** 718 tests and `tsc -b` clean; oxlint reports
+    the same six warnings that predate the phase; no em dashes; version 1.6.4 in all three
+    files; **nothing under `courses/` or `docs/bundles/` differs** and 308 line ids before
+    and after.
+20. **Nick's own files were not listed and not reported.** The browser build's storage is
+    the only store this gate touched.
+
+- [x] **Review gate 22 passed** (2026-09-02)
