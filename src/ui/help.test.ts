@@ -201,7 +201,13 @@ describe('the help document', () => {
   })
 
   it('has no em dash in it, and no smart quote', () => {
-    expect(HELP_DOCUMENT).not.toMatch(/[—–‘’“”]/)
+    // Built from code points rather than written out: the house rule is that
+    // none of these appear anywhere under src, and a test is not an exception.
+    // Em dash, en dash, and the four smart quotes.
+    const forbidden = [0x2014, 0x2013, 0x2018, 0x2019, 0x201c, 0x201d]
+    for (const code of forbidden) {
+      expect(HELP_DOCUMENT, `U+${code.toString(16)}`).not.toContain(String.fromCharCode(code))
+    }
   })
 })
 

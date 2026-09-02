@@ -275,7 +275,7 @@ export const HELP_SECTIONS: HelpSection[] = [
 
 /** The whole document, as one markdown string for `Prose`. */
 export const HELP_DOCUMENT = HELP_SECTIONS.map(
-  (section) => `## ${section.title}\n\n${section.body}`,
+  (section) => `### ${section.title}\n\n${section.body}`,
 ).join('\n\n')
 
 /**
