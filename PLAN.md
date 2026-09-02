@@ -3044,3 +3044,37 @@ Gate 22 findings (2026-09-02):
     the only store this gate touched.
 
 - [x] **Review gate 22 passed** (2026-09-02)
+
+## Phase 23 - a live evaluation bar, undo and redo, a game that survives leaving the screen, drilling early, and the wording that was still chess
+
+Goal: the nine findings Nick brought back after a day on 1.6.4 (2026-09-03). Notes only
+under `courses/`; no move changes.
+
+Chipped as `chips/phase-23-play-and-polish.md`. Play gets a live evaluation bar left of
+the board (reversing the v1 "no bar, it is a crutch" ruling), Undo and Redo, and a game
+that keeps going when he looks at another screen, with the course switcher greyed while it
+runs. Drill gets a one-off "Include cards that are not due yet" box; an early answer is an
+ordinary FSRS review. Five notes said a capture went towards the centre when it went away
+(seven Ruy nodes plus an intro, one Slav, one Vienna) and one Colle note put the bishop
+somewhere it already was; a content test now enforces the direction claim. The frequency
+badge comes off the Study move buttons and into a tooltip. "Due" and "New" become "ready"
+and "not yet drilled" everywhere a person reads them. The course dropdown moves up 8px,
+the window opens at 1200 by 980, and the version becomes 1.6.5.
+
+- [ ] 23.1 Live evaluation bar, one engine at the scan profile, fed into the report.
+- [ ] 23.2 Undo and Redo on `PlaySession`, held by the help test through a session fixture;
+  the phase 21 report register item closed with the same fixture.
+- [ ] 23.3 The game lives in a provider; the switcher is greyed while a game is in progress.
+- [ ] 23.4 "Include cards that are not due yet" on Drill; due first, then soonest due.
+- [ ] 23.5 Five wrong notes fixed, bundles regenerated, and a direction test that fails
+  before the fixes.
+- [ ] 23.6 Weight badge off the move buttons and into a title; Help sentence.
+- [ ] 23.7 "Ready" and "not yet drilled" throughout; next-card line on Progress; Help follows.
+- [ ] 23.8 Header gap balanced at 8px each side of the separator.
+- [ ] 23.9 Window 1200 by 980.
+- [ ] 23.10 Version 1.6.5.
+- [ ] 23.11 Proved in the browser build at 1200x980.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 23**
