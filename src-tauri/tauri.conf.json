@@ -14,8 +14,8 @@
       {
         "create": false,
         "title": "Repertoire Trainer",
-        "width": 1280,
-        "height": 900,
+        "width": 1200,
+        "height": 980,
         "minWidth": 900,
         "minHeight": 700,
         "resizable": true,
