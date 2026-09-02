@@ -5,6 +5,7 @@ import { Diagnostics } from './Diagnostics'
 import { Drill } from './Drill'
 import { Help } from './Help'
 import { Play, type PlayRequest } from './Play'
+import { PlayProvider, usePlay } from './play-context'
 import { Progress } from './Progress'
 import { ProgressProvider, useProgress } from './progress-context'
 import { Study } from './Study'
@@ -42,6 +43,11 @@ import './app.css'
  * The play request is held here rather than in either view, because it is the
  * one thing Study and Play have to say to each other: "start a game from this
  * position".
+ *
+ * The game ITSELF is held higher still, in `PlayProvider`, so it survives a
+ * look at another screen. That is why the course switcher can be greyed out
+ * from here: a game belongs to the course it was started in, and the header
+ * must not offer to change it out from under one.
  */
 type View = 'courses' | 'study' | 'drill' | 'play' | 'progress' | 'help' | 'diagnostics'
 
@@ -65,7 +71,9 @@ export function App() {
   return (
     <ProgressProvider>
       <CatalogProvider>
-        <Shell />
+        <PlayProvider>
+          <Shell />
+        </PlayProvider>
       </CatalogProvider>
     </ProgressProvider>
   )
@@ -86,6 +94,7 @@ export function Shell() {
   const [playRequest, setPlayRequest] = useState<PlayRequest | null>(null)
   const { theme, toggle } = useTheme()
   const { scope, setScope } = useDrillScope()
+  const { inProgress } = usePlay()
   const showDiagnostics = import.meta.env.DEV
 
   // Derived every render rather than stored: a remembered id that no longer
@@ -119,11 +128,20 @@ export function Shell() {
   // With any course installed this never fires: one is always resolved.
   const showing: View = (view === 'study' || view === 'play') && !course ? 'courses' : view
 
-  // The switcher is greyed on Drill while Drill is mixing every course. It
-  // stays visible rather than disappearing, because a header that changes
-  // shape between screens is its own confusion; the point is to say that the
-  // queue is not following it.
-  const switcherIdle = showing === 'drill' && scope === 'mixed'
+  // The switcher is greyed for two reasons, and it says which one applies. On
+  // Drill while Drill is mixing every course, because the queue is not
+  // following it. And on every screen while a game is in progress, because
+  // the game belongs to the course it was started in and changing course
+  // under it would throw it away. A reviewed game is over, so the switcher
+  // comes back as soon as the report is showing.
+  //
+  // It stays visible rather than disappearing either way: a header that
+  // changes shape between screens is its own confusion.
+  const drillIdle = showing === 'drill' && scope === 'mixed'
+  const switcherIdle = drillIdle || inProgress
+  const switcherWhy = inProgress
+    ? 'A game is in progress. Finish it or start a new one on Play to change course.'
+    : 'Drill is mixing every course. Choose Drill selected to drill this one.'
 
   return (
     <div className="app">
@@ -187,11 +205,7 @@ export function Shell() {
             id="course-switch"
             value={course.id}
             disabled={switcherIdle}
-            title={
-              switcherIdle
-                ? 'Drill is mixing every course. Choose Drill selected to drill this one.'
-                : undefined
-            }
+            title={switcherIdle ? switcherWhy : undefined}
             onChange={(event) => switchTo(event.target.value)}
           >
             {catalog.courses.map((entry) => (

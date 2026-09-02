@@ -7,6 +7,7 @@ import { Play, PlayHead, Report } from './Play'
 import { Progress } from './Progress'
 import { Study } from './Study'
 import { CatalogContext, type Catalog } from './catalog-context'
+import { PlayProvider } from './play-context'
 import { ProgressContext, type Progress as ProgressValue } from './progress-context'
 import { HELP_CONTROLS, HELP_DOCUMENT, HELP_SECTIONS, PANELS, type Screen } from './help-text'
 import { bundledCourses } from '../content'
@@ -103,13 +104,17 @@ const catalog: Catalog = {
   rescan: async () => {},
 }
 
-/** A screen, inside the two contexts every screen expects above it. */
+/** A screen, inside the three contexts every screen expects above it. */
 function inApp(state: ProgressState, view: ReactNode): string {
   return renderToStaticMarkup(
     createElement(
       ProgressContext,
       { value: progressValue(state) } as never,
-      createElement(CatalogContext, { value: catalog } as never, view),
+      createElement(
+        CatalogContext,
+        { value: catalog } as never,
+        createElement(PlayProvider, null, view),
+      ),
     ),
   )
 }

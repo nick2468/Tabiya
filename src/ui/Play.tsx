@@ -1,29 +1,22 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Board } from './Board'
 import { HelpAsk, HelpSaid } from './Help'
+import { usePlay } from './play-context'
 import { useProgress } from './progress-context'
 
-import {
-  StockfishEngine,
-  strengthProfile,
-  allProfiles,
-  whitePovPawns,
-  type Engine,
-} from '../engine'
-import { sanForMove, squaresForSan } from '../model/grade'
-import { legalDests, positionKey } from '../model/position'
+import { strengthProfile, allProfiles } from '../engine'
+import { squaresForSan } from '../model/grade'
+import { legalDests } from '../model/position'
 import { colourName, type Colour, type LoadedCourse } from '../model/types'
 import {
   GAME_LENGTHS,
   PlaySession,
   buildBook,
-  buildReport,
   describeDeviation,
   describeSlip,
   evalBarLayout,
   evalShare,
   fullMove,
-  scanGame,
   shownEvaluation,
   verdictInWords,
   type GameLength,
@@ -49,6 +42,12 @@ import './play.css'
  *
  * Every evaluation is kept and handed to the scan at the end, so the report
  * judges the game by the exact numbers the trainee watched.
+ *
+ * The game itself is NOT here. It lives in `play-context.tsx`, above every
+ * screen, because this component unmounts whenever the view changes and a
+ * game that dies when you glance at Study is not a game. This file is the
+ * screen: the options before a game, the board and the report during and
+ * after one.
  */
 
 /** A request to play from a position, sent over from Study. */
@@ -61,18 +60,6 @@ export interface PlayRequest {
 
 type Shape_ = 'any' | 'chapter' | 'here'
 
-/** How long the blunder scan thinks about each position. */
-const SCAN_MOVETIME = 150
-
-/**
- * The one profile every evaluation on this screen is made at: the live bar's
- * and the scan's. Full strength, one line, a fixed 150 ms. Two numbers can
- * only be compared when they were made the same way.
- */
-function analysisProfile() {
-  return { ...strengthProfile(8), multiPv: 1, movetime: SCAN_MOVETIME }
-}
-
 export function Play({
   course,
   request,
@@ -82,7 +69,8 @@ export function Play({
   request: PlayRequest | null
   onRequestUsed: () => void
 }) {
-  const { state, recordPlay } = useProgress()
+  const { state } = useProgress()
+  const game = usePlay()
   const chapters = course.chapters
   const [launch, setLaunch] = useState<Shape_>(request ? 'here' : 'any')
   const [chapterId, setChapterId] = useState(chapters[0]?.id ?? '')
@@ -92,30 +80,18 @@ export function Play({
   // options carry the screen's only `?`.
   const [askLaunch, setAskLaunch] = useState(false)
 
-  const [session, setSession] = useState<PlaySession | null>(null)
-  const [, setTick] = useState(0)
-  const [thinking, setThinking] = useState(false)
-  const [engineError, setEngineError] = useState<string | null>(null)
-  const [report, setReport] = useState<GameReport | null>(null)
-  const [scanning, setScanning] = useState<{ done: number; total: number } | null>(null)
-  const [evaluations, setEvaluations] = useState<Map<string, number>>(() => new Map())
-
-  const engineRef = useRef<Engine | null>(null)
-  const sessionRef = useRef<PlaySession | null>(null)
-  const evaluationsRef = useRef<Map<string, number>>(new Map())
-
   useEffect(() => {
     if (request) setLaunch('here')
   }, [request])
 
-  // The worker is expensive to start, so it is kept for the whole visit and
-  // stopped when the view goes away.
+  // A game belongs to the course it was started in. The switcher is greyed
+  // out while one is in progress, so this can only fire on a REVIEWED game
+  // left behind by a course change, and a stale report under a new course
+  // would be worse than an empty screen.
+  const { courseId, reset } = game
   useEffect(() => {
-    return () => {
-      engineRef.current?.stop()
-      engineRef.current = null
-    }
-  }, [])
+    if (courseId !== null && courseId !== course.id) reset()
+  }, [course.id, courseId, reset])
 
   const book = useMemo(() => {
     if (launch === 'chapter') {
@@ -125,177 +101,20 @@ export function Play({
     return buildBook({ colour: course.colour, chapters })
   }, [chapters, course.colour, launch, chapterId])
 
-  const refresh = useCallback(() => setTick((count) => count + 1), [])
+  const start = async () => {
+    await game.start({
+      courseId: course.id,
+      book,
+      length,
+      level,
+      startMoves: launch === 'here' && request ? request.moves : [],
+      chapterId: launch === 'chapter' ? chapterId : undefined,
+    })
+    if (launch === 'here') onRequestUsed()
+  }
 
-  /**
-   * Evaluates a position for the bar, at the analysis profile, and puts the
-   * playing profile back.
-   *
-   * The restore is in a `finally` for a reason worth keeping: the engine is
-   * one worker with a promise queue, so a search that threw and skipped the
-   * restore would leave the opponent playing the rest of the game at level 8
-   * with one candidate. A position already known is not searched again, which
-   * is what makes undo and redo free.
-   */
-  const evaluate = useCallback(
-    async (running: Engine, fen: string, playing: number) => {
-      const key = positionKey(fen)
-      if (evaluationsRef.current.has(key)) return
-      try {
-        await running.setStrength(analysisProfile())
-        const result = await running.search(fen, SCAN_MOVETIME)
-        const best = result.candidates[0]
-        if (!best) return
-        const side = fen.split(' ')[1] === 'b' ? 'black' : 'white'
-        const next = new Map(evaluationsRef.current)
-        next.set(key, whitePovPawns(best.score, side))
-        evaluationsRef.current = next
-        setEvaluations(next)
-      } finally {
-        await running.setStrength(strengthProfile(playing))
-      }
-    },
-    [],
-  )
-
-  const engine = useCallback(async (): Promise<Engine> => {
-    if (!engineRef.current) engineRef.current = new StockfishEngine()
-    await engineRef.current.start()
-    return engineRef.current
-  }, [])
-
-  const start = useCallback(async () => {
-    setEngineError(null)
-    setReport(null)
-    setThinking(true)
-    try {
-      const profile = strengthProfile(level)
-      const running = await engine()
-      await running.newGame()
-      await running.setStrength(profile)
-      const fresh = new PlaySession({
-        book,
-        engine: running,
-        profile,
-        length,
-        startMoves: launch === 'here' && request ? request.moves : [],
-      })
-      sessionRef.current = fresh
-      setSession(fresh)
-      // Dev-only handle on the running game, so a browser check can read the
-      // state the session actually holds rather than guess from the screen.
-      if (import.meta.env.DEV) (window as unknown as Record<string, unknown>).__game = fresh
-      if (launch === 'here') onRequestUsed()
-      // The engine may be the one to move first: a "play from here" position
-      // stopped on the opponent's turn, or a Black course, where it opens.
-      if (!fresh.studentToMove && !fresh.isFinished()) {
-        await fresh.playOpponent()
-      }
-      refresh()
-      await evaluate(running, fresh.fen, level)
-      refresh()
-    } catch (error) {
-      setEngineError(asMessage(error))
-    } finally {
-      setThinking(false)
-    }
-  }, [book, engine, evaluate, launch, length, level, onRequestUsed, refresh, request])
-
-  const onMove = useCallback(
-    async (from: string, to: string) => {
-      const running = sessionRef.current
-      if (!running || thinking || running.isFinished()) return
-      const san = sanForMove(running.fen, from, to)
-      if (!san || !running.playStudent(san)) return
-      refresh()
-      setThinking(true)
-      try {
-        // The bar is brought up to date before the opponent is asked to move,
-        // so it answers the move that was just played rather than the reply.
-        const live = engineRef.current
-        if (live) await evaluate(live, running.fen, level)
-        refresh()
-        if (running.isFinished()) return
-        await running.playOpponent()
-        refresh()
-        if (live) await evaluate(live, running.fen, level)
-        refresh()
-      } catch (error) {
-        setEngineError(asMessage(error))
-      } finally {
-        setThinking(false)
-      }
-    },
-    [evaluate, level, refresh, thinking],
-  )
-
-  const finish = useCallback(async () => {
-    const running = sessionRef.current
-    if (!running) return
-    setThinking(true)
-    setScanning({ done: 0, total: 0 })
-    try {
-      const running_engine = await engine()
-      await running_engine.setStrength(analysisProfile())
-      // What the bar already worked out is handed over rather than searched
-      // again: the scan is shorter, and the report cannot disagree with the
-      // numbers that were on the screen during the game.
-      const scanned = await scanGame(
-        running.moves,
-        running_engine,
-        SCAN_MOVETIME,
-        (done, total) => setScanning({ done, total }),
-        evaluationsRef.current,
-      )
-      evaluationsRef.current = scanned
-      setEvaluations(scanned)
-      const outcome = running.outcome ?? `Stopped after move ${fullMove(running.moves.length - 1)}`
-      const built = buildReport(running.moves, book, scanned, outcome)
-      setReport(built)
-      recordPlay({
-        courseId: course.id,
-        chapterId: launch === 'chapter' ? chapterId : undefined,
-        deviated: built.deviation.kind === 'student-left-book',
-        deviationMove:
-          built.deviation.kind === 'student-left-book'
-            ? fullMove(built.deviation.ply ?? 0)
-            : undefined,
-        moves: fullMove(Math.max(0, running.moves.length - 1)),
-        level,
-        at: new Date().toISOString(),
-      })
-    } catch (error) {
-      setEngineError(asMessage(error))
-    } finally {
-      setScanning(null)
-      setThinking(false)
-    }
-  }, [book, chapterId, course.id, engine, launch, level, recordPlay])
-
-  /**
-   * Undo and redo. Neither one asks the engine anything: every position they
-   * land on has already been evaluated, so the bar follows them for free.
-   */
-  const undo = useCallback(() => {
-    const running = sessionRef.current
-    if (!running || thinking || report) return
-    if (running.undo()) refresh()
-  }, [refresh, report, thinking])
-
-  const redo = useCallback(() => {
-    const running = sessionRef.current
-    if (!running || thinking || report) return
-    if (running.redo()) refresh()
-  }, [refresh, report, thinking])
-
-  const reset = useCallback(() => {
-    sessionRef.current = null
-    setSession(null)
-    setReport(null)
-    setScanning(null)
-    evaluationsRef.current = new Map()
-    setEvaluations(new Map())
-  }, [])
+  const { session, report, scanning, thinking, engineError, evaluations } = game
+  const playBook = game.book ?? book
 
   // The game ends by itself on mate or the length cap.
   const finished = session?.isFinished() ?? false
@@ -404,12 +223,12 @@ export function Play({
     <div className="play">
       <PlayHead
         session={session}
-        opponentColour={book.opponentColour}
+        opponentColour={playBook.opponentColour}
         thinking={thinking}
         reviewed={report !== null}
-        onUndo={undo}
-        onRedo={redo}
-        onNew={reset}
+        onUndo={game.undo}
+        onRedo={game.redo}
+        onNew={game.reset}
       />
 
       <div className="play-body">
@@ -425,7 +244,7 @@ export function Play({
           movableColor={finished || thinking || report ? undefined : session.studentColour}
           dests={finished || thinking || report ? undefined : legalDests(session.fen)}
           lastMove={lastMoveSquares(session)}
-          onMove={onMove}
+          onMove={game.play}
           size={420}
         />
 
@@ -433,7 +252,7 @@ export function Play({
           <MoveList session={session} />
 
           {report ? (
-            <Report report={report} opponentColour={book.opponentColour} />
+            <Report report={report} opponentColour={playBook.opponentColour} />
           ) : (
             <div className="play-actions">
               {finished ? (
@@ -442,7 +261,7 @@ export function Play({
                   where you left the repertoire and what it cost.
                 </p>
               ) : null}
-              <button type="button" className="primary" onClick={finish} disabled={thinking}>
+              <button type="button" className="primary" onClick={game.finish} disabled={thinking}>
                 {scanning
                   ? `Scanning ${scanning.done} of ${scanning.total}...`
                   : finished
@@ -658,8 +477,4 @@ function lastMoveSquares(session: PlaySession): [string, string] | undefined {
   if (!last) return undefined
   const squares = squaresForSan(last.fen, last.san)
   return squares ? [squares.from, squares.to] : undefined
-}
-
-function asMessage(error: unknown): string {
-  return error instanceof Error ? error.message : String(error)
 }

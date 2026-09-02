@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { Shell } from './App'
 import { Drill } from './Drill'
 import { CatalogContext, type Catalog } from './catalog-context'
+import { PlayProvider } from './play-context'
 import { ProgressContext, type Progress as ProgressValue } from './progress-context'
 import { resolveCourse, useDrillScope, type DrillScope } from './prefs'
 import { bundledCourses } from '../content'
@@ -84,12 +85,23 @@ function catalogOf(courses: LoadedCourse[]): Catalog {
   }
 }
 
+/**
+ * The provider that holds a running game.
+ *
+ * Real rather than faked: it loads nothing and reads nothing, so it renders
+ * to a string exactly as it does in the app, with no game and nothing in
+ * progress. That is the state every screen below is being looked at in.
+ */
 function render(state: ProgressState, catalog: Catalog, view: ReactNode): string {
   return renderToStaticMarkup(
     createElement(
       ProgressContext,
       { value: progressValue(state) } as never,
-      createElement(CatalogContext, { value: catalog } as never, view),
+      createElement(
+        CatalogContext,
+        { value: catalog } as never,
+        createElement(PlayProvider, null, view),
+      ),
     ),
   )
 }

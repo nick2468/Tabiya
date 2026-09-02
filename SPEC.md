@@ -448,6 +448,16 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   test click the nav and would pay for several other checks this suite cannot make; a
   test-only prop for the initial view would not, because it is production API that exists
   for a test. Recorded at phase 22.
+- **A view change itself is not driven by any test, which is the second thing a DOM test
+  environment would pay for.** Phase 23 moved the running game above the screen so that
+  looking at Study mid-game no longer throws it away. What the suite holds is the half
+  that carries the weight: the game is in a context, `Play` renders whatever the context
+  holds and owns none of it, and the switcher greys and ungreys off `inProgress`. Put the
+  game back into `Play`'s own state and three of those tests turn red. What it cannot do
+  is click Study and click back, because the view is internal state in the shell. That
+  was driven live at phase 23 instead. Recorded at phase 23, and it is the same missing
+  capability as the entry above rather than a second one: one DOM environment would
+  settle both.
 
 ## 7. Risks
 
