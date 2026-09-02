@@ -2874,3 +2874,44 @@ Gate 21 findings (2026-09-02):
 20. **Nick's own files were not listed and not reported.**
 
 - [x] **Review gate 21 passed** (2026-09-02)
+
+## Phase 22 - a course is always selected, and every mode works from the first click
+
+Goal: remove the inconsistency Nick met on first launch of 1.6.3. No chess content.
+
+Chipped as `chips/phase-22-first-click.md`. Nothing remembered a course, so `courseId`
+started null on every launch; Study and Play were disabled until one was chosen, Drill
+mixed every course without saying so at screen level, and Progress, which phase 21 made
+follow the switcher, told him to open a course. He named it: block all or allow all.
+
+**His rulings.** Allow all. A course is always selected: the one he was on last time,
+else the first visible course. The switcher always shows. Drill gets a remembered
+"Drill selected" or "Drill mixed" radio, default mixed (the v2 one-queue ruling stands as
+the default), and the switcher is greyed out on Drill while mixed is chosen so the header
+cannot appear to name a course Drill is ignoring. The preference is remembered the way
+the theme is, not in the progress file.
+
+- [ ] 22.1 Remember the selected course in localStorage, the theme's idiom.
+- [ ] 22.2 Resolve it at startup against the visible courses, fall back to the first.
+- [ ] 22.3 Enable every mode; remove `IN_COURSE` and the tooltip.
+- [ ] 22.4 The switcher always shows with more than one visible course.
+- [ ] 22.5 Drill: the radio pair, remembered, default mixed; replaces the filter row and
+  carries its counts; greys the switcher while mixed.
+- [ ] 22.6 Progress: remove the unreachable "open a course" fallback.
+- [ ] 22.7 Rewrite the Help paragraph that says Study and Play stay greyed out; add the
+  radios to the Drill section and to `HELP_CONTROLS`.
+- [ ] 22.8 Correct SPEC section 10 and log the ruling in section 8.
+- [ ] 22.9 Tests for the resolution and fallbacks, the preference, and the help; mutation
+  check the help test.
+- [ ] 22.10 Version 1.6.4.
+- [ ] 22.11 Prove it in the browser build from a cleared storage.
+
+Acceptance: a course always selected, remembered and falling back safely; all four modes
+enabled from the first click with the switcher showing; Drill's two radios remembered,
+defaulting to mixed, narrowing when selected and greying the switcher when mixed; the
+filter row gone with its counts in the labels; Progress's fallback gone; the Help document
+true against the new behaviour and its two new controls held by a test proved to fail on
+a rename; SPEC sections 8 and 10 corrected; version 1.6.4; 308 line ids unchanged; vitest
+green and `tsc -b` clean.
+
+- [ ] **Review gate 22 passed**
