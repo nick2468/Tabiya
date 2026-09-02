@@ -247,7 +247,15 @@ export function Drill() {
   )
 }
 
-function Feedback({
+/**
+ * What the app says once a move has been played, and the question it asks
+ * about how well the move was known.
+ *
+ * Exported for its test: the grade question is one of the strings the help
+ * names, and a drill session cannot be reached from a test that renders to a
+ * string.
+ */
+export function Feedback({
   card,
   verdict,
   state,

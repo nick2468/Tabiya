@@ -59,7 +59,14 @@ export function App() {
   )
 }
 
-function Shell() {
+/**
+ * The header, the nav and whichever view is showing.
+ *
+ * Exported for its test: `App` builds the two providers itself, and a test
+ * that wants the app at a chosen state has to supply them. Nothing else uses
+ * this directly.
+ */
+export function Shell() {
   const catalog = useCatalog()
   const { failure, restore, putBack } = useProgress()
   const [view, setView] = useState<View>('courses')

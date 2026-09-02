@@ -80,7 +80,21 @@ export interface Progress {
   importJson: (text: string) => Promise<void>
 }
 
-const ProgressContext = createContext<Progress | null>(null)
+/**
+ * Exported for tests that need the app at a chosen state.
+ *
+ * The provider loads its store in an effect, and rendering to a string runs no
+ * effects, so a test that goes through the provider always sees the empty
+ * state. A screen that only appears once something has been learnt cannot be
+ * reached that way. Handing this context a value directly is the way in, and
+ * nothing in the app does it: the app uses the provider.
+ *
+ * The rule below wants a context in its own file, for fast refresh. The
+ * cost of not doing that is one extra module reload while developing; the
+ * cost of doing it is a file whose only job is to break a cycle.
+ */
+// eslint-disable-next-line react/only-export-components
+export const ProgressContext = createContext<Progress | null>(null)
 
 export function useProgressStateFor(store: ProgressStore): Progress {
   const [state, setState] = useState<ProgressState>(emptyProgress)

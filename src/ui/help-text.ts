@@ -42,11 +42,10 @@ export const PANELS = {
     title: 'Who you are playing',
     text:
       "Any line lets the engine pick your opponent's replies from the whole course, " +
-      'weighted the way the course weights them, so you meet the common answers most ' +
-      "often. This chapter's line keeps the game inside the one chapter you pick, " +
-      'which is how you spar against a single defence. From a Study position starts from ' +
-      'a position you sent over with Play from here, so it stays greyed out until you ' +
-      'send one. Once the game leaves the course, the engine plays chess.',
+      "weighted the way the course weights them. This chapter's line keeps the game " +
+      'inside the one chapter you pick, which is how you spar against a single defence. ' +
+      'From a Study position starts from a position you sent over with Play from here, ' +
+      'so it stays greyed out until you send one.',
   },
   'progress-chapters': {
     title: 'Chapters',
@@ -114,6 +113,9 @@ export const HELP_SECTIONS: HelpSection[] = [
       '',
       'Nothing is compulsory and nothing is timed. Studying a chapter and never ticking a',
       'line is a fair way to use the app; you just will not get any drills.',
+      '',
+      'Help is the last thing in that row, after a faint line, because it is not a step.',
+      'It is always there, including before you have opened anything.',
     ].join('\n'),
   },
   {
@@ -180,9 +182,10 @@ export const HELP_SECTIONS: HelpSection[] = [
       '',
       'Then it schedules the card again. Get it right and the gap before it comes back',
       'grows, so a line you know well is asked rarely. Get it wrong and the gap shortens,',
-      'and the card also comes round again before the session ends. The buttons say how',
-      'long the gap will be before you press them, so nothing about the schedule is',
-      'hidden.',
+      'and the card also comes round again before the session ends. The question over the',
+      'buttons, How well did you know it?, has two answers when you played the repertoire',
+      'move, and each button says how long the gap will be before you press it. Nothing',
+      'about the schedule is hidden.',
       '',
       'A card is due when its gap has run out. Drill my weak areas first puts the concepts',
       'you have been getting wrong at the front of the queue, judged on your last twenty',
@@ -197,6 +200,8 @@ export const HELP_SECTIONS: HelpSection[] = [
       'Play is a game against Stockfish, with your opponent steered into the lines you',
       'have studied. It is the test that drilling cannot be: nobody tells you which line',
       'you are in.',
+      '',
+      'Who you are playing chooses how the game starts. There are three ways.',
       '',
       PANELS['play-launch'].text,
       '',
@@ -301,6 +306,7 @@ export const HELP_CONTROLS: HelpControl[] = [
 
   { name: 'Drill my weak areas first', screen: 'drill' },
   { name: 'Start drilling', screen: 'drill' },
+  { name: 'How well did you know it?', screen: 'drill' },
 
   { name: 'Who you are playing', screen: 'play' },
   { name: 'Any line', screen: 'play' },

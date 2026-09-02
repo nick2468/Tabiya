@@ -54,7 +54,20 @@ export interface Catalog {
   rescan: () => Promise<void>
 }
 
-const CatalogContext = createContext<Catalog | null>(null)
+/**
+ * Exported for tests that need a catalog the folder scan has finished.
+ *
+ * The scan is async and rendering to a string runs no effects, so through the
+ * provider `folder` is always null and the controls that only exist in the
+ * installed app never render. Handing this context a value directly is the way
+ * in. Nothing in the app does it: the app uses the provider.
+ *
+ * The rule below wants a context in its own file, for fast refresh. The
+ * cost of not doing that is one extra module reload while developing; the
+ * cost of doing it is a file whose only job is to break a cycle.
+ */
+// eslint-disable-next-line react/only-export-components
+export const CatalogContext = createContext<Catalog | null>(null)
 
 export function useCatalogValue(): Catalog {
   const { state } = useProgress()
