@@ -2080,6 +2080,13 @@ Gate 17 findings (2026-08-31):
     the top and check both data folders survive; uninstall with the box unticked and
     check the same; uninstall with it ticked and check they are gone; reinstall for a
     clean first start. Take an export from the Progress screen first.
+    **Run by Nick on 2026-09-02, all four steps, on 1.6.3 and 1.6.4, and every one
+    passed.** Install over the top: both folders and all three progress copies survived
+    (`courses/` absent is correct - the app only creates it on import). Uninstall with the
+    box unticked: listing identical. Uninstall with it ticked: both folders gone. Fresh
+    install of 1.6.4: clean first start, and Import progress restored his export. The
+    three guard cases are now proved on his machine, not only on fixtures, and the gate
+    16 register item is settled for good.
 
 - [x] **Review gate 17 passed** (2026-08-31)
 
