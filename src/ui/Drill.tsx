@@ -13,7 +13,7 @@ import {
   type Verdict,
 } from '../model/grade'
 import { legalDests, sideToMove } from '../model/position'
-import { dueQueue } from '../model/queue'
+import { dueQueue, earlyQueue } from '../model/queue'
 import { describeInterval, newSchedule, review, type Rating } from '../scheduler'
 import type { ProgressState } from '../storage/progress'
 import type { DrillScope } from './prefs'
@@ -53,6 +53,9 @@ export function Drill({
   const { state, answer } = useProgress()
   const { courses } = useCatalog()
   const [weakAreasFirst, setWeakAreasFirst] = useState(false)
+  // Deliberately not remembered. It is a decision for one sitting: a box that
+  // stayed ticked would make "due" mean nothing from then on.
+  const [includeEarly, setIncludeEarly] = useState(false)
   const [session, setSession] = useState<string[] | null>(null)
   const [verdict, setVerdict] = useState<Verdict | null>(null)
   const [done, setDone] = useState(0)
@@ -72,9 +75,13 @@ export function Drill({
   const byKey = useMemo(() => new Map(everyCard.map((card) => [card.key, card])), [everyCard])
 
   // The live queue, for the counts shown before a session starts.
-  const queue = useMemo(
+  const ready = useMemo(
     () => dueQueue(cards, state, { weakAreasFirst }),
     [cards, state, weakAreasFirst],
+  )
+  const queue = useMemo(
+    () => (includeEarly ? earlyQueue(cards, state, { weakAreasFirst }) : ready),
+    [cards, includeEarly, ready, state, weakAreasFirst],
   )
 
   // What each radio is worth, so the choice can be read before it is made.
@@ -144,9 +151,17 @@ export function Drill({
           Drill shows you positions out of the lines you have marked learnt, and asks you
           for the repertoire move. It brings each one back on its own schedule.
         </p>
+        {/* The count never silently changes meaning. With the early box
+            ticked it says how many of the cards it is offering are actually
+            due, so a bigger number cannot be read as more work arriving. */}
         <p className="drill-summary">
           {queue.length === 0 ? (
             <>Nothing is due. {nextDueLine(cards, state)}</>
+          ) : ready.length < queue.length ? (
+            <>
+              <strong>{queue.length}</strong> {queue.length === 1 ? 'card' : 'cards'},{' '}
+              {ready.length} of them due now, out of {cards.length} in your learnt lines.
+            </>
           ) : (
             <>
               <strong>{queue.length}</strong> {queue.length === 1 ? 'card' : 'cards'} ready, out of{' '}
@@ -195,6 +210,19 @@ export function Drill({
         <p className="hint">
           This puts the concepts you have been getting wrong at the front of the queue,
           judged on your last twenty answers for each one.
+        </p>
+        <label className="weak-toggle">
+          <input
+            type="checkbox"
+            checked={includeEarly}
+            onChange={(event) => setIncludeEarly(event.target.checked)}
+          />
+          Include cards that are not due yet
+        </label>
+        <p className="hint">
+          Everything due comes first, then the cards nearest coming back. An early answer
+          is an ordinary answer: it is scheduled from when you gave it, so the gap it
+          earns is a little shorter than it would have been on the day.
         </p>
         <button type="button" className="primary" onClick={start} disabled={queue.length === 0}>
           Start drilling

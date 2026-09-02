@@ -216,6 +216,14 @@ export const HELP_SECTIONS: HelpSection[] = [
       'you have been getting wrong at the front of the queue, judged on your last twenty',
       'answers for each one. Start drilling works through what is due; if nothing is due,',
       'the screen says when the next card comes back.',
+      '',
+      'Include cards that are not due yet lets you keep going once you have finished for',
+      'the day. Everything due comes first, then the cards nearest coming back. An early',
+      'answer is an ordinary answer, and it is scheduled from when you gave it: get it',
+      'right a week early and the next gap grows from that day rather than from the day it',
+      'was due, so it is a little shorter than it would have been. Nothing is hidden, and',
+      'the buttons still say what each answer costs. The box is not remembered, because a',
+      'box that stayed ticked would make due mean nothing.',
     ].join('\n'),
   },
   {
@@ -348,6 +356,7 @@ export const HELP_CONTROLS: HelpControl[] = [
   { name: 'Drill mixed', screen: 'drill' },
   { name: 'Drill selected', screen: 'drill' },
   { name: 'Drill my weak areas first', screen: 'drill' },
+  { name: 'Include cards that are not due yet', screen: 'drill' },
   { name: 'Start drilling', screen: 'drill' },
   { name: 'How well did you know it?', screen: 'drill' },
 

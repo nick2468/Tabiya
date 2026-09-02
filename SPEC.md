@@ -47,7 +47,9 @@ board appears, Nick plays a move, the app grades it.
 
 Cards are keyed by position (FEN) and deduplicated across chapters, so a shared setup
 move is only ever one card. A "drill my weak areas" filter prefers cards whose concept
-tags have the lowest rolling accuracy.
+tags have the lowest rolling accuracy. A second, unremembered option, "Include cards
+that are not due yet", offers everything due first and then the cards nearest coming
+back; an early answer goes through the ordinary review path.
 
 ### Play
 
@@ -595,6 +597,18 @@ strength**, made at the scan's profile, never read off a weakened opponent's sea
 because a bar that lies is worse than no bar. And every value it shows is **handed to the
 scan**, so the report is built from the numbers that were on the screen and cannot
 contradict them afterwards.
+
+2026-09-03, phase 23: **a card can be drilled before it is due, and an early answer is
+an ordinary answer.** After one full session Nick could not drill a course again for a
+week, and the app gave him no way to say he wanted to anyway. The schedule was right and
+the missing thing was an override. So a checkbox, not remembered between sessions: it is
+a decision for one sitting, and a box that stayed ticked would make "due" mean nothing
+from then on. There is no second recording path. FSRS already knows how much time has
+passed, so an early Good grows the gap less than a Good on the day and an early wrong
+answer shortens it as usual, and the buttons already say what each answer is worth.
+**The FSRS parameters are not touched**, which is the standing ruling in
+`scheduler/index.ts`: tuning them is a later question and a wrong answer there is worse
+than the default.
 
 ## 9. v1 acceptance
 

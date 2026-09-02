@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { cardWeakness, dueCount, dueQueue, newCount } from './queue'
+import { cardWeakness, dueCount, dueQueue, earlyQueue, newCount } from './queue'
 import { newSchedule, review } from '../scheduler'
 import { emptyProgress, recordAnswer, type ProgressState } from '../storage/progress'
 import { cardKey } from './ids'
@@ -164,6 +164,46 @@ describe('the weak-areas filter', () => {
       'b',
       'a',
     ])
+  })
+})
+
+describe('earlyQueue', () => {
+  it('puts everything due first and the rest soonest due first', () => {
+    // 'a' comes back in a day, 'b' in ten, 'c' has never been answered and is
+    // therefore due now.
+    let state = answered(emptyProgress(), 'a', NOW, 'good')
+    state = answered(state, 'b', NOW, 'easy')
+    const cards = [card('a'), card('b'), card('c')]
+
+    expect(dueQueue(cards, state, { now: NOW }).map((c) => c.position)).toEqual(['c'])
+    expect(earlyQueue(cards, state, { now: NOW }).map((c) => c.position)).toEqual([
+      'c',
+      'a',
+      'b',
+    ])
+  })
+
+  it('is the due queue exactly when everything is due', () => {
+    const cards = [card('a'), card('b')]
+    expect(earlyQueue(cards, emptyProgress(), { now: NOW }).map((c) => c.position)).toEqual(
+      dueQueue(cards, emptyProgress(), { now: NOW }).map((c) => c.position),
+    )
+  })
+
+  it('leaves the due part in the order the due queue chose, weak areas and all', () => {
+    let state = emptyProgress()
+    // vs-c5 is going badly, so a card tagged with it leads the due part.
+    for (const correct of [false, false, false, false]) {
+      state = recordAnswer(state, COURSE, 'elsewhere', ['vs-c5'], correct, newSchedule(NOW))
+    }
+    for (const correct of [true, true, true, true]) {
+      state = recordAnswer(state, COURSE, 'elsewhere-2', ['development'], correct, newSchedule(NOW))
+    }
+    state = answered(state, 'z', NOW, 'easy')
+    const cards = [card('a', ['development']), card('b', ['vs-c5']), card('z')]
+
+    expect(earlyQueue(cards, state, { now: NOW, weakAreasFirst: true }).map((c) => c.position))
+      .toEqual(['b', 'a', 'z'])
   })
 })
 

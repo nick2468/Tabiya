@@ -81,6 +81,33 @@ export function sortQueue(cards: Card[], state: ProgressState, options: QueueOpt
   })
 }
 
+/**
+ * Every card, with the ones that are due first and the rest behind them.
+ *
+ * For the trainee who has finished today's cards and wants to keep going.
+ * The due part keeps exactly the order `dueQueue` gives it, weak areas first
+ * included, because the schedule's own opinion about what to ask next does
+ * not stop being right just because there is more work after it. The rest
+ * follow soonest due first, so the cards nearest coming back are the ones
+ * brought forward.
+ *
+ * A card that has never been answered is always due, so nothing here is
+ * without a schedule.
+ */
+export function earlyQueue(cards: Card[], state: ProgressState, options: QueueOptions = {}): Card[] {
+  const due = dueQueue(cards, state, options)
+  const held = new Set(due.map((card) => card.key))
+  const later = cards
+    .filter((card) => !held.has(card.key))
+    .sort((a, b) => dueAt(state, a) - dueAt(state, b))
+  return [...due, ...later]
+}
+
+function dueAt(state: ProgressState, card: Card): number {
+  const schedule = scheduleFor(state, card.key)
+  return schedule ? new Date(schedule.due).getTime() : Number.POSITIVE_INFINITY
+}
+
 /** How many cards are due right now. */
 export function dueCount(cards: Card[], state: ProgressState, now: Date = new Date()): number {
   return cards.filter((card) => isDue(scheduleFor(state, card.key), now)).length
