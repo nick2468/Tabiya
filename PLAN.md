@@ -3170,4 +3170,41 @@ Open items (phase 23):
 
 Acceptance: as the chip's final paragraph.
 
-- [ ] **Review gate 23**
+Gate 23 findings (2026-09-03):
+
+14. **Verified for the gate from the repo:** 758 tests and `tsc -b` clean; oxlint reports
+    the same warnings as before plus the one the new provider suppresses for the same
+    reason the other two do; no em dashes under `src/` or `courses/`; version 1.6.5 in all
+    three files; the window 1200 by 980; **308 line ids before and after** with nothing
+    gone and nothing added; the bundles regenerated and held by `bundle.test.ts`;
+    `note-lines.mjs` reports 0 faults and `note-claims.mjs` the standing list.
+15. **Both new tests were mutation-checked at the gate.** Putting "Take towards the centre"
+    back on the Slav ...exf5 note turns the direction test red naming the line and the
+    move (`exf5: e6 to f5`). Renaming the Undo button to "Take back" turns the help test
+    red naming the control and the screen. Both files were restored from git afterwards.
+16. **Driven in the Vite build at 1200x980.** The header measures 8px above the rule and 8px
+    from the rule to the Course dropdown. A Caro-Kann game: the engine opened 1.e4, the bar
+    sat left of the board at 421px against a 420px board with White's share at the TOP,
+    labelled "Evaluation: level", and Undo and Redo were disabled with only the opponent's
+    move played. After 1...c6 2.Nc3 Undo went back to `1.e4` on the board, the move list
+    and the bar in one step, Redo put all three back, and the switcher was greyed on Study
+    mid-game with "A game is in progress..." and the game was still at move 2 on return.
+    Stop and review produced the three report headings and made the switcher live again.
+    On Study the opponent's reply carried the frequency title and there was no badge.
+17. **The builder's own bug (open item 5) was the right diagnosis and the right fix.** A
+    memoised context value with the tick counter outside its dependencies is exactly the
+    failure that a string-rendering suite cannot see, and rebuilding the value removes the
+    class rather than the instance. It is in the register with what it cost.
+18. **Two things beyond the chip were right to take:** the book moving into the provider
+    with the game (a chapter game reviewed after a look at Study would have been judged
+    against the whole course), and the weight badge's colour test, which had hidden the
+    badge in every Black course since it was written. Neither needed a ruling.
+19. **The direction rule found ten faults, not the five the chip counted**, and the eleventh
+    change, the Vienna cxb3 rewording, is a sound reading: a note under one move that talks
+    about another move is unreadable whether or not it is true.
+20. **The chess content was not otherwise touched.** Notes only; no `san` moved; no engine
+    run was needed and none was made.
+21. **Nick's own files were not listed and not reported.** The browser build's storage held
+    the one reviewed game from this gate and was cleared afterwards.
+
+- [x] **Review gate 23 passed** (2026-09-03)
