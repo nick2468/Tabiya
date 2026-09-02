@@ -15,6 +15,7 @@ import {
 import { legalDests, sideToMove } from '../model/position'
 import { dueQueue, earlyQueue } from '../model/queue'
 import { describeInterval, newSchedule, review, type Rating } from '../scheduler'
+import { nextCardLine } from './card-words'
 import type { ProgressState } from '../storage/progress'
 import type { DrillScope } from './prefs'
 import { colourName, type LoadedCourse, type Shape } from '../model/types'
@@ -156,11 +157,11 @@ export function Drill({
             due, so a bigger number cannot be read as more work arriving. */}
         <p className="drill-summary">
           {queue.length === 0 ? (
-            <>Nothing is due. {nextDueLine(cards, state)}</>
+            <>Nothing is ready. {nextCardLine(cards, state)}</>
           ) : ready.length < queue.length ? (
             <>
               <strong>{queue.length}</strong> {queue.length === 1 ? 'card' : 'cards'},{' '}
-              {ready.length} of them due now, out of {cards.length} in your learnt lines.
+              {ready.length} of them ready now, out of {cards.length} in your learnt lines.
             </>
           ) : (
             <>
@@ -183,7 +184,7 @@ export function Drill({
                 checked={scope === 'mixed'}
                 onChange={() => onScope('mixed')}
               />
-              Drill mixed: <span className="scope-detail">every course, {dueMixed} due</span>
+              Drill mixed: <span className="scope-detail">every course, {dueMixed} ready</span>
             </label>
             <label>
               <input
@@ -193,7 +194,7 @@ export function Drill({
               />
               Drill selected:{' '}
               <span className="scope-detail">
-                {selected ? selected.title : 'no course'}, {dueSelected} due
+                {selected ? selected.title : 'no course'}, {dueSelected} ready
               </span>
             </label>
           </fieldset>
@@ -220,7 +221,7 @@ export function Drill({
           Include cards that are not due yet
         </label>
         <p className="hint">
-          Everything due comes first, then the cards nearest coming back. An early answer
+          Everything ready comes first, then the cards nearest coming back. An early answer
           is an ordinary answer: it is scheduled from when you gave it, so the gap it
           earns is a little shorter than it would have been on the day.
         </p>
@@ -374,15 +375,6 @@ function answerShapes(card: Card, verdict: Verdict): Shape[] {
   const played = squaresForSan(card.fen, verdict.san)
   if (!played) return [expected]
   return [{ orig: played.from, dest: played.to, brush: 'red' }, expected]
-}
-
-/** When the next card comes back, in words. */
-function nextDueLine(cards: Card[], state: ProgressState): string {
-  const upcoming = cards
-    .map((card) => state.cards[card.key])
-    .filter((schedule) => Boolean(schedule))
-    .sort((a, b) => new Date(a.due).getTime() - new Date(b.due).getTime())[0]
-  return upcoming ? `The next card comes back ${describeInterval(upcoming)}.` : ''
 }
 
 /**

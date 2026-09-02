@@ -105,7 +105,7 @@ function CourseTile({
             learnt
           </span>
           <span>
-            <strong>{learnt?.due ?? 0}</strong> due now
+            <strong>{learnt?.due ?? 0}</strong> ready to drill
           </span>
         </span>
         {entry.origin === 'external' ? (

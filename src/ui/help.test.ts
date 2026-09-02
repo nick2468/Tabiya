@@ -272,8 +272,8 @@ describe('the help document', () => {
       'Line',
       'Card',
       'Learnt',
-      'Due',
-      'Never answered',
+      'Ready',
+      'Not yet drilled',
       'Concept',
     ]) {
       expect(words?.body, word).toContain(`**${word}.**`)

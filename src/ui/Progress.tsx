@@ -10,6 +10,7 @@ import type { Card } from '../model/cards'
 import { backupCopy, isDesktop, readBackup, saveBackup, type BackupCopy } from './backup'
 import { profileFolders, type ProfileFolders } from './folders'
 import { HelpPanel } from './Help'
+import { nextCardLine } from './card-words'
 import './progress.css'
 
 /**
@@ -61,6 +62,8 @@ export function Progress({ courseId }: { courseId: string | null }) {
     [cards, courses, state],
   )
 
+  const nextUp = rollup.due === 0 && rollup.cards > 0 ? nextCardLine(cards, state) : ''
+
   if (courses.length === 0) {
     return <p className="empty">No courses loaded. Check the diagnostics view.</p>
   }
@@ -69,7 +72,7 @@ export function Progress({ courseId }: { courseId: string | null }) {
     <div className="progress">
       <h2>Progress</h2>
       <p className="progress-lead">
-        What you have learnt, what is due, and which ideas are not sticking. Nothing here
+        What you have learnt, what is ready, and which ideas are not sticking. Nothing here
         is a score. The numbers are here to tell you what to work on next.
       </p>
 
@@ -80,8 +83,13 @@ export function Progress({ courseId }: { courseId: string | null }) {
         <strong>{rollup.learnt}</strong> of {rollup.lines} lines learnt across{' '}
         {courses.length} {courses.length === 1 ? 'course' : 'courses'}.{' '}
         <strong>{rollup.cards}</strong> {rollup.cards === 1 ? 'card' : 'cards'},{' '}
-        <strong>{rollup.due}</strong> due now, {rollup.fresh} never answered.
+        <strong>{rollup.due}</strong> ready to drill now, {rollup.fresh} not yet drilled.
       </p>
+      {/* Zero ready is the state the old wording could not explain: it is
+          what everything drilled looks like, and it looks the same as
+          nothing learnt. Saying when the next one comes back tells the two
+          apart without anyone having to work it out. */}
+      {nextUp ? <p className="hint">{nextUp}</p> : null}
 
       {chosen ? (
         <CourseProgress key={chosen.id} course={chosen} cards={cards} state={state} />
@@ -158,7 +166,7 @@ function CourseProgress({
       <p className="course-totals">
         <strong>{totals.learntLines}</strong> of {totals.totalLines} lines learnt.{' '}
         <strong>{totals.cards}</strong> {totals.cards === 1 ? 'card' : 'cards'},{' '}
-        <strong>{totals.due}</strong> due now, {totals.fresh} never answered.
+        <strong>{totals.due}</strong> ready to drill now, {totals.fresh} not yet drilled.
       </p>
 
       <HelpPanel panel="progress-chapters">
@@ -169,8 +177,8 @@ function CourseProgress({
           <tr>
             <th>Chapter</th>
             <th className="num">Learnt</th>
-            <th className="num">Due</th>
-            <th className="num">New</th>
+            <th className="num">Ready</th>
+            <th className="num">Not yet drilled</th>
           </tr>
         </thead>
         <tbody>
