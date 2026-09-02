@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { useProgress } from './progress-context'
 import { StockfishEngine, strengthProfile, whitePovPawns, type Engine } from '../engine'
 import { sanForMove } from '../model/grade'
@@ -92,6 +92,10 @@ function usePlayValue(): PlayGame {
   // What the game was started with. In state as well as in a ref, because the
   // screen renders from it and a ref read during render would not update.
   const [setup, setSetup] = useState<StartOptions | null>(null)
+  // The session is a mutable object, so playing, undoing and redoing change
+  // nothing React can see. Bumping this counter is what says something has
+  // happened. The value below is rebuilt on every render, so that is all it
+  // takes; see the note there for why it is not memoised.
   const [, setTick] = useState(0)
   const [thinking, setThinking] = useState(false)
   const [engineError, setEngineError] = useState<string | null>(null)
@@ -295,40 +299,35 @@ function usePlayValue(): PlayGame {
     engineRef.current = null
   }, [])
 
-  return useMemo(
-    () => ({
-      session,
-      book: setup?.book ?? null,
-      courseId: setup?.courseId ?? null,
-      report,
-      scanning,
-      evaluations,
-      thinking,
-      engineError,
-      inProgress: session !== null && report === null,
-      start,
-      play,
-      undo,
-      redo,
-      finish,
-      reset,
-    }),
-    [
-      engineError,
-      evaluations,
-      finish,
-      play,
-      redo,
-      report,
-      reset,
-      scanning,
-      session,
-      setup,
-      start,
-      thinking,
-      undo,
-    ],
-  )
+  // A fresh object every render, deliberately, with no useMemo around it.
+  //
+  // The children of a provider are the same element from one render to the
+  // next, so React skips them unless the context VALUE changes. Memoising
+  // this made that value survive a render, and a memo has to list everything
+  // that can change: the counter above is not a field of the value, so it was
+  // easy to leave out, and leaving it out meant undo moved the game and not
+  // the screen. It was caught by playing a game, not by anything else.
+  //
+  // Rebuilding it instead is one object per render of a provider that only
+  // renders when something has actually happened, and the whole failure mode
+  // goes with the memo.
+  return {
+    session,
+    book: setup?.book ?? null,
+    courseId: setup?.courseId ?? null,
+    report,
+    scanning,
+    evaluations,
+    thinking,
+    engineError,
+    inProgress: session !== null && report === null,
+    start,
+    play,
+    undo,
+    redo,
+    finish,
+    reset,
+  }
 }
 
 export function PlayProvider({ children }: { children: React.ReactNode }) {

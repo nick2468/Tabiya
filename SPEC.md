@@ -461,6 +461,15 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   capability as the entry above rather than a second one: one DOM environment would
   settle both.
 
+  **What that gap cost, once, in the same phase.** The provider's value was memoised, and
+  the counter that says the mutable session has changed was not in the memo's
+  dependencies. Children of a provider are the same element from render to render, so
+  React skips them unless the context value changes: undo moved the game and left the
+  screen showing the position before it. Every test passed. It was found by playing a
+  game in the browser and pressing Undo, and it is why the value is no longer memoised at
+  all. Written down because the next person to reach for a `useMemo` there should know
+  what it costs.
+
 ## 7. Risks
 
 - **Engine steering** is the one novel design piece; the book-until-exit design needs
