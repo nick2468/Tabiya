@@ -9,9 +9,11 @@
   justify-content: space-between;
   gap: 24px;
   flex-wrap: wrap;
-  margin-bottom: 16px;
   border-bottom: 1px solid var(--line);
+  /* The same 8px above the rule and below it. It was 8 and 16, which read as
+     the dropdown having drifted down away from the header it belongs to. */
   padding-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .app-header h1 {

@@ -123,16 +123,16 @@
   word-break: break-all;
 }
 
-/* A row of its own between the header above and the view below, so it needs
-   its own space on both sides: the header's own 16px sits above it, and the
-   16px below matches. The label and the select are centred on each other
-   rather than sharing a baseline, because the two boxes are different
-   heights. */
+/* A row of its own between the header above and the view below. The header
+   leaves 8px above it, matching the 8px above its own rule, and this keeps
+   the 24px below so the view underneath has not moved. The label and the
+   select are centred on each other rather than sharing a baseline, because
+   the two boxes are different heights. */
 .course-switch {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 0 0 16px;
+  margin: 0 0 24px;
   color: var(--text-dim);
   font-size: 0.9rem;
 }
