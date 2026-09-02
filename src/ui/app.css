@@ -54,6 +54,15 @@
   font-weight: 600;
 }
 
+/* Help is not a step in the loop, so it does not sit in the row of steps. One
+   faint rule is enough to say so. */
+.nav-separator {
+  align-self: stretch;
+  width: 1px;
+  margin: 6px 6px;
+  background: var(--line);
+}
+
 .scratch {
   margin-top: 40px;
 }

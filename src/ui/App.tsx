@@ -3,6 +3,7 @@ import { Catalog } from './Catalog'
 import { CatalogProvider, useCatalog } from './catalog-context'
 import { Diagnostics } from './Diagnostics'
 import { Drill } from './Drill'
+import { Help } from './Help'
 import { Play, type PlayRequest } from './Play'
 import { Progress } from './Progress'
 import { ProgressProvider, useProgress } from './progress-context'
@@ -18,11 +19,16 @@ import './app.css'
  * they do not. That split is the ruling in SPEC.md section 10 and it is the
  * only reason the shell holds a selected course at all.
  *
+ * Progress is given the selected course all the same. It still needs none - it
+ * opens with the rollup across everything and works with nothing chosen - but
+ * the detail under the rollup follows the course switcher rather than listing
+ * every course, which is the phase 21 ruling recorded in SPEC.md section 8.
+ *
  * The play request is held here rather than in either view, because it is the
  * one thing Study and Play have to say to each other: "start a game from this
  * position".
  */
-type View = 'courses' | 'study' | 'drill' | 'play' | 'progress' | 'diagnostics'
+type View = 'courses' | 'study' | 'drill' | 'play' | 'progress' | 'help' | 'diagnostics'
 
 /** Views that need a course chosen first. */
 const IN_COURSE: View[] = ['study', 'play']
@@ -34,6 +40,14 @@ const MODES: { view: View; label: string }[] = [
   { view: 'drill', label: 'Drill' },
   { view: 'progress', label: 'Progress' },
 ]
+
+/**
+ * Help sits apart from the workflow modes, after a separator, and is never
+ * disabled. It is not a step in the loop and it must be reachable from the
+ * screen somebody is stuck on, including the one they see before any course is
+ * open.
+ */
+const HELP_MODE: { view: View; label: string } = { view: 'help', label: 'Help' }
 
 export function App() {
   return (
@@ -104,6 +118,15 @@ function Shell() {
               {mode.label}
             </button>
           ))}
+          <span className="nav-separator" aria-hidden="true" />
+          <button
+            type="button"
+            className={showing === HELP_MODE.view ? 'nav-link current' : 'nav-link'}
+            aria-current={showing === HELP_MODE.view ? 'page' : undefined}
+            onClick={() => setView(HELP_MODE.view)}
+          >
+            {HELP_MODE.label}
+          </button>
           {showDiagnostics ? (
             <button
               type="button"
@@ -169,6 +192,7 @@ function Shell() {
         ) : null}
         {showing === 'drill' ? <Drill /> : null}
         {showing === 'progress' ? <Progress /> : null}
+        {showing === 'help' ? <Help /> : null}
         {showing === 'diagnostics' ? <Diagnostics /> : null}
       </main>
     </div>
