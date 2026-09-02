@@ -43,8 +43,16 @@ export function Study({
 
   return (
     <div className="study">
-      <nav className="chapter-list" aria-label="Chapters">
+      {/* The word "Chapters" was here as an aria-label, so a screen reader was
+          told what this list is and a sighted reader was not. Play and
+          Progress both use the word, which made it vocabulary the app used
+          twice and showed nowhere. One visible label is worth a paragraph of
+          help. */}
+      <nav className="chapter-list" aria-labelledby="chapter-list-label">
         <h2>{course.title}</h2>
+        <h3 id="chapter-list-label" className="chapter-list-label">
+          Chapters
+        </h3>
         <ol>
           {chapters.map((entry, index) => (
             <li key={entry.id}>
