@@ -2728,21 +2728,21 @@ the Study chapter list, which carries `aria-label="Chapters"` so a screen reader
 and a sighted reader is not, while Play and Progress both use the word. One visible label
 is worth more than a paragraph of help.
 
-- [ ] 21.1 One content module feeds both the `?` panels and the Help document.
-- [ ] 21.2 Label the Study chapter list on screen.
-- [ ] 21.3 A Help mode in the nav, after a separator, never disabled.
-- [ ] 21.4 The Help document, eight sections, rendered through `Prose`.
-- [ ] 21.5 Three `?` panels: Play's "Who you are playing", Progress's "Chapters" and
+- [x] 21.1 One content module feeds both the `?` panels and the Help document.
+- [x] 21.2 Label the Study chapter list on screen.
+- [x] 21.3 A Help mode in the nav, after a separator, never disabled.
+- [x] 21.4 The Help document, eight sections, rendered through `Prose`.
+- [x] 21.5 Three `?` panels: Play's "Who you are playing", Progress's "Chapters" and
   "Concepts". Keyboard-reachable, not hover tooltips.
-- [ ] 21.6 The landing page loses its statistics for "Select a course to study".
-- [ ] 21.7 Drill: a sentence under the heading and "How well did you know it?" over the
+- [x] 21.6 The landing page loses its statistics for "Select a course to study".
+- [x] 21.7 Drill: a sentence under the heading and "How well did you know it?" over the
   grade buttons.
-- [ ] 21.8 Progress: a sentence, and the detail follows the Course dropdown. SPEC
+- [x] 21.8 Progress: a sentence, and the detail follows the Course dropdown. SPEC
   sections 8 and 10 updated, because section 10 currently rules otherwise.
-- [ ] 21.9 A test holding every help string to the control it names.
-- [ ] 21.10 Version 1.6.3, because the second digit is the course count and no course is
+- [x] 21.9 A test holding every help string to the control it names.
+- [x] 21.10 Version 1.6.3, because the second digit is the course count and no course is
   added.
-- [ ] 21.11 Prove it in the browser build.
+- [x] 21.11 Prove it in the browser build.
 
 Acceptance: one content module feeding both surfaces; the chapter list labelled; Help in
 the nav and never disabled; the eight sections including the words list; three `?` panels
@@ -2750,5 +2750,79 @@ and no more; the landing page reading as ruled with its rollup verified still on
 Drill's sentence and label; Progress following the dropdown with the spec corrected; a
 test that fails on a renamed control; version 1.6.3; 308 line ids unchanged; vitest green
 and `tsc -b` clean.
+
+
+Open items (phase 21):
+
+1. **One module, two surfaces, and the panels are paragraphs of the document rather than
+   copies of it.** `src/ui/help-text.ts` holds the eight sections, the three `?` panels
+   and the list of controls the prose names. Each panel's text is interpolated into its
+   section, so the Help document literally contains the panel word for word, and
+   `help.test.ts` asserts that rather than trusting it. It is named `help-text.ts` and not
+   `help.ts` because Windows treats `help.ts` and `Help.tsx` as the same file and `tsc`
+   refuses the pair.
+2. **The naming-first rule paid for itself twice.** The Study chapter list carried
+   `aria-label="Chapters"`, so a screen reader was told what it is and a sighted reader
+   was not; it is now a visible heading the nav points at with `aria-labelledby`, one
+   source for both readers. The landing page's rollup went the same way: "1 of 308 lines
+   learnt across 6 courses" is written in vocabulary the app has not taught by the time
+   somebody reads it, and the front door now says what to do. **Verified in the running
+   app rather than assumed**: Progress carries the identical rollup, from the same
+   `courseTotals` and `dueCount` over the same visible courses, and it read "0 of 308
+   lines learnt across 6 courses" with no course open.
+3. **The test needed three seams, and each one is the same fact.** Rendering to a string
+   runs no effects, so the progress provider always renders the empty state and the
+   catalog's folder scan never finishes. Drill's start screen only exists once something
+   is learnt, and the installed app's own controls only render once a folder is known, so
+   neither is reachable through the providers. `ProgressContext` and `CatalogContext` are
+   exported for a test to hand a value to, and `Feedback` is exported because a drill
+   session cannot be reached at all. The lint rule that wants a context in its own file is
+   answered where it applies, with the reason, so the warning count is still **6** and
+   they are the same six that predate the phase.
+4. **Proved by mutation, six times.** Renaming `Auto step this line`, `Start drilling`,
+   the Study `Chapters` label, the Progress `Concepts` heading, `Who you are playing` and
+   `How well did you know it?` each turns the suite red and names the string that went
+   missing. Every one was put back and the tree left clean. Two of the six were written
+   only BECAUSE the mutation found them silent: the prose named no control called Help and
+   none called "How well did you know it?", so the list could not hold them, and both
+   sentences were added to the document.
+5. **One deliberate deviation, in 21.7.** The chip asked for a label above the button row.
+   It is there only after the repertoire move, where the row is two buttons and there is a
+   choice to make. After a wrong move the row is one Continue button, and "How well did
+   you know it?" over a move you did not know is a question with no answer. The label is
+   the row's `aria-labelledby` where it appears.
+6. **The `?` is a button in the flow, not a tooltip.** Three of them, no more. Each has
+   `aria-expanded`, an `aria-label` of "Help on this screen: <what>", and closes on Escape
+   from the button, which is where focus is. The panel opens underneath in the flow, so
+   opening it moves what is below it by the panel's own height and moves nothing else.
+   Play's is the one shaped differently: the button goes in the `<legend>`, beside the
+   words it explains, and the panel does not, because a legend is read out again for every
+   radio under it.
+7. **Two places where the code won over the chip, both recorded rather than papered
+   over.** Help is last in the nav in the shipped app, but in a dev build `Diagnostics`
+   renders after it, so the order there is Help then Diagnostics then the theme toggle.
+   And `Add a course from a file` does not exist in the browser build at all: `ImportCourse`
+   returns null without a courses folder. The help names it because the help is written for
+   the installed app, and the test renders a catalog whose scan has finished so it can
+   still hold the name.
+8. **What was driven, and what was only read.** Driven live at 1280x900 against the Vite
+   build, title checked first: Help opens from the nav with no course selected and renders
+   through `Prose`; the landing page reads "Select a course to study"; Progress with no
+   course shows the rollup and says to open one; Progress with the Vienna chosen shows the
+   Vienna and nothing else; both Progress `?` panels open in place and Escape closes the
+   focused one; Play's `?` opens inside its fieldset; Drill's sentence sits under the
+   heading and "HOW WELL DID YOU KNOW IT?" sits over the two grade buttons, reached by
+   ticking a line and playing e4. Only read, not driven: the light theme, the packaged
+   Windows build, and the installed app's courses folder. The line ticked for the drill
+   was unticked afterwards and `learntLines` in the browser build confirmed back to empty.
+9. **The heading level was a browser-only finding.** The document's sections were `##`,
+   the same level as the "Help" heading above them, so "What this is" rendered larger than
+   the page it was on. Nothing in the suite could see that. They are `###` now.
+10. **The spec disagreed and was corrected, not left.** Section 10 ruled that Progress
+    shows the rollup and each course. Section 8 now carries the phase 21 ruling with the
+    date and the reason, and section 10 says what Progress does and points at it.
+11. **No chess moved.** Nothing under `courses/` differs from the commit this phase
+    started on, checked with `git diff`, and the running app still counts 308 lines across
+    six courses.
 
 - [ ] **Review gate 21 passed**

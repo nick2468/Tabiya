@@ -422,6 +422,25 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   make it worth promoting is an anchor: an intro that declared which line each sequence
   hangs off would be checkable exactly like a node note, which is a content-format
   decision and Nick's to take. Recorded at phase 20.
+- **The help test cannot reach the Play report, so three names in the help are unheld.**
+  Phase 21's test walks six screens and asserts that every control the help names is on
+  the screen it says. The Play report is the one surface it cannot render: its three
+  headings (The repertoire, Your moves, The final position) only exist after a finished
+  game, and building a `GameReport` fixture means building a game. The help names all
+  three and all three were checked by reading `Play.tsx`, which is exactly the check that
+  goes stale. What would make it worth taking is either a small `GameReport` fixture,
+  which is honest work rather than a trick, or extracting the report into a component
+  that takes one. Neither is large; it was left because the phase's other five screens
+  cover the controls somebody actually clicks, and the report is read, not operated.
+  Recorded at phase 21.
+- **Two React contexts are exported from their provider files so tests can supply a
+  value.** Rendering to a string runs no effects, so the providers always render their
+  empty starting state and screens that only exist after something is loaded cannot be
+  reached. The lint rule that wants a context in its own file is suppressed at those two
+  lines with the reason written beside it. Moving both contexts into their own module is
+  the answer the rule asks for, and it is a file whose only job is to break a cycle, so
+  it was not taken. What would make it worth taking is a third file needing the same
+  thing. Recorded at phase 21.
 
 ## 7. Risks
 
