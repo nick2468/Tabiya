@@ -14,7 +14,7 @@ import { buildCardsAcross } from '../model/cards'
 import { judge } from '../model/grade'
 import { courseLineIds } from '../model/lines'
 import { emptyProgress, type ProgressState } from '../storage/progress'
-import type { CourseEntry } from '../model/types'
+import type { CourseEntry, LoadedCourse } from '../model/types'
 
 /**
  * The help has to stay true, and the way it goes false is quiet.
@@ -33,6 +33,11 @@ import type { CourseEntry } from '../model/types'
 
 const course = bundledCourses.find((entry) => entry.id === 'london-white')
 if (!course) throw new Error('the London is not in the bundled set')
+
+// A second course, because two is what makes the Course dropdown and Drill's
+// two options exist at all. One course has nothing to choose between.
+const other = bundledCourses.find((entry) => entry.id === 'caro-kann-black')
+if (!other) throw new Error('the Caro-Kann is not in the bundled set')
 
 /**
  * The app at a chosen state, through the context rather than the provider.
@@ -71,24 +76,27 @@ const learntOne: ProgressState = {
  *
  * Through the provider the scan never runs, so `folder` stays null and the
  * controls that only exist in the installed app do not render. This is the
- * installed app's catalog: one bundled course, and a folder to drop more into.
+ * installed app's catalog: two bundled courses, and a folder to drop more
+ * into.
  */
-const entry: CourseEntry = {
-  source: course.id,
+const bundled = (loaded: LoadedCourse): CourseEntry => ({
+  source: loaded.id,
   origin: 'bundled',
-  course,
+  course: loaded,
   errors: [],
-}
+})
+
+const entries = [bundled(course), bundled(other)]
 
 const catalog: Catalog = {
-  entries: [entry],
-  visible: [entry],
+  entries,
+  visible: entries,
   hidden: [],
-  courses: [course],
-  chapters: course.chapters,
+  courses: [course, other],
+  chapters: [...course.chapters, ...other.chapters],
   scanned: true,
   folder: 'C:/Users/example/Repertoire Trainer/courses',
-  find: (id: string) => (id === course.id ? course : undefined),
+  find: (id: string) => [course, other].find((each) => each.id === id),
   rescan: async () => {},
 }
 
@@ -117,7 +125,10 @@ const screens: Record<Screen, string> = {
     createElement(Play, { course, request: null, onRequestUsed: () => {} }),
   ),
   drill:
-    inApp(learntOne, createElement(Drill)) +
+    inApp(
+      learntOne,
+      createElement(Drill, { courseId: course.id, scope: 'mixed', onScope: () => {} }),
+    ) +
     renderToStaticMarkup(
       createElement(Feedback, {
         card: firstCard,
@@ -159,6 +170,23 @@ function controlNames(html: string): Set<string> {
   }
   for (const match of html.matchAll(/aria-label="([^"]*)"/g)) add(match[1])
   return found
+}
+
+/**
+ * Whether a screen has a control by this name.
+ *
+ * Exact, or the name followed by a colon. A control is allowed to carry its
+ * detail after one: "Drill mixed: every course, 12 due" is the control called
+ * Drill mixed, and the count beside it is what makes the choice readable
+ * before it is made. The colon is the only separator accepted, so appending
+ * anything else to a name still fails - "Start drilling now" is not "Start
+ * drilling".
+ */
+function hasControl(names: Set<string>, name: string): boolean {
+  for (const found of names) {
+    if (found === name || found.startsWith(`${name}:`)) return true
+  }
+  return false
 }
 
 const named: Record<Screen, Set<string>> = {
@@ -229,7 +257,7 @@ describe('the ? panels', () => {
 
 describe('the help against the app', () => {
   it.each(HELP_CONTROLS)('names $name, which is on the $screen screen', ({ name, screen }) => {
-    expect(named[screen]).toContain(name)
+    expect(hasControl(named[screen], name), [...named[screen]].join(' | ')).toBe(true)
   })
 
   it('names nothing the prose does not actually use', () => {

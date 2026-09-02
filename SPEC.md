@@ -544,6 +544,28 @@ that exists to explain a confusing label is a wound dressing. The wording is "He
 this screen", never "New here?", because the reader is not a beginner at chess and should
 not be addressed as one.
 
+2026-09-02, phase 22: **a course is always selected, and every mode works from the first
+click.** Nick installed 1.6.3, clicked Progress first and was told to open a course;
+clicked Drill first and got a London card with nothing on screen saying where it came
+from; and found Study and Play greyed out. He named the inconsistency himself: block
+every mode until a course is chosen, or allow all of them. **Allow all.** The cause was
+that nothing remembered a course, so the shell started with none on every launch, and
+phase 21 had made Progress follow the switcher while it was still classed as a screen
+that needed no course. The selected course is now remembered in `localStorage`, the way
+the theme is, and resolved at startup against the courses actually visible: a fresh
+install, a course since hidden, a deleted folder and a renamed id are one case, and all
+four fall back to the first visible course. It is deliberately NOT in `progress.json`,
+which is versioned and exported, because a course id in an export would travel to a
+machine that may not have that course.
+
+The same ruling gave Drill a remembered **Drill mixed** or **Drill selected**, default
+mixed. Mixed is the v2 one-queue ruling unchanged; what was wrong was that it happened
+silently. While mixed is chosen the header switcher is greyed out on the Drill screen,
+because a header naming a course the queue is ignoring is the same lie in the other
+direction. This replaced the per-course filter row rather than joining it: two course
+selectors on one screen would be worse than the inconsistency being fixed, and the counts
+the row carried moved onto the radio labels.
+
 ## 9. v1 acceptance
 
 1. Study: all eight chapters open; every line steps through with notes, arrows and
@@ -618,17 +640,32 @@ over as files.
 ### Navigation: catalog home (ruled)
 
 A courses screen is the front door: one tile per course with colour, title,
-progress and due counts, plus overall numbers. Study and Play open inside the
-selected course; a header switcher jumps between courses. Drill and Progress sit
-at the top level because they span courses: **the drill queue is one queue across
-all courses (ruled)**, due cards interleaved under the existing ordering rules,
-each card naming its course, with a per-course filter for deliberate practice.
-Progress shows the rollup across every course, and under
-it the detail for the ONE course the header switcher names. **Corrected at phase 21**,
-which is the ruling dated 2026-09-02 in section 8: this said "the rollup and each
-course", and rendering every course meant the switcher could say "The London System"
-while the page led with the Caro-Kann. Progress still needs no course chosen and still
-spans every course in its rollup; only what follows the switcher changed.
+progress and due counts. Opening a tile selects that course and goes to Study; a
+header switcher jumps between courses and shows on every view.
+
+**A course is always selected, and every mode works from the first click.**
+Corrected at phase 22, the ruling dated 2026-09-02 in section 8. This section
+used to say Study and Play open inside the selected course while Drill and
+Progress sit at the top level because they span courses, and the app disabled
+Study and Play until a course was chosen. The selected course is now resolved at
+startup from what was remembered, falling back to the first visible course, so
+there is never a moment with none; nothing is disabled and nothing has a tooltip
+telling the trainee to open a course first.
+
+**The drill queue is still one queue across all courses (ruled)**, due cards
+interleaved under the existing ordering rules, each card naming its course. What
+changed at phase 22 is that it is a remembered CHOICE rather than a rule: Drill
+mixed is the default and is this ruling, Drill selected narrows to the course the
+switcher names, and while mixed is chosen the switcher is greyed out on the Drill
+screen so it cannot appear to name a course the queue is ignoring. That replaced
+the per-course filter row, which was a second course selector beside the header's.
+
+Progress shows the rollup across every course, and under it the detail for the ONE
+course the header switcher names. **Corrected at phase 21**, the ruling dated
+2026-09-02 in section 8: this said "the rollup and each course", and rendering
+every course meant the switcher could say "The London System" while the page led
+with the Caro-Kann. The rollup still spans every course; only what follows the
+switcher changed.
 
 ### Name: Repertoire Trainer (ruled)
 
