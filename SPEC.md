@@ -500,6 +500,31 @@ its number and the decision, and the next pass compares against that file before
 an hour on it. Adding to that file is a decision to be argued, never a way to quieten a
 checker.
 
+2026-09-02, phase 21: **Progress shows the detail for the course the switcher names,
+not for every course.** The v2 ruling in section 10 put Drill and Progress at the top
+level because they span courses, and Progress took that to mean it should render a block
+per course in catalog order. With six courses that is six screens, and the header
+switcher could name the last of them. The rollup is the part that has to span everything
+and it still does. The detail follows the switcher, and with no course open Progress says
+to open one rather than choosing one silently, which is the same idiom the nav already
+uses on Study and Play. Section 10 is corrected rather than left disagreeing.
+
+The same sitting removed the rollup from the landing page. It read "1 of 308 lines learnt
+across 6 courses. 9 of 10 cards due now", which is written in vocabulary the app has not
+taught by the time somebody reads it. The front door now says what to do; the numbers are
+on Progress, which is the screen for numbers.
+
+2026-09-02, phase 21: **help is about the application, and the label comes first.** Every
+word of prose in the app was chess. Nothing said what the app is for, what a screen wants,
+or in what order to do things. The answer is one Help document, reached from the nav after
+a separator and never disabled, plus three `?` panels whose text is a paragraph of the
+matching document section rather than a second copy of it. Where a word on screen can be
+made clear, it is made clear instead: the Study chapter list carried "Chapters" as an
+aria-label, so a screen reader was told what it is and a sighted reader was not. Help
+that exists to explain a confusing label is a wound dressing. The wording is "Help on
+this screen", never "New here?", because the reader is not a beginner at chess and should
+not be addressed as one.
+
 ## 9. v1 acceptance
 
 1. Study: all eight chapters open; every line steps through with notes, arrows and
@@ -579,7 +604,12 @@ selected course; a header switcher jumps between courses. Drill and Progress sit
 at the top level because they span courses: **the drill queue is one queue across
 all courses (ruled)**, due cards interleaved under the existing ordering rules,
 each card naming its course, with a per-course filter for deliberate practice.
-Progress shows the rollup and each course.
+Progress shows the rollup across every course, and under
+it the detail for the ONE course the header switcher names. **Corrected at phase 21**,
+which is the ruling dated 2026-09-02 in section 8: this said "the rollup and each
+course", and rendering every course meant the switcher could say "The London System"
+while the page led with the Caro-Kann. Progress still needs no course chosen and still
+spans every course in its rollup; only what follows the switcher changed.
 
 ### Name: Repertoire Trainer (ruled)
 

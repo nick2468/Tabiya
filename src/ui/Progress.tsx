@@ -9,21 +9,30 @@ import type { ProgressState } from '../storage/progress'
 import type { Card } from '../model/cards'
 import { backupCopy, isDesktop, readBackup, saveBackup, type BackupCopy } from './backup'
 import { profileFolders, type ProfileFolders } from './folders'
+import { HelpPanel } from './Help'
 import './progress.css'
 
 /**
  * Progress: what has been done, and what is going badly. Plain numbers, no
  * badges, because the point is to help the trainee choose what to do next.
  *
- * A rollup across every course, then one block per course. The split is not
- * presentation: weak areas especially must stay per course (SPEC.md section
- * 10), because two repertoires share the core concept tags and one average
- * over both would let a strong course hide a weak one behind a number that
- * describes neither.
+ * A rollup across every course, then the detail for ONE of them. The split is
+ * not presentation: weak areas especially must stay per course (SPEC.md
+ * section 10), because two repertoires share the core concept tags and one
+ * average over both would let a strong course hide a weak one behind a number
+ * that describes neither.
+ *
+ * Which one is the course the header's Course dropdown names, which is the
+ * phase 21 ruling in SPEC.md section 8. It used to render a block for every
+ * course in catalog order, so the dropdown could say "The London System" while
+ * the page led with the Caro-Kann and the London was six screens down. The
+ * rollup still spans everything and this screen still needs no course chosen;
+ * with none chosen it says so rather than picking one for you.
  */
-export function Progress() {
+export function Progress({ courseId }: { courseId: string | null }) {
   const { state, note, exportJson, importJson } = useProgress()
   const { courses } = useCatalog()
+  const chosen = courses.find((course) => course.id === courseId)
 
   const cards = useMemo(
     () => buildCardsAcross(courses, state.learntLines).cards,
@@ -54,6 +63,10 @@ export function Progress() {
   return (
     <div className="progress">
       <h2>Progress</h2>
+      <p className="progress-lead">
+        What you have learnt, what is due, and which ideas are not sticking. Nothing here
+        is a score. The numbers are here to tell you what to work on next.
+      </p>
 
       {note ? <p className="notice">{note}</p> : null}
       <OldProfileNote />
@@ -65,9 +78,14 @@ export function Progress() {
         <strong>{rollup.due}</strong> due now, {rollup.fresh} never answered.
       </p>
 
-      {courses.map((course) => (
-        <CourseProgress key={course.id} course={course} cards={cards} state={state} />
-      ))}
+      {chosen ? (
+        <CourseProgress key={chosen.id} course={chosen} cards={cards} state={state} />
+      ) : (
+        <p className="hint">
+          Open a course to see its chapters and concepts. The numbers above cover all of
+          them.
+        </p>
+      )}
 
       <section>
         <h3>Games played</h3>
@@ -143,7 +161,9 @@ function CourseProgress({
         <strong>{totals.due}</strong> due now, {totals.fresh} never answered.
       </p>
 
-      <h4>Chapters</h4>
+      <HelpPanel panel="progress-chapters">
+        <h4>Chapters</h4>
+      </HelpPanel>
       <table>
         <thead>
           <tr>
@@ -167,7 +187,9 @@ function CourseProgress({
         </tbody>
       </table>
 
-      <h4>Concepts</h4>
+      <HelpPanel panel="progress-concepts">
+        <h4>Concepts</h4>
+      </HelpPanel>
       {concepts.length === 0 ? (
         <p className="hint">Nothing yet. Learn a line in this course and drill it.</p>
       ) : (
@@ -198,11 +220,6 @@ function CourseProgress({
           </tbody>
         </table>
       )}
-      <p className="hint">
-        Accuracy is the share of your last twenty answers on that concept that were the
-        repertoire move, counted in this course alone. A playable alternative still counts
-        as not recalled.
-      </p>
     </section>
   )
 }

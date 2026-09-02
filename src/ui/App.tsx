@@ -191,7 +191,7 @@ function Shell() {
           />
         ) : null}
         {showing === 'drill' ? <Drill /> : null}
-        {showing === 'progress' ? <Progress /> : null}
+        {showing === 'progress' ? <Progress courseId={courseId} /> : null}
         {showing === 'help' ? <Help /> : null}
         {showing === 'diagnostics' ? <Diagnostics /> : null}
       </main>

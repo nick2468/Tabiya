@@ -11,6 +11,12 @@
   margin: 28px 0 8px;
 }
 
+.progress-lead {
+  margin: 0 0 14px;
+  max-width: 62ch;
+  color: var(--text-dim);
+}
+
 .progress .totals {
   font-size: 1.05rem;
   margin: 0;
