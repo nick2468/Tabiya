@@ -3066,7 +3066,7 @@ the window opens at 1200 by 980, and the version becomes 1.6.5.
   the phase 21 report register item closed with the same fixture.
 - [x] 23.3 The game lives in a provider; the switcher is greyed while a game is in progress.
 - [x] 23.4 "Include cards that are not due yet" on Drill; due first, then soonest due.
-- [ ] 23.5 Five wrong notes fixed, bundles regenerated, and a direction test that fails
+- [x] 23.5 Five wrong notes fixed, bundles regenerated, and a direction test that fails
   before the fixes.
 - [ ] 23.6 Weight badge off the move buttons and into a title; Help sentence.
 - [ ] 23.7 "Ready" and "not yet drilled" throughout; next-card line on Progress; Help follows.

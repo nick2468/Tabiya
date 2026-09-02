@@ -90,6 +90,64 @@ describe.each(courses.map((course) => [course.id, course] as const))(
     })
 
     /**
+     * "Take towards the centre", checked against which way the pawn went.
+     *
+     * The same shape as the check-and-mate rule above: a note makes a claim
+     * about the board, and the board can answer it. Nick found one by eye in
+     * the Ruy Lopez Exchange, where 4...dxc6 was called a recapture towards
+     * the centre in seven places; d7 to c6 is a step away from it. Sweeping
+     * for the phrase found three more the same afternoon, in the Slav and the
+     * Vienna. The reasons those notes gave were right; only the direction was
+     * wrong, which is exactly the kind of fault that survives a careful read.
+     *
+     * A capture between the d and e files passes. `exd4` moves from one
+     * central file to the other, so it goes neither way, and calling it
+     * towards the centre is loose rather than false.
+     *
+     * Captures only. A note beside a quiet move may be talking about a plan
+     * two moves off, and this rule has no business guessing.
+     *
+     * The rule reads the phrase as being about the move the note is ON. That
+     * is what makes it cheap, and it is also a house rule it imposes: a note
+     * that recommends a DIFFERENT move must not use the phrase. One Vienna
+     * alternative did, saying "recapture towards the centre with the a-pawn"
+     * under cxb3, and it was reworded to match its own twin rather than the
+     * rule being weakened to allow it.
+     */
+    it('never says a capture goes towards the centre when it goes away from it', () => {
+      // Distance from the d and e files, which are the centre. Both are 0.
+      const fromCentre = (square: string) =>
+        Math.min(Math.abs(square.charCodeAt(0) - 100), Math.abs(square.charCodeAt(0) - 101))
+      const claimsCentre = (text: string | undefined) =>
+        /towards? the (centre|middle)/i.test(text ?? '')
+
+      // Every one at once rather than the first: a sweep that stops at the
+      // first fault hides how many there are, and there were five.
+      const wrong: string[] = []
+      for (const chapter of course.chapters) {
+        for (const node of walkNodes(chapter)) {
+          const said: [string, string | undefined][] = [
+            [node.san, [node.note, node.plan].filter(Boolean).join(' ')],
+            ...(node.mistakes ?? []).map(
+              (alternative) => [alternative.san, alternative.note] as [string, string | undefined],
+            ),
+          ]
+          for (const [san, text] of said) {
+            if (!claimsCentre(text)) continue
+            const board = new Chess(node.parentFen)
+            const move = board.move(san)
+            if (!move.captured) continue
+            if (fromCentre(move.to) <= fromCentre(move.from)) continue
+            wrong.push(
+              `${chapter.id} ${node.path.join(' ')} / ${san}: ${move.from} to ${move.to}`,
+            )
+          }
+        }
+      }
+      expect(wrong).toEqual([])
+    })
+
+    /**
      * The lines the prose names, played on a board.
      *
      * A note can describe a real idea and name a line that cannot be played,
