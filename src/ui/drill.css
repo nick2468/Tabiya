@@ -20,6 +20,17 @@
   font-variant-numeric: tabular-nums;
 }
 
+.drill-lead {
+  margin: 0 0 6px;
+  color: var(--text-dim);
+  max-width: 62ch;
+}
+
+.grade-question {
+  margin: 18px 0 6px;
+  font-size: 0.95rem;
+}
+
 .drill-summary {
   margin: 0 0 16px;
   font-size: 1.05rem;

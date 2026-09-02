@@ -131,6 +131,10 @@ export function Drill() {
     return (
       <div className="drill">
         <h2>Drill</h2>
+        <p className="drill-lead">
+          Drill shows you positions out of the lines you have marked learnt, and asks you
+          for the repertoire move. It brings each one back on its own schedule.
+        </p>
         <p className="drill-summary">
           {queue.length === 0 ? (
             <>Nothing is due. {nextDueLine(cards, state)}</>
@@ -280,7 +284,23 @@ function Feedback({
         </>
       ) : null}
 
-      <div className="feedback-actions">
+      {/* The buttons already said when the card comes back. What was missing
+          is that a question was being asked at all, so the row gets the
+          question rather than the buttons getting new wording.
+
+          It appears only where there is a choice to make. After a wrong move
+          the row is one Continue button, and asking how well you knew a move
+          you did not know would be a question with no answer. */}
+      {verdict.kind === 'exact' ? (
+        <h4 id="grade-question" className="grade-question">
+          How well did you know it?
+        </h4>
+      ) : null}
+      <div
+        className="feedback-actions"
+        role="group"
+        aria-labelledby={verdict.kind === 'exact' ? 'grade-question' : undefined}
+      >
         {verdict.kind === 'exact' ? (
           <>
             <button type="button" className="primary" onClick={() => onNext()}>
