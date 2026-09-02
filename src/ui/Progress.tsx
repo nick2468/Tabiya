@@ -26,8 +26,13 @@ import './progress.css'
  * phase 21 ruling in SPEC.md section 8. It used to render a block for every
  * course in catalog order, so the dropdown could say "The London System" while
  * the page led with the Caro-Kann and the London was six screens down. The
- * rollup still spans everything and this screen still needs no course chosen;
- * with none chosen it says so rather than picking one for you.
+ * rollup still spans everything.
+ *
+ * Phase 21 left a line here saying to open a course, for the case where none
+ * was chosen. Phase 22 made a course always selected, so that line became a
+ * sentence nobody could ever read, and it is gone. The test on `chosen` below
+ * is what remains: it is for the empty catalog, which the guard above already
+ * turns back, and it is there so the types hold rather than to say anything.
  */
 export function Progress({ courseId }: { courseId: string | null }) {
   const { state, note, exportJson, importJson } = useProgress()
@@ -80,12 +85,7 @@ export function Progress({ courseId }: { courseId: string | null }) {
 
       {chosen ? (
         <CourseProgress key={chosen.id} course={chosen} cards={cards} state={state} />
-      ) : (
-        <p className="hint">
-          Open a course to see its chapters and concepts. The numbers above cover all of
-          them.
-        </p>
-      )}
+      ) : null}
 
       <section>
         <h3>Games played</h3>
