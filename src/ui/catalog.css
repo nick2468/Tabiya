@@ -137,6 +137,17 @@
   font-size: 0.9rem;
 }
 
+/* Greyed on Drill while Drill is mixing every course. Still there, so the
+   header does not change shape between screens. */
+.course-switch.idle label,
+.course-switch.idle select {
+  opacity: 0.45;
+}
+
+.course-switch.idle select {
+  cursor: default;
+}
+
 .course-switch label {
   line-height: 1;
 }

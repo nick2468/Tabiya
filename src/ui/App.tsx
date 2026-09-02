@@ -12,6 +12,7 @@ import {
   rememberCourse,
   resolveCourse,
   savedCourse,
+  useDrillScope,
   useRememberedCourse,
 } from './prefs'
 import { useTheme } from './theme'
@@ -84,6 +85,7 @@ export function Shell() {
   const [courseId, setCourseId] = useState<string | null>(savedCourse)
   const [playRequest, setPlayRequest] = useState<PlayRequest | null>(null)
   const { theme, toggle } = useTheme()
+  const { scope, setScope } = useDrillScope()
   const showDiagnostics = import.meta.env.DEV
 
   // Derived every render rather than stored: a remembered id that no longer
@@ -116,6 +118,12 @@ export function Shell() {
   // render, so the catalog and its drop-in note are the only useful screen.
   // With any course installed this never fires: one is always resolved.
   const showing: View = (view === 'study' || view === 'play') && !course ? 'courses' : view
+
+  // The switcher is greyed on Drill while Drill is mixing every course. It
+  // stays visible rather than disappearing, because a header that changes
+  // shape between screens is its own confusion; the point is to say that the
+  // queue is not following it.
+  const switcherIdle = showing === 'drill' && scope === 'mixed'
 
   return (
     <div className="app">
@@ -173,11 +181,17 @@ export function Shell() {
           `course` test is for the empty catalog and nothing else: with any
           course installed, one is always resolved. */}
       {catalog.courses.length > 1 && course ? (
-        <div className="course-switch">
+        <div className={switcherIdle ? 'course-switch idle' : 'course-switch'}>
           <label htmlFor="course-switch">Course</label>
           <select
             id="course-switch"
             value={course.id}
+            disabled={switcherIdle}
+            title={
+              switcherIdle
+                ? 'Drill is mixing every course. Choose Drill selected to drill this one.'
+                : undefined
+            }
             onChange={(event) => switchTo(event.target.value)}
           >
             {catalog.courses.map((entry) => (
@@ -213,7 +227,9 @@ export function Shell() {
             onRequestUsed={() => setPlayRequest(null)}
           />
         ) : null}
-        {showing === 'drill' ? <Drill /> : null}
+        {showing === 'drill' ? (
+          <Drill courseId={course?.id ?? null} scope={scope} onScope={setScope} />
+        ) : null}
         {showing === 'progress' ? <Progress courseId={course?.id ?? null} /> : null}
         {showing === 'help' ? <Help /> : null}
         {showing === 'diagnostics' ? <Diagnostics /> : null}

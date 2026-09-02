@@ -134,42 +134,20 @@ button:disabled {
   cursor: default;
 }
 
-.course-filter {
+/* Two radios where a row of one button per course used to be. Shaped like
+   Play's launch options, because it is the same kind of question. */
+.drill-scope {
   margin: 16px 0;
+  max-width: 34rem;
 }
 
-.course-filter .hint {
-  margin: 0 0 6px;
-}
-
-.filter-row {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.filter {
-  background: var(--control);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: 5px 10px;
-  color: var(--text-soft);
+.drill-scope label {
+  display: block;
+  padding: 3px 0;
   cursor: pointer;
 }
 
-.filter:hover {
-  background: var(--control-hover);
-  color: var(--text);
-}
-
-.filter.current {
-  border-color: var(--accent-edge);
-  background: var(--accent-wash);
-  color: var(--text);
-}
-
-.filter-count {
+.scope-detail {
   color: var(--text-faint);
-  margin-left: 4px;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }

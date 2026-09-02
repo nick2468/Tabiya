@@ -16,6 +16,7 @@ import { legalDests, sideToMove } from '../model/position'
 import { dueQueue } from '../model/queue'
 import { describeInterval, newSchedule, review, type Rating } from '../scheduler'
 import type { ProgressState } from '../storage/progress'
+import type { DrillScope } from './prefs'
 import { colourName, type LoadedCourse, type Shape } from '../model/types'
 import './drill.css'
 
@@ -23,21 +24,35 @@ import './drill.css'
  * Drill: the daily loop. A position comes up, the trainee is to move, and they
  * play what the repertoire plays.
  *
- * One queue across every course, which is the ruling in SPEC.md section 10:
- * due is due, whichever repertoire the card belongs to, and a session that
- * made you finish one course before starting another would leave the second
- * one rotting. The filter is there for deliberate practice, not for tidiness.
+ * One queue across every course BY DEFAULT, which is the ruling in SPEC.md
+ * section 10: due is due, whichever repertoire the card belongs to, and a
+ * session that made you finish one course before starting another would leave
+ * the second one rotting.
+ *
+ * Phase 22 made that a remembered choice rather than a rule, because it was
+ * happening invisibly: the first card of a mixed queue looked like the app
+ * silently picking a course. Drill mixed is still the default and still the
+ * ruling; Drill selected narrows to the course the header names. The
+ * preference is held in the shell, not here, because the shell greys the
+ * switcher out while the queue is ignoring it.
  *
  * The session takes a snapshot of the queue when it starts and walks it in
  * order. A card answered wrong goes to the back of that session rather than
  * straight back to the front, so a move that will not come to mind cannot lock
  * the session up.
  */
-export function Drill() {
+export function Drill({
+  courseId,
+  scope,
+  onScope,
+}: {
+  courseId: string | null
+  scope: DrillScope
+  onScope: (scope: DrillScope) => void
+}) {
   const { state, answer } = useProgress()
   const { courses } = useCatalog()
   const [weakAreasFirst, setWeakAreasFirst] = useState(false)
-  const [only, setOnly] = useState<string>('')
   const [session, setSession] = useState<string[] | null>(null)
   const [verdict, setVerdict] = useState<Verdict | null>(null)
   const [done, setDone] = useState(0)
@@ -47,8 +62,9 @@ export function Drill() {
     () => buildCardsAcross(courses, state.learntLines).cards,
     [courses, state.learntLines],
   )
-  // The filter narrows the queue, not the card set: the counts on the start
-  // screen are still about everything learnt.
+  // Derived from the preference and the course the header names, rather than
+  // held here: two places holding the same choice is how they come apart.
+  const only = scope === 'selected' ? courseId : null
   const cards = useMemo(
     () => (only ? everyCard.filter((card) => card.courseId === only) : everyCard),
     [everyCard, only],
@@ -61,20 +77,13 @@ export function Drill() {
     [cards, state, weakAreasFirst],
   )
 
-  // One row per course that has anything learnt, for the start screen.
-  const perCourse = useMemo(
-    () =>
-      courses
-        .map((course) => ({
-          course,
-          cards: everyCard.filter((card) => card.courseId === course.id).length,
-          due: dueQueue(
-            everyCard.filter((card) => card.courseId === course.id),
-            state,
-          ).length,
-        }))
-        .filter((row) => row.cards > 0),
-    [courses, everyCard, state],
+  // What each radio is worth, so the choice can be read before it is made.
+  // This is the information the old per-course filter row carried.
+  const selected = courses.find((course) => course.id === courseId)
+  const dueMixed = useMemo(() => dueQueue(everyCard, state).length, [everyCard, state])
+  const dueSelected = useMemo(
+    () => dueQueue(everyCard.filter((card) => card.courseId === courseId), state).length,
+    [courseId, everyCard, state],
   )
 
   const card = session ? byKey.get(session[0]) : undefined
@@ -146,31 +155,33 @@ export function Drill() {
           )}
         </p>
 
-        {perCourse.length > 1 ? (
-          <div className="course-filter">
-            <p className="hint">
-              The queue mixes every course. Narrow it when you want to work on one.
-            </p>
-            <div className="filter-row">
-              <button
-                type="button"
-                className={only === '' ? 'filter current' : 'filter'}
-                onClick={() => setOnly('')}
-              >
-                Everything <span className="filter-count">{everyCard.length}</span>
-              </button>
-              {perCourse.map((row) => (
-                <button
-                  key={row.course.id}
-                  type="button"
-                  className={only === row.course.id ? 'filter current' : 'filter'}
-                  onClick={() => setOnly(row.course.id)}
-                >
-                  {row.course.title} <span className="filter-count">{row.due} due</span>
-                </button>
-              ))}
-            </div>
-          </div>
+        {/* A radio pair rather than the old row of one button per course. The
+            row was a second course selector beside the header's, which is the
+            confusion this phase exists to remove. The counts it carried are on
+            the labels, after a colon, so nothing readable was lost. */}
+        {courses.length > 1 ? (
+          <fieldset className="drill-scope">
+            <legend>What to drill</legend>
+            <label>
+              <input
+                type="radio"
+                checked={scope === 'mixed'}
+                onChange={() => onScope('mixed')}
+              />
+              Drill mixed: <span className="scope-detail">every course, {dueMixed} due</span>
+            </label>
+            <label>
+              <input
+                type="radio"
+                checked={scope === 'selected'}
+                onChange={() => onScope('selected')}
+              />
+              Drill selected:{' '}
+              <span className="scope-detail">
+                {selected ? selected.title : 'no course'}, {dueSelected} due
+              </span>
+            </label>
+          </fieldset>
         ) : null}
 
         <label className="weak-toggle">
