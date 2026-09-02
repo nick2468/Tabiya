@@ -2825,4 +2825,52 @@ Open items (phase 21):
     started on, checked with `git diff`, and the running app still counts 308 lines across
     six courses.
 
-- [ ] **Review gate 21 passed**
+Gate 21 findings (2026-09-02):
+
+12. **Every screen was driven at the gate, not read.** The landing page reads "Select a
+    course to study" with the statistic gone. The nav is Courses, Study, Play, Drill,
+    Progress, a 1px `nav-separator` span carrying `aria-hidden`, then Help, which is
+    enabled with no course while Study and Play are disabled. Help renders eight `h3`
+    sections under one `h2`, in the ruled order. Progress with no course shows the rollup
+    and says to open one; with the Vienna chosen it shows the Vienna and nothing else,
+    matching the switcher. Both Progress panels open in place and Escape closes the
+    focused one. Play's panel opens inside its fieldset, above the three radios it
+    explains. Study shows CHAPTERS above the list. Drill's start screen carries its
+    sentence, and after ticking a line and playing e4, **HOW WELL DID YOU KNOW IT?** sits
+    over the two grade buttons. The browser build's progress was cleared afterwards and
+    `learntLines` confirmed back to empty.
+13. **The help test was mutation-checked at the gate.** Renaming the Study `Chapters`
+    label and `How well did you know it?` each turns the suite red naming the string that
+    went missing, from a test that really renders the screen rather than grepping the
+    source. Both reverted.
+14. **The controls the prose names were checked against the code, not against the chip.**
+    `Very casual` through `Unpleasant` are the eight strength labels in
+    `src/engine/strength.ts`; `The repertoire`, `Your moves` and `The final position` are
+    the three report headings in `Play.tsx`; `Start drilling` and `Drill my weak areas
+    first` are on the Drill screen. Nothing named is missing.
+15. **One real fault in the prose, and it is the class the phase exists to prevent.** The
+    Drill section said "Get it wrong and the gap shortens, and the card also comes round
+    again before the session ends". `Drill.tsx:112` requeues only on Again, and
+    `grade.ts:43` maps a listed playable or inaccuracy to Hard, so a reader who plays a
+    listed inaccuracy is promised a card that never comes. Fixed in `b078891`. **The help
+    test could not have caught it**: it holds the help to the controls it NAMES, and this
+    was a claim about what the app does with them. Worth stating in the record, because
+    the test's green is not the same as the prose being true.
+16. **The 21.7 deviation is right.** The label sits over the row only after the repertoire
+    move, where there are two buttons and a choice; after a wrong move the row is one
+    Continue button and "How well did you know it?" would be a question with no answer.
+    Only the correct-move case was driven at the gate; the wrong-move reasoning was read.
+17. **One judgement for Nick rather than a fault.** The `?` is 20x20 at 12px in
+    `rgb(122, 128, 138)`, eight pixels after its heading. It works and it is quiet. Given
+    the complaint that started this phase was about guidance, whether it announces itself
+    enough is his call, not a builder's.
+18. **The document is 1625 words**, spread 89 to 274 a section, so no section is more than
+    about a minute. That is a reference to dip into rather than a manual to read, which is
+    what "not long" has to mean for eight sections.
+19. **Verified for the gate from the repo:** 699 tests and `tsc -b` clean, re-run after
+    the gate's own commit; oxlint reports the same six warnings that predate the phase; no
+    em dashes; version 1.6.3 in all three files; **not one byte under `courses/` or
+    `docs/bundles/` differs** from the commit the phase started on, so no chess moved.
+20. **Nick's own files were not listed and not reported.**
+
+- [x] **Review gate 21 passed** (2026-09-02)
