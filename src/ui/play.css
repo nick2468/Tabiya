@@ -67,6 +67,14 @@
   color: var(--text-dim);
 }
 
+/* Pushed to the right, so the status line keeps the space beside the heading
+   and the three things you can do to the game sit together. */
+.play-head-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 14px;
+}
+
 .play-body {
   display: flex;
   gap: 28px;

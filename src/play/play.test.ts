@@ -478,6 +478,122 @@ describe('PlaySession', () => {
   })
 })
 
+describe('undo and redo', () => {
+  const book = buildBook({ colour: 'white', chapters: [chapter] })
+  const blackBook = buildBook(blackCourse())
+  const profile = strengthProfile(4)
+
+  const started = (startMoves: string[] = []) =>
+    new PlaySession({ book, engine: fakeEngine(), profile, length: 'full', startMoves, random: () => 0 })
+
+  it('takes back the pair, so the trainee is to move again', async () => {
+    const session = started()
+    session.playStudent('d4')
+    await session.playOpponent()
+    expect(session.moves).toHaveLength(2)
+    expect(session.bookReplies).toBe(1)
+
+    expect(session.undo()).toBe(true)
+    expect(session.moves).toHaveLength(0)
+    expect(session.studentToMove).toBe(true)
+    // The book count is put back from what the move recorded, not guessed.
+    expect(session.bookReplies).toBe(0)
+  })
+
+  it('takes back one move when the trainee has moved and the opponent has not', () => {
+    const session = started()
+    session.playStudent('d4')
+    expect(session.undo()).toBe(true)
+    expect(session.moves).toHaveLength(0)
+    expect(session.studentToMove).toBe(true)
+  })
+
+  it('will not go back past the position the game started from', async () => {
+    const session = started(['d4', 'd5', 'Bf4'])
+    expect(session.canUndo()).toBe(false)
+    expect(session.undo()).toBe(false)
+    expect(session.moves).toHaveLength(3)
+
+    // And once a pair of the trainee's own is on top of them, undo takes that
+    // pair off and then stops. The opponent's reply to the starting position
+    // stays: taking it off would leave the opponent to move at the floor.
+    await session.playOpponent()
+    session.playStudent('e3')
+    await session.playOpponent()
+    expect(session.moves).toHaveLength(6)
+    expect(session.undo()).toBe(true)
+    expect(session.moves).toHaveLength(4)
+    expect(session.studentToMove).toBe(true)
+    expect(session.canUndo()).toBe(false)
+    expect(session.undo()).toBe(false)
+  })
+
+  it('has nothing to undo when only the opponent has moved', async () => {
+    const session = new PlaySession({
+      book: blackBook,
+      engine: fakeEngine(),
+      profile,
+      length: 'full',
+      random: () => 0,
+    })
+    await session.playOpponent()
+    expect(session.moves).toHaveLength(1)
+    expect(session.studentToMove).toBe(true)
+    // Undoing here would leave White to move with nothing to move it.
+    expect(session.canUndo()).toBe(false)
+    expect(session.undo()).toBe(false)
+  })
+
+  it('replays exactly what undo took off', async () => {
+    const session = started()
+    session.playStudent('d4')
+    await session.playOpponent()
+    const before = session.moves.map((move) => move.san)
+    const fen = session.fen
+
+    session.undo()
+    expect(session.canRedo()).toBe(true)
+    expect(session.redo()).toBe(true)
+    expect(session.moves.map((move) => move.san)).toEqual(before)
+    expect(session.fen).toBe(fen)
+    expect(session.bookReplies).toBe(1)
+    expect(session.canRedo()).toBe(false)
+  })
+
+  it('drops the redo stack the moment a different move is played', async () => {
+    const session = started()
+    session.playStudent('d4')
+    await session.playOpponent()
+    session.undo()
+    expect(session.canRedo()).toBe(true)
+    session.playStudent('e4')
+    expect(session.canRedo()).toBe(false)
+    expect(session.redo()).toBe(false)
+  })
+
+  it('unfinishes a game undone out of a checkmate', async () => {
+    const session = new PlaySession({
+      book: blackBook,
+      engine: fakeEngine({ move: 'd8h4' }),
+      profile,
+      length: 'full',
+      startMoves: ['f3', 'e5', 'g4'],
+      random: () => 0,
+    })
+    // The trainee is Black here, so ...Qh4 is the trainee's own move.
+    expect(session.playStudent('Qh4#')).toBe(true)
+    expect(session.outcome).toBe('You won by checkmate')
+    expect(session.isFinished()).toBe(true)
+
+    expect(session.undo()).toBe(true)
+    expect(session.outcome).toBeUndefined()
+    expect(session.isFinished()).toBe(false)
+    // And putting it back puts the mate back with it.
+    session.redo()
+    expect(session.outcome).toBe('You won by checkmate')
+  })
+})
+
 describe('scanGame', () => {
   it('evaluates every position once, from White\'s point of view', async () => {
     const moves = playedMoves(['d4', 'd5'])

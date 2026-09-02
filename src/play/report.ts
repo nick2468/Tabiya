@@ -27,6 +27,12 @@ export interface PlayedMove {
   fen: string
   /** The position after it. */
   after: string
+  /**
+   * True when an opponent move came out of the repertoire rather than the
+   * engine. Recorded so undo can put the book count back honestly rather than
+   * guessing that whatever it removed was a book move.
+   */
+  fromBook?: boolean
 }
 
 /** What the engine thought of a position, in pawns from White's point of view. */

@@ -3,13 +3,16 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { Shell } from './App'
 import { Drill, Feedback } from './Drill'
-import { Play } from './Play'
+import { Play, PlayHead, Report } from './Play'
 import { Progress } from './Progress'
 import { Study } from './Study'
 import { CatalogContext, type Catalog } from './catalog-context'
 import { ProgressContext, type Progress as ProgressValue } from './progress-context'
 import { HELP_CONTROLS, HELP_DOCUMENT, HELP_SECTIONS, PANELS, type Screen } from './help-text'
 import { bundledCourses } from '../content'
+import { PlaySession, buildBook, type GameReport } from '../play'
+import type { Engine, SearchResult } from '../engine'
+import { strengthProfile } from '../engine'
 import { buildCardsAcross } from '../model/cards'
 import { judge } from '../model/grade'
 import { courseLineIds } from '../model/lines'
@@ -114,16 +117,60 @@ function inApp(state: ProgressState, view: ReactNode): string {
 const firstCard = buildCardsAcross([course], learntOne.learntLines).cards[0]
 if (!firstCard) throw new Error('a learnt line built no cards')
 
+/**
+ * A game in progress, and a report on one.
+ *
+ * Both only exist on the Play screen AFTER something has happened, and the
+ * help names controls in both. Rendering the start screen alone would leave
+ * Undo, Redo and the report's three headings unheld, which is exactly the kind
+ * of gap this file exists to close. The engine is a stub because nothing here
+ * asks it anything: the session is built and looked at, never played.
+ */
+const stubEngine: Engine = {
+  start: async () => {},
+  setStrength: async () => {},
+  newGame: async () => {},
+  search: async (): Promise<SearchResult> => ({ bestMove: null, candidates: [] }),
+  stop: () => {},
+}
+
+const gameInProgress = new PlaySession({
+  book: buildBook({ colour: course.colour, chapters: course.chapters }),
+  engine: stubEngine,
+  profile: strengthProfile(4),
+  length: 'move15',
+})
+
+const reportFixture: GameReport = {
+  deviation: { kind: 'stayed-in-book' },
+  slips: [],
+  verdict: 'Level',
+  finalEval: 0,
+  outcome: 'Stopped after move 5',
+}
+
 const screens: Record<Screen, string> = {
   // The shell opens on the catalog, so one render covers the nav and the
   // front door.
   nav: inApp(learntOne, createElement(Shell)),
   catalog: inApp(learntOne, createElement(Shell)),
   study: inApp(learntOne, createElement(Study, { course, onPlayFrom: () => {} })),
-  play: inApp(
-    learntOne,
-    createElement(Play, { course, request: null, onRequestUsed: () => {} }),
-  ),
+  play:
+    inApp(learntOne, createElement(Play, { course, request: null, onRequestUsed: () => {} })) +
+    renderToStaticMarkup(
+      createElement(PlayHead, {
+        session: gameInProgress,
+        opponentColour: 'black' as const,
+        thinking: false,
+        reviewed: false,
+        onUndo: () => {},
+        onRedo: () => {},
+        onNew: () => {},
+      }),
+    ) +
+    renderToStaticMarkup(
+      createElement(Report, { report: reportFixture, opponentColour: 'black' as const }),
+    ),
   drill:
     inApp(
       learntOne,

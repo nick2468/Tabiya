@@ -18,6 +18,14 @@ import type { Colour } from '../model/types'
  *
  * The engine is injected rather than built here, so the tests drive a fake and
  * never start a worker.
+ *
+ * Undo works in PAIRS, not plies. Taking back one ply would leave the opponent
+ * to move with nothing to make it move, so the game would sit there. So undo
+ * goes back to the last position where the trainee was to move, which is the
+ * opponent's reply and the move before it in the ordinary case, and one move
+ * when the game has just ended on the trainee's own move. It cannot go back
+ * past where the game started: a game launched from a Study position replays
+ * those moves in the constructor and they are the floor.
  */
 
 /** How long a game runs before it stops and reports. */
@@ -62,6 +70,10 @@ export class PlaySession {
   readonly moves: PlayedMove[] = []
   private readonly options: SessionOptions
   private readonly random: () => number
+  /** How many plies the game started with, which undo may not go below. */
+  private readonly floor: number
+  /** What undo took off, latest removed at the top, for redo to put back. */
+  private readonly undone: PlayedMove[] = []
   /** How many of the opponent's moves came out of the book. */
   bookReplies = 0
   /** Set when the game ends by itself: checkmate, stalemate, a draw. */
@@ -84,6 +96,7 @@ export class PlaySession {
         after: this.chess.fen(),
       })
     }
+    this.floor = this.moves.length
   }
 
   get fen(): string {
@@ -143,8 +156,82 @@ export class PlaySession {
       fen: before,
       after: this.chess.fen(),
     })
+    // A new move is a new game from here on, so there is nothing to redo.
+    this.undone.length = 0
     this.noteOutcome()
     return true
+  }
+
+  /** True when there is a move of the trainee's own to take back. */
+  canUndo(): boolean {
+    return this.undoTarget() !== null
+  }
+
+  /** True when undo has taken something off that has not been put back. */
+  canRedo(): boolean {
+    return this.undone.length > 0
+  }
+
+  /**
+   * Takes the game back to the last position where the trainee was to move.
+   *
+   * Returns false when there is nothing to take back, which includes the case
+   * where every move since the floor belongs to the opponent: a Black course
+   * before the trainee has answered White's first move has nothing of the
+   * trainee's in it.
+   */
+  undo(): boolean {
+    const target = this.undoTarget()
+    if (target === null) return false
+    while (this.moves.length > target) {
+      const removed = this.moves.pop()
+      if (!removed) break
+      this.chess.undo()
+      this.undone.push(removed)
+      if (removed.fromBook) this.bookReplies -= 1
+    }
+    this.reoutcome()
+    return true
+  }
+
+  /** Puts back what undo took off, up to the trainee's next turn. */
+  redo(): boolean {
+    if (this.undone.length === 0) return false
+    do {
+      const move = this.undone.pop()
+      if (!move) break
+      this.chess.move(move.san)
+      this.moves.push(move)
+      if (move.fromBook) this.bookReplies += 1
+    } while (this.undone.length > 0 && !this.studentToMove && !this.chess.isGameOver())
+    this.reoutcome()
+    return true
+  }
+
+  /**
+   * How many plies to fall back to, or null when there is nothing to undo.
+   *
+   * `moves[count].colour` is the side that moved from that position, so it is
+   * also the side to move there. The search walks back one ply at a time and
+   * stops at the first position that belongs to the trainee, which makes the
+   * pairing fall out rather than having to be counted.
+   */
+  private undoTarget(): number | null {
+    for (let count = this.moves.length - 1; count >= this.floor; count -= 1) {
+      if (this.moves[count].colour === this.studentColour) return count
+    }
+    return null
+  }
+
+  /**
+   * Works the outcome out again after the move list changed.
+   *
+   * Clearing it first is the whole point: a game undone out of a checkmate
+   * would otherwise still be finished, with a board that says otherwise.
+   */
+  private reoutcome(): void {
+    this.outcome = undefined
+    this.noteOutcome()
   }
 
   /**
@@ -182,6 +269,7 @@ export class PlaySession {
       colour: this.options.book.opponentColour,
       fen: before,
       after: this.chess.fen(),
+      fromBook,
     })
     this.noteOutcome()
     return { san, fromBook }

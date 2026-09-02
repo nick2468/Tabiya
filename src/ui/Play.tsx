@@ -272,6 +272,22 @@ export function Play({
     }
   }, [book, chapterId, course.id, engine, launch, level, recordPlay])
 
+  /**
+   * Undo and redo. Neither one asks the engine anything: every position they
+   * land on has already been evaluated, so the bar follows them for free.
+   */
+  const undo = useCallback(() => {
+    const running = sessionRef.current
+    if (!running || thinking || report) return
+    if (running.undo()) refresh()
+  }, [refresh, report, thinking])
+
+  const redo = useCallback(() => {
+    const running = sessionRef.current
+    if (!running || thinking || report) return
+    if (running.redo()) refresh()
+  }, [refresh, report, thinking])
+
   const reset = useCallback(() => {
     sessionRef.current = null
     setSession(null)
@@ -386,21 +402,15 @@ export function Play({
 
   return (
     <div className="play">
-      <header className="play-head">
-        <h2>Play</h2>
-        <p className="play-status">
-          {report
-            ? 'Game reviewed'
-            : finished
-              ? session.outcome ?? 'Game over'
-              : thinking
-                ? `${colourName(book.opponentColour)} is thinking...`
-                : 'Your move'}
-        </p>
-        <button type="button" className="link" onClick={reset}>
-          New game
-        </button>
-      </header>
+      <PlayHead
+        session={session}
+        opponentColour={book.opponentColour}
+        thinking={thinking}
+        reviewed={report !== null}
+        onUndo={undo}
+        onRedo={redo}
+        onNew={reset}
+      />
 
       <div className="play-body">
         <LiveEvalBar
@@ -448,6 +458,74 @@ export function Play({
   )
 }
 
+/**
+ * The header over a game in progress: where the game is up to, and the three
+ * things you can do to it.
+ *
+ * A component rather than markup inside the screen, because the help names
+ * Undo and Redo and the help test walks the START screen. A control the test
+ * cannot reach is a control the help can start lying about, so this takes a
+ * session and the test builds one on the fake engine.
+ *
+ * Undo and Redo go dead while the engine is thinking and once the report
+ * exists. A reviewed game is finished, and New game is the way on from it.
+ */
+export function PlayHead({
+  session,
+  opponentColour,
+  thinking,
+  reviewed,
+  onUndo,
+  onRedo,
+  onNew,
+}: {
+  session: PlaySession
+  opponentColour: Colour
+  thinking: boolean
+  reviewed: boolean
+  onUndo: () => void
+  onRedo: () => void
+  onNew: () => void
+}) {
+  const finished = session.isFinished()
+  const frozen = thinking || reviewed
+  return (
+    <header className="play-head">
+      <h2>Play</h2>
+      <p className="play-status">
+        {reviewed
+          ? 'Game reviewed'
+          : finished
+            ? session.outcome ?? 'Game over'
+            : thinking
+              ? `${colourName(opponentColour)} is thinking...`
+              : 'Your move'}
+      </p>
+      <div className="play-head-actions">
+        <button
+          type="button"
+          className="link"
+          onClick={onUndo}
+          disabled={frozen || !session.canUndo()}
+        >
+          Undo
+        </button>
+        <button
+          type="button"
+          className="link"
+          onClick={onRedo}
+          disabled={frozen || !session.canRedo()}
+        >
+          Redo
+        </button>
+        <button type="button" className="link" onClick={onNew}>
+          New game
+        </button>
+      </div>
+    </header>
+  )
+}
+
 function MoveList({ session }: { session: PlaySession }) {
   const pairs: { number: number; white?: string; black?: string }[] = []
   for (const move of session.moves) {
@@ -472,7 +550,15 @@ function MoveList({ session }: { session: PlaySession }) {
   )
 }
 
-function Report({
+/**
+ * The report, after the game.
+ *
+ * Exported for the help test, which holds its three headings the same way it
+ * holds every other control the help names. That closes the phase 21 register
+ * item: the report could not be reached from a test that renders to a string,
+ * because it only exists once a game has been played and scanned.
+ */
+export function Report({
   report,
   opponentColour,
 }: {
