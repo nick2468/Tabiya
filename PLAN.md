@@ -2891,20 +2891,20 @@ the default), and the switcher is greyed out on Drill while mixed is chosen so t
 cannot appear to name a course Drill is ignoring. The preference is remembered the way
 the theme is, not in the progress file.
 
-- [ ] 22.1 Remember the selected course in localStorage, the theme's idiom.
-- [ ] 22.2 Resolve it at startup against the visible courses, fall back to the first.
-- [ ] 22.3 Enable every mode; remove `IN_COURSE` and the tooltip.
-- [ ] 22.4 The switcher always shows with more than one visible course.
-- [ ] 22.5 Drill: the radio pair, remembered, default mixed; replaces the filter row and
+- [x] 22.1 Remember the selected course in localStorage, the theme's idiom.
+- [x] 22.2 Resolve it at startup against the visible courses, fall back to the first.
+- [x] 22.3 Enable every mode; remove `IN_COURSE` and the tooltip.
+- [x] 22.4 The switcher always shows with more than one visible course.
+- [x] 22.5 Drill: the radio pair, remembered, default mixed; replaces the filter row and
   carries its counts; greys the switcher while mixed.
-- [ ] 22.6 Progress: remove the unreachable "open a course" fallback.
-- [ ] 22.7 Rewrite the Help paragraph that says Study and Play stay greyed out; add the
+- [x] 22.6 Progress: remove the unreachable "open a course" fallback.
+- [x] 22.7 Rewrite the Help paragraph that says Study and Play stay greyed out; add the
   radios to the Drill section and to `HELP_CONTROLS`.
-- [ ] 22.8 Correct SPEC section 10 and log the ruling in section 8.
-- [ ] 22.9 Tests for the resolution and fallbacks, the preference, and the help; mutation
+- [x] 22.8 Correct SPEC section 10 and log the ruling in section 8.
+- [x] 22.9 Tests for the resolution and fallbacks, the preference, and the help; mutation
   check the help test.
-- [ ] 22.10 Version 1.6.4.
-- [ ] 22.11 Prove it in the browser build from a cleared storage.
+- [x] 22.10 Version 1.6.4.
+- [x] 22.11 Prove it in the browser build from a cleared storage.
 
 Acceptance: a course always selected, remembered and falling back safely; all four modes
 enabled from the first click with the switcher showing; Drill's two radios remembered,
@@ -2913,5 +2913,88 @@ filter row gone with its counts in the labels; Progress's fallback gone; the Hel
 true against the new behaviour and its two new controls held by a test proved to fail on
 a rename; SPEC sections 8 and 10 corrected; version 1.6.4; 308 line ids unchanged; vitest
 green and `tsc -b` clean.
+
+
+Open items (phase 22):
+
+1. **The cause was that nothing remembered a course, and everything else followed from
+   it.** `courseId` started null on every launch, so Study and Play were greyed out, the
+   switcher did not render, and Progress - which phase 21 had made follow the switcher -
+   opened on a line telling him to open a course. The selected course is now read from
+   `localStorage` and resolved against the courses actually visible, every render. It is
+   derived rather than stored back into state, so there is no first paint where the
+   resolution has not happened yet.
+2. **The four ways a remembered id can be stale are one case, and each is tested.** A
+   fresh install with nothing remembered, a course since hidden, a folder deleted, an id
+   renamed: all fall back to the first visible course. The empty catalog is the fifth and
+   returns undefined rather than throwing, which is the only case where the shell has
+   nothing to show. **Driven live as well as tested**: hiding the Vienna and reloading fell
+   back to the Caro-Kann and rewrote the stored id to `caro-kann-black`, so the memory
+   heals itself.
+3. **The heal waits for the folder scan, and that is not a detail.** In the installed app
+   external courses arrive after the first render. Writing the fallback back before the
+   scan finished would forget the trainee's own dropped-in course to fix a problem that
+   was about to go away. `useRememberedCourse` takes `catalog.scanned` for exactly this.
+4. **It is not in `progress.json` and that was a decision, not an oversight.** That file
+   is versioned, exported and imported; a course id inside it would travel with an export
+   to a machine that may not have the course. `localStorage` lives in the WebView2 profile
+   under `Repertoire Trainer Data`, which survives an upgrade and goes on a ticked
+   uninstall, which is the right life for a preference. Same reasoning as `theme.ts`, and
+   the two now sit beside each other.
+5. **One deviation from the chip, on the seam it invited us to name.** The chip proposed
+   that the Drill preference live in a hook both the shell and Drill call. A hook called in
+   two places is two pieces of `useState`, and pressing the radio in Drill would not grey
+   the switcher in the shell until a reload. So `useDrillScope` is called ONCE, in the
+   shell, and handed down as props, the same way the shell already hands the selected
+   course to Progress. The module is still shared; what is not shared is the call.
+6. **The filter row was replaced, not joined.** A row of one button per course beside the
+   header's own dropdown was a second course selector, which is the confusion this phase
+   exists to remove. Its counts moved onto the radio labels after a colon, so the screen
+   still reads "Drill mixed: every course, 25 due" and "Drill selected: The Vienna Gambit,
+   12 due" and nothing legible was lost.
+7. **The help test learnt one rule to allow that, and only one.** A control may carry its
+   detail after a colon, so "Drill mixed: every course, 25 due" is the control called
+   Drill mixed. A colon and nothing else: appending anything to a name still fails, and
+   "Start drilling now" is still not "Start drilling". The test also needed a SECOND course
+   in its fixture, because one course has no dropdown and nothing to choose between.
+8. **22.7 found four lies beyond the two the chip named, which is the point of reading the
+   whole document.** The named two were Study and Play "stay greyed out until you open
+   one" and Drill and Progress "do not" need a course. The other four: Courses described as
+   "the front door, open one" when a course is already open; the Courses section saying
+   nothing about a tile selecting a course or about what happens when the remembered one
+   is gone; Drill saying a card names its course "because the queue mixes them", which
+   stops being the reason under Drill selected; and the words list saying opening a course
+   is what Study and Play work inside, which is now three screens and no opening.
+   **The suite could not have caught any of them.** It holds the help to the controls it
+   NAMES, not to claims about behaviour, which is the same gap gate 21 found in the Drill
+   scheduling sentence.
+9. **Seven mutations, six of them red, and the seventh is the more interesting result.**
+   Renaming Drill mixed, Drill selected, What to drill or the Course label each turns the
+   help test red naming the string that went missing. Ignoring the remembered id fails two
+   selection tests. Letting Drill ignore the preference fails the narrowing test. The one
+   that did NOT fail was re-adding `disabled={mode.view === 'study' && !course}`, and it
+   did not fail because it cannot fire: a course is always resolved, so the old guard is
+   now dead code wherever it is written. That is the phase working rather than the test
+   being weak. The mutation that does fail is disabling Study outright.
+10. **What was driven at 1280x900, from a cleared `localStorage`.** First click into
+    Progress showed the rollup and the Caro-Kann's detail with no "open a course" line;
+    first click into Study and into Play both opened, where both had been greyed; the
+    switcher showed on every view including the catalog. With lines learnt in two courses
+    the Drill screen read "Drill mixed: every course, 25 due" and "Drill selected: The
+    Vienna Gambit, 12 due", the summary moved between 25 and 12 as the radio flipped, and
+    the switcher greyed and ungreyed with it in both directions. A reload came back on the
+    Vienna with Drill selected still chosen. A tile still opens Study and selects that
+    course. The browser build's storage was cleared afterwards and checked back to no
+    learnt lines, no hidden courses and no drill preference.
+11. **One thing is proved in the browser and not in the suite**, and it is in the SPEC
+    section 6 register with what would make it worth taking: the greyed switcher, because
+    testing it needs the shell rendered on the Drill view and the view is internal state.
+    Both things it depends on are in the suite.
+12. **The Progress fallback line is gone rather than left.** It was the first thing Nick
+    read when this phase started. The `chosen` test above it remains as a type guard for
+    the empty catalog, which the guard above THAT already turns back, and the comment says
+    that is all it is.
+13. **No chess moved.** Nothing under `courses/` differs from the commit this phase started
+    on, and the running app still counts 308 lines across six courses.
 
 - [ ] **Review gate 22 passed**

@@ -441,6 +441,16 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   the answer the rule asks for, and it is a file whose only job is to break a cycle, so
   it was not taken. What would make it worth taking is a third file needing the same
   thing. Recorded at phase 21.
+- **The greyed course switcher is proved in the browser and not in the suite.** The rule
+  is one derived boolean in the shell: the switcher is idle on the Drill view while Drill
+  is mixing every course. Testing it needs the shell rendered ON the Drill view, and the
+  view is internal state with no way in from a test that renders to a string. It was
+  driven live at phase 22 in both directions, and the two things it depends on - the
+  remembered preference and Drill narrowing to the selected course - are each covered by
+  the suite. What would make it worth taking is a DOM test environment, which would let a
+  test click the nav and would pay for several other checks this suite cannot make; a
+  test-only prop for the initial view would not, because it is production API that exists
+  for a test. Recorded at phase 22.
 
 ## 7. Risks
 
@@ -728,7 +738,12 @@ authored to the same club depth with weights giving White's club-level choices.
    migrates in place with nothing lost.
 2. The catalog shows every course with progress and due counts; Study and Play
    scope to a course; Drill is one cross-course queue with a per-course filter;
-   Progress shows rollup and per-course figures.
+   Progress shows rollup and per-course figures. **This is what v2 was accepted
+   against and it is left as it was.** Three of its clauses have since been
+   superseded: the per-course filter row became the Drill mixed and Drill
+   selected radios at phase 22, Progress shows the rollup plus ONE course since
+   phase 21, and Study and Play no longer wait for a course to be chosen. The
+   rulings are in section 8 under their dates.
 3. A course folder dropped into the AppData courses folder appears in the catalog
    after a restart with no source change; an invalid one lists its errors and
    loads nothing else; a bundled id cannot be shadowed.
