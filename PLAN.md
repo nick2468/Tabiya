@@ -2704,3 +2704,51 @@ Gate 20 findings (2026-09-01):
 28. **Nick's own files were not listed and not reported.**
 
 - [x] **Review gate 20 passed** (2026-09-01)
+
+## Phase 21 - help for the app, not for the chess
+
+Goal: an app-help framework. No chess content, no course touched.
+
+Chipped as `chips/phase-21-help.md`. Nick opened 1.6.2 on 2026-09-01 and said it looks
+impressive and a bit daunting: every word of prose in the app is chess, and nothing is
+about the application - what it is for, what each screen wants, or what order to do
+things in.
+
+**The rulings he gave.** Written for anyone he hands a bundle to, not only for him. Help
+is one document with a heading per section, reached from a Help item in the nav after a
+faint separator, never disabled. The per-screen wording is "Help on this screen", never
+"New here?", because nobody should feel like a beginner every time they need a hand.
+Study needs nothing. The landing page drops its statistics for "Select a course to study".
+Drill gets a sentence and a label over the grade buttons rather than a `?`. Progress gets
+a sentence, a `?` on Chapters and one on Concepts, and **renders the course the dropdown
+names** instead of all six.
+
+**One rule shapes the phase: fix the label first, help second.** The worked example is
+the Study chapter list, which carries `aria-label="Chapters"` so a screen reader is told
+and a sighted reader is not, while Play and Progress both use the word. One visible label
+is worth more than a paragraph of help.
+
+- [ ] 21.1 One content module feeds both the `?` panels and the Help document.
+- [ ] 21.2 Label the Study chapter list on screen.
+- [ ] 21.3 A Help mode in the nav, after a separator, never disabled.
+- [ ] 21.4 The Help document, eight sections, rendered through `Prose`.
+- [ ] 21.5 Three `?` panels: Play's "Who you are playing", Progress's "Chapters" and
+  "Concepts". Keyboard-reachable, not hover tooltips.
+- [ ] 21.6 The landing page loses its statistics for "Select a course to study".
+- [ ] 21.7 Drill: a sentence under the heading and "How well did you know it?" over the
+  grade buttons.
+- [ ] 21.8 Progress: a sentence, and the detail follows the Course dropdown. SPEC
+  sections 8 and 10 updated, because section 10 currently rules otherwise.
+- [ ] 21.9 A test holding every help string to the control it names.
+- [ ] 21.10 Version 1.6.3, because the second digit is the course count and no course is
+  added.
+- [ ] 21.11 Prove it in the browser build.
+
+Acceptance: one content module feeding both surfaces; the chapter list labelled; Help in
+the nav and never disabled; the eight sections including the words list; three `?` panels
+and no more; the landing page reading as ruled with its rollup verified still on Progress;
+Drill's sentence and label; Progress following the dropdown with the spec corrected; a
+test that fails on a renamed control; version 1.6.3; 308 line ids unchanged; vitest green
+and `tsc -b` clean.
+
+- [ ] **Review gate 21 passed**
