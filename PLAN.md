@@ -3070,10 +3070,103 @@ the window opens at 1200 by 980, and the version becomes 1.6.5.
   before the fixes.
 - [x] 23.6 Weight badge off the move buttons and into a title; Help sentence.
 - [x] 23.7 "Ready" and "not yet drilled" throughout; next-card line on Progress; Help follows.
-- [ ] 23.8 Header gap balanced at 8px each side of the separator.
+- [x] 23.8 Header gap balanced at 8px each side of the separator.
 - [x] 23.9 Window 1200 by 980.
 - [x] 23.10 Version 1.6.5.
-- [ ] 23.11 Proved in the browser build at 1200x980.
+- [x] 23.11 Proved in the browser build at 1200x980.
+
+
+Open items (phase 23):
+
+1. **The evaluation bar reverses a v1 ruling, and the three things that keep the original
+   concern honest.** v1 said a live bar is a crutch. It was written before anybody had
+   played a game in the app, and Nick's reason after a day of playing is the one that
+   settles it: without a bar he could not tell a good game from a lucky one until the
+   report. The bar carries **no number**, so it says which way the game is going and not
+   by how much, and its accessible name is the report's own words. It is the engine at
+   **full strength**, made at the scan's own profile: the opponent's search would have
+   been a weakened engine's opinion at levels 4 to 8 and a glance at several candidates at
+   1 to 3, which is a lie in the shape of an evaluation. And every value it shows is
+   **handed to the scan**, so the report cannot disagree with the numbers that were on the
+   screen. The profile is restored in a `finally`, because the engine is one worker with a
+   promise queue and a search that threw would otherwise leave the opponent at level 8.
+2. **Undo works in pairs, and the reason is not tidiness.** Taking back one ply leaves the
+   opponent to move with nothing to make it move, so the game sits there. Undo goes back
+   to the last position where the trainee was to move, which is one move when the game has
+   just ended on their own. A Black course before the trainee has answered White's first
+   move has nothing of theirs in it, and undo says so rather than emptying the board.
+   Two things had to be put right rather than left: the outcome is cleared and worked out
+   again after every undo and redo, or a game undone out of a checkmate stays finished
+   while the board says otherwise; and each opponent move records whether it came from the
+   book, so `bookReplies` goes back to what it was instead of being guessed at.
+3. **The phase 21 register item is closed, by the fixture this phase needed anyway.** The
+   help names Undo and Redo, the help test walks the START screen, so the in-game header
+   became a component that takes a session. The same sitting exported `Report`, built a
+   small `GameReport` fixture, and put The repertoire, Your moves and The final position
+   under the same rule as every other control. Six names that were checked by reading
+   `Play.tsx` are now checked by the suite.
+4. **The book moved into the provider with the game, which was not in the chip.** It is
+   derived from the launch options, and those reset when `Play` unmounts. A chapter game
+   reviewed after a look at Study would have been reported against the whole course's
+   book. Found by asking what else dies with the screen.
+5. **A REAL BUG in this phase's own work, found by driving the browser and by nothing
+   else.** The provider's value was memoised, and the counter that says the mutable
+   session has changed is not a field of that value, so it was easy to leave out of the
+   dependencies. Children of a provider are the same element from render to render, so
+   React skips them unless the context value changes: **undo moved the game and the screen
+   stayed a step behind**, brought up to date only when an evaluation happened to arrive.
+   Every test passed. Adding the counter to the memo would have fixed the instance;
+   removing the memo fixes the class, and costs one object per render of a provider that
+   only renders when something has happened. In the SPEC section 6 register with what it
+   cost.
+6. **An early answer is an ordinary answer, and the numbers prove it.** No second recording
+   path and no change to the FSRS parameters. Driven live: a card scheduled eight days out,
+   answered on day zero, offered "Got it, back in 9 days" and "That was easy, back in 13
+   days" - shorter than it would have been on the day, which is FSRS knowing how much time
+   has passed. The box is not remembered, because one that stayed ticked would make ready
+   mean nothing.
+7. **The direction sweep found ten, not five.** Nick found one by eye. The rule found the
+   other nine the same afternoon, in three courses: seven Ruy `dxc6`, one Slav `exf5`, one
+   Vienna `dxc3`. The `ch4-bxc6` intro had the same error from the other side. One more was
+   a rewording rather than a correction: an alternative's note said "recapture towards the
+   centre with the a-pawn" while sitting under `cxb3`, and its own twin two hundred lines
+   away already said "Take with the a-pawn". The rule reads the phrase as being about the
+   move the note sits on, which is what makes it cheap, and that is now a house rule the
+   content obeys rather than a weakness the rule tolerates.
+8. **And one the chip did not name: the Colle's 5.b3 note.** It said the bishop was going
+   to b2 "not to c1", where the bishop already stands. It means not left on c1 behind a c3
+   pawn, which is the Colle-Koltanowski listed on that same node, and not out in front to
+   f4, which is the London listed on the node before. Its ch1 twin was already right.
+9. **The weight badge tested the wrong thing, so it never showed in a Black course.** It
+   tested `node.colour === 'black'`, and the opponent plays White in a Black repertoire.
+   The weight itself is the test now, which is the one the loader already enforces: it
+   refuses a weight on the trainee's own move.
+10. **Rewriting the words found four more stale sentences**, which is the same lesson as
+    gates 21 and 22 with a fourth number on it. The Drill help said the labels carry "the
+    number due", that a card is due, that Start drilling works through what is due, and
+    that an early answer is scheduled from "the day it was due". The suite could not have
+    caught any of them: it holds the help to the controls it NAMES.
+11. **One word did not change, deliberately.** The Drill box still says "Include cards that
+    are not due yet". "Ready" is the word for a COUNT of cards whose gap has run out, which
+    is what the sweep was about; the box is about the schedule's own date. The words list
+    now says how the two fit together, in the one place a reader meets both.
+12. **What was driven at 1200x980, from a cleared `localStorage`.** The header gaps measure
+    8px above the rule and 8px from the rule to the Course dropdown, where they were 8 and
+    16. A White game showed the bar left of the board at 421px, board height, with White's
+    share growing from the BOTTOM; a Caro-Kann game showed the same bar with White at the
+    TOP, so the trainee's colour is at the bottom in both. Two moves, two undos back to the
+    empty board, two redos back to exactly `1.d4 f5 2.Bf4 Nf6` with the bar at a different
+    value from the start position, so it follows them from the map with no search. A trip
+    to Study mid-game left the switcher greyed with "A game is in progress...", and the
+    game was where it had been on return; reviewing it made the switcher live again. On
+    Drill with everything answered: "Nothing is ready. The next card comes back in 8 days",
+    then the box ticked reads "10 cards, 0 of them ready now" with Start drilling enabled.
+    A Black reply on Study carries the frequency title and no badge. Progress reads "10
+    cards, 0 ready to drill now, 0 not yet drilled" with the next-card line under it and
+    Ready / Not yet drilled as columns. Storage was cleared afterwards and checked back to
+    no learnt lines, no cards, no games and no hidden courses.
+13. **No move changed.** Notes only under `courses/`, the bundles regenerated by the
+    writer, and 308 line ids across 6 courses before and after.
 
 Acceptance: as the chip's final paragraph.
 
