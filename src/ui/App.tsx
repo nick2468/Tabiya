@@ -8,30 +8,41 @@ import { Play, type PlayRequest } from './Play'
 import { Progress } from './Progress'
 import { ProgressProvider, useProgress } from './progress-context'
 import { Study } from './Study'
+import {
+  rememberCourse,
+  resolveCourse,
+  savedCourse,
+  useRememberedCourse,
+} from './prefs'
 import { useTheme } from './theme'
 import './app.css'
 
 /**
  * The app shell.
  *
- * Two kinds of view sit side by side here. Study and Play happen INSIDE a
- * course, so they need one chosen; Drill and Progress span every course, so
- * they do not. That split is the ruling in SPEC.md section 10 and it is the
- * only reason the shell holds a selected course at all.
+ * A COURSE IS ALWAYS SELECTED, which is the phase 22 ruling in SPEC.md
+ * section 8. The shell holds the id, resolves it against the courses that are
+ * actually there, and remembers it for next time. Nothing is disabled and
+ * nothing waits: every mode works from the first click of a fresh install.
  *
- * Progress is given the selected course all the same. It still needs none - it
- * opens with the rollup across everything and works with nothing chosen - but
- * the detail under the rollup follows the course switcher rather than listing
- * every course, which is the phase 21 ruling recorded in SPEC.md section 8.
+ * That replaced a split where Study and Play were greyed out until a course
+ * was chosen and Drill and Progress were not, on the v2 reasoning that those
+ * two span courses. Phase 21 then made Progress follow the switcher, so
+ * Progress wanted a course while still being classed as a screen that needed
+ * none, and the first click into it said to open one. The ruling: block every
+ * mode or allow all of them, and Nick chose allow all.
+ *
+ * Drill still spans courses by default, which is the part of the v2 ruling
+ * that survives. The difference is that it is a remembered choice on the
+ * screen rather than a rule, and while it is mixing everything the course
+ * switcher is greyed out here, so the header cannot appear to name a course
+ * the queue is ignoring.
  *
  * The play request is held here rather than in either view, because it is the
  * one thing Study and Play have to say to each other: "start a game from this
  * position".
  */
 type View = 'courses' | 'study' | 'drill' | 'play' | 'progress' | 'help' | 'diagnostics'
-
-/** Views that need a course chosen first. */
-const IN_COURSE: View[] = ['study', 'play']
 
 const MODES: { view: View; label: string }[] = [
   { view: 'courses', label: 'Courses' },
@@ -70,15 +81,20 @@ export function Shell() {
   const catalog = useCatalog()
   const { failure, restore, putBack } = useProgress()
   const [view, setView] = useState<View>('courses')
-  const [courseId, setCourseId] = useState<string | null>(null)
+  const [courseId, setCourseId] = useState<string | null>(savedCourse)
   const [playRequest, setPlayRequest] = useState<PlayRequest | null>(null)
   const { theme, toggle } = useTheme()
   const showDiagnostics = import.meta.env.DEV
 
-  const course = courseId ? catalog.find(courseId) : undefined
+  // Derived every render rather than stored: a remembered id that no longer
+  // names a visible course falls back to the first one, so a course that was
+  // hidden or deleted between sessions never leaves the app with none.
+  const course = resolveCourse(courseId, catalog.courses)
+  useRememberedCourse(course?.id, catalog.scanned)
 
   const open = useCallback((id: string) => {
     setCourseId(id)
+    rememberCourse(id)
     setPlayRequest(null)
     setView('study')
   }, [])
@@ -87,6 +103,7 @@ export function Shell() {
   // position it names belongs to the course being left.
   const switchTo = useCallback((id: string) => {
     setCourseId(id)
+    rememberCourse(id)
     setPlayRequest(null)
   }, [])
 
@@ -95,8 +112,10 @@ export function Shell() {
     setView('play')
   }, [])
 
-  // A view that needs a course, with none chosen, is the catalog.
-  const showing: View = IN_COURSE.includes(view) && !course ? 'courses' : view
+  // With no courses installed at all there is nothing for Study or Play to
+  // render, so the catalog and its drop-in note are the only useful screen.
+  // With any course installed this never fires: one is always resolved.
+  const showing: View = (view === 'study' || view === 'play') && !course ? 'courses' : view
 
   return (
     <div className="app">
@@ -114,12 +133,6 @@ export function Shell() {
               type="button"
               className={showing === mode.view ? 'nav-link current' : 'nav-link'}
               aria-current={showing === mode.view ? 'page' : undefined}
-              disabled={IN_COURSE.includes(mode.view) && !course}
-              title={
-                IN_COURSE.includes(mode.view) && !course
-                  ? 'Open a course first'
-                  : undefined
-              }
               onClick={() => setView(mode.view)}
             >
               {mode.label}
@@ -156,7 +169,10 @@ export function Shell() {
         </nav>
       </header>
 
-      {course && catalog.courses.length > 1 ? (
+      {/* Always, once there is more than one course to choose between. The
+          `course` test is for the empty catalog and nothing else: with any
+          course installed, one is always resolved. */}
+      {catalog.courses.length > 1 && course ? (
         <div className="course-switch">
           <label htmlFor="course-switch">Course</label>
           <select
@@ -198,7 +214,7 @@ export function Shell() {
           />
         ) : null}
         {showing === 'drill' ? <Drill /> : null}
-        {showing === 'progress' ? <Progress courseId={courseId} /> : null}
+        {showing === 'progress' ? <Progress courseId={course?.id ?? null} /> : null}
         {showing === 'help' ? <Help /> : null}
         {showing === 'diagnostics' ? <Diagnostics /> : null}
       </main>
