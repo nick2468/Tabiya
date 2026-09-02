@@ -156,7 +156,27 @@
   border-left-color: var(--link);
 }
 
-/* The one place an evaluation bar belongs: the report, after the game. */
+/* The bar beside the board, while the game is going. Board height, so it
+   reads as the board's own margin rather than as a widget of its own. */
+.live-eval {
+  position: relative;
+  width: 16px;
+  height: 420px;
+  flex: none;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.live-eval-white {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: var(--bar);
+}
+
+/* The report's own bar: the final position, horizontal, under the verdict. */
 .eval-bar {
   height: 10px;
   width: 100%;

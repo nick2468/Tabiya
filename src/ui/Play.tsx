@@ -3,9 +3,15 @@ import { Board } from './Board'
 import { HelpAsk, HelpSaid } from './Help'
 import { useProgress } from './progress-context'
 
-import { StockfishEngine, strengthProfile, allProfiles, type Engine } from '../engine'
+import {
+  StockfishEngine,
+  strengthProfile,
+  allProfiles,
+  whitePovPawns,
+  type Engine,
+} from '../engine'
 import { sanForMove, squaresForSan } from '../model/grade'
-import { legalDests } from '../model/position'
+import { legalDests, positionKey } from '../model/position'
 import { colourName, type Colour, type LoadedCourse } from '../model/types'
 import {
   GAME_LENGTHS,
@@ -14,8 +20,11 @@ import {
   buildReport,
   describeDeviation,
   describeSlip,
+  evalBarLayout,
+  evalShare,
   fullMove,
   scanGame,
+  shownEvaluation,
   verdictInWords,
   type GameLength,
   type GameReport,
@@ -25,10 +34,21 @@ import './play.css'
 /**
  * Play: a game against the engine, steered into the repertoire.
  *
- * There is no evaluation on screen while the game is going. That is deliberate
- * and it is in the spec: a bar telling you how you are doing replaces the
- * thinking the game is meant to train. Everything the engine knows comes out
- * afterwards, in the report.
+ * A bar to the left of the board shows what the engine makes of the position
+ * while the game is going. That reverses the v1 ruling, which called a live
+ * bar a crutch; the reversal and its reason are logged in SPEC.md section 8.
+ * Nick asked for it after a day of playing, and the v1 ruling was made before
+ * anyone had played a game in the app at all.
+ *
+ * The number is the engine's, at full strength, whatever the game is being
+ * played at: after every move the engine is set to the scan's own profile,
+ * asked about the new position, and set back before the opponent thinks. It is
+ * deliberately NOT read off the opponent's own search, which at levels 4 to 8
+ * is a weakened engine's opinion and at levels 1 to 3 is a glance at several
+ * candidates. That number would be a lie in the shape of an evaluation.
+ *
+ * Every evaluation is kept and handed to the scan at the end, so the report
+ * judges the game by the exact numbers the trainee watched.
  */
 
 /** A request to play from a position, sent over from Study. */
@@ -43,6 +63,15 @@ type Shape_ = 'any' | 'chapter' | 'here'
 
 /** How long the blunder scan thinks about each position. */
 const SCAN_MOVETIME = 150
+
+/**
+ * The one profile every evaluation on this screen is made at: the live bar's
+ * and the scan's. Full strength, one line, a fixed 150 ms. Two numbers can
+ * only be compared when they were made the same way.
+ */
+function analysisProfile() {
+  return { ...strengthProfile(8), multiPv: 1, movetime: SCAN_MOVETIME }
+}
 
 export function Play({
   course,
@@ -69,9 +98,11 @@ export function Play({
   const [engineError, setEngineError] = useState<string | null>(null)
   const [report, setReport] = useState<GameReport | null>(null)
   const [scanning, setScanning] = useState<{ done: number; total: number } | null>(null)
+  const [evaluations, setEvaluations] = useState<Map<string, number>>(() => new Map())
 
   const engineRef = useRef<Engine | null>(null)
   const sessionRef = useRef<PlaySession | null>(null)
+  const evaluationsRef = useRef<Map<string, number>>(new Map())
 
   useEffect(() => {
     if (request) setLaunch('here')
@@ -95,6 +126,37 @@ export function Play({
   }, [chapters, course.colour, launch, chapterId])
 
   const refresh = useCallback(() => setTick((count) => count + 1), [])
+
+  /**
+   * Evaluates a position for the bar, at the analysis profile, and puts the
+   * playing profile back.
+   *
+   * The restore is in a `finally` for a reason worth keeping: the engine is
+   * one worker with a promise queue, so a search that threw and skipped the
+   * restore would leave the opponent playing the rest of the game at level 8
+   * with one candidate. A position already known is not searched again, which
+   * is what makes undo and redo free.
+   */
+  const evaluate = useCallback(
+    async (running: Engine, fen: string, playing: number) => {
+      const key = positionKey(fen)
+      if (evaluationsRef.current.has(key)) return
+      try {
+        await running.setStrength(analysisProfile())
+        const result = await running.search(fen, SCAN_MOVETIME)
+        const best = result.candidates[0]
+        if (!best) return
+        const side = fen.split(' ')[1] === 'b' ? 'black' : 'white'
+        const next = new Map(evaluationsRef.current)
+        next.set(key, whitePovPawns(best.score, side))
+        evaluationsRef.current = next
+        setEvaluations(next)
+      } finally {
+        await running.setStrength(strengthProfile(playing))
+      }
+    },
+    [],
+  )
 
   const engine = useCallback(async (): Promise<Engine> => {
     if (!engineRef.current) engineRef.current = new StockfishEngine()
@@ -130,12 +192,14 @@ export function Play({
         await fresh.playOpponent()
       }
       refresh()
+      await evaluate(running, fresh.fen, level)
+      refresh()
     } catch (error) {
       setEngineError(asMessage(error))
     } finally {
       setThinking(false)
     }
-  }, [book, engine, launch, length, level, onRequestUsed, refresh, request])
+  }, [book, engine, evaluate, launch, length, level, onRequestUsed, refresh, request])
 
   const onMove = useCallback(
     async (from: string, to: string) => {
@@ -144,10 +208,17 @@ export function Play({
       const san = sanForMove(running.fen, from, to)
       if (!san || !running.playStudent(san)) return
       refresh()
-      if (running.isFinished()) return
       setThinking(true)
       try {
+        // The bar is brought up to date before the opponent is asked to move,
+        // so it answers the move that was just played rather than the reply.
+        const live = engineRef.current
+        if (live) await evaluate(live, running.fen, level)
+        refresh()
+        if (running.isFinished()) return
         await running.playOpponent()
+        refresh()
+        if (live) await evaluate(live, running.fen, level)
         refresh()
       } catch (error) {
         setEngineError(asMessage(error))
@@ -155,7 +226,7 @@ export function Play({
         setThinking(false)
       }
     },
-    [refresh, thinking],
+    [evaluate, level, refresh, thinking],
   )
 
   const finish = useCallback(async () => {
@@ -165,14 +236,21 @@ export function Play({
     setScanning({ done: 0, total: 0 })
     try {
       const running_engine = await engine()
-      // The scan runs at one fixed effort so every position is judged by the
-      // same standard, and at full strength whatever the game was played at.
-      await running_engine.setStrength({ ...strengthProfile(8), multiPv: 1, movetime: SCAN_MOVETIME })
-      const evaluations = await scanGame(running.moves, running_engine, SCAN_MOVETIME, (done, total) =>
-        setScanning({ done, total }),
+      await running_engine.setStrength(analysisProfile())
+      // What the bar already worked out is handed over rather than searched
+      // again: the scan is shorter, and the report cannot disagree with the
+      // numbers that were on the screen during the game.
+      const scanned = await scanGame(
+        running.moves,
+        running_engine,
+        SCAN_MOVETIME,
+        (done, total) => setScanning({ done, total }),
+        evaluationsRef.current,
       )
+      evaluationsRef.current = scanned
+      setEvaluations(scanned)
       const outcome = running.outcome ?? `Stopped after move ${fullMove(running.moves.length - 1)}`
-      const built = buildReport(running.moves, book, evaluations, outcome)
+      const built = buildReport(running.moves, book, scanned, outcome)
       setReport(built)
       recordPlay({
         courseId: course.id,
@@ -199,6 +277,8 @@ export function Play({
     setSession(null)
     setReport(null)
     setScanning(null)
+    evaluationsRef.current = new Map()
+    setEvaluations(new Map())
   }, [])
 
   // The game ends by itself on mate or the length cap.
@@ -210,9 +290,9 @@ export function Play({
         <h2>Play</h2>
         <p className="play-intro">
           A game against Stockfish as {colourName(course.colour)}, with your opponent
-          steered into the lines you have studied.
-          No evaluation while you play: everything the engine thinks comes out in the
-          report afterwards.
+          steered into the lines you have studied. A bar beside the board shows what the
+          engine makes of the position as you go, at full strength whatever you chose to
+          play against, and the report afterwards is built from the same numbers.
         </p>
 
         <fieldset>
@@ -323,6 +403,11 @@ export function Play({
       </header>
 
       <div className="play-body">
+        <LiveEvalBar
+          pawns={shownEvaluation(session.fen, session.moves, evaluations)}
+          studentColour={session.studentColour}
+        />
+
         <Board
           fen={session.fen}
           orientation={session.studentColour}
@@ -428,12 +513,49 @@ function Report({
 }
 
 /**
- * The one place an evaluation bar is allowed: the report, after the game. It
- * never appears while a game is going.
+ * The bar beside the board, while the game is going.
+ *
+ * Vertical and board height, so it reads as the board's own margin rather
+ * than as a widget. It follows the board's orientation: the trainee's colour
+ * is at the bottom of it whichever colour they are playing, so a bar growing
+ * towards them always means the same thing.
+ *
+ * No number on it, which is the part of the v1 ruling that survives. The
+ * accessible name is the report's own words.
  */
+function LiveEvalBar({
+  pawns,
+  studentColour,
+}: {
+  pawns: number | undefined
+  studentColour: Colour
+}) {
+  const layout = evalBarLayout(pawns ?? 0, studentColour)
+  return (
+    <div
+      className="live-eval"
+      role="img"
+      aria-label={
+        pawns === undefined
+          ? 'Evaluation: the engine has not looked yet'
+          : `Evaluation: ${verdictInWords(pawns).toLowerCase()}`
+      }
+    >
+      <div
+        className="live-eval-white"
+        style={{
+          height: `${layout.whiteShare}%`,
+          top: layout.whiteAtBottom ? 'auto' : 0,
+          bottom: layout.whiteAtBottom ? 0 : 'auto',
+        }}
+      />
+    </div>
+  )
+}
+
+/** The report's own bar: the final position, horizontal, under the verdict. */
 function EvalBar({ pawns }: { pawns: number }) {
-  // Squash the number into a bar without pretending the scale is linear.
-  const share = 50 + 50 * Math.tanh(pawns / 3)
+  const share = evalShare(pawns)
   return (
     <div
       className="eval-bar"

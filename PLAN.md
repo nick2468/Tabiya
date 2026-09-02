@@ -3061,7 +3061,7 @@ badge comes off the Study move buttons and into a tooltip. "Due" and "New" becom
 and "not yet drilled" everywhere a person reads them. The course dropdown moves up 8px,
 the window opens at 1200 by 980, and the version becomes 1.6.5.
 
-- [ ] 23.1 Live evaluation bar, one engine at the scan profile, fed into the report.
+- [x] 23.1 Live evaluation bar, one engine at the scan profile, fed into the report.
 - [ ] 23.2 Undo and Redo on `PlaySession`, held by the help test through a session fixture;
   the phase 21 report register item closed with the same fixture.
 - [ ] 23.3 The game lives in a provider; the switcher is greyed while a game is in progress.

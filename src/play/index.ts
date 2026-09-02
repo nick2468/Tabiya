@@ -12,6 +12,12 @@ export {
   type BookSource,
 } from './book'
 export {
+  evalBarLayout,
+  evalShare,
+  shownEvaluation,
+  type EvalBarLayout,
+} from './evalbar'
+export {
   SLIP_THRESHOLDS,
   buildReport,
   describeDeviation,

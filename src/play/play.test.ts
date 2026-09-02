@@ -495,6 +495,25 @@ describe('scanGame', () => {
     await scanGame(playedMoves(['d4', 'd5']), fakeEngine(), 10, (done) => seen.push(done))
     expect(seen).toEqual([1, 2, 3])
   })
+
+  it('keeps what the live bar already worked out rather than searching it again', async () => {
+    const moves = playedMoves(['d4', 'd5'])
+    const known = new Map([[positionKey(moves[0].fen), 1.5]])
+    const seen: number[] = []
+    const evaluations = await scanGame(
+      moves,
+      fakeEngine({ cp: 30 }),
+      10,
+      (_done, total) => seen.push(total),
+      known,
+    )
+    // The report is judged by the number that was on the screen, not by a
+    // fresh search that might disagree with it.
+    expect(evaluations.get(positionKey(moves[0].fen))).toBe(1.5)
+    expect(evaluations.size).toBe(3)
+    // And the scan is two positions shorter than it would have been.
+    expect(seen).toEqual([2, 2])
+  })
 })
 
 describe('buildReport', () => {

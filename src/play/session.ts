@@ -217,21 +217,28 @@ export class PlaySession {
  * Evaluates every position of a game at a fixed effort, for the blunder scan.
  *
  * Fixed effort matters: the scan compares positions with each other, so they
- * all have to be judged by the same standard. It is done after the game rather
- * than during it, because an evaluation shown while playing is a crutch.
+ * all have to be judged by the same standard.
+ *
+ * `known` is what the live bar already worked out during the game, at this
+ * same effort and this same profile. Handing it over is not only a saving.
+ * It means the report judges the game by the exact numbers the trainee was
+ * watching, so a position the bar called level cannot be called a blunder
+ * afterwards by a search that happened to see one ply further.
  */
 export async function scanGame(
   moves: PlayedMove[],
   engine: Engine,
   movetime: number,
   onProgress?: (done: number, total: number) => void,
+  known?: Map<string, number>,
 ): Promise<Map<string, number>> {
+  const evaluations = new Map<string, number>(known)
   const positions: { key: string; fen: string; side: 'white' | 'black' }[] = []
   const seen = new Set<string>()
 
   const add = (fen: string) => {
     const key = positionKey(fen)
-    if (seen.has(key)) return
+    if (seen.has(key) || evaluations.has(key)) return
     seen.add(key)
     positions.push({ key, fen, side: fen.split(' ')[1] === 'b' ? 'black' : 'white' })
   }
@@ -240,7 +247,6 @@ export async function scanGame(
     add(move.after)
   }
 
-  const evaluations = new Map<string, number>()
   for (const [index, position] of positions.entries()) {
     const result = await engine.search(position.fen, movetime)
     const best = result.candidates[0]

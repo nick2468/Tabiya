@@ -61,14 +61,15 @@ Full or partial games as White against Stockfish, in three launch shapes:
 - **From here**: launched from any Study position; the engine plays Black immediately.
 
 Options: game length (to move 10, to move 15, or full game) and strength (a 1-8 scale;
-implementation in section 5). No evaluation bar during play - it is a crutch. After the
+implementation in section 5). A live evaluation bar sits to the left of the board while
+the game is going, in the board's own orientation, and it carries no number. After the
 game or segment, a report:
 
 - The first White move that left the repertoire, with the book move and its note. If
   Black left book first, the report says from which move it was "just chess".
 - A blunder scan of White's moves at fixed engine effort.
-- Verdicts in words ("clearly better for White"), never bare numbers. The eval bar is
-  allowed here, in review, only.
+- Verdicts in words ("clearly better for White"), never bare numbers. That binds the
+  live bar too: it is a shape, with the same words as its accessible name.
 
 ### Progress
 
@@ -575,6 +576,19 @@ because a header naming a course the queue is ignoring is the same lie in the ot
 direction. This replaced the per-course filter row rather than joining it: two course
 selectors on one screen would be worse than the inconsistency being fixed, and the counts
 the row carried moved onto the radio labels.
+
+2026-09-03, phase 23: **there is an evaluation bar during play, and it reverses a v1
+ruling.** v1 said a bar while you play is a crutch that does the thinking the game is
+meant to train. Nick asked for one after a day of playing 1.6.4, and the v1 ruling was
+made before anybody had played a game in the app at all. His reason is the one that
+settles it: without a bar he cannot tell a good game from a lucky one until the report,
+so a game he was losing from move six feels the same as a game he was winning. Three
+things keep the original concern honest. The bar carries **no number**, so it says which
+way the game is going and not by how much. It is the engine's own view at **full
+strength**, made at the scan's profile, never read off a weakened opponent's search,
+because a bar that lies is worse than no bar. And every value it shows is **handed to the
+scan**, so the report is built from the numbers that were on the screen and cannot
+contradict them afterwards.
 
 ## 9. v1 acceptance
 
