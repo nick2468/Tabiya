@@ -46,7 +46,7 @@ Playing Ne5 because the square is there, when Black can trade on it and be happy
 4. Bd3
 {The bishop takes aim at h7 while Black's kingside is still bare. Against a Black pawn on g6 it would go to e2 instead. [%tags bishop-placement]}
 4... c5 {The standard break at the base of White's centre. [%weight 8]} 5. b3
-{The Zukertort move. The bishop is going to b2, not to c1 and not out to f4. [%tags long-diagonal]}
+{The Zukertort move. The bishop is going to b2: not left on c1 behind a c3 pawn, and not out in front to f4. [%tags long-diagonal]}
 ( 5. c3!?
 {The Colle-Koltanowski. Sound, and it builds the same triangle the London already taught you, so it teaches you nothing you do not know.}
 ) ( 5. c4!? {A Queen's Gambit a move late. Playable, and a different course.} ) 5... Nc6

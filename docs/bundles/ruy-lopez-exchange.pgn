@@ -49,7 +49,7 @@ Taking on e5 with the knight before the position allows it. Recapturing towards 
 ( 4. Ba4!?
 {The main Ruy Lopez, and several times the theory. It is a fine choice and it is not this course.}
 ) 4... dxc6
-{Towards the centre, which is right: it opens the bishop on c8 and keeps a pawn on e5. [%weight 8]}
+{The main recapture, and the right one: it opens the bishop on c8 and keeps a pawn on e5. [%weight 8]}
 5. O-O
 {King safety first, and the rook comes to e1 or d1 in every line from here. [%tags king-safety development]}
 ( 5. Nxe5?!
@@ -399,7 +399,7 @@ Playing d4 without counting first. Taking a queen trade that did not have to be 
 [ChapterTitle "4...bxc6, the other recapture"]
 [DefaultTags "doubled-pawns"]
 
-{Black recaptures towards the edge. It keeps a pawn on d7 and a route for the knight to e7 and g6, and it leaves the queenside pawns in a heap: a6, c6 and c7 with nothing on b7.
+{Black recaptures towards the centre. It keeps a pawn on d7 and a route for the knight to e7 and g6, and it leaves the queenside pawns in a heap: a6, c6 and c7 with nothing on b7.
 
 ## Why this is good news
 
@@ -536,7 +536,7 @@ Taking on e5 before counting what defends it. Grabbing on e5 against the Schliem
 ( 9. O-O?! {It castles away from the play.} ) ) ( 3... f5
 {The Schliemann. Black hits e4 and lets the bishop take. [%weight 2]} 4. Bxc6
 {Take first, which removes the defender of e5 as well. [%tags doubled-pawns]} 4... dxc6
-{Towards the centre. [%weight 7]} 5. Nc3
+{The main recapture: it frees the bishop on c8 and keeps a pawn on e5. [%weight 7]} 5. Nc3
 {Defend the pawn with a piece and develop in the same move.} ( 5. Nxe5?!
 {It grabs and gives it back with interest: Black takes on e4 with a free centre and lines at the king.}
 ) 5... fxe4 {Black resolves it. [%weight 7]} 6. Nxe4 {The knight lands in the middle.}
@@ -545,7 +545,8 @@ Taking on e5 before counting what defends it. Grabbing on e5 against the Schliem
 ( 7. Nxf6+?!
 {It relieves the pressure and develops Black. Keep the knight and let Black do the trading.}
 ) ) ( 3... g6 {The fianchetto. Slow and playable. [%weight 2]} 4. Bxc6
-{Take. [%tags doubled-pawns]} 4... dxc6 {Towards the centre. [%weight 7]} 5. d3
+{Take. [%tags doubled-pawns]} 4... dxc6
+{The main recapture: it frees the bishop on c8 and keeps a pawn on e5. [%weight 7]} 5. d3
 {Quiet. The pawn on e4 is held and the position stays closed for the bishop that is coming to g7.}
 ( 5. d4?! {It opens the diagonal for the bishop about to arrive on g7. Keep it shut.} )
 5... Bg7 {Black finishes the fianchetto. [%weight 8]} 6. Nbd2
@@ -564,8 +565,9 @@ Taking on e5 before counting what defends it. Grabbing on e5 against the Schliem
 {Take, and accept a comfortable game rather than a small pull. [%tags doubled-pawns]} (
 4. Nc3!?
 {The engine's move, and close to a pawn better. It is also a different opening from the rest of this course.}
-) 4... dxc6 {Towards the centre. [%weight 7]} 5. Nc3 {Develop and hold e4.} 5... Ng6
-{The knight arrives. [%weight 6]} 6. d4
+) 4... dxc6
+{The main recapture: it frees the bishop on c8 and keeps a pawn on e5. [%weight 7]} 5. Nc3
+{Develop and hold e4.} 5... Ng6 {The knight arrives. [%weight 6]} 6. d4
 {The break, with everything ready for it. [%tags d4-break]} 6... exd4
 {Black takes. [%weight 7]} 7. Nxd4 {Recapture, eyeing f5.} 7... Qf6
 {Black develops with a hit on the knight. [%weight 6]} 8. O-O
@@ -575,8 +577,9 @@ Taking on e5 before counting what defends it. Grabbing on e5 against the Schliem
 {Take anyway. The structure is what this course is about. [%tags doubled-pawns bishop-pair]}
 ( 4. O-O!? {The main Berlin, and an enormous amount of theory. Not this course.} ) (
 4. d3!? {Solid and quiet, and it gives up the structure the whole repertoire is built on.}
-) 4... dxc6 {Towards the centre, as always. [%weight 8]} 5. O-O
-{The same move as everywhere else. [%tags king-safety]} ( 5. Nxe5?!
+) 4... dxc6
+{The main recapture, as always: the c8 bishop comes free and the e-pawn keeps a defender. [%weight 8]}
+5. O-O {The same move as everywhere else. [%tags king-safety]} ( 5. Nxe5?!
 {The pawn comes straight back: 5...Nxe4 and Black is fine. Castle first.} ) 5... Nxe4
 {Black grabs the pawn, which is the main line and correct. [%weight 6]} ( 5... Bd6
 {Holding e5 and developing. [%weight 5]} 6. d4
@@ -644,7 +647,8 @@ Taking a piece because it is there. Grabbing the h-file bishop and then finding 
 1. e4 e5 2. Nf3 Nc6 3. Bb5 a6
 {The usual move, and where five of the six exercises start. [%weight 8]} ( 3... Nf6
 {The Berlin, and exercise two. Play to move eight and find what the rook on e1 is really doing. [%weight 6]}
-4. Bxc6 {Take. [%tags doubled-pawns]} 4... dxc6 {Towards the centre. [%weight 8]} 5. O-O
+4. Bxc6 {Take. [%tags doubled-pawns]} 4... dxc6
+{The main recapture: it frees the bishop on c8 and keeps a pawn on e5. [%weight 8]} 5. O-O
 {As always. [%tags king-safety]} 5... Nxe4 {Black grabs. [%weight 6]} 6. Re1
 {The rook lands on the file. [%tags development]} 6... Nd6 {Back. [%weight 6]} 7. Nxe5
 {The pawn comes back. [%tags majority]} 7... Qe7
@@ -655,7 +659,7 @@ Taking a piece because it is there. Grabbing the h-file bishop and then finding 
 ) ( 8. d4?
 {It defends the knight and lets Black off. The knight was never the piece in danger.} ) )
 4. Bxc6 {The Exchange. [%tags doubled-pawns bishop-pair]} 4... dxc6
-{Towards the centre. [%weight 8]} 5. O-O
+{The main recapture: it frees the bishop on c8 and keeps a pawn on e5. [%weight 8]} 5. O-O
 {King safety, and every exercise below starts here. [%tags king-safety]} 5... Bg4
 {Exercise one. Black pins the knight, and after 6.h3 offers the bishop. White to play at move seven: the offer is the exercise. [%weight 5]}
 ( 5... f6 {Exercise four and exercise five both live here. [%weight 7]} 6. d4

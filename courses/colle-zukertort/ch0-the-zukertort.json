@@ -67,7 +67,7 @@
                                       "tags": [
                                         "long-diagonal"
                                       ],
-                                      "note": "The Zukertort move. The bishop is going to b2, not to c1 and not out to f4.",
+                                      "note": "The Zukertort move. The bishop is going to b2: not left on c1 behind a c3 pawn, and not out in front to f4.",
                                       "mistakes": [
                                         {
                                           "san": "c3",

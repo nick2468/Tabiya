@@ -205,7 +205,7 @@
                               "children": [
                                 {
                                   "san": "dxc3",
-                                  "note": "Take towards the centre, opening the queen and the c1 bishop. A pawn up with the bishop pair.",
+                                  "note": "Take with the d-pawn, which opens the queen and the c1 bishop. A pawn up with the bishop pair.",
                                   "plan": "Develop with Bd3 or Bc4 and castle, and hold e4 with the queen if needed. A clean pawn and the two bishops is plenty.",
                                   "name": "2...Bc5 and 3...Nf6"
                                 }

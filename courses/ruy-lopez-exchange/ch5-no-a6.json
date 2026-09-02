@@ -38,7 +38,7 @@
             {
               "san": "dxc6",
               "weight": 8,
-              "note": "Towards the centre, as always.",
+              "note": "The main recapture, as always: the c8 bishop comes free and the e-pawn keeps a defender.",
               "children": [
                 {
                   "san": "O-O",
@@ -586,7 +586,7 @@
             {
               "san": "dxc6",
               "weight": 7,
-              "note": "Towards the centre.",
+              "note": "The main recapture: it frees the bishop on c8 and keeps a pawn on e5.",
               "children": [
                 {
                   "san": "Nc3",
@@ -664,7 +664,7 @@
             {
               "san": "dxc6",
               "weight": 7,
-              "note": "Towards the centre.",
+              "note": "The main recapture: it frees the bishop on c8 and keeps a pawn on e5.",
               "children": [
                 {
                   "san": "d3",
@@ -821,7 +821,7 @@
             {
               "san": "dxc6",
               "weight": 7,
-              "note": "Towards the centre.",
+              "note": "The main recapture: it frees the bishop on c8 and keeps a pawn on e5.",
               "children": [
                 {
                   "san": "Nc3",

@@ -76,7 +76,7 @@
                                 {
                                   "san": "dxc6",
                                   "weight": 8,
-                                  "note": "Towards the centre, which is right: it opens the bishop on c8 and keeps a pawn on e5.",
+                                  "note": "The main recapture, and the right one: it opens the bishop on c8 and keeps a pawn on e5.",
                                   "children": [
                                     {
                                       "san": "O-O",

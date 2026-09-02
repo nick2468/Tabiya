@@ -883,7 +883,7 @@ Playing 4.Nge2 or 4.Qh5 against 3...Na5 and simply losing the bishop on c4. Push
 {Step back before Black takes. The bishop keeps the diagonal and the knight on a5 stays offside. [%tags bishop-placement]}
 7... Nxb3 {Black trades anyway to get the knight back into the game. [%weight 7]} 8. axb3
 {Take with the a-pawn and open the file.} ( 8. cxb3?!
-{It leaves the a-file shut and the queen with nowhere to go along the first rank. Recapture towards the centre with the a-pawn.}
+{It leaves the a-file shut and the queen with nowhere to go along the first rank. Take with the a-pawn.}
 ) 8... a5 {Black grabs space and stops b4 hitting the bishop. [%weight 6]} 9. h3
 {A small move with a large purpose. It stops ...Ng4, which is the tactic that makes the immediate f4 or Kh1 fail. [%tags king-safety] [%plan Then Kh1 and f4, or Ng3 and Qf3. The order matters: g4 covered, king off the diagonal, and only then the pawn.] [%line 3...Nf6 4.d3 Na5]}
 ( 9. Kh1?
@@ -1153,7 +1153,7 @@ Checking on h5 when a knight covers the square. Pushing f4 against 2...Bc5 with 
 5... Bxc3
 {Black takes the knight to spoil the pawns, which is his only real idea. [%weight 7]}
 6. dxc3
-{Take towards the centre, opening the queen and the c1 bishop. A pawn up with the bishop pair. [%plan Develop with Bd3 or Bc4 and castle, and hold e4 with the queen if needed. A clean pawn and the two bishops is plenty.] [%line 2...Bc5 and 3...Nf6]}
+{Take with the d-pawn, which opens the queen and the c1 bishop. A pawn up with the bishop pair. [%plan Develop with Bd3 or Bc4 and castle, and hold e4 with the queen if needed. A clean pawn and the two bishops is plenty.] [%line 2...Bc5 and 3...Nf6]}
 ) ( 3... d5
 {Black tries to open the position while a pawn behind in the centre count. [%weight 4]}
 4. exd5 {Take. The pawn on d5 is hard to win back with the knight already on c3.} 4... Nd7

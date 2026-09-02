@@ -311,7 +311,7 @@ Trying to hang on to c4 after 5.a4 with ...b5, when axb5 and b3 blow the queensi
 ) 7. Nxf5
 {White carries out the plan, giving up a well-placed knight for the bishop. [%weight 8]}
 7... exf5
-{Take towards the centre. The pawn on f5 covers e4 for good and the e-file opens for a rook. [%tags light-squares]}
+{Take with the e-pawn. The pawn on f5 covers e4 for good and the e-file opens for a rook. [%tags light-squares]}
 ( 7... Nbd7? {Take the knight. Anything else simply leaves Black a bishop down.} ) 8. e3
 {White goes back to the plan of winning the pawn on c4 back. [%weight 7]} 8... Bb4
 {The same idea as the main line: pin the knight and get ready to castle. [%tags development king-safety]}
