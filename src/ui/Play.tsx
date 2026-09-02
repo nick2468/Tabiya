@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Board } from './Board'
+import { HelpAsk, HelpSaid } from './Help'
 import { useProgress } from './progress-context'
 
 import { StockfishEngine, strengthProfile, allProfiles, type Engine } from '../engine'
@@ -58,6 +59,9 @@ export function Play({
   const [chapterId, setChapterId] = useState(chapters[0]?.id ?? '')
   const [length, setLength] = useState<GameLength>('move15')
   const [level, setLevel] = useState(4)
+  // "This chapter's line" is the one people misread here, so the launch
+  // options carry the screen's only `?`.
+  const [askLaunch, setAskLaunch] = useState(false)
 
   const [session, setSession] = useState<PlaySession | null>(null)
   const [, setTick] = useState(0)
@@ -212,7 +216,14 @@ export function Play({
         </p>
 
         <fieldset>
-          <legend>Who you are playing</legend>
+          {/* The button goes in the legend, beside the words it explains. The
+              panel does not: a legend is read out again for every radio under
+              it, and three sentences read six times is worse than no help. */}
+          <legend>
+            Who you are playing
+            <HelpAsk panel="play-launch" open={askLaunch} onToggle={setAskLaunch} />
+          </legend>
+          <HelpSaid panel="play-launch" open={askLaunch} />
           <label>
             <input
               type="radio"
