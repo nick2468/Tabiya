@@ -268,14 +268,10 @@ function ChapterStudy({
                     key={node.san}
                     type="button"
                     className="choice"
+                    title={node.weight ? weightTitle(node.weight) : undefined}
                     onClick={() => jump([...chain, node])}
                   >
                     {node.san}
-                    {node.colour === 'black' && node.weight ? (
-                      <span className="weight" title="How often this comes up at club level">
-                        {node.weight}
-                      </span>
-                    ) : null}
                   </button>
                 ))}
               </div>
@@ -415,6 +411,25 @@ export function LinesTable({
 }
 
 /** The moves played so far, each one clickable to jump back to it. */
+/**
+ * What a frequency weight means, in words, on hover.
+ *
+ * It used to be a small badge on the button, and Nick read "d5 7" as a count
+ * of something. The number is worth having and it is not worth the space
+ * beside the move: a move button should read as a move.
+ *
+ * The words are what the number actually is. The loader holds a weight to a
+ * whole number from 1 to 10 and refuses one on the trainee's own move, and
+ * `chooseOpponentReply` picks among the replies in that proportion, so
+ * nothing here is an approximation.
+ */
+function weightTitle(weight: number): string {
+  return (
+    `How often club players choose this reply, on a scale of 1 to 10: ${weight}. ` +
+    "Play picks your opponent's moves in that proportion."
+  )
+}
+
 function MoveTrail({
   chapter,
   chain,
