@@ -7,7 +7,6 @@ import { courseToPgn } from '../model/bundle'
 import { buildCardsAcross } from '../model/cards'
 import { courseTotals } from '../model/stats'
 import { survivingLines } from '../model/lines'
-import { dueCount } from '../model/queue'
 import { colourName, type CourseEntry, type LoadedCourse } from '../model/types'
 import './catalog.css'
 
@@ -24,8 +23,13 @@ import './catalog.css'
  * A course the trainee has HIDDEN is the one exception, and it is their own
  * choice rather than a failure. The hidden ones sit behind a quiet control at
  * the bottom, so the catalog can be got down to the repertoire being worked on
- * without anything being lost. The totals above count what is showing, which is
- * what the Progress screen counts too.
+ * without anything being lost. A hidden course is left out of every count in
+ * the app, here and on Progress alike.
+ *
+ * There are no rollup numbers on this screen. Phase 21 took them off: they are
+ * the first thing somebody opening the app for the first time reads, and they
+ * are written in vocabulary the app has not taught yet. Progress carries the
+ * same rollup.
  */
 export function Catalog({ onOpen }: { onOpen: (courseId: string) => void }) {
   const { visible, hidden, courses, scanned, folder } = useCatalog()
@@ -40,26 +44,17 @@ export function Catalog({ onOpen }: { onOpen: (courseId: string) => void }) {
       courses.map((course) => ({ course, totals: courseTotals(course, cards, state) })),
     [cards, courses, state],
   )
-  const overall = useMemo(
-    () => ({
-      learnt: totals.reduce((sum, row) => sum + row.totals.learntLines, 0),
-      lines: totals.reduce((sum, row) => sum + row.totals.totalLines, 0),
-      due: dueCount(cards, state),
-      cards: cards.length,
-    }),
-    [cards, state, totals],
-  )
 
   return (
     <div className="catalog">
       <header className="catalog-head">
         <h2>Your courses</h2>
-        <p className="catalog-totals">
-          <strong>{overall.learnt}</strong> of {overall.lines} lines learnt across{' '}
-          {courses.length} {courses.length === 1 ? 'course' : 'courses'}.{' '}
-          <strong>{overall.due}</strong> of {overall.cards}{' '}
-          {overall.cards === 1 ? 'card' : 'cards'} due now.
-        </p>
+        {/* This said "1 of 308 lines learnt across 6 courses. 9 of 10 cards due
+            now", which is a sentence for somebody who already knows what a line
+            and a card are. The first screen of the app is not where that
+            reader is. The same rollup is on Progress, which is where it
+            belongs, so nothing is lost by saying what to do here instead. */}
+        <p className="catalog-lead">Select a course to study</p>
       </header>
 
       <ul className="course-tiles">
