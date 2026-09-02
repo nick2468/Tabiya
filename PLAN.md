@@ -3072,7 +3072,7 @@ the window opens at 1200 by 980, and the version becomes 1.6.5.
 - [x] 23.7 "Ready" and "not yet drilled" throughout; next-card line on Progress; Help follows.
 - [ ] 23.8 Header gap balanced at 8px each side of the separator.
 - [x] 23.9 Window 1200 by 980.
-- [ ] 23.10 Version 1.6.5.
+- [x] 23.10 Version 1.6.5.
 - [ ] 23.11 Proved in the browser build at 1200x980.
 
 Acceptance: as the chip's final paragraph.
