@@ -113,6 +113,9 @@
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  /* Starts under the board's left edge, not the bar's: the bar (16px) and
+     the gap after it (28px) sit to the left of the board in .play-board. */
+  margin-left: 44px;
 }
 
 .play-side {

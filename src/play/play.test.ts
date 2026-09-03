@@ -316,7 +316,26 @@ describe('scanForSlips', () => {
     expect(scanForSlips(moves, evaluations)).toEqual([])
   })
 
-  it('puts the worst slip first', () => {
+  it('lists slips most recent first, not worst first', () => {
+    const evaluations = new Map<string, number>()
+    for (const move of moves) {
+      evaluations.set(positionKey(move.fen), 0)
+      evaluations.set(positionKey(move.after), 0)
+    }
+    // The blunder is EARLIER than the inaccuracy, so worst-first would put it
+    // on top and move order puts it second.
+    evaluations.set(positionKey(moves[0].fen), 0)
+    evaluations.set(positionKey(moves[0].after), -2.2)
+    evaluations.set(positionKey(moves[4].fen), 0)
+    evaluations.set(positionKey(moves[4].after), -0.8)
+    const slips = scanForSlips(moves, evaluations)
+    expect(slips.map((slip) => [slip.ply, slip.tag])).toEqual([
+      [4, 'inaccuracy'],
+      [0, 'blunder'],
+    ])
+  })
+
+  it('puts a later slip first whatever its size', () => {
     const evaluations = new Map<string, number>()
     for (const move of moves) {
       evaluations.set(positionKey(move.fen), 0)

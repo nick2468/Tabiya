@@ -34,6 +34,14 @@ import {
 import './play.css'
 
 /**
+ * How many rows of the move list show before it scrolls. Twenty, which Nick
+ * asked for on 1.6.9: two more than the board's height held. Each row is
+ * 1.45em, the list's own line-height, so the height is counted in rows rather
+ * than copied from the board.
+ */
+const MOVE_LIST_ROWS = 20
+
+/**
  * Play: a game against the engine, steered into the repertoire.
  *
  * A bar to the left of the board shows what the engine makes of the position
@@ -367,7 +375,7 @@ export function Play({
           session={session}
           activePly={report ? ply : null}
           onSelect={step}
-          height={BOARD_SIZE}
+          rows={MOVE_LIST_ROWS}
         />
 
         <div className="play-side">
@@ -608,13 +616,13 @@ function MoveList({
   session,
   activePly,
   onSelect,
-  height,
+  rows,
 }: {
   session: PlaySession
   activePly: number | null
   onSelect: (ply: number) => void
-  /** As tall as the board beside it, which is the one number they share. */
-  height: number
+  /** How many rows show before it scrolls. */
+  rows: number
 }) {
   const pairs: {
     number: number
@@ -659,7 +667,7 @@ function MoveList({
   return (
     <ol
       className={activePly === null ? 'move-list' : 'move-list walkable'}
-      style={{ height }}
+      style={{ height: `calc(${rows} * 1.45em)` }}
     >
       {pairs.map((pair) => (
         <li key={pair.number}>

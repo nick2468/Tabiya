@@ -73,7 +73,7 @@ export interface MoveReview {
 
 export interface GameReport {
   deviation: Deviation
-  /** The trainee's worst moves, worst first. */
+  /** The trainee's slips, most recent first. */
   slips: MoveReview[]
   /** The verdict on the final position, in words. */
   verdict: string
@@ -184,7 +184,9 @@ export function scanForSlips(
     const tag = tagFor(loss)
     if (tag) slips.push({ ply: move.ply, san: move.san, before, after, loss, tag })
   }
-  return slips.sort((a, b) => b.loss - a.loss)
+  // Most recent first, not worst first: Nick reads the report against the
+  // game he has just played, and the end of it is what he remembers.
+  return slips.sort((a, b) => b.ply - a.ply)
 }
 
 /**
