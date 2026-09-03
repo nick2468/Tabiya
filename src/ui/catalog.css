@@ -124,15 +124,17 @@
 }
 
 /* A row of its own between the header above and the view below. The header
-   leaves 8px above it, matching the 8px above its own rule, and this keeps
-   the 24px below so the view underneath has not moved. The label and the
-   select are centred on each other rather than sharing a baseline, because
-   the two boxes are different heights. */
+   leaves 8px above it, matching the 8px above its own rule. Below it, 12px:
+   phase 23 kept the old 24 so that nothing under the row moved, and that gap
+   is what Nick then saw as too big. Halving it lifts every screen's heading
+   by about 3 mm, which is what he asked for. The label and the select are
+   centred on each other rather than sharing a baseline, because the two boxes
+   are different heights. */
 .course-switch {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 0 0 24px;
+  margin: 0 0 12px;
   color: var(--text-dim);
   font-size: 0.9rem;
 }
