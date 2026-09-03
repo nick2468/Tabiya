@@ -713,15 +713,47 @@ export function Report({
 }
 
 /**
+ * Puts text on the clipboard, by whichever of the two ways works.
+ *
+ * `navigator.clipboard` is the one to use and it is what both builds have.
+ * It is also the one that can be refused: it needs a secure context and a
+ * permission, and an embedded browser can say no to a page that a person
+ * clicking a button in the real app would be allowed. So the old
+ * `execCommand` path is kept behind it rather than the button simply failing
+ * where the modern API is not permitted. It is deprecated and it is also the
+ * thing that works, which is a fair trade for a fallback nobody sees.
+ */
+async function toClipboard(text: string): Promise<void> {
+  try {
+    await navigator.clipboard.writeText(text)
+    return
+  } catch {
+    // Fall through and try the old way before giving up.
+  }
+  const box = document.createElement('textarea')
+  box.value = text
+  // Off the screen rather than hidden: a display:none textarea cannot be
+  // selected, and selection is the whole mechanism here.
+  box.style.position = 'fixed'
+  box.style.left = '-9999px'
+  document.body.appendChild(box)
+  try {
+    box.select()
+    if (!document.execCommand('copy')) throw new Error('the browser refused to copy')
+  } finally {
+    box.remove()
+  }
+}
+
+/**
  * The game on the clipboard, as PGN with the report written in.
  *
  * The point is that a game can leave this app as text: pasted into a chat, a
  * file, or another engine, and played through by whoever reads it. A
  * screenshot was the only way before, and nobody can replay a screenshot.
  *
- * The same `navigator.clipboard` in both builds. The installed app is WebView2
- * and has it, which is why there is no Tauri plugin here; a failure says so
- * rather than leaving a button that looks as though it worked.
+ * A failure says so on the button rather than leaving one that looks as
+ * though it worked.
  */
 function CopyGame({ text }: { text: string }) {
   const [said, setSaid] = useState<string | null>(null)
@@ -734,7 +766,7 @@ function CopyGame({ text }: { text: string }) {
 
   const copy = async () => {
     try {
-      await navigator.clipboard.writeText(text)
+      await toClipboard(text)
       setSaid('Copied')
     } catch (error) {
       setSaid(`That could not be copied: ${error instanceof Error ? error.message : String(error)}`)

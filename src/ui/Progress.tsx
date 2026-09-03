@@ -18,6 +18,7 @@ import { backupCopy, isDesktop, readBackup, saveBackup, type BackupCopy } from '
 import { profileFolders, type ProfileFolders } from './folders'
 import { HelpPanel } from './Help'
 import { nextCardLine } from './card-words'
+import { usePlay } from './play-context'
 import { playedOn, recentPlayable, requestFor } from './play-on'
 import type { PlayRequest } from './Play'
 import './progress.css'
@@ -263,10 +264,16 @@ function CourseProgress({
  * back is a game you remember playing rather than one you go looking for by
  * course. Play on switches the header to the game's own course, the way
  * opening a course does.
+ *
+ * One game at a time still holds, so Play on has to make room for the game it
+ * starts. A reviewed game is over and is cleared without ceremony; a game
+ * still being played is not, and the button waits rather than throwing it
+ * away behind the trainee's back.
  */
 function PlayOn({ onPlayOn }: { onPlayOn: (request: PlayRequest) => void }) {
   const { state } = useProgress()
   const { courses } = useCatalog()
+  const game = usePlay()
   const rows = useMemo(() => recentPlayable(state.playGames), [state.playGames])
   const playable = rows
     .map((record) => ({ record, course: courses.find((entry) => entry.id === record.courseId) }))
@@ -297,7 +304,19 @@ function PlayOn({ onPlayOn }: { onPlayOn: (request: PlayRequest) => void }) {
                 <td>{chapter ? chapter.title : 'Any line'}</td>
                 <td className="num">{record.moves}</td>
                 <td>
-                  <button type="button" onClick={() => onPlayOn(requestFor(record, course))}>
+                  <button
+                    type="button"
+                    disabled={game.inProgress}
+                    title={
+                      game.inProgress
+                        ? 'Finish the game you are playing first, or start a new one.'
+                        : undefined
+                    }
+                    onClick={() => {
+                      game.reset()
+                      onPlayOn(requestFor(record, course))
+                    }}
+                  >
                     Play on
                   </button>
                 </td>
@@ -310,7 +329,8 @@ function PlayOn({ onPlayOn }: { onPlayOn: (request: PlayRequest) => void }) {
         Picks a game up where it stopped, in its own course and at the strength it was
         played at, with no length to stop it again. Reviewing it afterwards replaces this
         game rather than counting it twice. Only games played since version 1.6.7 are
-        here: earlier ones did not keep their moves.
+        here: earlier ones did not keep their moves. A game you are still playing has to
+        be finished or replaced first, because the app holds one game at a time.
       </p>
     </>
   )

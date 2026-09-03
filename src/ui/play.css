@@ -106,7 +106,10 @@
 .move-list {
   list-style: none;
   margin: 0 0 20px;
-  padding: 0;
+  /* Four pixels each side, which is exactly the bleed the highlighted move
+     takes with its negative margin. Without it the list grows a horizontal
+     scrollbar the moment a game is reviewed. */
+  padding: 0 4px;
   max-height: 220px;
   overflow-y: auto;
   font-variant-numeric: tabular-nums;

@@ -103,8 +103,10 @@ export function gameToPgn(game: GameForPgn): string {
   // say whether it was a mate or a resignation, and this app never resigns.
   const closing = [report.verdict]
   if (report.outcome) closing.push(report.outcome)
-  closing.push(`${colourName(studentColour)} was played by you at level ${level}.`)
-  out.comment(closing.join(' '))
+  closing.push(`${colourName(studentColour)} was played by you at level ${level}`)
+  // Full stops between them: the verdict and the outcome are both written
+  // without one, because on screen each has a line of its own.
+  out.comment(`${closing.join('. ')}.`)
   out.token(result)
 
   return `${header.join('\n')}\n\n${out.text()}\n`

@@ -361,7 +361,10 @@ function usePlayValue(): PlayGame {
       )
       evaluationsRef.current = scanned
       setEvaluations(scanned)
-      const at = new Date().toISOString()
+      // The SAME `at` when this game already has one. A game reviewed, carried
+      // on and reviewed again is one game, and `at` is what says so: a fresh
+      // one here would leave two records, one short and one long.
+      const at = recordedAt ?? new Date().toISOString()
       setRecordedAt(at)
       const outcome = running.outcome ?? `Stopped after move ${fullMove(running.moves.length - 1)}`
       const built = buildReport(running.moves, setup.book, scanned, outcome)
@@ -388,7 +391,7 @@ function usePlayValue(): PlayGame {
       setScanning(null)
       setThinking(false)
     }
-  }, [engine, recordPlay])
+  }, [engine, recordPlay, recordedAt])
 
   const reset = useCallback(() => {
     sessionRef.current = null

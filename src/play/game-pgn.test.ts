@@ -103,8 +103,9 @@ describe('gameToPgn', () => {
 
   it('ends on the verdict', () => {
     const played = parsePgn(gameToPgn(game)).games[0].moves
-    expect(played.at(-1)?.comment).toContain('Clearly better for Black')
-    expect(played.at(-1)?.comment).toContain('White was played by you at level 4.')
+    expect(played.at(-1)?.comment).toBe(
+      'Clearly better for Black. White was played by you at level 4.',
+    )
   })
 
   it('says nothing about a repertoire the game never left', () => {

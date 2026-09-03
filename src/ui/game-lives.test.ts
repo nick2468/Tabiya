@@ -3,6 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { Shell } from './App'
 import { Play, PlayHead } from './Play'
+import { Progress } from './Progress'
 import { Study } from './Study'
 import { CatalogContext, type Catalog } from './catalog-context'
 import { PlayContext, type PlayGame } from './play-context'
@@ -125,11 +126,26 @@ function game(over: Partial<PlayGame> = {}): PlayGame {
   }
 }
 
-function inApp(value: PlayGame, view: ReactNode): string {
+/** One recorded game that kept its moves, so Play on has something to offer. */
+const withRecord: ProgressState = {
+  ...emptyProgress(),
+  playGames: [
+    {
+      courseId: course.id,
+      deviated: false,
+      moves: 3,
+      level: 4,
+      at: '2026-09-03T09:00:00.000Z',
+      sans: ['d4', 'd5', 'Bf4'],
+    },
+  ],
+}
+
+function inApp(value: PlayGame, view: ReactNode, state: ProgressState = emptyProgress()): string {
   return renderToStaticMarkup(
     createElement(
       ProgressContext,
-      { value: progressValue(emptyProgress()) } as never,
+      { value: progressValue(state) } as never,
       createElement(
         CatalogContext,
         { value: catalog } as never,
@@ -246,6 +262,45 @@ describe('carrying a reviewed game on', () => {
     expect(
       inApp({ ...game({ session: mated, report: reportOf() }), canResume: false }, playScreen),
     ).not.toContain('Keep playing')
+  })
+})
+
+/**
+ * One game at a time, which Play on has to respect.
+ *
+ * It clears a reviewed game to make room, and that is fine: a reviewed game is
+ * over. A game still being played is not over, and losing one to a click on
+ * another screen is the sort of thing nobody forgives.
+ */
+describe('playing on from a recorded game', () => {
+  const progressScreen = createElement(Progress, {
+    courseId: course.id,
+    onPlayOn: () => {},
+  })
+
+  it('offers the recorded game when nothing is being played', () => {
+    const html = inApp(game(), progressScreen, withRecord)
+    expect(html).toContain('Play on')
+    expect(html).not.toMatch(/<button[^>]*disabled[^>]*>\s*Play on/)
+  })
+
+  it('waits while a game is in progress rather than throwing it away', () => {
+    const html = inApp(
+      game({ session: playedGame(), courseId: course.id, inProgress: true }),
+      progressScreen,
+      withRecord,
+    )
+    expect(html).toMatch(/<button[^>]*disabled/)
+    expect(html).toContain('Finish the game you are playing first')
+  })
+
+  it('offers it again once that game has been reviewed, because it is over', () => {
+    const html = inApp(
+      game({ session: playedGame(), courseId: course.id, report: reportOf(), inProgress: false }),
+      progressScreen,
+      withRecord,
+    )
+    expect(html).not.toMatch(/<button[^>]*disabled[^>]*>\s*Play on/)
   })
 })
 

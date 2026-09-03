@@ -3345,7 +3345,7 @@ main rides in it.
 - [x] 25.6 Play on from a recorded game, from the Progress screen, keeping the record's
   identity.
 - [x] 25.3 Version 1.6.8.
-- [ ] 25.4 Proved in the browser build at 1200x980, in both themes.
+- [x] 25.4 Proved in the browser build at 1200x980, in both themes.
 
 Acceptance: as the chip's final paragraph.
 
