@@ -416,6 +416,34 @@ describe('play history', () => {
     expect(state.playGames.map((held) => held.moves)).toEqual([5, 12])
   })
 
+  /**
+   * The reader keeps fields it was never told about, which is what lets a
+   * record grow without a version bump. Phase 24 added `sans` this way, 26
+   * added `hints`, and 27 adds these two.
+   */
+  it('reads back the fields added since the version was last moved', () => {
+    const full = {
+      ...game,
+      sans: ['d4', 'd5'],
+      hints: 2,
+      outcome: 'You won by checkmate',
+      finalEval: 1.4,
+    }
+    const state = parseProgress({ ...emptyProgress(), playGames: [full] })
+    expect(state.playGames[0]).toMatchObject({
+      sans: ['d4', 'd5'],
+      hints: 2,
+      outcome: 'You won by checkmate',
+      finalEval: 1.4,
+    })
+  })
+
+  it('reads an older record that has none of them', () => {
+    const state = parseProgress({ ...emptyProgress(), playGames: [game] })
+    expect(state.playGames[0].outcome).toBeUndefined()
+    expect(state.playGames[0].finalEval).toBeUndefined()
+  })
+
   it('still counts two games as two when they were played at different times', () => {
     let state = recordGame(emptyProgress(), game)
     state = recordGame(state, { ...game, at: '2026-08-27T09:00:01.000Z' })

@@ -34,6 +34,8 @@ export {
   findDeviation,
   fullMove,
   scanForSlips,
+  verdictBand,
+  verdictForYou,
   verdictInWords,
   type Deviation,
   type Evaluations,

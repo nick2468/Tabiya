@@ -113,6 +113,18 @@ export interface PlayRecord {
    * reconstruct. Nothing counts games by it; the report and the PGN say it.
    */
   hints?: number
+  /**
+   * How the game ended, when it ended by itself: the session's own sentence,
+   * "You won by checkmate" or "Drawn by stalemate". A game that was stopped
+   * has none, and the screen says "Stopped" plus the verdict instead.
+   */
+  outcome?: string
+  /**
+   * The final evaluation in pawns from White's point of view, from the report.
+   * Kept from White's side, the way every evaluation in this app is, and
+   * turned to the trainee's side where it is read.
+   */
+  finalEval?: number
 }
 
 export function emptyProgress(): ProgressState {

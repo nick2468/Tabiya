@@ -3,6 +3,7 @@ export {
   STRENGTH_LEVELS,
   allProfiles,
   chooseCandidate,
+  levelName,
   optionCommands,
   strengthProfile,
   type StrengthProfile,

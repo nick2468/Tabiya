@@ -11,6 +11,7 @@ import {
   playStats,
 } from '../model/stats'
 import { dueCount, newCount } from '../model/queue'
+import { levelName } from '../engine'
 import { colourName, type LoadedCourse } from '../model/types'
 import type { PlayRecord, ProgressState } from '../storage/progress'
 import type { Card } from '../model/cards'
@@ -19,7 +20,7 @@ import { profileFolders, type ProfileFolders } from './folders'
 import { HelpPanel } from './Help'
 import { nextCardLine } from './card-words'
 import { usePlay } from './play-context'
-import { playedOn, recentPlayable, requestFor } from './play-on'
+import { endedText, playedOn, recentPlayable, replayRequest, requestFor } from './play-on'
 import type { PlayRequest } from './Play'
 import './progress.css'
 
@@ -290,7 +291,9 @@ function PlayOn({ onPlayOn }: { onPlayOn: (request: PlayRequest) => void }) {
             <th>Played</th>
             <th>Course</th>
             <th>Sparring against</th>
+            <th>Strength</th>
             <th className="num">Moves</th>
+            <th>Ended</th>
             <th />
           </tr>
         </thead>
@@ -302,8 +305,10 @@ function PlayOn({ onPlayOn }: { onPlayOn: (request: PlayRequest) => void }) {
                 <td>{playedOn(record.at)}</td>
                 <td>{course.title}</td>
                 <td>{chapter ? chapter.title : 'Any line'}</td>
+                <td>{levelName(record.level)}</td>
                 <td className="num">{record.moves}</td>
-                <td>
+                <td>{endedText(record, course.colour)}</td>
+                <td className="row-actions">
                   <button
                     type="button"
                     disabled={game.inProgress}
@@ -319,6 +324,21 @@ function PlayOn({ onPlayOn }: { onPlayOn: (request: PlayRequest) => void }) {
                   >
                     Play on
                   </button>
+                  <button
+                    type="button"
+                    disabled={game.inProgress}
+                    title={
+                      game.inProgress
+                        ? 'Finish the game you are playing first, or start a new one.'
+                        : undefined
+                    }
+                    onClick={() => {
+                      game.reset()
+                      onPlayOn(replayRequest(record, course))
+                    }}
+                  >
+                    Replay
+                  </button>
                 </td>
               </tr>
             )
@@ -327,10 +347,13 @@ function PlayOn({ onPlayOn }: { onPlayOn: (request: PlayRequest) => void }) {
       </table>
       <p className="hint">
         Picks a game up where it stopped, in its own course and at the strength it was
-        played at, with no length to stop it again. Reviewing it afterwards replaces this
-        game rather than counting it twice. Only games played since version 1.6.7 are
-        here: earlier ones did not keep their moves. A game you are still playing has to
-        be finished or replaced first, because the app holds one game at a time.
+        played at, with no length to stop it again. Replay puts the same game up with its
+        report, to look through rather than carry on. Either way the game keeps its
+        identity, so reviewing it again replaces it rather than counting it twice. Only
+        games played since version 1.6.7 are here: earlier ones did not keep their moves,
+        and ones from before 1.6.11 do not say how they ended. A game you are still
+        playing has to be finished or replaced first, because the app holds one game at a
+        time.
       </p>
     </>
   )

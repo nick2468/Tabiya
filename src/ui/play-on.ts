@@ -1,7 +1,8 @@
 import { Chess } from 'chess.js'
+import { verdictForYou } from '../play'
 import type { PlayRequest } from './Play'
 import type { PlayRecord } from '../storage/progress'
-import type { LoadedCourse } from '../model/types'
+import type { Colour, LoadedCourse } from '../model/types'
 
 /**
  * Getting back into a game that was recorded and left.
@@ -34,11 +35,18 @@ export function recentPlayable(games: PlayRecord[], limit = PLAY_ON_LIMIT): Play
     .slice(0, limit)
 }
 
-/** The date of a game, for a row a person reads: "3 September". */
+/**
+ * When a game was played, for a row a person reads: "3 September, 14:32".
+ *
+ * The time as well as the date, because two games on one day are otherwise
+ * told apart only by their move counts. Both in the machine's own locale.
+ */
 export function playedOn(at: string): string {
   const when = new Date(at)
   if (Number.isNaN(when.getTime())) return 'an unknown date'
-  return when.toLocaleDateString(undefined, { day: 'numeric', month: 'long' })
+  const day = when.toLocaleDateString(undefined, { day: 'numeric', month: 'long' })
+  const time = when.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
+  return `${day}, ${time}`
 }
 
 /** What the Play screen calls a resumed game on its launch radio. */
@@ -68,6 +76,24 @@ export function canReplayMoves(sans: string[]): boolean {
 }
 
 /**
+ * How a recorded game ended, in one phrase.
+ *
+ * A game that ended by itself says so in the session's own words. A game that
+ * was stopped has no ending, only a position, so it is described by the
+ * verdict on that position, turned to the trainee's own side: the same game
+ * reads "clearly better for you" in a White course and in a Black one, which
+ * is what makes the column scannable.
+ *
+ * A record from before this phase has neither, and "Stopped" is all that can
+ * honestly be said about it.
+ */
+export function endedText(record: PlayRecord, studentColour: Colour): string {
+  if (record.outcome) return record.outcome
+  if (record.finalEval === undefined) return 'Stopped'
+  return `Stopped, ${verdictForYou(record.finalEval, studentColour)}`
+}
+
+/**
  * The request that starts a game from the end of a record.
  *
  * No cap: the game has already run past any length that would have applied,
@@ -89,4 +115,14 @@ export function requestFor(record: PlayRecord, course: LoadedCourse): PlayReques
     level: record.level,
     at: record.at,
   }
+}
+
+/**
+ * The same request, but for reading rather than playing: the game is loaded
+ * and reviewed at once, so the trainee lands on the report with the viewer
+ * live. It keeps the record's identity, so the review that follows replaces
+ * the record rather than adding a game.
+ */
+export function replayRequest(record: PlayRecord, course: LoadedCourse): PlayRequest {
+  return { ...requestFor(record, course), reviewAtOnce: true }
 }

@@ -169,6 +169,20 @@ function usePlayValue(): PlayGame {
   const engineRef = useRef<Engine | null>(null)
   const sessionRef = useRef<PlaySession | null>(null)
   const setupRef = useRef<StartOptions | null>(null)
+  /**
+   * The record's identity, in a ref as well as in state.
+   *
+   * `finish` is a callback, and a caller that starts a game and reviews it in
+   * one go holds the callback from BEFORE the start: its closure still has the
+   * old identity, so it mints a new one and the game is recorded twice. The
+   * ref is read at the moment it runs rather than at the moment it was made.
+   * Everything that sets one sets the other; `remember` is the only way in.
+   */
+  const recordedAtRef = useRef<string | null>(null)
+  const remember = useCallback((at: string | null) => {
+    recordedAtRef.current = at
+    setRecordedAt(at)
+  }, [])
   const evaluationsRef = useRef<Map<string, number>>(new Map())
 
   // The worker goes when the app goes, and not before. Leaving the Play
@@ -245,7 +259,7 @@ function usePlayValue(): PlayGame {
         })
         setupRef.current = options
         setSetup(options)
-        setRecordedAt(options.at ?? null)
+        remember(options.at ?? null)
         setHint(null)
         sessionRef.current = fresh
         setSession(fresh)
@@ -266,7 +280,7 @@ function usePlayValue(): PlayGame {
         setThinking(false)
       }
     },
-    [engine, evaluate, refresh],
+    [engine, evaluate, refresh, remember],
   )
 
   const play = useCallback(
@@ -449,8 +463,8 @@ function usePlayValue(): PlayGame {
       // whole game. Leaving it up would put advice for move 12 over a report
       // on move 19.
       setHint(null)
-      const at = recordedAt ?? new Date().toISOString()
-      setRecordedAt(at)
+      const at = recordedAtRef.current ?? new Date().toISOString()
+      remember(at)
       const outcome = running.outcome ?? `Stopped after move ${fullMove(running.moves.length - 1)}`
       const built = buildReport(running.moves, setup.book, scanned, outcome, running.hints)
       setReport(built)
@@ -469,6 +483,11 @@ function usePlayValue(): PlayGame {
         // Study position is still matched from the chapter root.
         sans: running.moves.map((move) => move.san),
         ...(running.hints > 0 ? { hints: running.hints } : {}),
+        // How it ended, for the list on Progress. The outcome only when the
+        // game ended by itself; a stopped game has none and is described by
+        // its evaluation instead.
+        ...(running.outcome ? { outcome: running.outcome } : {}),
+        ...(built.finalEval !== undefined ? { finalEval: built.finalEval } : {}),
         level: setup.level,
       })
     } catch (error) {
@@ -477,13 +496,13 @@ function usePlayValue(): PlayGame {
       setScanning(null)
       setThinking(false)
     }
-  }, [engine, recordPlay, recordedAt])
+  }, [engine, recordPlay, remember])
 
   const reset = useCallback(() => {
     sessionRef.current = null
     setupRef.current = null
     setSetup(null)
-    setRecordedAt(null)
+    remember(null)
     setSession(null)
     setReport(null)
     setScanning(null)
@@ -493,7 +512,7 @@ function usePlayValue(): PlayGame {
     setEvaluations(new Map())
     engineRef.current?.stop()
     engineRef.current = null
-  }, [])
+  }, [remember])
 
   // A fresh object every render, deliberately, with no useMemo around it.
   //

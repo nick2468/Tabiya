@@ -98,3 +98,13 @@
   margin: 0;
   color: var(--text-soft);
 }
+
+/* Play on and Replay sit together on the row rather than stacking, so the
+   column stays one line tall however many buttons it holds. */
+.row-actions {
+  white-space: nowrap;
+}
+
+.row-actions button + button {
+  margin-left: 6px;
+}

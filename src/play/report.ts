@@ -196,13 +196,61 @@ export function scanForSlips(
  * is slightly better, up to 2.5 is clearly better, and beyond that is winning.
  */
 export function verdictInWords(pawns: number): string {
+  const { band, ahead } = verdictBand(pawns)
+  const side = ahead ? 'White' : 'Black'
+  switch (band) {
+    case 'mate':
+      return `${side} has a forced mate`
+    case 'level':
+      return 'Level'
+    case 'slight':
+      return `Slightly better for ${side}`
+    case 'clear':
+      return `Clearly better for ${side}`
+    case 'winning':
+      return `Winning for ${side}`
+  }
+}
+
+/** How big an advantage is, and whose. The bands are SPEC.md section 5's. */
+export function verdictBand(pawns: number): {
+  band: 'mate' | 'level' | 'slight' | 'clear' | 'winning'
+  /** True when the number favours White. Meaningless when the band is level. */
+  ahead: boolean
+} {
   const size = Math.abs(pawns)
-  if (size >= MATE_PAWNS) return pawns > 0 ? 'White has a forced mate' : 'Black has a forced mate'
-  const side = pawns > 0 ? 'White' : 'Black'
-  if (size < 0.4) return 'Level'
-  if (size < 1) return `Slightly better for ${side}`
-  if (size < 2.5) return `Clearly better for ${side}`
-  return `Winning for ${side}`
+  const ahead = pawns > 0
+  if (size >= MATE_PAWNS) return { band: 'mate', ahead }
+  if (size < 0.4) return { band: 'level', ahead }
+  if (size < 1) return { band: 'slight', ahead }
+  if (size < 2.5) return { band: 'clear', ahead }
+  return { band: 'winning', ahead }
+}
+
+/**
+ * The same verdict said to the trainee: "clearly better for you".
+ *
+ * Never a bare colour. The trainee is White in one course and Black in the
+ * next, so "clearly better for black" is a sentence they have to translate
+ * before they can read it, and half the time they will translate it wrong.
+ * Lower case, because it is written into a sentence rather than starting one.
+ */
+export function verdictForYou(pawns: number, studentColour: Colour): string {
+  const mine = studentColour === 'white' ? pawns : -pawns
+  const { band, ahead } = verdictBand(mine)
+  const who = ahead ? 'you' : 'the engine'
+  switch (band) {
+    case 'mate':
+      return `${who} ${ahead ? 'have' : 'has'} a forced mate`
+    case 'level':
+      return 'level'
+    case 'slight':
+      return `slightly better for ${who}`
+    case 'clear':
+      return `clearly better for ${who}`
+    case 'winning':
+      return `winning for ${who}`
+  }
 }
 
 /**

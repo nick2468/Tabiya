@@ -2,7 +2,9 @@ import { describe, expect, it } from 'vitest'
 import {
   PLAY_ON_LIMIT,
   canReplayMoves,
+  endedText,
   recentPlayable,
+  replayRequest,
   requestFor,
   resumeLabel,
 } from './play-on'
@@ -104,5 +106,71 @@ describe('whether a record can go back on a board', () => {
 
   it('refuses an empty one, which is not a game', () => {
     expect(canReplayMoves([])).toBe(false)
+  })
+})
+
+/**
+ * How a recorded game ended, said to the trainee.
+ *
+ * The rule that matters is the one about colours: the same evaluation has to
+ * read the same way in a White course and a Black one, because the reader is
+ * the same person and their side is what they care about.
+ */
+describe('how a game ended', () => {
+  it('says the ending in the words the game itself used', () => {
+    expect(endedText(record({ outcome: 'You won by checkmate' }), 'white')).toBe(
+      'You won by checkmate',
+    )
+    expect(endedText(record({ outcome: 'Drawn by stalemate' }), 'black')).toBe(
+      'Drawn by stalemate',
+    )
+  })
+
+  it('describes a stopped game by the position it stopped in', () => {
+    // +1.6 from White's side, in a White course, is good for the trainee.
+    expect(endedText(record({ finalEval: 1.6 }), 'white')).toBe('Stopped, clearly better for you')
+    expect(endedText(record({ finalEval: -1.6 }), 'white')).toBe(
+      'Stopped, clearly better for the engine',
+    )
+  })
+
+  it('turns the same numbers round for a Black course', () => {
+    // The identical evaluation, read by a trainee playing Black.
+    expect(endedText(record({ finalEval: -1.6 }), 'black')).toBe('Stopped, clearly better for you')
+    expect(endedText(record({ finalEval: 1.6 }), 'black')).toBe(
+      'Stopped, clearly better for the engine',
+    )
+  })
+
+  it('says level without taking a side', () => {
+    expect(endedText(record({ finalEval: 0.1 }), 'white')).toBe('Stopped, level')
+    expect(endedText(record({ finalEval: 0.1 }), 'black')).toBe('Stopped, level')
+  })
+
+  it('says only Stopped for a game recorded before this was kept', () => {
+    expect(endedText(record(), 'white')).toBe('Stopped')
+  })
+
+  it('prefers the ending over the evaluation when it has both', () => {
+    expect(endedText(record({ outcome: 'You were checkmated', finalEval: 9 }), 'white')).toBe(
+      'You were checkmated',
+    )
+  })
+})
+
+describe('the request Replay builds', () => {
+  it('is the Play on request, asking for the review at once', () => {
+    const replay = replayRequest(record(), london)
+    const playOn = requestFor(record(), london)
+    expect(replay.reviewAtOnce).toBe(true)
+    expect({ ...replay, reviewAtOnce: undefined }).toEqual({ ...playOn, reviewAtOnce: undefined })
+  })
+
+  it('keeps the record identity, so a review replaces rather than adds', () => {
+    expect(replayRequest(record(), london).at).toBe('2026-09-03T09:00:00.000Z')
+  })
+
+  it('is not what Play on builds, which starts a game to carry on', () => {
+    expect(requestFor(record(), london).reviewAtOnce).toBeUndefined()
   })
 })

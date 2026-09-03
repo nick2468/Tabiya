@@ -117,6 +117,19 @@ export function allProfiles(): StrengthProfile[] {
 }
 
 /**
+ * What a level is called wherever it is named: "4. Club".
+ *
+ * One function rather than the same template in three places. The strength
+ * picker, the line over the board and the Progress list all say it, and a
+ * level that read one way on one screen and another way on the next would be
+ * two levels as far as anybody reading them is concerned.
+ */
+export function levelName(level: number): string {
+  const profile = strengthProfile(level)
+  return `${profile.level}. ${profile.label}`
+}
+
+/**
  * Picks one of the engine's candidate moves.
  *
  * At the low levels the choice is uniform among however many candidates came
