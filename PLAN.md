@@ -3227,7 +3227,7 @@ gap drops from 24px to 12px. Version 1.6.7.
 - [x] 24.3 `sans` on each play record; line matching in stats with tests; "Lines played"
   on Progress.
 - [ ] 24.4 Dropdown-to-heading gap at 12px.
-- [ ] 24.5 Version 1.6.7.
+- [x] 24.5 Version 1.6.7.
 - [ ] 24.6 Proved in the browser build at 1200x980, in both themes.
 
 Acceptance: as the chip's final paragraph.

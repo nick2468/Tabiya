@@ -1,7 +1,7 @@
 {
   "name": "london-trainer",
   "private": true,
-  "version": "1.6.6",
+  "version": "1.6.7",
   "type": "module",
   "scripts": {
     "dev": "npm run engine && vite --port 5175 --strictPort",
