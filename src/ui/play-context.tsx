@@ -322,6 +322,10 @@ function usePlayValue(): PlayGame {
             ? fullMove(built.deviation.ply ?? 0)
             : undefined,
         moves: fullMove(Math.max(0, running.moves.length - 1)),
+        // The game record, written once, here. `session.moves` holds every SAN
+        // including any replayed by the constructor, so a game started from a
+        // Study position is still matched from the chapter root.
+        sans: running.moves.map((move) => move.san),
         level: setup.level,
         at: new Date().toISOString(),
       })

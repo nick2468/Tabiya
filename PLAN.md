@@ -3224,7 +3224,7 @@ gap drops from 24px to 12px. Version 1.6.7.
 - [x] 24.1 Switcher free during a game; the game names its course; no reset on a header
   change; Help and SPEC follow.
 - [x] 24.2 `extend` on the session with tests; the two buttons on a game finished by cap.
-- [ ] 24.3 `sans` on each play record; line matching in stats with tests; "Lines played"
+- [x] 24.3 `sans` on each play record; line matching in stats with tests; "Lines played"
   on Progress.
 - [ ] 24.4 Dropdown-to-heading gap at 12px.
 - [ ] 24.5 Version 1.6.7.

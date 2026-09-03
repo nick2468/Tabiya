@@ -99,6 +99,14 @@ export interface PlayRecord {
   level: number
   /** When it finished, as an ISO timestamp. */
   at: string
+  /**
+   * Every move of the game, in order, so Progress can say which lines were
+   * played. Optional, and it stays optional: games recorded before phase 24
+   * never kept their moves and there is nothing to reconstruct them from.
+   * `PROGRESS_VERSION` does not move for it, because no old file needs
+   * rewriting to be read - a missing list simply counts for nothing.
+   */
+  sans?: string[]
 }
 
 export function emptyProgress(): ProgressState {

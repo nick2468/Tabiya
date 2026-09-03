@@ -196,4 +196,66 @@ export function playStats(courses: LoadedCourse[], state: ProgressState): PlaySt
   }
 }
 
+/** One line a game followed, and how many games followed it. */
+export interface LinePlayed {
+  id: string
+  /** What the line is called, as the Study table prints it. */
+  name: string
+  chapterTitle: string
+  games: number
+}
+
+/**
+ * Whether a game played a line: the two agree for the whole of the shorter one.
+ *
+ * Three cases, and they are all the same test. A game that ran past the leaf
+ * played the line and then kept going. A game that stopped inside the line
+ * played into it. A game that played something else at ply n did not play it,
+ * however far it agreed before that.
+ *
+ * The consequence worth being honest about: a game that stopped in a trunk
+ * several lines share counts for every one of them, because it did play into
+ * every one of them. The Progress hint says so, or the numbers would surprise.
+ */
+export function playedLine(sans: string[], path: string[]): boolean {
+  const shorter = Math.min(sans.length, path.length)
+  if (shorter === 0) return false
+  for (let index = 0; index < shorter; index += 1) {
+    if (sans[index] !== path[index]) return false
+  }
+  return true
+}
+
+/**
+ * The lines of one course that games have followed, most played first.
+ *
+ * Only games of THIS course, and only games that kept their moves. A game
+ * recorded before phase 24 has no `sans` and counts for nothing, which the
+ * screen says rather than leaving a trainee with fifty games wondering.
+ */
+export function linesPlayed(course: LoadedCourse, state: ProgressState): LinePlayed[] {
+  const games = state.playGames.filter(
+    (game) => game.courseId === course.id && game.sans && game.sans.length > 0,
+  )
+  if (games.length === 0) return []
+
+  const rows: LinePlayed[] = []
+  for (const chapter of course.chapters) {
+    for (const line of chapterLines(chapter)) {
+      const played = games.filter((game) => playedLine(game.sans ?? [], line.path)).length
+      if (played > 0) {
+        rows.push({ id: line.id, name: line.name, chapterTitle: chapter.title, games: played })
+      }
+    }
+  }
+  return rows.sort((a, b) => b.games - a.games || a.name.localeCompare(b.name))
+}
+
+/** True when any game of this course kept its moves, so the section is worth showing. */
+export function anyGameRecorded(course: LoadedCourse, state: ProgressState): boolean {
+  return state.playGames.some(
+    (game) => game.courseId === course.id && game.sans && game.sans.length > 0,
+  )
+}
+
 export type { PlayRecord }

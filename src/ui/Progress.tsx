@@ -2,7 +2,14 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useProgress } from './progress-context'
 import { useCatalog } from './catalog-context'
 import { buildCardsAcross } from '../model/cards'
-import { chapterProgress, conceptAccuracy, courseTotals, playStats } from '../model/stats'
+import {
+  anyGameRecorded,
+  chapterProgress,
+  conceptAccuracy,
+  courseTotals,
+  linesPlayed,
+  playStats,
+} from '../model/stats'
 import { dueCount, newCount } from '../model/queue'
 import { colourName, type LoadedCourse } from '../model/types'
 import type { ProgressState } from '../storage/progress'
@@ -139,6 +146,8 @@ export function Progress({ courseId }: { courseId: string | null }) {
         </p>
       </section>
 
+      {chosen ? <LinesPlayed course={chosen} state={state} /> : null}
+
       <BackupSection exportJson={exportJson} importJson={importJson} />
     </div>
   )
@@ -227,6 +236,67 @@ function CourseProgress({
             ))}
           </tbody>
         </table>
+      )}
+    </section>
+  )
+}
+
+/**
+ * Which lines the games of this course actually followed.
+ *
+ * A game counts for a line when the two agree for the whole of the shorter
+ * one, so a game that stopped inside a line played into it, and a game that
+ * ran past the leaf played it and kept going. A game that stopped in a trunk
+ * several lines share counts for every one of them, because it did play into
+ * every one, and the hint says so: a number nobody can explain is worse than
+ * no number.
+ *
+ * Games recorded before version 1.6.7 never kept their moves, so a trainee
+ * with a long history sees nothing here at first. That is said outright.
+ */
+function LinesPlayed({ course, state }: { course: LoadedCourse; state: ProgressState }) {
+  const rows = useMemo(() => linesPlayed(course, state), [course, state])
+  const recorded = useMemo(() => anyGameRecorded(course, state), [course, state])
+
+  return (
+    <section>
+      <h3>Lines played</h3>
+      {!recorded ? (
+        <p className="hint">
+          Counted from games played since version 1.6.7. Games before that did not keep
+          their moves, so there is nothing to count yet.
+        </p>
+      ) : rows.length === 0 ? (
+        <p className="hint">
+          No game of this course has followed one of its lines yet.
+        </p>
+      ) : (
+        <>
+          <table>
+            <thead>
+              <tr>
+                <th>Line</th>
+                <th>Chapter</th>
+                <th className="num">Games</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row) => (
+                <tr key={row.id}>
+                  <td>{row.name}</td>
+                  <td>{row.chapterTitle}</td>
+                  <td className="num">{row.games}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="hint">
+            A game counts for a line it never left, whether it played the line out or
+            stopped part way along it. A game that stopped where several lines still
+            share the same moves counts for each of them, because it did play into each.
+            Counted over your last 100 games.
+          </p>
+        </>
       )}
     </section>
   )

@@ -1,5 +1,14 @@
 import { describe, expect, it } from 'vitest'
-import { ANY_LINE, chapterProgress, conceptAccuracy, courseTotals, playStats } from './stats'
+import {
+  ANY_LINE,
+  anyGameRecorded,
+  chapterProgress,
+  conceptAccuracy,
+  courseTotals,
+  linesPlayed,
+  playStats,
+  playedLine,
+} from './stats'
 import { buildCards } from './cards'
 import { chapterLines } from './lines'
 import { loadFixture as load, manifest } from '../test/fixtures'
@@ -161,5 +170,105 @@ describe('the labels shown to both colours', () => {
       playGames: [{ courseId: 'c', deviated: false, moves: 12, level: 4, at: NOW.toISOString() }],
     }
     expect(playStats([], state).byChapter.map((row) => row.title)).toContain(ANY_LINE)
+  })
+})
+
+/**
+ * Which lines a game followed.
+ *
+ * The fixture has two lines out of the same trunk: 1.d4 d5 2.Bf4 Nf6 3.e3,
+ * then 3...e6 4.Nf3 or 3...c5 4.c3. That trunk is what makes the interesting
+ * case testable - a game that stops on move 3 has played into both.
+ */
+describe('playedLine', () => {
+  const nf3 = lines[0].path
+  const c3 = lines[1].path
+
+  it('counts a game that played the line right out', () => {
+    expect(playedLine([...nf3], nf3)).toBe(true)
+  })
+
+  it('counts a game that kept going past the leaf', () => {
+    expect(playedLine([...nf3, 'O-O', 'Be7'], nf3)).toBe(true)
+  })
+
+  it('counts a game that stopped part way along it', () => {
+    expect(playedLine(nf3.slice(0, 4), nf3)).toBe(true)
+  })
+
+  it('does not count a game that played something else', () => {
+    const wrong = [...nf3.slice(0, 4), 'Nc3']
+    expect(playedLine(wrong, nf3)).toBe(false)
+  })
+
+  it('does not count a game with no moves at all', () => {
+    expect(playedLine([], nf3)).toBe(false)
+  })
+
+  it('counts a game that stopped in the shared trunk for BOTH lines', () => {
+    // 1.d4 d5 2.Bf4 Nf6 3.e3, which is where the two part company.
+    const trunk = nf3.slice(0, 5)
+    expect(playedLine(trunk, nf3)).toBe(true)
+    expect(playedLine(trunk, c3)).toBe(true)
+  })
+})
+
+describe('linesPlayed', () => {
+  const game = (sans?: string[], courseId = COURSE) => ({
+    courseId,
+    deviated: false,
+    moves: 10,
+    level: 4,
+    at: NOW.toISOString(),
+    ...(sans ? { sans } : {}),
+  })
+
+  it('has nothing to say before any game kept its moves', () => {
+    const state = { ...emptyProgress(), playGames: [game(), game()] }
+    expect(anyGameRecorded(course, state)).toBe(false)
+    expect(linesPlayed(course, state)).toEqual([])
+  })
+
+  it('counts each line a game followed, most played first', () => {
+    const state = {
+      ...emptyProgress(),
+      playGames: [
+        game([...lines[0].path]),
+        game([...lines[0].path]),
+        game([...lines[1].path]),
+      ],
+    }
+    expect(anyGameRecorded(course, state)).toBe(true)
+    expect(linesPlayed(course, state).map((row) => [row.name, row.games])).toEqual([
+      [lines[0].name, 2],
+      [lines[1].name, 1],
+    ])
+  })
+
+  it('names the chapter the line belongs to', () => {
+    const state = { ...emptyProgress(), playGames: [game([...lines[0].path])] }
+    expect(linesPlayed(course, state)[0].chapterTitle).toBe('Test chapter')
+  })
+
+  it('counts a game that stopped in the trunk for every line it reached', () => {
+    const state = {
+      ...emptyProgress(),
+      playGames: [game(lines[0].path.slice(0, 5))],
+    }
+    expect(linesPlayed(course, state).map((row) => row.games)).toEqual([1, 1])
+  })
+
+  it('ignores games from another course', () => {
+    const state = {
+      ...emptyProgress(),
+      playGames: [game([...lines[0].path], 'somebody-elses-course')],
+    }
+    expect(anyGameRecorded(course, state)).toBe(false)
+    expect(linesPlayed(course, state)).toEqual([])
+  })
+
+  it('ignores a game that left the repertoire at once', () => {
+    const state = { ...emptyProgress(), playGames: [game(['e4', 'e5', 'Nf3'])] }
+    expect(linesPlayed(course, state)).toEqual([])
   })
 })
