@@ -3546,3 +3546,7 @@ Gate 26 findings (2026-09-03):
   cleared afterwards.
 
 - [x] **Review gate 26 passed** (2026-09-03)
+
+Follow-ups after 1.6.9 (2026-09-03, orchestrator commits, shipped as 1.6.10): the button
+row starts under the board's left edge rather than the bar's; the report lists slips in
+move order, most recent first, instead of worst first; the move list shows twenty rows.
