@@ -3297,4 +3297,31 @@ Open items (phase 24):
 
 Acceptance: as the chip's final paragraph.
 
-- [ ] **Review gate 24**
+Gate 24 findings (2026-09-03):
+
+12. **Verified for the gate from the repo:** 783 tests and `tsc -b` clean; nothing under
+    `courses/` or `docs/bundles/` differs; version 1.6.7 in all three files; no em dashes
+    under `src/`. The help test was mutation-checked: renaming "Play 5 more moves" turns it
+    red naming the control and the screen. `extend`, `finishedByCap` and `playedLine` each
+    have tests, and `sans` is written once at review from `session.moves`.
+13. **Open item 10 is explained.** The server holding port 5175 was the orchestrator's own
+    gate 23 dev server, started before the version bump. It was restarted for this gate and
+    the header read v1.6.7.
+14. **Driven in the Vite build at 1200x980, in both themes.** The dropdown-to-heading gap
+    measures 12px. A Caro-Kann game started with "Opening: The Caro-Kann Defence" in the
+    header and the switcher live. The dropdown moved to the London and Study showed the
+    London while the game held its one move; back on Play the board still held the
+    Caro-Kann game, the header still said "Opening: The Caro-Kann Defence" and the dropdown
+    still said the London. In the light theme the bar drew White's share as the light
+    colour at the top for the Black student, against a dark ground.
+15. **The extension buttons were not driven at the gate**: ten moves by pane drag is the
+    slow, unreliable part of driving, and the builder's account gives the cap values it saw
+    (15 after five more, null after play to the end) on top of the session tests that pin
+    every branch. Taken on the tests plus that account.
+16. **Open item 6 needs Nick.** A three-move game counting for eleven lines is the rule
+    working as written, and the screen says so, but it is a number he has not seen. His
+    call: leave it, or count only the deepest lines a game reached.
+17. **Nick's own files were not listed and not reported.** The browser build's storage
+    was cleared afterwards, with the remembered course put back.
+
+- [x] **Review gate 24 passed** (2026-09-03)
