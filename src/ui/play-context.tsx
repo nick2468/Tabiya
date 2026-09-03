@@ -80,6 +80,13 @@ export interface PlayGame {
   play: (from: string, to: string) => Promise<void>
   undo: () => void
   redo: () => void
+  /**
+   * True when a reviewed game can be carried on: it stopped rather than
+   * ended. A checkmate or a draw has nothing to play.
+   */
+  canResume: boolean
+  /** Puts the report away and hands the board back. */
+  resume: () => void
   extend: (by: 5 | 'full') => Promise<void>
   finish: () => Promise<void>
   reset: () => void
@@ -266,6 +273,25 @@ function usePlayValue(): PlayGame {
   }, [refresh, report, thinking])
 
   /**
+   * Puts the report away and gives the game back.
+   *
+   * The session is untouched: the game carries on from where it stopped, not
+   * from wherever the reader has walked to while looking at the report. Replay
+   * is a way of looking, and playing on from an earlier position would be a
+   * different feature with a rule about the moves it throws away.
+   *
+   * A game that had reached its cap becomes an ordinary capped game again, so
+   * the two extend buttons take it from there rather than a third path being
+   * invented. The engine is still running, and the evaluation map is kept, so
+   * nothing already worked out is searched again. The record's `at` is kept
+   * too: reviewing again replaces that record rather than adding a game.
+   */
+  const resume = useCallback(() => {
+    if (!sessionRef.current || sessionRef.current.outcome) return
+    setReport(null)
+  }, [])
+
+  /**
    * Carries a game on past its length, and lets the opponent move if it is
    * their turn.
    *
@@ -394,6 +420,8 @@ function usePlayValue(): PlayGame {
     play,
     undo,
     redo,
+    canResume: session !== null && report !== null && !session.outcome,
+    resume,
     extend,
     finish,
     reset,

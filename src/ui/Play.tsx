@@ -288,8 +288,10 @@ export function Play({
         opponentColour={playBook.opponentColour}
         thinking={thinking}
         reviewed={report !== null}
+        canResume={game.canResume}
         onUndo={game.undo}
         onRedo={game.redo}
+        onResume={game.resume}
         onNew={game.reset}
       />
 
@@ -377,7 +379,9 @@ function openingLine(
  * session and the test builds one on the fake engine.
  *
  * Undo and Redo go dead while the engine is thinking and once the report
- * exists. A reviewed game is finished, and New game is the way on from it.
+ * exists. Keep playing is what brings them back: a reviewed game that merely
+ * stopped can be carried on, and one that ended in a checkmate or a draw
+ * cannot, so the button is not there to be pressed.
  */
 export function PlayHead({
   session,
@@ -385,8 +389,10 @@ export function PlayHead({
   opponentColour,
   thinking,
   reviewed,
+  canResume,
   onUndo,
   onRedo,
+  onResume,
   onNew,
 }: {
   session: PlaySession
@@ -394,8 +400,10 @@ export function PlayHead({
   opponentColour: Colour
   thinking: boolean
   reviewed: boolean
+  canResume: boolean
   onUndo: () => void
   onRedo: () => void
+  onResume: () => void
   onNew: () => void
 }) {
   const finished = session.isFinished()
@@ -430,6 +438,11 @@ export function PlayHead({
         >
           Redo
         </button>
+        {canResume ? (
+          <button type="button" className="link" onClick={onResume}>
+            Keep playing
+          </button>
+        ) : null}
         <button type="button" className="link" onClick={onNew}>
           New game
         </button>

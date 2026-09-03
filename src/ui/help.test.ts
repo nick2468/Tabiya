@@ -190,8 +190,26 @@ const screens: Record<Screen, string> = {
         opponentColour: 'black' as const,
         thinking: false,
         reviewed: false,
+        canResume: false,
         onUndo: () => {},
         onRedo: () => {},
+        onResume: () => {},
+        onNew: () => {},
+      }),
+    ) +
+    // And again as a REVIEWED game that merely stopped, which is the only
+    // state Keep playing exists in.
+    renderToStaticMarkup(
+      createElement(PlayHead, {
+        session: gameInProgress,
+        opening: 'Opening: The London System',
+        opponentColour: 'black' as const,
+        thinking: false,
+        reviewed: true,
+        canResume: true,
+        onUndo: () => {},
+        onRedo: () => {},
+        onResume: () => {},
         onNew: () => {},
       }),
     ) +

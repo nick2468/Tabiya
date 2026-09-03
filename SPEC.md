@@ -66,7 +66,8 @@ Options: game length (to move 10, to move 15, or full game) and strength (a 1-8 
 implementation in section 5). A live evaluation bar sits to the left of the board while
 the game is going, in the board's own orientation, and it carries no number. The game
 names the course it belongs to above the board, and the chapter when it is sparring
-against one. After the game or segment, a report:
+against one. A reviewed game can be walked through move by move, copied out as PGN, and
+resumed from where it stopped. After the game or segment, a report:
 
 - The first White move that left the repertoire, with the book move and its note. If
   Black left book first, the report says from which move it was "just chess".
@@ -643,6 +644,23 @@ eleven of them still share those moves. Nick ruled the narrower reading: a game 
 a line once it has played past the ply where that line parts from every other line in the
 course, and a game that stops while several lines still share the same moves counts for
 none of them. `forkDepth` in `stats.ts` is that ply.
+
+2026-09-03, phase 25: **a reviewed game is not finished with.** Nick reviewed a London
+game, thought the report had the wrong side winning, and had no way to look again: the
+board holds the final position, the report names moves without showing them, and a
+screenshot was the only way to show anyone else. The report was right and both gaps were
+real. Three answers, and they are one feature seen from three sides. The move list and
+the report's sentences become a viewer, so a slip can be clicked to see the position it
+was played FROM, which is where the alternative was. **Copy game** puts the whole game on
+the clipboard as PGN with the report written in as comments, because a game is text and
+nobody can replay a screenshot. And **Keep playing** hands the board back from the
+position the game stopped in, for a game that stopped rather than ended; a capped game
+becomes an ordinary capped game again and the existing extend buttons take it from there.
+
+The consequence worth writing down: a game can now be reviewed more than once, so
+**`at` is the game's identity and not only its date**. `recordGame` replaces a record with
+the same `at` rather than appending, or one game counted twice in Games played and in
+Lines played, once short and once long.
 
 ## 9. v1 acceptance
 

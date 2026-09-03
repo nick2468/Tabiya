@@ -2,7 +2,7 @@ import { createElement, type ReactNode } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { Shell } from './App'
-import { Play } from './Play'
+import { Play, PlayHead } from './Play'
 import { Study } from './Study'
 import { CatalogContext, type Catalog } from './catalog-context'
 import { PlayContext, type PlayGame } from './play-context'
@@ -106,6 +106,8 @@ function game(over: Partial<PlayGame> = {}): PlayGame {
     chapterTitle: null,
     level: null,
     recordedAt: null,
+    canResume: false,
+    resume: () => {},
     report: null,
     scanning: null,
     evaluations: new Map(),
@@ -146,6 +148,9 @@ const running = game({
 })
 
 const playScreen = createElement(Play, { course, request: null, onRequestUsed: () => {} })
+
+/** A report with nothing in it, for the cases that only need one to exist. */
+const reportOf = () => ({ deviation: { kind: 'stayed-in-book' as const }, slips: [], verdict: 'Level' })
 
 describe('a game that outlives the screen', () => {
   it('is shown by Play because Play does not own it', () => {
@@ -192,6 +197,55 @@ describe('the course switcher while a game runs', () => {
 
   it('is live when there is no game at all', () => {
     expect(inApp(game(), shell)).not.toMatch(/<select[^>]*id="course-switch"[^>]*disabled/)
+  })
+})
+
+/**
+ * Keep playing, and the one question it asks: is there anything to play?
+ *
+ * A game that stopped has a position to carry on from. A game that ended in a
+ * checkmate or a draw does not, and a button that cannot do anything is worse
+ * than no button.
+ */
+describe('carrying a reviewed game on', () => {
+  const head = (over: { reviewed: boolean; canResume: boolean }) =>
+    renderToStaticMarkup(
+      createElement(PlayHead, {
+        session: playedGame(),
+        opening: 'Opening: The London System',
+        opponentColour: 'black' as const,
+        thinking: false,
+        onUndo: () => {},
+        onRedo: () => {},
+        onResume: () => {},
+        onNew: () => {},
+        ...over,
+      }),
+    )
+
+  it('offers Keep playing on a reviewed game that merely stopped', () => {
+    expect(head({ reviewed: true, canResume: true })).toContain('Keep playing')
+  })
+
+  it('offers nothing of the sort while the game is still going', () => {
+    expect(head({ reviewed: false, canResume: false })).not.toContain('Keep playing')
+  })
+
+  it('offers nothing on a game that ended, because there is nothing to play', () => {
+    expect(head({ reviewed: true, canResume: false })).not.toContain('Keep playing')
+  })
+
+  it('is offered by the provider only for a reviewed game with no outcome', () => {
+    // The screen asks the provider rather than working it out, so this is the
+    // rule itself: a report, a session, and a game that did not end by itself.
+    const stopped = game({ session: playedGame(), report: reportOf(), inProgress: false })
+    expect(inApp({ ...stopped, canResume: true }, playScreen)).toContain('Keep playing')
+
+    const mated = playedGame()
+    mated.outcome = 'You were checkmated'
+    expect(
+      inApp({ ...game({ session: mated, report: reportOf() }), canResume: false }, playScreen),
+    ).not.toContain('Keep playing')
   })
 })
 

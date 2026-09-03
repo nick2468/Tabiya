@@ -449,9 +449,19 @@ export function tagAccuracy(state: ProgressState, courseId: string, tag: string)
   return answers.reduce((sum, answer) => sum + answer, 0) / answers.length
 }
 
-/** Adds a finished game to the history. */
+/**
+ * Puts a finished game in the history, replacing the record with the same
+ * `at` if there already is one.
+ *
+ * `at` is the game's identity, not just its date. A game can now be resumed
+ * after it has been reviewed and reviewed again, and it is still one game:
+ * appending would count it twice in "Games played" and in "Lines played",
+ * once short and once long. The later record wins, because it is the same
+ * game with more of it played.
+ */
 export function recordGame(state: ProgressState, game: PlayRecord): ProgressState {
-  return { ...state, playGames: [...state.playGames, game].slice(-PLAY_HISTORY) }
+  const kept = state.playGames.filter((held) => held.at !== game.at)
+  return { ...state, playGames: [...kept, game].slice(-PLAY_HISTORY) }
 }
 
 /** How many answers the rolling window currently holds for a concept. */

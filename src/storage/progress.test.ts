@@ -383,7 +383,9 @@ describe('play history', () => {
   it('keeps only the most recent games', () => {
     let state = emptyProgress()
     for (let i = 0; i < PLAY_HISTORY + 10; i++) {
-      state = recordGame(state, { ...game, moves: i })
+      // Each game gets its own `at`, because `at` is the game's identity and
+      // two games played a second apart are two games.
+      state = recordGame(state, { ...game, moves: i, at: `2026-08-27T09:00:${String(i % 60).padStart(2, '0')}.${String(i).padStart(3, '0')}Z` })
     }
     expect(state.playGames).toHaveLength(PLAY_HISTORY)
     // The oldest ten have gone, so the first one left is game ten.
@@ -394,6 +396,30 @@ describe('play history', () => {
     const before = emptyProgress()
     recordGame(before, game)
     expect(before.playGames).toEqual([])
+  })
+
+  /**
+   * A game can be reviewed, carried on and reviewed again. It is still one
+   * game, and `at` is what says so.
+   */
+  it('replaces the record of a game reviewed twice rather than adding one', () => {
+    const first = recordGame(emptyProgress(), { ...game, moves: 3 })
+    const second = recordGame(first, { ...game, moves: 9, deviated: true })
+    expect(second.playGames).toHaveLength(1)
+    expect(second.playGames[0]).toMatchObject({ moves: 9, deviated: true })
+  })
+
+  it('puts the replacement where a new game would go, at the end', () => {
+    let state = recordGame(emptyProgress(), { ...game, moves: 3 })
+    state = recordGame(state, { ...game, moves: 5, at: '2026-08-28T09:00:00.000Z' })
+    state = recordGame(state, { ...game, moves: 12 })
+    expect(state.playGames.map((held) => held.moves)).toEqual([5, 12])
+  })
+
+  it('still counts two games as two when they were played at different times', () => {
+    let state = recordGame(emptyProgress(), game)
+    state = recordGame(state, { ...game, at: '2026-08-27T09:00:01.000Z' })
+    expect(state.playGames).toHaveLength(2)
   })
 })
 
