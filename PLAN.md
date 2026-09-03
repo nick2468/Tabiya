@@ -3464,7 +3464,57 @@ The move list becomes a narrow column at board height with a thin scrollbar. Ver
 - [x] 26.4 Move list as a narrow column at board height, thin scrollbar, replay marker
   kept in view.
 - [x] 26.5 Version 1.6.9.
-- [ ] 26.6 Proved in the browser build at 1200x980, in both themes, with the measurements.
+- [x] 26.6 Proved in the browser build at 1200x980, in both themes, with the measurements.
+
+Open items (phase 26):
+
+1. **The bar's last millimetre was the box against the squares, measured rather than
+   guessed.** In the pane at 1200x980, device pixel ratio 1.5, before: `.board` 420 by 420
+   with its bottom at 595.2, `cg-board` 416 by 416 with its bottom at 591.2, squares of 52.
+   Chessground floors each square to a whole CSS pixel, so 420 over eight gives 52 and the
+   eight come to 416: the box was four pixels taller than the chess, and phase 25 had
+   stretched the bar to the box. After the change to 416: board, inner board and bar all
+   416, all ending on 591.2, **overshoot 0**. 416 is also whole device pixels per square at
+   1.25, 1.5 and 2.0.
+2. **The size is a named constant now.** Two boards agreeing by coincidence is how they
+   stop agreeing, and the move list beside the board now needs the same number for its
+   height.
+3. **The controls moved because of what they are, not only where they were.** New game,
+   Undo and Redo were text links in a top corner, which reads as navigation. They act on
+   the game in front of you, so they are buttons under the board. Keep playing stayed in
+   the header: it is what you press when the game is over, so it belongs beside the line
+   that says so.
+4. **Hint draws the line between teaching and guessing, and says which it is handing
+   over.** In book it is the course's own move and note, green, the same answer Drill
+   gives. Out of book it is a 500 ms search, blue, with the sentence naming the engine and
+   the move number the repertoire ended at. Two colours because they are not the same kind
+   of thing. Driven live: green d2-d4 with "The line plays 1.d4..." in book, blue b1-d2
+   with "The engine suggests Nd2. No note: the repertoire ended at move 2." out of it.
+5. **A hint is counted in four places and the count means one thing.** The session holds
+   it, the report says "You used 2 hints.", the PGN says it before the first move where a
+   comment about the game belongs, and the record keeps `hints` (optional, like `sans`).
+   A game played with help is a different game, and anyone reading it later can tell.
+6. **The move list is 167 pixels wide**, down from a full-width box above the report. The
+   columns are sized to what actually goes in them, measured in the running app: "100." is
+   29px and the longest ordinary move, "O-O-O" or "Nxd4+", is 49. A promotion with check
+   is wider and will spill a few pixels into the gap, which is better than clipping a
+   move. Board height, 416, from the same constant, with a thin scrollbar on both the
+   Firefox and the WebKit properties because the installed app is WebView2.
+7. **Two things the drive found that were not in the chip.** A hint survived into the
+   report, so advice about move 12 sat over a report on move 19: it is cleared when the
+   report is built. And the finished-game notice ran two sentences together, "You were
+   checkmated Review it to see...", because the outcome carries no full stop of its own.
+8. **The console errors during the drive were HMR artifacts, checked rather than assumed.**
+   Editing `size={420}` to `size={BOARD_SIZE}` before adding the import left one reload
+   throwing exactly that, and a partial remount threw the catalog one. A fresh tab on a
+   clean load has no console output at all, which is what was verified before clearing up.
+9. **The port hazard again.** The orchestrator's server holds 5175 and `--strictPort`
+   blocks a second, so this drove against theirs. It serves this session's source, which
+   every measurement above proves, but `__APP_VERSION__` is fixed at its start, so the
+   header read v1.6.8 throughout. 1.6.9 was checked in the four files.
+10. **No chess content.** Nothing under `courses/` differs from the commit this phase
+    started on.
+
 
 Acceptance: as the chip's final paragraph.
 
