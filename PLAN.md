@@ -3226,9 +3226,74 @@ gap drops from 24px to 12px. Version 1.6.7.
 - [x] 24.2 `extend` on the session with tests; the two buttons on a game finished by cap.
 - [x] 24.3 `sans` on each play record; line matching in stats with tests; "Lines played"
   on Progress.
-- [ ] 24.4 Dropdown-to-heading gap at 12px.
+- [x] 24.4 Dropdown-to-heading gap at 12px.
 - [x] 24.5 Version 1.6.7.
-- [ ] 24.6 Proved in the browser build at 1200x980, in both themes.
+- [x] 24.6 Proved in the browser build at 1200x980, in both themes.
+
+
+Open items (phase 24):
+
+1. **The phase 23 greyed switcher is reversed, and the reasoning that produced it was not
+   the part that was wrong.** A game does belong to the course it was started in. What was
+   wrong was answering that by freezing the header: Nick wants to study a line, drill a
+   card or check progress on another opening while a game sits waiting, and a greyed
+   selector he could barely see on the Play screen answered a question nobody had asked.
+   The game says its own course above the board instead.
+2. **The titles are CAPTURED when the game starts, not looked up.** The header can now name
+   another course, so reading the catalog at render time would give a title that changes
+   under the game. `StartOptions` carries `courseTitle` and `chapterTitle`, and the line
+   reads "Opening: The London System" or "Opening: The London System, sparring against
+   Classical setups".
+3. **Two things had to come off with the greying.** The `key={course.id}` on `<Play>`, which
+   would have remounted the screen and thrown away the launch options under a running game,
+   and the effect that reset a game whose course no longer matched the header. Both existed
+   only because the switcher used to be held still.
+4. **The length cap became a field, which is the whole of `extend`.** It was read from the
+   options on every `status` call, and a game that can be told to carry on needs it to be
+   able to change. `extend` touches nothing else: a mated game has an `outcome`, `status`
+   reads that first, and `finishedByCap` is false for it, so the buttons never appear and
+   `extend` refuses. There is no limit on extending by five, which is what the chip asked
+   for and what the test pins.
+5. **After extending, the opponent may be the one to move.** A cap falls after both sides
+   have completed the move number, so usually it is the trainee's turn; a game started from
+   a Study position begins mid-pair. That is the case `start` already handles, handled the
+   same way, including the evaluation for the bar.
+6. **The line-matching rule is one test used three ways**, and the honest consequence is
+   written into the screen. A game played a line when the two agree for the whole of the
+   shorter one: played out, stopped inside, or diverged and did not count. A game that
+   stopped where several lines still share the same moves counts for every one of them.
+   **Driven live, that is not a small effect**: a three move Caro-Kann game stopping at
+   1.e4 c6 2.d4 d5 3.Nc3 counted for ELEVEN lines, because eleven of them still share those
+   moves. It is the ruling working exactly as written and the hint says so, but Nick has
+   not seen the size of it. If he wants it narrower, the smallest change is to count only
+   the deepest lines a game reached rather than every line it passed through.
+7. **`sans` is optional and the progress version does not move.** Nothing old needs
+   rewriting to be read: `readPlayGames` already passes unknown fields through, and a game
+   without moves counts for nothing. The section says that outright rather than showing a
+   trainee with a long history an empty table.
+8. **The one thing the suite cannot reach is the WRITE of `sans`**, because it happens in
+   `finish`, which needs a real engine and a driven provider. It is the same missing
+   capability already in the SPEC section 6 register, so it is not a second entry. It was
+   proved live instead: two reviewed games produced rows in Lines played.
+9. **What was driven at 1200x980, in both themes, from a cleared store.** A London game
+   started, then the dropdown moved to the Caro-Kann and Study, Drill and Progress all
+   followed it while the game waited; back on Play the board still held the London game
+   with "Opening: The London System" over it and the dropdown still said the Caro-Kann.
+   Reviewing it judged it against the LONDON: "You left the repertoire on move 1 with a3.
+   The line plays d4." New game then offered the Caro-Kann, "A game against Stockfish as
+   Black". A To move 10 game at its cap showed both extend buttons; Play 5 more moves put
+   the cap at 15 and the game back to playing; at 15 the buttons returned and Play to the
+   end took the cap to null. The dropdown-to-heading gap measures 12px on the Courses
+   screen and on Play, down from 24. **In the light theme** the vertical bar drew White's
+   share light and at the top for a Black student, and the report's bar drew it light on
+   the left, so the 1.6.6 colour fix holds where the phase 23 gate had not looked.
+10. **One caveat on the drive.** Another session held port 5175, so this ran against that
+    server. It serves this session's source - the 12px margin was live, and it only exists
+    in this phase's commit - but `__APP_VERSION__` is substituted from the config loaded at
+    server start, so the header read v1.6.5. The version was checked in `package.json`,
+    `tauri.conf.json`, `Cargo.toml` and `Cargo.lock` directly instead.
+11. **No chess content.** Nothing under `courses/` differs from the commit this phase
+    started on.
 
 Acceptance: as the chip's final paragraph.
 
