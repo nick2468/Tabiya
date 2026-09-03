@@ -74,6 +74,18 @@ is his unless it says it is a decision rule for you. **No chess content.**
   the course. Records from before this phase have neither field and show "Stopped".
   Nick's examples: "checkmate by black/white, stopped black/white level/ahead/winning";
   the wording above is the decision rule that keeps to the report's own vocabulary.
+- [ ] **A "Level" column in the same list**, from the record's `level`, shown as the
+  strength picker shows it: "4. Club". Every record has a level, so old games show it
+  too. Nick asked for this one on 2026-09-04, after the chip was written.
+- [ ] **The Played column carries the time as well as the date** ("3 September, 14:32",
+  in the machine's own locale via `toLocaleTimeString` with hours and minutes), because
+  two games on one day are otherwise told apart only by their move counts. Orchestrator's
+  addition; Nick can strike it.
+- [ ] **The in-game header says the level too.** The Opening line becomes "Opening: The
+  London System, against 4. Club" (and ", sparring against <chapter>" stays where a
+  chapter game has it). The level is in `setup` already. Orchestrator's addition: the
+  report and Progress will both name the level, and the screen the game is played on
+  should not be the one place that does not.
 - [ ] **A "Replay" button beside "Play on" on each row.** Replay loads the recorded game
   the way Play on does (same request path, same identity by `at`) and then runs the
   review at once, so the trainee lands on the Play screen with the report showing and
