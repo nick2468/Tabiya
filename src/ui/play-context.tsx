@@ -468,6 +468,14 @@ function usePlayValue(): PlayGame {
       const outcome = running.outcome ?? `Stopped after move ${fullMove(running.moves.length - 1)}`
       const built = buildReport(running.moves, setup.book, scanned, outcome, running.hints)
       setReport(built)
+      // A replayed game that nobody has moved in is already on disk, and the
+      // scan that just ran is a second opinion at 150 ms, not a new fact:
+      // writing it back would let a replay drift the recorded ending by a
+      // tenth of a pawn each time. Nick's rule at phase 27 is that a replay is
+      // reading, not playing, so the record is left alone until a move is
+      // played on top of it.
+      const untouched = setup.at !== undefined && running.moves.length === setup.startMoves.length
+      if (untouched) return
       recordPlay({
         courseId: setup.courseId,
         chapterId: setup.chapterId,
