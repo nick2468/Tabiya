@@ -18,6 +18,13 @@ export {
   type EvalBarLayout,
 } from './evalbar'
 export {
+  clampPly,
+  moveAtPly,
+  plyAfterMove,
+  plyBeforeMove,
+  positionAtPly,
+} from './replay'
+export {
   SLIP_THRESHOLDS,
   buildReport,
   describeDeviation,

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Board } from './Board'
 import { HelpAsk, HelpSaid } from './Help'
 import { usePlay } from './play-context'
@@ -6,21 +6,26 @@ import { useProgress } from './progress-context'
 
 import { strengthProfile, allProfiles } from '../engine'
 import { squaresForSan } from '../model/grade'
-import { legalDests } from '../model/position'
+import { legalDests, sideToMove } from '../model/position'
 import { colourName, type Colour, type LoadedCourse } from '../model/types'
 import {
   GAME_LENGTHS,
   PlaySession,
   buildBook,
+  clampPly,
   describeDeviation,
   describeSlip,
   evalBarLayout,
   evalShare,
   fullMove,
+  moveAtPly,
+  plyBeforeMove,
+  positionAtPly,
   shownEvaluation,
   verdictInWords,
   type GameLength,
   type GameReport,
+  type PlayedMove,
 } from '../play'
 import './play.css'
 
@@ -48,6 +53,13 @@ import './play.css'
  * game that dies when you glance at Study is not a game. This file is the
  * screen: the options before a game, the board and the report during and
  * after one.
+ *
+ * Once the report exists the screen becomes a VIEWER. Which position is being
+ * looked at is held here and nowhere else: it is a way of looking at the game,
+ * not part of it, and the session's moves must not move while somebody reads
+ * them. Every position of a reviewed game is already in the evaluation map,
+ * because the scan filled it, so the bar follows a replay without asking the
+ * engine anything.
  */
 
 /** A request to play from a position, sent over from Study. */
@@ -79,6 +91,9 @@ export function Play({
   // "This chapter's line" is the one people misread here, so the launch
   // options carry the screen's only `?`.
   const [askLaunch, setAskLaunch] = useState(false)
+  // Which position of a reviewed game is showing, as a count of moves played.
+  // Null means the end, which is where a report opens.
+  const [replayPly, setReplayPly] = useState<number | null>(null)
 
   useEffect(() => {
     if (request) setLaunch('here')
@@ -112,6 +127,44 @@ export function Play({
 
   // The game ends by itself on mate or the length cap.
   const finished = session?.isFinished() ?? false
+
+  // A new game, or a new report, starts the viewer at the end again.
+  useEffect(() => setReplayPly(null), [report])
+
+  const moves = useMemo(() => session?.moves ?? [], [session])
+  const atEnd = moves.length
+  const ply = replayPly ?? atEnd
+  const step = useCallback(
+    (to: number) => setReplayPly(clampPly(moves, to)),
+    [moves],
+  )
+
+  // The arrows only listen while a report is showing. Study puts the same
+  // handler on the window, and two screens fighting over one key is the sort
+  // of thing that works until the day both are mounted.
+  useEffect(() => {
+    if (!report) return
+    const onKey = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null
+      if (target && ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName)) return
+      if (event.key === 'ArrowLeft') setReplayPly((at) => clampPly(moves, (at ?? moves.length) - 1))
+      else if (event.key === 'ArrowRight')
+        setReplayPly((at) => clampPly(moves, (at ?? moves.length) + 1))
+      else return
+      event.preventDefault()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [moves, report])
+
+  // What the board is actually showing. During a game it is the game; during a
+  // review it is wherever the reader has walked to, which is the same position
+  // whenever they have not walked anywhere.
+  const replayed = report ? positionAtPly(moves, ply) : null
+  const shown = replayed ?? session?.fen ?? ''
+  const highlight = report
+    ? squaresOf(moveAtPly(moves, ply))
+    : squaresOf(session?.moves.at(-1) ?? null)
 
   if (!session) {
     return (
@@ -233,27 +286,37 @@ export function Play({
             for Black than the number is. */}
         <div className="play-board">
           <LiveEvalBar
-            pawns={shownEvaluation(session.fen, session.moves, evaluations)}
+            pawns={shownEvaluation(shown, session.moves, evaluations)}
             studentColour={session.studentColour}
           />
 
           <Board
-            fen={session.fen}
+            fen={shown}
             orientation={session.studentColour}
-            turnColor={session.sideToMove}
+            turnColor={sideToMove(shown)}
             movableColor={finished || thinking || report ? undefined : session.studentColour}
             dests={finished || thinking || report ? undefined : legalDests(session.fen)}
-            lastMove={lastMoveSquares(session)}
+            lastMove={highlight}
             onMove={game.play}
             size={420}
           />
         </div>
 
         <div className="play-side">
-          <MoveList session={session} />
+          <MoveList session={session} activePly={report ? ply : null} onSelect={step} />
 
           {report ? (
-            <Report report={report} opponentColour={playBook.opponentColour} />
+            <Report
+              report={report}
+              opponentColour={playBook.opponentColour}
+              replay={{
+                ply,
+                count: atEnd,
+                onJump: (movePly: number) => step(plyBeforeMove(movePly)),
+                onBack: () => step(ply - 1),
+                onForward: () => step(ply + 1),
+              }}
+            />
           ) : (
             <PlayActions
               session={session}
@@ -419,24 +482,63 @@ export function PlayActions({
   )
 }
 
-function MoveList({ session }: { session: PlaySession }) {
-  const pairs: { number: number; white?: string; black?: string }[] = []
+/**
+ * The moves of the game, and once it has been reviewed, a way into them.
+ *
+ * `activePly` is null during a game: the list is a record then, and a move
+ * that jumped the board mid-game would be a control that undoes without
+ * saying so. After the review every move is a button, and the one the board
+ * is standing on is marked.
+ */
+function MoveList({
+  session,
+  activePly,
+  onSelect,
+}: {
+  session: PlaySession
+  activePly: number | null
+  onSelect: (ply: number) => void
+}) {
+  const pairs: {
+    number: number
+    white?: { san: string; ply: number }
+    black?: { san: string; ply: number }
+  }[] = []
   for (const move of session.moves) {
     const number = fullMove(move.ply)
     const held = pairs.find((pair) => pair.number === number)
     const target = held ?? { number }
-    if (move.colour === 'white') target.white = move.san
-    else target.black = move.san
+    const entry = { san: move.san, ply: move.ply }
+    if (move.colour === 'white') target.white = entry
+    else target.black = entry
     if (!held) pairs.push(target)
   }
 
+  // The position after a move is that move's ply plus one, which is what the
+  // list is pointing at: click a move and see what it did.
+  const cell = (entry: { san: string; ply: number } | undefined, blank: string) => {
+    if (!entry) return <span>{blank}</span>
+    if (activePly === null) return <span>{entry.san}</span>
+    const here = activePly === entry.ply + 1
+    return (
+      <button
+        type="button"
+        className={here ? 'move-step here' : 'move-step'}
+        aria-current={here ? 'true' : undefined}
+        onClick={() => onSelect(entry.ply + 1)}
+      >
+        {entry.san}
+      </button>
+    )
+  }
+
   return (
-    <ol className="move-list">
+    <ol className={activePly === null ? 'move-list' : 'move-list walkable'}>
       {pairs.map((pair) => (
         <li key={pair.number}>
           <span className="move-number">{pair.number}.</span>
-          <span>{pair.white ?? '...'}</span>
-          <span>{pair.black ?? ''}</span>
+          {cell(pair.white, '...')}
+          {cell(pair.black, '')}
         </li>
       ))}
     </ol>
@@ -451,19 +553,71 @@ function MoveList({ session }: { session: PlaySession }) {
  * item: the report could not be reached from a test that renders to a string,
  * because it only exists once a game has been played and scanned.
  */
+export interface ReplayControls {
+  /** Which position is showing, as a count of moves played. */
+  ply: number
+  /** How many moves the game has, which is the last position. */
+  count: number
+  /** Put the board where this move was played FROM. */
+  onJump: (movePly: number) => void
+  onBack: () => void
+  onForward: () => void
+}
+
 export function Report({
   report,
   opponentColour,
+  replay,
 }: {
   report: GameReport
   opponentColour: Colour
+  replay: ReplayControls
 }) {
+  const deviationPly = report.deviation.ply
   return (
     <div className="report">
-      <h3>The report</h3>
+      <header className="report-head">
+        <h3>The report</h3>
+        {/* An arrow is not a name, so each one carries a written one for a
+            screen reader and for the tooltip, the same as Study's. */}
+        <div className="report-steps">
+          <button
+            type="button"
+            className="step-arrow"
+            onClick={replay.onBack}
+            disabled={replay.ply === 0}
+            aria-label="Back one move"
+            title="Back one move"
+          >
+            &#8592;
+          </button>
+          <button
+            type="button"
+            className="step-arrow"
+            onClick={replay.onForward}
+            disabled={replay.ply >= replay.count}
+            aria-label="Forward one move"
+            title="Forward one move"
+          >
+            &#8594;
+          </button>
+        </div>
+      </header>
 
       <h4>The repertoire</h4>
-      <p>{describeDeviation(report.deviation, opponentColour)}</p>
+      {deviationPly === undefined ? (
+        <p>{describeDeviation(report.deviation, opponentColour)}</p>
+      ) : (
+        <p>
+          <button
+            type="button"
+            className="jump"
+            onClick={() => replay.onJump(deviationPly)}
+          >
+            {describeDeviation(report.deviation, opponentColour)}
+          </button>
+        </p>
+      )}
       {report.deviation.kind === 'student-left-book' && report.deviation.note ? (
         <p className="book-note">
           <strong>{report.deviation.label}</strong> {report.deviation.note}
@@ -477,7 +631,9 @@ export function Report({
         <ul className="slips">
           {report.slips.map((slip) => (
             <li key={slip.ply} className={slip.tag}>
-              {describeSlip(slip)}
+              <button type="button" className="jump" onClick={() => replay.onJump(slip.ply)}>
+                {describeSlip(slip)}
+              </button>
             </li>
           ))}
         </ul>
@@ -546,9 +702,9 @@ function EvalBar({ pawns }: { pawns: number }) {
   )
 }
 
-function lastMoveSquares(session: PlaySession): [string, string] | undefined {
-  const last = session.moves.at(-1)
-  if (!last) return undefined
-  const squares = squaresForSan(last.fen, last.san)
+/** The two squares of a move, for the board's highlight. */
+function squaresOf(move: PlayedMove | null): [string, string] | undefined {
+  if (!move) return undefined
+  const squares = squaresForSan(move.fen, move.san)
   return squares ? [squares.from, squares.to] : undefined
 }

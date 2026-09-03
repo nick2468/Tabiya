@@ -421,3 +421,79 @@ function parseLine(
 export function escapeTag(value: string): string {
   return value.replace(/[\\"]/g, (match) => `\\${match}`)
 }
+
+/** One header tag pair, written out. */
+export function pgnTag(name: string, value: string): string {
+  return `[${name} "${escapeTag(value)}"]`
+}
+
+/**
+ * Builds the movetext.
+ *
+ * Move numbers carry no information the reader uses, so they exist for the
+ * chess GUI on the other end: a number before every White move, and one with
+ * dots before a Black move that starts a line or follows anything written
+ * between it and its own White move.
+ *
+ * Lines are wrapped at word boundaries outside comments. Whitespace between
+ * tokens means nothing to the reader, so wrapping is free, and a 40 kilobyte
+ * chapter on one line is not a file anybody can look at.
+ */
+export class Movetext {
+  private out: string[] = []
+  private column = 0
+  private needsNumber = true
+
+  private push(text: string, wrappable = true): void {
+    if (!this.out.length) {
+      this.out.push(text)
+      this.column = lastLineLength(text)
+      return
+    }
+    if (wrappable && this.column + text.length + 1 > 90) {
+      this.out.push('\n', text)
+      this.column = lastLineLength(text)
+      return
+    }
+    this.out.push(' ', text)
+    this.column += text.length + 1
+  }
+
+  move(san: string, ply: number): void {
+    const number = Math.floor(ply / 2) + 1
+    const white = ply % 2 === 0
+    if (white) this.push(`${number}. ${san}`)
+    else if (this.needsNumber) this.push(`${number}... ${san}`)
+    else this.push(san)
+    this.needsNumber = false
+  }
+
+  comment(text: string): void {
+    this.push(`{${text}}`, !text.includes('\n'))
+    if (text.includes('\n')) this.column = 90
+    this.needsNumber = true
+  }
+
+  open(): void {
+    this.push('(')
+    this.needsNumber = true
+  }
+
+  close(): void {
+    this.push(')')
+    this.needsNumber = true
+  }
+
+  token(text: string): void {
+    this.push(text)
+  }
+
+  text(): string {
+    return this.out.join('')
+  }
+}
+
+function lastLineLength(text: string): number {
+  const cut = text.lastIndexOf('\n')
+  return cut === -1 ? text.length : text.length - cut - 1
+}

@@ -206,7 +206,11 @@ const screens: Record<Screen, string> = {
       }),
     ) +
     renderToStaticMarkup(
-      createElement(Report, { report: reportFixture, opponentColour: 'black' as const }),
+      createElement(Report, {
+        report: reportFixture,
+        opponentColour: 'black' as const,
+        replay: { ply: 2, count: 4, onJump: () => {}, onBack: () => {}, onForward: () => {} },
+      }),
     ),
   drill:
     inApp(
