@@ -25,6 +25,12 @@ import type { CourseEntry, LoadedCourse } from '../model/types'
  * so it does the next honest thing: it hands the screen a game through the
  * context and asserts the screen shows it. If the game went back into `Play`'s
  * own state, `Play` would render its start screen here and these would fail.
+ *
+ * Phase 24 took the other half off. The game used to hold the course switcher
+ * still while it ran; Nick overruled that, so the header is free to name
+ * another course and the game says its own above the board. The tests below
+ * are the pair: the switcher is never greyed for a game, and the game is shown
+ * under a header naming somebody else.
  */
 
 const course = bundledCourses.find((entry) => entry.id === 'london-white')
@@ -96,6 +102,8 @@ function game(over: Partial<PlayGame> = {}): PlayGame {
     session: null,
     book: null,
     courseId: null,
+    courseTitle: null,
+    chapterTitle: null,
     report: null,
     scanning: null,
     evaluations: new Map(),
@@ -130,6 +138,7 @@ const running = game({
   session: playedGame(),
   book,
   courseId: course.id,
+  courseTitle: course.title,
   inProgress: true,
 })
 
@@ -160,26 +169,62 @@ describe('a game that outlives the screen', () => {
 describe('the course switcher while a game runs', () => {
   const shell = createElement(Shell)
 
-  it('is greyed out, and says why', () => {
+  it('is not greyed, because a game no longer holds the header still', () => {
     const html = inApp(running, shell)
-    expect(html).toContain('A game is in progress.')
-    expect(html).toMatch(/<select[^>]*id="course-switch"[^>]*disabled/)
+    expect(html).not.toMatch(/<select[^>]*id="course-switch"[^>]*disabled/)
+    expect(html).not.toContain('A game is in progress.')
   })
 
-  it('is live again once the game has been reviewed', () => {
+  it('is not greyed once the game has been reviewed either', () => {
     const reviewed = game({
       session: playedGame(),
       book,
       courseId: course.id,
+      courseTitle: course.title,
       report: { deviation: { kind: 'stayed-in-book' }, slips: [], verdict: 'Level' },
       inProgress: false,
     })
-    const html = inApp(reviewed, shell)
-    expect(html).not.toContain('A game is in progress.')
-    expect(html).not.toMatch(/<select[^>]*id="course-switch"[^>]*disabled/)
+    expect(inApp(reviewed, shell)).not.toMatch(/<select[^>]*id="course-switch"[^>]*disabled/)
   })
 
   it('is live when there is no game at all', () => {
     expect(inApp(game(), shell)).not.toMatch(/<select[^>]*id="course-switch"[^>]*disabled/)
+  })
+})
+
+describe('a game that names its own course', () => {
+  it('says which course it is, above the board', () => {
+    expect(inApp(running, playScreen)).toContain('Opening: The London System')
+  })
+
+  it('names the chapter too when the game is sparring against one', () => {
+    const chapter = course.chapters[1]
+    const targeted = game({
+      session: playedGame(),
+      book,
+      courseId: course.id,
+      courseTitle: course.title,
+      chapterTitle: chapter.title,
+      inProgress: true,
+    })
+    expect(inApp(targeted, playScreen)).toContain(
+      `Opening: ${course.title}, sparring against ${chapter.title}`,
+    )
+  })
+
+  it('is still shown when the header has moved on to another course', () => {
+    // The screen is handed the OTHER course, the way the shell hands it
+    // whatever the dropdown says, and the London game is still the one on
+    // the board. It has to be: it is judged against the London.
+    const html = inApp(
+      running,
+      createElement(Play, { course: other, request: null, onRequestUsed: () => {} }),
+    )
+    expect(html).toContain('Opening: The London System')
+    expect(html).not.toContain('Start the game')
+  })
+
+  it('says nothing at all when there is no game', () => {
+    expect(inApp(game(), playScreen)).not.toContain('Opening:')
   })
 })

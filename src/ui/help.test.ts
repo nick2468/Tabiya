@@ -165,6 +165,7 @@ const screens: Record<Screen, string> = {
     renderToStaticMarkup(
       createElement(PlayHead, {
         session: gameInProgress,
+        opening: 'Opening: The London System',
         opponentColour: 'black' as const,
         thinking: false,
         reviewed: false,

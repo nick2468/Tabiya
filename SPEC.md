@@ -64,8 +64,9 @@ Full or partial games as White against Stockfish, in three launch shapes:
 
 Options: game length (to move 10, to move 15, or full game) and strength (a 1-8 scale;
 implementation in section 5). A live evaluation bar sits to the left of the board while
-the game is going, in the board's own orientation, and it carries no number. After the
-game or segment, a report:
+the game is going, in the board's own orientation, and it carries no number. The game
+names the course it belongs to above the board, and the chapter when it is sparring
+against one. After the game or segment, a report:
 
 - The first White move that left the repertoire, with the book move and its note. If
   Black left book first, the report says from which move it was "just chess".
@@ -618,6 +619,22 @@ answer shortens it as usual, and the buttons already say what each answer is wor
 **The FSRS parameters are not touched**, which is the standing ruling in
 `scheduler/index.ts`: tuning them is a later question and a wrong answer there is worse
 than the default.
+
+2026-09-03, phase 24: **a game never holds the course switcher still, and names its own
+course instead.** This reverses the phase 23 decision, which was the orchestrator's rather
+than Nick's: the switcher was greyed on every screen while a game was open, on the
+reasoning that a game belongs to the course it was started in. It does, and that is still
+true. What was wrong was the answer. Nick wants to study a line, drill a card or check
+progress on another opening while a game sits waiting, which is a normal thing to want,
+and the greyed selector he could barely see on the Play screen answered a question nobody
+had asked. So the game carries its own course and chapter TITLES, captured when it starts,
+and writes them above the board: "Opening: The London System", or "Opening: The London
+System, sparring against Classical setups". Captured rather than looked up, because the
+header can now name another course and a title read late is a title that can change under
+the game. The Play screen shows the running game whenever there is one, whatever the
+header says; the start screen is what follows the header, so New game starts on the course
+the dropdown names. Still one game at a time, and still judged against the course it was
+started in.
 
 ## 9. v1 acceptance
 

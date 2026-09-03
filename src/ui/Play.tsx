@@ -84,15 +84,6 @@ export function Play({
     if (request) setLaunch('here')
   }, [request])
 
-  // A game belongs to the course it was started in. The switcher is greyed
-  // out while one is in progress, so this can only fire on a REVIEWED game
-  // left behind by a course change, and a stale report under a new course
-  // would be worse than an empty screen.
-  const { courseId, reset } = game
-  useEffect(() => {
-    if (courseId !== null && courseId !== course.id) reset()
-  }, [course.id, courseId, reset])
-
   const book = useMemo(() => {
     if (launch === 'chapter') {
       const chapter = chapters.find((entry) => entry.id === chapterId)
@@ -104,11 +95,14 @@ export function Play({
   const start = async () => {
     await game.start({
       courseId: course.id,
+      courseTitle: course.title,
       book,
       length,
       level,
       startMoves: launch === 'here' && request ? request.moves : [],
       chapterId: launch === 'chapter' ? chapterId : undefined,
+      chapterTitle:
+        launch === 'chapter' ? chapters.find((entry) => entry.id === chapterId)?.title : undefined,
     })
     if (launch === 'here') onRequestUsed()
   }
@@ -223,6 +217,7 @@ export function Play({
     <div className="play">
       <PlayHead
         session={session}
+        opening={openingLine(game.courseTitle, game.chapterTitle)}
         opponentColour={playBook.opponentColour}
         thinking={thinking}
         reviewed={report !== null}
@@ -278,8 +273,27 @@ export function Play({
 }
 
 /**
- * The header over a game in progress: where the game is up to, and the three
- * things you can do to it.
+ * What the game is, in one line: the course it was started in, and the chapter
+ * it is sparring against when it has one.
+ *
+ * It is here because the Course dropdown no longer waits for the game. A game
+ * belongs to the course it was started in and is judged against that course's
+ * repertoire, so with the header free to name another one, the game has to say
+ * which it is. The titles come from the game itself, captured when it started.
+ */
+function openingLine(
+  courseTitle: string | null,
+  chapterTitle: string | null,
+): string | null {
+  if (!courseTitle) return null
+  return chapterTitle
+    ? `Opening: ${courseTitle}, sparring against ${chapterTitle}`
+    : `Opening: ${courseTitle}`
+}
+
+/**
+ * The header over a game in progress: what it is, where it is up to, and the
+ * three things you can do to it.
  *
  * A component rather than markup inside the screen, because the help names
  * Undo and Redo and the help test walks the START screen. A control the test
@@ -291,6 +305,7 @@ export function Play({
  */
 export function PlayHead({
   session,
+  opening,
   opponentColour,
   thinking,
   reviewed,
@@ -299,6 +314,7 @@ export function PlayHead({
   onNew,
 }: {
   session: PlaySession
+  opening: string | null
   opponentColour: Colour
   thinking: boolean
   reviewed: boolean
@@ -311,6 +327,7 @@ export function PlayHead({
   return (
     <header className="play-head">
       <h2>Play</h2>
+      {opening ? <p className="play-opening">{opening}</p> : null}
       <p className="play-status">
         {reviewed
           ? 'Game reviewed'

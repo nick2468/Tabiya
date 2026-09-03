@@ -22,10 +22,15 @@ import {
  * Nick found that on the first afternoon. A game is not part of a screen; it
  * is a thing the app is doing.
  *
- * One game at a time, and it belongs to the course it was started in. The
- * course switcher is greyed out while it is in progress, so the game cannot
- * be orphaned by a course change; the screen still checks, because a stale
- * report under a different course would be worse than an empty screen.
+ * One game at a time, and it belongs to the course it was started in - which
+ * is now something the game SAYS rather than something the header enforces.
+ * Phase 23 greyed the course switcher while a game ran. Nick overruled that on
+ * 2026-09-03: he wants to study, drill and check progress on another opening
+ * while a game is open, and a greyed selector he could barely see answered a
+ * question nobody had asked. So the game carries its own course and chapter
+ * TITLES, captured when it starts, and writes them above the board. Reading
+ * them off the catalog would not do: the header can now name another course,
+ * and a title read late is a title that can change under the game.
  *
  * The engine worker now lives as long as the game does. It is stopped by New
  * game and by this provider going away, and by nothing else.
@@ -40,6 +45,10 @@ export interface StartOptions {
   startMoves: string[]
   /** The chapter a "this chapter's line" game is sparring against. */
   chapterId?: string
+  /** The course's title, captured now, because the header can change later. */
+  courseTitle: string
+  /** And the chapter's, for a game sparring against one. */
+  chapterTitle?: string
 }
 
 export interface PlayGame {
@@ -48,6 +57,10 @@ export interface PlayGame {
   book: Book | null
   /** The course the running game belongs to. */
   courseId: string | null
+  /** What that course is called, as the catalog prints it. */
+  courseTitle: string | null
+  /** And the chapter, for a game sparring against one. */
+  chapterTitle: string | null
   report: GameReport | null
   scanning: { done: number; total: number } | null
   evaluations: Map<string, number>
@@ -315,6 +328,8 @@ function usePlayValue(): PlayGame {
     session,
     book: setup?.book ?? null,
     courseId: setup?.courseId ?? null,
+    courseTitle: setup?.courseTitle ?? null,
+    chapterTitle: setup?.chapterTitle ?? null,
     report,
     scanning,
     evaluations,

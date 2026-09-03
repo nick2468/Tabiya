@@ -3221,7 +3221,7 @@ chapter above the board instead ("Opening: The London System"). A capped game of
 a "Lines played" section counting the lines a game never left. The dropdown-to-heading
 gap drops from 24px to 12px. Version 1.6.7.
 
-- [ ] 24.1 Switcher free during a game; the game names its course; no reset on a header
+- [x] 24.1 Switcher free during a game; the game names its course; no reset on a header
   change; Help and SPEC follow.
 - [ ] 24.2 `extend` on the session with tests; the two buttons on a game finished by cap.
 - [ ] 24.3 `sans` on each play record; line matching in stats with tests; "Lines played"
