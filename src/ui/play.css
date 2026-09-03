@@ -171,7 +171,8 @@
   width: 16px;
   height: 420px;
   flex: none;
-  background: var(--surface);
+  /* Piece colours, not theme colours: White's share is always the light one. */
+  background: var(--piece-black);
   border: 1px solid var(--line-strong);
   border-radius: 3px;
   overflow: hidden;
@@ -181,7 +182,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  background: var(--bar);
+  background: var(--piece-white);
 }
 
 /* The report's own bar: the final position, horizontal, under the verdict. */
@@ -189,7 +190,7 @@
   height: 10px;
   width: 100%;
   max-width: 320px;
-  background: var(--surface);
+  background: var(--piece-black);
   border: 1px solid var(--line-strong);
   border-radius: 3px;
   overflow: hidden;
@@ -197,5 +198,5 @@
 
 .eval-white {
   height: 100%;
-  background: var(--bar);
+  background: var(--piece-white);
 }

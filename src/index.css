@@ -10,6 +10,14 @@
  * rule that will be wrong in one of the two themes.
  */
 
+/* The two chess colours, the same in both themes. An evaluation bar is White
+   against Black, and a fill that took its colour from the theme read as Black
+   winning in the light theme: the frame changes, the pieces do not. */
+:root {
+  --piece-white: #ece9e2;
+  --piece-black: #2a2c30;
+}
+
 :root, :root[data-theme="dark"] {
   --ground: #16181c;
   --surface: #1c1f24;
