@@ -227,21 +227,27 @@ export function Play({
       />
 
       <div className="play-body">
-        <LiveEvalBar
-          pawns={shownEvaluation(session.fen, session.moves, evaluations)}
-          studentColour={session.studentColour}
-        />
+        {/* One box for the bar and the board, so the bar is stretched to the
+            board's own height rather than given a height of its own. Nick saw
+            it a few pixels long at the bottom, which reads as a touch better
+            for Black than the number is. */}
+        <div className="play-board">
+          <LiveEvalBar
+            pawns={shownEvaluation(session.fen, session.moves, evaluations)}
+            studentColour={session.studentColour}
+          />
 
-        <Board
-          fen={session.fen}
-          orientation={session.studentColour}
-          turnColor={session.sideToMove}
-          movableColor={finished || thinking || report ? undefined : session.studentColour}
-          dests={finished || thinking || report ? undefined : legalDests(session.fen)}
-          lastMove={lastMoveSquares(session)}
-          onMove={game.play}
-          size={420}
-        />
+          <Board
+            fen={session.fen}
+            orientation={session.studentColour}
+            turnColor={session.sideToMove}
+            movableColor={finished || thinking || report ? undefined : session.studentColour}
+            dests={finished || thinking || report ? undefined : legalDests(session.fen)}
+            lastMove={lastMoveSquares(session)}
+            onMove={game.play}
+            size={420}
+          />
+        </div>
 
         <div className="play-side">
           <MoveList session={session} />

@@ -181,10 +181,18 @@
 
 /* The bar beside the board, while the game is going. Board height, so it
    reads as the board's own margin rather than as a widget of its own. */
+.play-board {
+  display: flex;
+  gap: 28px;
+  align-items: stretch;
+}
+
 .live-eval {
   position: relative;
   width: 16px;
-  height: 420px;
+  /* Stretched to the board by .play-board; the border is inside that height
+     so the two boxes end on the same pixel. */
+  box-sizing: border-box;
   flex: none;
   /* Piece colours, not theme colours: White's share is always the light one. */
   background: var(--piece-black);
