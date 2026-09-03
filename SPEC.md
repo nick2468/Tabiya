@@ -636,6 +636,14 @@ header says; the start screen is what follows the header, so New game starts on 
 the dropdown names. Still one game at a time, and still judged against the course it was
 started in.
 
+2026-09-03, gate 24: **"Lines played" counts only the lines a game reached.** The
+phase 24 chip's rule counted a game for every line it never left, and the builder
+measured what that meant: a three move Caro-Kann game counted for eleven lines, because
+eleven of them still share those moves. Nick ruled the narrower reading: a game counts for
+a line once it has played past the ply where that line parts from every other line in the
+course, and a game that stops while several lines still share the same moves counts for
+none of them. `forkDepth` in `stats.ts` is that ply.
+
 ## 9. v1 acceptance
 
 1. Study: all eight chapters open; every line steps through with notes, arrows and

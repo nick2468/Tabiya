@@ -5,6 +5,7 @@ import {
   chapterProgress,
   conceptAccuracy,
   courseTotals,
+  forkDepth,
   linesPlayed,
   playStats,
   playedLine,
@@ -213,6 +214,17 @@ describe('playedLine', () => {
   })
 })
 
+describe('forkDepth', () => {
+  it('is the ply after the longest run a line shares with any other', () => {
+    expect(forkDepth(lines[0].path, [lines[0].path, lines[1].path])).toBe(6)
+    expect(forkDepth(lines[1].path, [lines[0].path, lines[1].path])).toBe(6)
+  })
+
+  it('is zero for a line with nothing to part from', () => {
+    expect(forkDepth(lines[0].path, [lines[0].path])).toBe(0)
+  })
+})
+
 describe('linesPlayed', () => {
   const game = (sans?: string[], courseId = COURSE) => ({
     courseId,
@@ -250,12 +262,24 @@ describe('linesPlayed', () => {
     expect(linesPlayed(course, state)[0].chapterTitle).toBe('Test chapter')
   })
 
-  it('counts a game that stopped in the trunk for every line it reached', () => {
+  it('counts a game that stopped in the shared trunk for NO line', () => {
+    // 1.d4 d5 2.Bf4 Nf6 3.e3 is where the two lines part; a game that stops
+    // there has not chosen either. Nick's ruling, 2026-09-03.
     const state = {
       ...emptyProgress(),
       playGames: [game(lines[0].path.slice(0, 5))],
     }
-    expect(linesPlayed(course, state).map((row) => row.games)).toEqual([1, 1])
+    expect(linesPlayed(course, state)).toEqual([])
+  })
+
+  it('counts a game for the one line it reached past the fork', () => {
+    const state = {
+      ...emptyProgress(),
+      playGames: [game(lines[0].path.slice(0, 6))],
+    }
+    expect(linesPlayed(course, state).map((row) => [row.name, row.games])).toEqual([
+      [lines[0].name, 1],
+    ])
   })
 
   it('ignores games from another course', () => {

@@ -244,12 +244,12 @@ function CourseProgress({
 /**
  * Which lines the games of this course actually followed.
  *
- * A game counts for a line when the two agree for the whole of the shorter
- * one, so a game that stopped inside a line played into it, and a game that
- * ran past the leaf played it and kept going. A game that stopped in a trunk
- * several lines share counts for every one of them, because it did play into
- * every one, and the hint says so: a number nobody can explain is worse than
- * no number.
+ * A game counts for a line it never left and got far enough into to have
+ * chosen it: past the ply where that line parts from every other line in the
+ * course. A game that stopped in a trunk several lines share counts for none
+ * of them. Nick ruled that on 2026-09-03 after a three move game was counted
+ * for eleven lines, and the hint says the rule: a number nobody can explain is
+ * worse than no number.
  *
  * Games recorded before version 1.6.7 never kept their moves, so a trainee
  * with a long history sees nothing here at first. That is said outright.
@@ -291,10 +291,10 @@ function LinesPlayed({ course, state }: { course: LoadedCourse; state: ProgressS
             </tbody>
           </table>
           <p className="hint">
-            A game counts for a line it never left, whether it played the line out or
-            stopped part way along it. A game that stopped where several lines still
-            share the same moves counts for each of them, because it did play into each.
-            Counted over your last 100 games.
+            A game counts for a line once it has played past the point where that line
+            parts from every other line in the course, whether it then played the line
+            out or stopped along it. A game that stopped while several lines still shared
+            the same moves counts for none of them. Counted over your last 100 games.
           </p>
         </>
       )}

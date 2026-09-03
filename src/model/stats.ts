@@ -227,7 +227,35 @@ export function playedLine(sans: string[], path: string[]): boolean {
 }
 
 /**
+ * How many plies of a line a game must play before it is THAT line.
+ *
+ * Lines share their opening moves, and a game that stops in the shared part
+ * has not chosen between them. The fork is the first ply after which no other
+ * line of the course has the same moves; a game has reached the line once it
+ * has played that ply. Nick ruled 2026-09-03 that only the lines a game
+ * reached count, after seeing a three move game counted for eleven lines.
+ */
+export function forkDepth(path: string[], others: string[][]): number {
+  let depth = 0
+  for (const other of others) {
+    if (other === path) continue
+    let shared = 0
+    while (shared < path.length && shared < other.length && path[shared] === other[shared]) {
+      shared += 1
+    }
+    // The ply that parts them is the one after the shared run.
+    depth = Math.max(depth, Math.min(shared + 1, path.length))
+  }
+  return depth
+}
+
+/**
  * The lines of one course that games have followed, most played first.
+ *
+ * A game counts for a line it never left AND got far enough into to have
+ * chosen it: past the ply where the line parts from every other line in the
+ * course. A game that stops in a trunk several lines share counts for none of
+ * them, because it did not get as far as any one of them.
  *
  * Only games of THIS course, and only games that kept their moves. A game
  * recorded before phase 24 has no `sans` and counts for nothing, which the
@@ -239,10 +267,15 @@ export function linesPlayed(course: LoadedCourse, state: ProgressState): LinePla
   )
   if (games.length === 0) return []
 
+  const every = course.chapters.flatMap((chapter) => chapterLines(chapter).map((line) => line.path))
   const rows: LinePlayed[] = []
   for (const chapter of course.chapters) {
     for (const line of chapterLines(chapter)) {
-      const played = games.filter((game) => playedLine(game.sans ?? [], line.path)).length
+      const reached = forkDepth(line.path, every)
+      const played = games.filter(
+        (game) =>
+          (game.sans ?? []).length >= reached && playedLine(game.sans ?? [], line.path),
+      ).length
       if (played > 0) {
         rows.push({ id: line.id, name: line.name, chapterTitle: chapter.title, games: played })
       }
