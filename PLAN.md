@@ -3518,4 +3518,31 @@ Open items (phase 26):
 
 Acceptance: as the chip's final paragraph.
 
-- [ ] **Review gate 26**
+Gate 26 findings (2026-09-03):
+
+- **Verified for the gate from the repo:** 852 tests and `tsc -b` clean; nothing under
+  `courses/`; version 1.6.9 in all three files; no em dashes under `src/`. The help test
+  was mutation-checked: renaming Hint turns it red naming the control and the screen.
+  `askHint` goes through the engine queue, refuses while thinking or reviewed, and puts
+  the playing profile back in a `finally`.
+- **The measurement holds in a restarted server showing v1.6.9**, device pixel ratio 1.5:
+  `.board`, `cg-board`, the bar and the move list all run from 175.2 to 591.2, 416 tall,
+  overshoot zero. The list is 167px wide with `scrollbar-width: thin`. The button row
+  under the board reads New game, Undo, Redo, Hint, as `<button>`s with no `.link` class,
+  Undo and Redo disabled with only the opponent's move played.
+- **Both hints driven.** In book: "The line plays 1...c6. The Caro-Kann..." with two
+  arrow shapes on the board and `hints` 1 on the session. Out of book after 1...a6
+  2.Ne2: "The engine suggests e6. No note: the repertoire ended at move 1." and `hints`
+  2. The review cleared the hint panel, the report read "You used 2 hints.", and the
+  stored record carried `hints: 2`.
+- **The console errors the builder reported are HMR artifacts, confirmed.** The gate tab
+  showed the same four provider errors after a reload, because the pane keeps a tab's
+  console across navigations and the orchestrator's mutation edits had gone through HMR.
+  A fresh tab on a clean load logs nothing but Vite's connect line and the React DevTools
+  notice.
+- **The light theme was not re-driven at this gate**; the builder drove it, and the two
+  theme-sensitive pieces (the list's scrollbar, the button row) use existing tokens.
+- **Nick's own files were not listed and not reported.** The browser build's storage was
+  cleared afterwards.
+
+- [x] **Review gate 26 passed** (2026-09-03)
