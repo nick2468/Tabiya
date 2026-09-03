@@ -3414,4 +3414,32 @@ Open items (phase 25):
 
 Acceptance: as the chip's final paragraph.
 
-- [ ] **Review gate 25**
+Gate 25 findings (2026-09-03):
+
+14. **Verified for the gate from the repo:** 836 tests and `tsc -b` clean; nothing under
+    `courses/` or `docs/bundles/` differs; version 1.6.8 in all three files; no em dashes
+    under `src/`. The help test was mutation-checked: renaming Keep playing turns it red
+    naming the control and the screen. The PGN writer has its own test file and the round
+    trip through `parsePgn` is one of its twelve tests.
+15. **The identity fix (open item 7) was read at source and then proved live.** `finish`
+    reuses `recordedAt` when it has one, `start` sets it from a resumed request's `at`,
+    and `recordGame` replaces by `at`. Driven in the Vite build at 1200x980 against a
+    server restarted so the header read v1.6.8: a Caro-Kann game reviewed at two moves,
+    Keep playing, reviewed again, Play on from Progress ("From your game of 3 September,
+    move 2", Full game checked), two more plies, reviewed a third time. The stored history
+    held ONE record throughout, with the same `at`, three moves and five plies at the end,
+    and the Play on row moved from 2 to 3 moves.
+16. **The rest of the drive.** After the review the left arrow moved the current move
+    from d4 to c6 and the bar read "slightly better for white" for that position; Keep
+    playing put the report away with the moves untouched and the status back to "Your
+    move"; a real click on Copy game changed the OS clipboard, which the pane reported.
+    The light theme was not re-driven at this gate: the builder drove it and no colour
+    changed in this phase.
+17. **Open item 12 is explained again**: the server on 5175 was the orchestrator's own,
+    started before the version bump, and was restarted for this gate.
+18. **The PGN helpers moving from `bundle.ts` to `pgn.ts` is the right home** and the
+    bundle tests are unchanged, which is the proof that nothing moved but the text.
+19. **Nick's own files were not listed and not reported.** The browser build's storage
+    was cleared afterwards.
+
+- [x] **Review gate 25 passed** (2026-09-03)
