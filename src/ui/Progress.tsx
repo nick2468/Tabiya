@@ -285,7 +285,7 @@ function PlayOn({ onPlayOn }: { onPlayOn: (request: PlayRequest) => void }) {
   return (
     <>
       <h4>Play on</h4>
-      <table>
+      <table className="play-on-table">
         <thead>
           <tr>
             <th>Played</th>

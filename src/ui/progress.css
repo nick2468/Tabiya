@@ -99,6 +99,19 @@
   color: var(--text-soft);
 }
 
+/* Seven columns do not fit the 640px the other tables are held to: at that
+   width the Ended column wrapped to five lines. This one takes the width its
+   cells need and keeps every cell on one line; the panel is wide enough. */
+.play-on-table {
+  max-width: none;
+  width: auto;
+}
+
+.play-on-table th,
+.play-on-table td {
+  white-space: nowrap;
+}
+
 /* Play on and Replay sit together on the row rather than stacking, so the
    column stays one line tall however many buttons it holds. */
 .row-actions {
