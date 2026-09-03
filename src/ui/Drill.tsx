@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react'
 import { Board } from './Board'
+import { BOARD_SIZE } from './board-size'
 import { useProgress } from './progress-context'
 import { useCatalog } from './catalog-context'
 import { buildCardsAcross, type Card } from '../model/cards'
@@ -268,7 +269,7 @@ export function Drill({
           dests={verdict ? undefined : legalDests(card.fen)}
           shapes={verdict ? answerShapes(card, verdict) : []}
           onMove={onMove}
-          size={420}
+          size={BOARD_SIZE}
         />
 
         <div className="drill-side">
