@@ -3663,3 +3663,24 @@ Gate 27 findings (2026-09-04):
   cleared afterwards.
 
 - [x] **Review gate 27 passed** (2026-09-04)
+
+## Phase 28 - how every game ended, including the ones played before we kept it
+
+Goal: Nick's finding on 1.6.11 (2026-09-04) that mated games read "Stopped" and stopped
+games carried no verdict. No chess content.
+
+Chipped as `chips/phase-28-how-it-ended.md`. A record without an outcome has its ending
+worked out from its moves; a record gains `length` so a capped game reads "Move limit";
+Ended and Position become two columns; Replay may fill in a missing verdict and never
+overwrite one; the greyed Play on and Replay buttons say whether a game is being played
+or reviewed. Version 1.6.12.
+
+- [ ] 28.1 Ending derived from the moves; `length` on the record; Move limit.
+- [ ] 28.2 Ended and Position columns; Replay fills in, never overwrites.
+- [ ] 28.3 The greyed buttons say why; the report-showing case checked.
+- [ ] 28.4 Version 1.6.12.
+- [ ] 28.5 Proved in the browser build with seeded records.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 28**
