@@ -3569,7 +3569,68 @@ Replay button beside Play on that lands on a live report. Version 1.6.11.
 - [x] 27.5 `outcome` and `finalEval` on the record; Ended and Level columns, time on the
   date; the level on the in-game Opening line; Replay.
 - [x] 27.6 Version 1.6.11.
-- [ ] 27.7 Proved in the browser build at 1200x980, in both themes.
+- [x] 27.7 Proved in the browser build at 1200x980, in both themes, with the measurements.
+
+Open items (phase 27):
+
+1. **The replay mark needed a token, not a shade.** `--surface` is a shade of the ground,
+   so the marked move disappeared into it. `--mark` is defined in both theme blocks,
+   `#3a5b3f` on dark and `#c9e2cc` on light, and measured live as `rgb(58,91,63)` and
+   `rgb(201,226,204)`.
+2. **The button row spans the board exactly.** Measured: board left 68, right 484; row
+   left 68, right 484; the arrows' right edge 484. The arrows are pushed there by `auto`,
+   so the row needs no width of its own, and both they and the report are driven by one
+   controls object rather than two copies of it.
+3. **The Study table drifted because weight is width.** The active row's moves were 500
+   and every other row's were 400, so a row becoming active widened its own moves and
+   pushed them out of line with the rows above and below - which is exactly where a
+   reader looks to find where two lines part company. Every row is now set the way the
+   active row is: measured at **zero drift** across the first fourteen moves of two lines
+   sharing a trunk, with row 0 active and row 1 not.
+4. **The notes measurement contradicted the chip's first branch, and its prescription was
+   still right.** The weights were NOT equal: body 400, headings 700. What was equal was
+   the ordering being wrong - the body was in `--text`, the brightest colour there is, and
+   the headings in `--text-soft`, which is dimmer. On a light ground that reads correctly
+   anyway; on a dark one bright 400 gains apparent weight while dim 700 recedes and they
+   meet in the middle. Colours swapped: body `--text-soft`, headings `--text` at 600.
+   Measured after, in dark: body 400 rgb(200,204,210), headings 600 rgb(230,230,230).
+5. **"Ended" never says a colour.** A game that ended says so in its own words; a stopped
+   game is described by the position it stopped in, turned to the trainee's side. The same
+   evaluation reads "clearly better for you" in a White course and a Black one, which is
+   the whole point: the reader's colour changes with the course and a bare colour would be
+   translated wrong half the time. The bands moved into `verdictBand` so `verdictInWords`
+   and `verdictForYou` cannot drift apart.
+6. **A REAL BUG, and it is the phase 25 rule breaking a second time by a different door.**
+   Replay wrote a second record instead of replacing the first. Two causes, both fixed:
+   the replay effect read the screen's launch state, which an effect declared above it
+   sets in the same commit, so it saw `at: undefined` and minted a fresh identity; and
+   `finish` closed over `recordedAt` as it stood when the callback was made, which for a
+   caller that starts a game and reviews it in one go is BEFORE the start. The identity
+   now lives in a ref read at the moment it is used, and the replay reads everything from
+   the request. **Rule worth keeping: a callback that has to see state set by an earlier
+   await in the same sequence must read it from a ref, not from its closure.**
+7. **The suite could not have caught it, for the third phase running.** The tests hold
+   `recordGame`, `replayRequest` and `endedText`, and all passed while the provider wrote
+   two records. Everything the provider does with a real engine is outside the suite,
+   which is the SPEC section 6 register entry, and it has now cost an identity bug twice.
+8. **The level is named by one function.** The picker, the line over the board and the
+   Progress column all say "4. Club", and three templates would have become three
+   spellings.
+9. **What was driven at 1200x980, in both themes, from a cleared store.** The mark on the
+   current move in both themes; the row ending at the board's right edge; the Study table
+   at zero drift with the moves readable on every row; the notes measured before and
+   after; the Play on list showing "4 September, 09:12", "4. Club" and both an ending
+   ("You were checkmated") and a stopped game ("Stopped, level"); Replay landing on the
+   report with the arrows live and the history still holding one game.
+10. **This drive ran on THIS session's own server.** Port 5175 was free, so the version
+    constant is the real one and the header read v1.6.11 throughout. The server was
+    restarted after the version bump for exactly that reason.
+11. **Console errors were judged from a fresh tab**, per the hazard: the driving tab held
+    HMR reload failures from the moments files were being edited, and a fresh tab visiting
+    Play, Study and Progress had no console output at all.
+12. **No chess content.** Nothing under `courses/` differs from the commit this phase
+    started on.
+
 
 Acceptance: as the chip's final paragraph.
 
