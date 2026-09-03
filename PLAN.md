@@ -3463,7 +3463,7 @@ The move list becomes a narrow column at board height with a thin scrollbar. Ver
   the PGN; `hints` on the record.
 - [x] 26.4 Move list as a narrow column at board height, thin scrollbar, replay marker
   kept in view.
-- [ ] 26.5 Version 1.6.9.
+- [x] 26.5 Version 1.6.9.
 - [ ] 26.6 Proved in the browser build at 1200x980, in both themes, with the measurements.
 
 Acceptance: as the chip's final paragraph.
