@@ -3550,3 +3550,26 @@ Gate 26 findings (2026-09-03):
 Follow-ups after 1.6.9 (2026-09-03, orchestrator commits, shipped as 1.6.10): the button
 row starts under the board's left edge rather than the bar's; the report lists slips in
 move order, most recent first, instead of worst first; the move list shows twenty rows.
+
+## Phase 27 - the replay you can see, the Study table in step, and how each game ended
+
+Goal: Nick's six findings after installing 1.6.10 (2026-09-04). No chess content.
+
+Chipped as `chips/phase-27-review-polish.md`. The replayed move gets a dull green mark;
+the stepping arrows join the button row, right-justified to the board; the Study lines
+table sets every row's moves in the active row's size and weight so the columns stay in
+step; the dark-mode notes section is measured and its headings made to stand off the
+body; each game records how it ended and Progress shows it in an Ended column, with a
+Replay button beside Play on that lands on a live report. Version 1.6.11.
+
+- [ ] 27.1 Dull green mark on the current replay move, both themes.
+- [ ] 27.2 Stepping arrows on the button row, ending at the board's right edge.
+- [ ] 27.3 Study lines table: one size and weight for every row's moves.
+- [ ] 27.4 Notes section in dark mode: measure, then contrast or weight.
+- [ ] 27.5 `outcome` and `finalEval` on the record; Ended column; Replay.
+- [ ] 27.6 Version 1.6.11.
+- [ ] 27.7 Proved in the browser build at 1200x980, in both themes.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 27**
