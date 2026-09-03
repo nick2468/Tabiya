@@ -3634,4 +3634,32 @@ Open items (phase 27):
 
 Acceptance: as the chip's final paragraph.
 
-- [ ] **Review gate 27**
+Gate 27 findings (2026-09-04):
+
+- **Verified for the gate from the repo:** 866 tests and `tsc -b` clean; nothing under
+  `courses/`; version 1.6.11 in all three files; no em dashes under `src/`. The help test
+  was mutation-checked: renaming Replay turns it red naming the control and the screen.
+- **Driven against the builder's own server** (it held 5175 and serves the same tree),
+  header v1.6.11, at 1200x980: the replayed move marked in rgb(58,91,63); the button row
+  from 68 to 484 with the two arrows ending at 484, the board's right edge; the in-game
+  line "Opening: The Caro-Kann Defence, against 4. Club"; the Play on table with Played
+  "4 September, 09:19", Strength "4. Club" and Ended "Stopped, slightly better for the
+  engine"; Replay landing on a live report with the arrows working.
+- **Two follow-ups landed at the gate as the orchestrator's own commits.** The Play on
+  table had seven columns in the 640px the other tables are held to and wrapped Ended to
+  five lines; it now takes its own width (882px) with every cell on one line. And Replay
+  broke its own rule: the re-scan wrote a fresh `finalEval` to the record (0.47 became
+  0.39 with nothing played). The review now skips the record when the game was loaded
+  from one and no move has been played on top of it. Driven after: Replay left 0.39 in
+  place; Play on with one more move reviewed to the same record at three moves.
+- **The identity bug returning through a second door (open item on `recordedAt`) is the
+  third time a provider bug has passed the suite.** The register entry stands; a DOM
+  test environment with a fake engine in the provider is the thing that would close it,
+  and it is now worth a phase of its own rather than a line in one.
+- **The Study table and the notes section were taken on the builder's measurements**
+  (zero drift across fourteen moves; body 400 in `--text-soft`, headings 600 in `--text`
+  in dark), not re-driven.
+- **Nick's own files were not listed and not reported.** The browser build's storage was
+  cleared afterwards.
+
+- [x] **Review gate 27 passed** (2026-09-04)
