@@ -63,12 +63,27 @@ import './play.css'
  * engine anything.
  */
 
-/** A request to play from a position, sent over from Study. */
+/**
+ * A request to play from a position.
+ *
+ * Study sends one from a position on its board. Progress sends one to carry on
+ * a recorded game, and that kind brings more with it: the course to switch to,
+ * the strength it was played at, its own identity, and the fact that it must
+ * not be capped, because it has already run past any cap that would apply.
+ */
 export interface PlayRequest {
   fen: string
   moves: string[]
   chapterId: string
   label: string
+  /** Set by a resumed game: keep the book inside the chapter it names. */
+  chapterOnly?: boolean
+  /** The course to open, when the request is not for the one showing. */
+  courseId?: string
+  /** The strength a resumed game was played at. */
+  level?: number
+  /** A resumed game keeps the record's identity, so one game stays one game. */
+  at?: string
 }
 
 type Shape_ = 'any' | 'chapter' | 'here'
@@ -92,21 +107,39 @@ export function Play({
   // "This chapter's line" is the one people misread here, so the launch
   // options carry the screen's only `?`.
   const [askLaunch, setAskLaunch] = useState(false)
-  // Which position of a reviewed game is showing, as a count of moves played.
-  // Null means the end, which is where a report opens.
-  const [replayPly, setReplayPly] = useState<number | null>(null)
+  // Which position of a reviewed game is showing, as a count of moves played,
+  // and WHICH report it belongs to. Holding the report alongside is what puts
+  // the viewer back at the end when a new one arrives: an effect watching the
+  // report would leave one render showing the old ply against the new game.
+  const [replay, setReplay] = useState<{ of: GameReport | null; ply: number }>({
+    of: null,
+    ply: 0,
+  })
 
   useEffect(() => {
     if (request) setLaunch('here')
   }, [request])
 
+  // A resumed game arrives with its own strength and no cap. Both are set on
+  // the screen rather than applied behind it, so the options say what is about
+  // to happen and can still be changed.
+  useEffect(() => {
+    if (request?.level !== undefined) setLevel(request.level)
+    if (request?.at !== undefined) setLength('full')
+  }, [request])
+
+  // The chapter a resumed game was sparring against, when it names one, so
+  // the opponent is steered the way it was steered the first time.
+  const resumeChapter = launch === 'here' && request?.chapterOnly ? request.chapterId : null
+  const targetChapter = launch === 'chapter' ? chapterId : resumeChapter
+
   const book = useMemo(() => {
-    if (launch === 'chapter') {
-      const chapter = chapters.find((entry) => entry.id === chapterId)
+    if (targetChapter) {
+      const chapter = chapters.find((entry) => entry.id === targetChapter)
       return buildBook({ colour: course.colour, chapters: chapter ? [chapter] : [] })
     }
     return buildBook({ colour: course.colour, chapters })
-  }, [chapters, course.colour, launch, chapterId])
+  }, [chapters, course.colour, targetChapter])
 
   const start = async () => {
     await game.start({
@@ -116,9 +149,11 @@ export function Play({
       length,
       level,
       startMoves: launch === 'here' && request ? request.moves : [],
-      chapterId: launch === 'chapter' ? chapterId : undefined,
-      chapterTitle:
-        launch === 'chapter' ? chapters.find((entry) => entry.id === chapterId)?.title : undefined,
+      chapterId: targetChapter ?? undefined,
+      chapterTitle: targetChapter
+        ? chapters.find((entry) => entry.id === targetChapter)?.title
+        : undefined,
+      at: launch === 'here' ? request?.at : undefined,
     })
     if (launch === 'here') onRequestUsed()
   }
@@ -129,15 +164,13 @@ export function Play({
   // The game ends by itself on mate or the length cap.
   const finished = session?.isFinished() ?? false
 
-  // A new game, or a new report, starts the viewer at the end again.
-  useEffect(() => setReplayPly(null), [report])
-
   const moves = useMemo(() => session?.moves ?? [], [session])
   const atEnd = moves.length
-  const ply = replayPly ?? atEnd
+  // A report nobody has walked yet shows its end, which is the final position.
+  const ply = replay.of === report && report !== null ? replay.ply : atEnd
   const step = useCallback(
-    (to: number) => setReplayPly(clampPly(moves, to)),
-    [moves],
+    (to: number) => setReplay({ of: report, ply: clampPly(moves, to) }),
+    [moves, report],
   )
 
   // The arrows only listen while a report is showing. Study puts the same
@@ -148,15 +181,14 @@ export function Play({
     const onKey = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null
       if (target && ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName)) return
-      if (event.key === 'ArrowLeft') setReplayPly((at) => clampPly(moves, (at ?? moves.length) - 1))
-      else if (event.key === 'ArrowRight')
-        setReplayPly((at) => clampPly(moves, (at ?? moves.length) + 1))
+      if (event.key === 'ArrowLeft') step(ply - 1)
+      else if (event.key === 'ArrowRight') step(ply + 1)
       else return
       event.preventDefault()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [moves, report])
+  }, [ply, report, step])
 
   // What the board is actually showing. During a game it is the game; during a
   // review it is wherever the reader has walked to, which is the same position

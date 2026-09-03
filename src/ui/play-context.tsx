@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react'
+import { canReplayMoves } from './play-on'
 import { useProgress } from './progress-context'
 import { StockfishEngine, strengthProfile, whitePovPawns, type Engine } from '../engine'
 import { sanForMove } from '../model/grade'
@@ -49,6 +50,12 @@ export interface StartOptions {
   courseTitle: string
   /** And the chapter's, for a game sparring against one. */
   chapterTitle?: string
+  /**
+   * The identity of the record this game continues, when it continues one.
+   * A game resumed from Progress is the same game, so reviewing it replaces
+   * that record rather than adding a second.
+   */
+  at?: string
 }
 
 export interface PlayGame {
@@ -195,6 +202,14 @@ function usePlayValue(): PlayGame {
         const running = await engine()
         await running.newGame()
         await running.setStrength(profile)
+        // The replay is checked before the engine is asked for anything, so
+        // a damaged record says what is wrong rather than throwing halfway
+        // through a constructor with the worker already started.
+        if (options.startMoves.length > 0 && !canReplayMoves(options.startMoves)) {
+          throw new Error(
+            'That game cannot be put back on the board: its moves no longer make a legal game.',
+          )
+        }
         const fresh = new PlaySession({
           book: options.book,
           engine: running,
@@ -204,7 +219,7 @@ function usePlayValue(): PlayGame {
         })
         setupRef.current = options
         setSetup(options)
-        setRecordedAt(null)
+        setRecordedAt(options.at ?? null)
         sessionRef.current = fresh
         setSession(fresh)
         // Dev-only handle on the running game, so a browser check can read the

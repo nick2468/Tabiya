@@ -73,6 +73,18 @@ function progressValue(state: ProgressState): ProgressValue {
 const learntOne: ProgressState = {
   ...emptyProgress(),
   learntLines: [[...courseLineIds(course)][0]],
+  // One recorded game that kept its moves, because Play on only exists for a
+  // game that can be picked up again.
+  playGames: [
+    {
+      courseId: course.id,
+      deviated: false,
+      moves: 2,
+      level: 4,
+      at: '2026-09-03T09:00:00.000Z',
+      sans: ['d4', 'd5', 'Bf4'],
+    },
+  ],
 }
 
 /**
@@ -244,7 +256,7 @@ const screens: Record<Screen, string> = {
         onNext: () => {},
       }),
     ),
-  progress: inApp(learntOne, createElement(Progress, { courseId: course.id })),
+  progress: inApp(learntOne, createElement(Progress, { courseId: course.id, onPlayOn: () => {} })),
 }
 
 /**

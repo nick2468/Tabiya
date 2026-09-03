@@ -3342,7 +3342,7 @@ main rides in it.
 - [x] 25.2 Copy game as PGN with the report as comments, parsing back through `parsePgn`.
 - [x] 25.5 Keep playing from a reviewed game (addendum `chips/phase-25-addendum.md`):
   resume from the final position, extend if capped, one record per game.
-- [ ] 25.6 Play on from a recorded game, from the Progress screen, keeping the record's
+- [x] 25.6 Play on from a recorded game, from the Progress screen, keeping the record's
   identity.
 - [ ] 25.3 Version 1.6.8.
 - [ ] 25.4 Proved in the browser build at 1200x980, in both themes.

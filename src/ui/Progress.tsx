@@ -12,12 +12,14 @@ import {
 } from '../model/stats'
 import { dueCount, newCount } from '../model/queue'
 import { colourName, type LoadedCourse } from '../model/types'
-import type { ProgressState } from '../storage/progress'
+import type { PlayRecord, ProgressState } from '../storage/progress'
 import type { Card } from '../model/cards'
 import { backupCopy, isDesktop, readBackup, saveBackup, type BackupCopy } from './backup'
 import { profileFolders, type ProfileFolders } from './folders'
 import { HelpPanel } from './Help'
 import { nextCardLine } from './card-words'
+import { playedOn, recentPlayable, requestFor } from './play-on'
+import type { PlayRequest } from './Play'
 import './progress.css'
 
 /**
@@ -42,7 +44,14 @@ import './progress.css'
  * is what remains: it is for the empty catalog, which the guard above already
  * turns back, and it is there so the types hold rather than to say anything.
  */
-export function Progress({ courseId }: { courseId: string | null }) {
+export function Progress({
+  courseId,
+  onPlayOn,
+}: {
+  courseId: string | null
+  /** Starts a live game from a recorded one. */
+  onPlayOn: (request: PlayRequest) => void
+}) {
   const { state, note, exportJson, importJson } = useProgress()
   const { courses } = useCatalog()
   const chosen = courses.find((course) => course.id === courseId)
@@ -144,6 +153,8 @@ export function Progress({ courseId }: { courseId: string | null }) {
           Leaving the repertoire is not the same as playing badly. The report after each
           game says which one it was.
         </p>
+
+        <PlayOn onPlayOn={onPlayOn} />
       </section>
 
       {chosen ? <LinesPlayed course={chosen} state={state} /> : null}
@@ -238,6 +249,70 @@ function CourseProgress({
         </table>
       )}
     </section>
+  )
+}
+
+/**
+ * Recent games that can be picked up where they were left.
+ *
+ * Nick stopped a game at move 20, upgraded the app, and the game was gone: it
+ * was in his progress file and nothing could turn it back into a game. Every
+ * review since version 1.6.7 keeps the moves, so these rows can.
+ *
+ * Every course, not just the one the dropdown names, because a game you want
+ * back is a game you remember playing rather than one you go looking for by
+ * course. Play on switches the header to the game's own course, the way
+ * opening a course does.
+ */
+function PlayOn({ onPlayOn }: { onPlayOn: (request: PlayRequest) => void }) {
+  const { state } = useProgress()
+  const { courses } = useCatalog()
+  const rows = useMemo(() => recentPlayable(state.playGames), [state.playGames])
+  const playable = rows
+    .map((record) => ({ record, course: courses.find((entry) => entry.id === record.courseId) }))
+    .filter((row): row is { record: PlayRecord; course: LoadedCourse } => Boolean(row.course))
+
+  if (playable.length === 0) return null
+
+  return (
+    <>
+      <h4>Play on</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Played</th>
+            <th>Course</th>
+            <th>Sparring against</th>
+            <th className="num">Moves</th>
+            <th />
+          </tr>
+        </thead>
+        <tbody>
+          {playable.map(({ record, course }) => {
+            const chapter = course.chapters.find((entry) => entry.id === record.chapterId)
+            return (
+              <tr key={record.at}>
+                <td>{playedOn(record.at)}</td>
+                <td>{course.title}</td>
+                <td>{chapter ? chapter.title : 'Any line'}</td>
+                <td className="num">{record.moves}</td>
+                <td>
+                  <button type="button" onClick={() => onPlayOn(requestFor(record, course))}>
+                    Play on
+                  </button>
+                </td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+      <p className="hint">
+        Picks a game up where it stopped, in its own course and at the strength it was
+        played at, with no length to stop it again. Reviewing it afterwards replaces this
+        game rather than counting it twice. Only games played since version 1.6.7 are
+        here: earlier ones did not keep their moves.
+      </p>
+    </>
   )
 }
 

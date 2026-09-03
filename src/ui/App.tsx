@@ -118,7 +118,13 @@ export function Shell() {
     setPlayRequest(null)
   }, [])
 
+  // A request can bring its own course with it: Progress sends one to carry
+  // on a game that was played in a course the header may not be naming.
   const playFrom = useCallback((request: PlayRequest) => {
+    if (request.courseId) {
+      setCourseId(request.courseId)
+      rememberCourse(request.courseId)
+    }
     setPlayRequest(request)
     setView('play')
   }, [])
@@ -241,7 +247,9 @@ export function Shell() {
         {showing === 'drill' ? (
           <Drill courseId={course?.id ?? null} scope={scope} onScope={setScope} />
         ) : null}
-        {showing === 'progress' ? <Progress courseId={course?.id ?? null} /> : null}
+        {showing === 'progress' ? (
+          <Progress courseId={course?.id ?? null} onPlayOn={playFrom} />
+        ) : null}
         {showing === 'help' ? <Help /> : null}
         {showing === 'diagnostics' ? <Diagnostics /> : null}
       </main>
