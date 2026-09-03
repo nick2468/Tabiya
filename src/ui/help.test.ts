@@ -215,6 +215,9 @@ const screens: Record<Screen, string> = {
         thinking: false,
         reviewed: false,
         canHint: true,
+        // With the arrows, which is where Back one move and Forward one move
+        // live since phase 27.
+        replay: { ply: 2, count: 4, onJump: () => {}, onBack: () => {}, onForward: () => {} },
         onNew: () => {},
         onUndo: () => {},
         onRedo: () => {},

@@ -116,12 +116,26 @@
 
 .intro-detail h2 {
   font-size: 1rem;
-  color: var(--text-soft);
+  color: var(--text);
+  font-weight: 600;
   margin: 18px 0 4px;
 }
 
 .intro-detail h2:first-child {
   margin-top: 0;
+}
+
+/* The heading stands off its body rather than under it.
+
+   Measured before changing, in the running app: the body was 400 weight in
+   --text, the brightest colour there is, and the heading was 700 in
+   --text-soft, which is dimmer. On a light ground that reads correctly. On a
+   dark one bright text at 400 gains apparent weight while a dimmer 700
+   recedes, and the two meet in the middle, which is Nick seeing body text as
+   bold as its headings. The weights were never the problem: the colours were
+   the wrong way round. */
+.intro-detail p {
+  color: var(--text-soft);
 }
 
 /* ------------------------------------------------------------ study body */
@@ -381,18 +395,28 @@
   text-decoration: underline;
 }
 
+/* Every row's moves are set the way the ACTIVE row's are, so nothing changes
+   size when a row becomes active and the shared trunk of two lines sits in one
+   vertical column down the table. A heavier weight is a wider weight, so
+   letting only the active row go to 500 pushed its moves out of step with the
+   rows above and below, which is exactly where a reader looks to see where
+   the lines part company.
+
+   Dim rather than faint, too: these are moves to be read, not a watermark. */
 .line-moves {
-  color: var(--text-faint);
+  color: var(--text-dim);
   font-size: 0.8rem;
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
   line-height: 1.5;
 }
 
 /* The moves already walked, on the highlighted row: the move column doubles as
-   a progress bar, so you can see how much of the line is behind you. */
+   a progress bar, so you can see how much of the line is behind you. Colour
+   only: the weight is the same as every other move, or the walked ones would
+   shift the unwalked ones along. */
 .line-moves .walked {
   color: var(--accent);
-  font-weight: 500;
 }
 
 .tick-head,

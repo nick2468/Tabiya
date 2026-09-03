@@ -35,6 +35,10 @@
   --accent-solid: #2f4a33;
   --accent-solid-hover: #3a5b3f;
   --accent-edge: #4b7a52;
+  /* What the app marks the one thing you are looking at with: the move a
+     replay is standing on. Solid rather than a wash, because a wash on a dark
+     ground is a shade of the ground. */
+  --mark: #3a5b3f;
   --control: #2a2e35;
   --control-hover: #343941;
   --link: #7fb2e5;
@@ -65,6 +69,7 @@
   --accent-solid: #dcecdd;
   --accent-solid-hover: #c9e2cc;
   --accent-edge: #2f7a3a;
+  --mark: #c9e2cc;
   --control: #ffffff;
   --control-hover: #e9e6e0;
   --link: #1f5f9e;

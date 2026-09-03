@@ -3562,9 +3562,9 @@ step; the dark-mode notes section is measured and its headings made to stand off
 body; each game records how it ended and Progress shows it in an Ended column, with a
 Replay button beside Play on that lands on a live report. Version 1.6.11.
 
-- [ ] 27.1 Dull green mark on the current replay move, both themes.
-- [ ] 27.2 Stepping arrows on the button row, ending at the board's right edge.
-- [ ] 27.3 Study lines table: one size and weight for every row's moves.
+- [x] 27.1 Dull green mark on the current replay move, both themes.
+- [x] 27.2 Stepping arrows on the button row, ending at the board's right edge.
+- [x] 27.3 Study lines table: one size and weight for every row's moves.
 - [ ] 27.4 Notes section in dark mode: measure, then contrast or weight.
 - [ ] 27.5 `outcome` and `finalEval` on the record; Ended and Level columns, time on the
   date; the level on the in-game Opening line; Replay.

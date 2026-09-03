@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Board } from './Board'
 import { BOARD_SIZE } from './board-size'
 import { HelpAsk, HelpSaid } from './Help'
 import { usePlay } from './play-context'
 import { useProgress } from './progress-context'
 
-import { strengthProfile, allProfiles } from '../engine'
+import { strengthProfile, allProfiles, levelName } from '../engine'
 import { squaresForSan } from '../model/grade'
 import type { Shape } from '../model/types'
 import { legalDests, sideToMove } from '../model/position'
@@ -95,6 +95,11 @@ export interface PlayRequest {
   level?: number
   /** A resumed game keeps the record's identity, so one game stays one game. */
   at?: string
+  /**
+   * Set by Replay: start the game and review it without waiting to be asked,
+   * so the trainee lands on the report rather than on the launch options.
+   */
+  reviewAtOnce?: boolean
 }
 
 type Shape_ = 'any' | 'chapter' | 'here'
@@ -152,22 +157,79 @@ export function Play({
     return buildBook({ colour: course.colour, chapters })
   }, [chapters, course.colour, targetChapter])
 
+  const startOptions = () => ({
+    courseId: course.id,
+    courseTitle: course.title,
+    book,
+    length,
+    level,
+    startMoves: launch === 'here' && request ? request.moves : [],
+    chapterId: targetChapter ?? undefined,
+    chapterTitle: targetChapter
+      ? chapters.find((entry) => entry.id === targetChapter)?.title
+      : undefined,
+    at: launch === 'here' ? request?.at : undefined,
+  })
+
   const start = async () => {
-    await game.start({
-      courseId: course.id,
-      courseTitle: course.title,
-      book,
-      length,
-      level,
-      startMoves: launch === 'here' && request ? request.moves : [],
-      chapterId: targetChapter ?? undefined,
-      chapterTitle: targetChapter
-        ? chapters.find((entry) => entry.id === targetChapter)?.title
-        : undefined,
-      at: launch === 'here' ? request?.at : undefined,
-    })
+    await game.start(startOptions())
     if (launch === 'here') onRequestUsed()
   }
+
+  /**
+   * What a replayed game is started with, read from the REQUEST and nothing
+   * else.
+   *
+   * Not `startOptions`, and the difference cost a record. The launch options
+   * on this screen are set by an effect when a request arrives, so during the
+   * render that effect belongs to they still hold the previous values: a
+   * replay reading them got `at: undefined`, minted a fresh identity, and
+   * wrote a second record for a game it was only supposed to be reading.
+   * Everything here comes from the request, which is right at the moment it
+   * is read.
+   *
+   * Always uncapped: the game has already run past any length that applied.
+   */
+  const replayOptions = (from: PlayRequest) => {
+    const chapter = from.chapterOnly
+      ? chapters.find((entry) => entry.id === from.chapterId)
+      : undefined
+    return {
+      courseId: course.id,
+      courseTitle: course.title,
+      book: buildBook({ colour: course.colour, chapters: chapter ? [chapter] : chapters }),
+      length: 'full' as GameLength,
+      level: from.level ?? level,
+      startMoves: from.moves,
+      chapterId: chapter?.id,
+      chapterTitle: chapter?.title,
+      at: from.at,
+    }
+  }
+
+  /**
+   * Replay: start the recorded game and review it without being asked.
+   *
+   * The ref is what stops it firing twice. `start` and `finish` both change
+   * provider state, so this effect reruns while it is still running, and a
+   * second run would start a second game over the first. Keyed by the
+   * record's identity, so a different game replays and the same one does not
+   * replay again.
+   */
+  const replayFired = useRef<string | null>(null)
+  useEffect(() => {
+    const wanted = request?.reviewAtOnce ? request.at ?? 'once' : null
+    if (!wanted || !request || replayFired.current === wanted) return
+    replayFired.current = wanted
+    void (async () => {
+      await game.start(replayOptions(request))
+      onRequestUsed()
+      await game.finish()
+    })()
+    // Everything it needs is read from the request at the moment it runs, so
+    // this fires on the arrival of one and on nothing else.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [request])
 
   const { session, report, scanning, thinking, engineError, evaluations } = game
   const playBook = game.book ?? book
@@ -216,6 +278,16 @@ export function Play({
       at: game.recordedAt ?? new Date().toISOString(),
     })
   }, [game.courseTitle, game.level, game.recordedAt, report, session])
+
+  // Built once, so the arrows under the board and anything else that walks
+  // the game are driven by the same object rather than two copies of it.
+  const replayControls: ReplayControls = {
+    ply,
+    count: atEnd,
+    onJump: (movePly: number) => step(plyBeforeMove(movePly)),
+    onBack: () => step(ply - 1),
+    onForward: () => step(ply + 1),
+  }
 
   const replayed = report ? positionAtPly(moves, ply) : null
   const shown = replayed ?? session?.fen ?? ''
@@ -298,7 +370,7 @@ export function Play({
           <select value={level} onChange={(event) => setLevel(Number(event.target.value))}>
             {allProfiles().map((profile) => (
               <option key={profile.level} value={profile.level}>
-                {profile.level}. {profile.label}
+                {levelName(profile.level)}
               </option>
             ))}
           </select>
@@ -327,7 +399,7 @@ export function Play({
     <div className="play">
       <PlayHead
         session={session}
-        opening={openingLine(game.courseTitle, game.chapterTitle)}
+        opening={openingLine(game.courseTitle, game.chapterTitle, game.level)}
         opponentColour={playBook.opponentColour}
         thinking={thinking}
         reviewed={report !== null}
@@ -364,6 +436,7 @@ export function Play({
             thinking={thinking}
             reviewed={report !== null}
             canHint={game.canHint}
+            replay={report ? replayControls : null}
             onNew={game.reset}
             onUndo={game.undo}
             onRedo={game.redo}
@@ -388,13 +461,7 @@ export function Play({
               report={report}
               opponentColour={playBook.opponentColour}
               pgn={pgn}
-              replay={{
-                ply,
-                count: atEnd,
-                onJump: (movePly: number) => step(plyBeforeMove(movePly)),
-                onBack: () => step(ply - 1),
-                onForward: () => step(ply + 1),
-              }}
+              replay={replayControls}
             />
           ) : (
             <PlayActions
@@ -413,22 +480,28 @@ export function Play({
 }
 
 /**
- * What the game is, in one line: the course it was started in, and the chapter
- * it is sparring against when it has one.
+ * What the game is, in one line: the course it was started in, the chapter it
+ * is sparring against when it has one, and the strength it is being played at.
  *
  * It is here because the Course dropdown no longer waits for the game. A game
  * belongs to the course it was started in and is judged against that course's
  * repertoire, so with the header free to name another one, the game has to say
  * which it is. The titles come from the game itself, captured when it started.
+ *
+ * The level is here because the report and the Progress list both name it, and
+ * the screen the game is actually played on should not be the one place that
+ * does not.
  */
 function openingLine(
   courseTitle: string | null,
   chapterTitle: string | null,
+  level: number | null,
 ): string | null {
   if (!courseTitle) return null
-  return chapterTitle
-    ? `Opening: ${courseTitle}, sparring against ${chapterTitle}`
-    : `Opening: ${courseTitle}`
+  const parts = [`Opening: ${courseTitle}`]
+  if (chapterTitle) parts.push(`sparring against ${chapterTitle}`)
+  if (level !== null) parts.push(`against ${levelName(level)}`)
+  return parts.join(', ')
 }
 
 /**
@@ -504,6 +577,7 @@ export function PlayControls({
   thinking,
   reviewed,
   canHint,
+  replay,
   onNew,
   onUndo,
   onRedo,
@@ -513,6 +587,8 @@ export function PlayControls({
   thinking: boolean
   reviewed: boolean
   canHint: boolean
+  /** The stepping arrows, once there is a reviewed game to walk. */
+  replay: ReplayControls | null
   onNew: () => void
   onUndo: () => void
   onRedo: () => void
@@ -533,6 +609,34 @@ export function PlayControls({
       <button type="button" onClick={onHint} disabled={!canHint}>
         Hint
       </button>
+      {/* Only while there is a game to walk. `auto` on this group is what
+          puts it at the board's right edge, so the row spans the board
+          exactly. An arrow is not a name, so each carries a written one for a
+          screen reader and for the tooltip, the same as Study's. */}
+      {replay ? (
+        <div className="play-steps">
+          <button
+            type="button"
+            className="step-arrow"
+            onClick={replay.onBack}
+            disabled={replay.ply === 0}
+            aria-label="Back one move"
+            title="Back one move"
+          >
+            &#8592;
+          </button>
+          <button
+            type="button"
+            className="step-arrow"
+            onClick={replay.onForward}
+            disabled={replay.ply >= replay.count}
+            aria-label="Forward one move"
+            title="Forward one move"
+          >
+            &#8594;
+          </button>
+        </div>
+      ) : null}
     </div>
   )
 }
@@ -714,33 +818,7 @@ export function Report({
   const deviationPly = report.deviation.ply
   return (
     <div className="report">
-      <header className="report-head">
-        <h3>The report</h3>
-        {/* An arrow is not a name, so each one carries a written one for a
-            screen reader and for the tooltip, the same as Study's. */}
-        <div className="report-steps">
-          <button
-            type="button"
-            className="step-arrow"
-            onClick={replay.onBack}
-            disabled={replay.ply === 0}
-            aria-label="Back one move"
-            title="Back one move"
-          >
-            &#8592;
-          </button>
-          <button
-            type="button"
-            className="step-arrow"
-            onClick={replay.onForward}
-            disabled={replay.ply >= replay.count}
-            aria-label="Forward one move"
-            title="Forward one move"
-          >
-            &#8594;
-          </button>
-        </div>
-      </header>
+      <h3>The report</h3>
 
       <h4>The repertoire</h4>
       {deviationPly === undefined ? (

@@ -118,6 +118,21 @@
   margin-left: 44px;
 }
 
+/* The row spans exactly the board: the buttons from its left edge, the two
+   stepping arrows ending at its right. `auto` on the arrows is what pushes
+   them there, so the row needs no width of its own. */
+.play-controls .play-steps {
+  margin-left: auto;
+  display: flex;
+  gap: 6px;
+}
+
+.play-controls .step-arrow {
+  min-width: 38px;
+  line-height: 1.2;
+  text-align: center;
+}
+
 .play-side {
   flex: 1;
   min-width: 300px;
@@ -189,7 +204,10 @@
 
 /* After the review every move is a button. It is styled as the text it
    replaces, because a list of thirty buttons that look like buttons is a
-   wall; the one the board is standing on is the only one that stands out. */
+   wall; the one the board is standing on is the only one that stands out.
+
+   It stands out in --mark, a solid dull green. It used to be --surface, which
+   is a shade of the ground and disappeared into it. */
 .move-step {
   background: none;
   border: none;
@@ -207,7 +225,7 @@
 }
 
 .move-step.here {
-  background: var(--surface);
+  background: var(--mark);
   color: var(--text);
   font-weight: 600;
   padding: 0 4px;
@@ -238,26 +256,6 @@
   align-items: center;
   gap: 10px;
   margin-top: 16px;
-}
-
-.report-head {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-}
-
-.report-steps {
-  margin-left: auto;
-  display: flex;
-  gap: 6px;
-}
-
-/* The same arrows Study uses, and the same size, so they are the same
-   control on both screens. */
-.report-steps .step-arrow {
-  min-width: 38px;
-  line-height: 1.2;
-  text-align: center;
 }
 
 .play-actions {
