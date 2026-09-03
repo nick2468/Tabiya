@@ -3325,3 +3325,24 @@ Gate 24 findings (2026-09-03):
     was cleared afterwards, with the remembered course put back.
 
 - [x] **Review gate 24 passed** (2026-09-03)
+
+## Phase 25 - replay a reviewed game, and copy it out as text
+
+Goal: Nick reviewed a game on 1.6.7 (2026-09-03), doubted the verdict, and had no way to
+look at the game again except a screenshot. No chess content.
+
+Chipped as `chips/phase-25-replay.md`. Once a game is reviewed, the move list and the
+report's slips become a viewer: click a move or a slip, or use the arrow keys, and the
+board and the bar follow from the scan's own numbers. "Copy game" puts the game on the
+clipboard as PGN with the report written in as comments, so a pasted game can be replayed
+against the engine without a screenshot. Version 1.6.8; the bar-alignment fix already on
+main rides in it.
+
+- [ ] 25.1 Replay by click and by arrow key, slips and deviation clickable, bar following.
+- [ ] 25.2 Copy game as PGN with the report as comments, parsing back through `parsePgn`.
+- [ ] 25.3 Version 1.6.8.
+- [ ] 25.4 Proved in the browser build at 1200x980, in both themes.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 25**
