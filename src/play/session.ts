@@ -26,6 +26,11 @@ import type { Colour } from '../model/types'
  * when the game has just ended on the trainee's own move. It cannot go back
  * past where the game started: a game launched from a Study position replays
  * those moves in the constructor and they are the floor.
+ *
+ * The length cap is a FIELD rather than a reading of the options, because a
+ * game that stopped at move 10 can be told to carry on. That is the only thing
+ * `extend` changes: a game that ended by checkmate or a draw has an `outcome`
+ * and stays ended, whatever anyone asks of it.
  */
 
 /** How long a game runs before it stops and reports. */
@@ -72,6 +77,8 @@ export class PlaySession {
   private readonly random: () => number
   /** How many plies the game started with, which undo may not go below. */
   private readonly floor: number
+  /** The move number the game stops after, or null for no limit. */
+  private cap: number | null
   /** What undo took off, latest removed at the top, for redo to put back. */
   private readonly undone: PlayedMove[] = []
   /** How many of the opponent's moves came out of the book. */
@@ -83,6 +90,7 @@ export class PlaySession {
     this.options = options
     this.random = options.random ?? Math.random
     this.chess = new Chess(options.startFen)
+    this.cap = lengthCap(options.length)
     // Replaying the moves that led here keeps the ply numbers honest, so a
     // report on a game started from move 8 still says "move 8".
     for (const san of options.startMoves ?? []) {
@@ -120,10 +128,38 @@ export class PlaySession {
   get status(): SessionStatus {
     if (this.outcome) return 'finished'
     if (this.chess.isGameOver()) return 'finished'
-    const cap = lengthCap(this.options.length)
-    if (cap === null) return 'playing'
+    if (this.cap === null) return 'playing'
     // The cap is reached once both sides have completed that move number.
-    return this.completedFullMoves() >= cap ? 'finished' : 'playing'
+    return this.completedFullMoves() >= this.cap ? 'finished' : 'playing'
+  }
+
+  /**
+   * True when the game has stopped only because it ran out of length.
+   *
+   * The distinction the screen needs: a game that reached its cap can be told
+   * to carry on, and a game that ended in a checkmate cannot.
+   */
+  finishedByCap(): boolean {
+    if (this.outcome || this.chess.isGameOver()) return false
+    return this.cap !== null && this.completedFullMoves() >= this.cap
+  }
+
+  /**
+   * Carries a capped game on: five more moves, or as long as it lasts.
+   *
+   * Returns false when there is nothing to extend, which is any game that did
+   * not stop at its cap. A mated game stays mated: `outcome` is not touched
+   * here and `status` reads it first.
+   */
+  extend(by: 5 | 'full'): boolean {
+    if (!this.finishedByCap()) return false
+    this.cap = by === 'full' ? null : this.completedFullMoves() + by
+    return true
+  }
+
+  /** The move number the game currently stops after, for the screen to say. */
+  get lengthLimit(): number | null {
+    return this.cap
   }
 
   /**

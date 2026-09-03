@@ -74,6 +74,14 @@
   color: var(--text-dim);
 }
 
+/* The two ways to carry a capped game on, side by side and above the review
+   button, because reviewing is still the ordinary next step. */
+.play-extend {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
 /* Pushed to the right, so the status line keeps the space beside the heading
    and the three things you can do to the game sit together. */
 .play-head-actions {

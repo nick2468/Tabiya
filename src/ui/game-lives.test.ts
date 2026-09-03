@@ -114,6 +114,7 @@ function game(over: Partial<PlayGame> = {}): PlayGame {
     play: async () => {},
     undo: () => {},
     redo: () => {},
+    extend: async () => {},
     finish: async () => {},
     reset: () => {},
     ...over,

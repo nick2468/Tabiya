@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { Shell } from './App'
 import { Drill, Feedback } from './Drill'
-import { Play, PlayHead, Report } from './Play'
+import { Play, PlayActions, PlayHead, Report } from './Play'
 import { Progress } from './Progress'
 import { Study } from './Study'
 import { CatalogContext, type Catalog } from './catalog-context'
@@ -146,6 +146,27 @@ const gameInProgress = new PlaySession({
   length: 'move15',
 })
 
+/**
+ * A game that stopped because it ran out of length, which is the only state
+ * the two extend buttons exist in.
+ *
+ * Twenty plies of a real London line, replayed by the constructor, against a
+ * cap of ten. Played rather than faked: if the moves stop being legal this
+ * throws on import, which is louder than a test that quietly stops covering
+ * anything.
+ */
+const cappedGame = new PlaySession({
+  book: buildBook({ colour: course.colour, chapters: course.chapters }),
+  engine: stubEngine,
+  profile: strengthProfile(4),
+  length: 'move10',
+  startMoves: [
+    'd4', 'd5', 'Bf4', 'Nf6', 'e3', 'e6', 'Nf3', 'Be7', 'Bd3', 'O-O',
+    'Nbd2', 'c5', 'c3', 'Nc6', 'O-O', 'b6', 'Ne5', 'Bb7', 'Bg3', 'Nh5',
+  ],
+})
+if (!cappedGame.finishedByCap()) throw new Error('the capped fixture did not reach its cap')
+
 const reportFixture: GameReport = {
   deviation: { kind: 'stayed-in-book' },
   slips: [],
@@ -172,6 +193,16 @@ const screens: Record<Screen, string> = {
         onUndo: () => {},
         onRedo: () => {},
         onNew: () => {},
+      }),
+    ) +
+    renderToStaticMarkup(
+      createElement(PlayActions, {
+        session: cappedGame,
+        scanning: null,
+        thinking: false,
+        engineError: null,
+        onExtend: () => {},
+        onFinish: () => {},
       }),
     ) +
     renderToStaticMarkup(

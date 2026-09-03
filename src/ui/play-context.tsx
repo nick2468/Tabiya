@@ -72,6 +72,7 @@ export interface PlayGame {
   play: (from: string, to: string) => Promise<void>
   undo: () => void
   redo: () => void
+  extend: (by: 5 | 'full') => Promise<void>
   finish: () => Promise<void>
   reset: () => void
 }
@@ -254,6 +255,40 @@ function usePlayValue(): PlayGame {
     if (running.redo()) refresh()
   }, [refresh, report, thinking])
 
+  /**
+   * Carries a game on past its length, and lets the opponent move if it is
+   * their turn.
+   *
+   * It usually is. A cap is reached after both sides have completed the move
+   * number, so the trainee is to move; but a game started from a Study
+   * position begins mid-move-pair, so the opponent can be the one waiting.
+   * That is the same case `start` handles, for the same reason.
+   */
+  const extend = useCallback(
+    async (by: 5 | 'full') => {
+      const running = sessionRef.current
+      const setup = setupRef.current
+      if (!running || !setup || thinking || report) return
+      if (!running.extend(by)) return
+      refresh()
+      setThinking(true)
+      try {
+        const live = engineRef.current
+        if (!running.studentToMove && !running.isFinished()) {
+          await running.playOpponent()
+          refresh()
+          if (live) await evaluate(live, running.fen, setup.level)
+          refresh()
+        }
+      } catch (error) {
+        setEngineError(asMessage(error))
+      } finally {
+        setThinking(false)
+      }
+    },
+    [evaluate, refresh, report, thinking],
+  )
+
   const finish = useCallback(async () => {
     const running = sessionRef.current
     const setup = setupRef.current
@@ -340,6 +375,7 @@ function usePlayValue(): PlayGame {
     play,
     undo,
     redo,
+    extend,
     finish,
     reset,
   }

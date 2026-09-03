@@ -249,22 +249,14 @@ export function Play({
           {report ? (
             <Report report={report} opponentColour={playBook.opponentColour} />
           ) : (
-            <div className="play-actions">
-              {finished ? (
-                <p className="notice">
-                  {session.outcome ?? 'The game has reached its length.'} Review it to see
-                  where you left the repertoire and what it cost.
-                </p>
-              ) : null}
-              <button type="button" className="primary" onClick={game.finish} disabled={thinking}>
-                {scanning
-                  ? `Scanning ${scanning.done} of ${scanning.total}...`
-                  : finished
-                    ? 'Review the game'
-                    : 'Stop and review'}
-              </button>
-              {engineError ? <p className="notice bad">{engineError}</p> : null}
-            </div>
+            <PlayActions
+              session={session}
+              scanning={scanning}
+              thinking={thinking}
+              engineError={engineError}
+              onExtend={game.extend}
+              onFinish={game.finish}
+            />
           )}
         </div>
       </div>
@@ -359,6 +351,65 @@ export function PlayHead({
         </button>
       </div>
     </header>
+  )
+}
+
+/**
+ * What you can do with a game that is not yet a report: review it, and, when
+ * it stopped only because it ran out of length, carry it on.
+ *
+ * The two extend buttons appear only for a game finished BY THE CAP. A game
+ * that ended in a checkmate has nowhere to carry on to, and offering the
+ * button anyway would be a control that does nothing.
+ *
+ * A component rather than markup inside the screen, for the same reason the
+ * header is one: the help names both buttons and the help test walks the
+ * start screen, so it needs something it can render with a finished session.
+ */
+export function PlayActions({
+  session,
+  scanning,
+  thinking,
+  engineError,
+  onExtend,
+  onFinish,
+}: {
+  session: PlaySession
+  scanning: { done: number; total: number } | null
+  thinking: boolean
+  engineError: string | null
+  onExtend: (by: 5 | 'full') => void
+  onFinish: () => void
+}) {
+  const finished = session.isFinished()
+  const capped = session.finishedByCap()
+  return (
+    <div className="play-actions">
+      {finished ? (
+        <p className="notice">
+          {session.outcome ?? 'The game has reached its length.'} Review it to see where
+          you left the repertoire and what it cost.
+        </p>
+      ) : null}
+      {capped ? (
+        <div className="play-extend">
+          <button type="button" onClick={() => onExtend(5)} disabled={thinking}>
+            Play 5 more moves
+          </button>
+          <button type="button" onClick={() => onExtend('full')} disabled={thinking}>
+            Play to the end
+          </button>
+        </div>
+      ) : null}
+      <button type="button" className="primary" onClick={onFinish} disabled={thinking}>
+        {scanning
+          ? `Scanning ${scanning.done} of ${scanning.total}...`
+          : finished
+            ? 'Review the game'
+            : 'Stop and review'}
+      </button>
+      {engineError ? <p className="notice bad">{engineError}</p> : null}
+    </div>
   )
 }
 

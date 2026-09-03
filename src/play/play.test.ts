@@ -17,7 +17,7 @@ import {
   verdictInWords,
   type PlayedMove,
 } from './report'
-import { GAME_LENGTHS, PlaySession, lengthCap, scanGame } from './session'
+import { GAME_LENGTHS, PlaySession, lengthCap, scanGame, type GameLength } from './session'
 import { blackCourse, loadFixture as load } from '../test/fixtures'
 import { positionKey } from '../model/position'
 import { strengthProfile } from '../engine'
@@ -475,6 +475,86 @@ describe('PlaySession', () => {
     await mated.playOpponent()
     expect(mated.outcome).toBe('You were checkmated')
     expect(mated.status).toBe('finished')
+  })
+})
+
+describe('carrying a capped game on', () => {
+  const book = buildBook({ colour: 'white', chapters: [chapter] })
+  const profile = strengthProfile(4)
+
+  /** A game played out to its cap, whatever is legal. */
+  const toTheCap = async (length: GameLength) => {
+    const session = new PlaySession({ book, engine: fakeEngine(), profile, length, random: () => 0 })
+    while (session.status === 'playing') {
+      const legal = session.chess.moves()
+      if (session.studentToMove) session.playStudent(legal[0])
+      else await session.playOpponent()
+    }
+    return session
+  }
+
+  it('knows a game that stopped at its length from one that ended', async () => {
+    const capped = await toTheCap('move10')
+    expect(capped.moves).toHaveLength(20)
+    expect(capped.finishedByCap()).toBe(true)
+    expect(capped.lengthLimit).toBe(10)
+  })
+
+  it('gives five more moves, and stops again when they are played', async () => {
+    const session = await toTheCap('move10')
+    expect(session.extend(5)).toBe(true)
+    expect(session.lengthLimit).toBe(15)
+    expect(session.status).toBe('playing')
+
+    while (session.status === 'playing') {
+      const legal = session.chess.moves()
+      if (session.studentToMove) session.playStudent(legal[0])
+      else await session.playOpponent()
+    }
+    expect(session.moves).toHaveLength(30)
+    expect(session.finishedByCap()).toBe(true)
+    // And it can be told to carry on again. There is no limit on extending.
+    expect(session.extend(5)).toBe(true)
+    expect(session.lengthLimit).toBe(20)
+  })
+
+  it('takes the cap off altogether for a full game', async () => {
+    const session = await toTheCap('move15')
+    expect(session.extend('full')).toBe(true)
+    expect(session.lengthLimit).toBeNull()
+    expect(session.status).toBe('playing')
+  })
+
+  it('does nothing to a game that has not reached its cap', () => {
+    const session = new PlaySession({ book, engine: fakeEngine(), profile, length: 'move10' })
+    expect(session.finishedByCap()).toBe(false)
+    expect(session.extend(5)).toBe(false)
+    expect(session.lengthLimit).toBe(10)
+  })
+
+  it('does nothing to a game that ended in a checkmate', async () => {
+    const mated = new PlaySession({
+      book: buildBook(blackCourse()),
+      engine: fakeEngine(),
+      profile,
+      length: 'move10',
+      startMoves: ['f3', 'e5', 'g4'],
+      random: () => 0,
+    })
+    expect(mated.playStudent('Qh4#')).toBe(true)
+    expect(mated.outcome).toBe('You won by checkmate')
+    expect(mated.finishedByCap()).toBe(false)
+    expect(mated.extend('full')).toBe(false)
+    // The outcome is untouched, and status reads it before it reads the cap.
+    expect(mated.outcome).toBe('You won by checkmate')
+    expect(mated.status).toBe('finished')
+  })
+
+  it('leaves a full game alone, since it never had a cap', () => {
+    const session = new PlaySession({ book, engine: fakeEngine(), profile, length: 'full' })
+    expect(session.lengthLimit).toBeNull()
+    expect(session.finishedByCap()).toBe(false)
+    expect(session.extend(5)).toBe(false)
   })
 })
 
