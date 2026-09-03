@@ -3208,3 +3208,28 @@ Gate 23 findings (2026-09-03):
     the one reviewed game from this gate and was cleared afterwards.
 
 - [x] **Review gate 23 passed** (2026-09-03)
+
+## Phase 24 - a game that names its own course, a longer game on request, lines played, and two gaps
+
+Goal: Nick's five findings after installing 1.6.6 (2026-09-03). No chess content.
+
+Chipped as `chips/phase-24-play-freedom.md`. The course switcher is never greyed for a
+game: Nick overruled the phase 23 decision because he wants to study, drill and check
+progress on other openings while a game is open. The game names its own course and
+chapter above the board instead ("Opening: The London System"). A capped game offers
+"Play 5 more moves" and "Play to the end". Each game records its moves, and Progress gains
+a "Lines played" section counting the lines a game never left. The dropdown-to-heading
+gap drops from 24px to 12px. Version 1.6.7.
+
+- [ ] 24.1 Switcher free during a game; the game names its course; no reset on a header
+  change; Help and SPEC follow.
+- [ ] 24.2 `extend` on the session with tests; the two buttons on a game finished by cap.
+- [ ] 24.3 `sans` on each play record; line matching in stats with tests; "Lines played"
+  on Progress.
+- [ ] 24.4 Dropdown-to-heading gap at 12px.
+- [ ] 24.5 Version 1.6.7.
+- [ ] 24.6 Proved in the browser build at 1200x980, in both themes.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 24**
