@@ -209,6 +209,7 @@ const screens: Record<Screen, string> = {
       createElement(Report, {
         report: reportFixture,
         opponentColour: 'black' as const,
+        pgn: '[Event "Repertoire Trainer"]',
         replay: { ply: 2, count: 4, onJump: () => {}, onBack: () => {}, onForward: () => {} },
       }),
     ),

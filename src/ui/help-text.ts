@@ -286,6 +286,10 @@ export const HELP_SECTIONS: HelpSection[] = [
       'your moves in Your moves, or the sentence about where you left the repertoire, puts',
       'the board on the position that move was played FROM, which is where you can see what',
       'else was on offer.',
+      '',
+      'Copy game puts the whole game on the clipboard as text, in the PGN format every',
+      'chess program reads, with the report written in as comments. Paste it into a chat or',
+      'a file and whoever reads it can play through the game themselves.',
     ].join('\n'),
   },
   {
@@ -397,6 +401,7 @@ export const HELP_CONTROLS: HelpControl[] = [
   { name: 'How long', screen: 'play' },
   { name: 'How strong', screen: 'play' },
   { name: 'Back one move', screen: 'play' },
+  { name: 'Copy game', screen: 'play' },
   { name: 'Forward one move', screen: 'play' },
   { name: 'Play 5 more moves', screen: 'play' },
   { name: 'Play to the end', screen: 'play' },

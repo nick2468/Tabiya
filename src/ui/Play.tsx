@@ -18,6 +18,7 @@ import {
   evalBarLayout,
   evalShare,
   fullMove,
+  gameToPgn,
   moveAtPly,
   plyBeforeMove,
   positionAtPly,
@@ -160,6 +161,19 @@ export function Play({
   // What the board is actually showing. During a game it is the game; during a
   // review it is wherever the reader has walked to, which is the same position
   // whenever they have not walked anywhere.
+  // The game as text, built once per report rather than per keystroke.
+  const pgn = useMemo(() => {
+    if (!report || !session) return ''
+    return gameToPgn({
+      moves: session.moves,
+      report,
+      courseTitle: game.courseTitle ?? 'Repertoire Trainer',
+      studentColour: session.studentColour,
+      level: game.level ?? 0,
+      at: game.recordedAt ?? new Date().toISOString(),
+    })
+  }, [game.courseTitle, game.level, game.recordedAt, report, session])
+
   const replayed = report ? positionAtPly(moves, ply) : null
   const shown = replayed ?? session?.fen ?? ''
   const highlight = report
@@ -309,6 +323,7 @@ export function Play({
             <Report
               report={report}
               opponentColour={playBook.opponentColour}
+              pgn={pgn}
               replay={{
                 ply,
                 count: atEnd,
@@ -567,10 +582,13 @@ export interface ReplayControls {
 export function Report({
   report,
   opponentColour,
+  pgn,
   replay,
 }: {
   report: GameReport
   opponentColour: Colour
+  /** The whole game as text, for the copy button. */
+  pgn: string
   replay: ReplayControls
 }) {
   const deviationPly = report.deviation.ply
@@ -643,6 +661,47 @@ export function Report({
       <p>{report.verdict}</p>
       {report.finalEval !== undefined ? <EvalBar pawns={report.finalEval} /> : null}
       {report.outcome ? <p className="hint">{report.outcome}</p> : null}
+
+      <CopyGame text={pgn} />
+    </div>
+  )
+}
+
+/**
+ * The game on the clipboard, as PGN with the report written in.
+ *
+ * The point is that a game can leave this app as text: pasted into a chat, a
+ * file, or another engine, and played through by whoever reads it. A
+ * screenshot was the only way before, and nobody can replay a screenshot.
+ *
+ * The same `navigator.clipboard` in both builds. The installed app is WebView2
+ * and has it, which is why there is no Tauri plugin here; a failure says so
+ * rather than leaving a button that looks as though it worked.
+ */
+function CopyGame({ text }: { text: string }) {
+  const [said, setSaid] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (said === null) return
+    const timer = setTimeout(() => setSaid(null), 2500)
+    return () => clearTimeout(timer)
+  }, [said])
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setSaid('Copied')
+    } catch (error) {
+      setSaid(`That could not be copied: ${error instanceof Error ? error.message : String(error)}`)
+    }
+  }
+
+  return (
+    <div className="copy-game">
+      <button type="button" onClick={() => void copy()}>
+        Copy game
+      </button>
+      {said ? <span className="hint">{said}</span> : null}
     </div>
   )
 }

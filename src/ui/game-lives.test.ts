@@ -104,6 +104,8 @@ function game(over: Partial<PlayGame> = {}): PlayGame {
     courseId: null,
     courseTitle: null,
     chapterTitle: null,
+    level: null,
+    recordedAt: null,
     report: null,
     scanning: null,
     evaluations: new Map(),

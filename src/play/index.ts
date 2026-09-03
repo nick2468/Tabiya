@@ -17,6 +17,7 @@ export {
   shownEvaluation,
   type EvalBarLayout,
 } from './evalbar'
+export { gameToPgn, pgnDate, pgnResult, type GameForPgn } from './game-pgn'
 export {
   clampPly,
   moveAtPly,

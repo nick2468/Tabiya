@@ -61,6 +61,14 @@ export interface PlayGame {
   courseTitle: string | null
   /** And the chapter, for a game sparring against one. */
   chapterTitle: string | null
+  /** The strength the engine is playing at. */
+  level: number | null
+  /**
+   * When the game was recorded, once it has been. It is the record's identity
+   * as well as its date, which matters the moment a game can be reviewed more
+   * than once.
+   */
+  recordedAt: string | null
   report: GameReport | null
   scanning: { done: number; total: number } | null
   evaluations: Map<string, number>
@@ -106,6 +114,7 @@ function usePlayValue(): PlayGame {
   // What the game was started with. In state as well as in a ref, because the
   // screen renders from it and a ref read during render would not update.
   const [setup, setSetup] = useState<StartOptions | null>(null)
+  const [recordedAt, setRecordedAt] = useState<string | null>(null)
   // The session is a mutable object, so playing, undoing and redoing change
   // nothing React can see. Bumping this counter is what says something has
   // happened. The value below is rebuilt on every render, so that is all it
@@ -188,6 +197,7 @@ function usePlayValue(): PlayGame {
         })
         setupRef.current = options
         setSetup(options)
+        setRecordedAt(null)
         sessionRef.current = fresh
         setSession(fresh)
         // Dev-only handle on the running game, so a browser check can read the
@@ -310,6 +320,8 @@ function usePlayValue(): PlayGame {
       )
       evaluationsRef.current = scanned
       setEvaluations(scanned)
+      const at = new Date().toISOString()
+      setRecordedAt(at)
       const outcome = running.outcome ?? `Stopped after move ${fullMove(running.moves.length - 1)}`
       const built = buildReport(running.moves, setup.book, scanned, outcome)
       setReport(built)
@@ -322,12 +334,12 @@ function usePlayValue(): PlayGame {
             ? fullMove(built.deviation.ply ?? 0)
             : undefined,
         moves: fullMove(Math.max(0, running.moves.length - 1)),
+        at,
         // The game record, written once, here. `session.moves` holds every SAN
         // including any replayed by the constructor, so a game started from a
         // Study position is still matched from the chapter root.
         sans: running.moves.map((move) => move.san),
         level: setup.level,
-        at: new Date().toISOString(),
       })
     } catch (error) {
       setEngineError(asMessage(error))
@@ -341,6 +353,7 @@ function usePlayValue(): PlayGame {
     sessionRef.current = null
     setupRef.current = null
     setSetup(null)
+    setRecordedAt(null)
     setSession(null)
     setReport(null)
     setScanning(null)
@@ -369,6 +382,8 @@ function usePlayValue(): PlayGame {
     courseId: setup?.courseId ?? null,
     courseTitle: setup?.courseTitle ?? null,
     chapterTitle: setup?.chapterTitle ?? null,
+    level: setup?.level ?? null,
+    recordedAt,
     report,
     scanning,
     evaluations,

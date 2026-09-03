@@ -3339,7 +3339,7 @@ against the engine without a screenshot. Version 1.6.8; the bar-alignment fix al
 main rides in it.
 
 - [x] 25.1 Replay by click and by arrow key, slips and deviation clickable, bar following.
-- [ ] 25.2 Copy game as PGN with the report as comments, parsing back through `parsePgn`.
+- [x] 25.2 Copy game as PGN with the report as comments, parsing back through `parsePgn`.
 - [ ] 25.5 Keep playing from a reviewed game (addendum `chips/phase-25-addendum.md`):
   resume from the final position, extend if capped, one record per game.
 - [ ] 25.6 Play on from a recorded game, from the Progress screen, keeping the record's
