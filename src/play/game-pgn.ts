@@ -87,6 +87,12 @@ export function gameToPgn(game: GameForPgn): string {
     report.deviation.kind === 'stayed-in-book' ? undefined : report.deviation.ply
 
   const out = new Movetext()
+  // Before the first move, which is where PGN puts a comment about the game
+  // rather than about a position. A game played with help is a different game
+  // from one played without it, and anyone reading this should know which.
+  if (report.hints) {
+    out.comment(`Played with ${report.hints} ${report.hints === 1 ? 'hint' : 'hints'}.`)
+  }
   for (const move of moves) {
     out.move(move.san, move.ply)
     const notes: string[] = []

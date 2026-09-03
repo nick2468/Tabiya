@@ -81,6 +81,8 @@ export interface GameReport {
   finalEval?: number
   /** How the game ended, when it ended by itself. */
   outcome?: string
+  /** How many hints were used, when any were. */
+  hints?: number
 }
 
 /**
@@ -225,6 +227,7 @@ export function buildReport(
   book: Book,
   evaluations: Evaluations,
   outcome?: string,
+  hints = 0,
 ): GameReport {
   const last = moves.at(-1)
   const finalEval = last ? evaluations.get(positionKey(last.after)) : undefined
@@ -234,5 +237,8 @@ export function buildReport(
     verdict: finalEval === undefined ? 'Not scanned' : verdictInWords(finalEval),
     finalEval,
     outcome,
+    // Left off entirely when there were none, so a clean game carries no
+    // mention of hints anywhere: not in the report, not in the PGN.
+    ...(hints > 0 ? { hints } : {}),
   }
 }

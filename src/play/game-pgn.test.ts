@@ -116,6 +116,24 @@ describe('gameToPgn', () => {
   })
 })
 
+describe('hints in the text', () => {
+  it('says so before the first move, where a note about the game belongs', () => {
+    const helped = gameToPgn({ ...game, report: { ...report, hints: 2 } })
+    expect(parsePgn(helped).games[0].intro).toBe('Played with 2 hints.')
+    expect(parsePgn(helped).errors).toEqual([])
+  })
+
+  it('counts one properly', () => {
+    const helped = gameToPgn({ ...game, report: { ...report, hints: 1 } })
+    expect(parsePgn(helped).games[0].intro).toBe('Played with 1 hint.')
+  })
+
+  it('says nothing at all about a game played without them', () => {
+    expect(parsePgn(gameToPgn(game)).games[0].intro).toBeNull()
+    expect(gameToPgn(game)).not.toContain('hint')
+  })
+})
+
 describe('the result', () => {
   it('is a star for a game that was stopped rather than finished', () => {
     expect(pgnResult(undefined, 'white')).toBe('*')

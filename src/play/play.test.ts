@@ -712,6 +712,22 @@ describe('scanGame', () => {
   })
 })
 
+describe('hints in the report', () => {
+  const book = buildBook({ colour: 'white', chapters: [chapter] })
+
+  it('carries the count when there was one', () => {
+    const moves = playedMoves(['d4', 'd5'])
+    const report = buildReport(moves, book, new Map(), 'Stopped at move 1', 2)
+    expect(report.hints).toBe(2)
+  })
+
+  it('says nothing about hints for a game played without them', () => {
+    const report = buildReport(playedMoves(['d4']), book, new Map(), undefined, 0)
+    expect(report.hints).toBeUndefined()
+    expect('hints' in report).toBe(false)
+  })
+})
+
 describe('buildReport', () => {
   it('puts the deviation, the slips and the verdict together', () => {
     const book = buildBook({ colour: 'white', chapters: [chapter] })

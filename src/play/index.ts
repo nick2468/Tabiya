@@ -18,6 +18,7 @@ export {
   type EvalBarLayout,
 } from './evalbar'
 export { gameToPgn, pgnDate, pgnResult, type GameForPgn } from './game-pgn'
+export { bookEndedAt, bookHint, engineHint, type Hint } from './hint'
 export {
   clampPly,
   moveAtPly,

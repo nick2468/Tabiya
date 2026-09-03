@@ -107,6 +107,12 @@ export interface PlayRecord {
    * rewriting to be read - a missing list simply counts for nothing.
    */
   sans?: string[]
+  /**
+   * How many hints were used. Optional like `sans`, and for the same reason:
+   * games recorded before phase 26 have none and there is nothing to
+   * reconstruct. Nothing counts games by it; the report and the PGN say it.
+   */
+  hints?: number
 }
 
 export function emptyProgress(): ProgressState {

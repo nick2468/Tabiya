@@ -3457,11 +3457,11 @@ note while in book and the engine's move once out of it, and the report counts h
 The move list becomes a narrow column at board height with a thin scrollbar. Version
 1.6.9.
 
-- [ ] 26.1 Measure the bar against the inner board; 416 if the squares end short.
-- [ ] 26.2 New game, Undo, Redo as buttons in a row under the board.
-- [ ] 26.3 Hint: book move with note, else the engine's move; counted in the report and
+- [x] 26.1 Measure the bar against the inner board; 416 if the squares end short.
+- [x] 26.2 New game, Undo, Redo as buttons in a row under the board.
+- [x] 26.3 Hint: book move with note, else the engine's move; counted in the report and
   the PGN; `hints` on the record.
-- [ ] 26.4 Move list as a narrow column at board height, thin scrollbar, replay marker
+- [x] 26.4 Move list as a narrow column at board height, thin scrollbar, replay marker
   kept in view.
 - [ ] 26.5 Version 1.6.9.
 - [ ] 26.6 Proved in the browser build at 1200x980, in both themes, with the measurements.

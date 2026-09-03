@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Board } from './Board'
+import { BOARD_SIZE } from './board-size'
 import { HelpAsk, HelpSaid } from './Help'
 import { usePlay } from './play-context'
 import { useProgress } from './progress-context'
 
 import { strengthProfile, allProfiles } from '../engine'
 import { squaresForSan } from '../model/grade'
+import type { Shape } from '../model/types'
 import { legalDests, sideToMove } from '../model/position'
 import { colourName, type Colour, type LoadedCourse } from '../model/types'
 import {
@@ -26,6 +28,7 @@ import {
   verdictInWords,
   type GameLength,
   type GameReport,
+  type Hint,
   type PlayedMove,
 } from '../play'
 import './play.css'
@@ -321,37 +324,56 @@ export function Play({
         thinking={thinking}
         reviewed={report !== null}
         canResume={game.canResume}
-        onUndo={game.undo}
-        onRedo={game.redo}
         onResume={game.resume}
-        onNew={game.reset}
       />
 
       <div className="play-body">
-        {/* One box for the bar and the board, so the bar is stretched to the
-            board's own height rather than given a height of its own. Nick saw
-            it a few pixels long at the bottom, which reads as a touch better
-            for Black than the number is. */}
-        <div className="play-board">
-          <LiveEvalBar
-            pawns={shownEvaluation(shown, session.moves, evaluations)}
-            studentColour={session.studentColour}
-          />
+        {/* The board column: the bar and the board in one box, so the bar is
+            stretched to the board's own height rather than given a height of
+            its own, and the controls directly under them. */}
+        <div className="play-column">
+          <div className="play-board">
+            <LiveEvalBar
+              pawns={shownEvaluation(shown, session.moves, evaluations)}
+              studentColour={session.studentColour}
+            />
 
-          <Board
-            fen={shown}
-            orientation={session.studentColour}
-            turnColor={sideToMove(shown)}
-            movableColor={finished || thinking || report ? undefined : session.studentColour}
-            dests={finished || thinking || report ? undefined : legalDests(session.fen)}
-            lastMove={highlight}
-            onMove={game.play}
-            size={420}
+            <Board
+              fen={shown}
+              orientation={session.studentColour}
+              turnColor={sideToMove(shown)}
+              movableColor={finished || thinking || report ? undefined : session.studentColour}
+              dests={finished || thinking || report ? undefined : legalDests(session.fen)}
+              lastMove={highlight}
+              shapes={hintShapes(game.hint, shown)}
+              onMove={game.play}
+              size={BOARD_SIZE}
+            />
+          </div>
+
+          <PlayControls
+            session={session}
+            thinking={thinking}
+            reviewed={report !== null}
+            canHint={game.canHint}
+            onNew={game.reset}
+            onUndo={game.undo}
+            onRedo={game.redo}
+            onHint={game.askHint}
           />
         </div>
 
+        <MoveList
+          session={session}
+          activePly={report ? ply : null}
+          onSelect={step}
+          height={BOARD_SIZE}
+        />
+
         <div className="play-side">
-          <MoveList session={session} activePly={report ? ply : null} onSelect={step} />
+          {game.hint ? (
+            <p className={`hint-said ${game.hint.source}`}>{game.hint.text}</p>
+          ) : null}
 
           {report ? (
             <Report
@@ -410,10 +432,11 @@ function openingLine(
  * cannot reach is a control the help can start lying about, so this takes a
  * session and the test builds one on the fake engine.
  *
- * Undo and Redo go dead while the engine is thinking and once the report
- * exists. Keep playing is what brings them back: a reviewed game that merely
- * stopped can be carried on, and one that ended in a checkmate or a draw
- * cannot, so the button is not there to be pressed.
+ * Keep playing is the only button left here. Phase 26 moved New game, Undo
+ * and Redo under the board, where a hand already is: they are things you do to
+ * the game while playing it, and they were text links in a corner. Keep
+ * playing is not one of those - it is what you press when the game is over -
+ * so it stays with the status that says the game is over.
  */
 export function PlayHead({
   session,
@@ -422,10 +445,7 @@ export function PlayHead({
   thinking,
   reviewed,
   canResume,
-  onUndo,
-  onRedo,
   onResume,
-  onNew,
 }: {
   session: PlaySession
   opening: string | null
@@ -433,13 +453,9 @@ export function PlayHead({
   thinking: boolean
   reviewed: boolean
   canResume: boolean
-  onUndo: () => void
-  onRedo: () => void
   onResume: () => void
-  onNew: () => void
 }) {
   const finished = session.isFinished()
-  const frozen = thinking || reviewed
   return (
     <header className="play-head">
       <h2>Play</h2>
@@ -453,34 +469,72 @@ export function PlayHead({
               ? `${colourName(opponentColour)} is thinking...`
               : 'Your move'}
       </p>
-      <div className="play-head-actions">
-        <button
-          type="button"
-          className="link"
-          onClick={onUndo}
-          disabled={frozen || !session.canUndo()}
-        >
-          Undo
-        </button>
-        <button
-          type="button"
-          className="link"
-          onClick={onRedo}
-          disabled={frozen || !session.canRedo()}
-        >
-          Redo
-        </button>
-        {canResume ? (
+      {canResume ? (
+        <div className="play-head-actions">
           <button type="button" className="link" onClick={onResume}>
             Keep playing
           </button>
-        ) : null}
-        <button type="button" className="link" onClick={onNew}>
-          New game
-        </button>
-      </div>
+        </div>
+      ) : null}
     </header>
   )
+}
+
+/**
+ * The row of buttons under the board.
+ *
+ * Under the board because that is where the hand is, and real buttons because
+ * these do things to the game: New game throws it away, Undo and Redo move it,
+ * Hint answers it. They were text links in the top corner, which read as
+ * navigation rather than as controls.
+ *
+ * New game first, because it is the one you look for; then the two that move
+ * the game; then the one that helps with the position in front of you.
+ */
+export function PlayControls({
+  session,
+  thinking,
+  reviewed,
+  canHint,
+  onNew,
+  onUndo,
+  onRedo,
+  onHint,
+}: {
+  session: PlaySession
+  thinking: boolean
+  reviewed: boolean
+  canHint: boolean
+  onNew: () => void
+  onUndo: () => void
+  onRedo: () => void
+  onHint: () => void
+}) {
+  const frozen = thinking || reviewed
+  return (
+    <div className="play-controls">
+      <button type="button" onClick={onNew}>
+        New game
+      </button>
+      <button type="button" onClick={onUndo} disabled={frozen || !session.canUndo()}>
+        Undo
+      </button>
+      <button type="button" onClick={onRedo} disabled={frozen || !session.canRedo()}>
+        Redo
+      </button>
+      <button type="button" onClick={onHint} disabled={!canHint}>
+        Hint
+      </button>
+    </div>
+  )
+}
+
+/** The hint as an arrow: the repertoire's move in green, the engine's in blue. */
+function hintShapes(hint: Hint | null, fen: string): Shape[] {
+  if (!hint) return []
+  const squares = squaresForSan(fen, hint.san)
+  if (!squares) return []
+  return [{ orig: squares.from, dest: squares.to, brush: hint.source === 'book' ? 'green' : 'blue' }]
 }
 
 /**
@@ -516,8 +570,8 @@ export function PlayActions({
     <div className="play-actions">
       {finished ? (
         <p className="notice">
-          {session.outcome ?? 'The game has reached its length.'} Review it to see where
-          you left the repertoire and what it cost.
+          {session.outcome ? `${session.outcome}.` : 'The game has reached its length.'} Review
+          it to see where you left the repertoire and what it cost.
         </p>
       ) : null}
       {capped ? (
@@ -554,10 +608,13 @@ function MoveList({
   session,
   activePly,
   onSelect,
+  height,
 }: {
   session: PlaySession
   activePly: number | null
   onSelect: (ply: number) => void
+  /** As tall as the board beside it, which is the one number they share. */
+  height: number
 }) {
   const pairs: {
     number: number
@@ -585,6 +642,13 @@ function MoveList({
         type="button"
         className={here ? 'move-step here' : 'move-step'}
         aria-current={here ? 'true' : undefined}
+        // The list is shorter than the game, so the move the board is standing
+        // on has to be brought to where somebody can see it. `nearest` scrolls
+        // only when it has to, which keeps the list still while stepping
+        // through moves that are already on screen.
+        ref={(node) => {
+          if (node && here) node.scrollIntoView({ block: 'nearest' })
+        }}
         onClick={() => onSelect(entry.ply + 1)}
       >
         {entry.san}
@@ -593,7 +657,10 @@ function MoveList({
   }
 
   return (
-    <ol className={activePly === null ? 'move-list' : 'move-list walkable'}>
+    <ol
+      className={activePly === null ? 'move-list' : 'move-list walkable'}
+      style={{ height }}
+    >
       {pairs.map((pair) => (
         <li key={pair.number}>
           <span className="move-number">{pair.number}.</span>
@@ -688,6 +755,11 @@ export function Report({
       ) : null}
 
       <h4>Your moves</h4>
+      {report.hints ? (
+        <p className="hint-count">
+          You used {report.hints} {report.hints === 1 ? 'hint' : 'hints'}.
+        </p>
+      ) : null}
       {report.slips.length === 0 ? (
         <p>Nothing the engine calls an inaccuracy or worse. Well played.</p>
       ) : (

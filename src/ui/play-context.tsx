@@ -1,17 +1,29 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { canReplayMoves } from './play-on'
 import { useProgress } from './progress-context'
-import { StockfishEngine, strengthProfile, whitePovPawns, type Engine } from '../engine'
+import { Chess } from 'chess.js'
+import {
+  StockfishEngine,
+  splitMove,
+  strengthProfile,
+  whitePovPawns,
+  type Engine,
+} from '../engine'
 import { sanForMove } from '../model/grade'
 import { positionKey } from '../model/position'
 import {
   PlaySession,
+  bookEndedAt,
+  bookHint,
   buildReport,
+  engineHint,
   fullMove,
   scanGame,
+  studentBookMove,
   type Book,
   type GameLength,
   type GameReport,
+  type Hint,
 } from '../play'
 
 /**
@@ -81,12 +93,18 @@ export interface PlayGame {
   evaluations: Map<string, number>
   thinking: boolean
   engineError: string | null
+  /** The move being suggested, until something moves the board. */
+  hint: Hint | null
   /** A game exists and has not been reviewed. A reviewed game is over. */
   inProgress: boolean
   start: (options: StartOptions) => Promise<void>
   play: (from: string, to: string) => Promise<void>
   undo: () => void
   redo: () => void
+  /** Asks what to play here: the repertoire's answer, or the engine's. */
+  askHint: () => Promise<void>
+  /** True when there is a position to ask about and nothing in the way. */
+  canHint: boolean
   /**
    * True when a reviewed game can be carried on: it stopped rather than
    * ended. A checkmate or a draw has nothing to play.
@@ -111,6 +129,13 @@ export const PlayContext = createContext<PlayGame | null>(null)
 
 /** How long the blunder scan thinks about each position. */
 const SCAN_MOVETIME = 150
+
+/**
+ * How long a hint thinks. Longer than the scan, because a hint is a single
+ * answer somebody is waiting on rather than one of forty positions, and short
+ * enough that the answer arrives before the question is forgotten.
+ */
+const HINT_MOVETIME = 500
 
 /**
  * The one profile every evaluation is made at, the live bar's and the scan's.
@@ -139,6 +164,7 @@ function usePlayValue(): PlayGame {
   const [report, setReport] = useState<GameReport | null>(null)
   const [scanning, setScanning] = useState<{ done: number; total: number } | null>(null)
   const [evaluations, setEvaluations] = useState<Map<string, number>>(() => new Map())
+  const [hint, setHint] = useState<Hint | null>(null)
 
   const engineRef = useRef<Engine | null>(null)
   const sessionRef = useRef<PlaySession | null>(null)
@@ -220,6 +246,7 @@ function usePlayValue(): PlayGame {
         setupRef.current = options
         setSetup(options)
         setRecordedAt(options.at ?? null)
+        setHint(null)
         sessionRef.current = fresh
         setSession(fresh)
         // Dev-only handle on the running game, so a browser check can read the
@@ -249,6 +276,8 @@ function usePlayValue(): PlayGame {
       if (!running || !setup || thinking || running.isFinished()) return
       const san = sanForMove(running.fen, from, to)
       if (!san || !running.playStudent(san)) return
+      // A hint is about the position it was asked in, so it goes with it.
+      setHint(null)
       refresh()
       setThinking(true)
       try {
@@ -278,14 +307,66 @@ function usePlayValue(): PlayGame {
   const undo = useCallback(() => {
     const running = sessionRef.current
     if (!running || thinking || report) return
-    if (running.undo()) refresh()
+    if (running.undo()) {
+      setHint(null)
+      refresh()
+    }
   }, [refresh, report, thinking])
 
   const redo = useCallback(() => {
     const running = sessionRef.current
     if (!running || thinking || report) return
-    if (running.redo()) refresh()
+    if (running.redo()) {
+      setHint(null)
+      refresh()
+    }
   }, [refresh, report, thinking])
+
+  /**
+   * What to play here.
+   *
+   * In book it costs nothing: the answer and its note are already loaded, so
+   * the arrow is up before the button has finished being pressed. Out of book
+   * it is a search, and it goes through the same one-at-a-time queue as
+   * everything else with the playing profile restored in a `finally`, exactly
+   * as `evaluate` does. A hint that left the engine at level 8 would quietly
+   * change the game it was meant to help with.
+   */
+  const askHint = useCallback(async () => {
+    const running = sessionRef.current
+    const setup = setupRef.current
+    if (!running || !setup || thinking || report) return
+    if (!running.studentToMove || running.isFinished()) return
+
+    const fromBook = studentBookMove(setup.book, running.fen)
+    if (fromBook) {
+      running.hints += 1
+      setHint(bookHint(fromBook))
+      refresh()
+      return
+    }
+
+    setThinking(true)
+    try {
+      const live = await engine()
+      try {
+        await live.setStrength(analysisProfile())
+        const result = await live.search(running.fen, HINT_MOVETIME)
+        const best = result.candidates[0]?.move ?? result.bestMove
+        if (!best) return
+        const san = new Chess(running.fen).move(splitMove(best)).san
+        running.hints += 1
+        setHint(engineHint(san, bookEndedAt(running.moves, setup.book)))
+        refresh()
+      } finally {
+        await live.setStrength(strengthProfile(setup.level))
+      }
+    } catch (error) {
+      setEngineError(asMessage(error))
+    } finally {
+      setThinking(false)
+    }
+  }, [engine, refresh, report, thinking])
 
   /**
    * Puts the report away and gives the game back.
@@ -364,10 +445,14 @@ function usePlayValue(): PlayGame {
       // The SAME `at` when this game already has one. A game reviewed, carried
       // on and reviewed again is one game, and `at` is what says so: a fresh
       // one here would leave two records, one short and one long.
+      // A hint is about a position, and the board is about to be about the
+      // whole game. Leaving it up would put advice for move 12 over a report
+      // on move 19.
+      setHint(null)
       const at = recordedAt ?? new Date().toISOString()
       setRecordedAt(at)
       const outcome = running.outcome ?? `Stopped after move ${fullMove(running.moves.length - 1)}`
-      const built = buildReport(running.moves, setup.book, scanned, outcome)
+      const built = buildReport(running.moves, setup.book, scanned, outcome, running.hints)
       setReport(built)
       recordPlay({
         courseId: setup.courseId,
@@ -383,6 +468,7 @@ function usePlayValue(): PlayGame {
         // including any replayed by the constructor, so a game started from a
         // Study position is still matched from the chapter root.
         sans: running.moves.map((move) => move.san),
+        ...(running.hints > 0 ? { hints: running.hints } : {}),
         level: setup.level,
       })
     } catch (error) {
@@ -402,6 +488,7 @@ function usePlayValue(): PlayGame {
     setReport(null)
     setScanning(null)
     setEngineError(null)
+    setHint(null)
     evaluationsRef.current = new Map()
     setEvaluations(new Map())
     engineRef.current?.stop()
@@ -433,11 +520,19 @@ function usePlayValue(): PlayGame {
     evaluations,
     thinking,
     engineError,
+    hint,
     inProgress: session !== null && report === null,
     start,
     play,
     undo,
     redo,
+    askHint,
+    canHint:
+      session !== null &&
+      report === null &&
+      !thinking &&
+      session.studentToMove &&
+      !session.isFinished(),
     canResume: session !== null && report !== null && !session.outcome,
     resume,
     extend,

@@ -82,18 +82,36 @@
   flex-wrap: wrap;
 }
 
-/* Pushed to the right, so the status line keeps the space beside the heading
-   and the three things you can do to the game sit together. */
+/* Pushed to the right, so the status line keeps the space beside the heading.
+   Only Keep playing lives here now. */
 .play-head-actions {
   margin-left: auto;
   display: flex;
   gap: 14px;
 }
 
+/* Three columns: the board with its bar and controls, the move list, and
+   whatever the game has to say. They wrap on a narrow window rather than
+   squeezing the report to nothing. */
 .play-body {
   display: flex;
-  gap: 28px;
+  gap: 24px;
   align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.play-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: none;
+}
+
+/* Under the board only, never under the list beside it. Real buttons: these
+   do things to the game rather than navigate away from it. */
+.play-controls {
+  display: flex;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
@@ -103,23 +121,63 @@
   max-width: 52ch;
 }
 
+/* What a hint said, until something moves the board. The two kinds are told
+   apart by the same colours their arrows use. */
+.hint-said {
+  margin: 0 0 16px;
+  border-left: 3px solid var(--accent);
+  padding: 4px 0 4px 12px;
+  max-width: 52ch;
+}
+
+.hint-said.engine {
+  border-left-color: var(--link);
+}
+
+.hint-count {
+  color: var(--text-dim);
+}
+
+/* Its own column beside the board, as tall as the board, scrolling inside
+   itself. The height comes from the component, which reads the same board
+   size the board does. */
 .move-list {
   list-style: none;
-  margin: 0 0 20px;
+  margin: 0;
   /* Four pixels each side, which is exactly the bleed the highlighted move
      takes with its negative margin. Without it the list grows a horizontal
      scrollbar the moment a game is reviewed. */
   padding: 0 4px;
-  max-height: 220px;
+  flex: none;
   overflow-y: auto;
   font-variant-numeric: tabular-nums;
+  /* Firefox and Chromium 121 and up. */
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
 }
 
+/* WebView2 is Chromium, and the installed app is the one this is for. */
+.move-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.move-list::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 4px;
+}
+
+/* Sized to what actually goes in each column, measured in the running app:
+   "100." is 29px, and the longest ordinary move, "O-O-O" or "Nxd4+", is 49.
+   The list is a reference rather than a feature, and a wide one steals the
+   width the report needs. A promotion with check is wider than this and will
+   spill a few pixels into the gap, which is better than clipping a move: it
+   happens about once in a thousand games. */
 .move-list li {
   display: grid;
-  grid-template-columns: 3em 1fr 1fr;
-  gap: 8px;
-  padding: 1px 0;
+  grid-template-columns: 2em 3.6em 3.6em;
+  gap: 6px;
+  padding: 0;
+  line-height: 1.45;
 }
 
 .move-number {

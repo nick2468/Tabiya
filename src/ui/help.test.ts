@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { Shell } from './App'
 import { Drill, Feedback } from './Drill'
-import { Play, PlayActions, PlayHead, Report } from './Play'
+import { Play, PlayActions, PlayControls, PlayHead, Report } from './Play'
 import { Progress } from './Progress'
 import { Study } from './Study'
 import { CatalogContext, type Catalog } from './catalog-context'
@@ -201,28 +201,24 @@ const screens: Record<Screen, string> = {
         opening: 'Opening: The London System',
         opponentColour: 'black' as const,
         thinking: false,
-        reviewed: false,
-        canResume: false,
-        onUndo: () => {},
-        onRedo: () => {},
-        onResume: () => {},
-        onNew: () => {},
-      }),
-    ) +
-    // And again as a REVIEWED game that merely stopped, which is the only
-    // state Keep playing exists in.
-    renderToStaticMarkup(
-      createElement(PlayHead, {
-        session: gameInProgress,
-        opening: 'Opening: The London System',
-        opponentColour: 'black' as const,
-        thinking: false,
         reviewed: true,
         canResume: true,
+        onResume: () => {},
+      }),
+    ) +
+    // The row under the board, which is where New game, Undo, Redo and Hint
+    // live since phase 26. Rendered here so none of the four falls out of the
+    // test when it moves house.
+    renderToStaticMarkup(
+      createElement(PlayControls, {
+        session: gameInProgress,
+        thinking: false,
+        reviewed: false,
+        canHint: true,
+        onNew: () => {},
         onUndo: () => {},
         onRedo: () => {},
-        onResume: () => {},
-        onNew: () => {},
+        onHint: () => {},
       }),
     ) +
     renderToStaticMarkup(

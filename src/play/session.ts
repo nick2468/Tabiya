@@ -83,6 +83,12 @@ export class PlaySession {
   private readonly undone: PlayedMove[] = []
   /** How many of the opponent's moves came out of the book. */
   bookReplies = 0
+  /**
+   * How many hints were asked for. Counted on the game rather than the screen
+   * because it is a fact about how the game was played, and the report says
+   * it: a game played with the answers on is a different game.
+   */
+  hints = 0
   /** Set when the game ends by itself: checkmate, stalemate, a draw. */
   outcome?: string
 
