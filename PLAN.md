@@ -3568,7 +3568,7 @@ Replay button beside Play on that lands on a live report. Version 1.6.11.
 - [x] 27.4 Notes section in dark mode: measure, then contrast or weight.
 - [x] 27.5 `outcome` and `finalEval` on the record; Ended and Level columns, time on the
   date; the level on the in-game Opening line; Replay.
-- [ ] 27.6 Version 1.6.11.
+- [x] 27.6 Version 1.6.11.
 - [ ] 27.7 Proved in the browser build at 1200x980, in both themes.
 
 Acceptance: as the chip's final paragraph.
