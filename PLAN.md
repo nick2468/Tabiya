@@ -3347,6 +3347,71 @@ main rides in it.
 - [x] 25.3 Version 1.6.8.
 - [x] 25.4 Proved in the browser build at 1200x980, in both themes.
 
+Open items (phase 25):
+
+1. **A replay ply numbers the POSITIONS, not the moves**, which is what makes a slip
+   clickable. Ply n is the position after n moves, so the position BEFORE the move at
+   index p is ply p and the one after it is p + 1. Clicking a slip goes to the before,
+   because the question a mistake raises is what else was on offer, and that is only
+   visible from where it was played.
+2. **Replay is view state and lives in the screen.** The session's moves are the game and
+   they do not move while somebody reads them. Which report the viewer belongs to is held
+   beside the ply rather than watched by an effect: an effect would leave one render
+   showing the old position against a new game.
+3. **The arrow listener is added only while a report is showing.** Study puts the same
+   handler on the window. They are never mounted together today, and the day they are is
+   not the day to find out.
+4. **The PGN writer moved from `bundle.ts` into `pgn.ts`, unchanged.** That module owns
+   writing PGN and already held `escapeTag`; a game needs the same `Movetext` and tag
+   helpers a course does. No behaviour changed and the bundle tests prove it.
+5. **The round trip is what holds the PGN honest.** The app owns a reader, so the reader
+   judges the writer rather than a string comparison nobody can check by eye. Seven tags,
+   nothing invented: `Site` is the course, `Round` is the standard's "-", and the result
+   is `*` for a game that was stopped, because guessing one from the evaluation would put
+   a number's opinion where a fact belongs.
+6. **`at` is the game's identity now, not only its date.** A game can be reviewed, carried
+   on and reviewed again, so `recordGame` replaces the record with the same `at`. The
+   existing history-cap test had recorded a hundred and ten games sharing one timestamp,
+   which was never true of real games; each now carries its own.
+7. **THE BROWSER FOUND A REAL BUG IN THIS PHASE'S OWN WORK, and it was the rule the phase
+   exists to keep.** `recordGame` replaced by `at` correctly, but `finish` generated a
+   FRESH `at` on every review instead of reusing the one it had kept, so the two records
+   never collided and a game reviewed twice was counted twice. Every test passed, because
+   the tests covered `recordGame` and the provider's `finish` needs a real engine. Driven
+   end to end afterwards: review, Keep playing, review, Play on, review, and the history
+   holds one game with the longest move count.
+8. **Play on had to be told what to do about a game already on the screen.** It landed on
+   the reviewed game rather than the start screen, because the Play screen shows the
+   running game whenever there is one, which is the phase 24 rule working. It now clears
+   a REVIEWED game, which is over, and waits with a title on a game still being played,
+   which is not. Losing a live game to a click on another screen is the sort of thing
+   nobody forgives.
+9. **The clipboard needed a fallback, and finding that out is why it was driven.** The
+   browser pane refuses `navigator.clipboard.writeText` to a page, which is exactly what
+   an embedded browser does and what an older WebView2 may do. The modern API is still
+   tried first and the old `execCommand` path is behind it. With a real click the button
+   said Copied and the OS clipboard genuinely changed.
+10. **What was driven at 1200x980, in both themes, from a cleared store.** Dark: a London
+    game reviewed, the arrow keys stepping two moves back, a move clicked, the deviation
+    sentence clicked to the position it was played from, and the bar changing with each
+    (level at ply 1, slightly better later). Copy game said Copied on a real click and
+    reported the refusal on a synthetic one. Keep playing put the report away and the
+    board back at the final position rather than the replayed one. Light: a Caro-Kann game
+    with a deliberate blunder, the slip sentence clicked to the position before Qxa2 with
+    the bar reading "slightly better for white" rather than "winning", and both bars
+    drawing White's share light and at the top for a Black student.
+11. **One thing was proved by a test rather than in the pane.** The clipboard cannot be
+    read back there, so the PGN text itself is held by the round trip through `parsePgn`
+    rather than by pasting. A sample was generated and read to check the wording, which
+    is how the run-together closing comment was caught.
+12. **The caveat on the drive, again.** Another session held port 5175 and `--strictPort`
+    blocked a second server, so this ran against that one. It serves this session's source
+    (all four new help paragraphs were in the page) but `__APP_VERSION__` is substituted
+    at server start, so the header read v1.6.7. The version was checked in the four files.
+13. **No chess content.** Nothing under `courses/` differs from the commit this phase
+    started on.
+
+
 Acceptance: as the chip's final paragraph.
 
 - [ ] **Review gate 25**
