@@ -3443,3 +3443,29 @@ Gate 25 findings (2026-09-03):
     was cleared afterwards.
 
 - [x] **Review gate 25 passed** (2026-09-03)
+
+## Phase 26 - the Play screen laid out for playing, a hint, and the last millimetre of the bar
+
+Goal: Nick's findings after installing 1.6.8 (2026-09-03). No chess content.
+
+Chipped as `chips/phase-26-play-layout.md`. The bar still runs about a millimetre past
+the board's last square on his display: measure the box against chessground's inner
+board and, if the squares end short, use a board size that is whole device pixels per
+square (416). Undo, Redo and New game leave the header for a row of real buttons under
+the board, ordered New game, Undo, Redo, Hint. Hint draws the repertoire move with its
+note while in book and the engine's move once out of it, and the report counts hints.
+The move list becomes a narrow column at board height with a thin scrollbar. Version
+1.6.9.
+
+- [ ] 26.1 Measure the bar against the inner board; 416 if the squares end short.
+- [ ] 26.2 New game, Undo, Redo as buttons in a row under the board.
+- [ ] 26.3 Hint: book move with note, else the engine's move; counted in the report and
+  the PGN; `hints` on the record.
+- [ ] 26.4 Move list as a narrow column at board height, thin scrollbar, replay marker
+  kept in view.
+- [ ] 26.5 Version 1.6.9.
+- [ ] 26.6 Proved in the browser build at 1200x980, in both themes, with the measurements.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 26**
