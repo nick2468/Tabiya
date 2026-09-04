@@ -3824,14 +3824,32 @@ Study sends, with the game's own course, chapter and level, no identity, so the 
 review mints a new record and the old one is untouched. Proved by a DOM test shown red
 before the feature. Version 1.6.13.
 
-- [ ] 30.1 Play from here on the row; a new game from the replayed position.
-- [ ] 30.2 DOM test red first; string test for the request builder; help mutation check.
-- [ ] 30.3 Help and SPEC.
-- [ ] 30.6 A second row under the board for the review controls: Keep playing and Play
+- [x] 30.1 Play from here on the row; a new game from the replayed position.
+- [x] 30.2 DOM test red first; string test for the request builder; help mutation check.
+- [x] 30.3 Help and SPEC.
+- [x] 30.6 A second row under the board for the review controls: Keep playing and Play
   from here left, arrows right; titles on both saying how they differ.
-- [ ] 30.4 Version 1.6.13.
-- [ ] 30.5 Proved in the browser build.
+- [x] 30.4 Version 1.6.13.
+- [x] 30.5 Proved in the browser build.
 
 Acceptance: as the chip's final paragraph.
+
+What landed, and one correction to the chip. The chip expected the report to stay on
+screen behind the start options while a Study-style request waits; it does not, and it
+cannot, because the launch options only render when there is no session at all. So Play
+from here sends the request and then throws the reviewed game away, exactly as New game
+does, and the trainee sees the options with "From your game of 4 September, after move 1"
+already chosen. The record was written at the review, so nothing is lost by it.
+
+Measured live at 1200x980: the board is 416px from x=68, row one spans 68 to 484 with its
+last button ending at 374, row two spans the same 68 to 484 with the arrows ending exactly
+at the board's right edge. Neither row wraps, both are 37px tall.
+
+Driven end to end: 1.d4 f5 2.Bf4 Nf6 reviewed, stepped back to after 1...f5, Play from
+here, Start, Hint (green arrow c1-f4, "The line plays 2.Bf4. The same first move as ever.
+The bishop is outside the pawn chain before anything else happens."), 2.Nf3 instead,
+reviewed. Two records with different identities, the first still d4 f5 Bf4 Nf6 with no
+hints and no deviation, the second d4 f5 Nf3 Nf6 with one hint and a deviation at move 2.
+Storage cleared afterwards and a fresh tab shows no console errors.
 
 - [ ] **Review gate 30**
