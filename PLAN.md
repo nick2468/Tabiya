@@ -3852,4 +3852,28 @@ reviewed. Two records with different identities, the first still d4 f5 Bf4 Nf6 w
 hints and no deviation, the second d4 f5 Nf3 Nf6 with one hint and a deviation at move 2.
 Storage cleared afterwards and a fresh tab shows no console errors.
 
-- [ ] **Review gate 30**
+Gate 30 findings (2026-09-04):
+
+- **Verified for the gate from the repo:** 913 tests in about ten seconds under one run;
+  `tsc -b` clean; nothing under `courses/`; version 1.6.13 in all three files; no em
+  dashes under `src/`. The request built from a replay carries the game's course, level,
+  chapter and moves and no `at`, no `reviewAtOnce`, no `holdOpponent`.
+- **The DOM test was mutation-checked at the gate**: giving the new game the old identity
+  (`at: game.at` in `requestFromReplay`) turns "starts a new game and leaves the replayed
+  one alone" red. Restored from git.
+- **Driven against the builder's restarted server, header v1.6.13, at 1200x980.** A
+  Caro-Kann game reviewed at two moves; two steps back; row one read New game, Undo, Redo,
+  Hint and row two Keep playing, Play from here and the two arrows, both rows from 68 to
+  484, both 37px, both buttons carrying their titles. Play from here opened the start
+  screen with the "From your game" radio checked; Start, one move, review: two records with
+  different `at`, the first byte for byte as before.
+- **One fault fixed at the gate as the orchestrator's commit.** The label read "after move
+  0" for the position after 1.e4, because a full move count at ply 1 is zero. It now names
+  the move: "after 1.e4", "after 1...c6", "from the start". Tests follow.
+- **The builder's design correction stands**: the launch options only render with no
+  session, so Play from here replaces the reviewed game as New game does; the record was
+  written at the review and nothing is lost.
+- **Nick's own files were not listed and not reported.** The browser build's storage was
+  cleared afterwards.
+
+- [x] **Review gate 30 passed** (2026-09-04)
