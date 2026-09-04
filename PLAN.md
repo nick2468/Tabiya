@@ -3890,18 +3890,74 @@ friends; the anti-Sicilians one recipe each; tactics and plans with defensive ex
 All four checkers, the mistakes pass at 2500 ms, engine work never beside another heavy
 process. Version 1.7.0.
 
-- [ ] 31.1 Rulings and decision rules (done in the chip).
-- [ ] 31.2 Seven chapters to the section 3 bar, student Black.
-- [ ] 31.3 Suite green after every chapter.
-- [ ] 31.4 Four checkers, outputs under `docs/engine-runs/phase-31/`, 2500 ms passes in a
+- [x] 31.1 Rulings and decision rules (done in the chip).
+- [x] 31.2 Seven chapters to the section 3 bar, student Black.
+- [x] 31.3 Suite green after every chapter.
+- [x] 31.4 Four checkers, outputs under `docs/engine-runs/phase-31/`, 2500 ms passes in a
   quiet window.
-- [ ] 31.5 The course's test block with two course-specific claims.
-- [ ] 31.6 Scoping test: Caro-Kann against Najdorf.
-- [ ] 31.7 Bundle exported and round-tripped.
-- [ ] 31.8 Prose counts say seven.
-- [ ] 31.9 Version 1.7.0.
-- [ ] 31.10 Proved in the browser build.
+- [x] 31.5 The course's test block with two course-specific claims.
+- [x] 31.6 Scoping test: Caro-Kann against Najdorf.
+- [x] 31.7 Bundle exported and round-tripped.
+- [x] 31.8 Prose counts say seven.
+- [x] 31.9 Version 1.7.0.
+- [x] 31.10 Proved in the browser build.
 
 Acceptance: as the chip's final paragraph.
+
+**Open items, every one of them a decision with its number.**
+
+*The forks taken, one sentence each.* Against 6.f4 the course plays the e-pawn two
+squares rather than 6...Qc7, because it is the same rule as the rest of the chapter and
+one rule is easier to hold than two. Against 6.h3 e5 7.Nde2 it plays the bishop to e6
+rather than 7...h5, because it needs nothing calculated. Against the Alapin it plays the
+knight to f6 rather than the pawn to d6, which is the only place the move-order policy
+bends, and the chapter says so. The Smith-Morra is declined, the Poisoned Pawn is out,
+and 8...h6 9.Bh4 g5 is out, all three under the theory fork rule.
+
+*What the engine changed.* Two 500 ms passes disagreed with each other, six findings
+against eight, and the union went to the 2500 ms arbiter. Four were real faults: the
+Grand Prix line walked past a free pawn on e4 and now takes it (-1.13 against -0.12); a
+knight to d7 at +1.55 became the queenside pawn at +0.28; a queenside pawn at +0.95
+became the h-pawn at +0.34, which is the one place in the course Black meets a wing
+attack on the wing; and a break at +0.63 became the e-pawn at +0.02. Exercise 5 was
+reframed: trading on d5 is sound at -0.30 and 12...Nxe4 is -1.27, so the exercise now
+asks for the tactic and the lesson is to look before playing the prepared move. A
+confirming 500 ms pass reports nothing.
+
+*What the engine did not change, with its number.* In the 6.Rg1 line, recapturing with
+the bishop measures +0.22 against +0.13 for the queen. Inside the half-pawn band, the
+move the structure wants, kept.
+
+*The grades.* The 2500 ms mistakes pass disagreed with 26 of 250 entries and was right
+about all of them. Three were not inaccuracies at all: after 11.Bh6 in the
+Fischer-Sozin, 11...Nxe4, 11...b4 and 11...Bb7 lose by force to 12.Bxg7, because Kxg7
+steps onto the file White's queen is on. One of those three had been graded playable.
+The course's own move there is +0.29, so the line is sound and the alternatives are not.
+Recorded in `docs/engine-runs/accepted.md`: a mate score is outside every band because
+the schema has no grade above mistake, so those three report for ever. A confirming pass
+took 26 down to 4, and the fourth was a band-edge straddle at 0.98 against a playable
+ceiling of 0.9 which the first pass had measured under the line; inaccuracy holds both
+measurements and needs no third run.
+
+*The verdict-strength passes ran, and here is the window.* Sixteen logical processors,
+CPU load 18 to 34 per cent, no build, no test run and no second engine process at any
+point. Both mistakes passes and every engine-ask ran one at a time.
+
+*Two claims the course makes that the engine prices low.* The e-pawn going two squares
+against 6.Bc4, which chapter 4 is built around calling an exception, costs 0.45 rather
+than the mistake it was graded. It is an inaccuracy now and the note says the number is
+small and the trouble lasts the game, which is the honest version of a positional claim.
+
+*Proved in the browser build at 1200x980, driven against another session's dev server on
+5175 because that port was held.* Seven tiles with the Najdorf's tagline; Study opens
+chapter 0 with its intro and names both its lines, chapter 1 names all five; ticking one
+line learnt gives Drill ten cards and the session runs with the board Black's way up;
+Play starts a game as Black, the engine opens 1.e4, and the book steers it into 2.f4 d6
+3.Nf3, which is chapter 5's own Grand Prix line; Progress reads "1 of 344 lines learnt
+across 7 courses", and 344 is the other six courses' 308 plus this one's 36, so no
+existing line id moved. Storage cleared afterwards and a reloaded page shows no console
+errors. **The version banner read 1.6.13 throughout**, because that server was started
+before the bump and the version is baked in at start; the three version files read 1.7.0
+and `src/version.test.ts` holds them together.
 
 - [ ] **Review gate 31**
