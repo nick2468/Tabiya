@@ -3990,10 +3990,35 @@ Gate 31 findings (2026-09-04):
   cleared afterwards.
 
 - [x] 31.11 Follow-up: ten or more authored mistake entries in ch6, graded at 2500 ms.
-- [ ] 31.12 Follow-up: one grade per position per course, as a content test, and the six
+- [x] 31.12 Follow-up: one grade per position per course, as a content test, and the six
   conflicts it finds settled at 2500 ms (three in the Najdorf, two in the Colle, one in
   the Ruy). Found at the 31.11 check: the ch6 copy of the regraded O-O still read
   inaccuracy.
+
+  Done. The rule is in `content.test.ts`, per course, reporting every clash at once, and
+  it was red on all three affected courses before the fixes: eight rows over six
+  positions, because two of the Najdorf's appear in three chapters each.
+
+  **The lesson is about 31.11, not about the six.** That commit copied chapter 6's
+  alternatives keyed by position and claimed the key is what stops the copies drifting.
+  It is not. The key made them right at the moment of copying; nothing held them together
+  afterwards, and an hour later the arbiter moved a grade in chapter 4, I moved the
+  chapter 4 copy, and chapter 6 kept the old grade with a note calling a losing move
+  "safe and normal". A copy needs a test, not a good key. The engine pass cannot stand in
+  for one either: it reported one copy of each conflicting pair and not the other, which
+  is exactly how fixing what it reports leaves the second copy behind.
+
+  Each of the six asked once at 2500 ms, one engine at a time, on a quiet machine. Two
+  grades were overturned by the number rather than by taste: the Najdorf's e5 against
+  6.Bg5 costs 0.46 and a mistake starts at 0.7, so both copies come down to inaccuracy;
+  the Colle's c3 costs nothing at all, +0.13 against a best of +0.13, and its inaccuracy
+  grade turned out to be a curriculum reason wearing a chess one. The Ruy's e5 costs over
+  two and a half pawns and its exercises copy was simply wrong. Chapter 1 of the Najdorf
+  also had an intro sentence saying the e-pawn push loses the pawn on d6; it does not, it
+  concedes d5, and that is corrected.
+
+  Landed as two commits, older courses first, so each is green on checkout. Version stays
+  1.7.1.
 
   Done, and 37 positions rather than ten. Chapter 6 runs lines that chapters 1 to 5
   already carry, so 35 of those positions already had authored alternatives that had
