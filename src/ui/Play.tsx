@@ -204,6 +204,8 @@ export function Play({
       chapterId: chapter?.id,
       chapterTitle: chapter?.title,
       at: from.at,
+      // Reading, not playing: the engine must not add a reply to the record.
+      holdOpponent: true,
     }
   }
 

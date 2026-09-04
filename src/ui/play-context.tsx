@@ -68,6 +68,13 @@ export interface StartOptions {
    * that record rather than adding a second.
    */
   at?: string
+  /**
+   * Do not let the opponent move after the start moves are replayed. A replay
+   * is reading a recorded game, and a record that ends on the trainee's move
+   * would otherwise gain the engine's reply before it was reviewed: driven at
+   * gate 28, a four ply game came back with five.
+   */
+  holdOpponent?: boolean
 }
 
 export interface PlayGame {
@@ -277,7 +284,7 @@ function usePlayValue(): PlayGame {
         if (import.meta.env.DEV) (window as unknown as Record<string, unknown>).__game = fresh
         // The engine may be the one to move first: a "play from here" position
         // stopped on the opponent's turn, or a Black course, where it opens.
-        if (!fresh.studentToMove && !fresh.isFinished()) {
+        if (!options.holdOpponent && !fresh.studentToMove && !fresh.isFinished()) {
           await fresh.playOpponent()
         }
         refresh()
