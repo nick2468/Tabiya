@@ -1,0 +1,842 @@
+{
+  "id": "ch5-anti-sicilians",
+  "title": "Everything else: the anti-Sicilians",
+  "defaultTags": ["vs-anti-sicilian"],
+  "intro": "Most club opponents do not play the Open Sicilian. They play something on move two or three that avoids the whole thing, and if a Najdorf player has no answer to those, the other five chapters never get used.\n\nThis chapter is one safe recipe against each. It is not a second repertoire and it does not try to refute anything. The aim is a comfortable game every time, with as few new structures to learn as possible.\n\n## The pawn to d6 comes first\n\nBlack plays the c-pawn and then the d-pawn against every White second move that allows it. That is the move-order policy of the whole course, and it pays off here: the pawn on d6 is useful in nearly all of these lines, it keeps the knight off e5, and it means the Open Sicilian is reached by the same route whatever White does in between.\n\n## The one exception, and why\n\nAgainst 2.c3, the Alapin, the pawn goes to f6 with the knight instead. The reason is that 2.c3 is a plan to build a big centre with d4 next move, and the pawn on d6 does nothing to stop it. The knight to f6 hits the pawn on e4 straight away and makes White commit. It is the only place in this course where the policy bends, and the pawn to d6 arrives a few moves later anyway.\n\n## What each recipe is\n\nAgainst the Closed Sicilian, 2.Nc3, Black builds the same fianchetto White does and plays for the pawn break in the centre. Against the Moscow, 3.Bb5+, the bishop goes to d7 and trades: fewer pieces, no weaknesses, and a free game. Against the Smith-Morra, 2.d4 cxd4 3.c3, the gambit is declined with the knight to f6, because taking the pawn is exactly the memorisation contest the theory fork rule exists to avoid. Against the Grand Prix, the bishop to c4 is answered by the pawn to e6, the same idea as chapter 4.\n\n## Typical mistakes at this level\n\nTaking the gambit pawn on c3 and then trying to remember twenty moves of a line White has played fifty times. Meeting a fianchetto by developing without a plan. Trading the light-squared bishop for nothing when White offers a check on b5. Forgetting to play the pawn to d6 and letting White set up a big centre unopposed. And treating a quiet anti-Sicilian as a draw offer rather than a game.",
+  "stem": ["e4", "c5"],
+  "tree": [
+    {
+      "san": "Nf3",
+      "note": "The main move, and it usually leads to the Open Sicilian. The lines here are the ones where White changes plan on move three.",
+      "weight": 9,
+      "children": [
+        {
+          "san": "d6",
+          "note": "The move order of this whole course. The pawn covers e5, opens the diagonal for the dark-squared bishop, and heads for the Najdorf.",
+          "tags": ["vs-anti-sicilian", "development"],
+          "mistakes": [
+            { "san": "Nc6", "grade": "playable", "note": "Sound, and it invites a different set of White tries. The pawn keeps the course to one move order." },
+            { "san": "e6", "grade": "playable", "note": "Also sound and a different family of Sicilians. One move order is easier to hold than three." }
+          ],
+          "children": [
+            {
+              "san": "d4",
+              "note": "The Open Sicilian, which is chapters 1 to 4 once the knight recaptures.",
+              "weight": 9,
+              "children": [
+                {
+                  "san": "cxd4",
+                  "note": "Take, as always. The trade of a wing pawn for a centre pawn is the whole point of the Sicilian.",
+                  "tags": ["development"],
+                  "children": [
+                    {
+                      "san": "Qxd4",
+                      "note": "The queen recaptures instead of the knight. It develops with a threat and it puts the queen where it can be hit.",
+                      "weight": 4,
+                      "children": [
+                        {
+                          "san": "Nc6",
+                          "note": "Develop with tempo. The knight attacks the queen and Black gains the move back at once.",
+                          "tags": ["development", "tactics"],
+                          "mistakes": [
+                            { "san": "Nf6", "grade": "playable", "note": "Also good. Hitting the queen first is the move that takes the sting out of the whole idea." },
+                            { "san": "a6", "grade": "inaccuracy", "note": "It is the Najdorf move in a position that is not a Najdorf. The queen on d4 has to be asked a question first." }
+                          ],
+                          "children": [
+                            {
+                              "san": "Bb5",
+                              "note": "White pins the knight rather than moving the queen, which is the point of the whole line.",
+                              "weight": 7,
+                              "children": [
+                                {
+                                  "san": "Bd7",
+                                  "note": "Break the pin at once. Black offers a trade of the bishops, which leaves nothing for White to work with.",
+                                  "tags": ["development", "bishop-placement"],
+                                  "mistakes": [
+                                    { "san": "Qd7", "grade": "inaccuracy", "note": "It blocks the bishop in and the queen is awkward there once White plays a rook to d1." },
+                                    { "san": "e6", "grade": "inaccuracy", "note": "The pin stays on and the knight on c6 is stuck defending itself for several moves." }
+                                  ],
+                                  "plan": "Trade on b5 or let White trade, then bring the knight to f6, the bishop to e7 and castle. The queen on d4 has to move sooner or later and Black gains time on it.",
+                                  "name": "3.d4 with 4.Qxd4"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Bb5+",
+              "note": "The Moscow Variation. White gives the check to trade off a piece and take the sting out of the Sicilian.",
+              "weight": 6,
+              "children": [
+                {
+                  "san": "Bd7",
+                  "note": "Block with the bishop and offer the trade. Fewer pieces, no weaknesses, and Black gets an easy game with the queen well placed.",
+                  "tags": ["vs-anti-sicilian", "bishop-placement"],
+                  "mistakes": [
+                    { "san": "Nd7", "grade": "playable", "note": "The other main answer and a good one. It keeps more pieces on and it needs more care, so this course takes the simpler road." },
+                    { "san": "Nc6", "grade": "inaccuracy", "note": "It keeps the pin on and White gets to trade on c6 at the moment that suits White, damaging Black's pawns." }
+                  ],
+                  "children": [
+                    {
+                      "san": "Bxd7+",
+                      "note": "White takes at once. There is nothing better, and the check means Black recaptures the way White chooses.",
+                      "weight": 8,
+                      "children": [
+                        {
+                          "san": "Qxd7",
+                          "note": "The queen recaptures and stands well: it eyes the c-file and the light squares the bishop used to cover.",
+                          "tags": ["development"],
+                          "mistakes": [
+                            { "san": "Nxd7", "grade": "inaccuracy", "note": "The knight belongs on c6 or f6 and it blocks the queen and the bishop from d7." },
+                            { "san": "Kxd7", "grade": "mistake", "note": "It throws away castling for no reason at all, with the centre still open." }
+                          ],
+                          "children": [
+                            {
+                              "san": "O-O",
+                              "note": "White castles and plans c3 and d4 in the centre.",
+                              "weight": 8,
+                              "children": [
+                                {
+                                  "san": "Nc6",
+                                  "note": "Develop towards the centre. The knight covers d4, which is the square White's whole plan is aimed at.",
+                                  "tags": ["development"],
+                                  "mistakes": [
+                                    { "san": "Nf6", "grade": "playable", "note": "Also good. The queen's knight first is the one that argues about d4." },
+                                    { "san": "g6", "grade": "playable", "note": "A perfectly good setup and a different structure to learn. This course keeps to one." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "c3",
+                                      "note": "White prepares to build the centre with d4 next.",
+                                      "weight": 8,
+                                      "children": [
+                                        {
+                                          "san": "Nf6",
+                                          "note": "The other knight comes out and hits the pawn on e4 before White is ready.",
+                                          "tags": ["development"],
+                                          "mistakes": [
+                                            { "san": "e5", "grade": "inaccuracy", "note": "It stops d4 and it leaves a hole on d5 with no light-squared bishop to cover it, which is exactly what the trade on d7 was for." },
+                                            { "san": "g6", "grade": "playable", "note": "Sound. Developing with a threat is quicker and it makes White decide about the pawn on e4 now." }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "Re1",
+                                              "note": "The rook props up the pawn on e4 so that d4 can come.",
+                                              "weight": 7,
+                                              "children": [
+                                                {
+                                                  "san": "e6",
+                                                  "note": "A small, useful move. It gives the bishop a square and gets Black ready to meet the centre with a pawn of its own.",
+                                                  "tags": ["development"],
+                                                  "mistakes": [
+                                                    { "san": "e5", "grade": "inaccuracy", "note": "The same hole on d5 as before, and this time White has a rook on the e-file waiting for the pawn to move again." },
+                                                    { "san": "g6", "grade": "playable", "note": "Playable. The modest pawn move keeps the option of hitting the centre with the d-pawn, which is the point in the next few moves." }
+                                                  ],
+                                                  "children": [
+                                                    {
+                                                      "san": "d4",
+                                                      "note": "White builds the centre at last, with everything behind it.",
+                                                      "weight": 8,
+                                                      "children": [
+                                                        {
+                                                          "san": "cxd4",
+                                                          "note": "Take, and make White decide how to recapture.",
+                                                          "tags": ["tactics"],
+                                                          "mistakes": [
+                                                            { "san": "d5", "grade": "inaccuracy", "note": "It leaves the pawn on c5 hanging in the air: 9.dxc5 and Black has to spend a move winning it back." }
+                                                          ],
+                                                          "children": [
+                                                            {
+                                                              "san": "cxd4",
+                                                              "note": "White takes back with the pawn and has the big centre the whole plan was for.",
+                                                              "weight": 8,
+                                                              "children": [
+                                                                {
+                                                                  "san": "d5",
+                                                                  "note": "The break. Black hits the centre in one move and the pawn on d6, which has done its job, goes forward.",
+                                                                  "tags": ["d5-break"],
+                                                                  "mistakes": [
+                                                                    { "san": "Be7", "grade": "playable", "note": "Fine and slower, and it lets White play e5 first and take the space for good." },
+                                                                    { "san": "Nxe4", "grade": "mistake", "note": "10.Re1 pins the knight against the queen on d7 and wins it back with a much better position." }
+                                                                  ],
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "e5",
+                                                                      "note": "White pushes past and gains space, which also frees e4 for a Black knight.",
+                                                                      "weight": 8,
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Ne4",
+                                                                          "note": "The knight takes the square the pawn has just left behind. It is safe there and it stares at the centre.",
+                                                                          "tags": ["development", "tactics"],
+                                                                          "plan": "Put the bishop on e7 and castle, then work on the pawn on d4 with the rook on the c-file and the knight from c6. The pawn on e5 is fixed and Black plays around it.",
+                                                                          "name": "The Moscow, 3.Bb5+ Bd7"
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "c3",
+              "note": "The Alapin one move late. White wants d4 with a pawn recapture and a big centre.",
+              "weight": 4,
+              "children": [
+                {
+                  "san": "Nf6",
+                  "note": "Hit the pawn on e4 before the centre is built. White has to answer it, and every answer costs something.",
+                  "tags": ["development"],
+                  "mistakes": [
+                    { "san": "Nc6", "grade": "playable", "note": "Fine, and it does not ask White a question. The knight to f6 makes the pawn on e4 decide." },
+                    { "san": "e5", "grade": "inaccuracy", "note": "It stops d4 and gives up d5 for good, in a position where White can put a bishop and a knight on it at leisure." }
+                  ],
+                  "children": [
+                    {
+                      "san": "Bd3",
+                      "note": "White defends the pawn and keeps the plan of d4 alive.",
+                      "weight": 6,
+                      "children": [
+                        {
+                          "san": "Nc6",
+                          "note": "Develop and cover d4, which is the square this whole line is about.",
+                          "tags": ["development"],
+                          "mistakes": [
+                            { "san": "g6", "grade": "playable", "note": "Sound, and it lets White play d4 unopposed. Covering the square first is more to the point." }
+                          ],
+                          "children": [
+                            {
+                              "san": "Bc2",
+                              "note": "The bishop steps aside to keep the diagonal and stay out of the way of the d-pawn.",
+                              "weight": 6,
+                              "children": [
+                                {
+                                  "san": "d5",
+                                  "note": "The break arrives in one move, because the pawn on d6 was already halfway there. Black hits the centre before White has finished building it.",
+                                  "tags": ["d5-break"],
+                                  "plan": "Trade in the centre or let White close it, then develop with the bishop to g4 or f5 and castle. The bishop on c2 is a long way from anything Black cares about.",
+                                  "name": "3.c3 and the break in one move"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Bc4",
+              "note": "The bishop takes aim at f7 before anything is opened. It is a club favourite and it is not dangerous.",
+              "weight": 4,
+              "children": [
+                {
+                  "san": "Nf6",
+                  "note": "Develop with a threat. The pawn on e4 needs looking after and the bishop on c4 does not defend it.",
+                  "tags": ["development"],
+                  "mistakes": [
+                    { "san": "e6", "grade": "playable", "note": "Also right in spirit, and the knight makes White answer immediately, which is better." },
+                    { "san": "Nc6", "grade": "playable", "note": "Fine. Hitting the pawn is the move that gains time." }
+                  ],
+                  "children": [
+                    {
+                      "san": "d3",
+                      "note": "White props up the pawn and settles for a slow game.",
+                      "weight": 7,
+                      "children": [
+                        {
+                          "san": "Nc6",
+                          "note": "The other knight comes out to its best square, covering d4 and e5.",
+                          "tags": ["development"],
+                          "mistakes": [
+                            { "san": "e6", "grade": "playable", "note": "Also good and it comes next anyway. The knight first keeps White from playing d4 with tempo." }
+                          ],
+                          "children": [
+                            {
+                              "san": "O-O",
+                              "note": "White castles into a quiet position with no plan in particular.",
+                              "weight": 7,
+                              "children": [
+                                {
+                                  "san": "e6",
+                                  "note": "Shut the bishop's diagonal and free the one on f8. This is the same idea as chapter 4 and it costs nothing here.",
+                                  "tags": ["light-squares"],
+                                  "plan": "Put the bishop on e7 and castle, then play the pawn to d5 in one move when the centre allows it. White's bishop on c4 has to move again the moment it does.",
+                                  "name": "3.Bc4 and the quiet game"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Nc3",
+      "note": "The Closed Sicilian. White is not going to open the centre at all and plays for a slow kingside attack.",
+      "weight": 6,
+      "children": [
+        {
+          "san": "d6",
+          "note": "The same move as always. It fits every setup White can build from here.",
+          "tags": ["vs-anti-sicilian", "development"],
+          "mistakes": [
+            { "san": "Nc6", "grade": "playable", "note": "Perfectly good and the usual move order. The pawn keeps this course to one road." },
+            { "san": "d5", "grade": "inaccuracy", "note": "3.exd5 Nf6 4.Bb5+ is a nuisance, and Black has opened the position for the side with more developed pieces." }
+          ],
+          "children": [
+            {
+              "san": "g3",
+              "note": "The fianchetto, which is the real Closed Sicilian. White plays Bg2, d3, f4 and pushes on the kingside.",
+              "weight": 6,
+              "children": [
+                {
+                  "san": "Nc6",
+                  "note": "Develop to the square that covers d4, because that is where Black's own break is coming.",
+                  "tags": ["development"],
+                  "mistakes": [
+                    { "san": "Nf6", "grade": "playable", "note": "Fine, and against a fianchetto the queen's knight is the more useful one first: it supports the pawn break." },
+                    { "san": "g6", "grade": "playable", "note": "Also good and it usually transposes. The knight first keeps the options open." }
+                  ],
+                  "children": [
+                    {
+                      "san": "Bg2",
+                      "note": "The bishop takes the long diagonal and stares at the queenside.",
+                      "weight": 9,
+                      "children": [
+                        {
+                          "san": "g6",
+                          "note": "Answer the fianchetto with a fianchetto. The bishops look at each other and neither achieves much, which suits the side with more space on the queenside.",
+                          "tags": ["bishop-placement"],
+                          "mistakes": [
+                            { "san": "e6", "grade": "playable", "note": "Sound and a little passive against this setup. The bishop on g7 answers the one on g2, which is the simplest arrangement." }
+                          ],
+                          "children": [
+                            {
+                              "san": "d3",
+                              "note": "White props up the pawn on e4 and gets ready to push the f-pawn.",
+                              "weight": 8,
+                              "children": [
+                                {
+                                  "san": "Bg7",
+                                  "note": "The bishop goes to its diagonal and the king is one move from safety.",
+                                  "tags": ["bishop-placement", "development"],
+                                  "mistakes": [
+                                    { "san": "Nf6", "grade": "playable", "note": "Fine. The bishop first means castling comes next whatever White does." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "f4",
+                                      "note": "The pawn storm begins, slowly. White wants f5 and a kingside attack.",
+                                      "weight": 7,
+                                      "children": [
+                                        {
+                                          "san": "Nf6",
+                                          "note": "Develop and cover the squares in front of the king. Against a slow attack Black finishes developing and then plays on the other wing.",
+                                          "tags": ["development"],
+                                          "mistakes": [
+                                            { "san": "e6", "grade": "playable", "note": "A good setup with the knight going to e7 instead. This course keeps the knight on f6, where it covers d5 and e4 and takes less thinking." },
+                                            { "san": "f5", "grade": "inaccuracy", "note": "It stops the attack and it opens the long diagonal straight at Black's own rook on a8, with a White bishop already on it." }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "Nf3",
+                                              "note": "White develops and castles next.",
+                                              "weight": 8,
+                                              "children": [
+                                                {
+                                                  "san": "O-O",
+                                                  "note": "Castle. Black is fully developed, the kingside is solid, and the queenside is where the play is.",
+                                                  "tags": ["king-safety"],
+                                                  "plan": "Play the rook to b8 and the pawns to b5 and b4, and answer f5 by keeping the knight on f6 and the bishop on g7. If White ever plays f5, the square e5 becomes Black's.",
+                                                  "name": "The Closed Sicilian, both fianchettos"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "f4",
+              "note": "The Grand Prix setup from the other move order. White plays for f5 and a direct attack.",
+              "weight": 5,
+              "children": [
+                {
+                  "san": "Nf6",
+                  "note": "Hit the pawn on e4 at once, which is the move that stops White from building at leisure.",
+                  "tags": ["development"],
+                  "mistakes": [
+                    { "san": "g6", "grade": "playable", "note": "Sound, and it invites 4.Nf3 Bg7 5.Bb5+ with an awkward check. Hitting the pawn first makes White answer." },
+                    { "san": "e6", "grade": "playable", "note": "Solid. The knight is quicker and it makes the pawn on e4 the problem." }
+                  ],
+                  "children": [
+                    {
+                      "san": "Nf3",
+                      "note": "White develops and defends the pawn on e4 a second time.",
+                      "weight": 8,
+                      "children": [
+                        {
+                          "san": "Nc6",
+                          "note": "The other knight comes out and covers d4 and e5, the two squares White would like.",
+                          "tags": ["development"],
+                          "mistakes": [
+                            { "san": "e6", "grade": "playable", "note": "Also fine and it comes next. The knight is the piece that argues about the centre." }
+                          ],
+                          "children": [
+                            {
+                              "san": "Bb5",
+                              "note": "The pin, which is the standard idea in every Grand Prix setup. White wants to trade on c6 and then attack.",
+                              "weight": 7,
+                              "children": [
+                                {
+                                  "san": "Bd7",
+                                  "note": "Break the pin and be ready to recapture on d7 with a piece rather than a pawn. Black keeps the structure whole.",
+                                  "tags": ["bishop-placement"],
+                                  "mistakes": [
+                                    { "san": "a6", "grade": "inaccuracy", "note": "6.Bxc6+ bxc6 doubles the pawns and hands White exactly the structure the whole plan is aimed at." },
+                                    { "san": "e6", "grade": "playable", "note": "Playable, and it leaves the pin on for another move. Breaking it at once is simpler." }
+                                  ],
+                                  "plan": "Trade on b5 or let White take, then play the pawn to g6 and the bishop to g7 and castle. If White pushes the f-pawn, the square e5 belongs to a Black knight.",
+                                  "name": "2.Nc3 with 3.f4 and the pin"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "c3",
+      "note": "The Alapin. White is going to play d4 next move and hold the centre with two pawns.",
+      "weight": 6,
+      "children": [
+        {
+          "san": "Nf6",
+          "note": "The one exception to this course's move order. The pawn on d6 does nothing about a centre with c3 behind it, so the knight hits the pawn on e4 instead and forces White to commit.",
+          "tags": ["vs-anti-sicilian", "development"],
+          "mistakes": [
+            { "san": "d6", "grade": "inaccuracy", "note": "It follows the rule and the rule does not fit here: 3.d4 cxd4 4.cxd4 gives White a big centre for free and the pawn on d6 has not touched it." },
+            { "san": "d5", "grade": "playable", "note": "The other main answer, entirely sound, and it leads to an isolated pawn position that is a course of its own." },
+            { "san": "e6", "grade": "inaccuracy", "note": "It lets White build the centre with 3.d4 and keeps the bishop on c8 shut in behind the pawns." }
+          ],
+          "children": [
+            {
+              "san": "e5",
+              "note": "White pushes past with tempo, which is the whole idea. The knight has to move.",
+              "weight": 9,
+              "children": [
+                {
+                  "san": "Nd5",
+                  "note": "The knight steps to the middle, where it is safe because the pawn on c3 blocks White's own knight from chasing it.",
+                  "tags": ["development"],
+                  "mistakes": [
+                    { "san": "Ng8", "grade": "mistake", "note": "It undevelops the piece for nothing and hands White the centre and every tempo in the position." },
+                    { "san": "Ne4", "grade": "inaccuracy", "note": "4.d3 hits the knight and it has to move again, so Black has lost a move to gain nothing." }
+                  ],
+                  "children": [
+                    {
+                      "san": "d4",
+                      "note": "White builds the centre behind the pawn on e5.",
+                      "weight": 9,
+                      "children": [
+                        {
+                          "san": "cxd4",
+                          "note": "Take, before White gets to keep both pawns abreast.",
+                          "tags": ["tactics"],
+                          "mistakes": [
+                            { "san": "d6", "grade": "playable", "note": "Also played and fine. Taking first is simpler because it stops White from ever having the two pawns side by side." }
+                          ],
+                          "children": [
+                            {
+                              "san": "Nf3",
+                              "note": "White develops rather than recapturing at once, keeping the option of a gambit.",
+                              "weight": 7,
+                              "children": [
+                                {
+                                  "san": "Nc6",
+                                  "note": "Develop and hold the pawn on d4 for one more move, which makes White spend time on it.",
+                                  "tags": ["development"],
+                                  "mistakes": [
+                                    { "san": "e6", "grade": "playable", "note": "Solid. The knight is more useful first because it defends the extra pawn and covers e5." },
+                                    { "san": "d3", "grade": "inaccuracy", "note": "Pushing the pawn on gives it away for nothing: White simply takes with the bishop and has a free game." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "cxd4",
+                                      "note": "White takes back and has the classic Alapin centre.",
+                                      "weight": 8,
+                                      "children": [
+                                        {
+                                          "san": "d6",
+                                          "note": "And the pawn arrives after all. It hits the head of White's centre and opens the diagonal for the bishop.",
+                                          "tags": ["d5-break", "development"],
+                                          "mistakes": [
+                                            { "san": "e6", "grade": "playable", "note": "Sound and slower. Hitting the pawn on e5 is the move that stops White from ever getting comfortable." }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "Bc4",
+                                              "note": "White develops with an eye on the knight on d5 and the pawn on f7.",
+                                              "weight": 7,
+                                              "children": [
+                                                {
+                                                  "san": "Nb6",
+                                                  "note": "The knight steps away and hits the bishop as it goes.",
+                                                  "tags": ["development", "tactics"],
+                                                  "mistakes": [
+                                                    { "san": "e6", "grade": "playable", "note": "Fine, and it leaves the knight where White can trade it off on Black's terms. Moving it with tempo is better." }
+                                                  ],
+                                                  "children": [
+                                                    {
+                                                      "san": "Bb5",
+                                                      "note": "The bishop steps aside and pins the knight on c6 instead.",
+                                                      "weight": 7,
+                                                      "children": [
+                                                        {
+                                                          "san": "dxe5",
+                                                          "note": "Take the pawn while the bishop is away from the centre. The head of White's chain comes off and the position opens for Black's pieces.",
+                                                          "tags": ["tactics"],
+                                                          "mistakes": [
+                                                            { "san": "Bd7", "grade": "playable", "note": "Solid and slower. Taking is the move that changes the structure while White's bishop is on the wrong square for it." }
+                                                          ],
+                                                          "children": [
+                                                            {
+                                                              "san": "Nxe5",
+                                                              "note": "White recaptures with the knight and keeps the pin.",
+                                                              "weight": 8,
+                                                              "children": [
+                                                                {
+                                                                  "san": "Bd7",
+                                                                  "note": "Break the pin. The bishop develops and defends the knight, and Black has a free position with no weaknesses.",
+                                                                  "tags": ["bishop-placement"],
+                                                                  "plan": "Trade on b5 if White allows it, then play the pawn to e6, the bishop to e7 and castle. White's pawn on d4 is isolated once the centre clears.",
+                                                                  "name": "The Alapin, 2...Nf6 and the trade"
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "d4",
+      "note": "The Smith-Morra move order. White is offering a pawn to open the position before Black has developed anything.",
+      "weight": 4,
+      "children": [
+        {
+          "san": "cxd4",
+          "note": "Take. Declining the first pawn would hand White the centre for nothing, and the gambit is refused on the next move instead.",
+          "tags": ["tactics"],
+          "children": [
+            {
+              "san": "c3",
+              "note": "The Smith-Morra Gambit. White offers a second pawn for two open files and a lead in development.",
+              "weight": 7,
+              "children": [
+                {
+                  "san": "Nf6",
+                  "note": "Decline. Taking on c3 is a memorisation contest against an opponent who has played it fifty times, and this move reaches a comfortable game with no theory at all.",
+                  "tags": ["vs-anti-sicilian", "development"],
+                  "mistakes": [
+                    { "san": "dxc3", "grade": "playable", "note": "Perfectly sound, and it is the line White has prepared and Black has not. The theory fork rule says take the move that needs less memorisation, and this is the clearest case of it in the whole course." },
+                    { "san": "d3", "grade": "inaccuracy", "note": "It gives the pawn straight back and leaves White with a comfortable game and a free tempo." },
+                    { "san": "e5", "grade": "inaccuracy", "note": "It holds the pawn and blocks the bishop on f8 in, and 4.cxd4 opens the position with Black undeveloped." }
+                  ],
+                  "children": [
+                    {
+                      "san": "e5",
+                      "note": "White pushes past with tempo, and this is the same structure as the Alapin.",
+                      "weight": 8,
+                      "children": [
+                        {
+                          "san": "Nd5",
+                          "note": "The knight to the middle again, and it is safe there for the same reason.",
+                          "tags": ["development"],
+                          "mistakes": [
+                            { "san": "Ne4", "grade": "inaccuracy", "note": "5.cxd4 and the knight has to move a third time once White plays d3 or Nd2." }
+                          ],
+                          "children": [
+                            {
+                              "san": "cxd4",
+                              "note": "White takes back and has the big centre the gambit was aiming for, without the extra pawn.",
+                              "weight": 8,
+                              "children": [
+                                {
+                                  "san": "d6",
+                                  "note": "The pawn arrives and hits the head of the chain. Black is back on familiar ground.",
+                                  "tags": ["d5-break", "development"],
+                                  "mistakes": [
+                                    { "san": "e6", "grade": "playable", "note": "Solid and slower. Hitting the pawn on e5 gives White the choice of trading into an even game or defending it." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Nf3",
+                                      "note": "White develops and holds the pawn on e5.",
+                                      "weight": 8,
+                                      "children": [
+                                        {
+                                          "san": "Nc6",
+                                          "note": "Develop and press the pawn on d4, which is the one White cannot easily defend twice.",
+                                          "tags": ["development"],
+                                          "mistakes": [
+                                            { "san": "dxe5", "grade": "playable", "note": "Fine, and it releases the tension a move early. Developing first keeps White having to watch both pawns." }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "Bc4",
+                                              "note": "White develops with an eye on the knight on d5, and the game has arrived at the Alapin position by a different road.",
+                                              "weight": 7,
+                                              "children": [
+                                                {
+                                                  "san": "Nb6",
+                                                  "note": "The knight steps away with tempo, the same answer as in the Alapin. The two lines have transposed, which is the reward for declining: one position to know instead of two.",
+                                                  "tags": ["development", "tactics"],
+                                                  "mistakes": [
+                                                    { "san": "e6", "grade": "playable", "note": "Solid, and it leaves the knight on d5 where White chooses when to trade it. Moving it with tempo is the better version." }
+                                                  ],
+                                                  "plan": "Follow the Alapin line: meet the bishop on b5 by taking on e5 and then breaking the pin with the bishop to d7. White has no attack and no extra pawn.",
+                                                  "name": "The Smith-Morra, declined"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "f4",
+      "note": "The Grand Prix Attack. White plays for f5 and a kingside attack and does not touch the centre.",
+      "weight": 4,
+      "children": [
+        {
+          "san": "d6",
+          "note": "The move order holds here. The pawn covers e5, which is the square White's attack wants to use.",
+          "tags": ["vs-anti-sicilian", "development"],
+          "mistakes": [
+            { "san": "d5", "grade": "playable", "note": "The critical answer and a good one: 3.exd5 Nf6 gives Black an easy game. This course keeps to one move order and the pawn on d6 is fine here." },
+            { "san": "g6", "grade": "playable", "note": "Also good. The pawn on d6 first is the habit that keeps every chapter of this course consistent." }
+          ],
+          "children": [
+            {
+              "san": "Nf3",
+              "note": "White develops and prepares to castle before pushing.",
+              "weight": 8,
+              "children": [
+                {
+                  "san": "Nf6",
+                  "note": "Hit the pawn on e4, which is the one loose thing in White's setup.",
+                  "tags": ["development"],
+                  "mistakes": [
+                    { "san": "g6", "grade": "playable", "note": "Sound and it usually transposes. Hitting the pawn first makes White defend it rather than push." }
+                  ],
+                  "children": [
+                    {
+                      "san": "Bc4",
+                      "note": "The bishop takes aim at f7, which is the standard Grand Prix idea.",
+                      "weight": 6,
+                      "children": [
+                        {
+                          "san": "e6",
+                          "note": "Shut the diagonal, exactly as in chapter 4. The bishop on c4 has nothing left to look at.",
+                          "tags": ["light-squares"],
+                          "mistakes": [
+                            { "san": "g6", "grade": "inaccuracy", "note": "It leaves the diagonal open and 5.Bxf7+ is at least awkward and often winning if Black is careless about f7." },
+                            { "san": "Nc6", "grade": "playable", "note": "Fine, and the pawn on e6 is the move that takes White's whole idea away." }
+                          ],
+                          "children": [
+                            {
+                              "san": "O-O",
+                              "note": "White castles and prepares to push the f-pawn.",
+                              "weight": 8,
+                              "children": [
+                                {
+                                  "san": "Be7",
+                                  "note": "Develop and castle next. The kingside is solid and White's attack has no target.",
+                                  "tags": ["development"],
+                                  "plan": "Castle, then play the knight to c6 and the pawn to b5 and take the queenside. Meet f5 by taking with the pawn on e6 and putting a knight on e5.",
+                                  "name": "The Grand Prix, with the bishop shut out"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "b3",
+      "note": "A quiet fianchetto. White develops the bishop to b2 and waits.",
+      "weight": 3,
+      "children": [
+        {
+          "san": "d6",
+          "note": "The usual move. It covers e5, which is the square the bishop on b2 is going to look at.",
+          "tags": ["vs-anti-sicilian", "development"],
+          "mistakes": [
+            { "san": "Nc6", "grade": "playable", "note": "Fine. The pawn is the move that takes the sting out of the bishop before it arrives." },
+            { "san": "e5", "grade": "inaccuracy", "note": "It walks straight onto the diagonal the bishop is about to occupy, and the hole on d5 comes with it." }
+          ],
+          "children": [
+            {
+              "san": "Bb2",
+              "note": "The bishop takes the long diagonal, which is White's only real idea in this line.",
+              "weight": 9,
+              "children": [
+                {
+                  "san": "Nf6",
+                  "note": "Develop and hit the pawn on e4, which nothing is defending yet.",
+                  "tags": ["development"],
+                  "mistakes": [
+                    { "san": "Nc6", "grade": "playable", "note": "Also fine. The knight to f6 makes White answer about the pawn on e4 straight away." },
+                    { "san": "g6", "grade": "inaccuracy", "note": "It offers to trade the bishop that defends the dark squares, which is the one piece Black needs against a bishop on b2." }
+                  ],
+                  "children": [
+                    {
+                      "san": "e5",
+                      "note": "White pushes past with tempo and hopes to open the diagonal.",
+                      "weight": 6,
+                      "children": [
+                        {
+                          "san": "dxe5",
+                          "note": "Take at once. The pawn on d6 has done its job and now it clears the way for Black's pieces.",
+                          "tags": ["tactics"],
+                          "mistakes": [
+                            { "san": "Nd5", "grade": "playable", "note": "Sound, and taking is simpler: it removes the pawn that would otherwise cramp the whole position." },
+                            { "san": "Ng4", "grade": "inaccuracy", "note": "The knight goes nowhere useful and White simply plays h3 and keeps the space." }
+                          ],
+                          "children": [
+                            {
+                              "san": "Bxe5",
+                              "note": "White recaptures with the bishop, which lands on an active square in the middle.",
+                              "weight": 8,
+                              "children": [
+                                {
+                                  "san": "Nc6",
+                                  "note": "Develop with a threat. The knight attacks the bishop and Black gains the time to finish developing.",
+                                  "tags": ["development", "tactics"],
+                                  "plan": "Chase the bishop, play the pawn to e6 and the bishop to e7, and castle. Black has the centre and an extra developing move.",
+                                  "name": "2.b3 and the bishop chased"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

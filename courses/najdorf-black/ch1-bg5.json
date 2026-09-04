@@ -76,7 +76,7 @@
                                           "tags": ["b5-break"],
                                           "mistakes": [
                                             { "san": "h6", "grade": "inaccuracy", "note": "It stops nothing. White is happy to play 11.Bxf6 anyway, and Black has spent a move that was needed on the queenside." },
-                                            { "san": "O-O", "grade": "mistake", "note": "The king goes to the side the pawns are already rolling down. White plays 11.g5 and keeps pushing with a target." },
+                                            { "san": "O-O", "grade": "mistake", "note": "The king goes to the side the pawns are already rolling down. White plays 11.Bxf6 Nxf6 12.g5 and keeps pushing with a target on it." },
                                             { "san": "Nc5", "grade": "inaccuracy", "note": "The knight looks active and it is not doing anything: the pawn on e4 is defended and the knight has to move again after 11.e5." }
                                           ],
                                           "children": [
@@ -104,7 +104,7 @@
                                                           "note": "Back to d7, which is the right square rather than the clever one. From there the knight is heading for e5, where it hits the pawn on g4 and blocks the file.",
                                                           "tags": ["development"],
                                                           "mistakes": [
-                                                            { "san": "Nh5", "grade": "mistake", "note": "The knight is stranded on the edge and 13.Nxh5 simply takes it, because nothing defends the square." },
+                                                            { "san": "Nh5", "grade": "inaccuracy", "note": "The knight is stranded on the edge with no way back into the game, and it takes no part in the defence or the attack. The retreat to d7 keeps it working." },
                                                             { "san": "Ng8", "grade": "inaccuracy", "note": "The same problem with an extra insult: the knight has undeveloped itself and the rook on h8 still cannot move." }
                                                           ],
                                                           "children": [

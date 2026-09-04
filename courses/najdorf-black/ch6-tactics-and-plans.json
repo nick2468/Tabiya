@@ -1,0 +1,527 @@
+{
+  "id": "ch6-tactics-and-plans",
+  "title": "Typical tactics and plans",
+  "defaultTags": ["tactics"],
+  "intro": "Six positions, each one running through a line from an earlier chapter and stopping on the move that matters. Play the line and find the last move yourself.\n\nSeveral of them are defensive, and that is deliberate. In most openings the exercises are about landing a blow. In the Najdorf, half of what a club player needs is seeing the blow coming: White sacrifices on d5, on f5, on e6 and on b5 in these structures, and knowing which ones work is worth more than any attacking idea Black has.\n\n## What each one is about\n\nThe first is the tempo. In the main line of chapter 1, with White's pawn arriving on f5 and everything hanging, there is a capture that comes with check, and a free move in a race decides the game.\n\nThe second is the order of operations. Black's knight is attacked and Black pushes a pawn on the other wing instead, because the pawn comes with a threat of its own and White has to answer first.\n\nThe third is the break. White has spent moves on a rook and a pawn storm and has not castled, and the answer to a wing attack with the king still in the middle is the centre.\n\nThe fourth is defence: a bishop appears on h6 offering to trade off the piece that guards the squares around Black's king, and there is a way to accept on Black's terms rather than White's.\n\nThe fifth is the hole. White finally puts a knight on d5 and Black has spent the whole opening preparing one answer to exactly that.\n\nThe sixth is the outpost. White opens the position and there is one square that is Black's for the rest of the game.\n\n## The pattern that is not here\n\nThe exchange sacrifice, a rook taking a knight on c3, is the signature blow of the Sicilian and it is not one of these six. It is not a move to memorise; it is a judgement about whether the dark squares and the pawn on e4 are worth the exchange, and it comes up in positions too varied to drill. Recognise it as an option whenever White's knight on c3 is the piece holding the position together, and then count.\n\n## Typical mistakes at this level\n\nAnswering an attack on a piece by moving the piece, when a bigger threat is available. Taking a free pawn without checking whether the capture also comes with check. Defending a wing attack on the wing rather than in the centre. And trading a good bishop for a knight because the trade is there, rather than because the position needs it.",
+  "stem": ["e4", "c5", "Nf3", "d6", "d4", "cxd4", "Nxd4", "Nf6", "Nc3", "a6"],
+  "tree": [
+    {
+      "san": "Bg5",
+      "note": "Exercise 1. The main line of chapter 1, played out to the moment the pawn arrives on f5.",
+      "weight": 7,
+      "children": [
+        {
+          "san": "e6",
+          "note": "One square, because of the pin.",
+          "tags": ["vs-bg5"],
+          "children": [
+            {
+              "san": "f4",
+              "note": "The main line.",
+              "weight": 8,
+              "children": [
+                {
+                  "san": "Be7",
+                  "note": "Break the pin.",
+                  "tags": ["development"],
+                  "children": [
+                    {
+                      "san": "Qf3",
+                      "note": "The standard square.",
+                      "weight": 8,
+                      "children": [
+                        {
+                          "san": "Qc7",
+                          "note": "The file, and cover of e5.",
+                          "tags": ["development"],
+                          "children": [
+                            {
+                              "san": "O-O-O",
+                              "note": "Opposite sides.",
+                              "weight": 9,
+                              "children": [
+                                {
+                                  "san": "Nbd7",
+                                  "note": "The last piece out.",
+                                  "tags": ["development"],
+                                  "children": [
+                                    {
+                                      "san": "g4",
+                                      "note": "The storm starts.",
+                                      "weight": 8,
+                                      "children": [
+                                        {
+                                          "san": "b5",
+                                          "note": "And so does Black's.",
+                                          "tags": ["b5-break"],
+                                          "children": [
+                                            {
+                                              "san": "Bxf6",
+                                              "note": "Trade first.",
+                                              "weight": 8,
+                                              "children": [
+                                                {
+                                                  "san": "Nxf6",
+                                                  "note": "With the knight, keeping the pawns whole.",
+                                                  "tags": ["development"],
+                                                  "children": [
+                                                    {
+                                                      "san": "g5",
+                                                      "note": "The knight is hit.",
+                                                      "weight": 9,
+                                                      "children": [
+                                                        {
+                                                          "san": "Nd7",
+                                                          "note": "Back to the useful square.",
+                                                          "tags": ["development"],
+                                                          "children": [
+                                                            {
+                                                              "san": "f5",
+                                                              "note": "White hits e6 and opens a second front. Black to play: something here comes with check.",
+                                                              "weight": 8,
+                                                              "children": [
+                                                                {
+                                                                  "san": "Bxg5+",
+                                                                  "note": "A free pawn and a free move. In a race where both sides are one tempo from breaking through, the check is the whole point.",
+                                                                  "tags": ["tactics", "dark-squares"],
+                                                                  "plan": "Meet the king move by bringing the knight to e5, then push the queenside pawns. Keep the bishop on g5 defended and let White run out of attackers.",
+                                                                  "name": "Exercise 1: the capture with check"
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Be3",
+      "note": "Exercise 2. The English Attack, to the moment White's pawn hits the knight.",
+      "weight": 9,
+      "children": [
+        {
+          "san": "e5",
+          "note": "Take the centre.",
+          "tags": ["vs-english-attack"],
+          "children": [
+            {
+              "san": "Nb3",
+              "note": "The retreat.",
+              "weight": 9,
+              "children": [
+                {
+                  "san": "Be6",
+                  "note": "Cover the hole.",
+                  "tags": ["light-squares"],
+                  "children": [
+                    {
+                      "san": "f3",
+                      "note": "The setup.",
+                      "weight": 8,
+                      "children": [
+                        {
+                          "san": "Be7",
+                          "note": "Develop.",
+                          "tags": ["development"],
+                          "children": [
+                            {
+                              "san": "Qd2",
+                              "note": "Connecting.",
+                              "weight": 9,
+                              "children": [
+                                {
+                                  "san": "O-O",
+                                  "note": "While it is quiet.",
+                                  "tags": ["king-safety"],
+                                  "children": [
+                                    {
+                                      "san": "O-O-O",
+                                      "note": "Opposite sides again.",
+                                      "weight": 9,
+                                      "children": [
+                                        {
+                                          "san": "Nbd7",
+                                          "note": "The last piece.",
+                                          "tags": ["development"],
+                                          "children": [
+                                            {
+                                              "san": "g4",
+                                              "note": "The attack.",
+                                              "weight": 8,
+                                              "children": [
+                                                {
+                                                  "san": "b5",
+                                                  "note": "The counter-attack.",
+                                                  "tags": ["b5-break"],
+                                                  "children": [
+                                                    {
+                                                      "san": "g5",
+                                                      "note": "The knight on f6 is attacked. Black to play, and moving it is not the answer.",
+                                                      "weight": 9,
+                                                      "children": [
+                                                        {
+                                                          "san": "b4",
+                                                          "note": "Push anyway. The pawn attacks the knight on c3, which is holding the pawn on e4 and the d5 square, so White has to deal with that before Black has to deal with anything.",
+                                                          "tags": ["b5-break", "tactics"],
+                                                          "plan": "Answer the knight move by retreating to e8, then bring it to c7 and on to b5 or e6. The queenside file is about to open and Black is the one with a rook ready for it.",
+                                                          "name": "Exercise 2: push, do not retreat"
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Rg1",
+      "note": "Exercise 3. White prepares a pawn storm and leaves the king in the middle.",
+      "weight": 3,
+      "children": [
+        {
+          "san": "e5",
+          "note": "The centre.",
+          "tags": ["vs-classical"],
+          "children": [
+            {
+              "san": "Nb3",
+              "note": "The retreat.",
+              "weight": 7,
+              "children": [
+                {
+                  "san": "Be6",
+                  "note": "The hole, and the preparation.",
+                  "tags": ["light-squares"],
+                  "children": [
+                    {
+                      "san": "g4",
+                      "note": "The storm, with the king still on e1. Black to play.",
+                      "weight": 8,
+                      "children": [
+                        {
+                          "san": "d5",
+                          "note": "The break. A wing attack is answered in the centre, and here the centre is open to Black in one move.",
+                          "tags": ["d5-break", "tactics"],
+                          "plan": "Trade in the centre, then develop with the bishop to e7 and the knight to d7 or c6. White has two loose pawns on the kingside and a king with nowhere safe to go.",
+                          "name": "Exercise 3: the break in the centre"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Bc4",
+      "note": "Exercise 4. The Fischer-Sozin, to the moment White offers a trade on h6.",
+      "weight": 7,
+      "children": [
+        {
+          "san": "e6",
+          "note": "The exception to the rule.",
+          "tags": ["vs-sozin"],
+          "children": [
+            {
+              "san": "Bb3",
+              "note": "Stepping aside early.",
+              "weight": 8,
+              "children": [
+                {
+                  "san": "b5",
+                  "note": "The space, and c4 taken away.",
+                  "tags": ["b5-break"],
+                  "children": [
+                    {
+                      "san": "O-O",
+                      "note": "Castling first.",
+                      "weight": 8,
+                      "children": [
+                        {
+                          "san": "Be7",
+                          "note": "Develop.",
+                          "tags": ["development"],
+                          "children": [
+                            {
+                              "san": "Qf3",
+                              "note": "The queen comes out.",
+                              "weight": 7,
+                              "children": [
+                                {
+                                  "san": "Qc7",
+                                  "note": "The file, and off the diagonal.",
+                                  "tags": ["development"],
+                                  "children": [
+                                    {
+                                      "san": "Qg3",
+                                      "note": "Swinging across.",
+                                      "weight": 8,
+                                      "children": [
+                                        {
+                                          "san": "O-O",
+                                          "note": "Castle anyway.",
+                                          "tags": ["king-safety"],
+                                          "children": [
+                                            {
+                                              "san": "Bh6",
+                                              "note": "The trade is offered, and the bishop on g7 is the piece guarding the dark squares in front of Black's king. Black to play.",
+                                              "weight": 7,
+                                              "children": [
+                                                {
+                                                  "san": "Ne8",
+                                                  "note": "Take on Black's terms. If White goes through with the trade, it is the knight that recaptures on g7 and the pawns in front of the king never move.",
+                                                  "tags": ["king-safety", "development"],
+                                                  "plan": "Recapture on g7 with the knight if White trades, then bring it back to f6 or on to c7. The bishop goes to b7 and the queenside pawns do the rest.",
+                                                  "name": "Exercise 4: trade on your own terms"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Be2",
+      "note": "Exercise 5. The classical line, to the moment White finally uses the hole.",
+      "weight": 7,
+      "children": [
+        {
+          "san": "e5",
+          "note": "The centre, and the hole with it.",
+          "tags": ["vs-classical"],
+          "children": [
+            {
+              "san": "Nb3",
+              "note": "The retreat.",
+              "weight": 9,
+              "children": [
+                {
+                  "san": "Be7",
+                  "note": "Develop.",
+                  "tags": ["development"],
+                  "children": [
+                    {
+                      "san": "O-O",
+                      "note": "Quietly.",
+                      "weight": 9,
+                      "children": [
+                        {
+                          "san": "O-O",
+                          "note": "The same.",
+                          "tags": ["king-safety"],
+                          "children": [
+                            {
+                              "san": "Be3",
+                              "note": "The last piece.",
+                              "weight": 8,
+                              "children": [
+                                {
+                                  "san": "Be6",
+                                  "note": "The answer to the hole, put in place before it is needed.",
+                                  "tags": ["light-squares"],
+                                  "children": [
+                                    {
+                                      "san": "Qd2",
+                                      "note": "Connecting.",
+                                      "weight": 7,
+                                      "children": [
+                                        {
+                                          "san": "Nbd7",
+                                          "note": "Developing.",
+                                          "tags": ["development"],
+                                          "children": [
+                                            {
+                                              "san": "a4",
+                                              "note": "Stopping the pawn.",
+                                              "weight": 8,
+                                              "children": [
+                                                {
+                                                  "san": "Rc8",
+                                                  "note": "The file instead.",
+                                                  "tags": ["development"],
+                                                  "children": [
+                                                    {
+                                                      "san": "Nd5",
+                                                      "note": "White plants the knight on the hole at last. Black to play, and this is what the bishop has been sitting on e6 for.",
+                                                      "weight": 7,
+                                                      "children": [
+                                                        {
+                                                          "san": "Bxd5",
+                                                          "note": "Trade it off. The hole only matters while White has a piece to put on it, and Black has been ready for this since move nine.",
+                                                          "tags": ["light-squares", "tactics"],
+                                                          "plan": "After the recapture, put the knight on c5 or b6 and double on the c-file. With the knights traded off the d5 square is a pawn, not an outpost.",
+                                                          "name": "Exercise 5: the hole answered"
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "f4",
+      "note": "Exercise 6. The pawn to f4, to the moment the centre opens.",
+      "weight": 5,
+      "children": [
+        {
+          "san": "e5",
+          "note": "The centre, at once.",
+          "tags": ["vs-classical"],
+          "children": [
+            {
+              "san": "Nf3",
+              "note": "Holding e5.",
+              "weight": 8,
+              "children": [
+                {
+                  "san": "Nbd7",
+                  "note": "Defending it a second time.",
+                  "tags": ["development"],
+                  "children": [
+                    {
+                      "san": "a4",
+                      "note": "Stopping the pawn.",
+                      "weight": 7,
+                      "children": [
+                        {
+                          "san": "Be7",
+                          "note": "Developing.",
+                          "tags": ["development"],
+                          "children": [
+                            {
+                              "san": "Bd3",
+                              "note": "The diagonal.",
+                              "weight": 8,
+                              "children": [
+                                {
+                                  "san": "O-O",
+                                  "note": "Safety first.",
+                                  "tags": ["king-safety"],
+                                  "children": [
+                                    {
+                                      "san": "O-O",
+                                      "note": "The same.",
+                                      "weight": 8,
+                                      "children": [
+                                        {
+                                          "san": "exf4",
+                                          "note": "Now the trade.",
+                                          "tags": ["tactics"],
+                                          "children": [
+                                            {
+                                              "san": "Bxf4",
+                                              "note": "White recaptures and the centre is open. Black to play: there is one square that is Black's for the rest of the game.",
+                                              "weight": 9,
+                                              "children": [
+                                                {
+                                                  "san": "Ne5",
+                                                  "note": "The outpost. The pawn on d6 defends it, the pawn that used to challenge it has been traded off, and it attacks the bishop and the knight at the same time.",
+                                                  "tags": ["development", "tactics"],
+                                                  "plan": "Trade on d3 if White allows it, then bring a rook to e8 and the bishop to e6. Nothing White has can drive the knight off e5 without making a bigger concession.",
+                                                  "name": "Exercise 6: the outpost on e5"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
