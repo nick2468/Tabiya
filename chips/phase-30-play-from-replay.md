@@ -110,10 +110,14 @@ Nick, 2026-09-04, after the chip was sent: nearly every control is a button and 
 playing is styled as a link in the header, which reads as odd, and it needs explaining
 beside Play from here because the two are easy to confuse.
 
-- [ ] **Keep playing leaves the header and joins the button row**, in the app's button
-  style, placed after New game and before Undo: New game, Keep playing, Undo, Redo, Hint,
-  Play from here, then the arrows on the right. It shows only when it applies (a reviewed
-  game that did not end by itself), as now.
+- [ ] **Two rows under the board, not one.** Nick's ruling 2026-09-04: the board is 416px
+  wide and the present row already reaches 374px, so there is no room for two more
+  buttons. **Row 1, whenever a game exists:** New game, Undo, Redo, Hint, unchanged.
+  **Row 2, only while a report is showing:** Keep playing and Play from here on the left,
+  the two arrows on the right ending at the board's edge. Keep playing is in the app's
+  button style and leaves the header; it shows only when it applies (a reviewed game that
+  did not end by itself), so row 2 sometimes starts with Play from here. Both rows start
+  at the board's left edge and neither exceeds its width; measure and say so.
 - [ ] **A title on each of the two so the difference is on the screen.** Keep playing:
   "Carry on this game from its final position. Reviewing again replaces this game's
   record." Play from here: "Start a new game from the position on the board. This game's
