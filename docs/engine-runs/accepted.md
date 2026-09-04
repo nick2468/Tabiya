@@ -24,6 +24,24 @@ is over the ceiling, so the checker will report it every time. It stays an inacc
 because the decision was argued, not because the number is unclear. Its note was wrong
 when the entry was found and was fixed then: it had called the ending level.
 
+**`najdorf-black` ch4-bc4-and-h3, three alternatives at `11...Ne8`, all reported at
+about 99.7.**
+Line: `e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3 Qc7 Qg3 O-O Bh6`,
+where the course plays `11...Ne8`. The three alternatives beside it, `11...Nxe4`,
+`11...b4` and `11...Bb7`, all lose by force to `12.Bxg7`: the pawn cannot be taken back,
+because `Kxg7` would step onto the file White's queen is already on.
+
+**The number is a mate score, not a pawn count, and no grade in the schema is above
+`mistake`.** The bands run `playable` to 0.9, `inaccuracy` to 1.8, and `mistake` to 99,
+so a forced mate is outside every one of them and the checker has nothing to match. All
+three are graded `mistake`, which is the strongest word available, and each note says
+plainly that the move loses on the spot.
+
+Found and settled at phase 31. The position itself is fine for Black, +0.29 at 2500 ms
+after the course's own move, so this is not an unsound line: it is three sharp
+alternatives beside a sound one. **A fourth entry appearing at this position would be
+new** and worth an hour; these three are not.
+
 ## engine-pass.mjs
 
 **`vienna-gambit` ch2-accepted, `7.Nxf3`, about 1.1 to 1.3.**

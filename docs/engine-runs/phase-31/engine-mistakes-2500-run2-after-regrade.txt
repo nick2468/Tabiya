@@ -1,0 +1,33 @@
+Confirming run after the regrades. Same conditions: no build, no test run, no second engine; CPU load 21-23% across 16 processors.
+
+240 mistake entries across 7 chapters, 358 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+  ...25/358
+  ...50/358
+  ...75/358
+  ...100/358
+  ...125/358
+  ...150/358
+  ...175/358
+  ...200/358
+  ...225/358
+  ...250/358
+  ...275/358
+  ...300/358
+  ...325/358
+  ...350/358
+
+4 entries where the grade and the engine disagree:
+
+ 99.73  mistake    graded too kindly  ch4-bc4-and-h3
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3 Qc7 Qg3 O-O Bh6 : Ne8 not Nxe4
+      "It loses on the spot, and not because of the pawn: 12.Bxg7 cannot be answered by Kxg7, because the king would be stepping onto the file White's queen is already on. Black is lost."
+ 99.73  mistake    graded too kindly  ch4-bc4-and-h3
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3 Qc7 Qg3 O-O Bh6 : Ne8 not b4
+      "It loses by force. 12.Bxg7 and the pawn cannot be taken back, because Kxg7 would put the king on the file White's queen is looking down. The knight has to go to e8 first, and then a trade on g7 is answered by the knight."
+ 99.73  mistake    graded too kindly  ch4-bc4-and-h3
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3 Qc7 Qg3 O-O Bh6 : Ne8 not Bb7
+      "A good square in almost every other position in this chapter, and here it loses: 12.Bxg7 and there is no recapture, because Kxg7 walks onto the queen's file. Everything waits until the knight has covered g7."
+ 0.98  playable   graded too kindly  ch2-english-attack
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nb3 Be6 f3 Be7 Qd2 O-O O-O-O Nbd7 g4 b5 g5 : b4 not Ne8
+      "The right square for the knight and the wrong moment. Pushing the pawn first makes White answer, and only then does the knight step back."

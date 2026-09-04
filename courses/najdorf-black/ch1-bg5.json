@@ -60,7 +60,7 @@
                                   "note": "The last minor piece comes out. From d7 it covers the pawn on f6 a third time and it has e5 and c5 ahead of it.",
                                   "tags": ["development"],
                                   "mistakes": [
-                                    { "san": "b5", "grade": "playable", "note": "Perfectly good and it usually transposes. Developing first means the knight is already on d7 when White pushes the g-pawn." },
+                                    { "san": "b5", "grade": "mistake", "note": "It looks like the same plan a move early and it is not: with the knight still on b8 the queenside is a move short of working, and White gets to push first. The knight comes out and then the pawn." },
                                     { "san": "O-O", "grade": "inaccuracy", "note": "The king walks into the pawn storm a move early. Black castles later or not at all in this line." },
                                     { "san": "Nc6", "grade": "inaccuracy", "note": "The knight is loose there: 10.Nxc6 bxc6 hands White a target on c6 and takes the b5 square away from Black's own pawn." }
                                   ],
@@ -76,7 +76,7 @@
                                           "tags": ["b5-break"],
                                           "mistakes": [
                                             { "san": "h6", "grade": "inaccuracy", "note": "It stops nothing. White is happy to play 11.Bxf6 anyway, and Black has spent a move that was needed on the queenside." },
-                                            { "san": "O-O", "grade": "mistake", "note": "The king goes to the side the pawns are already rolling down. White plays 11.Bxf6 Nxf6 12.g5 and keeps pushing with a target on it." },
+                                            { "san": "O-O", "grade": "inaccuracy", "note": "The king goes to the side the pawns are already rolling down. White plays 11.Bxf6 Nxf6 12.g5 and keeps pushing with a target on it." },
                                             { "san": "Nc5", "grade": "inaccuracy", "note": "The knight looks active and it is not doing anything: the pawn on e4 is defended and the knight has to move again after 11.e5." }
                                           ],
                                           "children": [
@@ -90,7 +90,7 @@
                                                   "note": "Recapture with the knight. The other knight takes the good square and the pawn structure in front of the king stays whole.",
                                                   "tags": ["development"],
                                                   "mistakes": [
-                                                    { "san": "gxf6", "grade": "mistake", "note": "It opens the g-file straight at Black's own king in a position where White has castled the other way and has a rook coming to g1." },
+                                                    { "san": "gxf6", "grade": "inaccuracy", "note": "It opens the g-file straight at Black's own king in a position where White has castled the other way and has a rook coming to g1." },
                                                     { "san": "Bxf6", "grade": "inaccuracy", "note": "The bishop is Black's best defensive piece on the dark squares. Taking with it leaves the squares around the king thin and the knight on d7 with nothing to do." }
                                                   ],
                                                   "children": [
@@ -104,7 +104,7 @@
                                                           "note": "Back to d7, which is the right square rather than the clever one. From there the knight is heading for e5, where it hits the pawn on g4 and blocks the file.",
                                                           "tags": ["development"],
                                                           "mistakes": [
-                                                            { "san": "Nh5", "grade": "inaccuracy", "note": "The knight is stranded on the edge with no way back into the game, and it takes no part in the defence or the attack. The retreat to d7 keeps it working." },
+                                                            { "san": "Nh5", "grade": "mistake", "note": "The knight is stranded on the edge with no way back into the game, and it takes no part in the defence or the attack. The retreat to d7 keeps it working." },
                                                             { "san": "Ng8", "grade": "inaccuracy", "note": "The same problem with an extra insult: the knight has undeveloped itself and the rook on h8 still cannot move." }
                                                           ],
                                                           "children": [
@@ -133,8 +133,8 @@
                                                                           "note": "The knight reaches its square. It blocks the e-file, hits the pawn on g4, and it cannot easily be driven away.",
                                                                           "tags": ["development", "dark-squares"],
                                                                           "mistakes": [
-                                                                            { "san": "Be7", "grade": "inaccuracy", "note": "Retreating hands the tempo straight back. The bishop is fine where it is and the knight is the piece that needs a square." },
-                                                                            { "san": "Bh6", "grade": "inaccuracy", "note": "The bishop is out of play on h6 and the knight on d7 still has nowhere useful to go." }
+                                                                            { "san": "Be7", "grade": "mistake", "note": "Retreating hands the tempo straight back. The bishop is fine where it is and the knight is the piece that needs a square." },
+                                                                            { "san": "Bh6", "grade": "mistake", "note": "The bishop is out of play on h6 and the knight on d7 still has nowhere useful to go." }
                                                                           ],
                                                                           "children": [
                                                                             {
@@ -200,7 +200,7 @@
                                                   "tags": ["bishop-placement", "light-squares"],
                                                   "mistakes": [
                                                     { "san": "b4", "grade": "inaccuracy", "note": "Too fast. 12.Na4 steps aside and the knight is heading for b6 while Black's bishop is still at home." },
-                                                    { "san": "O-O", "grade": "playable", "note": "Playable here, because White has built quietly rather than pushed. Developing the bishop first is still the better order." }
+                                                    { "san": "O-O", "grade": "mistake", "note": "It looks safe and it is not: the pawn storm is still coming and the king walks towards it. The bishop comes out first and the king waits to see which way White commits." }
                                                   ],
                                                   "children": [
                                                     {

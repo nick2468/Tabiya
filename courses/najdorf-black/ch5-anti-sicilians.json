@@ -495,8 +495,8 @@
                   "note": "The knight steps to the middle, where it is safe because the pawn on c3 blocks White's own knight from chasing it.",
                   "tags": ["development"],
                   "mistakes": [
-                    { "san": "Ng8", "grade": "mistake", "note": "It undevelops the piece for nothing and hands White the centre and every tempo in the position." },
-                    { "san": "Ne4", "grade": "inaccuracy", "note": "4.d3 hits the knight and it has to move again, so Black has lost a move to gain nothing." }
+                    { "san": "Ng8", "grade": "inaccuracy", "note": "It undevelops the piece for nothing and hands White the centre and every tempo in the position." },
+                    { "san": "Ne4", "grade": "mistake", "note": "4.d3 hits the knight and it has to move again, so Black has lost a move to gain nothing." }
                   ],
                   "children": [
                     {
@@ -642,7 +642,7 @@
                           "note": "The knight to the middle again, and it is safe there for the same reason.",
                           "tags": ["development"],
                           "mistakes": [
-                            { "san": "Ne4", "grade": "inaccuracy", "note": "5.cxd4 and the knight has to move a third time once White plays d3 or Nd2." }
+                            { "san": "Ne4", "grade": "mistake", "note": "5.cxd4 and the knight has to move a third time once White plays d3 or Nd2." }
                           ],
                           "children": [
                             {
@@ -745,9 +745,9 @@
                           "note": "Take the pawn. It is not a trap and there is nothing behind it: the pawn is simply undefended, and a club opponent playing this setup on autopilot will hand it over most times.",
                           "tags": ["tactics"],
                           "mistakes": [
-                            { "san": "e6", "grade": "playable", "note": "Solid, and it declines a free pawn. Shutting the diagonal is the right idea against this bishop everywhere else in the course, and here there is something better on the board first." },
+                            { "san": "e6", "grade": "inaccuracy", "note": "Solid, and it declines a free pawn. Shutting the diagonal is the right idea against this bishop everywhere else in the course, and here there is something better on the board first." },
                             { "san": "g6", "grade": "inaccuracy", "note": "It leaves the diagonal open with the pawn on f7 already the thing White is looking at, and it ignores the free pawn as well." },
-                            { "san": "Nc6", "grade": "playable", "note": "Fine and slow. The pawn on e4 will not be there for long." }
+                            { "san": "Nc6", "grade": "inaccuracy", "note": "Fine and slow. The pawn on e4 will not be there for long." }
                           ],
                           "children": [
                             {
@@ -833,7 +833,7 @@
                   "tags": ["development"],
                   "mistakes": [
                     { "san": "Nc6", "grade": "playable", "note": "Also fine. The knight to f6 makes White answer about the pawn on e4 straight away." },
-                    { "san": "g6", "grade": "inaccuracy", "note": "It offers to trade the bishop that defends the dark squares, which is the one piece Black needs against a bishop on b2." }
+                    { "san": "g6", "grade": "mistake", "note": "It offers to trade the bishop that defends the dark squares, which is the one piece Black needs against a bishop on b2." }
                   ],
                   "children": [
                     {

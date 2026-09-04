@@ -172,7 +172,7 @@
                                                   "note": "One square, not two. With the knight pinned the far push loses the pawn on d6 or the pawn on e5, so the modest move is the right one here.",
                                                   "tags": ["vs-bg5", "dark-squares"],
                                                   "mistakes": [
-                                                    { "san": "e5", "grade": "mistake", "note": "The pin is the point of White's last move. After 7.Bxf6 Qxf6 8.Nd5 the queen has to move again and White's knight owns the hole for good." },
+                                                    { "san": "e5", "grade": "inaccuracy", "note": "The pin is the point of White's last move. After 7.Bxf6 Qxf6 8.Nd5 the queen has to move again and White's knight owns the hole for good." },
                                                     { "san": "Nbd7", "grade": "inaccuracy", "note": "It is not a blunder, and it invites 7.Bc4 with an early attack on f7 before Black has covered it." }
                                                   ],
                                                   "children": [

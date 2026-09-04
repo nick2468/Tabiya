@@ -15,7 +15,7 @@
           "note": "One square, and this is the exception to the rule the rest of the course follows. The pawn blocks the bishop's diagonal, which the far push would leave wide open.",
           "tags": ["vs-sozin", "light-squares"],
           "mistakes": [
-            { "san": "e5", "grade": "mistake", "note": "It hands over d5 with a bishop already looking at it. After 7.Nde2 Black has a hole on d5, a bad bishop on c8 and no way to cover the square." },
+            { "san": "e5", "grade": "inaccuracy", "note": "It hands over d5 with a bishop already aimed at it. After 7.Nde2 Black has a hole there, a bishop on c8 with nothing to do, and no way to cover the square. The engine calls it under half a pawn; the trouble it causes lasts the whole game." },
             { "san": "b5", "grade": "inaccuracy", "note": "7.Bb3 and Black has committed a pawn without covering the diagonal, so White gets to push the f-pawn up the board with real force." },
             { "san": "Nc6", "grade": "playable", "note": "Sound, and it invites a set of positions from the Classical Sicilian rather than this course. The pawn is the move that answers the bishop." }
           ],
@@ -59,7 +59,7 @@
                                   "note": "The queen takes the file and covers e5 and c4. It also gets off the diagonal the rook on d1 would like.",
                                   "tags": ["development"],
                                   "mistakes": [
-                                    { "san": "O-O", "grade": "playable", "note": "Safe and normal. The queen move first is more useful, because White's plan runs through e5 and the queen covers it." },
+                                    { "san": "O-O", "grade": "inaccuracy", "note": "Safe and normal. The queen move first is more useful, because White's plan runs through e5 and the queen covers it." },
                                     { "san": "Bb7", "grade": "inaccuracy", "note": "It leaves the queen on d8, where 10.Bxe6 fxe6 11.Nxe6 hits it with tempo. White has given up a bishop and taken two pawns for it, and Black's king has nowhere safe to go, which is worth more than the count." }
                                   ],
                                   "children": [
@@ -87,9 +87,9 @@
                                                   "note": "The knight steps back so that a trade on g7 is met by the knight and not by the king. The pawns in front of the king stay where they are and the knight comes back to f6 or goes on to c7.",
                                                   "tags": ["king-safety", "development"],
                                                   "mistakes": [
-                                                    { "san": "Nxe4", "grade": "mistake", "note": "The pawn is defended twice over: 12.Nxe4 simply takes the knight back and Black is a piece down." },
-                                                    { "san": "b4", "grade": "inaccuracy", "note": "It is not a blunder and it lets White trade on g7 with the king having to recapture, which thins the cover in front of it for the rest of the game." },
-                                                    { "san": "Bb7", "grade": "playable", "note": "A good square for the bishop and the same small concession: after a trade on g7 it is the king that takes back. Moving the knight first keeps the pawns whole." }
+                                                    { "san": "Nxe4", "grade": "mistake", "note": "It loses on the spot, and not because of the pawn: 12.Bxg7 cannot be answered by Kxg7, because the king would be stepping onto the file White's queen is already on. Black is lost." },
+                                                    { "san": "b4", "grade": "mistake", "note": "It loses by force. 12.Bxg7 and the pawn cannot be taken back, because Kxg7 would put the king on the file White's queen is looking down. The knight has to go to e8 first, and then a trade on g7 is answered by the knight." },
+                                                    { "san": "Bb7", "grade": "mistake", "note": "A good square in almost every other position in this chapter, and here it loses: 12.Bxg7 and there is no recapture, because Kxg7 walks onto the queen's file. Everything waits until the knight has covered g7." }
                                                   ],
                                                   "plan": "If White trades on g7, recapture with the knight. Then put the bishop on b7 and the other knight on d7 and play on the queenside, where the pawns already are.",
                                                   "name": "The Fischer-Sozin, to 11...Ne8"
@@ -327,7 +327,7 @@
                           "tags": ["d5-break", "tactics"],
                           "mistakes": [
                             { "san": "h6", "grade": "inaccuracy", "note": "Defending on the wing White is attacking on. The centre is open to Black here and that is where the answer lies." },
-                            { "san": "Nbd7", "grade": "playable", "note": "Perfectly reasonable, and it gives White a free move to play g5. The break is available now and it will not be later." }
+                            { "san": "Nbd7", "grade": "inaccuracy", "note": "Perfectly reasonable, and it gives White a free move to play g5. The break is available now and it will not be later." }
                           ],
                           "children": [
                             {
@@ -340,7 +340,7 @@
                                   "note": "Recapture with the knight, which lands on the square the whole opening has been arguing about.",
                                   "tags": ["d5-break"],
                                   "mistakes": [
-                                    { "san": "Bxd5", "grade": "inaccuracy", "note": "9.Nxd5 Nxd5 10.Qxd5 and the queen sits in the middle for free. The knight takes first so that the bishop can recapture afterwards." }
+                                    { "san": "Bxd5", "grade": "mistake", "note": "9.Nxd5 Nxd5 10.Qxd5 and the queen sits in the middle for free. The knight takes first so that the bishop can recapture afterwards." }
                                   ],
                                   "children": [
                                     {

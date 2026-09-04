@@ -60,7 +60,7 @@
                                   "mistakes": [
                                     { "san": "Nc6", "grade": "inaccuracy", "note": "The knight blocks the c-file, which is where the rook wants to work in every line of this chapter." },
                                     { "san": "b5", "grade": "playable", "note": "Good, and the bishop to e6 first settles the d5 square before the pawns commit." },
-                                    { "san": "Ng4", "grade": "inaccuracy", "note": "It chases the bishop and 10.Bg5 answers with a pin, so Black has spent two moves to make White's bishop better." }
+                                    { "san": "Ng4", "grade": "mistake", "note": "It chases the bishop and 10.Bg5 answers with a pin, so Black has spent two moves to make White's bishop better." }
                                   ],
                                   "children": [
                                     {

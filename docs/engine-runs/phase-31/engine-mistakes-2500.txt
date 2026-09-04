@@ -1,0 +1,101 @@
+Run conditions: 16 logical processors, CPU load sampled at 18-34% across the ten minutes before this started.
+No build, no test run and no second engine process: the only node processes on the machine were an idle dev server and one helper, both under 30 seconds of cumulative CPU.
+Every other engine check in this phase had finished before this one began.
+
+240 mistake entries across 7 chapters, 358 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+  ...25/358
+  ...50/358
+  ...75/358
+  ...100/358
+  ...125/358
+  ...150/358
+  ...175/358
+  ...200/358
+  ...225/358
+  ...250/358
+  ...275/358
+  ...300/358
+  ...325/358
+  ...350/358
+
+26 entries where the grade and the engine disagree:
+
+ 99.69  mistake    graded too kindly  ch4-bc4-and-h3
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3 Qc7 Qg3 O-O Bh6 : Ne8 not Nxe4
+      "The pawn is defended twice over: 12.Nxe4 simply takes the knight back and Black is a piece down."
+ 99.69  inaccuracy graded too kindly  ch4-bc4-and-h3
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3 Qc7 Qg3 O-O Bh6 : Ne8 not b4
+      "It is not a blunder and it lets White trade on g7 with the king having to recapture, which thins the cover in front of it for the rest of the game."
+ 99.69  playable   graded too kindly  ch4-bc4-and-h3
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3 Qc7 Qg3 O-O Bh6 : Ne8 not Bb7
+      "A good square for the bishop and the same small concession: after a trade on g7 it is the king that takes back. Moving the knight first keeps the pawns whole."
+ 4.17  inaccuracy graded too kindly  ch3-classical-and-quiet
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e5 Nb3 Be7 O-O O-O Be3 : Be6 not Ng4
+      "It chases the bishop and 10.Bg5 answers with a pin, so Black has spent two moves to make White's bishop better."
+ 4.01  inaccuracy graded too kindly  ch5-anti-sicilians
+      e4 c5 b3 d6 Bb2 : Nf6 not g6
+      "It offers to trade the bishop that defends the dark squares, which is the one piece Black needs against a bishop on b2."
+ 3.98  inaccuracy graded too kindly  ch2-english-attack
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nb3 Be6 f3 Be7 Qd2 O-O O-O-O Nbd7 g4 b5 g5 : b4 not Nb6
+      "The knight is heading for c4, which is a fine idea, and it leaves the knight on f6 hanging in the air for a move while White is the one attacking."
+ 3.78  inaccuracy graded too kindly  ch4-bc4-and-h3
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Rg1 e5 Nb3 Be6 g4 d5 exd5 : Nxd5 not Bxd5
+      "9.Nxd5 Nxd5 10.Qxd5 and the queen sits in the middle for free. The knight takes first so that the bishop can recapture afterwards."
+ 2.94  inaccuracy graded too kindly  ch1-bg5
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5 e6 f4 Be7 Qf3 Qc7 O-O-O Nbd7 g4 b5 Bxf6 Nxf6 g5 Nd7 f5 Bxg5+ Kb1 : Ne5 not Be7
+      "Retreating hands the tempo straight back. The bishop is fine where it is and the knight is the piece that needs a square."
+ 2.73  playable   graded too kindly  ch2-english-attack
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nf3 Be7 Bc4 : O-O not b5
+      "It hits the bishop and it is a fine move. Castling first means the tempo is spent when the king is already safe."
+ 2.60  inaccuracy graded too kindly  ch1-bg5
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5 e6 f4 Be7 Qf3 Qc7 O-O-O Nbd7 g4 b5 Bxf6 Nxf6 g5 Nd7 f5 Bxg5+ Kb1 : Ne5 not Bh6
+      "The bishop is out of play on h6 and the knight on d7 still has nowhere useful to go."
+ 2.29  inaccuracy graded too kindly  ch5-anti-sicilians
+      e4 c5 c3 Nf6 e5 : Nd5 not Ne4
+      "4.d3 hits the knight and it has to move again, so Black has lost a move to gain nothing."
+ 2.23  inaccuracy graded too kindly  ch1-bg5
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5 e6 f4 Be7 Qf3 Qc7 O-O-O Nbd7 g4 b5 Bxf6 Nxf6 g5 : Nd7 not Nh5
+      "The knight is stranded on the edge with no way back into the game, and it takes no part in the defence or the attack. The retreat to d7 keeps it working."
+ 2.16  playable   graded too kindly  ch2-english-attack
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nf3 Be7 Bc4 O-O O-O : Be6 not b5
+      "Also good. The bishop is the move that settles the d5 square, which is the only thing wrong with Black's position."
+ 2.12  inaccuracy graded too kindly  ch5-anti-sicilians
+      e4 c5 d4 cxd4 c3 Nf6 e5 : Nd5 not Ne4
+      "5.cxd4 and the knight has to move a third time once White plays d3 or Nd2."
+ 1.98  playable   graded too kindly  ch1-bg5
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5 e6 f4 Be7 Qf3 Qc7 O-O-O Nbd7 Bd3 b5 Rhe1 : Bb7 not O-O
+      "Playable here, because White has built quietly rather than pushed. Developing the bishop first is still the better order."
+ 1.81  playable   graded too kindly  ch1-bg5
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5 e6 f4 Be7 Qf3 Qc7 O-O-O : Nbd7 not b5
+      "Perfectly good and it usually transposes. Developing first means the knight is already on d7 when White pushes the g-pawn."
+ 1.58  playable   graded too kindly  ch4-bc4-and-h3
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3 : Qc7 not O-O
+      "Safe and normal. The queen move first is more useful, because White's plan runs through e5 and the queen covers it."
+ 1.20  playable   graded too kindly  ch5-anti-sicilians
+      e4 c5 f4 d6 Nf3 Nf6 Bc4 : Nxe4 not Nc6
+      "Fine and slow. The pawn on e4 will not be there for long."
+ 1.07  playable   graded too kindly  ch5-anti-sicilians
+      e4 c5 f4 d6 Nf3 Nf6 Bc4 : Nxe4 not e6
+      "Solid, and it declines a free pawn. Shutting the diagonal is the right idea against this bishop everywhere else in the course, and here there is something better on the board first."
+ 0.91  playable   graded too kindly  ch4-bc4-and-h3
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Rg1 e5 Nb3 Be6 g4 : d5 not Nbd7
+      "Perfectly reasonable, and it gives White a free move to play g5. The break is available now and it will not be later."
+ 0.63  mistake    graded too harshly  ch5-anti-sicilians
+      e4 c5 c3 Nf6 e5 : Nd5 not Ng8
+      "It undevelops the piece for nothing and hands White the centre and every tempo in the position."
+ 0.58  mistake    graded too harshly  ch0-the-defence
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5 : e6 not e5
+      "The pin is the point of White's last move. After 7.Bxf6 Qxf6 8.Nd5 the queen has to move again and White's knight owns the hole for good."
+ 0.52  mistake    graded too harshly  ch1-bg5
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5 e6 f4 Be7 Qf3 Qc7 O-O-O Nbd7 g4 : b5 not O-O
+      "The king goes to the side the pawns are already rolling down. White plays 11.Bxf6 Nxf6 12.g5 and keeps pushing with a target on it."
+ 0.46  mistake    graded too harshly  ch1-bg5
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5 e6 f4 Be7 Qf3 Qc7 O-O-O Nbd7 g4 b5 Bxf6 : Nxf6 not gxf6
+      "It opens the g-file straight at Black's own king in a position where White has castled the other way and has a rook coming to g1."
+ 0.45  mistake    graded too harshly  ch4-bc4-and-h3
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 : e6 not e5
+      "It hands over d5 with a bishop already looking at it. After 7.Nde2 Black has a hole on d5, a bad bishop on c8 and no way to cover the square."
+ 0.14  mistake    graded too harshly  ch2-english-attack
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nb3 Be6 f3 Be7 Qd2 O-O O-O-O Nbd7 g4 b5 g5 : b4 not Nh5
+      "The knight is out of play on the edge and 13.Nd5 takes over the hole with the bishop unable to cope on its own."

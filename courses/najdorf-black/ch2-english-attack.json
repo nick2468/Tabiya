@@ -104,9 +104,9 @@
                                                           "note": "Do not move the attacked knight yet. The pawn comes with tempo of its own, and the knight on c3 has to answer first.",
                                                           "tags": ["b5-break", "tactics"],
                                                           "mistakes": [
-                                                            { "san": "Ne8", "grade": "playable", "note": "The right square for the knight and the wrong moment. Pushing the pawn first makes White answer, and only then does the knight step back." },
-                                                            { "san": "Nh5", "grade": "mistake", "note": "The knight is out of play on the edge and 13.Nd5 takes over the hole with the bishop unable to cope on its own." },
-                                                            { "san": "Nb6", "grade": "inaccuracy", "note": "The knight is heading for c4, which is a fine idea, and it leaves the knight on f6 hanging in the air for a move while White is the one attacking." }
+                                                            { "san": "Ne8", "grade": "inaccuracy", "note": "The right square for the knight and the wrong moment. Pushing the pawn first makes White answer, and only then does the knight step back, which is a whole tempo in a race." },
+                                                            { "san": "Nh5", "grade": "playable", "note": "The knight is out of play on the edge and 13.Nd5 takes over the hole with the bishop unable to cope on its own." },
+                                                            { "san": "Nb6", "grade": "mistake", "note": "The knight is heading for c4, which is a fine idea, and it leaves the knight on f6 hanging in the air for a move while White is the one attacking." }
                                                           ],
                                                           "children": [
                                                             {
@@ -206,7 +206,7 @@
                           "note": "Get the king safe. The bishop on c4 is only dangerous against a king in the middle.",
                           "tags": ["king-safety"],
                           "mistakes": [
-                            { "san": "b5", "grade": "playable", "note": "It hits the bishop and it is a fine move. Castling first means the tempo is spent when the king is already safe." },
+                            { "san": "b5", "grade": "mistake", "note": "It hits the bishop and it is a fine move. Castling first means the tempo is spent when the king is already safe." },
                             { "san": "Be6", "grade": "inaccuracy", "note": "It offers the trade before castling, and after 9.Bxe6 fxe6 Black has a hole on e6 and a king still in the middle." }
                           ],
                           "children": [
@@ -220,7 +220,7 @@
                                   "note": "Now the trade offer is right. With both kings safe, swapping the bishops leaves Black solid and White with nothing on the light squares.",
                                   "tags": ["light-squares", "bishop-placement"],
                                   "mistakes": [
-                                    { "san": "b5", "grade": "playable", "note": "Also good. The bishop is the move that settles the d5 square, which is the only thing wrong with Black's position." },
+                                    { "san": "b5", "grade": "mistake", "note": "Also good. The bishop is the move that settles the d5 square, which is the only thing wrong with Black's position." },
                                     { "san": "Nbd7", "grade": "playable", "note": "Fine and slower. White would like to play a4 and stop the queenside plan, so the bishop comes first." }
                                   ],
                                   "children": [
