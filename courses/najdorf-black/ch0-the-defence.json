@@ -1,0 +1,218 @@
+{
+  "id": "ch0-the-defence",
+  "title": "The defence and its ideas",
+  "defaultTags": ["development"],
+  "intro": "The Najdorf answers 1.e4 with 1...c5, and then spends move five on a pawn move at the edge of the board that develops nothing. That move is the whole opening, and it is worth understanding before anything else.\n\n## What the pawn on a6 is for\n\nThree things, and every one of them is about the b5 square. It takes b5 away from White's knight and bishop, which is exactly where both of them want to go in a Sicilian. It prepares Black's own pawn to b5, which gains space on the queenside and supports the pieces there. And after that pawn arrives, the bishop on c8 has the long diagonal through b7.\n\nBlack pays a tempo of development for it. What Black gets is that White's most natural attacking squares are gone and the counterplay arrives on the other wing.\n\n## The contrast with the Caro-Kann\n\nSame first move from White, opposite question from Black. The Caro-Kann builds a wall and asks White to find a way through it. The Najdorf hands White the centre and the space and asks whether White can do anything with them before Black's queenside gets going. Neither one is better. They suit different afternoons.\n\nBe honest about the cost. This is the most theoretical opening in this app, and this course exists to make it playable with a small number of ideas rather than a memorised book.\n\n## The one decision that repeats: e5 or e6\n\nBlack's e-pawn goes one square or two, and the choice comes up against almost every White setup. Two squares takes the centre and the d4 square, and concedes d5 for the rest of the game. One square is flexible and solid, and leaves White the space for longer.\n\nThis course answers it by White's sixth move rather than by taste. Against 6.Bg5 the pawn goes to e6, because with the knight pinned the other push is asking for trouble. Against the quieter sixth moves it goes to e5 and takes the ground. Each chapter says why in its own position.\n\n## The hole on d5\n\nOnce the pawn is on e5, White owns d5 permanently and no pawn will ever cover it again. Black lives with that by trading off the pieces that want to sit there, usually with the bishop to e6 and the knight to d7, and by watching for the moment the d-pawn can go to d5 in one move and end the discussion.\n\n## Where the pieces go\n\nBishop to e7, bishop to e6 or to b7, queen's knight to d7, queen to c7, castle short, rooks to c8 and e8. Then the queenside pawns roll, and the b-pawn hits the knight on c3.\n\n## Typical mistakes at this level\n\nPushing the b-pawn before it is prepared and simply losing it. Playing the e-pawn two squares against 6.Bg5, where the pin is the whole point of White's move. Chasing White's queen around instead of finishing development. Forgetting that after the pawn reaches e5 the knight retreats to b3 and the bishop belongs on e6. And treating the queenside pawns as an attack all by themselves, when they are a plan that needs pieces behind it.",
+  "stem": [],
+  "tree": [
+    {
+      "san": "e4",
+      "note": "The most popular first move in club chess. White takes the centre and opens lines for the queen and the light-squared bishop.",
+      "weight": 10,
+      "children": [
+        {
+          "san": "c5",
+          "note": "The Sicilian. Black declines to mirror White in the centre and fights for d4 with a wing pawn instead, which is what makes the game unbalanced from move one.",
+          "tags": ["development"],
+          "mistakes": [
+            { "san": "e5", "grade": "playable", "note": "The most common reply in the world and perfectly sound. It is a different repertoire with a great deal more theory to learn." },
+            { "san": "c6", "grade": "playable", "note": "The Caro-Kann, which is the other Black course here. Solid where this one is sharp." },
+            { "san": "e6", "grade": "playable", "note": "The French. Also sound, and the bishop on c8 has a long wait ahead of it." }
+          ],
+          "children": [
+            {
+              "san": "Nf3",
+              "note": "The Open Sicilian move order. White develops and prepares to open the centre with d4.",
+              "weight": 9,
+              "children": [
+                {
+                  "san": "d6",
+                  "note": "The Najdorf move order, played here against every second move that allows it. The pawn covers e5 so that White's knight can never settle there, and it opens the diagonal for the dark-squared bishop.",
+                  "tags": ["development"],
+                  "mistakes": [
+                    { "san": "Nc6", "grade": "playable", "note": "Sound, and it leads to the Sveshnikov and the Classical rather than to this course." },
+                    { "san": "e6", "grade": "playable", "note": "The Taimanov and Kan move orders. Also fine, and a different set of positions from these." },
+                    { "san": "g6", "grade": "inaccuracy", "note": "The Accelerated Dragon, and here it invites 3.d4 cxd4 4.Nxd4 with the extra option of the Maroczy bind after c4, which is exactly the squeeze this course avoids." }
+                  ],
+                  "children": [
+                    {
+                      "san": "d4",
+                      "note": "White opens the centre. This is the Open Sicilian and it is what most opponents play.",
+                      "weight": 9,
+                      "children": [
+                        {
+                          "san": "cxd4",
+                          "note": "Take. Black trades a wing pawn for a centre pawn, which is the bargain the Sicilian is built on, and the half-open c-file arrives with it.",
+                          "tags": ["development"],
+                          "mistakes": [
+                            { "san": "Nf6", "grade": "inaccuracy", "note": "4.dxc5 leaves White a pawn up for the moment and Black has to spend time winning it back." },
+                            { "san": "e6", "grade": "inaccuracy", "note": "It gives White the choice of holding the centre with c3 or d5 instead of releasing it, which hands over the tension for nothing." }
+                          ],
+                          "children": [
+                            {
+                              "san": "Nxd4",
+                              "note": "The knight recaptures and sits on a strong central square. Almost nobody plays anything else here.",
+                              "weight": 10,
+                              "children": [
+                                {
+                                  "san": "Nf6",
+                                  "note": "Develop with a threat. The knight attacks e4 and forces White to defend it, which is what gets the knight to c3 and makes the pawn to a6 useful.",
+                                  "tags": ["development"],
+                                  "mistakes": [
+                                    { "san": "a6", "grade": "playable", "note": "The same pawn move one move early, and it usually transposes straight back after 5.Nc3 Nf6. Developing with a threat first is the safer order because it takes White's choices away." },
+                                    { "san": "g6", "grade": "playable", "note": "The Dragon. Sound and very sharp, and it is a different course." },
+                                    { "san": "Nc6", "grade": "playable", "note": "The Classical Sicilian, a fine opening that this course does not cover." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Nc3",
+                                      "note": "White defends the pawn on e4 with the natural developing move.",
+                                      "weight": 9,
+                                      "children": [
+                                        {
+                                          "san": "a6",
+                                          "note": "The Najdorf. The pawn takes b5 from White's pieces, prepares Black's own pawn to b5, and opens the long diagonal for the bishop once it gets there.",
+                                          "tags": ["b5-break"],
+                                          "mistakes": [
+                                            { "san": "e6", "grade": "playable", "note": "The Scheveningen, which is sound and which this course does not cover. The small pawn move first keeps the option of both e-pawn pushes open." },
+                                            { "san": "g6", "grade": "playable", "note": "The Dragon again, and a different course." },
+                                            { "san": "e5", "grade": "inaccuracy", "note": "The pawn wants to go there, but not yet: 6.Bb5+ is awkward with no pawn on a6 to answer it." }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "Be2",
+                                              "note": "The quiet main line, and the one to learn the shape from. White develops and castles rather than starting anything.",
+                                              "weight": 4,
+                                              "children": [
+                                                {
+                                                  "san": "e5",
+                                                  "note": "Take the ground. The pawn hits the knight on d4 and covers the centre, and it hands White the d5 square in exchange.",
+                                                  "tags": ["dark-squares"],
+                                                  "mistakes": [
+                                                    { "san": "e6", "grade": "playable", "note": "A Scheveningen, entirely sound, and a different set of plans from the ones this course teaches." },
+                                                    { "san": "b5", "grade": "inaccuracy", "note": "Too early. After 7.Bf3 the rook on a8 is loose and Black has to spend moves untangling instead of developing." },
+                                                    { "san": "g6", "grade": "inaccuracy", "note": "It mixes two systems. The bishop belongs on e7 in this structure and the pawn on g6 leaves the dark squares thin." }
+                                                  ],
+                                                  "children": [
+                                                    {
+                                                      "san": "Nb3",
+                                                      "note": "The knight has to move and this is its square. From b3 it eyes a5 and c5 and keeps an eye on the queenside.",
+                                                      "weight": 8,
+                                                      "children": [
+                                                        {
+                                                          "san": "Be7",
+                                                          "note": "The bishop's home in almost every line of this course. It covers the dark squares near the king and gets ready to castle.",
+                                                          "tags": ["bishop-placement", "development"],
+                                                          "mistakes": [
+                                                            { "san": "Be6", "grade": "playable", "note": "Also a good square for that bishop, and playing it before castling gives White the chance to hit it. The order here is bishop to e7, castle, then the other bishop." },
+                                                            { "san": "b5", "grade": "inaccuracy", "note": "The pawn will come, but the king should be safe first. There is no rush while White has not started anything." }
+                                                          ],
+                                                          "children": [
+                                                            {
+                                                              "san": "O-O",
+                                                              "note": "White castles into a quiet position and prepares to work on the queenside or the d5 square.",
+                                                              "weight": 8,
+                                                              "children": [
+                                                                {
+                                                                  "san": "O-O",
+                                                                  "note": "Black castles too. The king is safe, the position is balanced, and both sides now play on the side of the board they own.",
+                                                                  "tags": ["king-safety"],
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Be3",
+                                                                      "note": "White develops the last minor piece and looks at the c5 and a7 squares along the diagonal.",
+                                                                      "weight": 7,
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Be6",
+                                                                          "note": "The bishop takes up its post on the hole. It offers a trade of the piece White most wants on d5, which is how Black lives with that square.",
+                                                                          "tags": ["light-squares", "bishop-placement"],
+                                                                          "mistakes": [
+                                                                            { "san": "Nc6", "grade": "inaccuracy", "note": "The knight belongs on d7 in this structure, where it covers b6 and c5 and supports the break to d5." },
+                                                                            { "san": "b5", "grade": "playable", "note": "Playable now that the king is safe. Putting the bishop on e6 first is more accurate, because it takes White's knight off the d5 square before the pawns commit." }
+                                                                          ],
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Qd2",
+                                                                              "note": "White connects the rooks and keeps the pieces flexible.",
+                                                                              "weight": 6,
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "Nbd7",
+                                                                                  "note": "The last piece comes out to the square that covers b6 and c5 and supports the pawn break in the centre.",
+                                                                                  "tags": ["development", "d5-break"],
+                                                                                  "plan": "Play the queen to c7, a rook to c8, and then the queenside pawns with the b-pawn to b5 and on to b4 at the knight. Watch for the moment the d-pawn can go to d5 in one move.",
+                                                                                  "name": "The shape: 6.Be2 and the full setup"
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "san": "Bg5",
+                                              "note": "The sharpest sixth move, and chapter 1. The bishop pins the knight on f6 and White is already looking at the e-pawn push and a kingside attack.",
+                                              "weight": 6,
+                                              "children": [
+                                                {
+                                                  "san": "e6",
+                                                  "note": "One square, not two. With the knight pinned the far push loses the pawn on d6 or the pawn on e5, so the modest move is the right one here.",
+                                                  "tags": ["vs-bg5", "dark-squares"],
+                                                  "mistakes": [
+                                                    { "san": "e5", "grade": "mistake", "note": "The pin is the point of White's last move. After 7.Bxf6 Qxf6 8.Nd5 the queen has to move again and White's knight owns the hole for good." },
+                                                    { "san": "Nbd7", "grade": "inaccuracy", "note": "It is not a blunder, and it invites 7.Bc4 with an early attack on f7 before Black has covered it." }
+                                                  ],
+                                                  "children": [
+                                                    {
+                                                      "san": "f4",
+                                                      "note": "White grabs the centre and prepares to push the e-pawn or the f-pawn at Black's king.",
+                                                      "weight": 8,
+                                                      "children": [
+                                                        {
+                                                          "san": "Be7",
+                                                          "note": "Break the pin by defending the knight a second time, and get ready to castle. This is the classical answer and it is chapter 1.",
+                                                          "tags": ["vs-bg5", "development"],
+                                                          "plan": "Castle short, put the queen on c7 and the knight on d7, and answer White's kingside push with the queenside pawns. Chapter 1 runs the whole line.",
+                                                          "name": "The 6.Bg5 shape, in one line"
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

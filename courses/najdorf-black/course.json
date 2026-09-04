@@ -1,0 +1,27 @@
+{
+  "id": "najdorf-black",
+  "title": "The Sicilian Najdorf",
+  "colour": "black",
+  "tagline": "The counterpunching answer to 1.e4, as Black.",
+  "formatVersion": 1,
+  "chapters": [
+    "ch0-the-defence.json",
+    "ch1-bg5.json",
+    "ch2-english-attack.json",
+    "ch3-classical-and-quiet.json",
+    "ch4-bc4-and-h3.json",
+    "ch5-anti-sicilians.json",
+    "ch6-tactics-and-plans.json"
+  ],
+  "tagExtensions": [
+    "vs-bg5",
+    "vs-english-attack",
+    "vs-classical",
+    "vs-sozin",
+    "vs-anti-sicilian",
+    "d5-break",
+    "b5-break",
+    "light-squares",
+    "exchange-sacrifice"
+  ]
+}

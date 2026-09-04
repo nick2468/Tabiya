@@ -1,0 +1,396 @@
+{
+  "id": "ch1-bg5",
+  "title": "The main line: 6.Bg5",
+  "defaultTags": ["vs-bg5"],
+  "intro": "6.Bg5 is the sharpest thing White can do and the one line in this course that has to be known cold. The bishop pins the knight on f6, which means the pawn on e5 is not available, and White is already thinking about castling long and rolling the g-pawn and the f-pawn at Black's king.\n\n## The answer in one sentence\n\nBlack plays the e-pawn one square, breaks the pin with the bishop to e7, castles, and then races White on the other wing with the queen on c7, the knight on d7 and the pawn to b5.\n\n## What is deliberately not here\n\nThe Poisoned Pawn, 7...Qb6 hitting the pawn on b2, is a famous line and a good one. It is out of this course under the theory fork rule: it is a forcing sequence twenty moves deep where one wrong move loses, and the classical setup reaches a playable game with a plan instead of a memorised path. The same rule takes out 8...h6 9.Bh4 g5, which is sound and which asks Black to walk a tightrope in front of an uncastled king.\n\nOne answer per position. Where the books give Black a second good move, this chapter says so in a note and moves on.\n\n## The race\n\nBoth sides are attacking, and the whole line turns on who is faster. White pushes g4 and g5 to drive the knight off f6, then f5 at the pawn on e6. Black pushes b5 and b4 at the knight on c3, because that knight is the one guarding the pawn on e4 and the d5 square.\n\nThe moment White plays g5 the knight goes to d7 rather than anywhere clever, and from d7 it comes to e5, which is the best square on the board for it: it hits the pawn on g4 and blocks the e-file.\n\n## Typical mistakes at this level\n\nPushing the e-pawn two squares on move six and losing the pawn on d6 to the pin. Castling before the queen and the knight are placed, which invites the pawn storm to arrive first. Recapturing on f6 with the g-pawn, which opens the file White is attacking down. Panicking when the pawn reaches f5 and taking it, which opens the position for White's pieces. And forgetting that the bishop on e7 takes the pawn on g5 with check, which is the move that wins the tempo Black needs.",
+  "stem": ["e4", "c5", "Nf3", "d6", "d4", "cxd4", "Nxd4", "Nf6", "Nc3", "a6"],
+  "tree": [
+    {
+      "san": "Bg5",
+      "note": "The main line. The bishop pins the knight on f6 and White prepares to castle long and attack.",
+      "weight": 7,
+      "children": [
+        {
+          "san": "e6",
+          "note": "One square. The pin means the far push would lose material, and this way the bishop on f8 gets out and the pawn on d5 is covered.",
+          "tags": ["vs-bg5", "dark-squares"],
+          "mistakes": [
+            { "san": "e5", "grade": "mistake", "note": "The pin is what White's last move was for. After 7.Bxf6 Qxf6 8.Nd5 the queen is hit and has to move, and White's knight settles on d5 for good." },
+            { "san": "Nbd7", "grade": "inaccuracy", "note": "It leaves f7 soft while the pin is on, and 7.Bc4 arrives with an awkward attack before Black has covered the square." },
+            { "san": "h6", "grade": "inaccuracy", "note": "It asks the question a move too early. After 7.Bh4 Black still has to play the e-pawn, and the pawn on h6 has given White the g5 square to push at." }
+          ],
+          "children": [
+            {
+              "san": "f4",
+              "note": "The main line. White takes the centre and gets ready to push the e-pawn or throw the f-pawn and g-pawn forward.",
+              "weight": 8,
+              "children": [
+                {
+                  "san": "Be7",
+                  "note": "The classical answer. The bishop defends the knight a second time, which breaks the pin, and Black is one move from castling.",
+                  "tags": ["vs-bg5", "development"],
+                  "mistakes": [
+                    { "san": "Qb6", "grade": "playable", "note": "The Poisoned Pawn, and a completely sound opening. It is out of this course under the theory fork rule: it is a long forcing line where a single wrong move loses, and the bishop to e7 reaches a game with a plan instead." },
+                    { "san": "Nbd7", "grade": "playable", "note": "Also played, and it invites 8.Qf3 with the pin still on. Breaking the pin first is the simpler order." },
+                    { "san": "b5", "grade": "inaccuracy", "note": "Too early with the king in the middle. 8.e5 opens the position while Black is still undeveloped." }
+                  ],
+                  "children": [
+                    {
+                      "san": "Qf3",
+                      "note": "The standard move. The queen supports the e-pawn push, eyes the b7 square, and clears d1 for the rook.",
+                      "weight": 7,
+                      "children": [
+                        {
+                          "san": "Qc7",
+                          "note": "The queen takes the half-open file and covers the pawn on e5 twice over, so White's push there gains nothing.",
+                          "tags": ["vs-bg5", "development"],
+                          "mistakes": [
+                            { "san": "h6", "grade": "playable", "note": "Sound, and it leads to 9.Bh4 g5, which is the tightrope this course leaves out under the fork rule. The queen move keeps a normal game." },
+                            { "san": "O-O", "grade": "inaccuracy", "note": "Castling into the attack before White has committed. White castles the other way and the pawns come, and Black has not started anything on the queenside." },
+                            { "san": "b5", "grade": "inaccuracy", "note": "9.e5 hits the pinned knight while the king sits in the middle, and Black is defending for the rest of the game." }
+                          ],
+                          "children": [
+                            {
+                              "san": "O-O-O",
+                              "note": "White castles into the attack. The kings are going to opposite wings and the race is on.",
+                              "weight": 8,
+                              "children": [
+                                {
+                                  "san": "Nbd7",
+                                  "note": "The last minor piece comes out. From d7 it covers the pawn on f6 a third time and it has e5 and c5 ahead of it.",
+                                  "tags": ["development"],
+                                  "mistakes": [
+                                    { "san": "b5", "grade": "playable", "note": "Perfectly good and it usually transposes. Developing first means the knight is already on d7 when White pushes the g-pawn." },
+                                    { "san": "O-O", "grade": "inaccuracy", "note": "The king walks into the pawn storm a move early. Black castles later or not at all in this line." },
+                                    { "san": "Nc6", "grade": "inaccuracy", "note": "The knight is loose there: 10.Nxc6 bxc6 hands White a target on c6 and takes the b5 square away from Black's own pawn." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "g4",
+                                      "note": "The pawn storm starts. White wants g5, driving the knight off f6 and opening the way to the king.",
+                                      "weight": 7,
+                                      "children": [
+                                        {
+                                          "san": "b5",
+                                          "note": "Black starts the other race. The pawn is coming to b4 and the knight on c3 is what holds White's centre together.",
+                                          "tags": ["b5-break"],
+                                          "mistakes": [
+                                            { "san": "h6", "grade": "inaccuracy", "note": "It stops nothing. White is happy to play 11.Bxf6 anyway, and Black has spent a move that was needed on the queenside." },
+                                            { "san": "O-O", "grade": "mistake", "note": "The king goes to the side the pawns are already rolling down. White plays 11.g5 and keeps pushing with a target." },
+                                            { "san": "Nc5", "grade": "inaccuracy", "note": "The knight looks active and it is not doing anything: the pawn on e4 is defended and the knight has to move again after 11.e5." }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "Bxf6",
+                                              "note": "White trades before the pawn arrives, so the knight cannot simply step aside with tempo later.",
+                                              "weight": 8,
+                                              "children": [
+                                                {
+                                                  "san": "Nxf6",
+                                                  "note": "Recapture with the knight. The other knight takes the good square and the pawn structure in front of the king stays whole.",
+                                                  "tags": ["development"],
+                                                  "mistakes": [
+                                                    { "san": "gxf6", "grade": "mistake", "note": "It opens the g-file straight at Black's own king in a position where White has castled the other way and has a rook coming to g1." },
+                                                    { "san": "Bxf6", "grade": "inaccuracy", "note": "The bishop is Black's best defensive piece on the dark squares. Taking with it leaves the squares around the king thin and the knight on d7 with nothing to do." }
+                                                  ],
+                                                  "children": [
+                                                    {
+                                                      "san": "g5",
+                                                      "note": "The pawn arrives and the knight has to move again.",
+                                                      "weight": 9,
+                                                      "children": [
+                                                        {
+                                                          "san": "Nd7",
+                                                          "note": "Back to d7, which is the right square rather than the clever one. From there the knight is heading for e5, where it hits the pawn on g4 and blocks the file.",
+                                                          "tags": ["development"],
+                                                          "mistakes": [
+                                                            { "san": "Nh5", "grade": "mistake", "note": "The knight is stranded on the edge and 13.Nxh5 simply takes it, because nothing defends the square." },
+                                                            { "san": "Ng8", "grade": "inaccuracy", "note": "The same problem with an extra insult: the knight has undeveloped itself and the rook on h8 still cannot move." }
+                                                          ],
+                                                          "children": [
+                                                            {
+                                                              "san": "f5",
+                                                              "note": "White hits the pawn on e6 and tries to open a second front before Black's queenside gets going.",
+                                                              "weight": 7,
+                                                              "children": [
+                                                                {
+                                                                  "san": "Bxg5+",
+                                                                  "note": "The move that makes the whole line work. The bishop takes the pawn with check, so Black wins the tempo the queenside race needs.",
+                                                                  "tags": ["tactics", "dark-squares"],
+                                                                  "mistakes": [
+                                                                    { "san": "exf5", "grade": "inaccuracy", "note": "It opens the centre in front of Black's own king while White's rooks are already pointing at it." },
+                                                                    { "san": "Ne5", "grade": "playable", "note": "Also played and reasonable. Taking with check first is a free tempo, and in a race a free tempo is the whole game." },
+                                                                    { "san": "Nc5", "grade": "inaccuracy", "note": "It ignores what is happening. 14.f6 rips the bishop's cover open and Black has not taken the free pawn." }
+                                                                  ],
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Kb1",
+                                                                      "note": "The king steps out of the check and off the open file at the same time. This is the standard tidying move in every line like this.",
+                                                                      "weight": 9,
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Ne5",
+                                                                          "note": "The knight reaches its square. It blocks the e-file, hits the pawn on g4, and it cannot easily be driven away.",
+                                                                          "tags": ["development", "dark-squares"],
+                                                                          "mistakes": [
+                                                                            { "san": "Be7", "grade": "inaccuracy", "note": "Retreating hands the tempo straight back. The bishop is fine where it is and the knight is the piece that needs a square." },
+                                                                            { "san": "Bh6", "grade": "inaccuracy", "note": "The bishop is out of play on h6 and the knight on d7 still has nowhere useful to go." }
+                                                                          ],
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Qh5",
+                                                                              "note": "The queen swings across to the kingside and eyes the pawn on h7 and the bishop on g5.",
+                                                                              "weight": 7,
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "Qd8",
+                                                                                  "note": "The queen comes back to defend the bishop and to keep an eye on the whole kingside. It looks like a retreat and it is a defensive resource.",
+                                                                                  "tags": ["king-safety"],
+                                                                                  "mistakes": [
+                                                                                    { "san": "g6", "grade": "mistake", "note": "It looks natural and it drops a piece: 16.fxg6 opens the file and the bishop on g5 is hanging with the queen still hitting it." },
+                                                                                    { "san": "O-O", "grade": "mistake", "note": "The king walks into the attack that is already there, with White's queen on h5 and the f-file about to open." }
+                                                                                  ],
+                                                                                  "plan": "Hold the bishop on g5 and the knight on e5, then push the queenside pawns with the b-pawn to b4. If White ever trades on e6, recapture with the f-pawn and the rook comes to f8 with play of its own.",
+                                                                                  "name": "The full main line, to 15...Qd8"
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "san": "Bd3",
+                                      "note": "The quieter build-up. White develops the last piece and keeps the pawn storm in reserve.",
+                                      "weight": 5,
+                                      "children": [
+                                        {
+                                          "san": "b5",
+                                          "note": "Black gets on with it. The plan does not change because White developed quietly: the pawns come.",
+                                          "tags": ["b5-break"],
+                                          "mistakes": [
+                                            { "san": "O-O", "grade": "inaccuracy", "note": "There is still a pawn storm coming, and castling towards it before Black has any counterplay is the wrong order." },
+                                            { "san": "h6", "grade": "inaccuracy", "note": "It invites 11.Bh4 and Black has spent a move on the side of the board where White is stronger." }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "Rhe1",
+                                              "note": "The rook joins in behind the e-pawn, which is White's real threat in this structure.",
+                                              "weight": 6,
+                                              "children": [
+                                                {
+                                                  "san": "Bb7",
+                                                  "note": "The bishop takes the long diagonal, which is what the pawn on a6 was for in the first place. It stares at the pawn on e4.",
+                                                  "tags": ["bishop-placement", "light-squares"],
+                                                  "mistakes": [
+                                                    { "san": "b4", "grade": "inaccuracy", "note": "Too fast. 12.Na4 steps aside and the knight is heading for b6 while Black's bishop is still at home." },
+                                                    { "san": "O-O", "grade": "playable", "note": "Playable here, because White has built quietly rather than pushed. Developing the bishop first is still the better order." }
+                                                  ],
+                                                  "children": [
+                                                    {
+                                                      "san": "Qg3",
+                                                      "note": "The queen steps off the file and points at the pawn on g7, keeping the e-pawn push in the air.",
+                                                      "weight": 6,
+                                                      "children": [
+                                                        {
+                                                          "san": "b4",
+                                                          "note": "Now the pawn comes, because the bishop behind it makes the pawn on e4 a real target once the knight has to move.",
+                                                          "tags": ["b5-break", "tactics"],
+                                                          "plan": "Chase the knight off c3 and then take aim at the pawn on e4 with the bishop and the knight. Keep the king in the middle while the centre is closed, and castle only when it is safe.",
+                                                          "name": "White's 10.Bd3 build-up"
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "Qe2",
+                      "note": "A quieter square for the queen. White plans to castle long just the same, with less commitment.",
+                      "weight": 3,
+                      "children": [
+                        {
+                          "san": "Qc7",
+                          "note": "The same plan against the same setup. The queen takes the file and covers the e5 push.",
+                          "tags": ["development"],
+                          "mistakes": [
+                            { "san": "O-O", "grade": "inaccuracy", "note": "White has not committed the king yet, and castling first tells White which side to attack." },
+                            { "san": "b5", "grade": "playable", "note": "Fine, and the queen move is more useful first: it covers e5, which is what White's whole setup is aiming at." }
+                          ],
+                          "children": [
+                            {
+                              "san": "O-O-O",
+                              "note": "The king goes long and the same race begins, a tempo slower than the main line.",
+                              "weight": 7,
+                              "children": [
+                                {
+                                  "san": "Nbd7",
+                                  "note": "Develop, and the knight is ready for e5 or c5 depending on which pawn White pushes.",
+                                  "tags": ["development"],
+                                  "mistakes": [
+                                    { "san": "b5", "grade": "playable", "note": "Also good. Bringing the knight out first means it is already home when the g-pawn arrives." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "g4",
+                                      "note": "The pawn storm again. White has one plan in this whole variation and it is this one.",
+                                      "weight": 7,
+                                      "children": [
+                                        {
+                                          "san": "b5",
+                                          "note": "And Black has one too. The races are symmetrical and the moves are the same.",
+                                          "tags": ["b5-break"],
+                                          "plan": "Push the b-pawn to b4 at the knight, put the bishop on b7 behind it, and answer g5 by retreating the knight to d7 and bringing it to e5.",
+                                          "name": "White's 8.Qe2 setup"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Qf3",
+              "note": "A move-order try. White brings the queen out before committing the f-pawn.",
+              "weight": 3,
+              "children": [
+                {
+                  "san": "Be7",
+                  "note": "Break the pin and carry on. The setup does not change because White changed the order.",
+                  "tags": ["vs-bg5", "development"],
+                  "mistakes": [
+                    { "san": "Qb6", "grade": "playable", "note": "Sound, and it is the Poisoned Pawn family again, which this course leaves out under the fork rule." },
+                    { "san": "h6", "grade": "inaccuracy", "note": "8.Bh4 and now the pawn on g5 is a square White would like, in a position where Black has not castled." }
+                  ],
+                  "children": [
+                    {
+                      "san": "O-O-O",
+                      "note": "White castles long first and keeps the f-pawn flexible.",
+                      "weight": 7,
+                      "children": [
+                        {
+                          "san": "Qc7",
+                          "note": "The queen to the file, which is the same move in every line of this chapter.",
+                          "tags": ["development"],
+                          "mistakes": [
+                            { "san": "Nbd7", "grade": "playable", "note": "The same two moves in the other order, and it usually comes to the same position. The queen first covers the e5 square before White can use it." }
+                          ],
+                          "children": [
+                            {
+                              "san": "g4",
+                              "note": "The pawn storm without the f-pawn, because the queen on f3 is standing in its way. White has to move the queen before the f-pawn can join in.",
+                              "weight": 7,
+                              "children": [
+                                {
+                                  "san": "Nbd7",
+                                  "note": "Develop and get ready. The same setup as the main line, and White's attack is a move slower for having put the queen on f3 first.",
+                                  "tags": ["development"],
+                                  "mistakes": [
+                                    { "san": "b5", "grade": "playable", "note": "Also good and it usually comes to the same thing. The knight first means it is already home when the g-pawn arrives on g5." },
+                                    { "san": "h6", "grade": "inaccuracy", "note": "It spends a move on the side of the board where White is stronger, and 10.Bh4 keeps the pin anyway." }
+                                  ],
+                                  "plan": "Play the b-pawn to b5 and on to b4, put the bishop on b7, and meet g5 with the knight to d7 and then e5. The main line of this chapter is the guide from here.",
+                                  "name": "White's 7.Qf3 move order"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "Bc4",
+              "note": "The bishop takes aim at f7 before the f-pawn moves. It is less common and it needs a precise answer.",
+              "weight": 3,
+              "children": [
+                {
+                  "san": "Be7",
+                  "note": "Develop and prepare to castle. The bishop on c4 has no target yet, and the pawn on b5 will ask it a question shortly.",
+                  "tags": ["vs-bg5", "development"],
+                  "mistakes": [
+                    { "san": "b5", "grade": "playable", "note": "Also good, and it commits the pawn before the king is safe. Developing first keeps both options." },
+                    { "san": "Nbd7", "grade": "inaccuracy", "note": "It leaves the pin on with the bishop already aimed at f7, which is more danger than the position needs." }
+                  ],
+                  "children": [
+                    {
+                      "san": "Qe2",
+                      "note": "White connects the pieces and holds the bishop on c4 in place.",
+                      "weight": 6,
+                      "children": [
+                        {
+                          "san": "b5",
+                          "note": "Now the pawn asks the question, and the bishop has to move.",
+                          "tags": ["b5-break", "vs-sozin"],
+                          "mistakes": [
+                            { "san": "O-O", "grade": "playable", "note": "Safe and slower. Hitting the bishop first gains a tempo that Black can spend on the king." }
+                          ],
+                          "children": [
+                            {
+                              "san": "Bb3",
+                              "note": "The bishop keeps the diagonal from a safer square.",
+                              "weight": 8,
+                              "children": [
+                                {
+                                  "san": "O-O",
+                                  "note": "Castle. The pawn on b5 gained the tempo and the king uses it.",
+                                  "tags": ["king-safety"],
+                                  "plan": "Put the bishop on b7 and the knight on d7, then play the pawn to b4 at the knight on c3. Watch the pawn on e6: it is what the bishop on b3 is really looking at.",
+                                  "name": "White's 7.Bc4 try"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
