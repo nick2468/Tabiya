@@ -3812,3 +3812,24 @@ Gate 29 findings (2026-09-04):
 - **No build**: nothing a person can see changed.
 
 - [x] **Review gate 29 passed** (2026-09-04)
+
+## Phase 30 - play from here, out of a replay
+
+Goal: Nick, replaying a game on 1.6.12 (2026-09-04), was told move 35 missed a forced
+mate and wants to start a new game from that position to find it. No chess content.
+
+Chipped as `chips/phase-30-play-from-replay.md`. A "Play from here" button on the button
+row during a replay, enabled on the trainee's positions only; it sends the same request
+Study sends, with the game's own course, chapter and level, no identity, so the first
+review mints a new record and the old one is untouched. Proved by a DOM test shown red
+before the feature. Version 1.6.13.
+
+- [ ] 30.1 Play from here on the row; a new game from the replayed position.
+- [ ] 30.2 DOM test red first; string test for the request builder; help mutation check.
+- [ ] 30.3 Help and SPEC.
+- [ ] 30.4 Version 1.6.13.
+- [ ] 30.5 Proved in the browser build.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 30**
