@@ -1,6 +1,6 @@
 import { MATE_PAWNS } from '../engine/uci'
 import { positionKey } from '../model/position'
-import { colourName, type Colour } from '../model/types'
+import { colourName, type Colour, type MistakeGrade } from '../model/types'
 import type { Book } from './book'
 
 /**
@@ -33,6 +33,13 @@ export interface PlayedMove {
    * guessing that whatever it removed was a book move.
    */
   fromBook?: boolean
+  /**
+   * Set on a move the engine played FOR the course, when it took a listed
+   * alternative rather than the repertoire move: the grade the course gives
+   * that alternative. The other-side report lists these, so the trainee can
+   * see where the game left the pure line.
+   */
+  alternative?: MistakeGrade
 }
 
 /** What the engine thought of a position, in pawns from White's point of view. */

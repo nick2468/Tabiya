@@ -94,7 +94,7 @@ describe('a hint inside the repertoire', () => {
   })
 
   it('says the move alone when the author wrote no note', () => {
-    const hint = bookHint({ san: 'e3', chapterId: 'ch-hint', label: '3.e3' })
+    const hint = bookHint({ san: 'e3', chapterId: 'ch-hint', label: '3.e3', alternatives: [] })
     expect(hint.text).toBe('The line plays 3.e3.')
     expect(hint.source).toBe('book')
   })

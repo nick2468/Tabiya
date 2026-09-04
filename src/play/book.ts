@@ -2,7 +2,7 @@ import { Chess } from 'chess.js'
 import { moveLabel } from '../model/cards'
 import { chapterLines } from '../model/lines'
 import { positionKey } from '../model/position'
-import type { Colour, LoadedChapter } from '../model/types'
+import type { Colour, LoadedChapter, MistakeGrade } from '../model/types'
 
 /**
  * The opening book: the repertoire tree, indexed by position so a game can be
@@ -42,12 +42,29 @@ export interface BookReply {
   chapterIds: string[]
 }
 
+/**
+ * A move the course lists beside its own and grades, so that a game played
+ * against the course can sometimes take one instead of the repertoire move.
+ */
+export interface BookAlternative {
+  san: string
+  grade: MistakeGrade
+}
+
 export interface BookMove {
   san: string
   note?: string
   chapterId: string
   /** How the move reads in a sentence: "3.e3", or "3...Bf5" in a Black course. */
   label: string
+  /**
+   * The graded alternatives the course lists at this position, in the order
+   * the chapter wrote them. Empty for a stem move, which carries no authored
+   * mistakes, and for a node that lists none. Held here so a session playing
+   * the course's side can pick among them without reaching back into the
+   * course.
+   */
+  alternatives: BookAlternative[]
 }
 
 export interface Book {
@@ -106,6 +123,7 @@ export function buildBook(source: BookSource): Book {
             san,
             chapterId: chapter.id,
             label: colour === 'white' ? `${number}.${san}` : `${number}...${san}`,
+            alternatives: [],
           })
         }
       } else {
@@ -122,6 +140,7 @@ export function buildBook(source: BookSource): Book {
               note: node.note,
               chapterId: chapter.id,
               label: moveLabel(node),
+              alternatives: (node.mistakes ?? []).map((entry) => ({ san: entry.san, grade: entry.grade })),
             })
           }
           continue

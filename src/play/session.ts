@@ -4,7 +4,7 @@ import { positionKey } from '../model/position'
 import { chooseOpponentReply, type Book } from './book'
 import { outcomeOf } from './outcome'
 import type { PlayedMove } from './report'
-import type { Colour } from '../model/types'
+import type { Colour, MistakeGrade } from '../model/types'
 
 /**
  * A game of chess against the engine, steered into the repertoire.
@@ -43,6 +43,32 @@ export const GAME_LENGTHS: { value: GameLength; label: string }[] = [
   { value: 'full', label: 'Full game' },
 ]
 
+/**
+ * Which side of the course the trainee is on.
+ *
+ * `course` is every game until phase 32: the trainee plays the repertoire and
+ * the engine plays the replies. `other` swaps them. The trainee takes the
+ * opponent's colour and the engine plays the course's own moves, so a person
+ * who has learnt an opening gets to see it coming at them.
+ */
+export type PlaySide = 'course' | 'other'
+
+/**
+ * How the engine plays the course when it is on that side.
+ *
+ * `always` is the repertoire move every time, which is the default. Under
+ * `sometimes` it plays a listed alternative one time in four, chosen among
+ * the moves the course grades at that position, so the trainee also meets
+ * the ways a club opponent gets the line slightly wrong.
+ */
+export type CourseMoves = 'always' | 'sometimes'
+
+/**
+ * The odds, in one place so they can be tuned. Ruled by the orchestrator at
+ * phase 32: the course move three times in four, an alternative the fourth.
+ */
+export const ALTERNATIVE_CHANCE = 0.25
+
 export interface SessionOptions {
   book: Book
   engine: Engine
@@ -54,6 +80,10 @@ export interface SessionOptions {
   startMoves?: string[]
   /** Injected so the tests are not a coin toss. */
   random?: () => number
+  /** Which side the trainee plays. Defaults to the course's own. */
+  side?: PlaySide
+  /** How the engine plays the course when it has that side. */
+  courseMoves?: CourseMoves
 }
 
 export type SessionStatus = 'playing' | 'finished'
@@ -62,6 +92,11 @@ export interface OpponentMoveResult {
   san: string
   /** True when the move came from the repertoire rather than the engine. */
   fromBook: boolean
+  /**
+   * Set when the engine, playing the course's side, took a listed alternative
+   * rather than the repertoire move: the grade the course gives it.
+   */
+  alternative?: MistakeGrade
 }
 
 /** The move number a game of this length stops after. */
@@ -122,9 +157,25 @@ export class PlaySession {
     return this.chess.turn() === 'w' ? 'white' : 'black'
   }
 
-  /** The colour the trainee is playing, which came from the course. */
+  /** Which side of the course the trainee is on. */
+  get side(): PlaySide {
+    return this.options.side ?? 'course'
+  }
+
+  /**
+   * The colour the trainee is playing. The course's own colour in the usual
+   * game, and the other one when the trainee is playing against the course.
+   * Everything about whose turn it is reads this and not the book, which is
+   * what lets the sides swap without the rest of the session knowing.
+   */
   get studentColour(): Colour {
-    return this.options.book.studentColour
+    const { book } = this.options
+    return this.side === 'other' ? book.opponentColour : book.studentColour
+  }
+
+  /** The colour the engine is playing. */
+  get engineColour(): Colour {
+    return this.studentColour === 'white' ? 'black' : 'white'
   }
 
   /** True when it is the trainee's turn. */
@@ -285,13 +336,15 @@ export class PlaySession {
     if (this.studentToMove || this.status === 'finished') return null
     const before = this.chess.fen()
 
-    const bookReply = chooseOpponentReply(this.options.book, before, this.random())
+    const chosen = this.side === 'other' ? this.courseMove(before) : this.replyMove(before)
     let san: string | null = null
     let fromBook = false
-    if (bookReply) {
+    let alternative: MistakeGrade | undefined
+    if (chosen) {
       try {
-        san = this.chess.move(bookReply.san).san
+        san = this.chess.move(chosen.san).san
         fromBook = true
+        alternative = chosen.alternative
         this.bookReplies += 1
       } catch {
         // The book and the position disagree, which would be a content fault.
@@ -309,13 +362,44 @@ export class PlaySession {
     this.moves.push({
       ply: this.moves.length,
       san,
-      colour: this.options.book.opponentColour,
+      colour: this.engineColour,
       fen: before,
       after: this.chess.fen(),
       fromBook,
+      ...(alternative ? { alternative } : {}),
     })
     this.noteOutcome()
-    return { san, fromBook }
+    return { san, fromBook, ...(alternative ? { alternative } : {}) }
+  }
+
+  /** The engine's move as the opponent: one of the book's replies, by weight. */
+  private replyMove(fen: string): { san: string; alternative?: MistakeGrade } | null {
+    const reply = chooseOpponentReply(this.options.book, fen, this.random())
+    return reply ? { san: reply.san } : null
+  }
+
+  /**
+   * The engine's move as the course: the repertoire move, or under the
+   * `sometimes` setting a listed alternative one draw in four.
+   *
+   * Two draws, in a fixed order, so a test with a fixed source can say which
+   * one it is exercising. The first decides whether to stray at all; the
+   * second picks which alternative, equally among them. A position that lists
+   * none plays the course move without drawing a second time.
+   */
+  private courseMove(fen: string): { san: string; alternative?: MistakeGrade } | null {
+    const move = this.options.book.student.get(positionKey(fen))
+    if (!move) return null
+    if (this.options.courseMoves !== 'sometimes' || move.alternatives.length === 0) {
+      return { san: move.san }
+    }
+    if (this.random() >= ALTERNATIVE_CHANCE) return { san: move.san }
+    const pick = Math.min(
+      move.alternatives.length - 1,
+      Math.floor(this.random() * move.alternatives.length),
+    )
+    const chosen = move.alternatives[pick]
+    return { san: chosen.san, alternative: chosen.grade }
   }
 
   /** Asks the engine for a move, applying the strength profile's randomness. */

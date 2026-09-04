@@ -38,6 +38,12 @@ const chapter = load({
         {
           san: 'e3',
           note: 'Complete the triangle.',
+          // Two graded alternatives, so a game played against the course has
+          // something to pick from at this position.
+          mistakes: [
+            { san: 'Nf3', grade: 'playable', note: 'Fine, and it lets ...Nh5 in.' },
+            { san: 'c3', grade: 'inaccuracy', note: 'A move too early.' },
+          ],
           children: [
             {
               san: 'e6',
@@ -127,6 +133,21 @@ describe('buildBook', () => {
     expect(replies.map((reply) => reply.san).sort()).toEqual(['Nf6', 'c5'])
     // ch-book weights Nf6 at 9, ch-transpose reaches the same position with 8.
     expect(replies.find((reply) => reply.san === 'Nf6')?.weight).toBe(9)
+  })
+
+  it('carries the graded alternatives the chapter lists at a position', () => {
+    // So a game played against the course can pick one without reaching back
+    // into the chapter. In the order the chapter wrote them.
+    const book = buildBook({ colour: 'white', chapters: [chapter] })
+    const move = studentBookMove(book, fenAfter(['d4', 'd5', 'Bf4', 'Nf6']))
+    expect(move?.alternatives).toEqual([
+      { san: 'Nf3', grade: 'playable' },
+      { san: 'c3', grade: 'inaccuracy' },
+    ])
+    // A node that lists none, and a stem move, both carry an empty list
+    // rather than nothing: the session reads the length and never the shape.
+    expect(studentBookMove(book, fenAfter(['d4', 'd5', 'Bf4', 'Nf6', 'e3', 'e6']))?.alternatives).toEqual([])
+    expect(studentBookMove(book, fenAfter([]))?.alternatives).toEqual([])
   })
 
   it('knows when each side has run out of book', () => {
@@ -471,6 +492,119 @@ describe('PlaySession', () => {
     await mated.playOpponent()
     expect(mated.outcome).toBe('You were checkmated')
     expect(mated.status).toBe('finished')
+  })
+})
+
+/**
+ * Playing the other side: the trainee takes the opponent's colour and the
+ * engine plays the course. Every test here runs the fixture as a WHITE course,
+ * so the engine is White and opens the game.
+ */
+describe('a game played against the course', () => {
+  const book = buildBook({ colour: 'white', chapters: [chapter] })
+  const profile = strengthProfile(4)
+
+  it('gives the trainee the opponent colour, and leaves the usual game alone', () => {
+    const other = new PlaySession({ book, engine: fakeEngine(), profile, length: 'full', side: 'other' })
+    expect(other.studentColour).toBe('black')
+    expect(other.engineColour).toBe('white')
+    expect(other.studentToMove).toBe(false)
+    // Nothing that exists changes: the default is the course's own side.
+    const usual = new PlaySession({ book, engine: fakeEngine(), profile, length: 'full' })
+    expect(usual.side).toBe('course')
+    expect(usual.studentColour).toBe('white')
+    expect(usual.studentToMove).toBe(true)
+  })
+
+  it('plays the course move every time under the default', async () => {
+    // 1.d4 d5 2.Bf4 Nf6, and the course's 3.e3 has two listed alternatives.
+    // A random source pinned to zero would pick an alternative if anything
+    // did; under the default it is never asked.
+    const session = new PlaySession({
+      book,
+      engine: fakeEngine(),
+      profile,
+      length: 'full',
+      side: 'other',
+      startMoves: ['d4', 'd5', 'Bf4', 'Nf6'],
+      random: () => 0,
+    })
+    const move = await session.playOpponent()
+    expect(move).toEqual({ san: 'e3', fromBook: true })
+    expect(session.moves.at(-1)?.colour).toBe('white')
+    expect(session.moves.at(-1)?.alternative).toBeUndefined()
+  })
+
+  it('sometimes plays a listed alternative, at the draws the odds say', async () => {
+    // Two draws: the first against ALTERNATIVE_CHANCE, the second picking
+    // among the alternatives. 0.1 is under a quarter, so it strays; 0.9 then
+    // picks the second of the two listed, which is c3.
+    const draws = [0.1, 0.9]
+    const session = new PlaySession({
+      book,
+      engine: fakeEngine(),
+      profile,
+      length: 'full',
+      side: 'other',
+      courseMoves: 'sometimes',
+      startMoves: ['d4', 'd5', 'Bf4', 'Nf6'],
+      random: () => draws.shift() ?? 0,
+    })
+    const move = await session.playOpponent()
+    expect(move).toEqual({ san: 'c3', fromBook: true, alternative: 'inaccuracy' })
+    expect(session.moves.at(-1)?.alternative).toBe('inaccuracy')
+  })
+
+  it('plays the course move when the first draw is over the odds', async () => {
+    const session = new PlaySession({
+      book,
+      engine: fakeEngine(),
+      profile,
+      length: 'full',
+      side: 'other',
+      courseMoves: 'sometimes',
+      startMoves: ['d4', 'd5', 'Bf4', 'Nf6'],
+      random: () => 0.5,
+    })
+    expect(await session.playOpponent()).toEqual({ san: 'e3', fromBook: true })
+  })
+
+  it('plays the course move where the position lists no alternative', async () => {
+    // 1.d4 is a stem move, which carries none. The random source is pinned
+    // where it WOULD stray, and there is nothing to stray to.
+    const session = new PlaySession({
+      book,
+      engine: fakeEngine(),
+      profile,
+      length: 'full',
+      side: 'other',
+      courseMoves: 'sometimes',
+      random: () => 0,
+    })
+    expect(await session.playOpponent()).toEqual({ san: 'd4', fromBook: true })
+  })
+
+  it('asks the engine once the course has nothing to say', async () => {
+    // After 1.d4 d5 2.Bf4 Nf6 3.e3 e6 4.Nf3 the fixture's line ends, and the
+    // trainee's 4...c5 is nowhere in it. The engine plays White from here.
+    const session = new PlaySession({
+      book,
+      engine: fakeEngine({ move: 'f1d3' }),
+      profile,
+      length: 'full',
+      side: 'other',
+      startMoves: ['d4', 'd5', 'Bf4', 'Nf6', 'e3', 'e6', 'Nf3', 'c5'],
+      random: () => 0.5,
+    })
+    expect(await session.playOpponent()).toEqual({ san: 'Bd3', fromBook: false })
+  })
+
+  it('takes the trainee move as Black and refuses one as White', async () => {
+    const session = new PlaySession({ book, engine: fakeEngine(), profile, length: 'full', side: 'other' })
+    expect(session.playStudent('d4')).toBe(false)
+    await session.playOpponent()
+    expect(session.playStudent('d5')).toBe(true)
+    expect(session.moves.at(-1)?.colour).toBe('black')
   })
 })
 
