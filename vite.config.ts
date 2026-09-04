@@ -22,7 +22,41 @@ export default defineConfig({
   // once showed someone else's site.
   server: { port: process.env.PORT ? Number(process.env.PORT) : 5175 },
   test: {
-    environment: 'node',
-    include: ['src/**/*.test.ts'],
+    /**
+     * Two kinds of test, and they want different rooms.
+     *
+     * The `.test.ts` files render React to a STRING and assert on the markup.
+     * They need no DOM, they run in milliseconds, and they are the bar that
+     * runs on every change. Nothing about them is migrating.
+     *
+     * The `.dom.test.tsx` files mount the app in jsdom and drive it the way a
+     * person does, because three identity bugs in `play-context.tsx` passed
+     * every string test and were found only by playing in the browser. They
+     * cost seconds rather than milliseconds, which is why they are a separate
+     * kind rather than the default.
+     *
+     * `projects` rather than `environmentMatchGlobs`: the glob form is
+     * deprecated, and two projects also keep the node tests from paying for
+     * jsdom's globals. `npx vitest run` still runs both, which is the point.
+     */
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: 'string',
+          environment: 'node',
+          include: ['src/**/*.test.ts'],
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'dom',
+          environment: 'jsdom',
+          include: ['src/**/*.dom.test.tsx'],
+          setupFiles: ['src/test/dom-setup.ts'],
+        },
+      },
+    ],
   },
 })

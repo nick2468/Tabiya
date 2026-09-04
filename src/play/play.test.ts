@@ -21,7 +21,7 @@ import { GAME_LENGTHS, PlaySession, lengthCap, scanGame, type GameLength } from 
 import { blackCourse, loadFixture as load } from '../test/fixtures'
 import { positionKey } from '../model/position'
 import { strengthProfile } from '../engine'
-import type { Engine, SearchResult } from '../engine'
+import { fakeEngine } from '../test/fake-engine'
 
 /** 1.d4 d5 2.Bf4, with two Black replies of different popularity. */
 const chapter = load({
@@ -95,29 +95,6 @@ function playedMoves(moves: string[]): PlayedMove[] {
       after: chess.fen(),
     }
   })
-}
-
-/** An engine that always plays the same move, with a fixed evaluation. */
-function fakeEngine(overrides: Partial<Engine> & { move?: string; cp?: number } = {}): Engine {
-  const search = async (fen: string): Promise<SearchResult> => {
-    const chess = new Chess(fen)
-    const legal = chess.moves({ verbose: true })
-    const move = overrides.move ?? (legal[0] ? legal[0].from + legal[0].to : '')
-    return {
-      bestMove: move || null,
-      candidates: move
-        ? [{ move, score: { kind: 'cp', centipawns: overrides.cp ?? 0 }, depth: 10 }]
-        : [],
-    }
-  }
-  return {
-    start: async () => {},
-    setStrength: async () => {},
-    newGame: async () => {},
-    search,
-    stop: () => {},
-    ...overrides,
-  }
 }
 
 describe('buildBook', () => {

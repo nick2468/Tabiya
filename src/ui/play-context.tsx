@@ -153,7 +153,18 @@ function analysisProfile() {
   return { ...strengthProfile(8), multiPv: 1, movetime: SCAN_MOVETIME }
 }
 
-function usePlayValue(): PlayGame {
+/**
+ * How the provider gets an engine.
+ *
+ * Injected rather than built, and NOT a test-only prop in the sense the phase
+ * 22 register rejected. `PlaySession` has taken its engine this way since v1
+ * for exactly this reason; the provider is the one place in the chain that had
+ * not been given the same seam, and three identity bugs lived there because
+ * nothing could reach it without starting a worker.
+ */
+export type CreateEngine = () => Engine
+
+function usePlayValue(createEngine: CreateEngine): PlayGame {
   const { recordPlay, state } = useProgress()
   /**
    * The history, read at the moment it is used rather than when a callback was
@@ -213,10 +224,10 @@ function usePlayValue(): PlayGame {
   const refresh = useCallback(() => setTick((count) => count + 1), [])
 
   const engine = useCallback(async (): Promise<Engine> => {
-    if (!engineRef.current) engineRef.current = new StockfishEngine()
+    if (!engineRef.current) engineRef.current = createEngine()
     await engineRef.current.start()
     return engineRef.current
-  }, [])
+  }, [createEngine])
 
   /**
    * Evaluates a position for the bar, at the analysis profile, and puts the
@@ -605,8 +616,18 @@ function usePlayValue(): PlayGame {
   }
 }
 
-export function PlayProvider({ children }: { children: React.ReactNode }) {
-  const value = usePlayValue()
+/** The real one: a Stockfish worker, made once the first game needs it. */
+const realEngine: CreateEngine = () => new StockfishEngine()
+
+export function PlayProvider({
+  children,
+  createEngine = realEngine,
+}: {
+  children: React.ReactNode
+  /** Overridden by the DOM tests, which must never start a worker. */
+  createEngine?: CreateEngine
+}) {
+  const value = usePlayValue(createEngine)
   return <PlayContext value={value}>{children}</PlayContext>
 }
 
