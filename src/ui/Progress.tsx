@@ -20,7 +20,7 @@ import { profileFolders, type ProfileFolders } from './folders'
 import { HelpPanel } from './Help'
 import { nextCardLine } from './card-words'
 import { usePlay } from './play-context'
-import { endedText, playedOn, recentPlayable, replayRequest, requestFor } from './play-on'
+import { endingOf, playedOn, recentPlayable, replayRequest, requestFor } from './play-on'
 import type { PlayRequest } from './Play'
 import './progress.css'
 
@@ -294,12 +294,21 @@ function PlayOn({ onPlayOn }: { onPlayOn: (request: PlayRequest) => void }) {
             <th>Strength</th>
             <th className="num">Moves</th>
             <th>Ended</th>
+            <th>Position</th>
             <th />
           </tr>
         </thead>
         <tbody>
           {playable.map(({ record, course }) => {
             const chapter = course.chapters.find((entry) => entry.id === record.chapterId)
+            const ending = endingOf(record, course.colour)
+            // Why the two buttons are dead, when they are. A game being played
+            // and a game being scanned are both "in progress"; they are not
+            // the same wait, and a title that said only one would be wrong
+            // half the time.
+            const waiting = game.scanning
+              ? 'The game is being reviewed; wait for the report.'
+              : 'A game is being played. Finish or replace it on Play first.'
             return (
               <tr key={record.at}>
                 <td>{playedOn(record.at)}</td>
@@ -307,16 +316,13 @@ function PlayOn({ onPlayOn }: { onPlayOn: (request: PlayRequest) => void }) {
                 <td>{chapter ? chapter.title : 'Any line'}</td>
                 <td>{levelName(record.level)}</td>
                 <td className="num">{record.moves}</td>
-                <td>{endedText(record, course.colour)}</td>
+                <td>{ending.ended}</td>
+                <td>{ending.position}</td>
                 <td className="row-actions">
                   <button
                     type="button"
                     disabled={game.inProgress}
-                    title={
-                      game.inProgress
-                        ? 'Finish the game you are playing first, or start a new one.'
-                        : undefined
-                    }
+                    title={game.inProgress ? waiting : undefined}
                     onClick={() => {
                       game.reset()
                       onPlayOn(requestFor(record, course))
@@ -327,11 +333,7 @@ function PlayOn({ onPlayOn }: { onPlayOn: (request: PlayRequest) => void }) {
                   <button
                     type="button"
                     disabled={game.inProgress}
-                    title={
-                      game.inProgress
-                        ? 'Finish the game you are playing first, or start a new one.'
-                        : undefined
-                    }
+                    title={game.inProgress ? waiting : undefined}
                     onClick={() => {
                       game.reset()
                       onPlayOn(replayRequest(record, course))
@@ -350,10 +352,14 @@ function PlayOn({ onPlayOn }: { onPlayOn: (request: PlayRequest) => void }) {
         played at, with no length to stop it again. Replay puts the same game up with its
         report, to look through rather than carry on. Either way the game keeps its
         identity, so reviewing it again replaces it rather than counting it twice. Only
-        games played since version 1.6.7 are here: earlier ones did not keep their moves,
-        and ones from before 1.6.11 do not say how they ended. A game you are still
-        playing has to be finished or replaced first, because the app holds one game at a
-        time.
+        games played since version 1.6.7 are here: earlier ones did not keep their moves.
+        Ended is worked out from the moves when the game itself did not record it, so a
+        game that finished in checkmate says so however old it is; a game from before
+        1.6.12 that simply ran out of moves reads as stopped, because nothing kept the
+        length it was given. Position is the verdict on the last position, blank where no
+        evaluation was kept and beside a checkmate, which has said it already. A game you
+        are still playing, or one being reviewed, has to finish first, because the app
+        holds one game at a time.
       </p>
     </>
   )

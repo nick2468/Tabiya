@@ -438,6 +438,27 @@ describe('play history', () => {
     })
   })
 
+  /**
+   * What a Replay does to a record that has no verdict: adds one, keeping
+   * everything the game itself recorded. The rule lives in the provider, which
+   * needs a real engine; what can be held here is that the merge it performs
+   * loses nothing.
+   */
+  it('keeps a game own facts when a verdict is merged onto it', () => {
+    const old = { ...game, sans: ['d4', 'd5'], hints: 2, moves: 9, length: 'move10' as const }
+    const state = recordGame(emptyProgress(), old)
+    const filled = recordGame(state, { ...old, finalEval: 0.4, outcome: 'Drawn by repetition' })
+    expect(filled.playGames).toHaveLength(1)
+    expect(filled.playGames[0]).toMatchObject({
+      sans: ['d4', 'd5'],
+      hints: 2,
+      moves: 9,
+      length: 'move10',
+      finalEval: 0.4,
+      outcome: 'Drawn by repetition',
+    })
+  })
+
   it('reads an older record that has none of them', () => {
     const state = parseProgress({ ...emptyProgress(), playGames: [game] })
     expect(state.playGames[0].outcome).toBeUndefined()

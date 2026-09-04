@@ -3676,8 +3676,8 @@ overwrite one; the greyed Play on and Replay buttons say whether a game is being
 or reviewed. Version 1.6.12.
 
 - [x] 28.1 Ending derived from the moves; `length` on the record; Move limit.
-- [ ] 28.2 Ended and Position columns; Replay fills in, never overwrites.
-- [ ] 28.3 The greyed buttons say why; the report-showing case checked.
+- [x] 28.2 Ended and Position columns; Replay fills in, never overwrites.
+- [x] 28.3 The greyed buttons say why; the report-showing case checked.
 - [ ] 28.4 Version 1.6.12.
 - [ ] 28.5 Proved in the browser build with seeded records.
 

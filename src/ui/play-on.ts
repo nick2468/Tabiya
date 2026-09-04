@@ -1,5 +1,5 @@
 import { Chess } from 'chess.js'
-import { verdictForYou } from '../play'
+import { endingFromMoves, isCheckmateOutcome, lengthCap, verdictForYou } from '../play'
 import type { PlayRequest } from './Play'
 import type { PlayRecord } from '../storage/progress'
 import type { Colour, LoadedCourse } from '../model/types'
@@ -75,22 +75,56 @@ export function canReplayMoves(sans: string[]): boolean {
   return true
 }
 
+/** How a game finished, and how it stood, which are two different facts. */
+export interface GameEnding {
+  /** The ending: the session's own sentence, or "Move limit", or "Stopped". */
+  ended: string
+  /** The verdict on the final position, or empty when none can be shown. */
+  position: string
+}
+
 /**
- * How a recorded game ended, in one phrase.
+ * How a recorded game ended.
  *
- * A game that ended by itself says so in the session's own words. A game that
- * was stopped has no ending, only a position, so it is described by the
- * verdict on that position, turned to the trainee's own side: the same game
- * reads "clearly better for you" in a White course and in a Black one, which
- * is what makes the column scannable.
+ * The record says so if it was reviewed on 1.6.11 or later. If it was not, the
+ * MOVES say so, and every record since 1.6.7 has them: Nick's games ending in
+ * checkmate read as merely stopped because nobody had asked the moves.
  *
- * A record from before this phase has neither, and "Stopped" is all that can
- * honestly be said about it.
+ * Failing both, the length says whether it ran out or was stopped by hand, and
+ * failing that the honest answer is "Stopped". The count has to MATCH the cap,
+ * not merely reach it: a game carried on past its limit by Play on did not
+ * stop at the limit.
  */
 export function endedText(record: PlayRecord, studentColour: Colour): string {
-  if (record.outcome) return record.outcome
-  if (record.finalEval === undefined) return 'Stopped'
-  return `Stopped, ${verdictForYou(record.finalEval, studentColour)}`
+  const ending = record.outcome ?? endingFromMoves(record.sans ?? [], studentColour)
+  if (ending) return ending
+  const cap = record.length ? lengthCap(record.length) : null
+  return cap !== null && record.moves === cap ? 'Move limit' : 'Stopped'
+}
+
+/**
+ * How the position stood at the end, capitalised for a column of its own.
+ *
+ * Empty when there is no evaluation, which is every game reviewed before
+ * 1.6.11, and empty for a game that ended in mate: the ending has said it, and
+ * a number beside a checkmate is noise. A draw keeps its number, because
+ * "Drawn by repetition" and "Winning for you" together say something worth
+ * knowing about how the draw was reached.
+ */
+export function positionText(record: PlayRecord, studentColour: Colour): string {
+  if (record.finalEval === undefined) return ''
+  const ending = record.outcome ?? endingFromMoves(record.sans ?? [], studentColour)
+  if (isCheckmateOutcome(ending)) return ''
+  const said = verdictForYou(record.finalEval, studentColour)
+  return said.charAt(0).toUpperCase() + said.slice(1)
+}
+
+/** Both, for a row that shows them side by side. */
+export function endingOf(record: PlayRecord, studentColour: Colour): GameEnding {
+  return {
+    ended: endedText(record, studentColour),
+    position: positionText(record, studentColour),
+  }
 }
 
 /**

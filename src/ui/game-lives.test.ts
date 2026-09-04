@@ -291,7 +291,27 @@ describe('playing on from a recorded game', () => {
       withRecord,
     )
     expect(html).toMatch(/<button[^>]*disabled/)
-    expect(html).toContain('Finish the game you are playing first')
+    expect(html).toContain('A game is being played.')
+  })
+
+  /**
+   * A game being played and a game being scanned are both "in progress", and
+   * they are not the same wait. Nick saw the buttons dead and could not tell
+   * which he was waiting for.
+   */
+  it('says it is a review it is waiting for, when it is', () => {
+    const html = inApp(
+      game({
+        session: playedGame(),
+        courseId: course.id,
+        inProgress: true,
+        scanning: { done: 3, total: 9 },
+      }),
+      progressScreen,
+      withRecord,
+    )
+    expect(html).toContain('The game is being reviewed')
+    expect(html).not.toContain('A game is being played.')
   })
 
   it('offers it again once that game has been reviewed, because it is over', () => {

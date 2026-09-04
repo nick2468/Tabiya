@@ -147,7 +147,16 @@ function analysisProfile() {
 }
 
 function usePlayValue(): PlayGame {
-  const { recordPlay } = useProgress()
+  const { recordPlay, state } = useProgress()
+  /**
+   * The history, read at the moment it is used rather than when a callback was
+   * built. Same reason as the identity ref below: `finish` can be called from a
+   * sequence that started before the render this state belongs to.
+   */
+  const historyRef = useRef(state.playGames)
+  useEffect(() => {
+    historyRef.current = state.playGames
+  }, [state.playGames])
 
   const [session, setSession] = useState<PlaySession | null>(null)
   // What the game was started with. In state as well as in a ref, because the
@@ -475,7 +484,25 @@ function usePlayValue(): PlayGame {
       // reading, not playing, so the record is left alone until a move is
       // played on top of it.
       const untouched = setup.at !== undefined && running.moves.length === setup.startMoves.length
-      if (untouched) return
+      // ...with one exception. A record from before 1.6.11 has no verdict and
+      // no ending, and this scan is the only chance it will ever have of
+      // getting one. Filling in what is missing is not drift; overwriting what
+      // is there would be, so a record that already has either is left alone.
+      const held = setup.at ? historyRef.current.find((game) => game.at === setup.at) : undefined
+      const canFillIn =
+        held !== undefined && held.outcome === undefined && held.finalEval === undefined
+      if (untouched && !canFillIn) return
+      if (untouched && held) {
+        // Merged onto the record rather than written over it: the game's own
+        // moves, hints and level are facts about how it was played and this
+        // replay did not play it.
+        recordPlay({
+          ...held,
+          ...(running.outcome ? { outcome: running.outcome } : {}),
+          ...(built.finalEval !== undefined ? { finalEval: built.finalEval } : {}),
+        })
+        return
+      }
       recordPlay({
         courseId: setup.courseId,
         chapterId: setup.chapterId,
@@ -496,6 +523,9 @@ function usePlayValue(): PlayGame {
         // its evaluation instead.
         ...(running.outcome ? { outcome: running.outcome } : {}),
         ...(built.finalEval !== undefined ? { finalEval: built.finalEval } : {}),
+        // What it was set to play, which is the only thing that tells a game
+        // that ran out of moves from one that was stopped by hand.
+        length: setup.length,
         level: setup.level,
       })
     } catch (error) {
