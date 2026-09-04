@@ -24,14 +24,19 @@ export const PLAY_ON_LIMIT = 10
  * The games that can be played on, newest first.
  *
  * Only records that kept their moves: a game from before 1.6.7 has nothing to
- * replay and listing it would be a button that cannot work. The history is
- * held oldest first, so this reverses it.
+ * replay and listing it would be a button that cannot work.
+ *
+ * Sorted by `at` rather than reversed. The history is written oldest first, so
+ * reversing it was the same thing until a record could be REPLACED: a replaced
+ * record goes to the end of the list, so a Replay that filled a verdict into a
+ * game from last week put last week at the top. The date is what the column
+ * says, so the date is what it sorts by.
  */
 export function recentPlayable(games: PlayRecord[], limit = PLAY_ON_LIMIT): PlayRecord[] {
   return games
     .filter((game) => game.sans && game.sans.length > 0)
     .slice()
-    .reverse()
+    .sort((a, b) => new Date(b.at).getTime() - new Date(a.at).getTime())
     .slice(0, limit)
 }
 

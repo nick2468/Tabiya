@@ -3,6 +3,7 @@ import {
   PLAY_ON_LIMIT,
   canReplayMoves,
   endedText,
+  positionText,
   recentPlayable,
   replayRequest,
   requestFor,
@@ -36,29 +37,45 @@ const record = (over: Partial<PlayRecord> = {}): PlayRecord => ({
 
 describe('which games can be played on', () => {
   it('leaves out the ones that never kept their moves', () => {
-    const games = [record({ at: 'a', sans: undefined }), record({ at: 'b' })]
-    expect(recentPlayable(games).map((game) => game.at)).toEqual(['b'])
+    const games = [record({ at: day(1), sans: undefined }), record({ at: day(2) })]
+    expect(recentPlayable(games).map((game) => game.at)).toEqual([day(2)])
   })
 
   it('leaves out a game whose move list is empty', () => {
     expect(recentPlayable([record({ sans: [] })])).toEqual([])
   })
 
-  it('offers the newest first, because the history is kept oldest first', () => {
-    const games = [record({ at: 'first' }), record({ at: 'second' }), record({ at: 'third' })]
-    expect(recentPlayable(games).map((game) => game.at)).toEqual(['third', 'second', 'first'])
+  const day = (n: number) => `2026-09-${String(n).padStart(2, '0')}T09:00:00.000Z`
+
+  it('offers the newest first', () => {
+    const games = [record({ at: day(1) }), record({ at: day(2) }), record({ at: day(3) })]
+    expect(recentPlayable(games).map((game) => game.at)).toEqual([day(3), day(2), day(1)])
+  })
+
+  /**
+   * The history used to be reversed, which was the same thing while records
+   * were only ever appended. Phase 25 let one be REPLACED, and a replacement
+   * goes to the end: filling a verdict into last week's game put last week at
+   * the top of the list. The column says a date, so the date is what it sorts
+   * by.
+   */
+  it('offers the newest first even when an old record was written last', () => {
+    const games = [record({ at: day(1) }), record({ at: day(3) }), record({ at: day(2) })]
+    expect(recentPlayable(games).map((game) => game.at)).toEqual([day(3), day(2), day(1)])
   })
 
   it('offers at most ten, which is a screenful', () => {
-    const games = Array.from({ length: 25 }, (_, index) => record({ at: `game-${index}` }))
+    const games = Array.from({ length: 25 }, (_, index) =>
+      record({ at: `2026-09-04T${String(index % 24).padStart(2, '0')}:00:${String(index).padStart(2, '0')}.000Z` }),
+    )
     expect(recentPlayable(games)).toHaveLength(PLAY_ON_LIMIT)
-    expect(recentPlayable(games)[0].at).toBe('game-24')
+    expect(recentPlayable(games)[0].at).toBe('2026-09-04T23:00:23.000Z')
   })
 
   it('does not change the history it was given', () => {
-    const games = [record({ at: 'a' }), record({ at: 'b' })]
+    const games = [record({ at: day(1) }), record({ at: day(2) })]
     recentPlayable(games)
-    expect(games.map((game) => game.at)).toEqual(['a', 'b'])
+    expect(games.map((game) => game.at)).toEqual([day(1), day(2)])
   })
 })
 
@@ -126,34 +143,102 @@ describe('how a game ended', () => {
     )
   })
 
-  it('describes a stopped game by the position it stopped in', () => {
-    // +1.6 from White's side, in a White course, is good for the trainee.
-    expect(endedText(record({ finalEval: 1.6 }), 'white')).toBe('Stopped, clearly better for you')
-    expect(endedText(record({ finalEval: -1.6 }), 'white')).toBe(
-      'Stopped, clearly better for the engine',
+  it('says Stopped for a game that was stopped mid-play', () => {
+    expect(endedText(record({ finalEval: 1.6 }), 'white')).toBe('Stopped')
+  })
+
+  it('says only Stopped for a game recorded before any of this was kept', () => {
+    expect(endedText(record({ sans: undefined }), 'white')).toBe('Stopped')
+  })
+
+  /**
+   * The moves were always kept, and they know. Nick's games ending in
+   * checkmate read as merely stopped because nobody had asked them.
+   */
+  it('works a checkmate out of the moves when the record does not say', () => {
+    // Fool's mate: White is mated, so a White course lost it.
+    const mate = ['f3', 'e5', 'g4', 'Qh4#']
+    expect(endedText(record({ sans: mate, outcome: undefined }), 'white')).toBe(
+      'You were checkmated',
     )
   })
 
-  it('turns the same numbers round for a Black course', () => {
-    // The identical evaluation, read by a trainee playing Black.
-    expect(endedText(record({ finalEval: -1.6 }), 'black')).toBe('Stopped, clearly better for you')
-    expect(endedText(record({ finalEval: 1.6 }), 'black')).toBe(
-      'Stopped, clearly better for the engine',
+  it('reads the same mate the other way round in a Black course', () => {
+    const mate = ['f3', 'e5', 'g4', 'Qh4#']
+    expect(endedText(record({ sans: mate, outcome: undefined }), 'black')).toBe(
+      'You won by checkmate',
+    )
+  })
+
+  it('works a stalemate out of the moves', () => {
+    const stalemate = [
+      'e3', 'a5', 'Qh5', 'Ra6', 'Qxa5', 'h5', 'Qxc7', 'Rah6', 'h4', 'f6',
+      'Qxd7+', 'Kf7', 'Qxb7', 'Qd3', 'Qxb8', 'Qh7', 'Qxc8', 'Kg6', 'Qe6',
+    ]
+    expect(endedText(record({ sans: stalemate, outcome: undefined }), 'white')).toBe(
+      'Drawn by stalemate',
+    )
+  })
+
+  it('trusts the recorded ending over the moves, when it has one', () => {
+    const mate = ['f3', 'e5', 'g4', 'Qh4#']
+    expect(endedText(record({ sans: mate, outcome: 'Drawn by repetition' }), 'white')).toBe(
+      'Drawn by repetition',
+    )
+  })
+
+  it('says Move limit when the game ran out of the length it was given', () => {
+    expect(endedText(record({ moves: 10, length: 'move10' }), 'white')).toBe('Move limit')
+    expect(endedText(record({ moves: 15, length: 'move15' }), 'white')).toBe('Move limit')
+  })
+
+  it('says Stopped when a game with a length stopped short of it', () => {
+    expect(endedText(record({ moves: 7, length: 'move10' }), 'white')).toBe('Stopped')
+  })
+
+  it('says Stopped when a game was carried on past its old limit', () => {
+    // Play on resumes uncapped, so a record at 14 moves with a move10 length
+    // did not stop at the limit: it ran through it.
+    expect(endedText(record({ moves: 14, length: 'move10' }), 'white')).toBe('Stopped')
+  })
+
+  it('says Stopped for a full game, which had no limit to reach', () => {
+    expect(endedText(record({ moves: 40, length: 'full' }), 'white')).toBe('Stopped')
+  })
+
+  it('says Stopped for a record from before the length was kept', () => {
+    expect(endedText(record({ moves: 10 }), 'white')).toBe('Stopped')
+  })
+})
+
+describe('how the position stood', () => {
+  it('is the verdict, capitalised, turned to the side the trainee plays', () => {
+    expect(positionText(record({ finalEval: 1.6 }), 'white')).toBe('Clearly better for you')
+    expect(positionText(record({ finalEval: 1.6 }), 'black')).toBe(
+      'Clearly better for the engine',
     )
   })
 
   it('says level without taking a side', () => {
-    expect(endedText(record({ finalEval: 0.1 }), 'white')).toBe('Stopped, level')
-    expect(endedText(record({ finalEval: 0.1 }), 'black')).toBe('Stopped, level')
+    expect(positionText(record({ finalEval: 0.1 }), 'white')).toBe('Level')
+    expect(positionText(record({ finalEval: 0.1 }), 'black')).toBe('Level')
   })
 
-  it('says only Stopped for a game recorded before this was kept', () => {
-    expect(endedText(record(), 'white')).toBe('Stopped')
+  it('is blank for a game recorded before evaluations were kept', () => {
+    expect(positionText(record(), 'white')).toBe('')
   })
 
-  it('prefers the ending over the evaluation when it has both', () => {
-    expect(endedText(record({ outcome: 'You were checkmated', finalEval: 9 }), 'white')).toBe(
-      'You were checkmated',
+  it('is blank beside a checkmate, which has already said it', () => {
+    const mate = ['f3', 'e5', 'g4', 'Qh4#']
+    expect(positionText(record({ sans: mate, finalEval: -9 }), 'white')).toBe('')
+    expect(positionText(record({ outcome: 'You won by checkmate', finalEval: 9 }), 'white')).toBe(
+      '',
+    )
+  })
+
+  it('is kept beside a draw, which does not say how it was reached', () => {
+    expect(positionText(record({ outcome: 'Drawn by repetition', finalEval: 1.6 }), 'white')).toBe(
+      'Clearly better for you',
     )
   })
 })
