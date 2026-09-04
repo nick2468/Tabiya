@@ -3679,7 +3679,53 @@ or reviewed. Version 1.6.12.
 - [x] 28.2 Ended and Position columns; Replay fills in, never overwrites.
 - [x] 28.3 The greyed buttons say why; the report-showing case checked.
 - [x] 28.4 Version 1.6.12.
-- [ ] 28.5 Proved in the browser build with seeded records.
+- [x] 28.5 Proved in the browser build with seeded records.
+
+Open items (phase 28):
+
+1. **The moves were always there; nobody had asked them.** A record has carried its `sans`
+   since 1.6.7 and its `outcome` only since 1.6.11, so Nick's checkmates read as
+   "Stopped". Replaying the moves answers it. The five sentences moved into
+   `src/play/outcome.ts` and the session says them from there, because two copies would
+   become two vocabularies the day one was reworded.
+2. **"Move limit" needs the length, and the length is new.** Nothing else tells a game
+   that ran out of moves from one stopped by hand. The count has to MATCH the cap, not
+   merely reach it: a game carried on past its limit by Play on did not stop at the limit,
+   and a record at 14 moves with a `move10` length reads "Stopped".
+3. **Position is blank where nothing honest fits.** No evaluation kept, or the game ended
+   in mate and the ending has said it. A DRAW keeps its number, which is a small decision
+   worth its reason: "Drawn by repetition" and "Winning for you" together say how the draw
+   was reached, and neither says it alone.
+4. **Replay may fill in, never overwrite, and merges rather than writes.** A record from
+   before 1.6.11 has no verdict and this scan is its only chance at one, so the phase 27
+   "a replay is reading" rule gains one exception, guarded on BOTH fields being absent.
+   It merges onto the record: the moves, hints and level the game itself recorded survive
+   a replay that did not play it. The provider reads the history through a ref, for the
+   same reason the identity is read through one - a callback in an async sequence must not
+   trust its closure.
+5. **The greyed buttons were not a bug, and I looked.** Reproduced the sequence the chip
+   named: during a Replay's scan they are disabled and now say "The game is being
+   reviewed; wait for the report."; the moment the report shows they are live again, with
+   no title. What Nick saw was the scan, and it now says so.
+6. **A REAL BUG found while driving, unrelated to what the phase was asked for.** The Play
+   on list reversed the history, which was newest-first only while records were appended.
+   Phase 25 let a record be replaced, and a replacement goes to the END, so the first
+   Replay that filled a verdict into a game from 2 September put it above 4 September on
+   screen. It sorts by `at` now. Its own commit, because it predates this phase. The
+   existing tests used `at` values that were not dates and only passed because the code
+   reversed.
+7. **What was driven at 1200x980 on this session's own server, v1.6.12 in the header.**
+   Four seeded records shaped like Nick's. A mate with no `outcome` reads "You won by
+   checkmate" with Position blank. A stopped game with no `finalEval` reads "Stopped" with
+   Position blank. The same twenty-ply game reads "Stopped" without a length and "Move
+   limit" with one, Position "Level". Replaying the two without evaluations filled them in
+   ("Level", then "Winning for you") and left the other rows and every other field
+   untouched, with four records before and four after.
+8. **Console judged from a fresh tab**, per the hazard: no output at all across Play,
+   Study, Progress and Help on a clean load.
+9. **No chess content.** Nothing under `courses/` differs from the commit this phase
+   started on.
+
 
 Acceptance: as the chip's final paragraph.
 
