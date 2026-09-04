@@ -302,6 +302,13 @@ export const HELP_SECTIONS: HelpSection[] = [
       'game stopped in. It is there for a game you stopped and not for one that ended in a',
       'checkmate or a draw, because there is nothing left to play in those. Reviewing again',
       'replaces the first report rather than counting the game twice.',
+      '',
+      'Play from here beside it starts a NEW game from whichever position you have stepped',
+      'back to, which is how you try again at a move the report called a mistake. That is',
+      'the difference between the two: Keep playing carries this game on and reviewing it',
+      'again replaces its record, while Play from here leaves this game recorded as it is',
+      'and adds a second one. It is off where it is the engine to move, so step one move on',
+      'or back, and off at a position where the game is already over.',
     ].join('\n'),
   },
   {

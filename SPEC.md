@@ -61,6 +61,11 @@ Full or partial games as White against Stockfish, in three launch shapes:
 - **This chapter's defence**: the same, restricted to one chapter's branches. Sparring
   against a specific setup, for example the King's Indian.
 - **From here**: launched from any Study position; the engine plays Black immediately.
+  Since phase 30 it is also launched from a REPLAY, at whichever position of a reviewed
+  game the trainee has stepped back to, which is how a move the report called a mistake
+  gets played again. That kind carries the recorded game's own course, chapter and
+  strength, and deliberately carries no identity: it is a new game, so the game being
+  read is left recorded exactly as it is.
 
 Options: game length (to move 10, to move 15, or full game) and strength (a 1-8 scale;
 implementation in section 5). A live evaluation bar sits to the left of the board while
@@ -699,6 +704,26 @@ stays under ten seconds**, both projects, because a bar nobody waits for is a ba
 runs. And **no snapshots, no fake timers, no worker** - the first records what the code
 did rather than what it should do, the second tests the clock, and the third is what the
 fake engine exists to prevent. `docs/testing.md` holds the detail.
+
+2026-09-04, phase 30: **a report should let you try the move.** Nick replayed a London
+game on 1.6.12 and was told move 35 had missed a forced mate. The report named it and the
+viewer showed the position, and neither let him play it, so the one thing he actually
+wanted to do with the finding was the one thing the screen would not do. Study has offered
+Play from here since v1 and the ruling is that a replay offers the same button.
+
+What it starts is a NEW game, and that is the ruling rather than a detail. `at` is a
+record's identity under the phase 25 rule, so a request keeping the old one would make the
+first review of the new attempt REPLACE the game he was reading. The game he is learning
+from has to survive being learnt from. It is enabled only where it can work, which is a
+position where it is the trainee's move and the game is not over.
+
+The same sitting moved **Keep playing** out of the header and into the button row beside
+it. It was a text link, which reads as navigation, and it does a thing to the game exactly
+as the other buttons do. The two are the pair a person confuses, so they sit together and
+each says in its tooltip what happens to the record: Keep playing carries this game on and
+a second review replaces its record, Play from here leaves it as it is and adds a game.
+The row became two rows to fit them: the board is 416px and one row of all of them does
+not.
 
 ## 9. v1 acceptance
 
