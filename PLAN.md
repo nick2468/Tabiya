@@ -3729,7 +3729,33 @@ Open items (phase 28):
 
 Acceptance: as the chip's final paragraph.
 
-- [ ] **Review gate 28**
+Gate 28 findings (2026-09-04):
+
+- **Verified for the gate from the repo:** 881 tests and `tsc -b` clean; nothing under
+  `courses/`; version 1.6.12 in all three files; no em dashes under `src/`. The five
+  outcome sentences live once in `src/play/outcome.ts`; the fill-in merges onto the held
+  record through a ref and refuses when either field is already there; the list sorts
+  by `at`.
+- **Driven with four seeded records** shaped like Nick's, against the builder's server
+  showing v1.6.12: a mated record with no outcome read "You were checkmated"; a stopped
+  one "Stopped" with Position blank; twenty plies with no length "Stopped"; the same with
+  `move10` "Move limit" and Position blank until replayed; newest first by date.
+- **One bug found by the drive and fixed at the gate as the orchestrator's commit.**
+  Replaying the record stopped after 2...d5 came back with five plies: the game was
+  loaded with the opponent to move and `start` let it move before the review. The
+  replay options now hold the opponent. Re-driven: four plies, two moves, verdict 0.49
+  filled in, every other record untouched.
+- **The greyed buttons** were not caught mid-scan (the scan of six positions is under a
+  second) and were live with the report showing; the builder's reproduction of the
+  scanning title stands.
+- **Both of the builder's decision rules stand**: Move limit only when the count equals
+  the cap, and a draw keeps its Position.
+- **The ordering bug it found beside the phase is the right generalisation**: a list that
+  reverses an append-ordered store breaks the moment the store can replace.
+- **Nick's own files were not listed and not reported.** The browser build's storage was
+  cleared afterwards.
+
+- [x] **Review gate 28 passed** (2026-09-04)
 
 ## Phase 29 - a test rig that can play a game
 
