@@ -452,6 +452,12 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   test click the nav and would pay for several other checks this suite cannot make; a
   test-only prop for the initial view would not, because it is production API that exists
   for a test. Recorded at phase 22.
+  **CLOSED at phase 29**, on exactly the terms it named: the DOM environment was built and
+  the test clicks the nav. `shell.dom.test.tsx` learns a line through the Study table, goes
+  to Drill, and reads the dropdown - idle with its reason in the title on Drill mixed, live
+  again the moment Drill selected is chosen, and live on a running game, which is the half
+  of the phase 22 ruling that says a game names its own course. Neutering the rule to
+  `false` turns two of them red.
 - **A view change itself is not driven by any test, which is the second thing a DOM test
   environment would pay for.** Phase 23 moved the running game above the screen so that
   looking at Study mid-game no longer throws it away. What the suite holds is the half
@@ -471,6 +477,12 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   game in the browser and pressing Undo, and it is why the value is no longer memoised at
   all. Written down because the next person to reach for a `useMemo` there should know
   what it costs.
+
+  **Both halves CLOSED at phase 29.** The view change is driven: a test starts a game,
+  plays a move, clicks Study, clicks back, and finds the same moves. And the memo is
+  pinned rather than merely written down - `play-game.dom.test.tsx` presses Undo and Redo
+  through the buttons, and putting the memo back turns both red. That is the bug this
+  entry was written about, held by a test at last.
 
 ## 7. Risks
 
