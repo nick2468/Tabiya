@@ -103,3 +103,21 @@ Acceptance: Play from here on the button row during a replay, enabled on the tra
 positions only; a new game with a fresh identity from the replayed position, the old
 record untouched, proved by a DOM test shown red first; Help and SPEC true; version
 1.6.13; nothing under `courses/`; vitest green and `tsc -b` clean.
+
+### 30.6 Keep playing becomes a button, and says what it does
+
+Nick, 2026-09-04, after the chip was sent: nearly every control is a button and Keep
+playing is styled as a link in the header, which reads as odd, and it needs explaining
+beside Play from here because the two are easy to confuse.
+
+- [ ] **Keep playing leaves the header and joins the button row**, in the app's button
+  style, placed after New game and before Undo: New game, Keep playing, Undo, Redo, Hint,
+  Play from here, then the arrows on the right. It shows only when it applies (a reviewed
+  game that did not end by itself), as now.
+- [ ] **A title on each of the two so the difference is on the screen.** Keep playing:
+  "Carry on this game from its final position. Reviewing again replaces this game's
+  record." Play from here: "Start a new game from the position on the board. This game's
+  record is kept as it is."
+- [ ] Help, Play section: the sentence on Keep playing and the new one on Play from here
+  sit together and say the same distinction in one breath. The help test holds both
+  names on `play`; `PlayHead` or the row component is the fixture for both.

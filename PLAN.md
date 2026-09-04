@@ -3827,6 +3827,8 @@ before the feature. Version 1.6.13.
 - [ ] 30.1 Play from here on the row; a new game from the replayed position.
 - [ ] 30.2 DOM test red first; string test for the request builder; help mutation check.
 - [ ] 30.3 Help and SPEC.
+- [ ] 30.6 Keep playing as a button on the row beside New game, with titles on it and on
+  Play from here saying how they differ.
 - [ ] 30.4 Version 1.6.13.
 - [ ] 30.5 Proved in the browser build.
 
