@@ -4052,3 +4052,30 @@ FEN-plus-SAN script, and the new one-grade rule mutation-checked by flipping a c
 copy (red, naming the position). Two grades were overturned by the number in the
 direction of leniency (the Najdorf e5 against 6.Bg5 at 0.46, the Colle c3 at 0.00) and
 the rest confirmed. The 1.7.1 installer was built from this commit with a clean tree.
+
+## Phase 32 - play the other side
+
+Goal: Nick, 2026-09-05, wants to play against the opening he has learnt, with the engine
+playing the course. No chess content.
+
+Chipped as `chips/phase-32-other-side.md`. A fourth launch shape, "Play the other side":
+the trainee takes the opponent's colour and the engine plays the repertoire move while
+the game is in the course, every time by default or sometimes a listed alternative under
+a remembered setting. The report's repertoire part becomes "The course"; Hint shows the
+reply club players make most often; records carry the side, are counted apart on Progress
+and excluded from Lines played. Version 1.7.2.
+
+- [ ] 32.1 The book carries each position's listed alternatives.
+- [ ] 32.2 The session plays either side, with tests for both settings.
+- [ ] 32.3 The other-side report and PGN.
+- [ ] 32.4 The start screen: the fourth radio and the remembered setting.
+- [ ] 32.5 Hint from the book's weights.
+- [ ] 32.6 Progress: counted apart, excluded from Lines played, Play on resumes the side.
+- [ ] 32.7 DOM tests red first; help test mutation-checked.
+- [ ] 32.8 Help and SPEC.
+- [ ] 32.9 Version 1.7.2.
+- [ ] 32.10 Proved in the browser build.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 32**
