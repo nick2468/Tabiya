@@ -118,6 +118,15 @@
   margin-left: 44px;
 }
 
+/* The second row, and there are two because one will not fit. The board is
+   416px and row one already reaches 374px, so Keep playing, Play from here and
+   the arrows beside them would wrap into a ragged second line rather than a
+   deliberate one. The column's own 12px gap is the space between them, so this
+   needs nothing but the same left edge, which it inherits. */
+.play-review-row {
+  margin-top: -4px;
+}
+
 /* The row spans exactly the board: the buttons from its left edge, the two
    stepping arrows ending at its right. `auto` on the arrows is what pushes
    them there, so the row needs no width of its own. */

@@ -3,6 +3,11 @@ import { Board } from './Board'
 import { BOARD_SIZE } from './board-size'
 import { HelpAsk, HelpSaid } from './Help'
 import { usePlay } from './play-context'
+import {
+  requestFromReplay,
+  whyNotPlayable,
+  type ReplayedGame,
+} from './play-from-replay'
 import { useProgress } from './progress-context'
 
 import { strengthProfile, allProfiles, levelName } from '../engine'
@@ -108,10 +113,13 @@ export function Play({
   course,
   request,
   onRequestUsed,
+  onPlayFrom,
 }: {
   course: LoadedCourse
   request: PlayRequest | null
   onRequestUsed: () => void
+  /** Sends a new request out through the shell, the way Study does. */
+  onPlayFrom?: (request: PlayRequest) => void
 }) {
   const { state } = useProgress()
   const game = usePlay()
@@ -291,6 +299,44 @@ export function Play({
     onForward: () => step(ply + 1),
   }
 
+  /**
+   * The replayed game as the request builder wants it: what the PROVIDER
+   * holds, not what this screen's launch options say. Same lesson as
+   * `replayOptions` above. The course a game was played in may not be the one
+   * the header is naming, because the header is free to move while a game is
+   * up.
+   */
+  const replayedGame: ReplayedGame | null =
+    report && game.courseId && game.recordedAt
+      ? {
+          moves,
+          courseId: game.courseId,
+          chapterId: game.chapterId ?? undefined,
+          level: game.level ?? undefined,
+          at: game.recordedAt,
+        }
+      : null
+
+  const playFromWhy = replayedGame
+    ? whyNotPlayable(replayedGame, ply, session?.studentColour ?? 'white')
+    : null
+
+  /**
+   * A new game from the position being looked at.
+   *
+   * The request goes out first and the reviewed game is thrown away second.
+   * The order is not arbitrary: the launch options only render when there is
+   * no session, so the reset is what puts them on the screen, and the request
+   * has to be waiting when they arrive.
+   */
+  const playFromHere = () => {
+    if (!replayedGame || !onPlayFrom) return
+    const built = requestFromReplay(replayedGame, ply)
+    if (!built) return
+    onPlayFrom(built)
+    game.reset()
+  }
+
   const replayed = report ? positionAtPly(moves, ply) : null
   const shown = replayed ?? session?.fen ?? ''
   const highlight = report
@@ -405,8 +451,6 @@ export function Play({
         opponentColour={playBook.opponentColour}
         thinking={thinking}
         reviewed={report !== null}
-        canResume={game.canResume}
-        onResume={game.resume}
       />
 
       <div className="play-body">
@@ -438,11 +482,15 @@ export function Play({
             thinking={thinking}
             reviewed={report !== null}
             canHint={game.canHint}
+            canResume={game.canResume}
             replay={report ? replayControls : null}
+            playFromWhy={playFromWhy}
             onNew={game.reset}
+            onResume={game.resume}
             onUndo={game.undo}
             onRedo={game.redo}
             onHint={game.askHint}
+            onPlayFrom={playFromHere}
           />
         </div>
 
@@ -527,16 +575,12 @@ export function PlayHead({
   opponentColour,
   thinking,
   reviewed,
-  canResume,
-  onResume,
 }: {
   session: PlaySession
   opening: string | null
   opponentColour: Colour
   thinking: boolean
   reviewed: boolean
-  canResume: boolean
-  onResume: () => void
 }) {
   const finished = session.isFinished()
   return (
@@ -552,13 +596,6 @@ export function PlayHead({
               ? `${colourName(opponentColour)} is thinking...`
               : 'Your move'}
       </p>
-      {canResume ? (
-        <div className="play-head-actions">
-          <button type="button" className="link" onClick={onResume}>
-            Keep playing
-          </button>
-        </div>
-      ) : null}
     </header>
   )
 }
@@ -579,67 +616,119 @@ export function PlayControls({
   thinking,
   reviewed,
   canHint,
+  canResume,
   replay,
+  playFromWhy,
   onNew,
+  onResume,
   onUndo,
   onRedo,
   onHint,
+  onPlayFrom,
 }: {
   session: PlaySession
   thinking: boolean
   reviewed: boolean
   canHint: boolean
+  /** Whether this game can be carried on from where it stopped. */
+  canResume: boolean
   /** The stepping arrows, once there is a reviewed game to walk. */
   replay: ReplayControls | null
+  /**
+   * Why Play from here is off at the position showing, or empty when it is
+   * on. Null when there is no replay at all and the button does not belong.
+   */
+  playFromWhy: string | null
   onNew: () => void
+  onResume: () => void
   onUndo: () => void
   onRedo: () => void
   onHint: () => void
+  onPlayFrom: () => void
 }) {
   const frozen = thinking || reviewed
   return (
-    <div className="play-controls">
-      <button type="button" onClick={onNew}>
-        New game
-      </button>
-      <button type="button" onClick={onUndo} disabled={frozen || !session.canUndo()}>
-        Undo
-      </button>
-      <button type="button" onClick={onRedo} disabled={frozen || !session.canRedo()}>
-        Redo
-      </button>
-      <button type="button" onClick={onHint} disabled={!canHint}>
-        Hint
-      </button>
-      {/* Only while there is a game to walk. `auto` on this group is what
-          puts it at the board's right edge, so the row spans the board
-          exactly. An arrow is not a name, so each carries a written one for a
-          screen reader and for the tooltip, the same as Study's. */}
+    <>
+      {/* Row one: the game itself, and it is the same four buttons whether a
+          game is running or finished. */}
+      <div className="play-controls">
+        <button type="button" onClick={onNew}>
+          New game
+        </button>
+        <button type="button" onClick={onUndo} disabled={frozen || !session.canUndo()}>
+          Undo
+        </button>
+        <button type="button" onClick={onRedo} disabled={frozen || !session.canRedo()}>
+          Redo
+        </button>
+        <button type="button" onClick={onHint} disabled={!canHint}>
+          Hint
+        </button>
+      </div>
+
+      {/* Row two: what a reviewed game offers, and it exists only while one is
+          showing. Two rows rather than one because the board is 416px and one
+          row of all of these does not fit under it.
+
+          The two on the left are the pair people confuse, so they are side by
+          side and each says in its tooltip what happens to the record. Keep
+          playing was a text link in the header until 1.6.13; it does a thing
+          to the game exactly as these do, and reading as navigation was the
+          wrong shape for it. */}
       {replay ? (
-        <div className="play-steps">
-          <button
-            type="button"
-            className="step-arrow"
-            onClick={replay.onBack}
-            disabled={replay.ply === 0}
-            aria-label="Back one move"
-            title="Back one move"
-          >
-            &#8592;
-          </button>
-          <button
-            type="button"
-            className="step-arrow"
-            onClick={replay.onForward}
-            disabled={replay.ply >= replay.count}
-            aria-label="Forward one move"
-            title="Forward one move"
-          >
-            &#8594;
-          </button>
+        <div className="play-controls play-review-row">
+          {canResume ? (
+            <button
+              type="button"
+              onClick={onResume}
+              title="Carry on this game from its final position. Reviewing again replaces this game's record."
+            >
+              Keep playing
+            </button>
+          ) : null}
+          {playFromWhy !== null ? (
+            <button
+              type="button"
+              onClick={onPlayFrom}
+              disabled={playFromWhy !== ''}
+              title={
+                playFromWhy === ''
+                  ? "Start a new game from the position on the board. This game's record is kept as it is."
+                  : playFromWhy
+              }
+            >
+              Play from here
+            </button>
+          ) : null}
+          {/* `auto` on this group is what puts it at the board's right edge,
+              so the row spans the board exactly. An arrow is not a name, so
+              each carries a written one for a screen reader and for the
+              tooltip, the same as Study's. */}
+          <div className="play-steps">
+            <button
+              type="button"
+              className="step-arrow"
+              onClick={replay.onBack}
+              disabled={replay.ply === 0}
+              aria-label="Back one move"
+              title="Back one move"
+            >
+              &#8592;
+            </button>
+            <button
+              type="button"
+              className="step-arrow"
+              onClick={replay.onForward}
+              disabled={replay.ply >= replay.count}
+              aria-label="Forward one move"
+              title="Forward one move"
+            >
+              &#8594;
+            </button>
+          </div>
         </div>
       ) : null}
-    </div>
+    </>
   )
 }
 

@@ -87,6 +87,11 @@ export interface PlayGame {
   courseTitle: string | null
   /** And the chapter, for a game sparring against one. */
   chapterTitle: string | null
+  /**
+   * That chapter's id, for anything building a request out of the running
+   * game: the title is for reading and the id is for matching.
+   */
+  chapterId: string | null
   /** The strength the engine is playing at. */
   level: number | null
   /**
@@ -588,6 +593,7 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
     courseId: setup?.courseId ?? null,
     courseTitle: setup?.courseTitle ?? null,
     chapterTitle: setup?.chapterTitle ?? null,
+    chapterId: setup?.chapterId ?? null,
     level: setup?.level ?? null,
     recordedAt,
     report,

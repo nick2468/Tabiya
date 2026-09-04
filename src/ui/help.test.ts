@@ -202,26 +202,31 @@ const screens: Record<Screen, string> = {
         opponentColour: 'black' as const,
         thinking: false,
         reviewed: true,
-        canResume: true,
-        onResume: () => {},
       }),
     ) +
-    // The row under the board, which is where New game, Undo, Redo and Hint
-    // live since phase 26. Rendered here so none of the four falls out of the
-    // test when it moves house.
+    // The rows under the board, which is where New game, Undo, Redo and Hint
+    // live since phase 26, Back one move and Forward one move since phase 27,
+    // and Keep playing and Play from here since phase 30. Rendered here so
+    // none of them falls out of the test when it moves house.
+    //
+    // `canResume` and a `replay` together, because the second row only exists
+    // while a report is showing and Keep playing only while the game can be
+    // carried on. Both true is the state that renders every button.
     renderToStaticMarkup(
       createElement(PlayControls, {
         session: gameInProgress,
         thinking: false,
         reviewed: false,
         canHint: true,
-        // With the arrows, which is where Back one move and Forward one move
-        // live since phase 27.
+        canResume: true,
         replay: { ply: 2, count: 4, onJump: () => {}, onBack: () => {}, onForward: () => {} },
+        playFromWhy: '',
         onNew: () => {},
+        onResume: () => {},
         onUndo: () => {},
         onRedo: () => {},
         onHint: () => {},
+        onPlayFrom: () => {},
       }),
     ) +
     renderToStaticMarkup(

@@ -2,7 +2,7 @@ import { createElement, type ReactNode } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { Shell } from './App'
-import { Play, PlayHead } from './Play'
+import { Play, PlayControls } from './Play'
 import { Progress } from './Progress'
 import { Study } from './Study'
 import { CatalogContext, type Catalog } from './catalog-context'
@@ -105,6 +105,7 @@ function game(over: Partial<PlayGame> = {}): PlayGame {
     courseId: null,
     courseTitle: null,
     chapterTitle: null,
+    chapterId: null,
     level: null,
     recordedAt: null,
     hint: null,
@@ -227,28 +228,45 @@ describe('the course switcher while a game runs', () => {
  * than no button.
  */
 describe('carrying a reviewed game on', () => {
-  const head = (over: { reviewed: boolean; canResume: boolean }) =>
+  /**
+   * The button row, not the header. Keep playing was a text link up beside the
+   * status until phase 30 moved it down among the other buttons, next to the
+   * Play from here it is confused with.
+   *
+   * A `replay` is what makes the second row exist at all, so a case that is
+   * about the game still going passes null and gets no row, which is the same
+   * answer by a different route and is the truth about the screen.
+   */
+  const row = (over: { reviewed: boolean; canResume: boolean }) =>
     renderToStaticMarkup(
-      createElement(PlayHead, {
+      createElement(PlayControls, {
         session: playedGame(),
-        opening: 'Opening: The London System',
-        opponentColour: 'black' as const,
         thinking: false,
+        canHint: false,
+        replay: over.reviewed
+          ? { ply: 2, count: 2, onJump: () => {}, onBack: () => {}, onForward: () => {} }
+          : null,
+        playFromWhy: over.reviewed ? '' : null,
+        onNew: () => {},
         onResume: () => {},
+        onUndo: () => {},
+        onRedo: () => {},
+        onHint: () => {},
+        onPlayFrom: () => {},
         ...over,
       }),
     )
 
   it('offers Keep playing on a reviewed game that merely stopped', () => {
-    expect(head({ reviewed: true, canResume: true })).toContain('Keep playing')
+    expect(row({ reviewed: true, canResume: true })).toContain('Keep playing')
   })
 
   it('offers nothing of the sort while the game is still going', () => {
-    expect(head({ reviewed: false, canResume: false })).not.toContain('Keep playing')
+    expect(row({ reviewed: false, canResume: false })).not.toContain('Keep playing')
   })
 
   it('offers nothing on a game that ended, because there is nothing to play', () => {
-    expect(head({ reviewed: true, canResume: false })).not.toContain('Keep playing')
+    expect(row({ reviewed: true, canResume: false })).not.toContain('Keep playing')
   })
 
   it('is offered by the provider only for a reviewed game with no outcome', () => {

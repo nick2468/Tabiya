@@ -242,6 +242,7 @@ export function Shell() {
             course={course}
             request={playRequest}
             onRequestUsed={() => setPlayRequest(null)}
+            onPlayFrom={playFrom}
           />
         ) : null}
         {showing === 'drill' ? (

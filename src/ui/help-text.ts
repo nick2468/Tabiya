@@ -426,6 +426,7 @@ export const HELP_CONTROLS: HelpControl[] = [
   { name: 'Copy game', screen: 'play' },
   { name: 'Hint', screen: 'play' },
   { name: 'Keep playing', screen: 'play' },
+  { name: 'Play from here', screen: 'play' },
   { name: 'Forward one move', screen: 'play' },
   { name: 'Play 5 more moves', screen: 'play' },
   { name: 'Play to the end', screen: 'play' },

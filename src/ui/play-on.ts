@@ -49,9 +49,21 @@ export function recentPlayable(games: PlayRecord[], limit = PLAY_ON_LIMIT): Play
 export function playedOn(at: string): string {
   const when = new Date(at)
   if (Number.isNaN(when.getTime())) return 'an unknown date'
-  const day = when.toLocaleDateString(undefined, { day: 'numeric', month: 'long' })
   const time = when.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
-  return `${day}, ${time}`
+  return `${playedDay(at)}, ${time}`
+}
+
+/**
+ * Just the day: "3 September".
+ *
+ * The Play on list needs the time to tell two games on one day apart. A label
+ * for the game already on the screen has nothing to tell it apart from, and
+ * the time there is noise in a sentence a person reads.
+ */
+export function playedDay(at: string): string {
+  const when = new Date(at)
+  if (Number.isNaN(when.getTime())) return 'an unknown date'
+  return when.toLocaleDateString(undefined, { day: 'numeric', month: 'long' })
 }
 
 /** What the Play screen calls a resumed game on its launch radio. */
