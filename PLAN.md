@@ -3769,13 +3769,21 @@ string-render tests; the engine injected into `PlayProvider` with the fake share
 replay write) each pinned by a DOM test shown red against the bug; the phase 22 and 23
 register entries closed by real tests; a testing page linked from the SPEC.
 
-- [ ] 29.1 jsdom environment for `*.dom.test.tsx`; engine injected into the provider.
-- [ ] 29.2 Three regression tests, each shown red against its bug.
-- [ ] 29.3 Register entries closed: the greyed switcher, the view change, Progress with a
+- [x] 29.1 jsdom environment for `*.dom.test.tsx`; engine injected into the provider.
+- [x] 29.2 Three regression tests, each shown red against its bug.
+- [x] 29.3 Register entries closed: the greyed switcher, the view change, Progress with a
   record.
-- [ ] 29.4 No snapshots, no timers, no worker.
-- [ ] 29.5 `docs/testing.md` linked from the SPEC; the ruling logged in section 8.
+- [x] 29.4 No snapshots, no timers, no worker.
+- [x] 29.5 `docs/testing.md` linked from the SPEC; the ruling logged in section 8.
 
 Acceptance: as the chip's final paragraph.
+
+What landed: 898 tests in 8.3 seconds, both projects under one `npx vitest run`. Four
+regression tests rather than three - the fourth is the replay that added a reply to a
+game stopped mid-move, fixed on main between phases, and deleting `holdOpponent` names
+the extra move in the failure. The phase 27 identity bug took a file of its own, because
+its stale closure only bites when a start and a review run back to back with no render
+between them, which is Replay and nothing else. Two register entries are closed on the
+terms they set: the greyed switcher and the view change. No version bump, no build.
 
 - [ ] **Review gate 29**
