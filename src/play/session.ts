@@ -2,6 +2,7 @@ import { Chess } from 'chess.js'
 import { chooseCandidate, splitMove, whitePovPawns, type Engine, type StrengthProfile } from '../engine'
 import { positionKey } from '../model/position'
 import { chooseOpponentReply, type Book } from './book'
+import { outcomeOf } from './outcome'
 import type { PlayedMove } from './report'
 import type { Colour } from '../model/types'
 
@@ -325,21 +326,12 @@ export class PlaySession {
     return candidate?.move ?? result.bestMove
   }
 
+  /**
+   * The sentences live in `outcome.ts`, not here, because Progress has to say
+   * the same thing about a game recorded before the ending was kept.
+   */
   private noteOutcome(): void {
-    if (this.chess.isCheckmate()) {
-      // The side to move is the one that got mated.
-      const mated: Colour = this.chess.turn() === 'w' ? 'white' : 'black'
-      this.outcome =
-        mated === this.studentColour ? 'You were checkmated' : 'You won by checkmate'
-    } else if (this.chess.isStalemate()) {
-      this.outcome = 'Drawn by stalemate'
-    } else if (this.chess.isInsufficientMaterial()) {
-      this.outcome = 'Drawn: neither side has enough to mate'
-    } else if (this.chess.isThreefoldRepetition()) {
-      this.outcome = 'Drawn by repetition'
-    } else if (this.chess.isDraw()) {
-      this.outcome = 'Drawn by the fifty move rule'
-    }
+    this.outcome = outcomeOf(this.chess, this.studentColour)
   }
 }
 

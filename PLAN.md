@@ -3675,7 +3675,7 @@ Ended and Position become two columns; Replay may fill in a missing verdict and 
 overwrite one; the greyed Play on and Replay buttons say whether a game is being played
 or reviewed. Version 1.6.12.
 
-- [ ] 28.1 Ending derived from the moves; `length` on the record; Move limit.
+- [x] 28.1 Ending derived from the moves; `length` on the record; Move limit.
 - [ ] 28.2 Ended and Position columns; Replay fills in, never overwrites.
 - [ ] 28.3 The greyed buttons say why; the report-showing case checked.
 - [ ] 28.4 Version 1.6.12.

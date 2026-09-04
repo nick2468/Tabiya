@@ -1,5 +1,6 @@
 import { cardKey } from '../model/ids'
 import type { Schedule } from '../scheduler'
+import type { GameLength } from '../play/session'
 import type { BackupOffer } from './safety'
 
 /**
@@ -125,6 +126,12 @@ export interface PlayRecord {
    * turned to the trainee's side where it is read.
    */
   finalEval?: number
+  /**
+   * The length the game was set to play. It is what tells a game that ran out
+   * of moves from one that was stopped by hand: without it the two look
+   * identical afterwards. Records from before phase 28 have none.
+   */
+  length?: GameLength
 }
 
 export function emptyProgress(): ProgressState {
