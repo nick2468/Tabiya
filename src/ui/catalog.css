@@ -1,5 +1,8 @@
 .catalog {
-  max-width: 900px;
+  /* Wide enough for four tiles of 250px and three gaps, which is what fits
+     the 1152px the shell leaves at the window's opening width. It was 900px,
+     which held three tiles and made the fourth start a new row. */
+  max-width: 1160px;
 }
 
 .catalog-head h2 {
@@ -18,7 +21,11 @@
   padding: 0;
   display: grid;
   gap: 12px;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  /* Four to a row in the window the app opens in. At 1200 wide the shell
+     leaves 1152px, and 280px tiles fitted three with room to spare, which
+     Nick read as too big. 250px fits four with a 12px gap and a seventh
+     course starts a second row of three rather than a third row of one. */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 
 .course-tile {
@@ -35,7 +42,7 @@
   background: none;
   border: none;
   border-radius: 6px;
-  padding: 16px;
+  padding: 12px 14px;
   cursor: pointer;
   color: inherit;
 }
@@ -67,17 +74,18 @@
 }
 
 .tile-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
 .tile-tagline {
   color: var(--text-dim);
+  font-size: 0.9rem;
 }
 
 .tile-numbers {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   flex-wrap: wrap;
   margin-top: 4px;
   color: var(--text-soft);
@@ -160,7 +168,7 @@
 
 .tile-actions {
   border-top: 1px solid var(--line);
-  padding: 8px 16px;
+  padding: 8px 14px;
 }
 
 .tile-export {
