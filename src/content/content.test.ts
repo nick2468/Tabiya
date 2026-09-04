@@ -757,6 +757,123 @@ describe('the Vienna Gambit course', () => {
   })
 })
 
+describe('the Najdorf course', () => {
+  const najdorf = courseById('najdorf-black')
+
+  it('is a Black course of seven chapters', () => {
+    expect(najdorf.colour).toBe('black')
+    expect(najdorf.opponentColour).toBe('white')
+    expect(najdorf.chapters.length).toBe(7)
+  })
+
+  it('declares the tags it uses beyond the core set', () => {
+    // light-squares is shared with the Caro-Kann and the Slav on purpose: it
+    // means the same thing in all three and Progress compares by the string.
+    expect(najdorf.tags).toContain('vs-bg5')
+    expect(najdorf.tags).toContain('light-squares')
+    expect(najdorf.tags).not.toContain('vs-advance')
+  })
+
+  it('plays the pawn to a6 by move five in every repertoire chapter', () => {
+    // The claim that makes this course the Najdorf rather than some other
+    // Sicilian. Chapters 1 to 4 all hang off the same six-move stem and differ
+    // at White's sixth, so if that stem ever stopped containing the move the
+    // opening is named after, four chapters would quietly be teaching
+    // something else.
+    for (const id of ['ch1', 'ch2', 'ch3', 'ch4']) {
+      const stem = chapterOf(najdorf, id).stem
+      expect(stem.indexOf('a6'), `${id} stem`).toBe(9)
+      expect(stem.length, `${id} stem`).toBe(10)
+    }
+  })
+
+  it('leaves the Poisoned Pawn out of the repertoire', () => {
+    // Ruled at phase 31 under the theory fork rule: 7...Qb6 is sound and it is
+    // a forcing line twenty moves deep where one wrong move loses. The
+    // classical setup reaches a game with a plan instead.
+    //
+    // Two halves, and the second is the one that matters. Black never plays the
+    // queen to b6 anywhere in this course, which is what leaving the line out
+    // means in practice. And the move IS named where a trainee would reach for
+    // it, as a graded alternative with the reason beside it, because a
+    // repertoire that silently omits a famous line teaches nothing about why.
+    for (const chapter of najdorf.chapters) {
+      for (const node of walkNodes(chapter)) {
+        if (node.isStudent) expect(node.san, `${chapter.id} ${node.path.join(' ')}`).not.toBe('Qb6')
+      }
+    }
+
+    const refusals = najdorf.chapters
+      .flatMap((chapter) => walkNodes(chapter))
+      .flatMap((node) => node.mistakes ?? [])
+      .filter((entry) => entry.san === 'Qb6')
+    expect(refusals.length, 'the line is refused where it arises').toBeGreaterThan(0)
+    for (const entry of refusals) {
+      // Sound, so it cannot be graded as an error; and the note has to give
+      // the reason rather than just declining it.
+      expect(entry.grade).toBe('playable')
+      expect(entry.note).toMatch(/fork rule/)
+    }
+  })
+
+  describe('chapter 0, the defence', () => {
+    it('has an intro of 300 to 500 words', () => {
+      const intro = chapterOf(najdorf, 'ch0').intro
+      expect(words(intro)).toBeGreaterThanOrEqual(300)
+      expect(words(intro)).toBeLessThanOrEqual(500)
+    })
+
+    it('carries mistake entries on its core setup decisions', () => {
+      expect(positionsWithMistakes(chapterOf(najdorf, 'ch0'))).toBeGreaterThanOrEqual(4)
+    })
+  })
+
+  describe('the repertoire chapters', () => {
+    for (const id of ['ch1', 'ch2', 'ch3', 'ch4', 'ch5']) {
+      it(`${id} runs its deepest line to move 10 or beyond`, () => {
+        expect(deepestFullMove(chapterOf(najdorf, id))).toBeGreaterThanOrEqual(10)
+      })
+
+      it(`${id} carries mistake entries on at least ten positions`, () => {
+        expect(positionsWithMistakes(chapterOf(najdorf, id))).toBeGreaterThanOrEqual(10)
+      })
+
+      it(`${id} weights every White reply by club frequency`, () => {
+        for (const node of walkNodes(chapterOf(najdorf, id))) {
+          if (!node.isStudent) {
+            expect(node.weight ?? 1, node.path.join(' ')).toBeGreaterThanOrEqual(1)
+            expect(node.weight ?? 1, node.path.join(' ')).toBeLessThanOrEqual(10)
+          }
+        }
+      })
+
+      it(`${id} tags every Black move with at least one concept`, () => {
+        for (const node of walkNodes(chapterOf(najdorf, id))) {
+          if (node.isStudent) expect(node.tags.length, node.path.join(' ')).toBeGreaterThan(0)
+        }
+      })
+    }
+  })
+
+  describe('chapter 6, the exercises', () => {
+    it('ends every exercise on a Black move worth drilling', () => {
+      const chapter = chapterOf(najdorf, 'ch6')
+      for (const line of walkNodes(chapter).filter((node) => node.isLeaf)) {
+        expect(line.isStudent, line.path.join(' ')).toBe(true)
+      }
+    })
+
+    it('carries at least four exercises', () => {
+      const leaves = walkNodes(chapterOf(najdorf, 'ch6')).filter((node) => node.isLeaf)
+      expect(leaves.length).toBeGreaterThanOrEqual(4)
+    })
+
+    it('runs each exercise deep enough to be a real position', () => {
+      expect(deepestFullMove(chapterOf(najdorf, 'ch6'))).toBeGreaterThanOrEqual(10)
+    })
+  })
+})
+
 describe('the courses together', () => {
   // Course scoping makes this structural rather than lucky: a card key is the
   // course id and the position. The acceptance asks for it proved anyway,
@@ -832,5 +949,38 @@ describe('the courses together', () => {
       (position) => ruy.get(position) === 'Nf3' && vienna.get(position) === 'Nc3',
     )
     expect(afterE5, 'the two courses answer 1...e5 differently').toBeTruthy()
+  })
+
+  it('has the Caro-Kann and the Najdorf disagreeing about 1.e4', () => {
+    // The Black-side instance of the same point, added at phase 31. Both are
+    // Black courses whose concept chapter starts from the initial position, so
+    // both hold a card for the position after 1.e4, and there the Caro-Kann
+    // plays the pawn to c6 and the Najdorf plays it to c5.
+    //
+    // This is the case the two tests above cannot make between them. Those are
+    // White courses, and the colour test says a White card and a Black card can
+    // never collide whatever they teach. Two Black courses can, and these two
+    // do, on the very first card each of them owns.
+    //
+    // Written the way it is because the obvious extra assertion is false. The
+    // Ruy and the Vienna share a position they ANSWER ALIKE, because both open
+    // 1.e4 and that card is White's. Two Black courses have no such card: every
+    // card they hold is a Black move, and a shared Black-to-move position is by
+    // definition one where the two repertoires have already diverged or have
+    // met by transposition. Here every shared position disagrees.
+    const answers = (id: string) =>
+      new Map(allCards(courseById(id)).cards.map((card) => [card.position, card.san]))
+    const caro = answers('caro-kann-black')
+    const najdorf = answers('najdorf-black')
+
+    const shared = [...najdorf.keys()].filter((position) => caro.has(position))
+    const disagree = shared.filter((position) => caro.get(position) !== najdorf.get(position))
+    expect(shared.length, 'the two courses reach positions in common').toBeGreaterThan(0)
+    expect(disagree.length, 'and answer them differently').toBeGreaterThan(0)
+
+    const afterE4 = shared.find(
+      (position) => caro.get(position) === 'c6' && najdorf.get(position) === 'c5',
+    )
+    expect(afterE4, 'the two courses answer 1.e4 differently').toBeTruthy()
   })
 })

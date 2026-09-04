@@ -203,8 +203,10 @@ Slav followed at phase 9, and the Ruy Lopez Exchange at phase 12 as the first co
 delivered as a bundle, the Colle-Zukertort at phase 14 as Nick's second White
 system against 1...d5, chosen so that the two structures teach each other, and the
 Vienna Gambit at phase 18 as his second White answer to 1...e5, chosen so that the
-two ask opposite questions about the same first move. Six courses, two colours, four
-of them White.
+two ask opposite questions about the same first move, and the Sicilian Najdorf at phase
+31 as his second Black answer to 1.e4, chosen for the same reason from the other side:
+the Caro-Kann is the solid one and the Najdorf is the counterpunching one. Seven courses,
+two colours, four of them White.
 
 Deferred with reasons (the register; a later phase working nearby may take one along):
 
@@ -724,6 +726,29 @@ each says in its tooltip what happens to the record: Keep playing carries this g
 a second review replaces its record, Play from here leaves it as it is and adds a game.
 The row became two rows to fit them: the board is 416px and one row of all of them does
 not.
+
+2026-09-04, phase 31: **the Sicilian Najdorf**, 1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6
+5.Nc3 a6, as Nick's second answer to 1.e4 and the seventh course. The pairing is the
+reason: the Caro-Kann builds a wall and asks White to find a way through it, the Najdorf
+hands White the centre and asks whether White can use it before the queenside arrives.
+Same first move, opposite question, which is the same shape as the Ruy and the Vienna
+from the White side. The course id is `najdorf-black` and it is permanent, because it is
+written into every line id and card key in the trainee's progress file.
+
+Three rulings inside it, and all three are the theory fork rule doing its job. **The move
+order is 1...c5 and 2...d6 against every White second move that allows it**, so the
+anti-Sicilians are met with one recipe each rather than a second repertoire. It bends
+exactly once, against the Alapin, where the pawn on d6 does nothing about a centre built
+behind c3 and the knight goes to f6 instead; the chapter says so rather than leaving the
+rule quietly broken. **The Poisoned Pawn is out**, and so is 8...h6 9.Bh4 g5: both are
+sound and both are a forcing line where one wrong move loses, which is what the fork rule
+declines. **The Smith-Morra is declined**, because taking the pawn is a memorisation
+contest against an opponent who has played it fifty times.
+
+The one that is not a fork is the e-pawn. Black plays it two squares against every quiet
+White sixth move and one square against 6.Bg5 and 6.Bc4, and the course teaches that as a
+rule with two named exceptions rather than as a judgement, because a rule with exceptions
+is what a club player can actually hold.
 
 ## 9. v1 acceptance
 
