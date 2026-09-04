@@ -46,7 +46,7 @@
                           "tags": ["development", "bishop-placement"],
                           "mistakes": [
                             { "san": "Nbd7", "grade": "playable", "note": "Also good and it often transposes. Castling as early as possible is the safer habit in a line where White is coming with pawns." },
-                            { "san": "d5", "grade": "mistake", "note": "The break is a move too soon: 9.exd5 Nxd5 10.Nxd5 Bxd5 11.c4 hits the bishop and wins a piece or the pawn back with a much better game." },
+                            { "san": "d5", "grade": "inaccuracy", "note": "The break is a move too soon: 9.exd5 Nxd5 10.Nxd5 Bxd5 11.c4 drives the bishop back and White has the centre and a free game for nothing." },
                             { "san": "h5", "grade": "inaccuracy", "note": "It tries to stop the g-pawn before White has committed to it, and it leaves the g5 square as a permanent hole." }
                           ],
                           "children": [

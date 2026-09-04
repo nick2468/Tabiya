@@ -147,7 +147,7 @@
                                                                                   "note": "The queen comes back to defend the bishop and to keep an eye on the whole kingside. It looks like a retreat and it is a defensive resource.",
                                                                                   "tags": ["king-safety"],
                                                                                   "mistakes": [
-                                                                                    { "san": "g6", "grade": "mistake", "note": "It looks natural and it drops a piece: 16.fxg6 opens the file and the bishop on g5 is hanging with the queen still hitting it." },
+                                                                                    { "san": "g6", "grade": "mistake", "note": "It looks natural and it drops a piece: 16.fxg6 hxg6 17.Qxg5 and the bishop is gone, because with the queen still on c7 nothing covers g5." },
                                                                                     { "san": "O-O", "grade": "mistake", "note": "The king walks into the attack that is already there, with White's queen on h5 and the f-file about to open." }
                                                                                   ],
                                                                                   "plan": "Hold the bishop on g5 and the knight on e5, then push the queenside pawns with the b-pawn to b4. If White ever trades on e6, recapture with the f-pawn and the rook comes to f8 with play of its own.",

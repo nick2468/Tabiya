@@ -74,7 +74,7 @@
                                           "tags": ["development", "d5-break"],
                                           "mistakes": [
                                             { "san": "Nc6", "grade": "inaccuracy", "note": "The same problem as before: the c-file belongs to Black's rook, not to Black's knight." },
-                                            { "san": "d5", "grade": "mistake", "note": "The break is not ready: 11.exd5 Nxd5 12.Nxd5 Bxd5 13.c4 hits the bishop and wins material or the centre back." }
+                                            { "san": "d5", "grade": "inaccuracy", "note": "The break is not ready: 11.exd5 Nxd5 12.Nxd5 Bxd5 13.c4 drives the bishop back and White keeps the centre with a free move in hand." }
                                           ],
                                           "children": [
                                             {
@@ -102,7 +102,7 @@
                                                           "tags": ["development"],
                                                           "mistakes": [
                                                             { "san": "Nb8", "grade": "inaccuracy", "note": "The knight is heading for c6 and a5, which is slow, and it undevelops a piece in a position where White is ready to act." },
-                                                            { "san": "Rc4", "grade": "mistake", "note": "13.Bd3 hits the rook and it has nowhere good to go, so Black loses the exchange for nothing." }
+                                                            { "san": "Rc4", "grade": "inaccuracy", "note": "13.Bd3 hits the rook and it has to go back, so Black has spent two moves arriving where the rook already was." }
                                                           ],
                                                           "plan": "Double on the c-file, put the knight on c5 by way of b8 or straight from d7, and aim at the pawn on e4 with the pieces. Watch for the moment the d-pawn can go to d5 in one move.",
                                                           "name": "6.Be2 with 11.a4, the c-file game"

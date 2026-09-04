@@ -319,7 +319,7 @@ Pushing the e-pawn two squares on move six and losing the pawn on d6 to the pin.
 15... Qd8
 {The queen comes back to defend the bishop and to keep an eye on the whole kingside. It looks like a retreat and it is a defensive resource. [%tags king-safety] [%plan Hold the bishop on g5 and the knight on e5, then push the queenside pawns with the b-pawn to b4. If White ever trades on e6, recapture with the f-pawn and the rook comes to f8 with play of its own.] [%line The full main line, to 15...Qd8]}
 ( 15... g6?
-{It looks natural and it drops a piece: 16.fxg6 opens the file and the bishop on g5 is hanging with the queen still hitting it.}
+{It looks natural and it drops a piece: 16.fxg6 hxg6 17.Qxg5 and the bishop is gone, because with the queen still on c7 nothing covers g5.}
 ) ( 15... O-O?
 {The king walks into the attack that is already there, with White's queen on h5 and the f-file about to open.}
 ) *
@@ -437,8 +437,8 @@ Playing the bishop to e6 and then panicking about g4 and moving it again. Taking
 {Develop and get ready to castle. The bishop has nothing better to do and the king needs a home before the pawns arrive. [%tags development bishop-placement]}
 ( 8... Nbd7!?
 {Also good and it often transposes. Castling as early as possible is the safer habit in a line where White is coming with pawns.}
-) ( 8... d5?
-{The break is a move too soon: 9.exd5 Nxd5 10.Nxd5 Bxd5 11.c4 hits the bishop and wins a piece or the pawn back with a much better game.}
+) ( 8... d5?!
+{The break is a move too soon: 9.exd5 Nxd5 10.Nxd5 Bxd5 11.c4 drives the bishop back and White has the centre and a free game for nothing.}
 ) ( 8... h5?!
 {It tries to stop the g-pawn before White has committed to it, and it leaves the g5 square as a permanent hole.}
 ) 9. Qd2 {The queen connects the rooks and prepares to castle long. [%weight 9]} 9... O-O
@@ -630,8 +630,8 @@ Treating a quiet position as a reason to have no plan. Allowing a4 and a5 withou
 {The knight to its square, covering b6 and c5 and ready for the break in the centre. [%tags development d5-break]}
 ( 10... Nc6?!
 {The same problem as before: the c-file belongs to Black's rook, not to Black's knight.} )
-( 10... d5?
-{The break is not ready: 11.exd5 Nxd5 12.Nxd5 Bxd5 13.c4 hits the bishop and wins material or the centre back.}
+( 10... d5?!
+{The break is not ready: 11.exd5 Nxd5 12.Nxd5 Bxd5 13.c4 drives the bishop back and White keeps the centre with a free move in hand.}
 ) 11. a4
 {White stops the queenside pawn before it starts. This is the standard try and it is why Black plays on the c-file instead. [%weight 8]}
 ( 11. f4
@@ -655,8 +655,8 @@ Treating a quiet position as a reason to have no plan. Allowing a4 and a5 withou
 {The queen joins the rook. Black gives up on the pawn storm here and plays against the knight on c3 and the pawn on e4 instead. [%tags development] [%plan Double on the c-file, put the knight on c5 by way of b8 or straight from d7, and aim at the pawn on e4 with the pieces. Watch for the moment the d-pawn can go to d5 in one move.] [%line 6.Be2 with 11.a4, the c-file game]}
 ( 12... Nb8?!
 {The knight is heading for c6 and a5, which is slow, and it undevelops a piece in a position where White is ready to act.}
-) ( 12... Rc4?
-{13.Bd3 hits the rook and it has nowhere good to go, so Black loses the exchange for nothing.}
+) ( 12... Rc4?!
+{13.Bd3 hits the rook and it has to go back, so Black has spent two moves arriving where the rook already was.}
 ) *
 
 
@@ -718,8 +718,8 @@ Playing the e-pawn two squares against the bishop on c4 and handing over d5 with
 {Develop rather than defend. A wing attack this slow is answered by getting the pieces out and hitting back in the middle. [%tags development]}
 ( 8... h6?!
 {It gives White a target: 9.g5 hxg5 opens the h-file straight at Black's king with the rook already on h1.}
-) ( 8... d5?!
-{The break is right in spirit and wrong in timing: 9.exd5 Nxd5 10.Nxd5 Bxd5 11.Qxd5 wins a piece, because nothing of Black's defends the bishop there yet.}
+) ( 8... d5!?
+{A real try, and sharper than the course's move: 9.exd5 Nxd5 10.Nxd5 Bxd5 and Black is fine, because the queen on d8 has been covering that square all along. Developing first keeps more pieces on for the queenside.}
 ) 9. Ng3 {The knight takes the square the pawn on h3 was clearing for it. [%weight 7]}
 9... b5
 {Black gets on with the queenside while White is still arranging the kingside. [%tags b5-break]}
@@ -811,7 +811,7 @@ Playing the e-pawn two squares against the bishop on c4 and handing over d5 with
 ( 6... e5?
 {It hands over d5 with a bishop already looking at it. After 7.Nde2 Black has a hole on d5, a bad bishop on c8 and no way to cover the square.}
 ) ( 6... b5?!
-{7.Bb3 and Black has committed a pawn without covering the diagonal, so 8.f4 and 9.f5 come with real force.}
+{7.Bb3 and Black has committed a pawn without covering the diagonal, so White gets to push the f-pawn up the board with real force.}
 ) ( 6... Nc6!?
 {Sound, and it invites a set of positions from the Classical Sicilian rather than this course. The pawn is the move that answers the bishop.}
 ) 7. Bb3
@@ -823,7 +823,7 @@ Playing the e-pawn two squares against the bishop on c4 and handing over d5 with
 ) ( 7... Nbd7!?
 {Fine. The pawn is more urgent, because the queenside space is the compensation for the pawn on e6 being a target.}
 ) ( 7... d5?
-{The break is far too early: 8.exd5 exd5 9.Nxd5 wins a pawn, because the knight on f6 is pinned against nothing and d5 is simply undefended enough.}
+{The break is far too early: 8.exd5 exd5 9.Nxd5 Nxd5 10.Bxd5 and White has won a pawn, with the bishop sitting in the middle of the board.}
 ) 8. O-O
 {White castles and keeps every option: f4, Qf3, Be3 and Bh6 are all on the way. [%weight 8]}
 8... Be7
@@ -839,7 +839,7 @@ Playing the e-pawn two squares against the bishop on c4 and handing over d5 with
 ( 9... O-O!?
 {Safe and normal. The queen move first is more useful, because White's plan runs through e5 and the queen covers it.}
 ) ( 9... Bb7?!
-{It leaves the queen on d8, where 10.Bxe6 fxe6 11.Nxe6 hits it with tempo. White is a piece down for two pawns there and Black's king has no safe home, which is more than enough to be worth avoiding.}
+{It leaves the queen on d8, where 10.Bxe6 fxe6 11.Nxe6 hits it with tempo. White has given up a bishop and taken two pawns for it, and Black's king has nowhere safe to go, which is worth more than the count.}
 ) 10. Qg3
 {The queen swings to the kingside and looks at the pawn on g7, which is why Black castles carefully here. [%weight 7]}
 10... O-O
@@ -1118,7 +1118,7 @@ Taking the gambit pawn on c3 and then trying to remember twenty moves of a line 
 ( 9... Be7!?
 {Fine and slower, and it lets White play e5 first and take the space for good.} ) (
 9... Nxe4?
-{10.Re1 pins the knight against the queen on d7 and wins it back with a much better position.}
+{The pawn is defended by the rook, which has been sitting on e1 since move seven: 10.Rxe4 simply takes the knight.}
 ) 10. e5
 {White pushes past and gains space, which also frees e4 for a Black knight. [%weight 8]}
 10... Ne4

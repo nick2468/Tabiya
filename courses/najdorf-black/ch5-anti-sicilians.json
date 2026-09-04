@@ -163,7 +163,7 @@
                                                                   "tags": ["d5-break"],
                                                                   "mistakes": [
                                                                     { "san": "Be7", "grade": "playable", "note": "Fine and slower, and it lets White play e5 first and take the space for good." },
-                                                                    { "san": "Nxe4", "grade": "mistake", "note": "10.Re1 pins the knight against the queen on d7 and wins it back with a much better position." }
+                                                                    { "san": "Nxe4", "grade": "mistake", "note": "The pawn is defended by the rook, which has been sitting on e1 since move seven: 10.Rxe4 simply takes the knight." }
                                                                   ],
                                                                   "children": [
                                                                     {

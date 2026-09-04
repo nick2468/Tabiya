@@ -16,7 +16,7 @@
           "tags": ["vs-sozin", "light-squares"],
           "mistakes": [
             { "san": "e5", "grade": "mistake", "note": "It hands over d5 with a bishop already looking at it. After 7.Nde2 Black has a hole on d5, a bad bishop on c8 and no way to cover the square." },
-            { "san": "b5", "grade": "inaccuracy", "note": "7.Bb3 and Black has committed a pawn without covering the diagonal, so 8.f4 and 9.f5 come with real force." },
+            { "san": "b5", "grade": "inaccuracy", "note": "7.Bb3 and Black has committed a pawn without covering the diagonal, so White gets to push the f-pawn up the board with real force." },
             { "san": "Nc6", "grade": "playable", "note": "Sound, and it invites a set of positions from the Classical Sicilian rather than this course. The pawn is the move that answers the bishop." }
           ],
           "children": [
@@ -32,7 +32,7 @@
                   "mistakes": [
                     { "san": "Be7", "grade": "playable", "note": "Also good and it usually transposes. Pushing first stops White from ever putting a knight or a rook on c4." },
                     { "san": "Nbd7", "grade": "playable", "note": "Fine. The pawn is more urgent, because the queenside space is the compensation for the pawn on e6 being a target." },
-                    { "san": "d5", "grade": "mistake", "note": "The break is far too early: 8.exd5 exd5 9.Nxd5 wins a pawn, because the knight on f6 is pinned against nothing and d5 is simply undefended enough." }
+                    { "san": "d5", "grade": "mistake", "note": "The break is far too early: 8.exd5 exd5 9.Nxd5 Nxd5 10.Bxd5 and White has won a pawn, with the bishop sitting in the middle of the board." }
                   ],
                   "children": [
                     {
@@ -60,7 +60,7 @@
                                   "tags": ["development"],
                                   "mistakes": [
                                     { "san": "O-O", "grade": "playable", "note": "Safe and normal. The queen move first is more useful, because White's plan runs through e5 and the queen covers it." },
-                                    { "san": "Bb7", "grade": "inaccuracy", "note": "It leaves the queen on d8, where 10.Bxe6 fxe6 11.Nxe6 hits it with tempo. White is a piece down for two pawns there and Black's king has no safe home, which is more than enough to be worth avoiding." }
+                                    { "san": "Bb7", "grade": "inaccuracy", "note": "It leaves the queen on d8, where 10.Bxe6 fxe6 11.Nxe6 hits it with tempo. White has given up a bishop and taken two pawns for it, and Black's king has nowhere safe to go, which is worth more than the count." }
                                   ],
                                   "children": [
                                     {
@@ -156,7 +156,7 @@
                           "tags": ["development"],
                           "mistakes": [
                             { "san": "h6", "grade": "inaccuracy", "note": "It gives White a target: 9.g5 hxg5 opens the h-file straight at Black's king with the rook already on h1." },
-                            { "san": "d5", "grade": "inaccuracy", "note": "The break is right in spirit and wrong in timing: 9.exd5 Nxd5 10.Nxd5 Bxd5 11.Qxd5 wins a piece, because nothing of Black's defends the bishop there yet." }
+                            { "san": "d5", "grade": "playable", "note": "A real try, and sharper than the course's move: 9.exd5 Nxd5 10.Nxd5 Bxd5 and Black is fine, because the queen on d8 has been covering that square all along. Developing first keeps more pieces on for the queenside." }
                           ],
                           "children": [
                             {
