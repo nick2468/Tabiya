@@ -3678,7 +3678,7 @@ or reviewed. Version 1.6.12.
 - [x] 28.1 Ending derived from the moves; `length` on the record; Move limit.
 - [x] 28.2 Ended and Position columns; Replay fills in, never overwrites.
 - [x] 28.3 The greyed buttons say why; the report-showing case checked.
-- [ ] 28.4 Version 1.6.12.
+- [x] 28.4 Version 1.6.12.
 - [ ] 28.5 Proved in the browser build with seeded records.
 
 Acceptance: as the chip's final paragraph.

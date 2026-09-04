@@ -1,6 +1,6 @@
 [package]
 name = "repertoire-trainer"
-version = "1.6.11"
+version = "1.6.12"
 description = "A trainer for chess opening repertoires"
 authors = ["Nick"]
 edition = "2021"
