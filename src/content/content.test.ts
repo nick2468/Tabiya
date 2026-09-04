@@ -171,6 +171,49 @@ describe.each(courses.map((course) => [course.id, course] as const))(
       }
     })
 
+    /**
+     * One position, one judgement.
+     *
+     * A chapter is free to reach a position another chapter already covers,
+     * and the exercises chapter does it on purpose: it replays lines from the
+     * repertoire chapters and stops on the move that matters. So the same
+     * alternative gets listed twice, and the two copies have to agree about
+     * how bad it is.
+     *
+     * They can disagree, and did. Phase 31 copied chapter 6's alternatives
+     * from the chapters that already had them, keyed by position, which made
+     * them right at the moment of copying. Then the arbiter moved one grade
+     * in chapter 4 and nothing moved the copy, so the same move was a mistake
+     * on one screen and an inaccuracy with a note calling it "safe and
+     * normal" on another. Drill asks by position and shows the trainee
+     * whichever it happens to load.
+     *
+     * The wording may differ - a shorter note in an exercise is fine - and
+     * the grade may not. Every conflict is reported at once, because fixing
+     * them one failure at a time is how the second one gets missed.
+     */
+    it('gives one alternative at one position one grade', () => {
+      const seen = new Map<string, { grade: string; where: string }>()
+      const clashes: string[] = []
+      for (const chapter of course.chapters) {
+        for (const node of walkNodes(chapter)) {
+          for (const entry of node.mistakes ?? []) {
+            const key = `${node.key}|${entry.san}`
+            const first = seen.get(key)
+            if (!first) {
+              seen.set(key, { grade: entry.grade, where: `${chapter.fileId} ${node.path.join(' ')}` })
+            } else if (first.grade !== entry.grade) {
+              clashes.push(
+                `${entry.san} after ${node.path.slice(0, -1).join(' ')}: ` +
+                  `${first.grade} in ${first.where}, ${entry.grade} in ${chapter.fileId}`,
+              )
+            }
+          }
+        }
+      }
+      expect(clashes, course.id).toEqual([])
+    })
+
     it('gives every chapter intro a typical-mistakes section', () => {
       for (const chapter of course.chapters) {
         expect(chapter.intro.toLowerCase(), chapter.id).toContain('typical mistakes')

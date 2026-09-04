@@ -105,7 +105,7 @@
                                                           "tags": ["bishop-placement", "development"],
                                                           "mistakes": [
                                                             { "san": "Be6", "grade": "playable", "note": "Also a good square for that bishop, and playing it before castling gives White the chance to hit it. The order here is bishop to e7, castle, then the other bishop." },
-                                                            { "san": "b5", "grade": "inaccuracy", "note": "The pawn will come, but the king should be safe first. There is no rush while White has not started anything." }
+                                                            { "san": "b5", "grade": "playable", "note": "The pawn will come, but the king should be safe first. There is no rush while White has not started anything." }
                                                           ],
                                                           "children": [
                                                             {

@@ -109,7 +109,7 @@ Pushing the b-pawn before it is prepared and simply losing it. Playing the e-paw
 {The bishop's home in almost every line of this course. It covers the dark squares near the king and gets ready to castle. [%tags bishop-placement development]}
 ( 7... Be6!?
 {Also a good square for that bishop, and playing it before castling gives White the chance to hit it. The order here is bishop to e7, castle, then the other bishop.}
-) ( 7... b5?!
+) ( 7... b5!?
 {The pawn will come, but the king should be safe first. There is no rush while White has not started anything.}
 ) 8. O-O
 {White castles into a quiet position and prepares to work on the queenside or the d5 square. [%weight 8]}
@@ -158,12 +158,12 @@ The moment White plays g5 the knight goes to d7 rather than anywhere clever, and
 
 ## Typical mistakes at this level
 
-Pushing the e-pawn two squares on move six and losing the pawn on d6 to the pin. Castling before the queen and the knight are placed, which invites the pawn storm to arrive first. Recapturing on f6 with the g-pawn, which opens the file White is attacking down. Panicking when the pawn reaches f5 and taking it, which opens the position for White's pieces. And forgetting that the bishop on e7 takes the pawn on g5 with check, which is the move that wins the tempo Black needs.}
+Pushing the e-pawn two squares on move six, where the pin means White trades on f6 and settles a knight on d5. Castling before the queen and the knight are placed, which invites the pawn storm to arrive first. Recapturing on f6 with the g-pawn, which opens the file White is attacking down. Panicking when the pawn reaches f5 and taking it, which opens the position for White's pieces. And forgetting that the bishop on e7 takes the pawn on g5 with check, which is the move that wins the tempo Black needs.}
 1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Bg5
 {The main line. The bishop pins the knight on f6 and White prepares to castle long and attack. [%weight 7]}
 6... e6
 {One square. The pin means the far push would lose material, and this way the bishop on f8 gets out and the pawn on d5 is covered. [%tags vs-bg5 dark-squares]}
-( 6... e5?
+( 6... e5?!
 {The pin is what White's last move was for. After 7.Bxf6 Qxf6 8.Nd5 the queen is hit and has to move, and White's knight settles on d5 for good.}
 ) ( 6... Nbd7?!
 {It leaves f7 soft while the pin is on, and 7.Bc4 arrives with an awkward attack before Black has covered the square.}
@@ -1315,8 +1315,8 @@ Answering an attack on a piece by moving the piece, when a bigger threat is avai
 ) ( 8... b4?!
 {9.Na4 steps aside and the knight is heading for b6, which is the square the pawn on a6 was supposed to look after.}
 ) 9. Qf3 {The queen comes out. [%weight 7]} 9... Qc7
-{The file, and off the diagonal. [%tags development]} ( 9... O-O?!
-{Safe and normal. The queen move first is more useful, because White's plan runs through e5 and the queen covers it.}
+{The file, and off the diagonal. [%tags development]} ( 9... O-O?
+{It looks like the safe move and it is the committal one. With the queen still on d8 the king walks in front of White's attack, and the next position in this exercise is where that attack turns into a forced mate.}
 ) ( 9... Bb7?!
 {It leaves the queen on d8, where 10.Bxe6 fxe6 11.Nxe6 hits it with tempo. White has given up a bishop and taken two pawns for it, and Black's king has nowhere safe to go, which is worth more than the count.}
 ) 10. Qg3 {Swinging across. [%weight 8]} 10... O-O {Castle anyway. [%tags king-safety]} (
@@ -1410,7 +1410,7 @@ Answering an attack on a piece by moving the piece, when a bigger threat is avai
 {The rook belongs on the open file and it can wait a move. The knight is the piece with a square nothing can take away from it.}
 ) ( 11... Qc7!?
 {Natural and fine. The knight goes first, because the square is available now and White can cover it with a move like Nd4.}
-) ) 6... e6 {One square, because of the pin. [%tags vs-bg5]} ( 6... e5?
+) ) 6... e6 {One square, because of the pin. [%tags vs-bg5]} ( 6... e5?!
 {The pin is what White's last move was for. After 7.Bxf6 Qxf6 8.Nd5 the queen is hit and has to move, and White's knight settles on d5 for good.}
 ) ( 6... Nbd7?!
 {It leaves f7 soft while the pin is on, and 7.Bc4 arrives with an awkward attack before Black has covered the square.}

@@ -1,0 +1,84 @@
+The six positions where one alternative carried two grades, asked at 2500 ms.
+Conditions: 16 logical processors, load 14-17%, no build, no test run, one engine.
+Evaluations are from White's point of view: negative favours Black.
+Bands: playable to 0.9, inaccuracy -0.4 to 1.8, mistake 0.7 and up.
+
+### e5 is the alternative in dispute (najdorf ch0 inaccuracy against ch1 and ch6 mistake)
+    e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5
+Black to move after: e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5
+  +0.45  e6 f4 h6 Bh4 Qb6 Rb1
+  +0.48  Nbd7 Bc4 Qc7 Bb3 h6 Be3
+  +0.51  Nc6 Qd2 e6 O-O-O h6 Be3
+  +0.58  Bd7 Bxf6 gxf6 Qh5 e6 Bc4
+  +0.83  h5 Qd2 Nbd7 Be2 e6 O-O-O
+  +0.88  Bg4 Qd2 Nc6 Nb3 e6 f3
+  +0.91  e5 Nf5 Nc6 h4 Be6 Qd2
+  +0.96  g6
+
+### b5 is the alternative in dispute (najdorf ch0 inaccuracy against ch3 and ch6 playable)
+    e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e5 Nb3
+Black to move after: e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e5 Nb3
+  +0.38  Be7 Be3 Be6 O-O O-O Qd2
+  +0.53  Be6 f4 Be7 f5 Bd7 Be3
+  +0.54  Qc7 Be3 Be7 O-O O-O a4
+  +0.55  Nc6 Be3 Be7 Nd5 Nxd5 exd5
+  +0.57  h6 Be3 Be7 Qd2 Qc7 O-O-O
+  +0.64  Nbd7 a4 b6 Be3 Bb7 Nd2
+  +0.65  Bd7 Bg5
+  +0.68  b6 Be3 Be7 g4 Bb7 Bf3
+
+### O-O is the alternative in dispute (najdorf ch4 mistake against ch6 inaccuracy)
+    e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3
+Black to move after: e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3
+  +0.18  Qb6 Be3 Qb7 Qg3 O-O Bh6
+  +0.21  Qc7 Qg3 O-O Bh6 Ne8 Nce2
+  +0.40  Qd7 a4 b4 a5 Qc7 Na4
+  +0.51  Ra7 Rd1 Bd7 Qg3 O-O Bh6
+  +0.85  Bb7 Bxe6 fxe6 Nxe6 Qd7 Nxg7+
+  +0.94  e5 Nf5 Bxf5 exf5 Nbd7 Rd1
+  +1.61  b4 e5
+  +1.67  Nfd7 e5 Ra7 exd6 Bxd6 Ne4
+
+### c3 is the alternative in dispute (colle ch0 playable against ch1 inaccuracy)
+    d4 d5 Nf3 Nf6 e3 e6 Bd3 c5
+White to move after: d4 d5 Nf3 Nf6 e3 e6 Bd3 c5
+  +0.13  b3 b6 O-O Bb7 Bb2 Nc6
+  +0.13  c3 Nc6 Nbd2 Bd6 O-O O-O
+  +0.04  c4 dxc4 Bxc4 a6 a4 Nc6
+  -0.07  dxc5
+  -0.06  a4 Nc6
+  -0.10  O-O c4 Be2 b5 b3 Bb7
+  -0.16  Nc3 c4 Be2 Bb4 Bd2 a6
+  -0.17  Be2 Be7 O-O O-O dxc5 Bxc5
+
+### Qf3 is the alternative in dispute (colle ch0 playable against ch1 inaccuracy)
+    d4 d5 Nf3 Nf6 e3 e6 Bd3 c5 b3 Nc6 O-O Bd6 Bb2 O-O Nbd2 b6 Ne5 Bb7
+White to move after: d4 d5 Nf3 Nf6 e3 e6 Bd3 c5 b3 Nc6 O-O Bd6 Bb2 O-O Nbd2 b6 Ne5 Bb7
+  -0.01  Nxc6 Bxc6 dxc5 Bxc5 a3 Re8
+  -0.02  c4 cxd4 Nxc6 Bxc6 Bxd4 Rc8
+  -0.06  a3 Ne7 Qe2 Ne4 Bxe4 dxe4
+  -0.10  Ndf3 Nb4 Bb5 a6 Be2 Qe7
+  -0.23  Bb5 Ne7 dxc5 Bxc5 Bd3 d4
+  -0.24  f4 Nb4 Be2 Rc8 a3 Nc6
+  -0.30  h3 Nb4 Be2 cxd4 exd4 Qc7
+  -0.34  Re1 Qc7
+
+### e5 is the alternative in dispute (ruy ch1 mistake against ch6 inaccuracy)
+    e4 e5 Nf3 Nc6 Bb5 a6 Bxc6 dxc6 O-O f6 d4 exd4 Nxd4 c5 Nb3 Qxd1 Rxd1 Be6 Bf4 c4 Nd4 O-O-O
+White to move after: e4 e5 Nf3 Nc6 Bb5 a6 Bxc6 dxc6 O-O f6 d4 exd4 Nxd4 c5 Nb3 Qxd1 Rxd1 Be6 Bf4 c4 Nd4 O-O-O
+  -0.05  Nc3 Bf7
+  -0.08  Kf1 c5 Nxe6 Rxd1+ Ke2 Rh1
+  -0.21  Rd2 Bf7 Nc3 Bb4 a3 Ba5
+  -0.49  Na3 Bf7 Bxc7 Rxd4 Rxd4 Kxc7
+  -1.62  Bxc7 Rxd4 Rxd4 Kxc7 Nc3 Ne7
+  -2.14  c3 c5 Na3 cxd4 cxd4 Bxa3
+  -2.39  a4 c5 c3 cxd4 cxd4 f5
+  -2.61  b3 c5 c3 Ne7 Be3 f5
+
+done
+
+### The two alternatives that fell outside the top eight, asked from the position after them.
+White to move after: e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e5 Nb3 b5
+  +0.78  a4
+Black to move after: d4 d5 Nf3 Nf6 e3 e6 Bd3 c5 b3 Nc6 O-O Bd6 Bb2 O-O Nbd2 b6 Ne5 Bb7 Qf3
+  -0.49  Nb4 dxc5 bxc5 Qh3 Nxd3 Nxd3

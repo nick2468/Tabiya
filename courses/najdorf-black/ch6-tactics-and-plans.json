@@ -178,7 +178,7 @@
             }
           ],
           "mistakes": [
-            { "san": "e5", "grade": "mistake", "note": "The pin is what White's last move was for. After 7.Bxf6 Qxf6 8.Nd5 the queen is hit and has to move, and White's knight settles on d5 for good." },
+            { "san": "e5", "grade": "inaccuracy", "note": "The pin is what White's last move was for. After 7.Bxf6 Qxf6 8.Nd5 the queen is hit and has to move, and White's knight settles on d5 for good." },
             { "san": "Nbd7", "grade": "inaccuracy", "note": "It leaves f7 soft while the pin is on, and 7.Bc4 arrives with an awkward attack before Black has covered the square." },
             { "san": "h6", "grade": "inaccuracy", "note": "It asks the question a move too early. After 7.Bh4 Black still has to play the e-pawn, and the pawn on h6 has given White the g5 square to push at." }
           ]
@@ -483,7 +483,7 @@
                                     }
                                   ],
                                   "mistakes": [
-                                    { "san": "O-O", "grade": "inaccuracy", "note": "Safe and normal. The queen move first is more useful, because White's plan runs through e5 and the queen covers it." },
+                                    { "san": "O-O", "grade": "mistake", "note": "It looks like the safe move and it is the committal one. With the queen still on d8 the king walks in front of White's attack, and the next position in this exercise is where that attack turns into a forced mate." },
                                     { "san": "Bb7", "grade": "inaccuracy", "note": "It leaves the queen on d8, where 10.Bxe6 fxe6 11.Nxe6 hits it with tempo. White has given up a bishop and taken two pawns for it, and Black's king has nowhere safe to go, which is worth more than the count." }
                                   ]
                                 }
