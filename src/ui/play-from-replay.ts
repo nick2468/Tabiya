@@ -58,14 +58,18 @@ export function whyNotPlayable(game: ReplayedGame, ply: number, studentColour: '
 }
 
 /**
- * The full move number a ply sits at, for the label.
+ * The move the replay is standing after, as the move list writes it.
  *
- * A replay ply counts POSITIONS, so ply 34 is the position after 34 half
- * moves, which is after White's 17th. The label says "after move 17" because
- * that is the number beside the move in the list he is looking at.
+ * A replay ply counts POSITIONS, so ply 1 is the position after White's first
+ * move and ply 2 the position after Black's reply. "after move 0" was what a
+ * full move count said at ply 1, which is nonsense to a reader, so the label
+ * names the move itself: "after 1.e4", "after 1...c6". Ply 0 is the start.
  */
-export function fullMoveAtPly(ply: number): number {
-  return Math.floor(ply / 2)
+export function moveAtPlyLabel(sans: string[], ply: number): string {
+  if (ply <= 0 || sans.length === 0) return 'from the start'
+  const index = Math.min(ply, sans.length) - 1
+  const number = Math.floor(index / 2) + 1
+  return index % 2 === 0 ? `after ${number}.${sans[index]}` : `after ${number}...${sans[index]}`
 }
 
 /**
@@ -89,6 +93,6 @@ export function requestFromReplay(game: ReplayedGame, ply: number): PlayRequest 
     chapterOnly: Boolean(game.chapterId),
     courseId: game.courseId,
     level: game.level,
-    label: `your game of ${playedDay(game.at)}, after move ${fullMoveAtPly(ply)}`,
+    label: `your game of ${playedDay(game.at)}, ${moveAtPlyLabel(game.moves.map((move) => move.san), ply)}`,
   }
 }

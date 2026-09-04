@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { Chess } from 'chess.js'
 import {
   canPlayFromPly,
-  fullMoveAtPly,
+  moveAtPlyLabel,
   requestFromReplay,
   whyNotPlayable,
   type ReplayedGame,
@@ -81,16 +81,18 @@ describe('which positions can be played from', () => {
 })
 
 describe('the label', () => {
-  it('counts full moves, not plies', () => {
-    expect(fullMoveAtPly(0)).toBe(0)
-    expect(fullMoveAtPly(34)).toBe(17)
-    expect(fullMoveAtPly(35)).toBe(17)
-    expect(fullMoveAtPly(36)).toBe(18)
+  it('names the move the replay stands after, as the list writes it', () => {
+    const sans = ['d4', 'd5', 'Bf4', 'Nf6']
+    expect(moveAtPlyLabel(sans, 0)).toBe('from the start')
+    expect(moveAtPlyLabel(sans, 1)).toBe('after 1.d4')
+    expect(moveAtPlyLabel(sans, 2)).toBe('after 1...d5')
+    expect(moveAtPlyLabel(sans, 3)).toBe('after 2.Bf4')
+    expect(moveAtPlyLabel(sans, 4)).toBe('after 2...Nf6')
   })
 
   it('names the day and the move, and no time', () => {
     const request = requestFromReplay(game(['d4', 'd5', 'Bf4', 'Nf6']), 4)
-    expect(request?.label).toMatch(/^your game of .+, after move 2$/)
+    expect(request?.label).toMatch(/^your game of .+, after 2...Nf6$/)
     // The Play on list needs a time to tell two games apart. This label is
     // about the game already on the screen, so a time would be noise.
     expect(request?.label).not.toMatch(/\d\d:\d\d/)
