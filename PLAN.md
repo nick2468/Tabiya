@@ -3960,4 +3960,35 @@ errors. **The version banner read 1.6.13 throughout**, because that server was s
 before the bump and the version is baked in at start; the three version files read 1.7.0
 and `src/version.test.ts` holds them together.
 
-- [ ] **Review gate 31**
+Gate 31 findings (2026-09-04):
+
+- **Verified for the gate from the repo:** 956 tests and `tsc -b` clean; version 1.7.0 in
+  all three files; nothing under the other six course folders differs; **308 line ids
+  before, 344 after, none gone, 36 added**, all under `najdorf-black`; no em dashes under
+  `src/` or `courses/`; the bundle `docs/bundles/najdorf-black.pgn` present and held by
+  the round-trip test.
+- **The engine records are complete and their conditions are written at the top of each
+  file**: two 500 ms passes, every finding re-checked at 2500 ms, a confirming pass after
+  the fixes reporting nothing, the mistakes pass at 2500 ms with its confirming run, and
+  both prose checkers at zero. The three forced-mate alternatives at 11...Ne8 in ch4 are
+  in `docs/engine-runs/accepted.md` with the reason they will report for ever.
+- **Three ruled lines spot-checked by the orchestrator at 2500 ms**: the 6.Bg5 main line
+  after 9...Nbd7 is +0.39 (inside the band and the theory move), the English Attack after
+  10...Nbd7 is +0.50 (at the band's edge, the theory move, kept), and the Grand Prix fix
+  4...Nxe4 stands at -1.23 for Black.
+- **Driven in the Vite build restarted to v1.7.0 at 1200x980**: seven tiles in two rows
+  of four and three; the Najdorf tile with its tagline and "0 of 36 lines learnt"; Study
+  opens ch0 with the seven chapter titles and two named lines; Play as Black starts with
+  the engine's 1.e4 out of the book.
+- **Content counts by the orchestrator**: intros 374 to 493 words; every node noted and
+  every leaf named; mistake entries 23, 41, 35, 36, 42 and 73 in ch0 to ch5. **ch6 has
+  none**, where the section 3 bar asks for ten. The precedent is uneven (the Vienna's ch6
+  has 13, the Colle's 6, the Caro-Kann's 1), so this is a follow-up rather than a block:
+  sent to the builder as 31.11, to land with a 2500 ms mistakes pass over ch6 before the
+  next build.
+- **Nick's own files were not listed and not reported.** The browser build's storage was
+  cleared afterwards.
+
+- [ ] 31.11 Follow-up: ten or more authored mistake entries in ch6, graded at 2500 ms.
+
+- [x] **Review gate 31 passed** (2026-09-04), with 31.11 open as a follow-up.
