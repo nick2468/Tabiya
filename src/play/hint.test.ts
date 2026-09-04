@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { Chess } from 'chess.js'
-import { bookEndedAt, bookHint, engineHint } from './hint'
-import { buildBook, studentBookMove } from './book'
+import { bookEndedAt, bookHint, clubEngineHint, clubHint, engineHint } from './hint'
+import { buildBook, opponentBookReplies, studentBookMove } from './book'
 import { PlaySession } from './session'
 import { loadFixture as load } from '../test/fixtures'
 import { strengthProfile } from '../engine'
@@ -114,6 +114,48 @@ describe('a hint after the repertoire has run out', () => {
     expect(engineHint('Nf3', null).text).toBe(
       'The engine suggests Nf3. No note: this position is not in the repertoire.',
     )
+  })
+})
+
+describe('a hint for the trainee playing against the course', () => {
+  it('names the reply club players most often make, from the weights the book carries', () => {
+    // From 1.d4 d5 2.Bf4 the fixture weights Nf6 at 9 and c5 at 1.
+    const fen = fenAfter(['d4', 'd5', 'Bf4'])
+    const hint = clubHint(opponentBookReplies(book, fen), fen)
+    expect(hint).toEqual({
+      san: 'Nf6',
+      source: 'engine',
+      text: 'Club players most often play 2...Nf6 here.',
+    })
+  })
+
+  it('reads the move number off the position, on either side', () => {
+    const fen = fenAfter(['d4', 'd5', 'Bf4', 'Nf6', 'e3'])
+    expect(clubHint([{ san: 'e6', weight: 5, chapterIds: [] }], fen)?.text).toBe(
+      'Club players most often play 3...e6 here.',
+    )
+    const white = fenAfter(['e4', 'c5'])
+    expect(clubHint([{ san: 'Nf3', weight: 9, chapterIds: [] }], white)?.text).toBe(
+      'Club players most often play 2.Nf3 here.',
+    )
+  })
+
+  it('keeps the chapter order between two replies of equal weight', () => {
+    const fen = fenAfter(['d4', 'd5', 'Bf4'])
+    const tied = [
+      { san: 'c5', weight: 5, chapterIds: [] },
+      { san: 'Nf6', weight: 5, chapterIds: [] },
+    ]
+    expect(clubHint(tied, fen)?.san).toBe('c5')
+  })
+
+  it('has nothing to say where the course lists no reply, and the engine says so', () => {
+    expect(clubHint([], fenAfter(['e4']))).toBeNull()
+    expect(clubEngineHint('Nf3').text).toBe(
+      'The engine suggests Nf3. The course has nothing here, so there is no usual reply to report.',
+    )
+    // Blue, not green: it is not the course's move and the arrow must not claim it is.
+    expect(clubEngineHint('Nf3').source).toBe('engine')
   })
 })
 

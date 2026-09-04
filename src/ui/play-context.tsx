@@ -16,14 +16,19 @@ import {
   bookEndedAt,
   bookHint,
   buildReport,
+  clubEngineHint,
+  clubHint,
   engineHint,
   fullMove,
+  opponentBookReplies,
   scanGame,
   studentBookMove,
   type Book,
+  type CourseMoves,
   type GameLength,
   type GameReport,
   type Hint,
+  type PlaySide,
 } from '../play'
 
 /**
@@ -75,6 +80,14 @@ export interface StartOptions {
    * gate 28, a four ply game came back with five.
    */
   holdOpponent?: boolean
+  /**
+   * Which side of the course the trainee plays. Absent means the course's
+   * own, which is every game before phase 32. On the other side the engine
+   * plays the course and the trainee takes the opponent's colour.
+   */
+  side?: PlaySide
+  /** How the engine plays the course when it has that side. */
+  courseMoves?: CourseMoves
 }
 
 export interface PlayGame {
@@ -94,6 +107,8 @@ export interface PlayGame {
   chapterId: string | null
   /** The strength the engine is playing at. */
   level: number | null
+  /** Which side of the course the running game has the trainee on. */
+  side: PlaySide
   /**
    * When the game was recorded, once it has been. It is the record's identity
    * as well as its date, which matters the moment a game can be reviewed more
@@ -288,6 +303,8 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
           profile,
           length: options.length,
           startMoves: options.startMoves,
+          side: options.side,
+          courseMoves: options.courseMoves,
         })
         setupRef.current = options
         setSetup(options)
@@ -384,12 +401,26 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
     if (!running || !setup || thinking || report) return
     if (!running.studentToMove || running.isFinished()) return
 
-    const fromBook = studentBookMove(setup.book, running.fen)
-    if (fromBook) {
-      running.hints += 1
-      setHint(bookHint(fromBook))
-      refresh()
-      return
+    // On the other side there is no authored answer to give. What the book
+    // has is the weight of each reply, so the hint is what club players most
+    // often play here, and it is drawn in the engine's colour because it is
+    // not the course's move.
+    if (setup.side === 'other') {
+      const usual = clubHint(opponentBookReplies(setup.book, running.fen), running.fen)
+      if (usual) {
+        running.hints += 1
+        setHint(usual)
+        refresh()
+        return
+      }
+    } else {
+      const fromBook = studentBookMove(setup.book, running.fen)
+      if (fromBook) {
+        running.hints += 1
+        setHint(bookHint(fromBook))
+        refresh()
+        return
+      }
     }
 
     setThinking(true)
@@ -402,7 +433,11 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
         if (!best) return
         const san = new Chess(running.fen).move(splitMove(best)).san
         running.hints += 1
-        setHint(engineHint(san, bookEndedAt(running.moves, setup.book)))
+        setHint(
+          setup.side === 'other'
+            ? clubEngineHint(san)
+            : engineHint(san, bookEndedAt(running.moves, setup.book)),
+        )
         refresh()
       } finally {
         await live.setStrength(strengthProfile(setup.level))
@@ -498,7 +533,14 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
       const at = recordedAtRef.current ?? new Date().toISOString()
       remember(at)
       const outcome = running.outcome ?? `Stopped after move ${fullMove(running.moves.length - 1)}`
-      const built = buildReport(running.moves, setup.book, scanned, outcome, running.hints)
+      const built = buildReport(
+        running.moves,
+        setup.book,
+        scanned,
+        outcome,
+        running.hints,
+        setup.side ?? 'course',
+      )
       setReport(built)
       // A replayed game that nobody has moved in is already on disk, and the
       // scan that just ran is a second opinion at 150 ms, not a new fact:
@@ -550,6 +592,9 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
         // that ran out of moves from one that was stopped by hand.
         length: setup.length,
         level: setup.level,
+        // Only when it is the other side: absent means the course's own, and
+        // every record before this one is absent.
+        ...(setup.side === 'other' ? { side: 'other' as const } : {}),
       })
     } catch (error) {
       setEngineError(asMessage(error))
@@ -595,6 +640,7 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
     chapterTitle: setup?.chapterTitle ?? null,
     chapterId: setup?.chapterId ?? null,
     level: setup?.level ?? null,
+    side: setup?.side ?? 'course',
     recordedAt,
     report,
     scanning,

@@ -107,6 +107,7 @@ function game(over: Partial<PlayGame> = {}): PlayGame {
     chapterTitle: null,
     chapterId: null,
     level: null,
+    side: 'course',
     recordedAt: null,
     hint: null,
     canHint: false,

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import type { LoadedCourse } from '../model/types'
+import type { CourseMoves } from '../play'
 
 /**
  * The choices that belong to this screen rather than to what has been learnt.
@@ -23,6 +24,7 @@ import type { LoadedCourse } from '../model/types'
 
 const COURSE_KEY = 'london-trainer.course'
 const DRILL_KEY = 'london-trainer.drill'
+const OTHER_SIDE_KEY = 'london-trainer.other-side'
 
 /** What Drill draws its queue from. */
 export type DrillScope = 'mixed' | 'selected'
@@ -95,6 +97,31 @@ export function useDrillScope(): { scope: DrillScope; setScope: (scope: DrillSco
   }, [])
 
   return { scope, setScope }
+}
+
+/**
+ * How the engine plays the course when the trainee plays the other side,
+ * remembered between sessions the way the drill scope is.
+ *
+ * The SIDE is not remembered. It is a launch choice like the others, made
+ * fresh each game; the setting is a preference about how those games go,
+ * and a preference is what this file is for. Default "always", which is the
+ * ruling: the course move every time unless the trainee asks otherwise.
+ */
+export function useCourseMoves(): {
+  courseMoves: CourseMoves
+  setCourseMoves: (next: CourseMoves) => void
+} {
+  const [courseMoves, setStored] = useState<CourseMoves>(
+    () => (read(OTHER_SIDE_KEY) === 'sometimes' ? 'sometimes' : 'always'),
+  )
+
+  const setCourseMoves = useCallback((next: CourseMoves) => {
+    setStored(next)
+    write(OTHER_SIDE_KEY, next)
+  }, [])
+
+  return { courseMoves, setCourseMoves }
 }
 
 /**

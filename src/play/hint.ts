@@ -1,5 +1,5 @@
 import { findDeviation, fullMove, type PlayedMove } from './report'
-import type { Book, BookMove } from './book'
+import type { Book, BookMove, BookReply } from './book'
 
 /**
  * What to say when the trainee asks what to play.
@@ -46,6 +46,47 @@ export function engineHint(san: string, endedAtMove: number | null): Hint {
       ? 'No note: this position is not in the repertoire.'
       : `No note: the repertoire ended at move ${endedAtMove}.`
   return { san, source: 'engine', text: `The engine suggests ${san}. ${why}` }
+}
+
+/**
+ * What to say when the trainee is playing AGAINST the course.
+ *
+ * There is no authored answer for this side. What the book does carry is the
+ * weight the course gave each reply, which is the author's estimate of how
+ * often club players choose it, and that is the honest hint: not what is
+ * best, but what the trainee is most likely to meet across a board. Drawn in
+ * the engine's colour, because it is not the course's move and the arrow
+ * should not claim it is.
+ *
+ * Ties keep chapter order, which is the order the book lists them.
+ */
+export function clubHint(replies: BookReply[], fen: string): Hint | null {
+  if (replies.length === 0) return null
+  const most = replies.reduce((held, reply) => (reply.weight > held.weight ? reply : held))
+  return {
+    san: most.san,
+    source: 'engine',
+    text: `Club players most often play ${labelAt(fen, most.san)} here.`,
+  }
+}
+
+/**
+ * The engine's move on the other side, once the book has no reply to offer.
+ * Said in the trainee's terms: the course has nothing here, so there is no
+ * club habit to report.
+ */
+export function clubEngineHint(san: string): Hint {
+  return {
+    san,
+    source: 'engine',
+    text: `The engine suggests ${san}. The course has nothing here, so there is no usual reply to report.`,
+  }
+}
+
+/** "6.Bg5" or "6...e5": how a move from this position reads in a sentence. */
+function labelAt(fen: string, san: string): string {
+  const [, turn, , , , number] = fen.split(' ')
+  return turn === 'b' ? `${number}...${san}` : `${number}.${san}`
 }
 
 /**

@@ -132,6 +132,14 @@ export interface PlayRecord {
    * identical afterwards. Records from before phase 28 have none.
    */
   length?: GameLength
+  /**
+   * Which side of the course the trainee played. Absent means the course's
+   * own, which is every game recorded before phase 32, so no old record needs
+   * touching and no reader has to special-case one. A game on the other side
+   * is counted apart on Progress and left out of Lines played, because the
+   * engine played the line and the trainee cannot be credited with it.
+   */
+  side?: 'course' | 'other'
 }
 
 export function emptyProgress(): ProgressState {
