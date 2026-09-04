@@ -175,7 +175,10 @@ Module boundaries, kept clean so the Tauri wrap touches only storage and build c
 `src/engine` (worker adapter, strength logic), `src/play` (steering, deviation and
 blunder reports - pure logic, engine mocked in tests), `src/storage` (ProgressStore),
 `src/ui` (React), `courses/` (course manifests and chapter JSON). Vitest covers the
-pure modules; the UI is verified by use.
+pure modules. The UI was verified by use until phase 29, which added a second kind of
+test: `src/**/*.dom.test.tsx` runs the real app in jsdom and drives it by clicking.
+`docs/testing.md` says what each kind is for, what is faked and why, and the rules the
+suite keeps.
 
 Implementation guidance, not contract: strength scale 1-8 maps the top levels to
 UCI_LimitStrength (UCI_Elo floors around 1320), and below that picks semi-randomly
@@ -673,6 +676,29 @@ The consequence worth writing down: a game can now be reviewed more than once, s
 **`at` is the game's identity and not only its date**. `recordGame` replaces a record with
 the same `at` rather than appending, or one game counted twice in Games played and in
 Lines played, once short and once long.
+
+2026-09-04, phase 29: **a suite that cannot drive the app is not finished.** Three bugs
+shipped through a green bar and every one was found by Nick or a session pressing a
+button in a browser. The memoised provider value at phase 23, where Undo moved the game
+and left the screen behind. The fresh timestamp at phase 25, where a game reviewed twice
+was counted twice. The replay write at phase 27, where reading a game left a second
+record. They are one bug three times: the provider that runs a game needs a DOM and an
+engine to reach, the suite had neither, and so the one module holding the app's mutable
+state was the one module nothing drove.
+
+The ruling is that the suite gets a DOM. `src/**/*.dom.test.tsx` runs the real app in
+jsdom as a second vitest project and clicks its buttons; the engine arrives through an
+optional `createEngine` on `PlayProvider` so a test can hand over a fake without the
+provider knowing; the board is stubbed because chessground needs a `ResizeObserver` jsdom
+does not have, and the throw that forces that is itself pinned by a test.
+
+Three conditions, and they are the ruling as much as the rig is. **A regression test is
+shown red against its own bug first**, by writing it against the commit before the fix or
+by putting the bug back: a test that has never failed proves nothing. **The whole suite
+stays under ten seconds**, both projects, because a bar nobody waits for is a bar nobody
+runs. And **no snapshots, no fake timers, no worker** - the first records what the code
+did rather than what it should do, the second tests the clock, and the third is what the
+fake engine exists to prevent. `docs/testing.md` holds the detail.
 
 ## 9. v1 acceptance
 
