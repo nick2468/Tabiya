@@ -116,6 +116,45 @@ describe('gameToPgn', () => {
   })
 })
 
+describe('a game played against the course', () => {
+  // A White course played from the other side: the trainee is Black and the
+  // engine, playing the course, took one graded alternative on move 3.
+  const against: GameForPgn = {
+    ...game,
+    studentColour: 'black',
+    side: 'other',
+    report: {
+      deviation: {
+        kind: 'course-book-ended',
+        ply: 4,
+        played: 'Nf3',
+        alternatives: [{ ply: 2, san: 'Bf4', grade: 'playable', label: '2.Bf4' }],
+      },
+      slips: [],
+      verdict: 'Level',
+      finalEval: 0.1,
+    },
+  }
+
+  it('puts the colours the right way round for the swapped sides', () => {
+    const { tags } = parsePgn(gameToPgn(against)).games[0]
+    expect(tags.White).toBe('Stockfish level 4')
+    expect(tags.Black).toBe('You')
+  })
+
+  it('says the game was played against the course', () => {
+    const text = gameToPgn(against)
+    expect(text).toContain('Black was played by you against the course, at level 4')
+    expect(text).not.toContain('left the repertoire')
+  })
+
+  it('says where the course book ran out, and grades the alternative where it was played', () => {
+    const played = parsePgn(gameToPgn(against)).games[0].moves
+    expect(played[4].comment).toContain("The course's book ran out at move 3")
+    expect(played[2].comment).toContain('The course grades this playable')
+  })
+})
+
 describe('hints in the text', () => {
   it('says so before the first move, where a note about the game belongs', () => {
     const helped = gameToPgn({ ...game, report: { ...report, hints: 2 } })

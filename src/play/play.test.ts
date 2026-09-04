@@ -9,8 +9,10 @@ import {
 } from './book'
 import {
   buildReport,
+  describeAlternatives,
   describeDeviation,
   describeSlip,
+  findCourseBookEnd,
   findDeviation,
   fullMove,
   scanForSlips,
@@ -234,6 +236,54 @@ describe('findDeviation', () => {
     expect(
       describeDeviation({ kind: 'opponent-left-book-first', ply: 3, played: 'a6' }, 'black'),
     ).toContain('just chess')
+  })
+})
+
+describe('the report for a game played against the course', () => {
+  const book = buildBook({ colour: 'white', chapters: [chapter] })
+
+  it('says the course played its book to the end when it did', () => {
+    const moves = playedMoves(['d4', 'd5', 'Bf4', 'Nf6', 'e3', 'e6', 'Nf3'])
+    const deviation = findCourseBookEnd(moves, book)
+    expect(deviation).toEqual({ kind: 'course-book-ended', alternatives: [] })
+    expect(describeDeviation(deviation, 'white')).toBe('The course played its book to the end.')
+  })
+
+  it('says where the course book ran out, by the first position it had no entry for', () => {
+    // After 1.d4 d5 2.Bf4 Nf6 3.e3 the trainee, as Black, plays 3...c5, which
+    // the fixture never lists; the engine plays White from there.
+    const moves = playedMoves(['d4', 'd5', 'Bf4', 'Nf6', 'e3', 'c5', 'Nf3'])
+    const deviation = findCourseBookEnd(moves, book)
+    expect(deviation).toMatchObject({ kind: 'course-book-ended', ply: 6, played: 'Nf3' })
+    expect(describeDeviation(deviation, 'white')).toBe("The course's book ran out at move 4.")
+  })
+
+  it('lists the alternatives the engine took, with their grades, and counts them as in book', () => {
+    const moves = playedMoves(['d4', 'd5', 'Bf4', 'Nf6', 'c3'])
+    moves[4].alternative = 'inaccuracy'
+    const deviation = findCourseBookEnd(moves, book)
+    expect(deviation.ply).toBeUndefined()
+    expect(deviation.alternatives).toEqual([
+      { ply: 4, san: 'c3', grade: 'inaccuracy', label: '3.c3' },
+    ])
+    expect(describeAlternatives(deviation)).toEqual([
+      '3.c3, which the course grades an inaccuracy.',
+    ])
+  })
+
+  it('never judges the trainee against a repertoire, and scans their moves as the other colour', () => {
+    const moves = playedMoves(['d4', 'd5', 'Bf4', 'Nf6', 'e3', 'e6'])
+    const evaluations = new Map<string, number>()
+    // Black's 3...e6 turned a level position into one clearly better for White.
+    evaluations.set(positionKey(moves[5].fen), 0.1)
+    evaluations.set(positionKey(moves[5].after), 1.6)
+    const report = buildReport(moves, book, evaluations, undefined, 0, 'other')
+    expect(report.deviation.kind).toBe('course-book-ended')
+    expect(report.slips.map((slip) => slip.san)).toEqual(['e6'])
+    expect(report.slips[0].loss).toBeCloseTo(1.5)
+    // The same game on the course's own side has no such slip: 3...e6 was
+    // not the trainee's move there.
+    expect(buildReport(moves, book, evaluations).slips).toEqual([])
   })
 })
 

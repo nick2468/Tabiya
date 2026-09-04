@@ -49,6 +49,21 @@ export type DeviationKind =
   | 'student-left-book'
   | 'opponent-left-book-first'
   | 'stayed-in-book'
+  /**
+   * The other-side game's one kind. There is no repertoire for the trainee to
+   * be judged against, so the only question is how far the course's own book
+   * lasted, and which graded alternatives the engine took on the way.
+   */
+  | 'course-book-ended'
+
+/** An alternative the engine played for the course, and what the course calls it. */
+export interface AlternativePlayed {
+  ply: number
+  san: string
+  grade: MistakeGrade
+  /** How it reads in a sentence: "3.c3". */
+  label: string
+}
 
 export interface Deviation {
   kind: DeviationKind
@@ -62,6 +77,8 @@ export interface Deviation {
   note?: string
   /** How the book move reads in a sentence: "7.c3". */
   label?: string
+  /** For a game against the course: the alternatives the engine took, in order. */
+  alternatives?: AlternativePlayed[]
 }
 
 export type MoveTag = 'blunder' | 'mistake' | 'inaccuracy'
@@ -128,6 +145,42 @@ export function findDeviation(moves: PlayedMove[], book: Book): Deviation {
   return { kind: 'stayed-in-book' }
 }
 
+/**
+ * Where the course's own book ran out, in a game played against it.
+ *
+ * The course side's moves are looked up by position, the same way the book
+ * looks them up when it plays: the first position it has no entry for is
+ * where the engine took over. An alternative counts as in book, because the
+ * course listed it; it is recorded separately so the report can say which
+ * were played. The trainee's own moves are not judged at all here. They are
+ * not deviations from anything, and the scan of their quality is elsewhere.
+ */
+export function findCourseBookEnd(moves: PlayedMove[], book: Book): Deviation {
+  const alternatives: AlternativePlayed[] = []
+  for (const move of moves) {
+    if (move.colour !== book.studentColour) continue
+    const entry = book.student.get(positionKey(move.fen))
+    if (!entry) {
+      return { kind: 'course-book-ended', ply: move.ply, played: move.san, alternatives }
+    }
+    if (move.alternative) {
+      alternatives.push({
+        ply: move.ply,
+        san: move.san,
+        grade: move.alternative,
+        label: moveLabelAt(move),
+      })
+    }
+  }
+  return { kind: 'course-book-ended', alternatives }
+}
+
+/** "3.c3" or "3...c5": how a played move reads in a sentence. */
+function moveLabelAt(move: PlayedMove): string {
+  const number = fullMove(move.ply)
+  return move.colour === 'white' ? `${number}.${move.san}` : `${number}...${move.san}`
+}
+
 /** The full move number a ply belongs to: plies 0 and 1 are both move 1. */
 export function fullMove(ply: number): number {
   return Math.floor(ply / 2) + 1
@@ -146,7 +199,25 @@ export function describeDeviation(deviation: Deviation, opponentColour: Colour):
       return `You left the repertoire on move ${fullMove(deviation.ply ?? 0)} with ${deviation.played}. The line plays ${deviation.bookMove}.`
     case 'opponent-left-book-first':
       return `${colourName(opponentColour)} left the repertoire on move ${fullMove(deviation.ply ?? 0)} with ${deviation.played}. From there it was just chess, so nothing after it counts as a deviation.`
+    case 'course-book-ended':
+      // No "you left" sentence exists on this side: the trainee was never in
+      // the book to leave it.
+      return deviation.ply === undefined
+        ? 'The course played its book to the end.'
+        : `The course's book ran out at move ${fullMove(deviation.ply)}.`
   }
+}
+
+/**
+ * The alternatives the engine took for the course, as one sentence each.
+ * Empty when the course played the pure line, which is the usual case and
+ * the only case under the default setting.
+ */
+export function describeAlternatives(deviation: Deviation): string[] {
+  const names = { playable: 'playable', inaccuracy: 'an inaccuracy', mistake: 'a mistake' }
+  return (deviation.alternatives ?? []).map(
+    (played) => `${played.label}, which the course grades ${names[played.grade]}.`,
+  )
 }
 
 /**
@@ -285,12 +356,18 @@ export function buildReport(
   evaluations: Evaluations,
   outcome?: string,
   hints = 0,
+  side: 'course' | 'other' = 'course',
 ): GameReport {
   const last = moves.at(-1)
   const finalEval = last ? evaluations.get(positionKey(last.after)) : undefined
+  // On the other side the trainee holds the book's opponent colour, and the
+  // scan of their moves has to know it: a Black trainee's loss is the number
+  // going up.
+  const trainee: Colour =
+    side === 'other' ? book.opponentColour : book.studentColour
   return {
-    deviation: findDeviation(moves, book),
-    slips: scanForSlips(moves, evaluations, book.studentColour),
+    deviation: side === 'other' ? findCourseBookEnd(moves, book) : findDeviation(moves, book),
+    slips: scanForSlips(moves, evaluations, trainee),
     verdict: finalEval === undefined ? 'Not scanned' : verdictInWords(finalEval),
     finalEval,
     outcome,

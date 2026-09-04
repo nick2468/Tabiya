@@ -30,6 +30,13 @@ export interface GameForPgn {
   level: number
   /** When the game was recorded, as an ISO timestamp. */
   at: string
+  /**
+   * Which side the trainee was on. Absent means the course's own, which is
+   * every game before phase 32. On the other side the colour tags already
+   * come out the right way round, because  is the session's
+   * and the session swapped it; what changes is the closing comment.
+   */
+  side?: 'course' | 'other'
 }
 
 /** The PGN date field: "2026.09.03", or the standard's own unknown date. */
@@ -99,6 +106,10 @@ export function gameToPgn(game: GameForPgn): string {
     if (move.ply === deviationPly) {
       notes.push(describeDeviation(report.deviation, opponentColour))
     }
+    // An alternative the engine took for the course is said where it was
+    // played, so a reader can see where the game left the pure line.
+    const strayed = report.deviation.alternatives?.find((played) => played.ply === move.ply)
+    if (strayed) notes.push(`The course grades this ${strayed.grade}.`)
     const slip = slips.get(move.ply)
     if (slip) notes.push(slipComment(slip.tag, slip.before, slip.after))
     if (notes.length) out.comment(notes.join(' '))
@@ -109,7 +120,11 @@ export function gameToPgn(game: GameForPgn): string {
   // say whether it was a mate or a resignation, and this app never resigns.
   const closing = [report.verdict]
   if (report.outcome) closing.push(report.outcome)
-  closing.push(`${colourName(studentColour)} was played by you at level ${level}`)
+  closing.push(
+    game.side === 'other'
+      ? `${colourName(studentColour)} was played by you against the course, at level ${level}`
+      : `${colourName(studentColour)} was played by you at level ${level}`,
+  )
   // Full stops between them: the verdict and the outcome are both written
   // without one, because on screen each has a line of its own.
   out.comment(`${closing.join('. ')}.`)
