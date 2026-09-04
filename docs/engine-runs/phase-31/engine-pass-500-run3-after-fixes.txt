@@ -1,0 +1,16 @@
+140 student moves across 7 chapters, 280 positions to evaluate at 500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+  ...25/280
+  ...50/280
+  ...75/280
+  ...100/280
+  ...125/280
+  ...150/280
+  ...175/280
+  ...200/280
+  ...225/280
+  ...250/280
+  ...275/280
+
+0 moves cost 0.5 of a pawn or more:
+

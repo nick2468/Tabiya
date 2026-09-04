@@ -230,10 +230,14 @@
                                       "weight": 7,
                                       "children": [
                                         {
-                                          "san": "Nbd7",
-                                          "note": "The last piece comes out and the setup is complete.",
-                                          "tags": ["development"],
-                                          "plan": "Play the queen to c7 and a rook to c8, then look for the pawn to b5 and the knight to c5 or b6. Trade the bishops on b3 if White ever allows it, because the knight on b3 is then a spectator.",
+                                          "san": "b5",
+                                          "note": "The pawn, not the knight. With the bishop biting on e6, White's plan is the knight to h4 and then f5, and the queenside pawn is both faster and the move that gives Black something of its own to do.",
+                                          "tags": ["b5-break"],
+                                          "mistakes": [
+                                            { "san": "Nbd7", "grade": "inaccuracy", "note": "The natural developing move, and here it is a move too slow: 11.Nh4 heads for f5 and Black has to answer that before getting on with anything." },
+                                            { "san": "Nc6", "grade": "playable", "note": "Reasonable, and the knight blocks the file its own rook wants. The pawn is the move with a plan behind it." }
+                                          ],
+                                          "plan": "Follow with the knight to d7 and the queen to c7, and meet the knight coming to h4 by trading on f5 when it arrives. Trade the bishops on b3 if White allows it, because the knight on b3 is then a spectator.",
                                           "name": "White's 7.Nf3 and the Bc4 setup"
                                         }
                                       ]

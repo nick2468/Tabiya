@@ -1,4 +1,4 @@
-241 mistake entries, 2 with a material claim and a move sequence to check it, 0 claiming material without naming a move.
+250 mistake entries, 2 with a material claim and a move sequence to check it, 0 claiming material without naming a move.
 
 0 claims the board does not support:
 

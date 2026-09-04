@@ -165,25 +165,26 @@
                               "weight": 7,
                               "children": [
                                 {
-                                  "san": "b5",
-                                  "note": "Black gets on with the queenside while White is still arranging the kingside.",
-                                  "tags": ["b5-break"],
+                                  "san": "h5",
+                                  "note": "Stop the pawn before it arrives. This is the one place in the course where Black meets a wing attack on the wing, and the reason is that White has spent four moves on it and has no pieces there yet.",
+                                  "tags": ["king-safety", "tactics"],
                                   "mistakes": [
-                                    { "san": "h6", "grade": "inaccuracy", "note": "Same answer as before: it gives the attack a target rather than taking one away." },
-                                    { "san": "Be7", "grade": "playable", "note": "Also fine. The pawn is a move more urgent, because it is what makes the knight on c3 uncomfortable." }
+                                    { "san": "b5", "grade": "inaccuracy", "note": "The plan from every other chapter, and here it is too slow: White answers with g5 and the knight on f6 has to move while the attack is already rolling." },
+                                    { "san": "h6", "grade": "inaccuracy", "note": "It gives the attack a target rather than taking one away: g5 comes anyway and the file opens towards Black's king." },
+                                    { "san": "Be7", "grade": "playable", "note": "Sound, and it lets White play g5 for free. The pawn is what makes White stop and think." }
                                   ],
                                   "children": [
                                     {
-                                      "san": "a3",
-                                      "note": "White stops the pawn from coming any further, which costs another move on the wrong side of the board.",
-                                      "weight": 6,
+                                      "san": "gxh5",
+                                      "note": "White takes, which is the critical try. The pawn on h5 is a long way from home and White has an open file.",
+                                      "weight": 7,
                                       "children": [
                                         {
-                                          "san": "Be7",
-                                          "note": "Finish developing. Black has a whole position and White has two rows of pawns.",
+                                          "san": "Nb6",
+                                          "note": "Ignore the pawn and improve the knight, which is heading for c4 and d5. The pawn on h5 is not going anywhere and White has opened a file towards a king that has not committed itself yet.",
                                           "tags": ["development"],
-                                          "plan": "Castle short if the kingside stays quiet, or leave the king in the middle and play the pawn to d5 the moment White commits the g-pawn any further. The queen goes to c7 and a rook to c8.",
-                                          "name": "6.h3 and the slow attack"
+                                          "plan": "Play the pawn to d5 next, with the bishop on e6 and the knight on b6 both supporting it. Leave the king in the middle while the h-file is open and castle long if the queenside allows it.",
+                                          "name": "6.h3 and the pawn stopped"
                                         }
                                       ]
                                     }

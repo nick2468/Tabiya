@@ -1,0 +1,67 @@
+Every finding from the two 500 ms passes, re-checked at 2500 ms.
+Evaluations are from White's point of view: negative favours Black.
+
+### e4 c5 f4 d6 Nf3 Nf6 Bc4
+    (course plays: e6)
+Black to move after: e4 c5 f4 d6 Nf3 Nf6 Bc4
+  -1.13  Nxe4 Nc3 Nf6 d4 d5 Be2
+  -0.12  e6 d3 d5 Bb5+ Bd7 Bxd7+
+  -0.01  Nc6 d3
+
+### e4 c5 f4 d6 Nf3 Nf6 Bc4 Nxe4
+    (course plays: (checking the punishment))
+White to move after: e4 c5 f4 d6 Nf3 Nf6 Bc4 Nxe4
+  -0.96  Nc3 Nf6 d4 cxd4 Nxd4 d5
+  -1.15  O-O Nf6
+  -1.16  d4 d5 Bd3 Nc6 Nbd2 Nxd2
+
+### e4 c5 f4 d6 Nf3 Nf6 Bc4 e6 O-O
+    (course plays: Be7)
+Black to move after: e4 c5 f4 d6 Nf3 Nf6 Bc4 e6 O-O
+  -0.99  Nxe4 Nc3 Nf6 f5 d5 Bb5+
+  -0.15  a6 e5 dxe5 fxe5 Nfd7 d3
+  -0.06  Nc6 d3
+
+### e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nf3 Be7 Bc4 O-O O-O Be6 Bb3
+    (course plays: Nbd7)
+Black to move after: e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nf3 Be7 Bc4 O-O O-O Be6 Bb3
+  +0.26  Ng4 Bd2 Nf6 Qe2 Qc7 Bg5
+  +0.28  b5 Nh4 Nbd7 Nf5 Bxf5 exf5
+  +0.39  Nc6 Qe2 b5 Rfd1 Qb8 Ng5
+
+### e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e5 Nb3 Be7 O-O O-O Be3 Be6 Qd2 Nbd7 a4 Rc8 Nd5
+    (course plays: Bxd5)
+Black to move after: e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e5 Nb3 Be7 O-O O-O Be3 Be6 Qd2 Nbd7 a4 Rc8 Nd5
+  -1.27  Nxe4 Nxe7+
+  -0.30  Bxd5 exd5 Nb6 Bxb6 Qxb6 a5
+  -0.21  h6 Qd3 Bxd5 exd5 Nb6 Bxb6
+
+### e4 c5 Nf3 d6 c3 Nf6 Bd3 Nc6 Bc2
+    (course plays: d5)
+Black to move after: e4 c5 Nf3 d6 c3 Nf6 Bd3 Nc6 Bc2
+  +0.02  e5 O-O
+  +0.03  Bg4 h3 Bh5 d4 cxd4 cxd4
+  +0.13  g6 O-O Bg7 h3 e5 d4
+
+### e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 h3 e5 Nde2 Be6 g4 Nbd7 Ng3
+    (course plays: b5)
+Black to move after: e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 h3 e5 Nde2 Be6 g4 Nbd7 Ng3
+  +0.34  h5 gxh5 Nb6 Bg2 d5 exd5
+  +0.50  h6 Be3 Nb6 Bg2 d5 Bxb6
+  +0.60  Rc8 g5 Ng8 h4 h6 Bh3
+
+### e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 h3 e5 Nde2 Be6 g4 Nbd7 Ng3 b5 a3
+    (course plays: Be7)
+Black to move after: e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 h3 e5 Nde2 Be6 g4 Nbd7 Ng3 b5 a3
+  +0.39  h6 a4 Qa5 Bg2 g6 O-O
+  +0.54  Nb6 g5 Nfd7 h4 g6 Bh3
+  +0.56  h5 gxh5
+
+### e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Rg1 e5 Nb3 Be6 g4 d5 exd5 Nxd5 Nxd5
+    (course plays: Bxd5)
+Black to move after: e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Rg1 e5 Nb3 Be6 g4 d5 exd5 Nxd5 Nxd5
+  +0.13  Qxd5
+  +0.22  Bxd5 Rg3 Nc6 Rd3 Nb4 Rd2
+  +2.37  h5 Bg5 Qxd5 Qxd5 Bxd5 O-O-O
+
+done

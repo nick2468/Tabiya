@@ -241,11 +241,16 @@
                               "weight": 6,
                               "children": [
                                 {
-                                  "san": "d5",
-                                  "note": "The break arrives in one move, because the pawn on d6 was already halfway there. Black hits the centre before White has finished building it.",
-                                  "tags": ["d5-break"],
-                                  "plan": "Trade in the centre or let White close it, then develop with the bishop to g4 or f5 and castle. The bishop on c2 is a long way from anything Black cares about.",
-                                  "name": "3.c3 and the break in one move"
+                                  "san": "e5",
+                                  "note": "Take the square White has spent three moves preparing to use. With the pawn on e5 the push to d4 is off, and White's whole idea has to start again.",
+                                  "tags": ["dark-squares"],
+                                  "mistakes": [
+                                    { "san": "d5", "grade": "inaccuracy", "note": "The break looks right and it is a move early: 6.exd5 Nxd5 leaves White with the freer game and Black's pawn on c5 loose." },
+                                    { "san": "Bg4", "grade": "playable", "note": "A good move that pins the knight and makes the centre push awkward. The pawn does the same job and takes the square for good." },
+                                    { "san": "g6", "grade": "playable", "note": "Sound, and it lets White build the centre at leisure. Stopping the push is the point here." }
+                                  ],
+                                  "plan": "Develop with the bishop to e7 and castle, then play for the pawn to d5 once White's centre is fixed. The bishop on c2 has nothing to look at while the pawn stands on e5.",
+                                  "name": "3.c3 and the centre stopped"
                                 }
                               ]
                             }
@@ -732,29 +737,62 @@
                   "children": [
                     {
                       "san": "Bc4",
-                      "note": "The bishop takes aim at f7, which is the standard Grand Prix idea.",
-                      "weight": 6,
+                      "note": "The bishop takes aim at f7, which is the standard Grand Prix idea. It is also the moment White forgets the pawn on e4: with the f-pawn already gone from f2, nothing on the board is defending it.",
+                      "weight": 5,
                       "children": [
                         {
-                          "san": "e6",
-                          "note": "Shut the diagonal, exactly as in chapter 4. The bishop on c4 has nothing left to look at.",
-                          "tags": ["light-squares"],
+                          "san": "Nxe4",
+                          "note": "Take the pawn. It is not a trap and there is nothing behind it: the pawn is simply undefended, and a club opponent playing this setup on autopilot will hand it over most times.",
+                          "tags": ["tactics"],
                           "mistakes": [
-                            { "san": "g6", "grade": "inaccuracy", "note": "It leaves the diagonal open and 5.Bxf7+ is at least awkward and often winning if Black is careless about f7." },
-                            { "san": "Nc6", "grade": "playable", "note": "Fine, and the pawn on e6 is the move that takes White's whole idea away." }
+                            { "san": "e6", "grade": "playable", "note": "Solid, and it declines a free pawn. Shutting the diagonal is the right idea against this bishop everywhere else in the course, and here there is something better on the board first." },
+                            { "san": "g6", "grade": "inaccuracy", "note": "It leaves the diagonal open with the pawn on f7 already the thing White is looking at, and it ignores the free pawn as well." },
+                            { "san": "Nc6", "grade": "playable", "note": "Fine and slow. The pawn on e4 will not be there for long." }
                           ],
                           "children": [
                             {
-                              "san": "O-O",
-                              "note": "White castles and prepares to push the f-pawn.",
-                              "weight": 8,
+                              "san": "Nc3",
+                              "note": "White hits the knight and hopes to win the pawn straight back.",
+                              "weight": 7,
                               "children": [
                                 {
-                                  "san": "Be7",
-                                  "note": "Develop and castle next. The kingside is solid and White's attack has no target.",
+                                  "san": "Nf6",
+                                  "note": "Retreat and keep the pawn. The knight has done its job and there is no reason to hold the square.",
                                   "tags": ["development"],
-                                  "plan": "Castle, then play the knight to c6 and the pawn to b5 and take the queenside. Meet f5 by taking with the pawn on e6 and putting a knight on e5.",
-                                  "name": "The Grand Prix, with the bishop shut out"
+                                  "mistakes": [
+                                    { "san": "Nxc3", "grade": "inaccuracy", "note": "It gives White the open b-file and a strong centre after 6.dxc3, which is real compensation for the pawn. Retreating keeps the pawn and gives nothing." },
+                                    { "san": "d5", "grade": "inaccuracy", "note": "It hands the extra pawn straight back: 6.Nxe4 dxe4 7.Ng5 and nothing defends e4, so the position is level again and Black has spent two moves getting there." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "d4",
+                                      "note": "White opens the centre to get some play for the pawn.",
+                                      "weight": 7,
+                                      "children": [
+                                        {
+                                          "san": "cxd4",
+                                          "note": "Take, as always in this course.",
+                                          "tags": ["development"],
+                                          "children": [
+                                            {
+                                              "san": "Nxd4",
+                                              "note": "White recaptures and has an open game for the pawn.",
+                                              "weight": 8,
+                                              "children": [
+                                                {
+                                                  "san": "d5",
+                                                  "note": "Give the extra pawn a job. It blocks the bishop on c4 and takes the centre, and Black is a pawn up with no weaknesses.",
+                                                  "tags": ["d5-break"],
+                                                  "plan": "Put the bishop on e7 and castle, then hold the extra pawn and trade pieces. White has some activity for it and nothing that lasts.",
+                                                  "name": "The Grand Prix, and the free pawn"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
                                 }
                               ]
                             }
