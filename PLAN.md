@@ -3684,3 +3684,26 @@ or reviewed. Version 1.6.12.
 Acceptance: as the chip's final paragraph.
 
 - [ ] **Review gate 28**
+
+## Phase 29 - a test rig that can play a game
+
+Goal: three phases running, a game-provider bug passed every test and was found only by
+playing. Nick ruled on 2026-09-04 to spend a phase on the rig. No user-visible change,
+no version bump, no build.
+
+Chipped as `chips/phase-29-test-rig.md`. jsdom for `*.dom.test.tsx` beside the existing
+string-render tests; the engine injected into `PlayProvider` with the fake shared from
+`src/test/`; the three bugs (phase 23's memo, phase 25 and 27's identity, phase 27's
+replay write) each pinned by a DOM test shown red against the bug; the phase 22 and 23
+register entries closed by real tests; a testing page linked from the SPEC.
+
+- [ ] 29.1 jsdom environment for `*.dom.test.tsx`; engine injected into the provider.
+- [ ] 29.2 Three regression tests, each shown red against its bug.
+- [ ] 29.3 Register entries closed: the greyed switcher, the view change, Progress with a
+  record.
+- [ ] 29.4 No snapshots, no timers, no worker.
+- [ ] 29.5 `docs/testing.md` linked from the SPEC; the ruling logged in section 8.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 29**
