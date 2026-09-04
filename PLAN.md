@@ -3877,3 +3877,31 @@ Gate 30 findings (2026-09-04):
   cleared afterwards.
 
 - [x] **Review gate 30 passed** (2026-09-04)
+
+## Phase 31 - the Sicilian Najdorf, a seventh course
+
+Goal: Nick commissioned the Najdorf on 2026-09-04, his third Black course and his
+counterpunching answer to 1.e4 beside the Caro-Kann.
+
+Chipped as `chips/phase-31-najdorf.md`. Id `najdorf-black`, permanent. Move order 2...d6
+always; the Poisoned Pawn out by the fork rule. Seven chapters: the idea; 6.Bg5 with
+6...e6 7.f4 Be7; the English Attack with 6...e5; 6.Be2, 6.f4 and 6.g3; 6.Bc4, 6.h3 and
+friends; the anti-Sicilians one recipe each; tactics and plans with defensive exercises.
+All four checkers, the mistakes pass at 2500 ms, engine work never beside another heavy
+process. Version 1.7.0.
+
+- [ ] 31.1 Rulings and decision rules (done in the chip).
+- [ ] 31.2 Seven chapters to the section 3 bar, student Black.
+- [ ] 31.3 Suite green after every chapter.
+- [ ] 31.4 Four checkers, outputs under `docs/engine-runs/phase-31/`, 2500 ms passes in a
+  quiet window.
+- [ ] 31.5 The course's test block with two course-specific claims.
+- [ ] 31.6 Scoping test: Caro-Kann against Najdorf.
+- [ ] 31.7 Bundle exported and round-tripped.
+- [ ] 31.8 Prose counts say seven.
+- [ ] 31.9 Version 1.7.0.
+- [ ] 31.10 Proved in the browser build.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 31**
