@@ -75,7 +75,7 @@ Playing Ne5 because the square is there, when Black can trade on it and be happy
 {The bishop arrives, and it is aiming at a square White has already occupied. [%weight 7]}
 10. f4
 {The pawn comes up behind the knight. Now the knight on e5 is permanent, the f-file is White's, and a trade on e5 is answered by the f-pawn. [%tags kingside-attack]}
-( 10. Qf3!? {Direct, and a move early. The pawn on f4 is what makes the knight permanent.}
+( 10. Qf3?! {Direct, and a move early. The pawn on f4 is what makes the knight permanent.}
 ) 10... Ne7 {Black reroutes towards g6 and f5 to hold the kingside. [%weight 5]} 11. Rf3
 {The lift. The rook leaves the file it opened and heads for h3, which is the whole point of playing f4 before this. [%tags rook-lift] [%cal Gf3h3]}
 11... cxd4 {Black takes in the centre before White gets any further. [%weight 6]} 12. Rh3
@@ -129,7 +129,7 @@ Playing Ne5 before Bb2. Recapturing on e5 with a piece when the pawn forks two o
 {The outpost, and here it comes with an extra point: taking on e5 would hang the bishop on d6 to the recapture. [%tags e5-outpost] [%plan Play f4 and Nbd2, then the rook lift. Black's pawn on c6 keeps the queenside quiet, so the whole game is on the other wing.] [%line The solid ...c6]}
 ) 5. b3
 {The Zukertort move. The bishop goes behind the pawns, not out in front of them. [%tags long-diagonal]}
-( 5. c3?!
+( 5. c3!?
 {The Koltanowski triangle. It is sound, and it is the London structure you already know, so it gives up the second structure this course exists to teach.}
 ) ( 5. dxc5!?
 {It gives up the tension far too early and hands Black the bishop on c5 with a free move.}

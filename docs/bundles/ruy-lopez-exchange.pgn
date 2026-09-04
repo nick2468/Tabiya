@@ -682,7 +682,7 @@ Taking a piece because it is there. Grabbing the h-file bishop and then finding 
 {Black castles into the pawns. White to play: the position is ready and the temptation is to start pushing. [%weight 6]}
 12. Nc3
 {Development first. The majority is the plan and it moves last, when the pieces behind it are placed. [%tags endgame majority] [%plan Trade one pair of rooks, keep the other, and bring a knight to e3 and f5. Play a4 and a5 to fix the queenside before the kingside pawns move at all.] [%line The main line: development first]}
-( 12. e5?!
+( 12. e5?
 {The front pawn of the majority, pushed before the pieces are ready. It fixes Black's structure for him and hands the bishops the d5 square.}
 ) ) ( 5... Bd6
 {Exercise three. Play to move eight and look at what Black has just stopped defending. [%weight 4]}

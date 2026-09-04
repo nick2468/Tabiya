@@ -169,7 +169,7 @@
                                                                           "mistakes": [
                                                                             {
                                                                               "san": "e5",
-                                                                              "grade": "inaccuracy",
+                                                                              "grade": "mistake",
                                                                               "note": "The front pawn of the majority, pushed before the pieces are ready. It fixes Black's structure for him and hands the bishops the d5 square."
                                                                             }
                                                                           ]
