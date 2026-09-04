@@ -3989,6 +3989,30 @@ Gate 31 findings (2026-09-04):
 - **Nick's own files were not listed and not reported.** The browser build's storage was
   cleared afterwards.
 
-- [ ] 31.11 Follow-up: ten or more authored mistake entries in ch6, graded at 2500 ms.
+- [x] 31.11 Follow-up: ten or more authored mistake entries in ch6, graded at 2500 ms.
+
+  Done, and 37 positions rather than ten. Chapter 6 runs lines that chapters 1 to 5
+  already carry, so 35 of those positions already had authored alternatives that had
+  survived two verdict-strength passes; they were copied **by position** rather than
+  retyped, which is what stops the two copies drifting. The two positions chapter 6
+  reaches that no other chapter does are the answers to exercises 5 and 6, and those were
+  written fresh.
+
+  The 2500 ms pass over the whole course, 364 positions, on a quiet machine with the
+  1.7.0 build already finished, reports five. Three are the accepted forced-mate entries.
+  **Two are new and both are straddles rather than overshoots**, which is the gate 20
+  distinction: the rook to c4 in chapter 3 and castling early in chapter 4 measured under
+  the 1.80 inaccuracy ceiling on the first two passes and 1.82 and 1.81 on this one. Under
+  that ruling a straddle goes quiet rather than into `accepted.md`, and the phase 19
+  precedent is to take the stricter grade on what the line does. Both are `mistake` now,
+  which covers every measurement taken of either, so neither will report again.
+
+  One of the two had a note worse than its grade, and that is the reason worth recording.
+  Castling early in the Fischer-Sozin was described as "safe and normal". It is neither:
+  it is the move that puts the king in front of White's queen and bishop, and the position
+  three moves later in the same chapter is the one where that attack is a forced mate. The
+  note says so now.
+
+  Version 1.7.1, because the 1.7.0 build read chapter 6 while this edit was in progress.
 
 - [x] **Review gate 31 passed** (2026-09-04), with 31.11 open as a follow-up.

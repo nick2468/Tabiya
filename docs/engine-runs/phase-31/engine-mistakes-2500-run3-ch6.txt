@@ -1,0 +1,36 @@
+Chapter 6's alternatives, checked at verdict strength. Conditions: 16 logical processors, CPU load 7-15%, no build (the 1.7.0 tauri build had finished), no test run, one engine process.
+
+244 mistake entries across 7 chapters, 364 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+  ...25/364
+  ...50/364
+  ...75/364
+  ...100/364
+  ...125/364
+  ...150/364
+  ...175/364
+  ...200/364
+  ...225/364
+  ...250/364
+  ...275/364
+  ...300/364
+  ...325/364
+  ...350/364
+
+5 entries where the grade and the engine disagree:
+
+ 99.81  mistake    graded too kindly  ch4-bc4-and-h3
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3 Qc7 Qg3 O-O Bh6 : Ne8 not Nxe4
+      "It loses on the spot, and not because of the pawn: 12.Bxg7 cannot be answered by Kxg7, because the king would be stepping onto the file White's queen is already on. Black is lost."
+ 99.81  mistake    graded too kindly  ch4-bc4-and-h3
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3 Qc7 Qg3 O-O Bh6 : Ne8 not b4
+      "It loses by force. 12.Bxg7 and the pawn cannot be taken back, because Kxg7 would put the king on the file White's queen is looking down. The knight has to go to e8 first, and then a trade on g7 is answered by the knight."
+ 99.81  mistake    graded too kindly  ch4-bc4-and-h3
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3 Qc7 Qg3 O-O Bh6 : Ne8 not Bb7
+      "A good square in almost every other position in this chapter, and here it loses: 12.Bxg7 and there is no recapture, because Kxg7 walks onto the queen's file. Everything waits until the knight has covered g7."
+ 1.82  inaccuracy graded too kindly  ch3-classical-and-quiet
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e5 Nb3 Be7 O-O O-O Be3 Be6 Qd2 Nbd7 a4 Rc8 a5 : Qc7 not Rc4
+      "13.Bd3 hits the rook and it has to go back, so Black has spent two moves arriving where the rook already was."
+ 1.81  inaccuracy graded too kindly  ch4-bc4-and-h3
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3 : Qc7 not O-O
+      "Safe and normal. The queen move first is more useful, because White's plan runs through e5 and the queen covers it."

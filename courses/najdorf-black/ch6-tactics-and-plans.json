@@ -1,9 +1,22 @@
 {
   "id": "ch6-tactics-and-plans",
   "title": "Typical tactics and plans",
-  "defaultTags": ["tactics"],
+  "defaultTags": [
+    "tactics"
+  ],
   "intro": "Six positions, each one running through a line from an earlier chapter and stopping on the move that matters. Play the line and find the last move yourself.\n\nSeveral of them are defensive, and that is deliberate. In most openings the exercises are about landing a blow. In the Najdorf, half of what a club player needs is seeing the blow coming: White sacrifices on d5, on f5, on e6 and on b5 in these structures, and knowing which ones work is worth more than any attacking idea Black has.\n\n## What each one is about\n\nThe first is the tempo. In the main line of chapter 1, with White's pawn arriving on f5 and everything hanging, there is a capture that comes with check, and a free move in a race decides the game.\n\nThe second is the order of operations. Black's knight is attacked and Black pushes a pawn on the other wing instead, because the pawn comes with a threat of its own and White has to answer first.\n\nThe third is the break. White has spent moves on a rook and a pawn storm and has not castled, and the answer to a wing attack with the king still in the middle is the centre.\n\nThe fourth is defence: a bishop appears on h6 offering to trade off the piece that guards the squares around Black's king, and there is a way to accept on Black's terms rather than White's.\n\nThe fifth is the second look. White finally puts a knight on d5, Black has spent the whole opening preparing to trade it off, and on this particular board there is something better. The prepared answer is still sound; it is just not the best move, and that is worth meeting once.\n\nThe sixth is the outpost. White opens the position and there is one square that is Black's for the rest of the game.\n\n## The pattern that is not here\n\nThe exchange sacrifice, a rook taking a knight on c3, is the signature blow of the Sicilian and it is not one of these six. It is not a move to memorise; it is a judgement about whether the dark squares and the pawn on e4 are worth the exchange, and it comes up in positions too varied to drill. Recognise it as an option whenever White's knight on c3 is the piece holding the position together, and then count.\n\n## Typical mistakes at this level\n\nAnswering an attack on a piece by moving the piece, when a bigger threat is available. Taking a free pawn without checking whether the capture also comes with check. Defending a wing attack on the wing rather than in the centre. And trading a good bishop for a knight because the trade is there, rather than because the position needs it.",
-  "stem": ["e4", "c5", "Nf3", "d6", "d4", "cxd4", "Nxd4", "Nf6", "Nc3", "a6"],
+  "stem": [
+    "e4",
+    "c5",
+    "Nf3",
+    "d6",
+    "d4",
+    "cxd4",
+    "Nxd4",
+    "Nf6",
+    "Nc3",
+    "a6"
+  ],
   "tree": [
     {
       "san": "Bg5",
@@ -13,7 +26,9 @@
         {
           "san": "e6",
           "note": "One square, because of the pin.",
-          "tags": ["vs-bg5"],
+          "tags": [
+            "vs-bg5"
+          ],
           "children": [
             {
               "san": "f4",
@@ -23,7 +38,9 @@
                 {
                   "san": "Be7",
                   "note": "Break the pin.",
-                  "tags": ["development"],
+                  "tags": [
+                    "development"
+                  ],
                   "children": [
                     {
                       "san": "Qf3",
@@ -33,7 +50,9 @@
                         {
                           "san": "Qc7",
                           "note": "The file, and cover of e5.",
-                          "tags": ["development"],
+                          "tags": [
+                            "development"
+                          ],
                           "children": [
                             {
                               "san": "O-O-O",
@@ -43,7 +62,9 @@
                                 {
                                   "san": "Nbd7",
                                   "note": "The last piece out.",
-                                  "tags": ["development"],
+                                  "tags": [
+                                    "development"
+                                  ],
                                   "children": [
                                     {
                                       "san": "g4",
@@ -53,7 +74,9 @@
                                         {
                                           "san": "b5",
                                           "note": "And so does Black's.",
-                                          "tags": ["b5-break"],
+                                          "tags": [
+                                            "b5-break"
+                                          ],
                                           "children": [
                                             {
                                               "san": "Bxf6",
@@ -63,7 +86,9 @@
                                                 {
                                                   "san": "Nxf6",
                                                   "note": "With the knight, keeping the pawns whole.",
-                                                  "tags": ["development"],
+                                                  "tags": [
+                                                    "development"
+                                                  ],
                                                   "children": [
                                                     {
                                                       "san": "g5",
@@ -73,7 +98,9 @@
                                                         {
                                                           "san": "Nd7",
                                                           "note": "Back to the useful square.",
-                                                          "tags": ["development"],
+                                                          "tags": [
+                                                            "development"
+                                                          ],
                                                           "children": [
                                                             {
                                                               "san": "f5",
@@ -83,36 +110,77 @@
                                                                 {
                                                                   "san": "Bxg5+",
                                                                   "note": "A free pawn and a free move. In a race where both sides are one tempo from breaking through, the check is the whole point.",
-                                                                  "tags": ["tactics", "dark-squares"],
+                                                                  "tags": [
+                                                                    "tactics",
+                                                                    "dark-squares"
+                                                                  ],
                                                                   "plan": "Meet the king move by bringing the knight to e5, then push the queenside pawns. Keep the bishop on g5 defended and let White run out of attackers.",
-                                                                  "name": "Exercise 1: the capture with check"
+                                                                  "name": "Exercise 1: the capture with check",
+                                                                  "mistakes": [
+                                                                    { "san": "exf5", "grade": "inaccuracy", "note": "It opens the centre in front of Black's own king while White's rooks are already pointing at it." },
+                                                                    { "san": "Ne5", "grade": "playable", "note": "Also played and reasonable. Taking with check first is a free tempo, and in a race a free tempo is the whole game." },
+                                                                    { "san": "Nc5", "grade": "inaccuracy", "note": "It ignores what is happening. 14.f6 rips the bishop's cover open and Black has not taken the free pawn." }
+                                                                  ]
                                                                 }
                                                               ]
                                                             }
+                                                          ],
+                                                          "mistakes": [
+                                                            { "san": "Nh5", "grade": "mistake", "note": "The knight is stranded on the edge with no way back into the game, and it takes no part in the defence or the attack. The retreat to d7 keeps it working." },
+                                                            { "san": "Ng8", "grade": "inaccuracy", "note": "The same problem with an extra insult: the knight has undeveloped itself and the rook on h8 still cannot move." }
                                                           ]
                                                         }
                                                       ]
                                                     }
+                                                  ],
+                                                  "mistakes": [
+                                                    { "san": "gxf6", "grade": "inaccuracy", "note": "It opens the g-file straight at Black's own king in a position where White has castled the other way and has a rook coming to g1." },
+                                                    { "san": "Bxf6", "grade": "inaccuracy", "note": "The bishop is Black's best defensive piece on the dark squares. Taking with it leaves the squares around the king thin and the knight on d7 with nothing to do." }
                                                   ]
                                                 }
                                               ]
                                             }
+                                          ],
+                                          "mistakes": [
+                                            { "san": "h6", "grade": "inaccuracy", "note": "It stops nothing. White is happy to play 11.Bxf6 anyway, and Black has spent a move that was needed on the queenside." },
+                                            { "san": "O-O", "grade": "inaccuracy", "note": "The king goes to the side the pawns are already rolling down. White plays 11.Bxf6 Nxf6 12.g5 and keeps pushing with a target on it." },
+                                            { "san": "Nc5", "grade": "inaccuracy", "note": "The knight looks active and it is not doing anything: the pawn on e4 is defended and the knight has to move again after 11.e5." }
                                           ]
                                         }
                                       ]
                                     }
+                                  ],
+                                  "mistakes": [
+                                    { "san": "b5", "grade": "mistake", "note": "It looks like the same plan a move early and it is not: with the knight still on b8 the queenside is a move short of working, and White gets to push first. The knight comes out and then the pawn." },
+                                    { "san": "O-O", "grade": "inaccuracy", "note": "The king walks into the pawn storm a move early. Black castles later or not at all in this line." },
+                                    { "san": "Nc6", "grade": "inaccuracy", "note": "The knight is loose there: 10.Nxc6 bxc6 hands White a target on c6 and takes the b5 square away from Black's own pawn." }
                                   ]
                                 }
                               ]
                             }
+                          ],
+                          "mistakes": [
+                            { "san": "h6", "grade": "playable", "note": "Sound, and it leads to 9.Bh4 g5, which is the tightrope this course leaves out under the fork rule. The queen move keeps a normal game." },
+                            { "san": "O-O", "grade": "inaccuracy", "note": "Castling into the attack before White has committed. White castles the other way and the pawns come, and Black has not started anything on the queenside." },
+                            { "san": "b5", "grade": "inaccuracy", "note": "9.e5 hits the pinned knight while the king sits in the middle, and Black is defending for the rest of the game." }
                           ]
                         }
                       ]
                     }
+                  ],
+                  "mistakes": [
+                    { "san": "Qb6", "grade": "playable", "note": "The Poisoned Pawn, and a completely sound opening. It is out of this course under the theory fork rule: it is a long forcing line where a single wrong move loses, and the bishop to e7 reaches a game with a plan instead." },
+                    { "san": "Nbd7", "grade": "playable", "note": "Also played, and it invites 8.Qf3 with the pin still on. Breaking the pin first is the simpler order." },
+                    { "san": "b5", "grade": "inaccuracy", "note": "Too early with the king in the middle. 8.e5 opens the position while Black is still undeveloped." }
                   ]
                 }
               ]
             }
+          ],
+          "mistakes": [
+            { "san": "e5", "grade": "mistake", "note": "The pin is what White's last move was for. After 7.Bxf6 Qxf6 8.Nd5 the queen is hit and has to move, and White's knight settles on d5 for good." },
+            { "san": "Nbd7", "grade": "inaccuracy", "note": "It leaves f7 soft while the pin is on, and 7.Bc4 arrives with an awkward attack before Black has covered the square." },
+            { "san": "h6", "grade": "inaccuracy", "note": "It asks the question a move too early. After 7.Bh4 Black still has to play the e-pawn, and the pawn on h6 has given White the g5 square to push at." }
           ]
         }
       ]
@@ -125,7 +193,9 @@
         {
           "san": "e5",
           "note": "Take the centre.",
-          "tags": ["vs-english-attack"],
+          "tags": [
+            "vs-english-attack"
+          ],
           "children": [
             {
               "san": "Nb3",
@@ -135,7 +205,9 @@
                 {
                   "san": "Be6",
                   "note": "Cover the hole.",
-                  "tags": ["light-squares"],
+                  "tags": [
+                    "light-squares"
+                  ],
                   "children": [
                     {
                       "san": "f3",
@@ -145,7 +217,9 @@
                         {
                           "san": "Be7",
                           "note": "Develop.",
-                          "tags": ["development"],
+                          "tags": [
+                            "development"
+                          ],
                           "children": [
                             {
                               "san": "Qd2",
@@ -155,7 +229,9 @@
                                 {
                                   "san": "O-O",
                                   "note": "While it is quiet.",
-                                  "tags": ["king-safety"],
+                                  "tags": [
+                                    "king-safety"
+                                  ],
                                   "children": [
                                     {
                                       "san": "O-O-O",
@@ -165,7 +241,9 @@
                                         {
                                           "san": "Nbd7",
                                           "note": "The last piece.",
-                                          "tags": ["development"],
+                                          "tags": [
+                                            "development"
+                                          ],
                                           "children": [
                                             {
                                               "san": "g4",
@@ -175,7 +253,9 @@
                                                 {
                                                   "san": "b5",
                                                   "note": "The counter-attack.",
-                                                  "tags": ["b5-break"],
+                                                  "tags": [
+                                                    "b5-break"
+                                                  ],
                                                   "children": [
                                                     {
                                                       "san": "g5",
@@ -185,32 +265,67 @@
                                                         {
                                                           "san": "b4",
                                                           "note": "Push anyway. The pawn attacks the knight on c3, which is holding the pawn on e4 and the d5 square, so White has to deal with that before Black has to deal with anything.",
-                                                          "tags": ["b5-break", "tactics"],
+                                                          "tags": [
+                                                            "b5-break",
+                                                            "tactics"
+                                                          ],
                                                           "plan": "Answer the knight move by retreating to e8, then bring it to c7 and on to b5 or e6. The queenside file is about to open and Black is the one with a rook ready for it.",
-                                                          "name": "Exercise 2: push, do not retreat"
+                                                          "name": "Exercise 2: push, do not retreat",
+                                                          "mistakes": [
+                                                            { "san": "Ne8", "grade": "inaccuracy", "note": "The right square for the knight and the wrong moment. Pushing the pawn first makes White answer, and only then does the knight step back, which is a whole tempo in a race." },
+                                                            { "san": "Nh5", "grade": "playable", "note": "The knight is out of play on the edge and 13.Nd5 takes over the hole with the bishop unable to cope on its own." },
+                                                            { "san": "Nb6", "grade": "mistake", "note": "The knight is heading for c4, which is a fine idea, and it leaves the knight on f6 hanging in the air for a move while White is the one attacking." }
+                                                          ]
                                                         }
                                                       ]
                                                     }
+                                                  ],
+                                                  "mistakes": [
+                                                    { "san": "h6", "grade": "inaccuracy", "note": "It costs a move and does not stop the plan, because White plays g5 anyway and opens the file." },
+                                                    { "san": "Nb6", "grade": "playable", "note": "A good square and a good idea, heading for c4. The pawn is faster, and the knight can go there next." },
+                                                    { "san": "Rc8", "grade": "playable", "note": "The rook belongs there eventually. In a race the pawn goes first, because the pawn is what opens the file the rook wants." }
                                                   ]
                                                 }
                                               ]
                                             }
+                                          ],
+                                          "mistakes": [
+                                            { "san": "b5", "grade": "playable", "note": "Perfectly good and a common move order. Bringing the knight out first means it is ready when the b-pawn does arrive." },
+                                            { "san": "Nc6", "grade": "inaccuracy", "note": "The knight has no future there. It gets in the way of the c-file, which is the file Black's rook wants." },
+                                            { "san": "Qc7", "grade": "playable", "note": "Also natural. The knight first is a shade more accurate because the queen may want b8 or a5 rather than c7 in this structure." }
                                           ]
                                         }
                                       ]
                                     }
+                                  ],
+                                  "mistakes": [
+                                    { "san": "Nbd7", "grade": "playable", "note": "The same moves in the other order and usually the same position. Castling first is the safer habit." },
+                                    { "san": "b5", "grade": "inaccuracy", "note": "With the king still in the middle it is asking for trouble. Castling costs one move and buys the whole plan." }
                                   ]
                                 }
                               ]
                             }
+                          ],
+                          "mistakes": [
+                            { "san": "Nbd7", "grade": "playable", "note": "Also fine. The bishop first keeps Black one move from castling at all times." }
                           ]
                         }
                       ]
                     }
+                  ],
+                  "mistakes": [
+                    { "san": "Be7", "grade": "playable", "note": "Fine, and it usually transposes. The bishop to e6 first is more accurate because it covers d5 before White's knight can think about it." },
+                    { "san": "b5", "grade": "inaccuracy", "note": "8.Nd5 arrives on the hole with the bishop still at home, and Black has no good way to remove it." },
+                    { "san": "Nbd7", "grade": "playable", "note": "Playable, and it leaves d5 to White for a move. The bishop is the piece that answers that square." }
                   ]
                 }
               ]
             }
+          ],
+          "mistakes": [
+            { "san": "Ng4", "grade": "playable", "note": "A real line and a sharp one. It is out of this course under the theory fork rule: 7.Bg5 h6 8.Bh4 g5 is a forcing sequence to learn by heart, and the pawn push reaches a game with a plan." },
+            { "san": "e6", "grade": "playable", "note": "A Scheveningen, entirely sound, and a different course. The far push is what this one teaches against this setup." },
+            { "san": "b5", "grade": "inaccuracy", "note": "It is the right plan at the wrong moment. 7.Nd5 lands on the hole before Black has a bishop to answer it with." }
           ]
         }
       ]
@@ -223,7 +338,9 @@
         {
           "san": "e5",
           "note": "The centre.",
-          "tags": ["vs-classical"],
+          "tags": [
+            "vs-classical"
+          ],
           "children": [
             {
               "san": "Nb3",
@@ -233,7 +350,9 @@
                 {
                   "san": "Be6",
                   "note": "The hole, and the preparation.",
-                  "tags": ["light-squares"],
+                  "tags": [
+                    "light-squares"
+                  ],
                   "children": [
                     {
                       "san": "g4",
@@ -243,16 +362,31 @@
                         {
                           "san": "d5",
                           "note": "The break. A wing attack is answered in the centre, and here the centre is open to Black in one move.",
-                          "tags": ["d5-break", "tactics"],
+                          "tags": [
+                            "d5-break",
+                            "tactics"
+                          ],
                           "plan": "Trade in the centre, then develop with the bishop to e7 and the knight to d7 or c6. White has two loose pawns on the kingside and a king with nowhere safe to go.",
-                          "name": "Exercise 3: the break in the centre"
+                          "name": "Exercise 3: the break in the centre",
+                          "mistakes": [
+                            { "san": "h6", "grade": "inaccuracy", "note": "Defending on the wing White is attacking on. The centre is open to Black here and that is where the answer lies." },
+                            { "san": "Nbd7", "grade": "inaccuracy", "note": "Perfectly reasonable, and it gives White a free move to play g5. The break is available now and it will not be later." }
+                          ]
                         }
                       ]
                     }
+                  ],
+                  "mistakes": [
+                    { "san": "Be7", "grade": "playable", "note": "Fine and slower. The bishop on e6 is what makes the pawn break possible next move, so it comes first here." },
+                    { "san": "b5", "grade": "inaccuracy", "note": "8.g4 and the attack arrives while Black has not touched the centre, which is the one thing that answers it." }
                   ]
                 }
               ]
             }
+          ],
+          "mistakes": [
+            { "san": "e6", "grade": "playable", "note": "Solid, and it lets White get on with the pawn storm undisturbed." },
+            { "san": "h5", "grade": "inaccuracy", "note": "It stops the pawn and leaves g5 as a permanent hole with a rook already on the file." }
           ]
         }
       ]
@@ -265,7 +399,9 @@
         {
           "san": "e6",
           "note": "The exception to the rule.",
-          "tags": ["vs-sozin"],
+          "tags": [
+            "vs-sozin"
+          ],
           "children": [
             {
               "san": "Bb3",
@@ -275,7 +411,9 @@
                 {
                   "san": "b5",
                   "note": "The space, and c4 taken away.",
-                  "tags": ["b5-break"],
+                  "tags": [
+                    "b5-break"
+                  ],
                   "children": [
                     {
                       "san": "O-O",
@@ -285,7 +423,9 @@
                         {
                           "san": "Be7",
                           "note": "Develop.",
-                          "tags": ["development"],
+                          "tags": [
+                            "development"
+                          ],
                           "children": [
                             {
                               "san": "Qf3",
@@ -295,7 +435,9 @@
                                 {
                                   "san": "Qc7",
                                   "note": "The file, and off the diagonal.",
-                                  "tags": ["development"],
+                                  "tags": [
+                                    "development"
+                                  ],
                                   "children": [
                                     {
                                       "san": "Qg3",
@@ -305,7 +447,9 @@
                                         {
                                           "san": "O-O",
                                           "note": "Castle anyway.",
-                                          "tags": ["king-safety"],
+                                          "tags": [
+                                            "king-safety"
+                                          ],
                                           "children": [
                                             {
                                               "san": "Bh6",
@@ -315,28 +459,58 @@
                                                 {
                                                   "san": "Ne8",
                                                   "note": "Take on Black's terms. If White goes through with the trade, it is the knight that recaptures on g7 and the pawns in front of the king never move.",
-                                                  "tags": ["king-safety", "development"],
+                                                  "tags": [
+                                                    "king-safety",
+                                                    "development"
+                                                  ],
                                                   "plan": "Recapture on g7 with the knight if White trades, then bring it back to f6 or on to c7. The bishop goes to b7 and the queenside pawns do the rest.",
-                                                  "name": "Exercise 4: trade on your own terms"
+                                                  "name": "Exercise 4: trade on your own terms",
+                                                  "mistakes": [
+                                                    { "san": "Nxe4", "grade": "mistake", "note": "It loses on the spot, and not because of the pawn: 12.Bxg7 cannot be answered by Kxg7, because the king would be stepping onto the file White's queen is already on. Black is lost." },
+                                                    { "san": "b4", "grade": "mistake", "note": "It loses by force. 12.Bxg7 and the pawn cannot be taken back, because Kxg7 would put the king on the file White's queen is looking down. The knight has to go to e8 first, and then a trade on g7 is answered by the knight." },
+                                                    { "san": "Bb7", "grade": "mistake", "note": "A good square in almost every other position in this chapter, and here it loses: 12.Bxg7 and there is no recapture, because Kxg7 walks onto the queen's file. Everything waits until the knight has covered g7." }
+                                                  ]
                                                 }
                                               ]
                                             }
+                                          ],
+                                          "mistakes": [
+                                            { "san": "b4", "grade": "inaccuracy", "note": "11.Na4 and the king is still in the middle with White's queen already on the kingside." },
+                                            { "san": "Bd7", "grade": "inaccuracy", "note": "It is passive and it takes the square the knight wants. The bishop belongs on b7 in this structure." }
                                           ]
                                         }
                                       ]
                                     }
+                                  ],
+                                  "mistakes": [
+                                    { "san": "O-O", "grade": "inaccuracy", "note": "Safe and normal. The queen move first is more useful, because White's plan runs through e5 and the queen covers it." },
+                                    { "san": "Bb7", "grade": "inaccuracy", "note": "It leaves the queen on d8, where 10.Bxe6 fxe6 11.Nxe6 hits it with tempo. White has given up a bishop and taken two pawns for it, and Black's king has nowhere safe to go, which is worth more than the count." }
                                   ]
                                 }
                               ]
                             }
+                          ],
+                          "mistakes": [
+                            { "san": "Bb7", "grade": "playable", "note": "A good square for that bishop and it can wait. The king comes first when White has castled and Black has not." },
+                            { "san": "b4", "grade": "inaccuracy", "note": "9.Na4 steps aside and the knight is heading for b6, which is the square the pawn on a6 was supposed to look after." }
                           ]
                         }
                       ]
                     }
+                  ],
+                  "mistakes": [
+                    { "san": "Be7", "grade": "playable", "note": "Also good and it usually transposes. Pushing first stops White from ever putting a knight or a rook on c4." },
+                    { "san": "Nbd7", "grade": "playable", "note": "Fine. The pawn is more urgent, because the queenside space is the compensation for the pawn on e6 being a target." },
+                    { "san": "d5", "grade": "mistake", "note": "The break is far too early: 8.exd5 exd5 9.Nxd5 Nxd5 10.Bxd5 and White has won a pawn, with the bishop sitting in the middle of the board." }
                   ]
                 }
               ]
             }
+          ],
+          "mistakes": [
+            { "san": "e5", "grade": "inaccuracy", "note": "It hands over d5 with a bishop already aimed at it. After 7.Nde2 Black has a hole there, a bishop on c8 with nothing to do, and no way to cover the square. The engine calls it under half a pawn; the trouble it causes lasts the whole game." },
+            { "san": "b5", "grade": "inaccuracy", "note": "7.Bb3 and Black has committed a pawn without covering the diagonal, so White gets to push the f-pawn up the board with real force." },
+            { "san": "Nc6", "grade": "playable", "note": "Sound, and it invites a set of positions from the Classical Sicilian rather than this course. The pawn is the move that answers the bishop." }
           ]
         }
       ]
@@ -349,7 +523,9 @@
         {
           "san": "e5",
           "note": "The centre, and the hole with it.",
-          "tags": ["vs-classical"],
+          "tags": [
+            "vs-classical"
+          ],
           "children": [
             {
               "san": "Nb3",
@@ -359,7 +535,9 @@
                 {
                   "san": "Be7",
                   "note": "Develop.",
-                  "tags": ["development"],
+                  "tags": [
+                    "development"
+                  ],
                   "children": [
                     {
                       "san": "O-O",
@@ -369,7 +547,9 @@
                         {
                           "san": "O-O",
                           "note": "The same.",
-                          "tags": ["king-safety"],
+                          "tags": [
+                            "king-safety"
+                          ],
                           "children": [
                             {
                               "san": "Be3",
@@ -379,7 +559,9 @@
                                 {
                                   "san": "Be6",
                                   "note": "The answer to the hole, put in place before it is needed.",
-                                  "tags": ["light-squares"],
+                                  "tags": [
+                                    "light-squares"
+                                  ],
                                   "children": [
                                     {
                                       "san": "Qd2",
@@ -389,7 +571,9 @@
                                         {
                                           "san": "Nbd7",
                                           "note": "Developing.",
-                                          "tags": ["development"],
+                                          "tags": [
+                                            "development"
+                                          ],
                                           "children": [
                                             {
                                               "san": "a4",
@@ -399,7 +583,9 @@
                                                 {
                                                   "san": "Rc8",
                                                   "note": "The file instead.",
-                                                  "tags": ["development"],
+                                                  "tags": [
+                                                    "development"
+                                                  ],
                                                   "children": [
                                                     {
                                                       "san": "Nd5",
@@ -409,32 +595,65 @@
                                                         {
                                                           "san": "Nxe4",
                                                           "note": "The knight that left c3 was the one defending e4, and the queen on d2 is now attacked by the knight that takes it. Trading on d5 is sound and this wins a pawn, so it is worth the second look.",
-                                                          "tags": ["tactics", "d5-break"],
+                                                          "tags": [
+                                                            "tactics",
+                                                            "d5-break"
+                                                          ],
                                                           "plan": "Meet 13.Nxe7+ by recapturing with the queen, then bring the knight back to f6 or d6. Black is a pawn up with the same solid structure the trade would have given.",
-                                                          "name": "Exercise 5: look before you trade"
+                                                          "name": "Exercise 5: look before you trade",
+                                                          "mistakes": [
+                                                            { "san": "Bxd5", "grade": "inaccuracy", "note": "The move the whole chapter prepares, and it is sound: the hole stops mattering once the knight is off it. It is not the best move on this particular board, which is the whole point of the exercise." },
+                                                            { "san": "h6", "grade": "inaccuracy", "note": "A useful little move in most of these positions and a wasted one here, because it neither takes the knight off d5 nor takes the pawn that is hanging." }
+                                                          ]
                                                         }
                                                       ]
                                                     }
+                                                  ],
+                                                  "mistakes": [
+                                                    { "san": "b5", "grade": "mistake", "note": "12.axb5 axb5 13.Rxa8 Qxa8 14.Nxb5 simply takes the pawn, because the knight on c3 covers b5 and nothing of Black's does." },
+                                                    { "san": "Qc7", "grade": "playable", "note": "The same idea a move later and perfectly good. The rook first is more useful because the queen may prefer b8 once the file is contested." }
                                                   ]
                                                 }
                                               ]
                                             }
+                                          ],
+                                          "mistakes": [
+                                            { "san": "Nc6", "grade": "inaccuracy", "note": "The same problem as before: the c-file belongs to Black's rook, not to Black's knight." },
+                                            { "san": "d5", "grade": "inaccuracy", "note": "The break is not ready: 11.exd5 Nxd5 12.Nxd5 Bxd5 13.c4 drives the bishop back and White keeps the centre with a free move in hand." }
                                           ]
                                         }
                                       ]
                                     }
+                                  ],
+                                  "mistakes": [
+                                    { "san": "Nc6", "grade": "inaccuracy", "note": "The knight blocks the c-file, which is where the rook wants to work in every line of this chapter." },
+                                    { "san": "b5", "grade": "playable", "note": "Good, and the bishop to e6 first settles the d5 square before the pawns commit." },
+                                    { "san": "Ng4", "grade": "mistake", "note": "It chases the bishop and 10.Bg5 answers with a pin, so Black has spent two moves to make White's bishop better." }
                                   ]
                                 }
                               ]
                             }
+                          ],
+                          "mistakes": [
+                            { "san": "Be6", "grade": "playable", "note": "A move order that usually transposes. Castling first is the habit: there is no reason to leave the king in the middle in a quiet position." },
+                            { "san": "b5", "grade": "inaccuracy", "note": "8.a4 arrives before Black is castled and the pawn on b5 becomes a target rather than a plan." }
                           ]
                         }
                       ]
                     }
+                  ],
+                  "mistakes": [
+                    { "san": "Be6", "grade": "playable", "note": "Fine, and White can answer with f4 while Black's king is still in the middle. Castling first takes that away." },
+                    { "san": "b5", "grade": "playable", "note": "Playable and slightly loose. White has not committed anything yet, so there is time to castle first." }
                   ]
                 }
               ]
             }
+          ],
+          "mistakes": [
+            { "san": "e6", "grade": "playable", "note": "A Scheveningen, sound and out of scope here. The far push is what this course plays against every quiet sixth move." },
+            { "san": "b5", "grade": "inaccuracy", "note": "7.Bf3 hits the rook on a8 through the pawn and Black has to spend moves sorting it out." },
+            { "san": "Nc6", "grade": "playable", "note": "A Classical Sicilian by transposition, entirely playable, and a different set of structures from this course." }
           ]
         }
       ]
@@ -447,7 +666,9 @@
         {
           "san": "e5",
           "note": "The centre, at once.",
-          "tags": ["vs-classical"],
+          "tags": [
+            "vs-classical"
+          ],
           "children": [
             {
               "san": "Nf3",
@@ -457,7 +678,9 @@
                 {
                   "san": "Nbd7",
                   "note": "Defending it a second time.",
-                  "tags": ["development"],
+                  "tags": [
+                    "development"
+                  ],
                   "children": [
                     {
                       "san": "a4",
@@ -467,7 +690,9 @@
                         {
                           "san": "Be7",
                           "note": "Developing.",
-                          "tags": ["development"],
+                          "tags": [
+                            "development"
+                          ],
                           "children": [
                             {
                               "san": "Bd3",
@@ -477,7 +702,9 @@
                                 {
                                   "san": "O-O",
                                   "note": "Safety first.",
-                                  "tags": ["king-safety"],
+                                  "tags": [
+                                    "king-safety"
+                                  ],
                                   "children": [
                                     {
                                       "san": "O-O",
@@ -487,7 +714,9 @@
                                         {
                                           "san": "exf4",
                                           "note": "Now the trade.",
-                                          "tags": ["tactics"],
+                                          "tags": [
+                                            "tactics"
+                                          ],
                                           "children": [
                                             {
                                               "san": "Bxf4",
@@ -497,28 +726,56 @@
                                                 {
                                                   "san": "Ne5",
                                                   "note": "The outpost. The pawn on d6 defends it, the pawn that used to challenge it has been traded off, and it attacks the bishop and the knight at the same time.",
-                                                  "tags": ["development", "tactics"],
+                                                  "tags": [
+                                                    "development",
+                                                    "tactics"
+                                                  ],
                                                   "plan": "Trade on d3 if White allows it, then bring a rook to e8 and the bishop to e6. Nothing White has can drive the knight off e5 without making a bigger concession.",
-                                                  "name": "Exercise 6: the outpost on e5"
+                                                  "name": "Exercise 6: the outpost on e5",
+                                                  "mistakes": [
+                                                    { "san": "Re8", "grade": "playable", "note": "The rook belongs on the open file and it can wait a move. The knight is the piece with a square nothing can take away from it." },
+                                                    { "san": "Qc7", "grade": "playable", "note": "Natural and fine. The knight goes first, because the square is available now and White can cover it with a move like Nd4." }
+                                                  ]
                                                 }
                                               ]
                                             }
+                                          ],
+                                          "mistakes": [
+                                            { "san": "b6", "grade": "playable", "note": "Quiet and reasonable. Taking is more to the point: it gives the knight the square that makes Black's position work." },
+                                            { "san": "Re8", "grade": "playable", "note": "The rook belongs there, and taking first means it arrives on a file that is already open." }
                                           ]
                                         }
                                       ]
                                     }
+                                  ],
+                                  "mistakes": [
+                                    { "san": "exf4", "grade": "inaccuracy", "note": "10.Bxf4 and White's pieces are all pointing at a king still in the middle. Castle first, take second." }
                                   ]
                                 }
                               ]
                             }
+                          ],
+                          "mistakes": [
+                            { "san": "b6", "grade": "inaccuracy", "note": "It is slow and it leaves the pawn on a6 backward on an open file once the a-pawns come off." },
+                            { "san": "exf4", "grade": "playable", "note": "Playable, and there is no hurry: the trade is better once the king is safe and the rook is on e8." }
                           ]
                         }
                       ]
                     }
+                  ],
+                  "mistakes": [
+                    { "san": "exf4", "grade": "inaccuracy", "note": "Too early. 8.Bxf4 leaves White's bishop active and Black's knight with no way to reach e5 yet." },
+                    { "san": "Be7", "grade": "playable", "note": "Fine, and after 8.fxe5 dxe5 the pawn on e5 needs a defender anyway. The knight first is a move in hand." },
+                    { "san": "Nc6", "grade": "inaccuracy", "note": "It blocks the c-file and 8.Bb5 pins it against the king before Black has castled." }
                   ]
                 }
               ]
             }
+          ],
+          "mistakes": [
+            { "san": "e6", "grade": "playable", "note": "Sound and it makes a Scheveningen, which is not this course. The far push is more testing here because White's pawn on f4 has already committed." },
+            { "san": "Qc7", "grade": "playable", "note": "A real alternative, keeping the option of both e-pawn pushes. This course plays the pawn move for one reason: it is the same rule as everywhere else in the chapter, and one rule is easier to hold than two." },
+            { "san": "g6", "grade": "inaccuracy", "note": "7.e5 opens the centre while Black's king is in the middle, which is exactly what the pawn on f4 was hoping for." }
           ]
         }
       ]

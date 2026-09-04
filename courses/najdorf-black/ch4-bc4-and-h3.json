@@ -59,7 +59,7 @@
                                   "note": "The queen takes the file and covers e5 and c4. It also gets off the diagonal the rook on d1 would like.",
                                   "tags": ["development"],
                                   "mistakes": [
-                                    { "san": "O-O", "grade": "inaccuracy", "note": "Safe and normal. The queen move first is more useful, because White's plan runs through e5 and the queen covers it." },
+                                    { "san": "O-O", "grade": "mistake", "note": "It looks like the safe move and it is the committal one. With the queen still on d8 the king walks in front of White's attack, and this chapter's next position is where that attack turns into a forced mate. The queen goes to c7 first, covering e5 and getting off the d-file." },
                                     { "san": "Bb7", "grade": "inaccuracy", "note": "It leaves the queen on d8, where 10.Bxe6 fxe6 11.Nxe6 hits it with tempo. White has given up a bishop and taken two pawns for it, and Black's king has nowhere safe to go, which is worth more than the count." }
                                   ],
                                   "children": [
