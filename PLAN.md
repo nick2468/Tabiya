@@ -3786,4 +3786,29 @@ its stale closure only bites when a start and a review run back to back with no 
 between them, which is Replay and nothing else. Two register entries are closed on the
 terms they set: the greyed switcher and the view change. No version bump, no build.
 
-- [ ] **Review gate 29**
+Gate 29 findings (2026-09-04):
+
+- **Verified for the gate from the repo:** 898 tests across both projects in 9.1 seconds
+  under one `npx vitest run`; `tsc -b` clean; nothing under `courses/`, `docs/bundles/` or
+  `src-tauri/`; version unchanged at 1.6.12 as ruled. The four dev dependencies are pinned
+  exact. `PlayProvider` takes `createEngine` with the real engine as its default; the
+  worker guard is a test that installs a throwing `Worker` and asserts it was never
+  constructed; no snapshot, fake timer or `setTimeout` in any DOM test.
+- **Two of the four regression tests were mutation-checked by hand at the gate.** Turning
+  `holdOpponent` off makes "does not add a reply to a game that was stopped mid-move" red.
+  Minting a fresh `at` on every review makes both identity tests red ("replaces the record
+  when a game is carried on and reviewed again" and "keeps one record through a Play on
+  from Progress"). Both files restored from git afterwards. The other two mutations are
+  taken on the builder's account, which names the failing tests for each.
+- **The register entries for the greyed switcher and the view change are closed** in SPEC
+  section 6 on the terms they set, and the builder's correction stands: Study has a board
+  of its own, so the view-change test reads the move list and the chapter heading rather
+  than the absence of a board.
+- **`docs/testing.md` is linked from the SPEC's architecture section**, which no longer
+  says the UI is verified by use, and the ruling is logged in section 8.
+- **The board is stubbed at the component boundary in DOM tests** because chessground
+  needs `ResizeObserver`, and the rig has a test that pins that throw so the stub is
+  retired loudly when jsdom grows one.
+- **No build**: nothing a person can see changed.
+
+- [x] **Review gate 29 passed** (2026-09-04)
