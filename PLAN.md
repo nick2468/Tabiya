@@ -3990,6 +3990,10 @@ Gate 31 findings (2026-09-04):
   cleared afterwards.
 
 - [x] 31.11 Follow-up: ten or more authored mistake entries in ch6, graded at 2500 ms.
+- [ ] 31.12 Follow-up: one grade per position per course, as a content test, and the six
+  conflicts it finds settled at 2500 ms (three in the Najdorf, two in the Colle, one in
+  the Ruy). Found at the 31.11 check: the ch6 copy of the regraded O-O still read
+  inaccuracy.
 
   Done, and 37 positions rather than ten. Chapter 6 runs lines that chapters 1 to 5
   already carry, so 35 of those positions already had authored alternatives that had
