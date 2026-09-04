@@ -4045,3 +4045,10 @@ Gate 31 findings (2026-09-04):
   Version 1.7.1, because the 1.7.0 build read chapter 6 while this edit was in progress.
 
 - [x] **Review gate 31 passed** (2026-09-04), with 31.11 open as a follow-up.
+
+Follow-up gate (2026-09-04, orchestrator): 31.11 and 31.12 verified on a clean tree at
+1.7.1: 963 tests, 344 line ids unchanged, zero grade conflicts across the catalog by the
+FEN-plus-SAN script, and the new one-grade rule mutation-checked by flipping a chapter 6
+copy (red, naming the position). Two grades were overturned by the number in the
+direction of leniency (the Najdorf e5 against 6.Bg5 at 0.46, the Colle c3 at 0.00) and
+the rest confirmed. The 1.7.1 installer was built from this commit with a clean tree.
