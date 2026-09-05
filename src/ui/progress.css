@@ -112,6 +112,23 @@
   white-space: nowrap;
 }
 
+/* The rows in the lead's voice (phase 40, Nick: they stood out too strongly,
+   especially in dark mode), names of courses, lines, endings and positions
+   included. The header row keeps its own style. */
+.play-on-table td {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+/* Thin buttons, so the row is the height of its text. The armed Delete keeps
+   its colour from the rule below. */
+.play-on-table .row-actions button {
+  padding: 2px 8px;
+  font-size: 0.85rem;
+}
+
 /* Play on and Replay sit together on the row rather than stacking, so the
    column stays one line tall however many buttons it holds. */
 .row-actions {
@@ -157,5 +174,8 @@ button.danger {
    four buttons; it scrolls inside its own box rather than the page. */
 .play-on-scroll {
   overflow-x: auto;
+  /* The width the panel gives it, so a wider window shows more columns
+     before the sideways scroll is needed (phase 40). */
+  width: 100%;
   max-width: 100%;
 }

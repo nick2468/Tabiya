@@ -7,6 +7,7 @@ import { Progress } from './Progress'
 import { Study } from './Study'
 import { CatalogContext, type Catalog } from './catalog-context'
 import { PlayContext, type PlayGame } from './play-context'
+import { StudyProvider } from './study-context'
 import { ProgressContext, type Progress as ProgressValue } from './progress-context'
 import { bundledCourses } from '../content'
 import { PlaySession, buildBook } from '../play'
@@ -160,7 +161,7 @@ function inApp(value: PlayGame, view: ReactNode, state: ProgressState = emptyPro
       createElement(
         CatalogContext,
         { value: catalog } as never,
-        createElement(PlayContext, { value } as never, view),
+        createElement(PlayContext, { value } as never, createElement(StudyProvider, null, view)),
       ),
     ),
   )

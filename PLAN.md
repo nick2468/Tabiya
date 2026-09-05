@@ -4652,14 +4652,45 @@ are live on Progress (only a game still being played is guarded); the window ope
 lead's muted voice with thin buttons; Study's place is kept per course in a small
 provider across screen changes. Version 1.8.6.
 
-- [ ] 40.1 Archive and Delete live after a review; Play resets when its record goes.
-- [ ] 40.2 Window 1400 by 980; five tiles; the games table given room.
-- [ ] 40.3 The games table lighter and tighter, measured, both themes.
-- [ ] 40.4 Study's place kept per course; DOM test red first.
-- [ ] 40.5 Version 1.8.6.
-- [ ] 40.6 Proved at 1400x980 in both themes.
+- [x] 40.1 Archive and Delete live after a review; Play resets when its record goes.
+- [x] 40.2 Window 1400 by 980; five tiles; the games table given room.
+- [x] 40.3 The games table lighter and tighter, measured, both themes.
+- [x] 40.4 Study's place kept per course; DOM test red first.
+- [x] 40.5 Version 1.8.6.
+- [x] 40.6 Proved at 1400x980 in both themes.
 
 Acceptance: as the chip's final paragraph.
+
+**For the gate.** 40.1: the guard is `game.inProgress && game.recordedAt === record.at`
+(a session with no report), so a reviewed game's row is free; Archive and Delete on the
+record whose game is on the Play screen call `game.reset()` first. The DOM test was
+written first and red on 1.8.5 (Archive disabled after a Replay); phase 39's test that
+had pinned the wider rule now pins the narrower one on a Play on game, started. The
+disabled styling is unchanged: it is the app-wide `button:disabled` at opacity 0.5, which
+read clearly enough in dark mode on the drive. 40.2: the window opens at 1400 by 980, min
+size unchanged; `.catalog` capped at 1360 with the same 250 px tiles, measured at 1400 as
+five and three with tiles 261 px wide in a 1352 px catalog. `.play-on-scroll` is
+`width: 100%`; at 1400 the games table is 1162 px in a 1337 px box, so all nine columns
+fit without the sideways scroll. 40.3: cells in `--text-dim` at 0.9 rem with 3 px vertical
+padding, the row buttons at `2px 8px` and 0.85 rem; the row was 50 px and is 32 px,
+measured by swapping the old rules back in over the live table. 40.4: `StudyProvider`
+(`study-context.tsx`) holds `{ chapterId, chain, chosen }` per course id, in memory, with
+`place` and `update`; `Study` reads the chapter from it and `ChapterStudy` reads the chain
+and the chosen row, with `setChain`/`setChosen` shaped like the state setters they
+replaced (and now in the callbacks' dependency lists, which the second click of the test
+caught). The auto-step flag stays on the screen on purpose: its timer must not run unseen,
+so it stops when the screen unmounts and does not restart on return, which meets the
+chip's rule without lifting it. The DOM test was written first and red on 1.8.5 (an empty
+trail after a trip to Play); a second pins the chapter. Help has the clause. 1106 tests
+in 10.7 seconds, `tsc -b` clean, nothing under `courses/`.
+
+Driven at 1400x980 against another session's server on 5175 (files touched for its
+watcher). Courses: five and three. Two London games reviewed; on Progress both rows had
+Archive and Delete live, including the game still showing its report on Play; the rows
+in the muted voice with thin buttons in dark and in light (photographed both); Archive on
+that game took the row out and Play showed its start options. Study, Classical Black, two
+arrow steps to 2...e6 3.e3, Play, Study: the same chapter, trail and position. No console
+errors; storage cleared afterwards. Nick's own files were not listed and not reported.
 
 - [ ] **Review gate 40**
 

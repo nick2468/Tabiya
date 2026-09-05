@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState, type CSSProperties } from 'react'
+import { useStudy } from './study-context'
 import { Prose } from './Prose'
 import { Board } from './Board'
 import { useProgress } from './progress-context'
@@ -34,8 +35,16 @@ export function Study({
   onPlayFrom: (request: PlayRequest) => void
 }) {
   const chapters = course.chapters
-  const [chapterId, setChapterId] = useState(chapters[0]?.id ?? '')
+  // The chapter, the moves walked and the chosen line live in the provider,
+  // per course, so they survive a trip to another screen (phase 40). A course
+  // not opened before starts at its first chapter.
+  const { place, update } = useStudy()
+  const held = place(course.id)
+  const chapterId = held?.chapterId ?? chapters[0]?.id ?? ''
   const chapter = chapters.find((entry) => entry.id === chapterId) ?? chapters[0]
+  // Opening a chapter is a fresh start in it: the walk and the chosen row go
+  // back to the top, as they did when the chapter's state was its own.
+  const openChapter = (id: string) => update(course.id, { chapterId: id, chain: [], chosen: 0 })
 
   if (!chapter) {
     return <p className="empty">This course has no chapters. Check the diagnostics view.</p>
@@ -60,7 +69,7 @@ export function Study({
                 type="button"
                 className={entry.id === chapter.id ? 'chapter-link current' : 'chapter-link'}
                 aria-current={entry.id === chapter.id ? 'true' : undefined}
-                onClick={() => setChapterId(entry.id)}
+                onClick={() => openChapter(entry.id)}
               >
                 <span className="chapter-number">{index}</span>
                 {entry.title}
@@ -101,8 +110,26 @@ function ChapterStudy({
   chapter: LoadedChapter
   onPlayFrom: (request: PlayRequest) => void
 }) {
-  const [chain, setChain] = useState<LoadedNode[]>([])
-  const [chosen, setChosen] = useState(0)
+  const { place, update } = useStudy()
+  const held = place(course.id)
+  // The walk and the row belong to THIS chapter only; a place left in another
+  // chapter reads as the top of this one until something is walked.
+  const chain = held?.chapterId === chapter.id ? held.chain : []
+  const chosen = held?.chapterId === chapter.id ? held.chosen : 0
+  // The same shape as the state setter it replaces, so the callbacks below
+  // read as they did. The functional form works from the chain this render
+  // saw, which is current: every step is a render.
+  const setChain = useCallback(
+    (next: LoadedNode[] | ((previous: LoadedNode[]) => LoadedNode[])) =>
+      update(course.id, { chapterId: chapter.id, chain: typeof next === 'function' ? next(chain) : next }),
+    [chain, chapter.id, course.id, update],
+  )
+  const setChosen = useCallback(
+    (index: number) => update(course.id, { chapterId: chapter.id, chosen: index }),
+    [chapter.id, course.id, update],
+  )
+  // Auto step is the screen's own: its timer must not run unseen, so it stops
+  // with the screen and does not start again by itself on return.
   const [stepping, setStepping] = useState(false)
   const { learnt, toggle } = useProgress()
 
@@ -120,7 +147,7 @@ function ChapterStudy({
   const goBack = useCallback(() => {
     stop()
     setChain((previous) => previous.slice(0, -1))
-  }, [stop])
+  }, [stop, setChain])
   // Forward follows the CHOSEN line, not the first child. The two used to
   // disagree, so pressing Forward after picking a row walked off into a
   // different line without saying so.
@@ -130,7 +157,7 @@ function ChapterStudy({
       const step = nextOnLine(lines, previous, chosen)
       return step ? [...previous, step] : previous
     })
-  }, [stop, lines, chosen])
+  }, [stop, lines, chosen, setChain])
 
   // Left and right arrows step through the line, the way a board viewer should.
   useEffect(() => {
@@ -157,14 +184,14 @@ function ChapterStudy({
       if (last) setStepping(false)
     }, STEP_MS)
     return () => clearTimeout(timer)
-  }, [stepping, next, chain, lines, active])
+  }, [stepping, next, chain, lines, active, setChain])
 
   const jump = useCallback(
     (to: LoadedNode[]) => {
       stop()
       setChain(to)
     },
-    [stop],
+    [stop, setChain],
   )
 
   /**
@@ -179,7 +206,7 @@ function ChapterStudy({
       setChain([])
       setChosen(index)
     },
-    [stop],
+    [stop, setChain, setChosen],
   )
 
   const fen = current?.fen ?? chapter.stemFen

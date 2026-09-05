@@ -1,8 +1,9 @@
 .catalog {
-  /* Wide enough for four tiles of 250px and three gaps, which is what fits
-     the 1152px the shell leaves at the window's opening width. It was 900px,
-     which held three tiles and made the fourth start a new row. */
-  max-width: 1160px;
+  /* Wide enough for five tiles of 250px and four gaps (1298px), which is what
+     fits the 1352px the shell leaves at the window's opening width of 1400
+     (phase 40). It was 1160px for four at 1200, and 900px for three before
+     that. Eight courses sit as five and three. */
+  max-width: 1360px;
 }
 
 .catalog-head h2 {
@@ -21,10 +22,10 @@
   padding: 0;
   display: grid;
   gap: 12px;
-  /* Four to a row in the window the app opens in. At 1200 wide the shell
-     leaves 1152px, and 280px tiles fitted three with room to spare, which
-     Nick read as too big. 250px fits four with a 12px gap and a seventh
-     course starts a second row of three rather than a third row of one. */
+  /* Five to a row in the window the app opens in, 1400 wide since phase 40.
+     280px tiles fitted three at 1200 with room to spare, which Nick read as
+     too big; 250px fitted four there, and fits five at 1400 with a 12px gap,
+     so eight courses are a row of five and a row of three. */
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 

@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { Shell } from '../ui/App'
 import { CatalogProvider } from '../ui/catalog-context'
 import { PlayProvider } from '../ui/play-context'
+import { StudyProvider } from '../ui/study-context'
 import { ProgressProvider } from '../ui/progress-context'
 import { fakeEngine } from './fake-engine'
 import { STORAGE_KEY, emptyProgress, type PlayRecord } from '../storage/progress'
@@ -24,7 +25,9 @@ export function renderApp() {
     <ProgressProvider>
       <CatalogProvider>
         <PlayProvider createEngine={() => fakeEngine()}>
-          <Shell />
+          <StudyProvider>
+            <Shell />
+          </StudyProvider>
         </PlayProvider>
       </CatalogProvider>
     </ProgressProvider>,

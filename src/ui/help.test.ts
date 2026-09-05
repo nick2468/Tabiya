@@ -8,6 +8,7 @@ import { PlayOn, Progress } from './Progress'
 import { Study } from './Study'
 import { CatalogContext, type Catalog } from './catalog-context'
 import { PlayProvider } from './play-context'
+import { StudyProvider } from './study-context'
 import { ProgressContext, type Progress as ProgressValue } from './progress-context'
 import { HELP_CONTROLS, HELP_DOCUMENT, HELP_SECTIONS, PANELS, type Screen } from './help-text'
 import { bundledCourses } from '../content'
@@ -138,7 +139,7 @@ function inApp(state: ProgressState, view: ReactNode): string {
       createElement(
         CatalogContext,
         { value: catalog } as never,
-        createElement(PlayProvider, null, view),
+        createElement(PlayProvider, null, createElement(StudyProvider, null, view)),
       ),
     ),
   )

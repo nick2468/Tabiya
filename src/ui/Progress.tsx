@@ -320,10 +320,22 @@ export function PlayOn({
   const waiting = game.scanning
     ? 'The game is being reviewed; wait for the report.'
     : 'A game is being played. Finish or replace it on Play first.'
-  // And the game on the Play screen itself, played or reviewed, cannot be
-  // archived or deleted from here: the same rule Play on follows.
-  const onPlay = (record: PlayRecord) => game.session !== null && game.recordedAt === record.at
+  // And the game still being PLAYED on the Play screen cannot be archived or
+  // deleted from here. A reviewed game is a record and its row is free (Nick,
+  // phase 40: the buttons were dead until he restarted the app); when its
+  // record goes, the Play screen goes back to its start options, because the
+  // game it was showing is no longer in the list or in the file.
+  const onPlay = (record: PlayRecord) => game.inProgress && game.recordedAt === record.at
   const onPlayTitle = 'Finish or replace this game on Play first.'
+  const showing = (record: PlayRecord) => game.session !== null && game.recordedAt === record.at
+  const archive = (record: PlayRecord) => {
+    if (showing(record)) game.reset()
+    archivePlay(record.at)
+  }
+  const remove = (record: PlayRecord) => {
+    if (showing(record)) game.reset()
+    deletePlay(record.at)
+  }
 
   const cells = (record: PlayRecord, course: LoadedCourse) => {
     const chapter = course.chapters.find((entry) => entry.id === record.chapterId)
@@ -382,7 +394,7 @@ export function PlayOn({
                   <DeleteButton
                     disabled={onPlay(record)}
                     title={onPlay(record) ? onPlayTitle : undefined}
-                    onDelete={() => deletePlay(record.at)}
+                    onDelete={() => remove(record)}
                   />
                 </td>
               </tr>
@@ -442,14 +454,14 @@ export function PlayOn({
                       type="button"
                       disabled={onPlay(record)}
                       title={onPlay(record) ? onPlayTitle : undefined}
-                      onClick={() => archivePlay(record.at)}
+                      onClick={() => archive(record)}
                     >
                       Archive
                     </button>
                     <DeleteButton
                       disabled={onPlay(record)}
                       title={onPlay(record) ? onPlayTitle : undefined}
-                      onDelete={() => deletePlay(record.at)}
+                      onDelete={() => remove(record)}
                     />
                   </td>
                 </tr>

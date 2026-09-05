@@ -131,14 +131,17 @@ describe('deleting a game', () => {
   })
 })
 
-describe('the game on the Play screen', () => {
+describe('the game being played on the Play screen', () => {
+  // Phase 39 wrote this for a REPLAYED game as well; phase 40 narrowed the
+  // rule to a game still being played, on Nick's ruling that a reviewed game
+  // is a record and its row is free. The block below holds the other half.
   it('cannot be archived or deleted from Progress until it leaves Play', async () => {
     seedHistory([first, second])
     const { user } = renderApp()
     await goTo(user, 'Progress')
-    // Replay puts the first game on the Play screen with its report.
-    await user.click(buttonIn(playOnRow('1 September'), 'Replay'))
-    await screen.findByRole('heading', { name: 'The report' })
+    await user.click(buttonIn(playOnRow('1 September'), 'Play on'))
+    await user.click(await screen.findByRole('button', { name: 'Start the game' }))
+    await screen.findByTestId('board')
 
     await goTo(user, 'Progress')
     const held = playOnRow('1 September')
@@ -165,5 +168,46 @@ describe('an armed Delete', () => {
 
     expect(buttonIn(row, 'Delete')).toBeDefined()
     expect(storedGames()).toHaveLength(2)
+  })
+})
+
+describe('a reviewed game on the Play screen', () => {
+  // Phase 40, Nick: after Stop and review the reviewed game's Archive and
+  // Delete were dead on Progress until he restarted the app. A reviewed game
+  // is a record and its row is free; only a game still being played keeps
+  // the guard. Archiving the record whose report is on Play puts that screen
+  // back to its start options, because the game it showed is gone.
+  it('can be archived from Progress, and Play goes back to its options', async () => {
+    seedHistory([first, second])
+    const { user } = renderApp()
+    await goTo(user, 'Progress')
+    await user.click(buttonIn(playOnRow('1 September'), 'Replay'))
+    await screen.findByRole('heading', { name: 'The report' })
+
+    await goTo(user, 'Progress')
+    const held = playOnRow('1 September')
+    expect(buttonIn(held, 'Archive').disabled).toBe(false)
+    expect(buttonIn(held, 'Delete').disabled).toBe(false)
+    await user.click(buttonIn(held, 'Archive'))
+    expect(() => playOnRow('1 September')).toThrow()
+
+    await goTo(user, 'Play')
+    await screen.findByRole('button', { name: 'Start the game' })
+    expect(screen.queryByRole('heading', { name: 'The report' })).toBeNull()
+  })
+
+  it('keeps the guard for a game still being played', async () => {
+    seedHistory([first, second])
+    const { user } = renderApp()
+    await goTo(user, 'Progress')
+    // Play on continues the first game: a session with no report.
+    await user.click(buttonIn(playOnRow('1 September'), 'Play on'))
+    await user.click(await screen.findByRole('button', { name: 'Start the game' }))
+    await screen.findByTestId('board')
+
+    await goTo(user, 'Progress')
+    const held = playOnRow('1 September')
+    expect(buttonIn(held, 'Archive').disabled).toBe(true)
+    expect(buttonIn(held, 'Archive').title).toBe('Finish or replace this game on Play first.')
   })
 })

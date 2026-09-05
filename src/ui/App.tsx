@@ -6,6 +6,7 @@ import { Drill } from './Drill'
 import { Help } from './Help'
 import { Play, type PlayRequest } from './Play'
 import { PlayProvider } from './play-context'
+import { StudyProvider } from './study-context'
 import { Progress } from './Progress'
 import { ProgressProvider, useProgress } from './progress-context'
 import { Study } from './Study'
@@ -73,7 +74,9 @@ export function App() {
     <ProgressProvider>
       <CatalogProvider>
         <PlayProvider>
-          <Shell />
+          <StudyProvider>
+            <Shell />
+          </StudyProvider>
         </PlayProvider>
       </CatalogProvider>
     </ProgressProvider>
