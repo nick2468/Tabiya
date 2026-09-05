@@ -4704,18 +4704,75 @@ Grand Prix by temperament; two main-line chapters (the e5 wedge, the isolated pa
 other second moves, the closed centre, everything else, tactics with ten mistake entries.
 The checkers include a 2500 ms engine-pass over the whole course. Version 1.9.0.
 
-- [ ] 41.1 Rulings and decision rules (done in the chip).
-- [ ] 41.2 Seven chapters to the section 3 bar, student White.
-- [ ] 41.3 Suite green after every chapter.
-- [ ] 41.4 Checkers with conditions, including the 2500 ms pass over the course.
-- [ ] 41.5 The course's test block with two course-specific claims.
-- [ ] 41.6 Scoping test: the three 1.e4 courses.
-- [ ] 41.7 Bundle exported and round-tripped.
-- [ ] 41.8 Prose counts say nine.
-- [ ] 41.9 Version 1.9.0.
-- [ ] 41.10 Proved in the browser build at 1400x980.
+- [x] 41.1 Rulings and decision rules (done in the chip).
+- [x] 41.2 Seven chapters to the section 3 bar, student White.
+- [x] 41.3 Suite green after every chapter.
+- [x] 41.4 Checkers with conditions, including the 2500 ms pass over the course.
+- [x] 41.5 The course's test block with two course-specific claims.
+- [x] 41.6 Scoping test: the three 1.e4 courses.
+- [x] 41.7 Bundle exported and round-tripped.
+- [x] 41.8 Prose counts say nine.
+- [x] 41.9 Version 1.9.0.
+- [x] 41.10 Proved in the browser build at 1400x980.
 
 Acceptance: as the chip's final paragraph.
+
+**For the gate.** 41.1 and 41.2: the course is `courses/alapin-sicilian/`, id
+`alapin-sicilian`, permanent, seven chapters and 43 lines, student White, with 2.c3
+chosen over the Grand Prix in ch0's second paragraph and the alternative named once.
+Every fork, with its sentence in the note where it arises: the knight to f3 before the
+pawn takes back on d4, so the pawn lands defended (ch1's intro, on 5.Nf3); the pawn recapture
+on d4 wherever the pawn can make it, because the knight recapture is the open Sicilian the
+course exists to avoid (ch1 6.cxd4, ch2 7.cxd4, ch3 and ch5 throughout); 6.Be3 before Bd3
+in the isolated-pawn line, so that ...cxd4 and ...Nc6 never hit an unheld pawn (ch2 root);
+Nxd7 rather than Bxc6 where both take, keeping the bishop pair (ch0 and ch4's 4...d6
+line); and against 2...e6 the trade on d5 rather than the
+French Advance, which is a different course (ch3). Mistake positions: ch0 11, ch1 28,
+ch2 33, ch3 43, ch4 22, ch5 32, ch6 11; deepest White move 15 in ch1 and ch6, 12 in ch2,
+11 in ch4, 10 in ch3 and ch5 (the chip's 6-8 for sidelines, 10-12 for mains, met). The
+shared-position rule bit once: ch4's queen-on-d5 line reached ch2's 5...e6 6.Bd3 position
+with a different move, and was reordered to 5...Nc6 6.Bd3 Nf6 so the two chapters agree.
+
+41.4, the checkers, all under `docs/engine-runs/phase-41/`. Conditions for every 2500 ms
+run: CPU load sampled at 2 to 27 per cent before the run, no build, no test run beside it,
+one engine process, every run in the phase sequential. One three-second content-suite run
+overlapped the FIRST 500 ms sampler pass only, which later passes superseded. Engine-pass
+at 500 ms ran six times in all: two before any engine-led fix (12 findings, 10 rewritten,
+2 kept), two after (one more, 8...Bd7 9.Bxc6 at -0.27, rewritten to 9.exd6), and the two
+the chip asks for after the last content edit, which report only the kept moves. The
+2500 ms engine-pass over the whole course, once, reports three, all KEPT: 6.O-O against
+2...e5 at +0.19 of 6.Ng5's +1.64, under the fork rule because Ng5 d5 is a forcing line,
+with Ng5 named playable beside it; 6.cxd4 against 2...f5 at +1.19 of 6.Nf3's +1.83, the
+course's own recapture rule with White clearly better, Nf3 named playable; and 8.Be3 in
+ch4's queen-on-d5 line at -0.16 of +0.41, inside the -0.3 bar and the chapter's rule of
+holding d4 before ...cxd4, recorded for the next pass. Two of the ten rewrites were real
+White blunders the sampler caught: 8.O-O with a bishop on g4 taking the queen (ch3, 2...d6)
+and 5.O-O hanging e4 (ch5, 2...Qa5). The mistakes pass at 2500 ms found 23, every one
+acted on: eight to mistake with the punishment asked at 2500 ms and written into the note
+(engine-ask-2500.txt, section 3), fourteen playable entries between 0.92 and 1.44 to
+inaccuracy with their notes saying the cost, one too harsh (6.Nf3 against 2...f5 is the
+engine's choice, playable now). The confirming run found two more in the ...Qb6 hunt just
+over an edge (Qd2 0.99, Nd2 2.06), regraded by the number; grades only, so no third run.
+Note-lines: zero findings. Note-claims: zero unsupported. `accepted.md` is untouched:
+the three kept moves are recorded in the phase folder for the next pass to compare.
+
+41.5 to 41.9: the course block in `content.test.ts` holds c3 by move two on every line's
+`path[2]` and no White Nc3 before cxd4; the scoping test holds the Ruy, the Vienna and
+the Alapin to 1.e4 and only the Alapin to 1...c5. The bundle round-trips byte for byte,
+the other eight bundles are byte-identical to their committed files, and the other eight
+courses' 378 line ids are intact (421 now, none gone). SPEC section 3 and section 8 say
+nine and carry the phase 41 ruling paragraph. Version 1.9.0 in the four files. 1150
+tests, `tsc -b` clean.
+
+41.10, driven at 1400x980 against another session's server on 5175 (files touched for its
+watcher): nine tiles as five and four, the Alapin's reading "The pawn centre against the
+Sicilian, as White." with 43 lines; Study opened ch0 naming "The shape: the wedge, the
+pin and d4" and ch1 naming all eight; the main line marked learnt; Drill gave "10 to go",
+White to move, "2...Nf6: the e5 wedge"; Play as White answered 1.e4 with 1...c5 from the
+book; Play the other side had the engine open 1.e4 and answer 1...c5 with 2.c3. No
+console errors on a fresh load (the provider errors in the log were the touched context
+module's HMR invalidations, gone on reload); storage cleared afterwards; viewport reset.
+Nick's own files were not listed and not reported.
 
 - [ ] **Review gate 41**
 
