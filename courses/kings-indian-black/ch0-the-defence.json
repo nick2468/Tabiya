@@ -1,0 +1,232 @@
+{
+  "id": "ch0-the-defence",
+  "title": "The defence and its idea",
+  "defaultTags": ["development"],
+  "intro": "# The defence and its idea\n\nThe King's Indian gives White the centre and then attacks it. Black plays ...Nf6, ...g6, ...Bg7 and ...d6, castles, and only then decides where the pawns go. White usually spends the four free moves on pawns at c4, d4 and e4. The bargain is that a big centre has to be held, and Black's whole setup asks whether it can be.\n\n## The lever\n\nThe question is ...e5. The pawn hits d4, and the bishop on g7 looks through it. White has three answers, and the course is arranged around them. Push past with d5, and the centre is closed: White plays on the queenside with c5, Black on the kingside with ...f5, and the game is a race between two pawn storms. Take on e5, and the queens usually come off into an ending where Black's bishop and the open d-file are worth the structure. Hold with a piece, and Black can take on d4 and play against the pawn on e4 with a rook on e8 and a knight on c5.\n\n## Two structures\n\nThe closed centre after d5, with the bishop on g7 kept for the whole game, is the King's Indian people picture: a knight leaves f6 so that the f-pawn can go, then ...f5 and often ...f4, pawns rolling on the kingside while White's roll on the other wing. Black's king is the safer one, because everything Black owns is in front of it.\n\nThe open centre after ...exd4 is quieter and easier to play badly. Black has given up the e-pawn, so the plan is pieces: the rook on e8 against e4, the knight on c5, ...a5 to hold it there, ...c6 to take d5 from White's pieces. It arrives against the Fianchetto and the quieter Classical orders, and it is a different King's Indian, not a worse one.\n\n## Against the Slav\n\nThe Slav is the other half of this repertoire, and the two ask opposite questions. The Slav decides the centre on move one with ...d5 and holds it. This defence lets White have the centre and asks whether the pawns are strength or a target. Play the Slav when the position needs holding and this when it needs winning.\n\n## One setup for three first moves\n\nThe four moves that begin every line are the same against 1.d4, 1.c4 and 1.Nf3. Chapter 3 shows the flank openings arriving at the same house, and chapter 5 the setup against White players who never put a pawn on c4.\n\n## Typical mistakes at this level\n\nPlaying ...d5 as well as ...g6, which is a different opening. Trading the bishop on g7 for a knight because a check was there. Taking on d4 a move after ...e5 with no reason. Starting ...f5 before the knight on f6 has moved. And answering White's queenside pawns with pieces rather than with the kingside attack that is the whole point.",
+  "stem": [],
+  "tree": [
+    {
+      "san": "d4",
+      "weight": 10,
+      "note": "The queen's pawn. White takes the centre with a pawn a rook will defend, and the course's first four moves are the same whatever comes next.",
+      "children": [
+        {
+          "san": "Nf6",
+          "note": "The knight first: it stops e4 for now, and it commits nothing about the pawns. Where the Slav puts a pawn on d5 at once, this defence keeps the centre for later and lets White build.",
+          "tags": ["development"],
+          "mistakes": [
+            { "san": "d5", "grade": "playable", "note": "Sound, and the other course: the Slav decides the centre now. This defence delays it on purpose, so the knight goes first." },
+            { "san": "g6", "grade": "playable", "note": "Sound, and it usually transposes; the knight first keeps e4 from arriving with tempo and takes a few White tries off the board." },
+            { "san": "e6", "grade": "playable", "note": "Sound, and a different family: the Nimzo-Indian and the Queen's Indian, with a bishop on e7 or b4. This course fianchettoes." }
+          ],
+          "children": [
+            {
+              "san": "c4",
+              "weight": 8,
+              "note": "The pawn White wants next to d4: the big centre, and c4 covers d5 so Black cannot easily contest it.",
+              "children": [
+                {
+                  "san": "g6",
+                  "note": "The fianchetto. The bishop is going to g7, the long diagonal, where it looks through d4 at the queenside for the rest of the game.",
+                  "tags": ["development", "dark-bishop"],
+                  "mistakes": [
+                    { "san": "e6", "grade": "playable", "note": "Sound, and the Nimzo and Queen's Indian family. Not this course." },
+                    { "san": "d6", "grade": "playable", "note": "Sound, and it usually transposes, but 3.Nc3 e5 is the Old Indian with the bishop on e7. The fianchetto first keeps the shape." },
+                    { "san": "c5", "grade": "playable", "note": "Sound: the Benoni after 3.d5. A different structure with a different course to learn." }
+                  ],
+                  "children": [
+                    {
+                      "san": "Nc3",
+                      "weight": 8,
+                      "note": "The knight covers e4 before the pawn goes there. The most common third move, and the one that leads to the main systems.",
+                      "children": [
+                        {
+                          "san": "Bg7",
+                          "note": "The bishop takes the diagonal. It is Black's best piece and it stays: no trade on c3, no ...Bh6 unless there is a reason in the position.",
+                          "tags": ["development", "dark-bishop"],
+                          "mistakes": [
+                            { "san": "d5", "grade": "playable", "note": "The Grünfeld: sound, sharp and a different course. With the pawn on d5 the bishop on g7 hits a centre that has been given a target, and the whole play is different." },
+                            { "san": "d6", "grade": "playable", "note": "Sound, and it transposes after 4.e4 Bg7. The bishop first, every time, so that no move order ever catches it on f8." }
+                          ],
+                          "children": [
+                            {
+                              "san": "e4",
+                              "weight": 9,
+                              "note": "The full centre. White has taken it, and everything Black does now is about it.",
+                              "children": [
+                                {
+                                  "san": "d6",
+                                  "note": "The pawn that makes this the King's Indian. It holds e5 for the pawn that is coming there, and keeps e4 from advancing.",
+                                  "tags": ["development", "e5-lever"],
+                                  "mistakes": [
+                                    { "san": "d5", "grade": "playable", "note": "The Grünfeld again, and its move order is worse here: 5.e5 hits the knight before Black is ready. This course's pawn goes one square." },
+                                    { "san": "O-O", "grade": "playable", "note": "Sound and it transposes after ...d6. The pawn first stops 5.e5, which is only a nuisance but is a nuisance." },
+                                    { "san": "c5", "grade": "playable", "note": "Sound: 5.d5 d6 is a Benoni shape, with a plan that is not in this course." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Nf3",
+                                      "weight": 7,
+                                      "note": "The Classical. The knight comes to its natural square and the bishop will follow to e2. Chapters 2 and 4 take the other fifth moves.",
+                                      "children": [
+                                        {
+                                          "san": "O-O",
+                                          "note": "Castle, before ...e5. The king behind the fianchetto is safe, and the rook on f8 is where the ...f5 attack needs it.",
+                                          "tags": ["king-safety"],
+                                          "mistakes": [
+                                            { "san": "e5", "grade": "playable", "note": "Sound, and it invites 6.dxe5 dxe5 7.Qxd8+ Kxd8 with the king in the middle. Castle first, so that the trade on e5 leaves a rook to take back." },
+                                            { "san": "Bg4", "grade": "inaccuracy", "note": "6.Be2 and the bishop is on the wrong side of the board: it belongs on c8 until the centre is settled, and it has given up the pin on nothing." },
+                                            { "san": "Nbd7", "grade": "playable", "note": "Sound, and it commits the knight before it knows where the centre will close. The king first." }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "Be2",
+                                              "weight": 8,
+                                              "note": "The bishop goes to e2 and White is ready to castle. The main position of the Classical.",
+                                              "children": [
+                                                {
+                                                  "san": "e5",
+                                                  "note": "The lever. The pawn hits d4, the bishop on g7 looks through it, and White has to say what the centre is going to be.",
+                                                  "tags": ["e5-lever"],
+                                                  "mistakes": [
+                                                    { "san": "c5", "grade": "playable", "note": "Sound: 7.d5 is a Benoni with the bishop already on e2. This course puts the pawn on e5, so that everything is one shape." },
+                                                    { "san": "Nc6", "grade": "playable", "note": "Sound, hitting d4, and 7.d5 Nb8 loses two tempi. The pawn does the hitting and the knight comes to a6 or d7 afterwards." },
+                                                    { "san": "Bg4", "grade": "inaccuracy", "note": "7.Be3 Nc6 8.d5 and the bishop on g4 is traded for the knight that was holding nothing: White has the centre and the two bishops." }
+                                                  ],
+                                                  "children": [
+                                                    {
+                                                      "san": "O-O",
+                                                      "weight": 8,
+                                                      "note": "White castles and keeps the tension. The pawn on d4 stays and Black chooses.",
+                                                      "children": [
+                                                        {
+                                                          "san": "Na6",
+                                                          "note": "The knight to the edge, on its way to c5. It keeps the centre closed on Black's terms: after d5 the knight hits e4 from c5 and there is no knight on c6 to be chased. The famous 7...Nc6 8.d5 Ne7 is a race both sides have to know to move twenty, and this course declines it in favour of the plan that fits every other chapter.",
+                                                          "tags": ["development", "vs-classical"],
+                                                          "mistakes": [
+                                                            { "san": "Nc6", "grade": "playable", "note": "Sound and the heaviest theory in the opening: 8.d5 Ne7 and a race of pawn storms where one wrong move loses. The fork rule takes the knight to a6, where the plans are the ones the rest of the course uses." },
+                                                            { "san": "exd4", "grade": "playable", "note": "Sound: 8.Nxd4 Re8 9.f3 c6 and the open centre. Playable, and the knight to a6 keeps more." },
+                                                            { "san": "Nbd7", "grade": "playable", "note": "Sound, and 8.Re1 c6 9.Bf1 is the old main line, where the knight on d7 blocks the bishop on c8. From a6 it reaches c5 without blocking anything." }
+                                                          ],
+                                                          "children": [
+                                                            {
+                                                              "san": "Be3",
+                                                              "weight": 5,
+                                                              "note": "The bishop develops and holds d4. The most common eighth move at club level, and the one the whole course learns the shape from.",
+                                                              "children": [
+                                                                {
+                                                                  "san": "Ng4",
+                                                                  "note": "Hit the bishop. It has to go somewhere, and every square costs White something: g5 walks into ...Qe8 and ...f6, c1 gives the move back.",
+                                                                  "tags": ["tactics", "vs-classical"],
+                                                                  "mistakes": [
+                                                                    { "san": "Qe7", "grade": "playable", "note": "Sound and quieter: 9.dxe5 dxe5 10.Nd5 and the knight is in. The bishop hit first asks the question now." },
+                                                                    { "san": "exd4", "grade": "playable", "note": "Sound: 9.Nxd4 Re8 and the open centre, with the bishop already on e3 where it wants to be. The knight jump keeps it from settling." },
+                                                                    { "san": "c6", "grade": "playable", "note": "Sound and slow: 9.d5 and the centre is closed with the knight on a6 a long way from anything." }
+                                                                  ],
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Bg5",
+                                                                      "weight": 8,
+                                                                      "note": "The bishop goes to g5, where it pins nothing yet and hits the queen's diagonal. The main line.",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Qe8",
+                                                                          "note": "Out of the bishop's way and behind the e-pawn. From e8 the queen holds e5, sees h5, and ...f6 next hits the bishop again.",
+                                                                          "tags": ["vs-classical"],
+                                                                          "mistakes": [
+                                                                            { "san": "f6", "grade": "playable", "note": "Sound: 10.Bc1 and the bishop has gone home with ...f6 played, which weakens e6 a little. The queen move first keeps ...f6 in reserve." },
+                                                                            { "san": "Qd7", "grade": "inaccuracy", "note": "10.d5 and the queen on d7 is in the way of the knight that wants that square, and the bishop on c8 is shut in." },
+                                                                            { "san": "h6", "grade": "inaccuracy", "note": "10.Bh4 g5 11.Bg3 and the bishop is on the long diagonal against e5 with the kingside pawns loosened for nothing." }
+                                                                          ],
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "dxe5",
+                                                                              "weight": 6,
+                                                                              "note": "White trades on e5 to open the d-file and take the tension away.",
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "dxe5",
+                                                                                  "note": "Take back with the pawn. It holds the centre and it keeps the bishop on g7 looking at the queenside.",
+                                                                                  "tags": ["e5-lever"],
+                                                                                  "mistakes": [
+                                                                                    { "san": "Nxe5", "grade": "inaccuracy", "note": "11.Nxe5 dxe5 and the knight that was asking the questions has been traded for the knight that was White's worst piece, with the bishop on g5 left on a free diagonal." }
+                                                                                  ],
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "h3",
+                                                                                      "weight": 8,
+                                                                                      "note": "The knight is asked to leave g4.",
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "h6",
+                                                                                          "note": "Ask the bishop first. It has to go, and whichever square it picks, the knight on g4 comes back to f6 with a tempo already spent by White.",
+                                                                                          "tags": ["tactics"],
+                                                                                          "mistakes": [
+                                                                                            { "san": "Nf6", "grade": "inaccuracy", "note": "12.Bxf6 Bxf6 and the bishop on g7 has left the diagonal, which is the one thing the setup never allows without a reason." },
+                                                                                            { "san": "Nh6", "grade": "inaccuracy", "note": "12.Be3 and the knight on h6 is hit next by Bxh6, or sits on the edge doing nothing while the bishop on g5 has gone home for free." }
+                                                                                          ],
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "san": "Bd2",
+                                                                                              "weight": 7,
+                                                                                              "note": "The bishop retreats to d2, keeping an eye on a5 and the c3 knight.",
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "san": "Nf6",
+                                                                                                  "note": "The knight comes home. Black has a pawn on e5, the bishop on g7, a queen on e8 that sees the kingside, and every piece where it wants to be. The main line of the Classical, and the shape to learn the defence from.",
+                                                                                                  "tags": ["development", "vs-classical"],
+                                                                                                  "mistakes": [
+                                                                                                    { "san": "Qe7", "grade": "mistake", "note": "13.hxg4 and the knight has gone. It was attacked by the pawn on h3, and any move that is not the knight's loses it." },
+                                                                                                    { "san": "f5", "grade": "mistake", "note": "13.hxg4 and the knight has gone: the pawn on h3 was attacking it, and the push did not save it." }
+                                                                                                  ],
+                                                                                                  "plan": "...b6 and ...Nd7 to bring the knight on a6 to c5 by way of the pawn on b6, ...Qe7 with a rook to d8, and ...Nh5 to f4 when White's bishop is on e3. The pawn on e5 is held by the queen, the bishop stays on g7, and White's c-pawn has nothing to push against.",
+                                                                                                  "name": "The shape: the Classical to move 12"
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

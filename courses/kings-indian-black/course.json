@@ -1,0 +1,29 @@
+{
+  "id": "kings-indian-black",
+  "title": "The King's Indian Defence",
+  "colour": "black",
+  "tagline": "Concede the centre, then hit it: one setup against 1.d4, 1.c4 and 1.Nf3, as Black.",
+  "formatVersion": 1,
+  "chapters": [
+    "ch0-the-defence.json",
+    "ch1-the-classical.json",
+    "ch2-the-samisch.json",
+    "ch3-the-fianchetto.json",
+    "ch4-four-pawns-averbakh-h3.json",
+    "ch5-without-c4-and-e4.json",
+    "ch6-tactics-and-plans.json"
+  ],
+  "tagExtensions": [
+    "e5-lever",
+    "f5-break",
+    "closed-centre",
+    "open-centre",
+    "dark-bishop",
+    "c5-break",
+    "vs-classical",
+    "vs-samisch",
+    "vs-fianchetto",
+    "vs-london",
+    "queenside-defence"
+  ]
+}
