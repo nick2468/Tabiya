@@ -67,7 +67,10 @@ Full or partial games as White against Stockfish, in three launch shapes:
   strength, and deliberately carries no identity: it is a new game, so the game being
   read is left recorded exactly as it is.
 - **Play the other side** (phase 32): the trainee takes the opponent's colour and the
-  engine plays the course, against the whole course or one chapter of it. While the game
+  engine plays the course. Since phase 33 it is a box that goes with any of the three
+  shapes above, so it starts from move one, against one chapter, from a Study position or
+  from a replay; from a position where the course is to move, the engine answers before
+  the trainee does. While the game
   is inside the course the engine plays the repertoire move every time, or under a
   remembered setting a listed alternative one time in four; once the course has nothing
   to say it plays at the chosen strength. The report's first part becomes The course,
@@ -713,7 +716,8 @@ Three conditions, and they are the ruling as much as the rig is. **A regression 
 shown red against its own bug first**, by writing it against the commit before the fix or
 by putting the bug back: a test that has never failed proves nothing. **The whole suite
 stays under ten seconds**, both projects, because a bar nobody waits for is a bar nobody
-runs. And **no snapshots, no fake timers, no worker** - the first records what the code
+runs (raised to twenty at phase 33; see below). And **no snapshots, no fake timers, no
+worker** - the first records what the code
 did rather than what it should do, the second tests the clock, and the third is what the
 fake engine exists to prevent. `docs/testing.md` holds the detail.
 
@@ -777,6 +781,25 @@ about leaving the repertoire exists there. And a game on the other side is the e
 playing the line, so it is recorded with its side, counted apart in Games played, and left
 out of Lines played, because crediting the trainee with a line the engine played would
 make that table say the opposite of what it is for.
+
+2026-09-05, phase 33: **the other side from any start, and a suite budget that fits the
+app.** Nick played 1.7.2 and wanted to play against the course from a Study position.
+Phase 32 had built Play the other side as a fourth launch radio, which made it exclusive
+with From a Study position, and hung a dropdown of lines under it that repeated the
+choice the first two radios already make. The fault was the shape of the control, and
+the ruling is that **it is a checkbox that goes with whichever launch shape is chosen**:
+the radios say where the game starts and which lines the engine draws on, the box says
+which side of them the trainee is on. The box is a launch choice and is not remembered;
+the setting under it is. A recorded game keeps its side, so Play on and Replay of an
+other-side game show the box ticked and held, and a course-side game played on cannot
+be switched: that would be a different game.
+
+The same day, **the ten-second suite rule is raised to twenty.** The suite was at 9.5
+seconds and the next DOM file would have crossed the line, and a rule that blocks a
+better app is the wrong rule. The purpose stays and is written beside the number in
+`docs/testing.md`: a bar nobody waits for is a bar nobody runs, so the suite must stay
+fast enough that a builder runs it after every change, and twenty seconds on this
+machine is that. The number is a ceiling, not a target.
 
 ## 9. v1 acceptance
 

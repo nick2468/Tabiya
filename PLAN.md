@@ -3778,7 +3778,8 @@ register entries closed by real tests; a testing page linked from the SPEC.
 
 Acceptance: as the chip's final paragraph.
 
-What landed: 898 tests in 8.3 seconds, both projects under one `npx vitest run`. Four
+What landed: 898 tests in 8.3 seconds, both projects under one `npx vitest run` (the
+ten-second rule set here was raised to twenty at phase 33). Four
 regression tests rather than three - the fourth is the replay that added a reply to a
 game stopped mid-move, fixed on main between phases, and deleting `holdOpponent` names
 the extra move in the failure. The phase 27 identity bug took a file of its own, because
@@ -4099,7 +4100,8 @@ three new names in turn.
 *The suite is at the edge of its budget.* 997 tests in 9.4 to 9.7 seconds on repeat,
 against the phase 29 rule of ten. The five new DOM tests cost about three seconds of
 test time between them, at the going rate of one full app render each. One more DOM
-file of this size crosses the line, and the next builder should know.
+file of this size crosses the line, and the next builder should know. **Raised to twenty
+at phase 33**, with the reason the rule exists written beside the number.
 
 *Driven at 1200x980 on this session's own server, banner 1.7.2.* The Najdorf on the
 other side: the trainee to move first as White, 1.e4 answered by the course's 1...c5,
@@ -4139,7 +4141,7 @@ Gate 32 findings (2026-09-05):
   to face the course from a Study position, that is a ruling about the control's shape.
 - **The suite is at its budget**: 997 to 998 tests in 8.7 to 9.7 seconds against the phase
   29 rule of ten. The next DOM file of any size crosses it, and the next chip should say
-  whether the rule bends or the tests get cheaper.
+  whether the rule bends or the tests get cheaper. **It bent: twenty seconds at phase 33.**
 - **Nick's own files were not listed and not reported.** The browser build's storage was
   cleared afterwards.
 

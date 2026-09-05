@@ -68,8 +68,12 @@ that ships.
   is updated by pressing a key.
 - **No fake timers.** Waiting is done with `vi.waitFor`, on the thing being waited for.
 - **No worker, ever**, per the guard above.
-- **Under ten seconds.** The whole suite, both projects. It was 898 tests in 8.3 seconds
-  at phase 29. A bar nobody waits for is a bar nobody runs.
+- **Under twenty seconds.** The whole suite, both projects, on this machine. The rule
+  exists for one reason: a bar nobody waits for is a bar nobody runs, so the suite has to
+  stay fast enough that a builder runs it after every change. It was ten at phase 29,
+  when 898 tests took 8.3 seconds, and Nick raised it to twenty at phase 33 (2026-09-05)
+  when 1003 tests took 9.5 and the next DOM file would have crossed it: a rule that blocks
+  a better app is the wrong rule. The number is a ceiling, not a target.
 - **A regression test is shown red first.** Write it against the commit before the fix,
   or put the bug back and watch it fail. A test that has never failed proves nothing.
 
