@@ -1,0 +1,11 @@
+Phase 35, 2026-09-05, after the last content edit. No engine; prose checker only.
+
+128 mistake entries, 12 with a material claim and a move sequence to check it, 2 claiming material without naming a move.
+
+0 claims the board does not support:
+
+
+2 claiming material with no sequence to check, for a human:
+
+  ch5-sidelines  Qh4+ not e5: "It opens the position for White's two bishops with the black king still in the middle, and it passes up the check that wins the pawn back. Nearly two pawns."
+  ch6-tactics-and-plans  Nxe3 not Nxe5: "It wins the pawn, and taking on e3 first wins the pawn as well as wrecking White's kingside."

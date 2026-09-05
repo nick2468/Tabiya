@@ -1,0 +1,7 @@
+Phase 35, 2026-09-05, after the last content edit. No engine; prose checker only.
+
+
+=== scandinavian-black: 634 notes read, 0 findings, 0 in intros
+    illegal 0, misnumbered 0, marker 0, unplaceable 0, back-reference 0, widened 0, deliberate 0
+
+0 faults, 0 for a human to read.

@@ -199,7 +199,9 @@ Playing ...Bf5 on move three, before the exchange on e4, when 4.exf5 simply take
 ) ( 5. Bd3 {White defends the knight and offers a trade on Black's terms. [%weight 2]}
 5... Bxe4
 {Take the knight. White has to recapture with the bishop, and Black gains a move on it next. [%tags tactics]}
-6. Bxe4 {Forced, and the bishop is now the piece standing in the centre. [%weight 10]}
+( 5... Qxd4!?
+{It takes a pawn, and it is sound: 6.Nf3 chases the queen and it comes home to d8 with the pawn kept. The course prefers the simple recapture, which asks nothing of the queen and leaves nothing to know.}
+) 6. Bxe4 {Forced, and the bishop is now the piece standing in the centre. [%weight 10]}
 6... Nf6 {Develop and hit the bishop at the same time.} 7. Bd3
 {The bishop steps back to the diagonal it wanted in the first place. [%weight 5]}
 7... Qxd4

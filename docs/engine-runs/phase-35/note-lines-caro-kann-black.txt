@@ -1,0 +1,21 @@
+Phase 35, 2026-09-05, after the last content edit. No engine; prose checker only.
+
+
+=== caro-kann-black: 606 notes read, 2 findings, 2 in intros
+    illegal 0, misnumbered 0, marker 0, unplaceable 0, back-reference 2, widened 0, deliberate 0
+
+  [back-reference] ch5-sidelines  e4 c6 Nf3 d5 exd5 cxd5 d4 Nc6  (plan)
+      "Nf3": every move in it has already been played on this line
+      This is chapter 3 after 4.Nf3. Expect 5.Bd3 Nf6 and follow the Exchange chapter from there.
+
+  [back-reference] ch5-sidelines  e4 c6 Nf3 d5 e5 Bf5 d4 e6  (plan)
+      "Nf3": every move in it has already been played on this line
+      This is chapter 2 after 4.Nf3. Expect 5.Be2 and play ...c5 against the base of the chain.
+
+  [intro/widened] ch0-the-defence
+      "c4": plays with dxe4 inserted, which the note leaves out
+
+  [intro/widened] ch1-main-line
+      "exf5": plays with Bf5 inserted, which the note leaves out
+
+0 faults, 2 for a human to read.

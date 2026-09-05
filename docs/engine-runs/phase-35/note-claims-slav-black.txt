@@ -1,0 +1,6 @@
+Phase 35, 2026-09-05, after the last content edit. No engine; prose checker only.
+
+198 mistake entries, 13 with a material claim and a move sequence to check it, 0 claiming material without naming a move.
+
+0 claims the board does not support:
+

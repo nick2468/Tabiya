@@ -1,0 +1,10 @@
+Phase 35, 2026-09-05, after the last content edit. No engine; prose checker only.
+
+340 mistake entries, 1 with a material claim and a move sequence to check it, 1 claiming material without naming a move.
+
+0 claims the board does not support:
+
+
+1 claiming material with no sequence to check, for a human:
+
+  ch4-bc4-and-h3  Qc7 not O-O: "It looks like the safe move and it is the committal one. With the queen still on d8 the king walks in front of White's attack, and this chapter's next position is where that attack turns into a forced mate. The queen goes to c7 first, covering e5 and getting off the d-file."

@@ -1003,8 +1003,8 @@ Playing the Slav structure with ...c6 anyway, and drifting into a passive positi
 ) 4. c3
 {The Colle proper. White builds the little pyramid and prepares Bd3 and e4. [%weight 7]}
 4... Nc6
-{Develop and press d4. The pressure is what stops White from getting e4 in for free.} (
-4... Qb6!?
+{Develop and press d4. The pressure is what stops White from getting e4 in for free. The engine slightly prefers 4...e6 first, keeping the knight's choice of square open; the course develops the knight first because it is the piece that does the pressing, and the pawn move comes anyway.}
+( 4... Qb6!?
 {Less effective here than against the London, because the bishop on c1 has not moved and still guards b2.}
 ) 5. dxc5
 {The critical try, and the one a Colle player rarely finds. White grabs the pawn and hopes to hold it with b4. [%weight 3]}

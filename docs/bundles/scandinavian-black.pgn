@@ -308,7 +308,7 @@ Moving the queen when nothing attacks it. Playing ...e6 before the bishop has co
 
 ## What each one gives up
 
-4.Nf3 is the same as the main line with the moves swapped, and it usually is the main line by move five. 4.Bc4 puts the bishop on the diagonal to f7 before the centre is settled, and the pawn on d3 that has to follow it means White has given up on d4. 4.g3 spends two moves on the fianchetto while Black develops normally. 4.Nge2 keeps the f-pawn free and aims the knight at f4 to hit the queen, and the queen simply goes home when it does. 4.d3 is the modest centre, and against it the pin on g4 is the most annoying thing Black can do.
+4.Nf3 is the same as the main line with the moves swapped, and it usually is the main line by move five. 4.Bc4 puts the bishop on the diagonal to f7 before the centre is settled, and the pawn on d3 that has to follow it means White has given up on d4. 4.g3 spends two moves on the fianchetto while Black develops normally. 4.Nge2 keeps the f-pawn free and aims the knight at f4 to hit the queen, and the queen simply goes home when it does; then the knight that should have guarded d4 goes to g3, and the queen comes back out to take the pawn. 4.d3 is the modest centre, and against it the pin on g4 is the most annoying thing Black can do.
 
 ## The queen, again
 
@@ -389,9 +389,28 @@ Moving the queen before it is attacked. Playing ...e6 before the bishop has come
 {8.f3 hits it and the bishop to d3 follows, and Black's bishop has cost two moves.} )
 8. Bd3 {Develop. [%weight 8]} 8... Be7 {Develop. [%tags development]} ( 8... Bd6!?
 {It offers a trade of the bishops, which is fine. The bishop on e7 keeps the dark squares near the king covered.}
-) 9. O-O {White castles. [%weight 8]} 9... O-O
-{Castle. The queen went home, the pieces are out, and Black has a solid Caro-Kann shape a move behind, which is what this opening always costs. [%tags king-safety] [%plan Bring the knight to d7 and the bishop to b7 after the pawn goes to b6, or to d7 after ...Nbd7 and ...Nb6. Play for the pawn to c5.] [%line 4.Nge2 and the queen sent home]}
-) ( 4. d3
+) 9. O-O
+{White castles, and leaves the pawn on d4 with nothing guarding it: the knight that would have gone to f3 went to g3, and the queen on d1 is all that is left. [%weight 8]}
+9... Qxd4
+{Take it. The pawn is free because the knight went to g3 and nothing else guards d4, and the queen that went home on move six comes out again with a pawn to show for it. White gets some activity for it, and Black castles next. [%tags tactics]}
+( 9... O-O?
+{It walks past a free pawn. The queen went home to d8 to be safe, not to be shy, and 10.Re1 leaves White with the centre and the move for nothing.}
+) ( 9... Nbd7?!
+{Development with the pawn still hanging. 10.Re1 and White keeps the centre.} ) 10. Nce4
+{The knight jumps to the centre with a hit on the knight on f6, which is the activity White gets for the pawn. [%weight 7]}
+10... Nxe4
+{Trade the knight that arrived. One pair of pieces off makes the extra pawn count for more and the queen easier to bring home. [%tags development]}
+( 10... O-O!?
+{Also fine: 11.c3 Qd8 12.Nxf6+ Bxf6 and the trade happens anyway. Taking first chooses which knight goes.}
+) ( 10... Qxb2!?
+{A second pawn, and 11.Nh5 Nxh5 12.Qxh5 brings White's queen to the kingside with Black's still away. One pawn is the point of the line; the second is not needed.}
+) 11. Nxe4 {The other knight takes back and sits in the centre. [%weight 9]} 11... O-O
+{Castle. A pawn up with the king safe, and the queen comes back to d8 when it is asked. White has the freer pieces and Black has the pawn, and the pawn lasts. [%tags king-safety] [%plan When the rook comes to e1, put the queen back on d8 and the knight on d7, and meet Qh5 with the pawn to e5. Then play the pieces to the same squares as every other chapter, a pawn up.] [%line 4.Nge2 and the pawn on d4]}
+( 11... e5!?
+{It hits the bishop and holds the centre, and 12.Be3 Qd5 13.Qh5 brings White's queen over before Black's king is safe. Castle first.}
+) ( 11... Qxb2?!
+{12.Nd6+ Bxd6 13.Bxd6 and the second pawn has cost the bishop pair and the dark squares round a king that has not castled.}
+) ) ( 4. d3
 {The modest centre. White gives up on d4 and plays a small position. [%weight 4]} 4... Nf6
 {Develop. [%tags development]} ( 4... e5!?
 {Sound, and with the pawn on d3 it takes the centre for free. The structure with c6 is what this course keeps to everywhere.}

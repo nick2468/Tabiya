@@ -219,7 +219,7 @@ Pushing the e-pawn two squares on move six, where the pin means White trades on 
 ( 8. Qe2
 {A quieter square for the queen. White plans to castle long just the same, with less commitment. [%weight 3]}
 8... Qc7
-{The same plan against the same setup. The queen takes the file and covers the e5 push. [%tags development]}
+{The same plan against the same setup. The queen takes the file and covers the e5 push. The engine prefers 8...b5, the livelier try, by about half a pawn; the course keeps the shape it plays against 8.Qf3, because one plan held is worth more than two plans half known. [%tags development]}
 ( 8... O-O?!
 {White has not committed the king yet, and castling first tells White which side to attack.}
 ) ( 8... b5!?

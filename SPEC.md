@@ -394,6 +394,13 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   scores at plus one and a quarter for White. Raw output is in the phase 20 record. At
   500 ms that is a sampler and settles nothing either way, which is exactly what this
   entry is for. Recorded at phase 20.
+  **CLOSED at phase 35.** The orchestrator ran it on 2026-09-05 in an idle window: all
+  eight courses at 2500 ms, about 2,600 positions in 1 hour 48 minutes, raw output per
+  course under `docs/engine-runs/second-pass/` with the triage in its README. Twenty-five
+  reports: four already accepted, seventeen where the floor holds (now listed in
+  `accepted.md`), three worth a note or a listed alternative, and one real fault, the
+  Scandinavian's Nge2 line castling past a free pawn. The four were landed by
+  `chips/phase-35-second-pass-fixes.md`.
 - **A note can name a line that cannot be played, and nothing in the repo checks it.**
   `note-claims.mjs` plays a note's moves only when the note also makes a material claim
   its vocabulary recognises, which is one mistake entry in twenty. A note that names a
@@ -827,6 +834,19 @@ position**. Chapters 2, 3 and 6 pass through positions that chapters 0 and 1 alr
 grade, and under the one-grade rule from phase 31 those positions carry mistake entries
 in one chapter only. The suite already says so; the course is the first written knowing
 it.
+
+2026-09-05, phase 35: **the second pass ran, and a line id changed for it.** The
+verdict-strength pass of `engine-pass.mjs`, 2500 ms over every course, had been open in
+the section 6 register since phase 19. It ran in an idle window and reported twenty-five
+moves. Twenty-one were settled by the floor ruling or were already accepted, and all of
+those are in `accepted.md` now so that the next pass reports nothing new on them. Three
+earned a note or a listed alternative without a move changing: the Caro-Kann names
+5...Qxd4 as playable beside its recapture, the Najdorf's 8...Qc7 note names 8...b5 as the
+livelier try, and the Slav's 4...Nc6 note says the engine prefers 4...e6 by a little.
+One was a fault: the Scandinavian's 4.Nge2 line castled on move nine where a pawn was
+free on d4, +0.83 against +0.33. **Nick ruled "fix it"**, accepting that the line's id,
+which is its moves, changes: one learnt line at most, on a course a day old. The line
+takes the pawn, and the old castling move is a mistake entry saying why.
 
 ## 9. v1 acceptance
 

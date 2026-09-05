@@ -1,0 +1,10 @@
+Phase 35, 2026-09-05, after the last content edit. No engine; prose checker only.
+
+240 mistake entries, 0 with a material claim and a move sequence to check it, 1 claiming material without naming a move.
+
+0 claims the board does not support:
+
+
+1 claiming material with no sequence to check, for a human:
+
+  ch2-other-fourth-moves  Nf6 not Qd8: "The queen goes home before anything has asked it to, which is the whole tempo given back for nothing."
