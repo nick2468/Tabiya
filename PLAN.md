@@ -4309,4 +4309,34 @@ once from the book, "Your move". Play the other side: White to move, and after 1
 engine answered 1...d5 at once. No console errors; storage cleared afterwards. Nick's own
 files were not listed and not reported.
 
-- [ ] **Review gate 34**
+Gate 34 findings (2026-09-05):
+
+- **Verified for the gate from the repo:** 1047 tests in 9.2 seconds and `tsc -b` clean;
+  version 1.8.0 in all three files; nothing under the other seven course folders; **344
+  line ids before, 378 after, none gone, 34 added**, all under `scandinavian-black`; no em
+  dashes; the bundle present and held by the round-trip test; the tree clean at the start.
+- **Content counts by the orchestrator**: intros 294 to 500 words; every node noted and
+  every leaf named; mistake entries 16, 50, 29, 32, 45, 39 and 23 across ch0 to ch6, so the
+  tactics chapter meets the bar this time; zero grade conflicts under the one-grade rule.
+- **The engine records are complete with their conditions**: five 500 ms passes across
+  the drafting, every finding re-checked at 2500 ms, the mistakes pass at 2500 ms with a
+  confirming run after 28 regrades, and both prose checkers at zero. Load was 17 to 46
+  percent with one java process from another project holding a core, one engine at a time,
+  no build and no test run, which is within the standard phase 31 set.
+- **Three ruled lines spot-checked by the orchestrator at 2500 ms.** The main line after
+  5...c6 stands at +0.62, which is above the chip's +0.4 bar in absolute terms but is the
+  opening itself: at that position the engine's own first choice is +0.57 and 5...c6 is its
+  second at +0.65, eight hundredths behind, so the move costs nothing against the best. The
+  6.Ne5 tail ends at +0.27 as the builder recorded. 3.Be2 Qxg2 4.Bf3 Qg6 is 1.05 in Black's
+  favour: the course was right to take the pawn.
+- **Driven in the Vite build restarted to v1.8.0 at 1200x980**: eight tiles in two rows of
+  four; the Scandinavian's tile with its tagline and 34 lines; Study with the seven chapter
+  titles and ch0's named line; Play the other side with the engine answering 1.e4 with
+  1...d5 and 2.exd5 with 2...Qxd5.
+- **The queen square is 3...Qd6** by the decision rule, and the forks are each recorded
+  with a sentence. The chip's "...Nb4 against Bd3" exercise theme had no sound instance in
+  this repertoire and was replaced, which is the right reading of an exercise list.
+- **Nick's own files were not listed and not reported.** The browser build's storage was
+  cleared afterwards.
+
+- [x] **Review gate 34 passed** (2026-09-05)
