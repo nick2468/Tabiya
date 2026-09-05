@@ -4384,3 +4384,27 @@ cleared with the report; a DOM test shown red first; one Help clause. Version 1.
 Acceptance: as the chip's final paragraph.
 
 - [ ] **Review gate 36**
+
+## Phase 37 - the report says what was better
+
+Goal: Nick, 2026-09-05, was told 4.Nf3 was an inaccuracy and nothing said what was better.
+The scan already has the engine's best move for every position and throws it away. No
+chess content. After phases 35 and 36.
+
+Chipped as `chips/phase-37-better-move.md`. The scan keeps the best move; every slip
+sentence ends "The engine preferred 4.Nc3."; clicking the slip draws that move as a blue
+arrow beside the move played; the PGN comment says it too. Version 1.8.3.
+
+- [ ] 37.1 The scan and the live evaluation keep the best move per position.
+- [ ] 37.2 A slip carries its better move.
+- [ ] 37.3 The sentence, in move-list notation.
+- [ ] 37.4 The blue arrow on the clicked slip.
+- [ ] 37.5 The PGN comment.
+- [ ] 37.6 Tests.
+- [ ] 37.7 Help.
+- [ ] 37.8 Version 1.8.3.
+- [ ] 37.9 Proved in the browser build.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 37**
