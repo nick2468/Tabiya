@@ -313,6 +313,34 @@
                                                           ]
                                                         }
                                                       ]
+                                                    },
+                                                    {
+                                                      "san": "Bd6",
+                                                      "weight": 4,
+                                                      "note": "The bishop to d6 rather than e7, which is what the Caro-Kann course plays here: the same structure arrives from 1.e4 c6 by the Exchange, and that course puts the bishop on the diagonal that looks at h2.",
+                                                      "children": [
+                                                        {
+                                                          "san": "Bb2",
+                                                          "note": "Home, as always. The bishop on d6 changes nothing about the setup: the bishop on b2 faces the pawn on d4's defender and the plan is c4 next.",
+                                                          "tags": [
+                                                            "development"
+                                                          ],
+                                                          "mistakes": [
+                                                            {
+                                                              "san": "Nc3",
+                                                              "grade": "inaccuracy",
+                                                              "note": "The knight blocks the c-pawn, which wants to go to c4 in this line: 8...O-O 9.Bb2 a6 and the push has been made harder for nothing."
+                                                            },
+                                                            {
+                                                              "san": "c4",
+                                                              "grade": "inaccuracy",
+                                                              "note": "The push before the bishop is home: 8...dxc4 9.bxc4 and the pawn on d4 is held by the queen alone."
+                                                            }
+                                                          ],
+                                                          "plan": "Castle, then c4 as in the main line, with Re1 and Nbd2. The bishop on d6 is aiming at h2, so Nbd2 and Nf1 hold the kingside before anything opens.",
+                                                          "name": "The early ...c5, with ...Bd6"
+                                                        }
+                                                      ]
                                                     }
                                                   ]
                                                 }

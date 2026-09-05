@@ -216,6 +216,25 @@
                                       "name": "5.Nf3 before c3"
                                     }
                                   ]
+                                },
+                                {
+                                  "san": "b3",
+                                  "weight": 4,
+                                  "note": "The pawn to b3 before castling, the Colle-Zukertort course's move: it reaches this structure by 1.d4 c5 2.e3 cxd4 3.exd4 d5 and puts the bishop on b2.",
+                                  "children": [
+                                    {
+                                      "san": "Bd6",
+                                      "note": "The bishop to d6, as in every line of this chapter: it looks at h2, and the bishop that is going to b2 looks at nothing while the pawn on d4 blocks it. The Colle course expects ...Be7 here and this is the better square.",
+                                      "tags": ["development", "bishop-placement"],
+                                      "mistakes": [
+                                        { "san": "Be7", "grade": "playable", "note": "Sound, and the move the Colle course lists. On d6 the bishop does more." },
+                                        { "san": "b6", "grade": "playable", "note": "Sound and the engine's choice: 8.O-O Bb7 9.c3 Bd6 and the same setup with both bishops out. The bishop first." },
+                                        { "san": "Nb4", "grade": "playable", "note": "Sound: 8.Be2 Bd6 9.O-O O-O and the knight has hit the bishop for nothing." }
+                                      ],
+                                      "plan": "...O-O, ...b6 and ...Bb7, ...Re8 and ...Ne4 when the knight on f3 is the only piece holding it. Level, with the bishop on d6 the better of the two dark bishops.",
+                                      "name": "5.Nf3 before c3, with 7.b3"
+                                    }
+                                  ]
                                 }
                               ]
                             }
@@ -330,6 +349,44 @@
                       "tags": ["development"],
                       "plan": "This is the main line of this chapter by a different order. Expect 6.h3 e6 7.O-O Bd6, or 6.c3 Bg4 with the ...Na5 idea against Qb3.",
                       "name": "The plain 4.Nf3"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "san": "Bf4",
+          "weight": 3,
+          "note": "The bishop out first, the London player's habit: the London course reaches this structure by 1.d4 c5 2.e3 cxd4 3.exd4 d5 and plays exactly this.",
+          "children": [
+            {
+              "san": "Nf6",
+              "note": "Develop, the move the London course expects. The bishop on f4 has taken the square the knight on c6 would have hit, so the plan is ...Nc6 and ...Bg4 as against 4.Bd3, with ...Qb6 hitting b2 once the bishop has left c1.",
+              "tags": ["development"],
+              "mistakes": [
+                { "san": "Nc6", "grade": "playable", "note": "Sound and the engine's choice: 5.Nf3 Bg4 6.c3 e6 and the same setup. The knight on f6 first meets the London course on its own ground." },
+                { "san": "Bf5", "grade": "playable", "note": "Sound: 5.c4 and the centre opens with the bishop out. The knight first." },
+                { "san": "Qb6", "grade": "inaccuracy", "note": "5.Nc3 and the pawn on b2 is held by nothing but the queen has no follow-up: 5...Qxb2 6.Nb5 and the queen is in trouble." }
+              ],
+              "children": [
+                {
+                  "san": "Nf3",
+                  "weight": 8,
+                  "note": "The knight, and the London course's line ends here.",
+                  "children": [
+                    {
+                      "san": "Nc6",
+                      "note": "The knight to c6, hitting d4, and ...Bg4 or ...Bf5 next. With the bishop on f4 the queen on d8 sees b6, and ...Qb6 comes when c3 has been played and b2 is loose.",
+                      "tags": ["development"],
+                      "mistakes": [
+                        { "san": "Bg4", "grade": "playable", "note": "Sound: 6.c3 e6 and the same setup with the bishop out first." },
+                        { "san": "Qb6", "grade": "playable", "note": "Sound: 6.Nc3 Bd7 7.Qd2 e6 and the pawn on b2 is held. The knight first." },
+                        { "san": "e6", "grade": "inaccuracy", "note": "It shuts the bishop on c8 in before it has chosen f5 or g4." }
+                      ],
+                      "plan": "...Bf5 or ...Bg4, ...e6 and ...Bd6 to trade the bishop on f4, ...Qb6 when c3 has left b2 loose. The Exchange structure with White's bishop already committed.",
+                      "name": "4.Bf4, the London player's bishop"
                     }
                   ]
                 }
