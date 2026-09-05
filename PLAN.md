@@ -4929,3 +4929,29 @@ Gate 42 findings (2026-09-06, orchestrator, unattended run):
   cleared afterwards.
 
 - [x] **Review gate 42 passed** (2026-09-06)
+
+## Phase 43 - the courses agree with each other
+
+Goal: Nick, 2026-09-06: the King's Indian found three places where his London and his King's
+Indian meet and disagree, and he ruled that the courses must be consistent. Content plus one
+test.
+
+Chipped as `chips/phase-43-courses-agree.md`. A test holds every White course against every
+Black course at their shared positions: each course's repertoire move must be a listed reply
+in the other. The London's King's Indian chapter takes the King's Indian's answers (10...Ne4
+added and answered; 10.Bh2 kept under the floor rule and recorded; the 8.c3 note says what it
+threatens); every other mismatch fixed by listing or extending, never by moving a repertoire
+move, with a stop rule at about twenty. Version 1.10.1.
+
+- [ ] 43.1 The cross-course test, run first, mismatches recorded.
+- [ ] 43.2 The London's ch3 against the King's Indian.
+- [ ] 43.3 Every other mismatch, or deferred with counts.
+- [ ] 43.4 Checkers on what changed, with conditions.
+- [ ] 43.5 Bundles regenerated.
+- [ ] 43.6 SPEC sections 3 and 8.
+- [ ] 43.7 Version 1.10.1.
+- [ ] 43.8 Suite green; line ids as the commits name.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 43**
