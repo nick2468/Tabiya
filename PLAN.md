@@ -5041,3 +5041,25 @@ Gate 43 findings (2026-09-06, orchestrator):
 - Nick's own files were not listed and not reported.
 
 - [x] **Review gate 43 passed** (2026-09-06)
+
+## Phase 44 - the drill board shows the answer, and the gap has a unit
+
+Goal: Nick, 2026-09-06, three things about Drill: a right answer leaves the piece where it
+went; a wrong answer shows the correct piece moved as well as the red arrow; the gap after a
+right answer has a remembered unit, minutes, hours or days. No chess content.
+
+Chipped as `chips/phase-44-drill-feel.md`. The board shows the position after the repertoire
+move once a verdict exists; a "Come back in" unit scales the due date FSRS computes and
+nothing else, with the practice caveat in the Help. Version 1.10.2.
+
+- [ ] 44.1 The board after an answer shows the repertoire move played.
+- [ ] 44.2 The unit in the scheduler, the clock only.
+- [ ] 44.3 The "Come back in" control, remembered.
+- [ ] 44.4 DOM tests red first; help test mutation-checked.
+- [ ] 44.5 Help and SPEC.
+- [ ] 44.6 Version 1.10.2.
+- [ ] 44.7 Proved in the browser build.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 44**
