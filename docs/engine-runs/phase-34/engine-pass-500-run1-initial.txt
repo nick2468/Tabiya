@@ -1,0 +1,31 @@
+engine-pass.mjs at 500 ms, the first run over the finished chapters, before any engine-led fix.
+Reconstructed from the terminal output: the raw file was overwritten by the runs that followed. The eight
+findings and their numbers are as the script printed them.
+Conditions: 16 logical processors, CPU load sampled at 17-46% in the minutes before and during the run (one java process from another project of Nick's held about one core throughout; the rest was idle Vite servers). No build, no test run and no second engine process: one engine at a time, every run in this phase sequential.
+Evaluations are from White's point of view: negative favours Black.
+
+154 student moves across 7 chapters, 304 positions to evaluate at 500 ms each.
+
+8 moves cost 0.5 of a pawn or more:
+
+5.70  ch6-tactics-and-plans  e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O c3 Nd7 Bf4 e5
+      before -4.07  after 1.63
+4.33  ch1-main-line  e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 h3 Bf5 Bd3 Bxd3 Qxd3 e6 O-O Be7 Bf4 Qd8
+      before -3.86  after 0.47
+3.12  ch5-everything-else  e4 d5 Bd3 dxe4 Bxe4 Nf6 Bf3 e5 Ne2 Nc6
+      before -3.48  after -0.36
+1.51  ch3-other-third-moves  e4 d5 exd5 Qxd5 Be2 Nf6
+      before -1.08  after 0.43
+1.37  ch1-main-line  e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Ne5 Nbd7 Nc4 Qc7 Qf3 Nb6 Bf4 Qd8 Ne5 e6
+      before -0.23  after 1.14
+0.75  ch6-tactics-and-plans  e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Be2 Bf5 O-O e6 Bg5 Be7 Qd2 Nbd7 Rad1 O-O Rfe1 c5
+      before 0.02  after 0.77
+0.60  ch1-main-line  e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bf5 Bd2 e6 Qe2 Be7 O-O-O Nbd7 Kb1 O-O
+      before -0.23  after 0.37
+0.59  ch5-everything-else  e4 d5 Nf3 dxe4 Ng5 Nf6 Bc4 e6 Nc3 Be7 Ngxe4 Nxe4 Nxe4 O-O d4 b6
+      before -0.46  after 0.13
+
+What the three big ones were: White moves that hung a piece. 13.Bf4 in exercise 5 and 10.Bf4 in the 6.h3 line
+both put a bishop on the queen's diagonal with nothing defending it, and 5.Ne2 in the 2.Bd3 line let 5...e4
+trap the bishop on f3. The "before" numbers are the engine seeing the free piece. Fixed in the content; the
+2500 ms checks are in engine-ask-2500.txt.

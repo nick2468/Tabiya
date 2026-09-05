@@ -60,7 +60,7 @@
                                   "tags": ["development"],
                                   "mistakes": [
                                     { "san": "exf6", "grade": "inaccuracy", "note": "It doubles the pawns for no reason when a piece could take back." },
-                                    { "san": "gxf6", "grade": "mistake", "note": "It opens the king for nothing at all." }
+                                    { "san": "gxf6", "grade": "inaccuracy", "note": "It opens the king for nothing, when the other knight takes back and keeps everything in place." }
                                   ],
                                   "children": [
                                     {
@@ -205,7 +205,7 @@
                           "tags": ["light-squares"],
                           "mistakes": [
                             { "san": "e6", "grade": "inaccuracy", "note": "Shut in, and now it is a French with a move less." },
-                            { "san": "Bg4", "grade": "playable", "note": "Sound. With the knight not yet on f3 there is nothing to pin, and f5 is the better square for now." }
+                            { "san": "Bg4", "grade": "mistake", "note": "5.Qxg4: with the knight not yet on f3 there is nothing to pin, and the bishop is simply taken." }
                           ],
                           "children": [
                             {
@@ -218,7 +218,7 @@
                                   "note": "The pawn goes with the bishop out.",
                                   "tags": ["development"],
                                   "mistakes": [
-                                    { "san": "Qb6", "grade": "playable", "note": "A good move that hits b2 and d4 at once, and it can wait a move. The pawn first frees the bishop on f8." }
+                                    { "san": "Qb6", "grade": "inaccuracy", "note": "It hits b2 and d4 at once, and it comes a move early: the queen is out before the bishop on f8 has a square. The pawn first." }
                                   ],
                                   "children": [
                                     {
@@ -351,8 +351,8 @@
           "note": "Take the pawn. Declining the first one hands White the centre for nothing; the gambit is declined on move four instead.",
           "tags": ["development"],
           "mistakes": [
-            { "san": "Nf6", "grade": "playable", "note": "Sound, and 3.e5 hits it and White has the centre for free. Taking first keeps the choice." },
-            { "san": "e6", "grade": "playable", "note": "A French, sound and a different course." }
+            { "san": "Nf6", "grade": "inaccuracy", "note": "3.e5 hits it and White has the centre for free. Taking first keeps the choice." },
+            { "san": "e6", "grade": "inaccuracy", "note": "A French, and a different course. Here it gives back the choice the pawn on d5 was offering." }
           ],
           "children": [
             {
@@ -380,7 +380,7 @@
                           "tags": ["light-squares"],
                           "mistakes": [
                             { "san": "exf3", "grade": "playable", "note": "Sound, and it is what every player of this gambit has prepared for. The fork rule refuses it: declining reaches a position with nothing to remember." },
-                            { "san": "e3", "grade": "playable", "note": "The other decline, giving the pawn back at once. Also fine; the bishop move develops while it declines." }
+                            { "san": "e3", "grade": "inaccuracy", "note": "The other decline, giving the pawn back at once and getting nothing for it. The bishop move develops while it declines." }
                           ],
                           "children": [
                             {
@@ -406,8 +406,8 @@
                                           "note": "The knight steps back to d6, defending the bishop and keeping every piece.",
                                           "tags": ["development"],
                                           "mistakes": [
-                                            { "san": "Nxc3", "grade": "inaccuracy", "note": "7.Qxf5 and the bishop has gone, because the knight was the only thing defending it." },
-                                            { "san": "Qd7", "grade": "inaccuracy", "note": "7.Nxe4 Bxe4 8.Qxe4 and White has traded into a position where the pawn is back and Black is behind." }
+                                            { "san": "Nxc3", "grade": "playable", "note": "Sound: 7.Qxf5 takes the bishop, but the knight took a knight first and gets away, so Black is still the pawn up. The course's move keeps the bishop and the simpler position." },
+                                            { "san": "Qd7", "grade": "mistake", "note": "7.Nxe4 Bxe4 8.Qxe4 and the pawn is back with White's queen in the centre hitting b7, and Black three moves behind in development." }
                                           ],
                                           "children": [
                                             {
@@ -420,7 +420,7 @@
                                                   "note": "The pawn goes, defending nothing yet but freeing the bishop on f8 to cover d6.",
                                                   "tags": ["development"],
                                                   "mistakes": [
-                                                    { "san": "Qd7", "grade": "inaccuracy", "note": "8.Bxd6 Qxd6 9.Qxb7 and the pawn on b7 goes, because the queen on d7 was the only thing that could have covered it and it has just recaptured elsewhere." }
+                                                    { "san": "Qd7", "grade": "mistake", "note": "8.Bxd6 Qxd6 9.Qxb7 and the pawn on b7 goes, because the queen on d7 was the only thing that could have covered it and it has just recaptured elsewhere." }
                                                   ],
                                                   "children": [
                                                     {
@@ -459,7 +459,7 @@
                                                                           "note": "Stop the pawn. The bishop stays on g6 and White has spent three pawn moves on a bishop that has not moved.",
                                                                           "tags": ["light-squares"],
                                                                           "mistakes": [
-                                                                            { "san": "Be7", "grade": "inaccuracy", "note": "11.h5 and the bishop has to go to h7 or e4, and White's pawns are rolling for free." }
+                                                                            { "san": "Be7", "grade": "mistake", "note": "11.h5 and the bishop on g6 is lost: its own pawn on h7 has taken the retreat, and on f5 or e4 it is simply taken. The h-pawn first, because it asks that question before White can." }
                                                                           ],
                                                                           "plan": "Bishop to e7, then castle short or leave the king in the middle while White's own king sits behind a wall of pawns it has pushed. The extra pawn was never taken, and White has nothing for the moves spent.",
                                                                           "name": "The Blackmar-Diemer, declined"

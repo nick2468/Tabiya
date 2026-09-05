@@ -15,7 +15,7 @@
           "note": "Take. The pawn is free for now and Black keeps it or gives it back on Black's terms.",
           "tags": ["development"],
           "mistakes": [
-            { "san": "Nf6", "grade": "playable", "note": "Fine, and 3.e5 hits it and White has the push for free. The pawn is there to be taken." },
+            { "san": "Nf6", "grade": "inaccuracy", "note": "3.e5 hits it and White has the push for free. The pawn is there to be taken." },
             { "san": "Nc6", "grade": "inaccuracy", "note": "3.exd5 Qxd5 4.Nc3 hits the queen with the knight on c6 in the way of the pawn that gives it a square." }
           ],
           "children": [
@@ -29,8 +29,8 @@
                   "note": "Develop and defend the pawn. The knight on g5 has nothing to do yet.",
                   "tags": ["development"],
                   "mistakes": [
-                    { "san": "Bf5", "grade": "inaccuracy", "note": "4.Bc4 and f7 is attacked twice with nothing defending it but the king." },
-                    { "san": "e5", "grade": "inaccuracy", "note": "4.Nxe4 and the pawn is back with the knight in the centre and Black's e-pawn loose behind it." }
+                    { "san": "Bf5", "grade": "playable", "note": "Sound: 4.Bc4 e6 covers f7 in time. The knight first, because the bishop can wait and the knight cannot." },
+                    { "san": "e5", "grade": "playable", "note": "Sound, and it holds the pawn a move longer. The knight move develops and keeps the structure the chapter teaches, and the pawn is coming back either way." }
                   ],
                   "children": [
                     {
@@ -44,7 +44,7 @@
                           "tags": ["king-safety"],
                           "mistakes": [
                             { "san": "Bg4", "grade": "mistake", "note": "5.Bxf7+ Kd7 6.Qxg4+ and White has taken two pawns and pulled the king into the middle for a bishop." },
-                            { "san": "Nc6", "grade": "inaccuracy", "note": "5.Bxf7+ Kd7 6.Bb3 and White has the pawn back with Black's king stuck in the middle." }
+                            { "san": "Nc6", "grade": "mistake", "note": "5.Bxf7+ Kd7 6.Ne6 and the knight forks the queen and the bishop on f8, because nothing covers e6. The pawn to e6 covers it, which is the whole point of the move." }
                           ],
                           "children": [
                             {
@@ -273,18 +273,19 @@
                           ],
                           "children": [
                             {
-                              "san": "Ne2",
-                              "note": "The knight has to come to e2, because the bishop is on f3.",
+                              "san": "Nc3",
+                              "note": "The queen's knight comes out, because the king's knight cannot: the bishop on f3 has its square, and 5.Ne2 walks into 5...e4, when the bishop has nowhere to go.",
                               "weight": 7,
                               "children": [
                                 {
                                   "san": "Nc6",
-                                  "note": "Develop. Every Black piece is coming out with tempo or with purpose, and White's are in each other's way.",
+                                  "note": "Develop. Every Black piece is coming out with tempo or with purpose, and White's king's knight still has no square.",
                                   "tags": ["development"],
                                   "mistakes": [
-                                    { "san": "Bd6", "grade": "playable", "note": "Also fine. The knight first, then the bishop." }
+                                    { "san": "Bd6", "grade": "playable", "note": "Also fine. The knight first, then the bishop." },
+                                    { "san": "Bc5", "grade": "playable", "note": "Also fine, and the knight first keeps the bishop's choice of square open." }
                                   ],
-                                  "plan": "Bishop to c5 or d6, castle, and play for the pawn to e4 or the knight to d4. White's knight on e2 and bishop on f3 are a tangle it will take moves to undo.",
+                                  "plan": "Bishop to c5 or d6, castle, and play for the pawn to e4 or the knight to d4. White's knight has to come to e2, where it and the bishop on f3 are a tangle it will take moves to undo.",
                                   "name": "2.Bd3 and the bishop chased"
                                 }
                               ]
@@ -379,7 +380,7 @@
           "note": "Take.",
           "tags": ["development"],
           "mistakes": [
-            { "san": "e5", "grade": "playable", "note": "Sound, and it walks onto the diagonal the bishop is about to take." }
+            { "san": "e5", "grade": "inaccuracy", "note": "It walks onto the diagonal the bishop is about to take, and the pawn on d5 is left to be exchanged on White's terms." }
           ],
           "children": [
             {
@@ -405,7 +406,7 @@
                           "note": "Defend the pawn with the bishop, which is the piece that will take back on e4 if White trades there, so the knight on f6 can stay where it is in front of the long diagonal.",
                           "tags": ["light-squares"],
                           "mistakes": [
-                            { "san": "e6", "grade": "playable", "note": "Fine, and it lets 5.Nxe4 Nxe4 6.Bxg7 Rg8 7.Bb2 happen, where Black has a knight for two pawns and a good game but the pawns in front of the king are gone. The bishop first keeps it simpler." }
+                            { "san": "e6", "grade": "inaccuracy", "note": "It lets 5.Nxe4 Nxe4 6.Bxg7 Rg8 7.Bb2 happen, where Black has a knight for two pawns but the pawns in front of the king are gone. The bishop first keeps it simpler." }
                           ],
                           "children": [
                             {

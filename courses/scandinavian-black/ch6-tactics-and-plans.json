@@ -2,7 +2,7 @@
   "id": "ch6-tactics-and-plans",
   "title": "Typical tactics and plans",
   "defaultTags": ["tactics"],
-  "intro": "Six positions, each running through a line from an earlier chapter and stopping on the move that matters. Play the line and find the last move yourself. Three of them are about the queen, because the queen out early is the one thing every opponent knows about this opening, and knowing where it goes when it is hit is most of what there is to know.\n\n## What each one is about\n\nThe first is the knight to b5. It hits the queen and eyes c7, and the answer is the retreat that covers c7 rather than the active square that leaves it.\n\nThe second is the check on b5. The pawn that was going to c6 anyway blocks it with tempo, and the bishop has to move again.\n\nThe third is the knight jump. With the queens off and White's king stuck on the open file, a knight comes to b4 and the fork on c2 is in the air.\n\nThe fourth is the break with the c-pawn. The whole structure is built, every piece is placed, and the pawn hits d4 at the moment the pieces are ready to take back.\n\nThe fifth is the break with the e-pawn. The bishop comes to f4 hitting the queen, and the pawn to e5 blocks the diagonal, hits the bishop and hits d4 in one move.\n\nThe sixth is defence. A knight on g5 and a bishop on c4 are both looking at f7, and one pawn move covers everything.\n\n## Typical mistakes at this level\n\nAnswering a hit on the queen with the most active square rather than the safest. Blocking a check with a piece when a pawn does it with tempo. Playing a pawn break before the pieces are placed to take back on it. And meeting an attack on f7 by counting attackers, when the pawn to e6 makes the count irrelevant.",
+  "intro": "Six positions, each running through a line from an earlier chapter and stopping on the move that matters. Play the line and find the last move yourself. Three of them are about the queen, because the queen out early is the one thing every opponent knows about this opening, and knowing where it goes when it is hit is most of what there is to know.\n\n## What each one is about\n\nThe first is the knight to b5. It hits the queen and eyes c7, and the answer is the retreat that covers c7 rather than the active square that leaves it.\n\nThe second is the check on b5. The pawn that was going to c6 anyway blocks it with tempo, and the bishop has to move again.\n\nThe third is the knight jump. With the queens off and White's king stuck on the open file, a knight comes to b4 and the fork on c2 is in the air.\n\nThe fourth is the pin. The whole structure is built and every piece is placed, and the bishop on g5 is still pinning the knight; the knight to d5 steps out of it, offers a trade that suits Black, and takes the queen out of the bishop's sights.\n\nThe fifth is the break with the c-pawn. The bishop on e4 has been hit and has gone home, the d-pawn has one pawn behind it and nothing else, and the pawn to c5 hits it at the moment the queen is ready to take back.\n\nThe sixth is defence. A knight on g5 and a bishop on c4 are both looking at f7, and one pawn move covers everything.\n\n## Typical mistakes at this level\n\nAnswering a hit on the queen with the most active square rather than the safest. Blocking a check with a piece when a pawn does it with tempo. Playing a pawn break before the pieces are placed to take back on it. And meeting an attack on f7 by counting attackers, when the pawn to e6 makes the count irrelevant.",
   "stem": ["e4", "d5"],
   "tree": [
     {
@@ -203,19 +203,38 @@
                                                                           "children": [
                                                                             {
                                                                               "san": "Rfe1",
-                                                                              "note": "The other rook comes to the centre. Every White piece is placed and so is every Black one. Black to play: the structure was built for one pawn move.",
+                                                                              "note": "The other rook comes to the centre. Every White piece is placed and so is every Black one, and the bishop on g5 is still pinning the knight to the bishop on e7. Black to play: the pin is the last thing to deal with.",
                                                                               "weight": 7,
                                                                               "children": [
                                                                                 {
-                                                                                  "san": "c5",
-                                                                                  "note": "The break. It hits d4 at the moment the knight on d7 and the queen on d6 are both ready to take back on c5, so the pawn cannot be won and the centre opens for Black's pieces.",
-                                                                                  "tags": ["c5-break"],
+                                                                                  "san": "Nd5",
+                                                                                  "note": "The knight to d5. It steps out of the pin, offers the bishop a trade on e7 that suits Black, and hits the knight on c3. The queen on d6 stops being the piece the bishop points at.",
+                                                                                  "tags": ["development"],
                                                                                   "mistakes": [
-                                                                                    { "san": "Qc7", "grade": "playable", "note": "The queen moves before it is asked to. The break was ready and this delays it a move." },
-                                                                                    { "san": "h6", "grade": "playable", "note": "It asks the bishop a question that costs Black the move the break wanted." }
+                                                                                    { "san": "c5", "grade": "inaccuracy", "note": "The break comes a move early. 12.Nh4 hits the bishop, and after 12...cxd4 13.Nxf5 exf5 14.Qxd4 the queens come off and White's pieces are the freer ones." },
+                                                                                    { "san": "h6", "grade": "playable", "note": "Also fine. It asks the bishop the question a move earlier; the knight move asks it from the centre." },
+                                                                                    { "san": "Qb4", "grade": "playable", "note": "Sound, offering the queen trade and eyeing b2. The knight move keeps the queens on and deals with the pin first." }
                                                                                   ],
-                                                                                  "plan": "If White takes on c5, take back with the knight or trade the queens on d2 first. If White holds d4, put the rook on d8 and keep the tension until it breaks in Black's favour.",
-                                                                                  "name": "Exercise 4: the break with the c-pawn"
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "Bxe7",
+                                                                                      "note": "White trades rather than retreat.",
+                                                                                      "weight": 7,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "Qxe7",
+                                                                                          "note": "Take back with the queen, which leaves the d-file and the bishop's old diagonal in one move. The knight on d5 is the best piece on the board.",
+                                                                                          "tags": ["queen-safety"],
+                                                                                          "mistakes": [
+                                                                                            { "san": "Nxe7", "grade": "playable", "note": "Also fine. The queen recapture takes the queen off the file White's rook is on and keeps the knight on its square." },
+                                                                                            { "san": "Qf4", "grade": "mistake", "note": "It hopes for the queen trade on d2, but 13.Nxd5 Qxd2 14.Rxd2 cxd5 15.Bxf8 and the bishop has taken a rook." }
+                                                                                          ],
+                                                                                          "plan": "If White takes on d5, take back with the c-pawn and put a rook on c8 against the half-open file. Otherwise the knight stays on d5, the rooks come to the centre, and the game is level.",
+                                                                                          "name": "Exercise 4: the knight to d5"
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
                                                                                 }
                                                                               ]
                                                                             }
@@ -314,20 +333,38 @@
                                                                                           ],
                                                                                           "children": [
                                                                                             {
-                                                                                              "san": "Bf4",
-                                                                                              "note": "The bishop hits the queen. Black to play, and the queen does not have to move.",
+                                                                                              "san": "Qe2",
+                                                                                              "note": "The queen comes off the file the pin is on. Black to play, and the bishop on e4 is standing in the middle of the board.",
                                                                                               "weight": 7,
                                                                                               "children": [
                                                                                                 {
-                                                                                                  "san": "e5",
-                                                                                                  "note": "The break. The pawn blocks the bishop's diagonal to the queen, hits the bishop, and hits d4, all in one move; and the knight on f3 cannot help, because it is pinned to the queen on d1 by the bishop on h5.",
-                                                                                                  "tags": ["e5-break"],
+                                                                                                  "san": "Nf6",
+                                                                                                  "note": "The knight comes back with a hit on the bishop. It went to d7 to cover the break squares, and now the bishop on e4 has to move so that the knight can have the centre.",
+                                                                                                  "tags": ["development"],
                                                                                                   "mistakes": [
-                                                                                                    { "san": "Qc7", "grade": "playable", "note": "The retreat is sound, and it gives back the tempo the pawn move wins." },
-                                                                                                    { "san": "Nb6", "grade": "mistake", "note": "The queen is still on d6 with the bishop on f4 pointing at it: 14.Bxd6 simply takes the queen." }
+                                                                                                    { "san": "Qc7", "grade": "playable", "note": "Sound, and the queen has not been asked to move. The knight move gains the tempo first." },
+                                                                                                    { "san": "Rad8", "grade": "playable", "note": "Also fine. The knight first, because the bishop on e4 moves with tempo now and for free later." }
                                                                                                   ],
-                                                                                                  "plan": "If the bishop takes on e5, the knight takes back and the knight on f3 still cannot join in. If the bishop retreats, take on d4 and the centre is Black's.",
-                                                                                                  "name": "Exercise 5: the break with the e-pawn"
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "san": "Bc2",
+                                                                                                      "note": "The bishop drops back to the diagonal it wants. Every White piece is placed, and the d-pawn has the c-pawn behind it and nothing else. Black to play: the structure was built for one pawn move.",
+                                                                                                      "weight": 7,
+                                                                                                      "children": [
+                                                                                                        {
+                                                                                                          "san": "c5",
+                                                                                                          "note": "The break. It hits d4 at the moment the queen on d6 is ready to take back on c5, and the pawn on c3 cannot hold d4 on its own. The centre opens for Black's pieces.",
+                                                                                                          "tags": ["c5-break"],
+                                                                                                          "mistakes": [
+                                                                                                            { "san": "Rad8", "grade": "playable", "note": "Sound, and it lets White play b4 and keep the c-pawn at home. The break was ready and this delays it." },
+                                                                                                            { "san": "Qc7", "grade": "playable", "note": "The queen moves before it is asked to. The break was ready and this delays it a move." }
+                                                                                                          ],
+                                                                                                          "plan": "If White takes on c5, take back with the queen, which stands in the centre and goes to c7 when the bishop hits it. If White holds d4, put the rooks on d8 and c8 and keep the tension until it breaks in Black's favour.",
+                                                                                                          "name": "Exercise 5: the break with the c-pawn"
+                                                                                                        }
+                                                                                                      ]
+                                                                                                    }
+                                                                                                  ]
                                                                                                 }
                                                                                               ]
                                                                                             }
@@ -436,7 +473,7 @@
                                                   "tags": ["tactics"],
                                                   "mistakes": [
                                                     { "san": "Bxf3", "grade": "inaccuracy", "note": "8.Bxf3 and the pin is gone for nothing, with White's bishop now on the long diagonal." },
-                                                    { "san": "Nd4", "grade": "playable", "note": "Also a good square, hitting c2 and e2. The jump to b4 keeps the knight on f3 pinned while it threatens the same fork." }
+                                                    { "san": "Nd4", "grade": "mistake", "note": "8.Nxd4 and the knight is lost: the pin on f3 is only to the bishop, and 8...Bxe2 9.Nxe2 leaves White a piece up." }
                                                   ],
                                                   "plan": "If White covers c2 with the king or a knight, take on f3 and double the pawns, or bring the knight to d5 and play the ending a move ahead. If White does not, take on c2 and then the rook.",
                                                   "name": "Exercise 3: the knight jump to b4"

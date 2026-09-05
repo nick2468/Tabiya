@@ -1,0 +1,78 @@
+The punishments asked at 2500 ms while regrading the mistakes-pass findings, so that every rewritten note
+says what the engine plays rather than what I remembered.
+Conditions: 16 logical processors, CPU load sampled at 17-46% before and during the run (one java process from another project of Nick's held about one core throughout; the rest was idle Vite servers). No build, no test run and no second engine process; every other engine check in this phase had finished before this one began.
+Evaluations are from White's point of view: negative favours Black.
+Bands: playable to 0.9, inaccuracy -0.4 to 1.8, mistake 0.7 and up.
+
+
+### e4 d5 Nf3 dxe4 Ng5 Nf6 Bc4 Nc6
+    (Tennison 4...Nc6, the punishment)
+White to move after: e4 d5 Nf3 dxe4 Ng5 Nf6 Bc4 Nc6
+  +4.65  Bxf7+ Kd7 Ne6 Nd4 Nxd8 Kxd8
+  +0.62  Nxf7 Qd4 d3 Bg4 Qd2 exd3
+  -0.26  Nc3 Ne5 Qe2 e6 Bb3 Nc6
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bf5
+    (6.Bd3 Bf5, the punishment)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bf5
+  +4.78  Bxf5 e6 Bd3 c5 dxc5 Qxc5
+  +0.53  O-O Bxd3 Qxd3 e6 Ne4 Nxe4
+  +0.51  Bg5 Bxd3 Qxd3 Nbd7 O-O-O e6
+
+### e4 d5 d4 dxe4 Nc3 Nf6 f3 Bf5 fxe4 Nxe4 Qf3 Nd6 Bf4 e6 O-O-O c6 g4 Bg6 h4 Be7
+    (BDG 10...Be7, the punishment)
+White to move after: e4 d5 d4 dxe4 Nc3 Nf6 f3 Bf5 fxe4 Nxe4 Qf3 Nd6 Bf4 e6 O-O-O c6 g4 Bg6 h4 Be7
+  +3.33  h5 O-O Bxd6 Bxc2 Kxc2 Qxd6
+  +2.96  Bxd6 Qxd6 h5 Bxc2 Kxc2 Nd7
+  +0.68  Qg2 h6 Be5 f6 Bf4 Nd7
+
+### e4 d5 d4 dxe4 Nc3 Nf6 f3 Bf5 fxe4 Nxe4 Qf3 Qd7
+    (BDG 6...Qd7, the punishment)
+White to move after: e4 d5 d4 dxe4 Nc3 Nf6 f3 Bf5 fxe4 Nxe4 Qf3 Qd7
+  +2.87  Nxe4 Nc6 Nc5 Nxd4 Nxd7 Nxf3+
+  +0.42  g4 Nxc3
+  -0.41  Nge2 Nxc3 Nxc3 Nc6 Bb5 a6
+
+### e4 d5 d4 dxe4 Nc3 Nf6 f3 Bf5 fxe4 Nxe4 Qf3 Nxc3
+    (BDG 6...Nxc3, White's best)
+White to move after: e4 d5 d4 dxe4 Nc3 Nf6 f3 Bf5 fxe4 Nxe4 Qf3 Nxc3
+  -0.50  Qxf5 e6
+  -0.54  bxc3 e6 Qxb7 Nd7 Bd3 Rb8
+  -1.18  Qxc3 Nc6 Nf3 e6 a3 Be7
+
+### e4 d5 d4 dxe4 Nc3 Nf6 f3 Bf5 fxe4 Nxe4 Qf3 Nxc3 Qxf5
+    (BDG 6...Nxc3 7.Qxf5, Black's best)
+Black to move after: e4 d5 d4 dxe4 Nc3 Nf6 f3 Bf5 fxe4 Nxe4 Qf3 Nxc3 Qxf5
+  -0.39  e6
+  -0.36  Nd5 Nf3 e6 Qh3 Nb4 Bb5+
+  +0.52  g6 Qd3 Nd5 Qb5+ Qd7 Qxb7
+
+### e4 d5 d4 dxe4 Nc3 Nf6 f3 Bf5 fxe4 Nxe4 Qf3 Nd6 Bf4 e6 O-O-O c6 g4 Bg6 h4 Be7 h5
+    (BDG 10...Be7 11.h5, Black's choices)
+Black to move after: e4 d5 d4 dxe4 Nc3 Nf6 f3 Bf5 fxe4 Nxe4 Qf3 Nd6 Bf4 e6 O-O-O c6 g4 Bg6 h4 Be7 h5
+  +3.43  O-O Nh3 Bxc2 Kxc2 b5 Kb1
+  +3.68  Bxc2 Kxc2 Nd7 Bd3 Nb6 Kb1
+  +3.92  Bxh5 gxh5 Qb6 Kb1 Nd7 Bxd6
+
+### e4 d5 d4 dxe4 Nc3 Nf6 f3 Bf5 fxe4 Nxe4 Qf3 Nd6 Bf4 e6 O-O-O c6 g4 Bg6 h4 Be7 h5 Bh7
+    (BDG 11...Bh7, the punishment)
+C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529
+                throw new Error(`Invalid move: ${move}`);
+                      ^
+
+Error: Invalid move: Bh7
+    at Chess.move (C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529:23)
+    at file:///C:/Users/nick2/Code/London/scripts/engine-ask.mjs:22:31
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v20.20.2
+
+### e4 d5 d4 dxe4 Nc3 Nf6 f3 Bf5 fxe4 Nxe4 Qf3 Qd7 Nxe4 Bxe4 Qxe4
+    (BDG 6...Qd7 7.Nxe4 Bxe4 8.Qxe4, Black's choices)
+Black to move after: e4 d5 d4 dxe4 Nc3 Nf6 f3 Bf5 fxe4 Nxe4 Qf3 Qd7 Nxe4 Bxe4 Qxe4
+  +3.94  Nc6 Bb5 O-O-O Be3 f5 Bxc6
+  +4.02  c5 d5 g6 a4 a6 Qe5
+  +4.21  Qc6 Bd3 g6 Qe2 Nd7 Nf3
+DONE

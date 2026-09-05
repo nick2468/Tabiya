@@ -1,0 +1,37 @@
+engine-pass.mjs at 500 ms, twice, after the LAST content edit. These are the two runs the chip asks for.
+Every finding below was re-checked at 2500 ms (engine-ask-2500.txt, last section) and kept; none is over +0.40
+for White at 2500 ms.
+Conditions: 16 logical processors, CPU load sampled at 17-46% in the minutes before and during the run (one java process from another project of Nick's held about one core throughout; the rest was idle Vite servers). No build, no test run and no second engine process: one engine at a time, every run in this phase sequential.
+Evaluations are from White's point of view: negative favours Black.
+
+=== run 4 ===
+155 student moves across 7 chapters, 306 positions to evaluate at 500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+7 moves cost 0.5 of a pawn or more:
+
+0.60  ch5-everything-else  e4 d5 Nf3 dxe4 Ng5 Nf6
+      before -0.93  after -0.33
+0.60  ch5-everything-else  e4 d5 Nf3 dxe4 Ng5 Nf6 Bc4 e6 Nc3 Be7 Ngxe4 Nxe4 Nxe4 O-O d4 b6
+      before -0.47  after 0.13
+0.54  ch4-white-does-not-take  e4 d5 Nc3 dxe4
+      before -0.48  after 0.06
+0.53  ch4-white-does-not-take  e4 d5 e5 c5 d4 Nc6 c3 Bf5 Nf3 e6 Be2 Nge7
+      before -0.21  after 0.32
+0.52  ch2-other-fourth-moves  e4 d5 exd5 Qxd5 Nc3 Qd6 g3 Nf6
+      before -0.16  after 0.36
+0.52  ch5-everything-else  e4 d5 f3 dxe4
+      before -0.79  after -0.27
+0.52  ch5-everything-else  e4 d5 c4 d4 d3 c5
+      before -0.91  after -0.39
+
+=== run 5 ===
+155 student moves across 7 chapters, 306 positions to evaluate at 500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+2 moves cost 0.5 of a pawn or more:
+
+0.67  ch5-everything-else  e4 d5 Nf3 dxe4 Ng5 Nf6 Bc4 e6 Nc3 Be7 Ngxe4 Nxe4 Nxe4 O-O d4 b6
+      before -0.48  after 0.19
+0.52  ch5-everything-else  e4 d5 c4 d4 d3 c5
+      before -0.95  after -0.43

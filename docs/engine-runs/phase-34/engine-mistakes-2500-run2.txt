@@ -1,0 +1,25 @@
+engine-mistakes.mjs at 2500 ms, the confirming run after the 28 regrades.
+Conditions: 16 logical processors, CPU load sampled at 17-46% before and during the run (one java process from another project of Nick's held about one core throughout; the rest was idle Vite servers). No build, no test run and no second engine process; every other engine check in this phase had finished before this one began.
+Evaluations are from White's point of view: negative favours Black.
+Bands: playable to 0.9, inaccuracy -0.4 to 1.8, mistake 0.7 and up.
+
+234 mistake entries across 7 chapters, 378 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+3 entries where the grade and the engine disagree:
+
+-0.47  inaccuracy graded too harshly  ch5-everything-else
+      e4 d5 c4 : d4 not dxe4
+      "3.Qa4+ and the pawn on e4 falls to the queen after the check is blocked, so Black has traded the centre for nothing."
+-0.46  inaccuracy graded too harshly  ch3-other-third-moves
+      e4 d5 exd5 Qxd5 d4 : Nf6 not e5
+      "4.Nf3 hits the pawn and 4.dxe5 simply takes it, with the queen loose in the middle either way."
+-0.44  inaccuracy graded too harshly  ch3-other-third-moves
+      e4 d5 exd5 Qxd5 d4 : Nf6 not Nc6
+      "It blocks the pawn that gives the queen its square, and 4.Nf3 followed by Nc3 hits the queen with no c7 to go to."
+
+Verdict: three straddles at the -0.4 floor of the inaccuracy band, all "too harsh" by 0.04 to 0.07, none of
+which the first run reported (the first run saw them inside the band). Under the gate 20 straddle ruling
+these are noise at a band edge and the grades stand. For the record: 2.c4 dxe4 (the note says the pawn on e4
+falls to Qa4+, which it does; the engine still calls the position level), and 3.d4 e5 and 3.d4 Nc6, both
+of which give up the structure the chapter teaches for nothing better.

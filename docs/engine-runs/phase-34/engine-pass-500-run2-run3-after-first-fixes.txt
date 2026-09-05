@@ -1,0 +1,39 @@
+engine-pass.mjs at 500 ms, the second and third runs, after the first round of fixes (the two Bf4 blunders, the
+2.Bd3 line, the 6.Ne5 tail, exercises 4 and 5) and before the last round (6.Bc4 to ...Bg4, 3.Be2 to ...Qxg2).
+Kept because they are the runs that found 6.Bc4 Bf5 at +0.96 (run 3 only), which the 2500 ms check confirmed.
+Conditions: 16 logical processors, CPU load sampled at 17-46% in the minutes before and during the run (one java process from another project of Nick's held about one core throughout; the rest was idle Vite servers). No build, no test run and no second engine process: one engine at a time, every run in this phase sequential.
+Evaluations are from White's point of view: negative favours Black.
+
+=== run 2 ===
+156 student moves across 7 chapters, 308 positions to evaluate at 500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+6 moves cost 0.5 of a pawn or more:
+
+1.66  ch3-other-third-moves  e4 d5 exd5 Qxd5 Be2 Nf6
+      before -1.23  after 0.43
+0.57  ch1-main-line  e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bf5 Bd2 e6 Qe2 Be7 O-O-O Nbd7 Kb1 O-O
+      before -0.28  after 0.29
+0.56  ch5-everything-else  e4 d5 Nf3 dxe4 Ng5 Nf6 Bc4 e6 Nc3 Be7 Ngxe4 Nxe4 Nxe4 O-O d4 b6
+      before -0.42  after 0.14
+0.51  ch2-other-fourth-moves  e4 d5 exd5 Qxd5 Nc3 Qd6 g3 Nf6
+      before -0.19  after 0.32
+0.50  ch4-white-does-not-take  e4 d5 Nc3 dxe4
+      before -0.43  after 0.07
+0.50  ch5-everything-else  e4 d5 Nf3 dxe4 Ng5 Nf6
+      before -0.85  after -0.35
+
+=== run 3 ===
+156 student moves across 7 chapters, 308 positions to evaluate at 500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+4 moves cost 0.5 of a pawn or more:
+
+1.56  ch3-other-third-moves  e4 d5 exd5 Qxd5 Be2 Nf6
+      before -1.13  after 0.43
+0.61  ch1-main-line  e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bf5 Bd2 e6 Qe2 Be7 O-O-O Nbd7 Kb1 O-O
+      before -0.29  after 0.32
+0.58  ch1-main-line  e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bf5
+      before 0.38  after 0.96
+0.50  ch5-everything-else  e4 d5 Nf3 dxe4 Ng5 Nf6 Bc4 e6 Nc3 Be7 Ngxe4 Nxe4 Nxe4 O-O d4 b6
+      before -0.46  after 0.04

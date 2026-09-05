@@ -2,7 +2,7 @@
   "id": "ch3-other-third-moves",
   "title": "Third moves other than 3.Nc3",
   "defaultTags": ["vs-nf3"],
-  "intro": "After 2...Qxd5 almost everyone plays 3.Nc3, because it develops with a hit on the queen and there is no reason not to. This chapter is the rest: White develops something else first, or takes the centre first, or offers a queen trade. In every case Black plays the same setup, and in most cases the game becomes chapter 1 by move six.\n\n## The one choice\n\nAgainst 3.Nf3 the knight comes to f6, and the pin on g4 is refused in a sentence: it is a good move and it commits the bishop before White has shown where the knight on b1 is going, and if that knight goes to c3 with a hit on the queen the bishop on g4 is a move Black may wish it had back. The knight to f6 keeps every option, and the pin comes a move later.\n\n## What the others give up\n\n3.d4 takes the centre first and usually transposes. 3.Be2 is quiet and blocks nothing, and Black develops the bishop to f5 before the pawn goes to e6, as always. 3.Qf3 offers a queen trade, and Black takes it: with the queens off there is no tempo to lose and the structure with the pawn on c6 plays itself. 3.d3 is the small centre, and the pawn to c6 and the bishop to f5 are the answer, as against every quiet move in this course.\n\n## Typical mistakes at this level\n\nDeclining the queen trade after 3.Qf3, which keeps the queen on d5 as a target for a knight that has not yet moved. Pinning on g4 before the knight on g8 has moved. Playing ...e6 before the bishop is out. And chasing the main line when a quiet move has been played: against 3.Be2 or 3.d3 there is nothing to punish, and the right answer is to develop and be comfortable.",
+  "intro": "After 2...Qxd5 almost everyone plays 3.Nc3, because it develops with a hit on the queen and there is no reason not to. This chapter is the rest: White develops something else first, or takes the centre first, or offers a queen trade. In every case Black plays the same setup, and in most cases the game becomes chapter 1 by move six.\n\n## The one choice\n\nAgainst 3.Nf3 the knight comes to f6, and the pin on g4 is refused in a sentence: it is a good move and it commits the bishop before White has shown where the knight on b1 is going, and if that knight goes to c3 with a hit on the queen the bishop on g4 is a move Black may wish it had back. The knight to f6 keeps every option, and the pin comes a move later.\n\n## What the others give up\n\n3.d4 takes the centre first and usually transposes. 3.Be2 is quiet and blocks nothing, and it leaves the pawn on g2 to the queen: this is the one line in the course where the queen goes and takes something, because it can come back to g6 a pawn up with nothing to answer for. 3.Qf3 offers a queen trade, and Black takes it: with the queens off there is no tempo to lose and the structure with the pawn on c6 plays itself. 3.d3 is the small centre, and the pawn to c6 and the bishop to f5 are the answer, as against every quiet move in this course.\n\n## Typical mistakes at this level\n\nDeclining the queen trade after 3.Qf3, which keeps the queen on d5 as a target for a knight that has not yet moved. Pinning on g4 before the knight on g8 has moved. Playing ...e6 before the bishop is out. Declining a free pawn on g2 after 3.Be2 in order to develop, when the queen can take it and come home. And chasing the main line when a quiet move has been played: against 3.d3 there is nothing to punish, and the right answer is to develop and be comfortable.",
   "stem": ["e4", "d5", "exd5", "Qxd5"],
   "tree": [
     {
@@ -224,49 +224,34 @@
     },
     {
       "san": "Be2",
-      "note": "A quiet developing move that blocks nothing and threatens nothing.",
+      "note": "A quiet developing move that blocks nothing, threatens nothing, and leaves the pawn on g2 to the queen.",
       "weight": 4,
       "children": [
         {
-          "san": "Nf6",
-          "note": "Develop.",
-          "tags": ["development"],
+          "san": "Qxg2",
+          "note": "Take it. The queen is chased once and lands on g6, and Black is a pawn up with nothing to answer for. This is the one line in the course where the queen goes hunting, because the pawn is free.",
+          "tags": ["tactics"],
           "mistakes": [
-            { "san": "e5", "grade": "playable", "note": "Sound against a move this quiet, and it gives up the structure the course keeps to everywhere." }
+            { "san": "Nf6", "grade": "inaccuracy", "note": "Sound development, and it declines a pawn that can be taken safely. Against a move that hangs something, take it." },
+            { "san": "Nc6", "grade": "inaccuracy", "note": "Also sound, and the same pawn is still on g2 waiting to be taken." }
           ],
           "children": [
             {
-              "san": "Nf3",
-              "note": "Develop.",
-              "weight": 8,
+              "san": "Bf3",
+              "note": "The bishop hits the queen, which is the only thing White gets for the pawn.",
+              "weight": 9,
               "children": [
                 {
-                  "san": "c6",
-                  "note": "The structure.",
+                  "san": "Qg6",
+                  "note": "To g6, where the bishop cannot reach it, it watches c2, and it is one move from home. A pawn up.",
                   "tags": ["queen-safety"],
                   "mistakes": [
-                    { "san": "Bg4", "grade": "playable", "note": "Fine. The pawn first gives the queen its squares before the knight on b1 moves." }
+                    { "san": "Qg5", "grade": "playable", "note": "Also keeps the pawn, and 5.d4 hits the queen again. On g6 it is not asked to move a third time." },
+                    { "san": "Qxf3", "grade": "mistake", "note": "5.Qxf3 and the queen has been given for a bishop." },
+                    { "san": "Bg4", "grade": "mistake", "note": "The queen is still on g2: 5.Bxg2 takes it, and 5...Bxd1 6.Kxd1 leaves White a piece up." }
                   ],
-                  "children": [
-                    {
-                      "san": "O-O",
-                      "note": "White castles.",
-                      "weight": 8,
-                      "children": [
-                        {
-                          "san": "Bf5",
-                          "note": "The bishop comes out before the pawn goes to e6, and the position is the 3.Nf3 line of this chapter once White plays d4.",
-                          "tags": ["light-squares"],
-                          "mistakes": [
-                            { "san": "e6", "grade": "inaccuracy", "note": "Shut in. The bishop comes out first." },
-                            { "san": "Bg4", "grade": "playable", "note": "Also good. The bishop on f5 cannot be asked a question by h3." }
-                          ],
-                          "plan": "The pawn to e6, the bishop to e7 and castling. If White plays d4 the game is the 3.Nf3 line above; if White plays d3 it is the small centre, and the pawn to e5 comes when the pieces are out.",
-                          "name": "3.Be2 and the quiet development"
-                        }
-                      ]
-                    }
-                  ]
+                  "plan": "Meet Nc3 with the pawn to c6 so the knight has no b5, then the bishop to f5, the knight to d7 and the pawn to e6, and the king castles when the queenside is quiet. The pawn is kept and the position is the usual one with an extra pawn.",
+                  "name": "3.Be2 and the pawn on g2"
                 }
               ]
             }
@@ -324,7 +309,7 @@
                                   "note": "Take. The trade leaves White's pawns doubled on the d-file, which is a target for the rest of the game.",
                                   "tags": ["light-squares"],
                                   "mistakes": [
-                                    { "san": "Bg6", "grade": "playable", "note": "Sound, and taking first is what doubles White's pawns." }
+                                    { "san": "Bg6", "grade": "inaccuracy", "note": "It keeps the bishop and lets White keep the structure. Taking first is what doubles White's pawns." }
                                   ],
                                   "children": [
                                     {

@@ -1,0 +1,116 @@
+engine-mistakes.mjs at 2500 ms, the first run, after the last edit to the course's lines.
+Conditions: 16 logical processors, CPU load sampled at 17-46% before and during the run (one java process from another project of Nick's held about one core throughout; the rest was idle Vite servers). No build, no test run and no second engine process; every other engine check in this phase had finished before this one began.
+Evaluations are from White's point of view: negative favours Black.
+Bands: playable to 0.9, inaccuracy -0.4 to 1.8, mistake 0.7 and up.
+
+All 28 findings were acted on; the regrades are listed at the end and the confirming run is
+engine-mistakes-2500-run2.txt. The punishments the notes needed were asked at 2500 ms
+(engine-ask-2500-mistakes.txt).
+
+234 mistake entries across 7 chapters, 378 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+28 entries where the grade and the engine disagree:
+
+ 5.02  inaccuracy graded too kindly  ch5-everything-else
+      e4 d5 Nf3 dxe4 Ng5 Nf6 Bc4 : e6 not Nc6
+      "5.Bxf7+ Kd7 6.Bb3 and White has the pawn back with Black's king stuck in the middle."
+ 4.67  inaccuracy graded too kindly  ch1-main-line
+      e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 h3 Bf5 Bd3 Bxd3 Qxd3 e6 O-O Be7 Ne5 O-O Bf4 : Qd8 not Qd5
+      "12.Rfe1 and the queen is in the middle of the board with White's rooks arriving."
+ 4.42  inaccuracy graded too kindly  ch1-main-line
+      e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Ne5 Nbd7 Nc4 Qc7 Qf3 Nb6 Bf4 : Qd8 not Nxc4
+      "10.Bxc7 and the bishop has taken the queen, because the queen was still on c7 with the bishop on f4 pointing at it."
+ 4.23  inaccuracy graded too kindly  ch2-other-fourth-moves
+      e4 d5 exd5 Qxd5 Nc3 Qd6 Bc4 : Nf6 not Bg4
+      "5.Nf3 and the bishop has nothing to pin, while the bishop on c4 eyes f7 with the queen about to be hit."
+ 4.17  playable   graded too kindly  ch1-main-line
+      e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 : Bg4 not Bf5
+      "Sound, and it offers a trade of the bishop that has just come out. The pin asks more of White."
+ 4.10  playable   graded too kindly  ch4-white-does-not-take
+      e4 d5 e5 c5 d4 Nc6 c3 : Bf5 not Bg4
+      "Sound. With the knight not yet on f3 there is nothing to pin, and f5 is the better square for now."
+ 4.00  playable   graded too kindly  ch6-tactics-and-plans
+      e4 d5 d3 dxe4 dxe4 Qxd1+ Kxd1 Nc6 Nf3 Bg4 Be2 O-O-O+ Ke1 : Nb4 not Nd4
+      "Also a good square, hitting c2 and e2. The jump to b4 keeps the knight on f3 pinned while it threatens the same fork."
+ 3.45  inaccuracy graded too kindly  ch4-white-does-not-take
+      e4 d5 d4 dxe4 Nc3 Nf6 f3 Bf5 fxe4 Nxe4 Qf3 Nd6 Bf4 e6 O-O-O c6 g4 Bg6 h4 : h5 not Be7
+      "11.h5 and the bishop has to go to h7 or e4, and White's pawns are rolling for free."
+ 2.83  inaccuracy graded too kindly  ch4-white-does-not-take
+      e4 d5 d4 dxe4 Nc3 Nf6 f3 Bf5 fxe4 Nxe4 Qf3 : Nd6 not Qd7
+      "7.Nxe4 Bxe4 8.Qxe4 and White has traded into a position where the pawn is back and Black is behind."
+ 2.21  inaccuracy graded too kindly  ch4-white-does-not-take
+      e4 d5 d4 dxe4 Nc3 Nf6 f3 Bf5 fxe4 Nxe4 Qf3 Nd6 Bf4 : e6 not Qd7
+      "8.Bxd6 Qxd6 9.Qxb7 and the pawn on b7 goes, because the queen on d7 was the only thing that could have covered it and it has just recaptured elsewhere."
+ 2.11  inaccuracy graded too kindly  ch1-main-line
+      e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Ne5 Nbd7 Nc4 Qc7 Qf3 : Nb6 not e5
+      "9.dxe5 Nxe5 10.Nxe5 Qxe5+ 11.Be2 and White has traded a pair of knights and gained time on the queen again."
+ 1.60  playable   graded too kindly  ch5-everything-else
+      e4 d5 Nf3 : dxe4 not Nf6
+      "Fine, and 3.e5 hits it and White has the push for free. The pawn is there to be taken."
+ 1.50  playable   graded too kindly  ch1-main-line
+      e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Ne5 Nbd7 Nc4 Qc7 Qf3 : Nb6 not e6
+      "Solid, and it lets the knight sit on c4 for free. Hitting it first is the move that gains the tempo back."
+ 1.27  playable   graded too kindly  ch1-main-line
+      e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 g3 Bg4 Bg2 e6 O-O Be7 h3 Bh5 g4 Bg6 Ne5 : Nbd7 not O-O
+      "Sound, and 12.Nxg6 hxg6 leaves the knight on b8 still at home with the h-file open beside the king."
+ 1.27  playable   graded too kindly  ch4-white-does-not-take
+      e4 d5 d4 : dxe4 not Nf6
+      "Sound, and 3.e5 hits it and White has the centre for free. Taking first keeps the choice."
+ 1.22  playable   graded too kindly  ch2-other-fourth-moves
+      e4 d5 exd5 Qxd5 Nc3 Qd6 d3 Nf6 Nf3 c6 Be2 Bg4 O-O : e6 not e5
+      "Also good with White's pawn on d3. The modest move keeps the structure the course teaches everywhere."
+ 1.14  playable   graded too kindly  ch1-main-line
+      e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 g3 Bg4 Bg2 e6 O-O Be7 h3 Bh5 g4 Bg6 Ne5 : Nbd7 not Qc7
+      "Fine and quieter. The knight does the same job and develops a piece doing it."
+ 1.04  playable   graded too kindly  ch4-white-does-not-take
+      e4 d5 e5 c5 d4 Nc6 c3 Bf5 Nf3 : e6 not Qb6
+      "A good move that hits b2 and d4 at once, and it can wait a move. The pawn first frees the bishop on f8."
+ 1.03  playable   graded too kindly  ch2-other-fourth-moves
+      e4 d5 exd5 Qxd5 Nc3 Qd6 Bc4 Nf6 d3 c6 Nf3 Bg4 h3 Bh5 Bd2 e6 Qe2 Be7 O-O-O : Nbd7 not O-O
+      "Also fine. The knight first is placed before the pawns start rolling."
+ 1.01  playable   graded too kindly  ch3-other-third-moves
+      e4 d5 exd5 Qxd5 Qf3 Qxf3 Nxf3 Nf6 d4 Bf5 Bd3 : Bxd3 not Bg6
+      "Sound, and taking first is what doubles White's pawns."
+ 1.01  playable   graded too kindly  ch5-everything-else
+      e4 d5 b3 : dxe4 not e5
+      "Sound, and it walks onto the diagonal the bishop is about to take."
+ 1.00  playable   graded too kindly  ch5-everything-else
+      e4 d5 b3 dxe4 Nc3 Nf6 Bb2 : Bf5 not e6
+      "Fine, and it lets 5.Nxe4 Nxe4 6.Bxg7 Rg8 7.Bb2 happen, where Black has a knight for two pawns and a good game but the pawns in front of the king are gone. The bishop first keeps it simpler."
+ 0.94  playable   graded too kindly  ch4-white-does-not-take
+      e4 d5 d4 : dxe4 not e6
+      "A French, sound and a different course."
+ 0.94  playable   graded too kindly  ch4-white-does-not-take
+      e4 d5 d4 dxe4 Nc3 Nf6 f3 : Bf5 not e3
+      "The other decline, giving the pawn back at once. Also fine; the bishop move develops while it declines."
+ 0.52  mistake    graded too harshly  ch4-white-does-not-take
+      e4 d5 Nc3 dxe4 Nxe4 Nd7 d4 Ngf6 Nxf6+ : Nxf6 not gxf6
+      "It opens the king for nothing at all."
+-0.51  inaccuracy graded too harshly  ch5-everything-else
+      e4 d5 Nf3 dxe4 Ng5 : Nf6 not e5
+      "4.Nxe4 and the pawn is back with the knight in the centre and Black's e-pawn loose behind it."
+-0.43  inaccuracy graded too harshly  ch5-everything-else
+      e4 d5 Nf3 dxe4 Ng5 : Nf6 not Bf5
+      "4.Bc4 and f7 is attacked twice with nothing defending it but the king."
+-0.41  inaccuracy graded too harshly  ch4-white-does-not-take
+      e4 d5 d4 dxe4 Nc3 Nf6 f3 Bf5 fxe4 Nxe4 Qf3 : Nd6 not Nxc3
+      "7.Qxf5 and the bishop has gone, because the knight was the only thing defending it."
+
+What was done with them:
+
+Eleven became mistakes. Eight of those were entries whose own note described losing the queen or a piece
+while the grade said inaccuracy or playable: Qd5 onto the knight (6.h3 line), Nxc4 with the queen still on c7
+(6.Ne5 line), Bg4 with nothing on f3 to pin so Qxg4 takes it (ch2 4.Bc4 and ch4 2.e5), Bf5 into the bishop on
+d3 (6.Bd3 line), Nd4 into Nxd4 (exercise 3), ...Nc6 into Bxf7+ and Ne6 forking the queen (Tennison), and
+...Be7 losing the bishop on g6 to h5 because its own pawn on h7 took its retreat (Blackmar-Diemer). The
+other three (two ...Qd7 entries and 8...e5 in the 6.Ne5 line) were inaccuracies at 2.1 to 2.9 and are
+mistakes now, with notes made true to the engine's line.
+
+Thirteen playable entries between 0.94 and 1.6 became inaccuracies, with "fine", "sound" and "also good"
+reworded to say what the move costs.
+
+Four were too harsh. gxf6 (2.Nc3 line) at 0.52 is an inaccuracy, not a mistake. Tennison 3...e5 and 3...Bf5
+are sound (the engine prefers e5 to the course's Nf6 by half a pawn) and are playable with their notes
+corrected. And 6...Nxc3 in the Blackmar-Diemer is sound and its note was FALSE: the knight takes a knight
+before the queen takes the bishop, and it gets away a pawn up (-0.50 for White). Rewritten as playable.

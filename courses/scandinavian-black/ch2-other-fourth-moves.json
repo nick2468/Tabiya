@@ -47,7 +47,7 @@
           "note": "Develop, and cover d5 so the knight on c3 has nowhere to jump to.",
           "tags": ["development"],
           "mistakes": [
-            { "san": "Bg4", "grade": "inaccuracy", "note": "5.Nf3 and the bishop has nothing to pin, while the bishop on c4 eyes f7 with the queen about to be hit." },
+            { "san": "Bg4", "grade": "mistake", "note": "5.Qxg4: there is nothing on f3 to pin, and the bishop is simply taken." },
             { "san": "Qb4", "grade": "inaccuracy", "note": "It hits the bishop and 5.Bb3 answers with the bishop still on the diagonal and the queen further from home." }
           ],
           "children": [
@@ -128,7 +128,7 @@
                                                           "note": "The last piece out, covering e5 and c5, and Black is ready to castle and push the queenside pawns.",
                                                           "tags": ["development"],
                                                           "mistakes": [
-                                                            { "san": "O-O", "grade": "playable", "note": "Also fine. The knight first is placed before the pawns start rolling." }
+                                                            { "san": "O-O", "grade": "inaccuracy", "note": "It castles into the side White's pawns are pointing at before the last piece is out. The knight first is placed before the pawns start rolling." }
                                                           ],
                                                           "plan": "Castle short, then the b-pawn to b5 at the bishop and on to b4 at the knight, with the queen on c7 behind it. The bishop on h5 keeps the knight on f3 tied down.",
                                                           "name": "4.Bc4, the pin and the long castle"
@@ -376,7 +376,7 @@
                                   "note": "The pawn goes with the bishop out.",
                                   "tags": ["development"],
                                   "mistakes": [
-                                    { "san": "e5", "grade": "playable", "note": "Also good with White's pawn on d3. The modest move keeps the structure the course teaches everywhere." }
+                                    { "san": "e5", "grade": "inaccuracy", "note": "It looks natural with White's pawn on d3, and it loosens d5 and f5 for White's pieces. The modest move keeps the structure the course teaches everywhere." }
                                   ],
                                   "children": [
                                     {

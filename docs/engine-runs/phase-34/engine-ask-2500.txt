@@ -1,0 +1,621 @@
+Every finding from the 500 ms passes, re-checked at 2500 ms with engine-ask.mjs, plus the questions asked to
+build the replacement lines. Four sections in the order they were run. Each ask is headed by the line and what
+the course plays (or what was being asked). Verdicts are summarised at the end.
+Conditions: 16 logical processors, CPU load sampled at 17-46% in the minutes before and during the run (one java process from another project of Nick's held about one core throughout; the rest was idle Vite servers). No build, no test run and no second engine process: one engine at a time, every run in this phase sequential.
+Evaluations are from White's point of view: negative favours Black.
+
+=== 1. The eight findings of the initial run ===
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O c3 Nd7 Bf4
+    (course plays: e5 (E5, ch6))
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O c3 Nd7 Bf4
+  -4.10  Qxf4 g3 Bxf3 Bxf3 Qc7 c4
+  +1.32  e5 dxe5 Qxd1 Raxd1 Nc5 Bc2
+  +3.30  Bxf3 Bxh7+ Kxh7 Qd3+ Be4 Qxe4+
+  +4.62  Ne5 Bxe5 Qd8 Qe2 Qb6 g4
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O c3 Nd7
+    (course plays: (White's 13th, ch6 E5: is Bf4 a blunder))
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O c3 Nd7
+  +0.27  Qe2 Nf6 Bc2 Rad8 Bg5 Rfe8
+  +0.22  Bc2 Rad8 Qe2 Qc7 a4 Nf6
+  +0.20  Qb3 Qc7 a4 a5 Bd2 Rfe8
+  +0.20  a4 Nf6
+  +0.32  g3 Nf6
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 h3 Bf5 Bd3 Bxd3 Qxd3 e6 O-O Be7 Bf4
+    (course plays: Qd8 (ch1 6.h3))
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 h3 Bf5 Bd3 Bxd3 Qxd3 e6 O-O Be7 Bf4
+  -3.90  Qxf4 Ne5 Nbd7 Rfe1 Rd8 Qe2
+  +0.46  Qd8 Ne4 Nxe4 Qxe4 O-O c4
+  +0.68  Qd7 Rfe1 O-O Rad1 Qc8 Ne4
+  +1.51  Qb4
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 h3 Bf5 Bd3 Bxd3 Qxd3 e6 O-O Be7
+    (course plays: (White's 10th, ch1 6.h3))
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 h3 Bf5 Bd3 Bxd3 Qxd3 e6 O-O Be7
+  +0.42  Ne4 Nxe4 Qxe4 Nd7 c4 Nf6
+  +0.41  Rd1 Nbd7 Ne2 Qc7 c4 O-O
+  +0.39  Re1 Nbd7 Ne4 Qc7 c4 O-O
+  +0.35  Ne5 O-O Bf4 Qd8 a4 Nd5
+  +0.32  a4 Nbd7
+
+### e4 d5 Bd3 dxe4 Bxe4 Nf6 Bf3 e5 Ne2
+    (course plays: Nc6 (ch5 2.Bd3))
+Black to move after: e4 d5 Bd3 dxe4 Bxe4 Nf6 Bf3 e5 Ne2
+  -3.38  e4 Bxe4 Nxe4 O-O Bd6 Ng3
+  -0.44  g5 g3 Nc6 d3 h6 Bxc6+
+  -0.40  Qd6 Nbc3 Nc6 Nb5 Qd7 d3
+  -0.39  Bc5 Nbc3 Nc6 d3 O-O h3
+
+### e4 d5 Bd3 dxe4 Bxe4 Nf6 Bf3 e5
+    (course plays: (White's 5th, ch5 2.Bd3))
+White to move after: e4 d5 Bd3 dxe4 Bxe4 Nf6 Bf3 e5
+  -0.31  d3 Nc6 Bxc6+ bxc6 Nf3 Bd6
+  -0.32  Nc3 Bc5 d3 c6 Nge2 Be6
+  -0.72  Qe2 Bd6 Nc3 O-O d3 a5
+  -0.78  d4 e4 Be2 h6 Nc3 Bd6
+  -0.88  c3 Qd3
+
+### e4 d5 exd5 Qxd5 Be2
+    (course plays: Nf6 (ch3 3.Be2))
+Black to move after: e4 d5 exd5 Qxd5 Be2
+  -1.15  Qxg2 Bf3 Qg6 Nc3 Nc6 Nb5
+  +0.38  Nc6 Nf3 Bg4 O-O O-O-O h3
+  +0.53  Nf6 Nf3 e5 Nc3 Qa5 O-O
+  +0.54  e5 Nf3
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Ne5 Nbd7 Nc4 Qc7 Qf3 Nb6 Bf4 Qd8 Ne5
+    (course plays: e6 (ch1 6.Ne5))
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Ne5 Nbd7 Nc4 Qc7 Qf3 Nb6 Bf4 Qd8 Ne5
+  -0.15  Qxd4 Rd1 Qb4 b3 Qa5 Bc4
+  +0.42  Be6 Rd1 g6 Be2 Nbd5 Nxd5
+  +0.67  h5
+  +0.75  a6 O-O-O g6 g4 Bg7 h4
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Be2 Bf5 O-O e6 Bg5 Be7 Qd2 Nbd7 Rad1 O-O Rfe1
+    (course plays: c5 (ch6 E4))
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Be2 Bf5 O-O e6 Bg5 Be7 Qd2 Nbd7 Rad1 O-O Rfe1
+  +0.03  Qb4 Qc1 h6 Bf4 Nd5 Nxd5
+  +0.03  h6 Bf4 Qb4 Qc1 Nd5 Nxd5
+  +0.13  Nd5 Bxe7
+  +0.20  Rfe8 Nh4 Qb4 Nxf5 exf5 Qc1
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bf5 Bd2 e6 Qe2 Be7 O-O-O Nbd7 Kb1
+    (course plays: O-O (ch1 6.Bc4))
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bf5 Bd2 e6 Qe2 Be7 O-O-O Nbd7 Kb1
+  -0.22  b5 Bd3 Bxd3 Qxd3 a5 Rhe1
+  +0.31  a5
+  +0.37  Bg6 Bc1 b5 Bd3 Nb6 h4
+  +0.37  h6 Bc1
+
+### e4 d5 Nf3 dxe4 Ng5 Nf6 Bc4 e6 Nc3 Be7 Ngxe4 Nxe4 Nxe4 O-O d4
+    (course plays: b6 (ch5 Tennison))
+Black to move after: e4 d5 Nf3 dxe4 Ng5 Nf6 Bc4 e6 Nc3 Be7 Ngxe4 Nxe4 Nxe4 O-O d4
+  -0.25  Nc6 c3 e5 d5 Na5 Be2
+  -0.05  b6 O-O Bb7 Qd3 c5 dxc5
+  +0.16  b5
+  -0.04  e5 d5
+DONE
+
+=== 2. Follow-ups: replacement White moves and replacement exercise lines ===
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O c3 Nd7 Qe2 e5
+    (E5 candidate: 13.Qe2 e5, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O c3 Nd7 Qe2 e5
+  +1.63  dxe5 Nxe5 Bxh7+ Kxh7 Qxe5 Bxf3
+  +1.35  g4 f5 dxe5 Nxe5 Bc2 Nxf3+
+  +1.31  Bc2
+  +1.27  Bf5 Bxf3 Qxf3 Bf6 Bxd7 Qxd7
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O c3 Nd7 Bc2 e5
+    (E5 candidate: 13.Bc2 e5, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O c3 Nd7 Bc2 e5
+  +1.28  dxe5 Qxd1 Rxd1 Rad8 g4 Bg6
+  +1.20  Qe2 Bxf3
+  +1.10  g4 Bg6 Bxg6 hxg6 Nxe5 Nxe5
+  +0.46  a4 exd4 g4 Bg6 Nxd4 Bxc2
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O c3 Nd7 Qe2 Nf6 Bc2 e5
+    (E5 candidate: 13.Qe2 Nf6 14.Bc2 e5, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O c3 Nd7 Qe2 Nf6 Bc2 e5
+  +4.49  dxe5 Qc7 exf6 Bxf6 Bd2 Rad8
+  +3.42  g4 Nxg4 hxg4 Bxg4 Qd3 g6
+  +1.57  Qxe5 Rae8 Qxd6 Bxd6 Ne5 Nd5
+  +1.48  Bb3 Bxf3
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 h3 Bf5 Bd3 Bxd3 Qxd3 e6 O-O Be7 Ne5 O-O Bf4 Qxf4
+    (6.h3 candidate: 10.Ne5 O-O 11.Bf4 Qxf4, the punishment)
+C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529
+                throw new Error(`Invalid move: ${move}`);
+                      ^
+
+Error: Invalid move: Qxf4
+    at Chess.move (C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529:23)
+    at file:///C:/Users/nick2/Code/London/scripts/engine-ask.mjs:22:31
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v20.20.2
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 h3 Bf5 Bd3 Bxd3 Qxd3 e6 O-O Be7 Ne5 O-O Bf4
+    (6.h3 candidate: after 11.Bf4, Black's choices)
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 h3 Bf5 Bd3 Bxd3 Qxd3 e6 O-O Be7 Ne5 O-O Bf4
+  +0.40  Qd8 a4 Nbd7 a5 Nd5 Nxd5
+  +0.58  Rd8 Ng6 Qd7 Nxe7+ Qxe7 Bg5
+  +0.61  Re8 Ng6 Qd7 Nxe7+ Qxe7 Bg5
+  +0.67  Nd5 Nxd5 Qxd5 c4 Qd8 Nf3
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 h3 Bf5 Bd3 Bxd3 Qxd3 e6 O-O Be7 Ne5
+    (6.h3 candidate: after 10.Ne5, Black's choices)
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 h3 Bf5 Bd3 Bxd3 Qxd3 e6 O-O Be7 Ne5
+  +0.37  O-O Bf4 Qd8 a4 Nbd7 a5
+  +0.43  Qd8 a4 Nbd7 Qf3 a5 Rd1
+  +0.45  Nbd7 Bf4 Nxe5 Bxe5 Qd8 Rad1
+  +0.53  Qc7
+
+### e4 d5 Bd3 dxe4 Bxe4 Nf6 Bf3 e5 Nc3 Nc6
+    (2.Bd3 candidate: 5.Nc3 Nc6, White's best)
+White to move after: e4 d5 Bd3 dxe4 Bxe4 Nf6 Bf3 e5 Nc3 Nc6
+  -0.32  Nge2 Bd6 O-O O-O d3 h6
+  -0.33  Bxc6+ bxc6 Nf3 Bd6 d4 exd4
+  -0.54  d3
+  -0.67  h3 Nd4 d3 Bd6 Be4 h6
+
+### e4 d5 Bd3 dxe4 Bxe4 Nf6 Bf3 e5 d3 Nc6
+    (2.Bd3 candidate: 5.d3 Nc6, White's best)
+White to move after: e4 d5 Bd3 dxe4 Bxe4 Nf6 Bf3 e5 d3 Nc6
+  -0.27  Bxc6+ bxc6 Nf3 Bd6 O-O O-O
+  -0.45  Ne2 Qd6 Nbc3 Be6 O-O O-O-O
+  -0.52  Nd2 Nd4 h3 c6 Ne2 Nxf3+
+  -0.64  a3 Nd4 Nd2 Be7 Ne2 Nxf3+
+
+### e4 d5 exd5 Qxd5 Be2 Nf6
+    (3.Be2 Nf6, White's best)
+White to move after: e4 d5 exd5 Qxd5 Be2 Nf6
+  +0.45  Nf3 e5 O-O Be7 d4 exd4
+  -0.09  Bf3 Qd6 d3 Nc6 Nd2 Be6
+  -0.51  Bf1 e5 Nc3 Qa5 Bb5+ c6
+  -0.83  Kf1 Nc6 Nc3 Qc5 Nf3 e5
+  -0.97  d4 Qxg2
+
+### e4 d5 exd5 Qxd5 Be2 Nc6
+    (3.Be2 Nc6, White's best)
+White to move after: e4 d5 exd5 Qxd5 Be2 Nc6
+  +0.28  Nf3 Bg4
+  -0.55  Bf3 Qe6+ Kf1 Qg6 h4 e5
+  -0.90  Bf1 Bf5 Nc3 Qe6+ Nge2 Qg6
+  -0.94  Nc3 Qxg2 Bf3 Qg6 Nb5 Kd8
+  -1.04  d4 Qxg2 Bf3 Qg6 Ne2 Qf6
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Ne5 Nbd7 Nc4 Qc7 Qf3 Nb6 Bf4 Qd8
+    (6.Ne5 line: White's 10th)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Ne5 Nbd7 Nc4 Qc7 Qf3 Nb6 Bf4 Qd8
+  +0.53  Be5 Be6 Ne3 g6 h4 h5
+  +0.25  h3 Be6 Nxb6 axb6 Be5 Nd7
+  +0.13  Be3 Bg4 Qg3 e6 Ne5 Bf5
+  +0.09  Ne5 Qxd4
+  +0.04  Qd3 g6 Qd2 Bg7 O-O-O Be6
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Ne5 Nbd7 Nc4 Qc7 Qf3 Nb6 Bf4 Qd8 Ne5 e6
+    (6.Ne5 line: 10.Ne5 e6, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Ne5 Nbd7 Nc4 Qc7 Qf3 Nb6 Bf4 Qd8 Ne5 e6
+  +1.16  O-O-O Nbd5 Bd2 Bb4 Kb1 Nxc3+
+  +1.12  Bg5
+  +1.07  Bd3 Nbd5 Bg5 Bb4 a3 Ba5
+  +0.75  Be3 Nbd5 Bd3 Be7 h4 O-O
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Ne5 Nbd7 Nc4 Qc7 Qf3 Nb6 Bf4 Qd8 Nxb6 Qxb6
+    (6.Ne5 line: 10.Nxb6 Qxb6, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Ne5 Nbd7 Nc4 Qc7 Qf3 Nb6 Bf4 Qd8 Nxb6 Qxb6
+  +0.01  h3 Qxd4 Bd3 e5 Bg5 Be7
+  -0.04  Be5 Be6
+  -0.20  Be2 Qxd4 Rd1 Qc5 h3 e5
+  -0.21  d5 Bg4 Qg3 Qxb2 Rb1 Qxc2
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Be2 Bf5 O-O e6 Bg5 Be7 Qd2 Nbd7 Rad1 O-O Rfe1 c5
+    (E4: 11.Rfe1 c5, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Be2 Bf5 O-O e6 Bg5 Be7 Qd2 Nbd7 Rad1 O-O Rfe1 c5
+  +0.74  Nh4 cxd4 Nxf5 exf5 Qxd4 Qxd4
+  +0.62  d5
+  +0.51  Bf4 Qb6 Nh4 cxd4 Nxf5 exf5
+  +0.46  Qc1 h6 Bf4 Qb6 d5 exd5
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Be2 Bf5 O-O e6 Bg5 Be7 Qd2 Nbd7 Rad1 O-O Rfe1 h6 Bf4 Qb4 Qc1
+    (E4 candidate: after 11...h6 12.Bf4 Qb4 13.Qc1, Black's choices incl c5)
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Be2 Bf5 O-O e6 Bg5 Be7 Qd2 Nbd7 Rad1 O-O Rfe1 h6 Bf4 Qb4 Qc1
+  +0.11  Nd5 Nxd5 cxd5 Bd3 Bxd3 Rxd3
+  +0.12  Rac8
+  +0.15  Qb6 Bd3
+  +0.19  Rfc8 Bd3 Bg4 Ne4 Bxf3 gxf3
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Be2 Bf5 O-O e6 Bg5 Be7 Qd2 Nbd7 Rad1 O-O Rfe1 h6 Bf4 Qb4 Qc1 c5
+    (E4 candidate: ...c5 there, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Be2 Bf5 O-O e6 Bg5 Be7 Qd2 Nbd7 Rad1 O-O Rfe1 h6 Bf4 Qb4 Qc1 c5
+  +2.11  Bc7
+  +1.31  Bb5 Qa5 d5 Rfd8 Nh4 Bf8
+  +0.83  d5 exd5 Rxd5 Be6 Rdd1 Qb6
+  +0.55  a3 Qb6 d5 exd5 Rxd5 Be6
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bf5 Bd2 e6 Qe2 Be7 O-O-O Nbd7 Kb1 O-O
+    (6.Bc4: ...O-O, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bf5 Bd2 e6 Qe2 Be7 O-O-O Nbd7 Kb1 O-O
+  +0.37  Nh4
+  +0.07  Bb3 Bg6 Nh4 Qxd4 Bg5 Qc5
+  -0.02  g3 Nd5 Ne5 Nxc3+ Bxc3 b5
+  -0.15  Bc1 Nd5 Ne4 Qc7 Rdg1 Nf4
+DONE
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Ne5 Nbd7 Nc4 Qc7 Qf3 Nb6 Bf4 Qd8 Nxb6
+    (6.Ne5 line: 10.Nxb6, Black's choices)
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Ne5 Nbd7 Nc4 Qc7 Qf3 Nb6 Bf4 Qd8 Nxb6
+  +0.19  Qxb6 h3 Qxd4 Bd3 g6 O-O-O
+  +0.34  axb6 Be5
+  +1.04  Bg4 Nxa8 Bxf3 Nc7+ Kd7 gxf3
+  +4.01  e5 dxe5 Qxb6 exf6 Qxb2 Rb1
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Ne5 Nbd7 Nc4 Qc7 Qf3 Nb6 Bf4 Qd8 Nxb6 Qxb6 O-O-O
+    (6.Ne5 line: 10.Nxb6 Qxb6 11.O-O-O, Black's choices)
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Ne5 Nbd7 Nc4 Qc7 Qf3 Nb6 Bf4 Qd8 Nxb6 Qxb6 O-O-O
+  -1.82  Bg4 Qd3 Bxd1 Nxd1 e6 c3
+  +0.23  g6 Qe3 Be6 f3 Bg7 Be5
+  +0.29  Be6 Rd3 Qa5 Bd2 Bg4 Qg3
+  +0.53  Bf5 Rd2 e6 Bd3 Bxd3 Rxd3
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Ne5 Nbd7 Nc4 Qc7 Qf3 Nb6 Bf4 Qd8 Nxb6 Qxb6 O-O-O e6
+    (6.Ne5 line: 11...e6, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Ne5 Nbd7 Nc4 Qc7 Qf3 Nb6 Bf4 Qd8 Nxb6 Qxb6 O-O-O e6
+  +1.38  h4 Bd7 h5 Nd5 Nxd5 cxd5
+  +1.37  Be5 Nd7 Bf4 Nf6 h4 Bd7
+  +1.30  Ne4 Nxe4 Qxe4 Bd7 h4 h5
+  +1.26  a3 Nd5 Nxd5 cxd5 Rd3 Be7
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 g3 Bg4 Bg2 e6 O-O Be7 h3 Bh5 g4 Bg6 Ne5 Nbd7 Nxg6 hxg6
+    (main line: White's 13th)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 g3 Bg4 Bg2 e6 O-O Be7 h3 Bh5 g4 Bg6 Ne5 Nbd7 Nxg6 hxg6
+  +0.30  a4
+  +0.20  Re1 Rd8 Qd3 Qc7 Ne2 O-O
+  +0.17  b3 Rd8 Re1 Nf8 Be3 Qc7
+  +0.12  g5 Nh5 Qg4 Qc7 a4 a5
+  +0.03  Rb1 Bd8 Re1 Bc7 Kf1 Qh2
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 g3 Bg4 Bg2 e6 O-O Be7 h3 Bh5 g4 Bg6 Ne5 Nbd7 Nxg6 hxg6 Qe2 O-O Rd1
+    (main line: 13.Qe2 O-O 14.Rd1, Black's choices)
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 g3 Bg4 Bg2 e6 O-O Be7 h3 Bh5 g4 Bg6 Ne5 Nbd7 Nxg6 hxg6 Qe2 O-O Rd1
+  +0.22  Qc7 a4 a5 h4 Rfe8 h5
+  +0.25  Rad8 h4 Nb6 a4 Nbd5 a5
+  +0.25  Nb6 h4 Qc7 Ne4 Nxe4 Qxe4
+  +0.34  Nd5 Qf3 Nxc3 bxc3 Rad8 a4
+  +0.31  Rfe8 a4 a5 g5 Nh5 Ne4
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 g3 Bg4 Bg2 e6 O-O Be7 h3 Bh5 g4 Bg6 Ne5 Nbd7 Nxg6 hxg6 Qe2 O-O Rd1 c5
+    (main line: 14...c5, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 g3 Bg4 Bg2 e6 O-O Be7 h3 Bh5 g4 Bg6 Ne5 Nbd7 Nxg6 hxg6 Qe2 O-O Rd1 c5
+  +2.49  dxc5 Qc7 g5 Nh5 Nb5 Qc8
+  +2.42  d5 Rad8 Nb5 Qe5 Qxe5 Nxe5
+  +2.03  g5 Nd5 dxc5 Nxc5 Nxd5 exd5
+  +2.03  Nb5 Qb6 d5 exd5 g5 Rae8
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 g3 Bg4 Bg2 e6 O-O Be7 h3 Bh5 g4 Bg6 Ne5 Nbd7 Nxg6 hxg6 Qe2 O-O Rd1 e5
+    (main line: 14...e5, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 g3 Bg4 Bg2 e6 O-O Be7 h3 Bh5 g4 Bg6 Ne5 Nbd7 Nxg6 hxg6 Qe2 O-O Rd1 e5
+  +1.85  g5 Ne8 dxe5 Qe6 f4 Nc7
+  +1.07  dxe5 Qxe5 g5 Qxe2 Nxe2 Nd5
+  +0.95  Re1 Qxd4 Rd1 Qb6 g5 Nd5
+  +0.82  d5 Nxd5
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O
+    (6.Bd3 line: White's 12th)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O
+  +0.55  g3 Nd7 Bf4 Qb4 c3 Qb6
+  +0.33  a4 Nd7 g4 Bg6 Bxg6 hxg6
+  +0.27  c3 Nd7 Qe2 Qc7 a4 Nf6
+  +0.21  c4
+  +0.18  g4 Bg6
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O Be3
+    (6.Bd3 line: 12.Be3, Black's choices)
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O Be3
+  +0.29  Nd7 c4 Rad8 Qe2 Qc7 Bc2
+  +0.41  Qc7 g3 f5 Bf4 Bd6 Bxd6
+  +0.46  a5 c4
+  +0.47  Qd8 g4 Bg6 Bxg6 hxg6 c4
+  +0.55  Na6 c3 Rad8 a4 Nc7 a5
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O Be3 c5
+    (6.Bd3 line: 12.Be3 c5, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O Be3 c5
+  +3.52  Bxb7 Nc6 dxc5 Qc7 Bxc6 Qxc6
+  +2.69  g4 f5 Bxb7 fxg4 Ne5 Nd7
+  +1.30  dxc5 Qc7 c3 Nd7 b4 Rad8
+  +0.81  Qd3 Bxf3 Bxf3 Nc6 dxc5 Qxd3
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O Be3 Nd7
+    (6.Bd3 line: 12.Be3 Nd7, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O Be3 Nd7
+  +0.25  c3 Nf6 Bc2 Qc7 Qe2 Nd5
+  +0.19  c4 f5 Bd3 e5 c5 Qe6
+  +0.19  a4 Nf6 Bd3 Qc7 c3 c5
+  +0.12  Bd3 Rad8
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Be2 Bf5 O-O e6 Bg5 Be7 Qd2 Nbd7 Rad1 O-O Rfe1 Nd5
+    (E4 candidate: 11...Nd5, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Be2 Bf5 O-O e6 Bg5 Be7 Qd2 Nbd7 Rad1 O-O Rfe1 Nd5
+  +0.22  Bxe7 Qxe7 Nxd5 cxd5 b3 h6
+  +0.17  Bd3 Bxg5 Nxg5 Bxd3 Qxd3 N5f6
+  +0.14  Bh4 Bxh4 Nxh4 Nxc3 Qxc3 Be4
+  +0.04  Nxd5 Bxg5 Qxg5 cxd5 c4 dxc4
+  +0.01  h4 h6
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Be2 Bf5 O-O e6 Bg5 Be7 Qd2 Nbd7 Rad1 O-O Rfe1 Nd5 Bxe7 Qxe7
+    (E4 candidate: 12.Bxe7 Qxe7, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Be2 Bf5 O-O e6 Bg5 Be7 Qd2 Nbd7 Rad1 O-O Rfe1 Nd5 Bxe7 Qxe7
+  +0.20  Nxd5 cxd5 b3 Be4 c4 b6
+  +0.20  h3 h6 Bd3 Bxd3 Qxd3 Nxc3
+  +0.20  Nb1
+  +0.15  a3 Nxc3
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Be2 Bf5 O-O e6 Bg5 Be7 Qd2 Nbd7 Rad1 O-O Rfe1 Nd5 Bxe7
+    (E4 new: 12.Bxe7, Black's choices)
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Be2 Bf5 O-O e6 Bg5 Be7 Qd2 Nbd7 Rad1 O-O Rfe1 Nd5 Bxe7
+  +0.25  Nxe7 Bf1
+  +0.25  Qxe7 Nxd5 cxd5 b3 Rfd8 c4
+  +4.93  Qf4 Nxd5 Qxd2 Rxd2 cxd5 Bxf8
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Be2 Bf5 O-O e6 Bg5 Be7 Qd2 Nbd7 Rad1 O-O Rfe1 Qc7
+    (E4: 11...Qc7, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Be2 Bf5 O-O e6 Bg5 Be7 Qd2 Nbd7 Rad1 O-O Rfe1 Qc7
+  +0.38  Nh4 Be4 Bf4 Qb6 Nxe4 Nxe4
+  +0.15  Bd3
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O c3 Nd7 Qe2
+    (E5 new: 13.Qe2, Black's choices)
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O c3 Nd7 Qe2
+  +0.22  Nf6
+  +0.27  Qc7 Bc2 Nf6 g4 Bg6 Bb3
+  +0.28  Rad8 b4 Nf6 Bc2 Qc7 Bd2
+  +0.30  Rae8 b4 Qc7 g4 Bg6 Bxg6
+  +0.35  Rfe8 g3 Nf6 Bf4 Qd7 Bd3
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O c3 Nd7 Qe2 Nf6 Bc2
+    (E5 new: 14.Bc2, Black's choices)
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O c3 Nd7 Qe2 Nf6 Bc2
+  +0.22  c5 dxc5 Qxc5 Be3 Qc7 Bd4
+  +0.24  Qc7 Bg5 Rfe8 Rac1 a5 c4
+  +0.25  Rfe8 Bb3 a5 a4 Nd5 g4
+  +0.36  Rfd8 Bg5 c5 Rad1 cxd4 Rxd4
+  +0.38  Rad8 b4
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O c3 Nd7 Qe2 Nf6 Bc2 Rad8
+    (E5 new: 14...Rad8, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bd3 Bg4 h3 Bh5 O-O e6 Re1 Be7 Ne4 Nxe4 Bxe4 O-O c3 Nd7 Qe2 Nf6 Bc2 Rad8
+  +0.32  b4 Qc7 a4 a5 bxa5 Qxa5
+  +0.27  Bg5 Rfe8
+  +0.24  a4 c5 dxc5 Qxc5 Bf4 Bd6
+DONE
+
+=== 3. After the first fixes: the surviving findings, and the 6.Bc4 and 3.Be2 rewrites ===
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bf5
+    (6.Bc4 Bf5, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bf5
+  +0.73  Ne5 e6 g4 Bg6 h4 Nbd7
+  +0.53  O-O e6 Nh4 Bg6 Nxg6 hxg6
+  +0.42  Qe2 Nbd7
+  +0.48  Bg5 e6 Qe2 Be7 O-O-O Nbd7
+  +0.41  Bb3 e6 Nh4 Bg6 Nxg6 hxg6
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4
+    (6.Bc4, Black's choices)
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4
+  +0.40  Bg4 Be3 Nbd7 h3 Bh5 Qe2
+  +0.62  Be6 Bd3 g6 O-O Bg7 Re1
+  +0.92  Nbd7 Ng5
+  +0.93  e6 O-O Be7 Re1 Nbd7 Bd3
+  +0.93  Qc7 Qe2 e6 O-O Be7 Bd3
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 g3 Nf6
+    (ch2 4.g3 Nf6, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 g3 Nf6
+  +0.25  d4 Nc6
+  +0.30  d3 Nc6 Nf3 Bg4 h3 Bxf3
+  +0.29  Nf3 Nc6 Nb5 Qd8 d4 Bf5
+
+### e4 d5 Nc3 dxe4
+    (ch4 2.Nc3 dxe4, White's best)
+White to move after: e4 d5 Nc3 dxe4
+  +0.15  Nxe4 Nf6 Nxf6+ exf6 d4 Bd6
+  -0.05  d3 exd3
+  -0.38  d4 Nf6 f3 exf3 Nxf3 e6
+
+### e4 d5 Nf3 dxe4 Ng5 Nf6
+    (ch5 Tennison 3...Nf6, White's best)
+White to move after: e4 d5 Nf3 dxe4 Ng5 Nf6
+  -0.29  Bc4 e6 Nc3 Nc6 O-O Qd4
+  -0.46  Nc3 Bf5
+  -1.07  Bb5+ Nc6 Nc3 Bg4 f3 exf3
+
+### e4 d5 exd5 Qxd5 Be2 Qxg2 Bf3
+    (3.Be2 Qxg2 4.Bf3, Black's choices)
+Black to move after: e4 d5 exd5 Qxd5 Be2 Qxg2 Bf3
+  -1.15  Qg6 Ne2 Nc6 d4 Qf6 Bf4
+  -0.81  Qg5 d4 Qf5 Nc3 Nf6 Qe2
+  +2.47  Qxf3 Qxf3
+  +3.96  Bg4 Bxg2 Bxd1 Kxd1 Nc6 Bxc6+
+
+### e4 d5 exd5 Qxd5 Be2 Qxg2 Bf3 Qg6
+    (3.Be2 Qxg2 4.Bf3 Qg6, White's choices)
+White to move after: e4 d5 exd5 Qxd5 Be2 Qxg2 Bf3 Qg6
+  -1.09  Nc3 Nc6 Nb5 Kd8 d4 a6
+  -1.15  d4 Nc6 Ne2 e5 Nbc3 Nge7
+  -1.30  Ne2 Nc6 d4 e5 Nbc3 Bd7
+  -1.37  d3
+  -1.67  h4 Nc6 d4 h5 c3 Bg4
+  -1.79  a4 Nc6 d3 e5 Ne2 Bg4
+
+### e4 d5 exd5 Qxd5 Be2 Qxg2 Bf3 Qg6 Nc3
+    (5.Nc3, Black's choices)
+Black to move after: e4 d5 exd5 Qxd5 Be2 Qxg2 Bf3 Qg6 Nc3
+  -1.13  Nc6 Nb5 Kd8 d4 a6 d5
+  -1.04  e5 Nge2 Nc6 Nb5 Nb4 d3
+  -0.93  Nf6 d4 Bg4 Bf4 Nc6 Bxc7
+  -0.72  Na6 a3 Nf6 d4 c6 h4
+  -0.66  c6 d3 Bf5 Nge2 Nd7 Be3
+
+### e4 d5 exd5 Qxd5 Be2 Qxg2 Bf3 Qg6 Nc3 Nc6
+    (5.Nc3 Nc6, White's choices)
+White to move after: e4 d5 exd5 Qxd5 Be2 Qxg2 Bf3 Qg6 Nc3 Nc6
+  -1.15  Nb5 Kd8 d4 a6 d5 Ne5
+  -1.32  d3 Nd4 Be4 f5 Bf3 Qd6
+  -1.61  Nge2 Ne5
+  -1.67  d4 Nb4 Kf1 c6 Bf4 Bf5
+  -1.68  Nd5 Qd6 d4 e5 dxe5 Nxe5
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bg4
+    (6.Bc4 Bg4, White's choices)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bg4
+  +0.36  Be3 e6 h3 Bh5 Qe2 Nbd7
+  +0.25  a4 Nbd7
+  +0.28  O-O e6 a4 Be7 a5 Nbd7
+  +0.27  Bb3 e6 Be3 Bh5 h3 Be7
+  +0.26  Be2 Nbd7 O-O e6 h3 Bh5
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bg4 Be3
+    (7.Be3, Black's choices)
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bg4 Be3
+  +0.37  Nd5 O-O e6 Nxd5 cxd5 Bb5+
+  +0.47  Bh5 h3
+  +0.48  Nbd7 h3 Bh5 Qe2 e6 Bd3
+  +0.48  e6 h3 Bh5 Qe2 Nbd7 Bd3
+  +0.65  Qc7 h3 Bh5 g4 Bg6 Ne5
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bg4 h3
+    (7.h3, Black's choices)
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bg4 h3
+  -0.14  Bxf3 Qxf3 Qxd4 Bb3 e6 Be3
+  +0.47  Bh5 g4 Bg6 Ne5 Nbd7 Bf4
+  +0.82  Bf5 Ne5
+  +0.81  Be6 Bd3 Bd5 Nxd5 cxd5 Ne5
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bg4 Be3 Nbd7 h3
+    (7.Be3 Nbd7 8.h3, Black's choices)
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bg4 Be3 Nbd7 h3
+  +0.38  Bh5 Qe2 e6 O-O-O Be7 g4
+  +0.56  Bf5 O-O e6 Nh4 Bg6 Nxg6
+  +0.68  Bxf3
+  +0.81  Be6 Bd3 Bd5 O-O Bxf3 Qxf3
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bg4 Be3 Nbd7 h3 Bh5 Qe2
+    (9.Qe2, Black's choices)
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bg4 Be3 Nbd7 h3 Bh5 Qe2
+  +0.37  e6 g4 Bg6 O-O-O Be7 Bd3
+  +0.52  Bg6 g3 e6 Bf4 Qb4 O-O-O
+  +0.64  b5 Bb3
+  +0.65  Qc7 g4 Bg6 O-O-O e6 Ne5
+  +0.75  Bxf3 Qxf3 e6 O-O-O Nb6 Bf4
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bg4 Be3 Nbd7 h3 Bh5 Qe2 e6 O-O-O
+    (10.O-O-O, Black's choices)
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bg4 Be3 Nbd7 h3 Bh5 Qe2 e6 O-O-O
+  +0.34  b5 Bd3 b4 Na4 Bxf3 Qxf3
+  +0.43  Nd5 Nxd5 cxd5 Bd3 Be7 Kb1
+  +0.46  Be7 Bd3 Nd5 Nxd5 cxd5 Kb1
+  +0.52  Bg6 g3 Qc7 Nh4 Nb6 Bb3
+  +0.52  O-O-O Bd3 Qc7 g4 Bg6 Bxg6
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bg4 Be3 Nbd7 h3 Bh5 Qe2 e6 O-O-O Be7
+    (10...Be7, White's best)
+White to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bg4 Be3 Nbd7 h3 Bh5 Qe2 e6 O-O-O Be7
+  +0.40  Bd3 b5 g4 Bg6 Bxg6 hxg6
+  +0.38  g4
+  +0.34  Kb1 b5 Bd3 Bg6 Bc1 b4
+
+### e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bg4 Be3 Nbd7 h3 Bh5 Qe2 e6 O-O-O Be7 g4 Bg6 Ne5
+    (11.g4 Bg6 12.Ne5, Black's choices)
+Black to move after: e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3 c6 Bc4 Bg4 Be3 Nbd7 h3 Bh5 Qe2 e6 O-O-O Be7 g4 Bg6 Ne5
+  -0.30  Nxe5 dxe5 Qxe5 f4 Qc7 Rhf1
+  +0.40  b5 Bf4
+  +0.62  Nd5 Bxd5 exd5 h4 h5 Nxg6
+  +0.70  Ne4 Nxe4 Bxe4 Rhe1 Nxe5 dxe5
+DONE
+
+=== 4. The findings of the final two 500 ms runs ===
+
+### e4 d5 e5 c5 d4 Nc6 c3 Bf5 Nf3 e6 Be2 Nge7
+    (ch4 2.e5 line, 6...Nge7, White's best)
+White to move after: e4 d5 e5 c5 d4 Nc6 c3 Bf5 Nf3 e6 Be2 Nge7
+  +0.30  dxc5 Ng6 Be3 Ngxe5 Nxe5 Nxe5
+  +0.10  O-O
+  -0.13  Na3 Ng6 O-O Rc8 Be3 cxd4
+
+### e4 d5 e5 c5 d4 Nc6 c3 Bf5 Nf3 e6 Be2
+    (ch4 2.e5 line, Black's choices at move 6)
+Black to move after: e4 d5 e5 c5 d4 Nc6 c3 Bf5 Nf3 e6 Be2
+  -0.07  Bg4 O-O cxd4 cxd4 Nge7 Nbd2
+  -0.03  cxd4 cxd4 Bg4 O-O Nge7 Nbd2
+  +0.00  Bg6 a3 cxd4 cxd4 Nge7 O-O
+  +0.01  Nh6 Nbd2
+
+### e4 d5 f3 dxe4
+    (ch5 2.f3 dxe4, White's best)
+White to move after: e4 d5 f3 dxe4
+  -0.34  fxe4 e5
+  -0.63  Nc3 exf3 Nxf3 Bf5 d4 e6
+  -0.98  Bc4 Bf5 Qe2 Nf6 Nc3 exf3
+
+### e4 d5 c4 d4 d3 c5
+    (ch5 2.c4 line, 3...c5, White's best)
+White to move after: e4 d5 c4 d4 d3 c5
+  -0.35  e5 Nc6 f4 g6 g3 f6
+  -0.51  Nf3 g6 e5 Nc6 g3 Qc7
+  -0.58  Bf4 g6
+
+### e4 d5 c4 d4 d3
+    (ch5 2.c4 line, Black's choices at move 3)
+Black to move after: e4 d5 c4 d4 d3
+  -0.91  e5 Nf3 Nc6 Be2 Bb4+ Nbd2
+  -0.81  Nc6 f4
+  -0.57  Nd7 f4 e5 Nf3 Ngf6 Na3
+  -0.55  f6 e5 Nc6 Nf3 g5 h3
+
+### e4 d5 Nf3 dxe4 Ng5 Nf6 Bc4 e6 Nc3 Be7 Ngxe4 Nxe4 Nxe4 O-O d4 b6
+    (Tennison 8...b6, White's best)
+White to move after: e4 d5 Nf3 dxe4 Ng5 Nf6 Bc4 e6 Nc3 Be7 Ngxe4 Nxe4 Nxe4 O-O d4 b6
+  +0.22  c3
+  +0.09  O-O Bb7 Re1 c5 Qg4 Nc6
+  -0.04  Bf4 Bb7 f3 Nc6 c3 Na5
+DONE
+
+=== Verdicts ===
+
+Fixed (the flagged Black move was right; the White move before it was a blunder the course had authored):
+  ch6 exercise 5, 13.Bf4?? hung the bishop to 13...Qxf4 (-4.10). The exercise is rebuilt: 13.Qe2 Nf6 14.Bc2 c5,
+    the c-pawn break, at +0.22 for c5 with the best move at +0.22. The old ...e5 break measured +1.3 whatever
+    White played on move 13, so the e-pawn exercise is gone and the chapter says so.
+  ch1 6.h3 line, 10.Bf4?? hung the bishop the same way (-3.90). Now 10.Ne5 O-O 11.Bf4 Qd8: the knight on e5
+    blocks the diagonal, which is what makes Bf4 a move. Qd8 at +0.40.
+  ch5 2.Bd3 line, 5.Ne2?? lost the bishop to 5...e4 (-3.38). Now 5.Nc3 Nc6 at -0.32.
+
+Fixed (the Black move was wrong at 2500 ms):
+  ch1 6.Ne5 line, 10.Ne5 e6 at +1.16: the e-pawn walks into O-O-O and h4-h5. The line now ends 10.Nxb6 Qxb6
+    at +0.19 (Nxb6 is the club move; 10.Ne5 leaves d4 to the queen at -0.15).
+  ch6 exercise 4, 11.Rfe1 c5 at +0.74 against +0.03 for the best move: the break was a move early. The exercise
+    is now 11...Nd5 (+0.13 to +0.22) 12.Bxe7 Qxe7 (+0.20), the knight stepping out of the pin. c5 is kept as an
+    inaccuracy entry with the engine's line.
+  ch1 6.Bc4 Bf5 at +0.73 (7.Ne5 e6 8.g4 Bg6 9.h4): over the bar. Rewritten to 6...Bg4 (+0.36 to +0.40), the
+    same pin as against 6.Bd3, running 7.Be3 Nbd7 (+0.48; Nd5 +0.37 is the engine's choice and is named)
+    8.h3 Bh5 (+0.38) 9.Qe2 e6 (+0.37) 10.O-O-O Be7 (+0.46; b5 +0.34 is named). The old note's claim that the pin
+    fails to Bxf7+ tricks was not true and is gone.
+  ch3 3.Be2 Nf6 at +0.45 to +0.53, with 3...Qxg2 at -1.15: the course was declining a free pawn. Rewritten to
+    3...Qxg2 4.Bf3 Qg6 (-1.09 to -1.15 whatever White plays), with Nf6 and Nc6 kept as inaccuracy entries.
+
+Kept (at or under about +0.40 for White at 2500 ms, and the move the theory plays):
+  ch1 6.Bc4 ... Kb1 O-O            +0.37   (line since rewritten; the position no longer exists in the course)
+  ch5 Tennison 8...b6              -0.05 / +0.22 in the final check
+  ch5 Tennison 3...Nf6             -0.29
+  ch4 2.Nc3 dxe4                   +0.15
+  ch2 4.g3 Nf6                     +0.25 to +0.30
+  ch4 2.e5 ... 6...Nge7            +0.30   (6...Bg4 -0.07 is the engine's choice; Nge7-g6 is the plan taught)
+  ch5 2.f3 dxe4                    -0.34
+  ch5 2.c4 d4 3.d3 c5              -0.35   (3...e5 -0.91 is the engine's choice; c5 holds d4 and is the theory move)
