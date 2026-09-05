@@ -4621,4 +4621,23 @@ first click read "Delete for good?" in red, the second removed the row and the r
 widened button, which is the "anything else puts it back" rule doing its job). Storage
 cleared afterwards. Nick's own files were not listed and not reported.
 
-- [ ] **Review gate 39**
+Gate 39 findings (2026-09-05):
+
+- **Verified for the gate from the repo:** 1102 tests in under eleven seconds and `tsc -b`
+  clean; version 1.8.5; nothing under `courses/`; the tree clean at the start.
+- **Two mutations checked by hand.** Making Delete act on its first click turns three of the
+  six history tests red (the two-click, the timeout and the click-elsewhere). Counting
+  archived games in the Games played stats turns the archive round-trip test red.
+- **Driven against a server on the phase's source at 1200x980.** Stop and discard on a game
+  at move 2: the start screen returned and the store held no game. A reviewed game on
+  Progress: Archive took it out of the list and the count ("No games yet"), the "1 archived
+  game" line appeared and opened the archive view with Unarchive and Delete; the record
+  carried `archived: true`. Delete pressed twice within the window removed a seeded record
+  and its row. One earlier Delete attempt disarmed itself because the two clicks were more
+  than five seconds apart across tool calls, which is the timeout doing its job.
+- **The builder's addition stands**: with the Line column and four buttons the games table
+  is wider than the panel, so both tables scroll inside their own box rather than the page.
+- **Nick's own files were not listed and not reported.** The browser build's storage was
+  cleared afterwards.
+
+- [x] **Review gate 39 passed** (2026-09-05)
