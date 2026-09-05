@@ -1,0 +1,10 @@
+Phase 41, 2026-09-06, after the last content edit. No engine; prose checker only.
+
+331 mistake entries, 3 with a material claim and a move sequence to check it, 1 claiming material without naming a move.
+
+0 claims the board does not support:
+
+
+1 claiming material with no sequence to check, for a human:
+
+  ch1-nf6-the-wedge  Bxc6 not Rd1: "Sound, holding d4 with the rook. The trade first wins the bishop the tempo it needs."

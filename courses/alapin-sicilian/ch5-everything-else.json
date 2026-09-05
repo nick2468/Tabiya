@@ -69,8 +69,8 @@
                                           "note": "The knight with tempo on the queen.",
                                           "tags": ["development"],
                                           "mistakes": [
-                                            { "san": "Be3", "grade": "playable", "note": "Sound. The knight first, because the tempo is free." },
-                                            { "san": "Bd3", "grade": "playable", "note": "Fine: 7...Qd6 8.Nc3 is the same shape a move later. The knight first takes the free tempo." }
+                                            { "san": "Be3", "grade": "inaccuracy", "note": "It lets the tempo go: 7...Bg4 and the knight on b1 comes out a move later than it could have." },
+                                            { "san": "Bd3", "grade": "inaccuracy", "note": "It lets the tempo go: 7...Bg4 and Black is developing while the knight on b1 still has to come out." }
                                           ],
                                           "children": [
                                             {
@@ -84,8 +84,8 @@
                                                   "tags": ["big-centre"],
                                                   "mistakes": [
                                                     { "san": "Be2", "grade": "inaccuracy", "note": "Sound development and it lets the moment go: 8...Nf6 9.O-O and it is a level isolated-pawn game, where the push was a pawn's worth better." },
-                                                    { "san": "Bc4", "grade": "playable", "note": "Sound: 8...Nf6 9.d5 Ne5 10.Bb3 and the push comes a move later." },
-                                                    { "san": "g3", "grade": "playable", "note": "Sound, and the push is simpler." }
+                                                    { "san": "Bc4", "grade": "inaccuracy", "note": "8...Nf6 and the knight on c6 has a defender before the push arrives, so the push a move later is worth much less." },
+                                                    { "san": "g3", "grade": "inaccuracy", "note": "A quiet move where the push hits the knight with check to follow; 8...Bg4 and the moment has gone." }
                                                   ],
                                                   "children": [
                                                     {
@@ -112,7 +112,7 @@
                                                                   "tags": ["development"],
                                                                   "mistakes": [
                                                                     { "san": "Qe2", "grade": "inaccuracy", "note": "10...Qxe2+ 11.Bxe2 and the queens are off with White's edge traded away." },
-                                                                    { "san": "Ne2", "grade": "playable", "note": "Sound, and the bishop is the piece that wants e2; the knight is better on c3." }
+                                                                    { "san": "Ne2", "grade": "mistake", "note": "10...Nf6 and the pawn on d5 is hit by the queen and the knight with only the queen holding it. The bishop blocks and keeps d5." }
                                                                   ],
                                                                   "plan": "Castle, Re1 hitting the queen, Bf4 and Qd2. The pawn on d5 is a wedge in Black's camp and the queen on e5 has to move again before Black has developed anything.",
                                                                   "name": "2...a6, the push to d5"
@@ -409,7 +409,7 @@
                                   "note": "The pawn takes back.",
                                   "tags": ["big-centre"],
                                   "mistakes": [
-                                    { "san": "Nf3", "grade": "inaccuracy", "note": "6...dxc3 7.Nxc3 and the pawn on f5 is all White has for a centre that has gone." }
+                                    { "san": "Nf3", "grade": "playable", "note": "Sound, and the engine's choice: 6...e5 7.fxe6 and the pawns come off into an attack. The course takes back with the pawn, which is simpler and keeps the centre." }
                                   ],
                                   "children": [
                                     {
@@ -423,7 +423,7 @@
                                           "tags": ["development"],
                                           "mistakes": [
                                             { "san": "Ne2", "grade": "playable", "note": "Sound, keeping f3 for the pawn. The knight on f3 holds d4 and e5 both." },
-                                            { "san": "Bb5", "grade": "playable", "note": "Fine, and the bishop on d3 is holding f5: 7...Bd7 and it has to decide." }
+                                            { "san": "Bb5", "grade": "inaccuracy", "note": "The bishop leaves the pawn on f5 it was holding: 7...Bd7 and the bishop has to decide with nothing gained." }
                                           ],
                                           "plan": "Castle, Nc3, and keep the pawn on f5 with Bd3 and g4 only when the king is safe. Give the pawn back only for the centre or for development, never for nothing.",
                                           "name": "2...f5, the pawn taken and kept"
@@ -521,7 +521,7 @@
                                                   "note": "Block with the knight, which comes out with tempo to the square it wanted. The queen is on b4 with nowhere to go, the knight on e5 is hit by the bishop, and Black is a pawn up in a position he would give two pawns to be out of.",
                                                   "tags": ["development"],
                                                   "mistakes": [
-                                                    { "san": "Qd2", "grade": "inaccuracy", "note": "8...Qxd2+ 9.Nxd2 and the queens are off with the pawn gone." },
+                                                    { "san": "Qd2", "grade": "mistake", "note": "8...Qxd2+ 9.Nxd2 and the queens are off with the pawn gone and the hunt over: everything White had built comes to nothing." },
                                                     { "san": "Ke2", "grade": "mistake", "note": "8...b6 9.Nc3 Ba6+ and the king is in the open with the queens on." }
                                                   ],
                                                   "plan": "f4 to hit the knight, Rb1 to hit the queen, Nf3 and the king castles: every White move comes with a threat and Black is answering them with a queen that has moved five times.",
@@ -543,7 +543,7 @@
                                           "note": "Block with the knight, developing with tempo, and the knight on c3 covers b5 and d5 as well.",
                                           "tags": ["development"],
                                           "mistakes": [
-                                            { "san": "Nd2", "grade": "playable", "note": "Sound, and the knight on c3 is the better square: it covers d5 and it is not in the bishop's way." },
+                                            { "san": "Nd2", "grade": "inaccuracy", "note": "The knight blocks on the wrong square: it is in the bishop's way and it does not cover d5, and the pawn on d5 needs it." },
                                             { "san": "Qd2", "grade": "inaccuracy", "note": "7...Qxd2+ 8.Nxd2 and the queens are off with White's development spent on a trade." }
                                           ],
                                           "plan": "f4 against the knight, Nf3, Bd3 and castle. White has the centre, the pieces and the tempi; Black has a queen on a5 and a knight looking for a square.",
@@ -566,7 +566,7 @@
                                   "tags": ["tactics"],
                                   "mistakes": [
                                     { "san": "Nc3", "grade": "playable", "note": "Sound: 6...e5 7.Nf3 and the knight on d4 is asked to leave. The bishop asks the queen first." },
-                                    { "san": "Nf3", "grade": "playable", "note": "Fine: 6...Nxf3+ 7.Qxf3 e5 and White has the centre with the queens on." }
+                                    { "san": "Nf3", "grade": "inaccuracy", "note": "6...Nxf3+ 7.Qxf3 e5 and the knight has been traded before the bishop could hit the queen, with the tempo gone." }
                                   ],
                                   "plan": "Nc3, Nf3 to trade the knight on d4 when it suits, and Bd3 and castle. The pawn on d5 is a wedge in Black's camp and the queen on b6 is a target for the bishop.",
                                   "name": "5...Nd4, the knight hit"

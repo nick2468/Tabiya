@@ -1,0 +1,30 @@
+engine-pass.mjs at 500 ms, runs 3 and 4, after the rewrites above and before the last content edit.
+Conditions: 16 logical processors, CPU load sampled at 2-27% before each run (no javac, cargo, rustc or tauri process; the idle Vite dev servers of other projects), no build, no test run beside any 2500 ms run, one engine process at a time, every run in this phase sequential. One content-suite run of about three seconds overlapped the FIRST 500 ms sampler pass, which is a sampler and was superseded by later passes.
+Evaluations are from White's point of view: positive favours White, the student side.
+
+=== run 3 ===
+184 student moves across 7 chapters, 368 positions to evaluate at 500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+2 moves cost 0.5 of a pawn or more:
+
+1.58  ch3-other-second-moves  e4 c5 c3 e5 Nf3 Nc6 Bc4 Nf6 d3 d6 O-O
+      before 1.79  after 0.21
+0.81  ch5-everything-else  e4 c5 c3 f5 exf5 Nf6 d4 d5 Bd3 cxd4 cxd4
+      before 1.85  after 1.04
+
+=== run 4 ===
+184 student moves across 7 chapters, 368 positions to evaluate at 500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+3 moves cost 0.5 of a pawn or more:
+
+1.44  ch3-other-second-moves  e4 c5 c3 e5 Nf3 Nc6 Bc4 Nf6 d3 d6 O-O
+      before 1.68  after 0.24
+0.67  ch5-everything-else  e4 c5 c3 f5 exf5 Nf6 d4 d5 Bd3 cxd4 cxd4
+      before 1.82  after 1.15
+0.54  ch1-nf6-the-wedge  e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 Nc6 cxd4 d6 Bc4 Nb6 Bb5 Bd7 Bxc6
+      before 0.27  after -0.27
+
+Run 4 found ch1 8...Bd7 9.Bxc6 at -0.27 (below the top four at 2500 ms, where 9.exd6 is +0.16 and 9.Nc3 +0.19);
+rewritten to 9.exd6 e6 10.O-O Bxd6 11.Nc3, the last content edit of the phase.

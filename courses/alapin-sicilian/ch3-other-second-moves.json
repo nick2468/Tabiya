@@ -200,7 +200,7 @@
                                   "tags": ["big-centre"],
                                   "mistakes": [
                                     { "san": "Be3", "grade": "playable", "note": "Sound, and 6...cxd4 7.cxd4 e5 hits the centre with the pin holding f3. The push first, while the knight has nowhere good." },
-                                    { "san": "O-O", "grade": "playable", "note": "Fine: 6...cxd4 7.cxd4 e6 and it is an isolated-pawn game with Black's pieces well placed." }
+                                    { "san": "O-O", "grade": "inaccuracy", "note": "6...cxd4 7.cxd4 e6 and it is an isolated-pawn game with Black's pieces well placed, where the push had the knight on c6 short of squares." }
                                   ],
                                   "children": [
                                     {
@@ -302,7 +302,7 @@
                                           "tags": ["development"],
                                           "mistakes": [
                                             { "san": "d5", "grade": "playable", "note": "Sound: 7...Ne5 8.Nxe5 dxe5 is the other line. With the c-file open the push gives Black's rook the file." },
-                                            { "san": "Nbd2", "grade": "playable", "note": "Fine, and the bishop on e3 does the job the position asks for." }
+                                            { "san": "Nbd2", "grade": "inaccuracy", "note": "The knight blocks the bishop that wants e3, and the pawn on d4 is held by the queen alone; the bishop comes to e3 a move late." }
                                           ],
                                           "plan": "Nc3, castle, h3 to ask the bishop, and the centre pawns stay where they are until Black's pieces are placed; then d5 or e5, whichever hits more.",
                                           "name": "2...d6 and 5...cxd4, the full centre"
@@ -713,7 +713,7 @@
                           "note": "The queen defends e4 a second time, keeping the wedge on e5 for the moment it is a threat and not a pawn to be taken.",
                           "tags": ["development"],
                           "mistakes": [
-                            { "san": "e5", "grade": "inaccuracy", "note": "5...Nd5 and the knight is on its best square with the bishop already behind it." },
+                            { "san": "e5", "grade": "mistake", "note": "5...Bxg2 6.exf6 Bxh1 and the exchange has gone: the e-pawn was all that stood between the bishop on b7 and g2." },
                             { "san": "Nd2", "grade": "playable", "note": "Sound, and the queen keeps the knight for c3." }
                           ],
                           "children": [
@@ -727,7 +727,7 @@
                                   "note": "Develop. Both e-pawn defenders are in place and the centre stands.",
                                   "tags": ["development"],
                                   "mistakes": [
-                                    { "san": "e5", "grade": "playable", "note": "Sound now: 6...Nd5 7.Nf3 and the wedge is held. The knight first keeps the choice." }
+                                    { "san": "e5", "grade": "mistake", "note": "6...Bxg2 7.exf6 Bxh1 and the exchange has gone: the e-pawn was all that stood between the bishop on b7 and g2." }
                                   ],
                                   "children": [
                                     {

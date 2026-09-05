@@ -107,7 +107,7 @@
                                                                   "mistakes": [
                                                                     { "san": "O-O", "grade": "inaccuracy", "note": "10...cxd4 11.cxd4 e6 and Black has taken on his own terms with everything defended." },
                                                                     { "san": "a4", "grade": "playable", "note": "Sound, hitting the knight, and the pawn on c5 is there to be taken now." },
-                                                                    { "san": "Be3", "grade": "playable", "note": "Sound: 10...cxd4 11.Bxd4 Qd5 and the tension is gone on Black's terms." }
+                                                                    { "san": "Be3", "grade": "inaccuracy", "note": "10...cxd4 11.Bxd4 Qd5 and the tension is gone on Black's terms, with the pawn on c5 that was free no longer there." }
                                                                   ],
                                                                   "children": [
                                                                     {
@@ -192,7 +192,7 @@
                                           "tags": ["big-centre"],
                                           "mistakes": [
                                             { "san": "dxc5", "grade": "playable", "note": "Sound: 7...Ng6 8.Nc3 and the centre has been traded for development. The push keeps it." },
-                                            { "san": "Nc3", "grade": "playable", "note": "Sound and slower: 7...cxd4 8.Nxd4 and the knight has taken back, which the course avoids. The push first." }
+                                            { "san": "Nc3", "grade": "inaccuracy", "note": "7...cxd4 8.Nxd4 and the knight has taken back, which the course avoids, and the knight on c6 has been let off. The push first." }
                                           ],
                                           "plan": "Nxd4 when the knight comes to d4, then Nc3 and Bd3 with the pawns on d5 and e5 cramping everything Black has. If Black takes on d5, take back with the c-pawn and the pawn on d5 is a passed pawn with a rook behind it.",
                                           "name": "4...e6, the c-pawn hits the knight"

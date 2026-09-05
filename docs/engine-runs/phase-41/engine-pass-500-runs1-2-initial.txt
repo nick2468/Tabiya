@@ -1,0 +1,80 @@
+engine-pass.mjs at 500 ms, the first two runs over the finished chapters, before any engine-led fix.
+Conditions: 16 logical processors, CPU load sampled at 2-27% before each run (no javac, cargo, rustc or tauri process; the idle Vite dev servers of other projects), no build, no test run beside any 2500 ms run, one engine process at a time, every run in this phase sequential. One content-suite run of about three seconds overlapped the FIRST 500 ms sampler pass, which is a sampler and was superseded by later passes.
+Evaluations are from White's point of view: positive favours White, the student side.
+
+=== run 1 ===
+176 student moves across 7 chapters, 352 positions to evaluate at 500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+12 moves cost 0.5 of a pawn or more:
+
+5.32  ch3-other-second-moves  e4 c5 c3 d6 d4 Nf6 Bd3 Nc6 Nf3 Bg4 d5 Ne5 Nxe5 dxe5 O-O
+      before 1.25  after -4.07
+1.56  ch3-other-second-moves  e4 c5 c3 e5 Nf3 Nc6 Bc4 Nf6 d3 d6 O-O
+      before 1.77  after 0.21
+1.39  ch5-everything-else  e4 c5 c3 a6 d4 cxd4 cxd4 d5 exd5 Qxd5 Nf3 Nc6 Nc3 Qd6 Be2
+      before 1.68  after 0.29
+1.25  ch4-the-full-centre  e4 c5 c3 Nf6 e5 Nd5 d4 d6 Nf3 Nc6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7 Qxd7 O-O
+      before 1.29  after 0.04
+1.09  ch1-nf6-the-wedge  e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 Nc6 cxd4 d6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7 Qxd7 Nc3 e6 O-O Be7 Qg4 O-O Bd3
+      before 0.30  after -0.79
+1.05  ch2-d5-the-isolated-pawn  e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bxf3 Bxf3 Qd7 O-O
+      before 1.31  after 0.26
+1.00  ch5-everything-else  e4 c5 c3 Qa5 Nf3 Nc6 Bc4 Nf6 O-O
+      before 0.50  after -0.50
+0.85  ch4-the-full-centre  e4 c5 c3 Nf6 e5 Nd5 d4 e6 Nf3 Nc6 Bc4
+      before 1.16  after 0.31
+0.76  ch5-everything-else  e4 c5 c3 f5 exf5 Nf6 d4 d5 Bd3 cxd4 cxd4
+      before 1.83  after 1.07
+0.66  ch1-nf6-the-wedge  e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 d6 cxd4 dxe5 Nxe5 e6 Bc4 Nd7 Nxd7
+      before 0.36  after -0.30
+0.54  ch3-other-second-moves  e4 c5 c3 g6 d4 cxd4 cxd4 d5 e5 Nc6 Nc3 Bg7 Nf3
+      before 0.68  after 0.14
+0.54  ch4-the-full-centre  e4 c5 c3 d5 exd5 Qxd5 d4 Nc6 Nf3 Bg4 Be2 e6 O-O Nf6 Be3 Be7 c4
+      before 0.14  after -0.40
+
+=== run 2 ===
+176 student moves across 7 chapters, 352 positions to evaluate at 500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+10 moves cost 0.5 of a pawn or more:
+
+5.46  ch3-other-second-moves  e4 c5 c3 d6 d4 Nf6 Bd3 Nc6 Nf3 Bg4 d5 Ne5 Nxe5 dxe5 O-O
+      before 1.28  after -4.18
+1.39  ch3-other-second-moves  e4 c5 c3 e5 Nf3 Nc6 Bc4 Nf6 d3 d6 O-O
+      before 1.60  after 0.21
+1.12  ch5-everything-else  e4 c5 c3 a6 d4 cxd4 cxd4 d5 exd5 Qxd5 Nf3 Nc6 Nc3 Qd6 Be2
+      before 1.54  after 0.42
+0.99  ch2-d5-the-isolated-pawn  e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bxf3 Bxf3 Qd7 O-O
+      before 1.38  after 0.39
+0.98  ch1-nf6-the-wedge  e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 Nc6 cxd4 d6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7 Qxd7 Nc3 e6 O-O Be7 Qg4 O-O Bd3
+      before 0.18  after -0.80
+0.96  ch4-the-full-centre  e4 c5 c3 Nf6 e5 Nd5 d4 d6 Nf3 Nc6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7 Qxd7 O-O
+      before 1.12  after 0.16
+0.96  ch5-everything-else  e4 c5 c3 Qa5 Nf3 Nc6 Bc4 Nf6 O-O
+      before 0.48  after -0.48
+0.84  ch4-the-full-centre  e4 c5 c3 Nf6 e5 Nd5 d4 e6 Nf3 Nc6 Bc4
+      before 1.23  after 0.39
+0.68  ch1-nf6-the-wedge  e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 d6 cxd4 dxe5 Nxe5 e6 Bc4 Nd7 Nxd7
+      before 0.38  after -0.30
+0.66  ch5-everything-else  e4 c5 c3 f5 exf5 Nf6 d4 d5 Bd3 cxd4 cxd4
+      before 1.85  after 1.19
+
+What they found, and what was done (every finding re-checked at 2500 ms in engine-ask-2500.txt):
+  ch3 2...d6 line, 8.O-O?? at -3.80: the knight had left f3 and the bishop on g4 took the queen. Now 8.Qb3 (+1.35)
+    Qc7 9.Bb5+ Bd7 10.Bxd7+ (+1.40).
+  ch3 2...e5, 6.O-O at +0.26 against 6.Ng5 at +1.63: KEPT. Ng5 d5 is a forcing line the fork rule declines; the
+    position after O-O is level-plus and it is the move the structure wants. Ng5 is named as playable beside it.
+  ch5 2...a6 line, 8.Be2 at +0.29 against 8.d5 at +1.52: rewritten to 8.d5 Ne5 9.Nxe5 Qxe5+ 10.Be2.
+  ch4 4...d6 line, 10.O-O at +0.19 against 10.dxc5 at +1.27: rewritten to 10.dxc5 Nd5 11.Nd2.
+  ch1 main line, 14.Bd3 below -0.22 (it hangs d4 to ...Nxd4) against 14.Bxc6 at +0.39: rewritten to 14.Bxc6 bxc6
+    15.Bh6; 13.Qg4 confirmed best at +0.36.
+  ch2 ...Bxf3 line, 9.O-O at +0.41 against 9.dxc5 at +1.40: rewritten to 9.dxc5 Bxc5 10.Qxd7+ Nbxd7 11.Bxb7 (+1.30).
+  ch5 2...Qa5 line, 5.O-O?? at -0.50 (5...Nxe4): rewritten to 5.Qe2 (+0.49) d6 6.O-O e6 7.d4 cxd4 8.cxd4 (+0.76).
+  ch4 4...e6 line, 6.Bc4 at +0.32 against 6.c4 at +1.07: rewritten to 6.c4 Nde7 7.d5 (+1.11).
+  ch5 2...f5 line, 6.cxd4 at +1.07 against 6.Nf3 at +1.88: KEPT. The pawn recapture is the course's rule and the
+    position is clearly better for White. Nf3 is named as playable beside it.
+  ch1 5...d6 line, 9.Nxd7 below +0.16 against 9.O-O at +0.40: rewritten to 9.O-O Be7 10.Qg4 O-O 11.Re1.
+  ch3 2...g6 line, 7.Nf3 below +0.38 against 7.Bb5 at +0.61: rewritten to 7.Bb5 f6 8.Nf3 Bg4 9.h3 Bxf3 10.Qxf3.
+  ch4 4...Nc6 line, 9.c4 at about -0.40 against 9.dxc5 at +0.19: rewritten to 9.h3 cxd4 10.cxd4 Bh5 11.Nc3, which
+    is chapter 2's pin line by transposition.

@@ -1,0 +1,87 @@
+engine-mistakes.mjs at 2500 ms, the first run, after the last edit to the course's lines.
+Conditions: 16 logical processors, CPU load sampled at 2-27% before the run, no build, no test run, one engine process, every other engine run in the phase finished before it began.
+Evaluations are from White's point of view: positive favours White, the student side.
+Bands: playable to 0.9, inaccuracy -0.4 to 1.8, mistake 0.7 and up.
+
+329 mistake entries across 7 chapters, 506 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+23 entries where the grade and the engine disagree:
+
+ 3.99  inaccuracy graded too kindly  ch1-nf6-the-wedge
+      e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 e6 cxd4 b6 Nc3 Nxc3 : bxc3 not Qd2
+      "8...Nd5 puts a knight back on the square with the pawn still on c3, and the queen has to guard it."
+ 3.73  inaccuracy graded too kindly  ch1-nf6-the-wedge
+      e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 e6 cxd4 b6 Nc3 Nxc3 bxc3 Qc7 : Bd2 not Bd3
+      "9...Qxc3+ 10.Bd2 Qc7 and Black has taken a pawn for one tempo."
+ 2.94  playable   graded too kindly  ch5-everything-else
+      e4 c5 c3 a6 d4 cxd4 cxd4 d5 exd5 Qxd5 Nf3 Nc6 Nc3 Qd6 d5 Ne5 Nxe5 Qxe5+ : Be2 not Ne2
+      "Sound, and the bishop is the piece that wants e2; the knight is better on c3."
+ 2.78  playable   graded too kindly  ch3-other-second-moves
+      e4 c5 c3 b6 d4 Bb7 Bd3 Nf6 Qe2 e6 : Nf3 not e5
+      "Sound now: 6...Nd5 7.Nf3 and the wedge is held. The knight first keeps the choice."
+ 2.35  inaccuracy graded too kindly  ch3-other-second-moves
+      e4 c5 c3 b6 d4 Bb7 Bd3 Nf6 : Qe2 not e5
+      "5...Nd5 and the knight is on its best square with the bishop already behind it."
+ 2.34  inaccuracy graded too kindly  ch2-d5-the-isolated-pawn
+      e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bxf3 : Bxf3 not gxf3
+      "8...cxd4 9.cxd4 Nc6 and White's king has no cover with the centre about to open."
+ 2.10  inaccuracy graded too kindly  ch2-d5-the-isolated-pawn
+      e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 e6 Be3 Nc6 Bd3 cxd4 cxd4 Qd6 : Nc3 not d5
+      "The break with nothing behind it: 9...exd5 10.Nc3 Nb4 and the pawn on d5 is a target with the bishop on d3 chased."
+ 2.02  inaccuracy graded too kindly  ch2-d5-the-isolated-pawn
+      e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 cxd4 : cxd4 not Nxd4
+      "7...Bxe2 8.Qxe2 and White has the open Sicilian's knight with nothing else."
+ 1.44  playable   graded too kindly  ch2-d5-the-isolated-pawn
+      e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bxf3 Bxf3 Qd7 dxc5 Bxc5 Qxd7+ Nbxd7 : Bxb7 not O-O
+      "Sound: 11...b6 12.Nd2 and White has the bishop pair for nothing. The pawn on b7 is free now and may not be later."
+ 1.42  playable   graded too kindly  ch5-everything-else
+      e4 c5 c3 f5 exf5 Nf6 d4 d5 Bd3 cxd4 cxd4 Nc6 : Nf3 not Bb5
+      "Fine, and the bishop on d3 is holding f5: 7...Bd7 and it has to decide."
+ 1.36  playable   graded too kindly  ch5-everything-else
+      e4 c5 c3 a6 d4 cxd4 cxd4 d5 exd5 Qxd5 Nf3 Nc6 : Nc3 not Bd3
+      "Fine: 7...Qd6 8.Nc3 is the same shape a move later. The knight first takes the free tempo."
+ 1.34  playable   graded too kindly  ch5-everything-else
+      e4 c5 c3 a6 d4 cxd4 cxd4 d5 exd5 Qxd5 Nf3 Nc6 : Nc3 not Be3
+      "Sound. The knight first, because the tempo is free."
+ 1.18  playable   graded too kindly  ch2-d5-the-isolated-pawn
+      e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bxf3 Bxf3 Qd7 : dxc5 not Qb3
+      "Sound, hitting b7: 9...Nc6 10.dxc5 Bxc5 and the pawn on b7 is still defended."
+ 1.14  playable   graded too kindly  ch5-everything-else
+      e4 c5 c3 a6 d4 cxd4 cxd4 d5 exd5 Qxd5 Nf3 Nc6 Nc3 Qd6 : d5 not Bc4
+      "Sound: 8...Nf6 9.d5 Ne5 10.Bb3 and the push comes a move later."
+ 1.12  playable   graded too kindly  ch3-other-second-moves
+      e4 c5 c3 d6 d4 Nf6 Bd3 Nc6 Nf3 cxd4 cxd4 Bg4 : Be3 not Nbd2
+      "Fine, and the bishop on e3 does the job the position asks for."
+ 1.10  playable   graded too kindly  ch4-the-full-centre
+      e4 c5 c3 Nf6 e5 Nd5 d4 d6 Nf3 Nc6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7 Qxd7 : dxc5 not Be3
+      "Sound: 10...cxd4 11.Bxd4 Qd5 and the tension is gone on Black's terms."
+ 1.03  playable   graded too kindly  ch5-everything-else
+      e4 c5 c3 a6 d4 cxd4 cxd4 d5 exd5 Qxd5 Nf3 Nc6 Nc3 Qd6 : d5 not g3
+      "Sound, and the push is simpler."
+ 1.00  playable   graded too kindly  ch2-d5-the-isolated-pawn
+      e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bxf3 Bxf3 Qd7 : dxc5 not Be3
+      "Sound, holding d4, and 9...Nd5 hits the bishop. The pawn on c5 was there to be taken."
+ 0.99  playable   graded too kindly  ch3-other-second-moves
+      e4 c5 c3 d6 d4 Nf6 Bd3 Nc6 Nf3 Bg4 : d5 not O-O
+      "Fine: 6...cxd4 7.cxd4 e6 and it is an isolated-pawn game with Black's pieces well placed."
+ 0.97  playable   graded too kindly  ch2-d5-the-isolated-pawn
+      e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 Bg4 Be2 e6 h3 Bxf3 Bxf3 Qd7 dxc5 Bxc5 : Qxd7+ not O-O
+      "Sound, and it lets 10...Qc7 defend b7. The trade first."
+ 0.97  playable   graded too kindly  ch4-the-full-centre
+      e4 c5 c3 Nf6 e5 Nd5 d4 e6 Nf3 Nc6 c4 Nde7 : d5 not Nc3
+      "Sound and slower: 7...cxd4 8.Nxd4 and the knight has taken back, which the course avoids. The push first."
+ 0.92  playable   graded too kindly  ch5-everything-else
+      e4 c5 c3 Nc6 d4 cxd4 cxd4 Qb6 d5 Nd4 : Be3 not Nf3
+      "Fine: 6...Nxf3+ 7.Qxf3 e5 and White has the centre with the queens on."
+-0.56  inaccuracy graded too harshly  ch5-everything-else
+      e4 c5 c3 f5 exf5 Nf6 d4 d5 Bd3 cxd4 : cxd4 not Nf3
+      "6...dxc3 7.Nxc3 and the pawn on f5 is all White has for a centre that has gone."
+
+What was done with the 23: every one acted on. Eight became mistakes, and the punishments were asked at 2500 ms
+(engine-ask-2500.txt, section 3) so the notes say what the engine plays: 8.Qd2 and 9.Bd3 in the ...b6 line (the
+first drops a piece to ...Nd5, the second the rook to ...Qxc3+ and ...Qxa1), 10.Ne2 in the 2...a6 line, the two e5
+pushes against 2...b6 that hang the exchange to ...Bxg2, 8.gxf3 in the ...Bxf3 line, 9.d5 with nothing behind it,
+and 7.Nxd4 that lets ...Qxg2 through. Fourteen playable entries between 0.92 and 1.44 became inaccuracies with their
+notes reworded to say what the move costs. One was too harsh: 6.Nf3 against 2...f5 is the engine's own choice and is
+playable now, with the pawn recapture kept as the course's move.

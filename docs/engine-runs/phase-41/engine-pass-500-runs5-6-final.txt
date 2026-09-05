@@ -1,0 +1,28 @@
+engine-pass.mjs at 500 ms, twice, after the LAST content edit. These are the two runs the chip asks for.
+Conditions: 16 logical processors, CPU load sampled at 2-27% before each run (no javac, cargo, rustc or tauri process; the idle Vite dev servers of other projects), no build, no test run beside any 2500 ms run, one engine process at a time, every run in this phase sequential. One content-suite run of about three seconds overlapped the FIRST 500 ms sampler pass, which is a sampler and was superseded by later passes.
+Evaluations are from White's point of view: positive favours White, the student side.
+
+=== run 5 ===
+184 student moves across 7 chapters, 368 positions to evaluate at 500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+1 moves cost 0.5 of a pawn or more:
+
+1.52  ch3-other-second-moves  e4 c5 c3 e5 Nf3 Nc6 Bc4 Nf6 d3 d6 O-O
+      before 1.71  after 0.19
+
+=== run 6 ===
+184 student moves across 7 chapters, 368 positions to evaluate at 500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+3 moves cost 0.5 of a pawn or more:
+
+1.63  ch3-other-second-moves  e4 c5 c3 e5 Nf3 Nc6 Bc4 Nf6 d3 d6 O-O
+      before 1.70  after 0.07
+0.64  ch5-everything-else  e4 c5 c3 f5 exf5 Nf6 d4 d5 Bd3 cxd4 cxd4
+      before 1.78  after 1.14
+0.52  ch3-other-second-moves  e4 c5 c3 e5 Nf3 Nc6 Bc4 Nf6 d3
+      before 0.59  after 0.07
+
+Both findings are the two kept moves (6.O-O against 2...e5, 6.cxd4 against 2...f5); run 6 also sampled 5.d3 in the
+2...e5 line at 0.52, which the 2500 ms pass below does not report.

@@ -242,7 +242,7 @@
                                   "note": "The knight to c3 now that the c-pawn has gone: the main line with the bishop already on d3, so a3 is the next move before ...Nb4 arrives.",
                                   "tags": ["development"],
                                   "mistakes": [
-                                    { "san": "d5", "grade": "inaccuracy", "note": "The break with nothing behind it: 9...exd5 10.Nc3 Nb4 and the pawn on d5 is a target with the bishop on d3 chased." },
+                                    { "san": "d5", "grade": "mistake", "note": "9...Nxd5 and the pawn has simply gone: nothing was behind it." },
                                     { "san": "O-O", "grade": "playable", "note": "Fine: 9...Nb4 10.Be2 and the bishop has been chased once. The knight first, then a3." }
                                   ],
                                   "plan": "a3, castle, and the main line's plan: Qe2, the rooks to the centre files, Ne5 and the d5 break.",
@@ -388,7 +388,7 @@
                           "note": "The bishop takes back and points down the long diagonal at b7 and the queen on d5.",
                           "tags": ["development"],
                           "mistakes": [
-                            { "san": "gxf3", "grade": "inaccuracy", "note": "8...cxd4 9.cxd4 Nc6 and White's king has no cover with the centre about to open." }
+                            { "san": "gxf3", "grade": "mistake", "note": "8...cxd4 9.Qxd4 Qxd4 10.cxd4 Nc6 and White has a wrecked kingside in an ending." }
                           ],
                           "children": [
                             {
@@ -402,8 +402,8 @@
                                   "tags": ["tactics"],
                                   "mistakes": [
                                     { "san": "O-O", "grade": "inaccuracy", "note": "9...cxd4 10.cxd4 and the pawn is isolated with nothing won for it, where the pawn on c5 was there to be taken." },
-                                    { "san": "Be3", "grade": "playable", "note": "Sound, holding d4, and 9...Nd5 hits the bishop. The pawn on c5 was there to be taken." },
-                                    { "san": "Qb3", "grade": "playable", "note": "Sound, hitting b7: 9...Nc6 10.dxc5 Bxc5 and the pawn on b7 is still defended." }
+                                    { "san": "Be3", "grade": "inaccuracy", "note": "It holds d4 and 9...Nd5 hits the bishop, while the pawn on c5 that was there to be taken stays on the board." },
+                                    { "san": "Qb3", "grade": "inaccuracy", "note": "It hits b7 and 9...Nc6 defends it; the pawn on c5 was the one to take, and it is taken with the queens off." }
                                   ],
                                   "children": [
                                     {
@@ -417,7 +417,7 @@
                                           "tags": ["tactics"],
                                           "mistakes": [
                                             { "san": "Bxb7", "grade": "mistake", "note": "10...Qxb7 and the bishop has been given for a pawn: the queen on d7 defends b7 until it is traded." },
-                                            { "san": "O-O", "grade": "playable", "note": "Sound, and it lets 10...Qc7 defend b7. The trade first." }
+                                            { "san": "O-O", "grade": "inaccuracy", "note": "10...Qc7 defends b7 and the pawn is not coming off. The trade first." }
                                           ],
                                           "children": [
                                             {
@@ -431,7 +431,7 @@
                                                   "tags": ["tactics"],
                                                   "mistakes": [
                                                     { "san": "Nd2", "grade": "inaccuracy", "note": "11...b6 and the pawn on b7 is defended; the bishop was taking it for free." },
-                                                    { "san": "O-O", "grade": "playable", "note": "Sound: 11...b6 12.Nd2 and White has the bishop pair for nothing. The pawn on b7 is free now and may not be later." }
+                                                    { "san": "O-O", "grade": "inaccuracy", "note": "11...b6 and the pawn on b7 is defended: it was free now and is not later." }
                                                   ],
                                                   "plan": "Ba6 when the rook hits the bishop, Nd2 and O-O-O or Ke2 with the rooks connected, and the a-pawn goes forward with the bishop pair behind it. A pawn up with no weaknesses is the whole plan.",
                                                   "name": "The trade on f3, a pawn on b7"
@@ -464,7 +464,7 @@
                   "note": "The pawn takes back.",
                   "tags": ["isolated-pawn"],
                   "mistakes": [
-                    { "san": "Nxd4", "grade": "inaccuracy", "note": "7...Bxe2 8.Qxe2 and White has the open Sicilian's knight with nothing else." }
+                    { "san": "Nxd4", "grade": "mistake", "note": "7...Qxg2 8.Rf1 and the pawn has gone with the king stuck in the middle: the knight left f3 and the queen walked through." }
                   ],
                   "children": [
                     {

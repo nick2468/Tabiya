@@ -1,0 +1,21 @@
+engine-pass.mjs at 2500 ms over the whole course, once, after the last content edit: the second-pass standard.
+Conditions: 16 logical processors, CPU load sampled at 2-27% before each run (no javac, cargo, rustc or tauri process; the idle Vite dev servers of other projects), no build, no test run beside any 2500 ms run, one engine process at a time, every run in this phase sequential. One content-suite run of about three seconds overlapped the FIRST 500 ms sampler pass, which is a sampler and was superseded by later passes.
+Evaluations are from White's point of view: positive favours White, the student side.
+
+184 student moves across 7 chapters, 368 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+3 moves cost 0.5 of a pawn or more:
+
+1.45  ch3-other-second-moves  e4 c5 c3 e5 Nf3 Nc6 Bc4 Nf6 d3 d6 O-O
+      before 1.64  after 0.19
+0.64  ch5-everything-else  e4 c5 c3 f5 exf5 Nf6 d4 d5 Bd3 cxd4 cxd4
+      before 1.83  after 1.19
+0.57  ch4-the-full-centre  e4 c5 c3 d5 exd5 Qxd5 d4 e6 Nf3 Nc6 Bd3 Nf6 O-O Be7 Be3
+      before 0.41  after -0.16
+
+Verdicts:
+  ch3 2...e5, 6.O-O: +0.19 kept of +1.64. KEPT under the fork rule; Ng5 d5 is forcing and is named playable.
+  ch5 2...f5, 6.cxd4: +1.19 kept of +1.83. KEPT; the pawn recapture is the course's rule and White is clearly better.
+  ch4 4...e6 line with the queen on d5, 8.Be3: -0.16 kept of +0.41. KEPT: inside the -0.3 bar, and the bishop
+    holding d4 before ...cxd4 is the chapter's rule. Recorded here for the next pass.

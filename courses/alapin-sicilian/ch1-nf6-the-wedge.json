@@ -377,7 +377,7 @@
                           "note": "The b-pawn takes back, and White has pawns on c3, d4 and e5: a centre with a doubled pawn in it, and the b-file half open for a rook.",
                           "tags": ["big-centre"],
                           "mistakes": [
-                            { "san": "Qd2", "grade": "inaccuracy", "note": "8...Nd5 puts a knight back on the square with the pawn still on c3, and the queen has to guard it." }
+                            { "san": "Qd2", "grade": "mistake", "note": "8...Nd5 and the knight is back on its square, hitting c3 with the queen the only thing holding it; White loses material at once." }
                           ],
                           "children": [
                             {
@@ -391,7 +391,7 @@
                                   "tags": ["development"],
                                   "mistakes": [
                                     { "san": "Qd2", "grade": "playable", "note": "Fine, and the queen is not where it wants to be. The bishop does the job." },
-                                    { "san": "Bd3", "grade": "inaccuracy", "note": "9...Qxc3+ 10.Bd2 Qc7 and Black has taken a pawn for one tempo." }
+                                    { "san": "Bd3", "grade": "mistake", "note": "9...Qxc3+ 10.Qd2 Qxa1 and the rook has gone: the check picks up c3 and a1 together." }
                                   ],
                                   "children": [
                                     {
