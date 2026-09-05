@@ -225,7 +225,9 @@ two ask opposite questions about the same first move, and the Sicilian Najdorf a
 the Caro-Kann is the solid one and the Najdorf is the counterpunching one, and the
 Scandinavian at phase 34 as his third Black answer to 1.e4, the simple one: it trades
 the centre away on move one and builds a Caro-Kann structure without the Caro-Kann's
-tension. Eight courses, two colours, four of them White.
+tension, and the Alapin Sicilian at phase 41 as his first answer to 1...c5, the
+structural one: c3 and d4 for a pawn centre, the London player's chess reached by 1.e4.
+Nine courses, two colours, five of them White.
 
 Deferred with reasons (the register; a later phase working nearby may take one along):
 
@@ -867,6 +869,26 @@ is a two-step button: the first click turns it into "Delete for good?" for five 
 a second click within that time deletes, and anything else, the time passing or a click
 elsewhere, puts it back. The game on the Play screen cannot be archived or deleted from
 Progress until it has finished there, the rule Play on already followed.
+
+2026-09-05, phase 41: **the Alapin Sicilian**, 1.e4 c5 2.c3, as Nick's first answer to
+1...c5 and the ninth course. His White repertoire answered 1...d5 twice and 1...e5 twice
+and had nothing against the most common reply to 1.e4 at club level. The Alapin was
+chosen over the Grand Prix Attack because the White courses are structural and this one
+is too: c3 and d4 for a pawn centre, the London player's chess reached by 1.e4. Chapter 0
+names the rejected alternative once. The course id is `alapin-sicilian` and it is
+permanent, for the reason the Najdorf's and the Scandinavian's are.
+
+**Two main lines, one chapter each**: 2...Nf6 3.e5 Nd5 4.d4 cxd4 5.Nf3 with the e5 wedge,
+and 2...d5 3.exd5 Qxd5 4.d4 Nf6 5.Nf3 with the isolated queen's pawn. The forks, each in
+a sentence where it arises: the knight to f3 before the pawn takes back on d4, so that the
+pawn lands defended; the pawn recapture on d4 every time the pawn can do it, because the
+knight recapture is the open Sicilian the course exists to avoid; 6.Be3 before Bd3 in
+the isolated-pawn line, so that ...cxd4 and ...Nc6 never hit an unheld pawn; Bxc6 declined
+where Nxd7 takes instead, keeping the bishop pair; and against 2...e6 the trade on d5
+rather than the French Advance, which is a different course. **The one line the engine
+rewrote before it shipped**: the answer to ...Qb6 hitting b2 with the queen's knight at
+home was going to be Nc3 and Nb5, and the engine showed ...Qxb2 and ...Qxa1 taking a rook;
+it is d5 now, hitting the knight, with Bd4 and a check that ends on c3 behind it.
 
 ## 9. v1 acceptance
 

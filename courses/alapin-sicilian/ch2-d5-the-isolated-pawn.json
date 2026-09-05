@@ -29,7 +29,13 @@
                   "san": "cxd4",
                   "note": "The pawn takes back. The d-pawn is isolated now, held by the bishop, with the c-file half open for a rook.",
                   "tags": ["isolated-pawn"],
-                  "shapes": [{ "orig": "d4", "dest": "d5", "brush": "green" }],
+                  "shapes": [
+                    {
+                      "orig": "d4",
+                      "dest": "d5",
+                      "brush": "green"
+                    }
+                  ],
                   "mistakes": [
                     { "san": "Nxd4", "grade": "inaccuracy", "note": "The knight takes and it is an open Sicilian with Black's queen already on d5: a fine game for Black, and not the one the course was chosen for." },
                     { "san": "Bxd4", "grade": "inaccuracy", "note": "7...Nc6 8.Be3 and the bishop has moved twice to reach the square it could have had in one, with the c-pawn still on c3 and no pawn in the centre at all." }
@@ -391,14 +397,52 @@
                               "note": "The queen steps off the diagonal.",
                               "children": [
                                 {
-                                  "san": "O-O",
-                                  "note": "Castle. White has the bishop pair and the centre, and the pawn on d4 is not isolated yet.",
-                                  "tags": ["king-safety"],
+                                  "san": "dxc5",
+                                  "note": "Take the pawn. The queen on d7 cannot take back without walking into the queen trade on d7, and after 9...Bxc5 10.Qxd7+ Nbxd7 11.Bxb7 the pawn on b7 is a pawn: with the queens off and the bishop pair, White is simply a pawn up.",
+                                  "tags": ["tactics"],
                                   "mistakes": [
-                                    { "san": "Bxb7", "grade": "mistake", "note": "9...Qxb7 and the bishop has been given for a pawn: the queen on d7 was defending it." }
+                                    { "san": "O-O", "grade": "inaccuracy", "note": "9...cxd4 10.cxd4 and the pawn is isolated with nothing won for it, where the pawn on c5 was there to be taken." },
+                                    { "san": "Be3", "grade": "playable", "note": "Sound, holding d4, and 9...Nd5 hits the bishop. The pawn on c5 was there to be taken." },
+                                    { "san": "Qb3", "grade": "playable", "note": "Sound, hitting b7: 9...Nc6 10.dxc5 Bxc5 and the pawn on b7 is still defended." }
                                   ],
-                                  "plan": "Nd2 to b3 or c4, Re1, and keep the bishop pair. Play c4 and d5 when the centre can be opened for the bishops.",
-                                  "name": "The trade on f3, the bishop pair"
+                                  "children": [
+                                    {
+                                      "san": "Bxc5",
+                                      "weight": 8,
+                                      "note": "Black takes back with the bishop.",
+                                      "children": [
+                                        {
+                                          "san": "Qxd7+",
+                                          "note": "Trade the queens, so that the bishop on f3 takes on b7 with nothing to punish it.",
+                                          "tags": ["tactics"],
+                                          "mistakes": [
+                                            { "san": "Bxb7", "grade": "mistake", "note": "10...Qxb7 and the bishop has been given for a pawn: the queen on d7 defends b7 until it is traded." },
+                                            { "san": "O-O", "grade": "playable", "note": "Sound, and it lets 10...Qc7 defend b7. The trade first." }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "Nbxd7",
+                                              "weight": 8,
+                                              "note": "The knight takes back.",
+                                              "children": [
+                                                {
+                                                  "san": "Bxb7",
+                                                  "note": "Take the pawn. The rook comes to b8 and the bishop goes back to a6 or f3, a pawn up with the bishop pair against a Black position that has nothing for it.",
+                                                  "tags": ["tactics"],
+                                                  "mistakes": [
+                                                    { "san": "Nd2", "grade": "inaccuracy", "note": "11...b6 and the pawn on b7 is defended; the bishop was taking it for free." },
+                                                    { "san": "O-O", "grade": "playable", "note": "Sound: 11...b6 12.Nd2 and White has the bishop pair for nothing. The pawn on b7 is free now and may not be later." }
+                                                  ],
+                                                  "plan": "Ba6 when the rook hits the bishop, Nd2 and O-O-O or Ke2 with the rooks connected, and the a-pawn goes forward with the bishop pair behind it. A pawn up with no weaknesses is the whole plan.",
+                                                  "name": "The trade on f3, a pawn on b7"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
                                 }
                               ]
                             }

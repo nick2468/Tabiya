@@ -1032,6 +1032,112 @@ describe('the Scandinavian course', () => {
   })
 })
 
+describe('the Alapin course', () => {
+  const alapin = courseById('alapin-sicilian')
+
+  it('is a White course of seven chapters', () => {
+    expect(alapin.colour).toBe('white')
+    expect(alapin.opponentColour).toBe('black')
+    expect(alapin.chapters.length).toBe(7)
+  })
+
+  it('declares the tags it uses beyond the core set', () => {
+    // e5-wedge and big-centre are shared with the Vienna on purpose: they mean
+    // the same thing in both and Progress compares by the string.
+    expect(alapin.tags).toContain('isolated-pawn')
+    expect(alapin.tags).toContain('e5-wedge')
+    expect(alapin.tags).toContain('d5-break')
+    expect(alapin.tags).not.toContain('gambit-pawn')
+  })
+
+  it('has the pawn on c3 by move two in every chapter', () => {
+    // The claim that makes this course the Alapin rather than some other
+    // 1.e4 c5. Every chapter's stem, or its first White move when the stem is
+    // empty, has 2.c3 in it; a chapter that answered 1...c5 any other way
+    // would be teaching the open Sicilian this course exists to avoid.
+    for (const chapter of alapin.chapters) {
+      const first = walkNodes(chapter).find((node) => node.isLeaf)
+      const path = first?.path ?? chapter.stem
+      expect(path[2], `${chapter.id} second White move`).toBe('c3')
+    }
+  })
+
+  it('never plays the knight to c3 before the pawn has left it', () => {
+    // The structural point: the c-pawn takes back on d4, and the knight has
+    // c3 only once the pawn has gone. A course that played Nc3 with the
+    // c-pawn still home would be a different opening, and the board would
+    // refuse the move besides. Here the check is that every Nc3 comes after
+    // cxd4, so the knight is always taking the square the pawn vacated.
+    for (const chapter of alapin.chapters) {
+      for (const node of walkNodes(chapter)) {
+        if (!node.isStudent || node.san !== 'Nc3') continue
+        const before = node.path.slice(0, -1).filter((_, ply) => ply % 2 === 0)
+        expect(before, `${chapter.id} ${node.path.join(' ')}`).toContain('cxd4')
+      }
+    }
+  })
+
+  describe('chapter 0, the idea', () => {
+    it('has an intro of 300 to 500 words', () => {
+      const intro = chapterOf(alapin, 'ch0').intro
+      expect(words(intro)).toBeGreaterThanOrEqual(300)
+      expect(words(intro)).toBeLessThanOrEqual(500)
+    })
+
+    it('carries mistake entries on its core setup decisions', () => {
+      expect(positionsWithMistakes(chapterOf(alapin, 'ch0'))).toBeGreaterThanOrEqual(4)
+    })
+  })
+
+  describe('the repertoire chapters', () => {
+    for (const id of ['ch1', 'ch2', 'ch3', 'ch4', 'ch5']) {
+      it(`${id} runs its deepest line to move 8 or beyond`, () => {
+        // Chapter 5 is the sidelines chapter, whose bar is 6 to 8 by section 3;
+        // the others run to 10 or more.
+        expect(deepestFullMove(chapterOf(alapin, id))).toBeGreaterThanOrEqual(id === 'ch5' ? 8 : 10)
+      })
+
+      it(`${id} carries mistake entries on at least ten positions`, () => {
+        expect(positionsWithMistakes(chapterOf(alapin, id))).toBeGreaterThanOrEqual(10)
+      })
+
+      it(`${id} weights every Black reply by club frequency`, () => {
+        for (const node of walkNodes(chapterOf(alapin, id))) {
+          if (!node.isStudent) {
+            expect(node.weight ?? 1, node.path.join(' ')).toBeGreaterThanOrEqual(1)
+            expect(node.weight ?? 1, node.path.join(' ')).toBeLessThanOrEqual(10)
+          }
+        }
+      })
+
+      it(`${id} tags every White move with at least one concept`, () => {
+        for (const node of walkNodes(chapterOf(alapin, id))) {
+          if (node.isStudent) expect(node.tags.length, node.path.join(' ')).toBeGreaterThan(0)
+        }
+      })
+    }
+  })
+
+  describe('chapter 6, the exercises', () => {
+    it('ends every exercise on a White move worth drilling', () => {
+      for (const line of walkNodes(chapterOf(alapin, 'ch6')).filter((node) => node.isLeaf)) {
+        expect(line.isStudent, line.path.join(' ')).toBe(true)
+      }
+    })
+
+    it('carries at least four exercises, and at least ten authored mistake entries', () => {
+      const chapter = chapterOf(alapin, 'ch6')
+      const leaves = walkNodes(chapter).filter((node) => node.isLeaf)
+      expect(leaves.length).toBeGreaterThanOrEqual(4)
+      expect(positionsWithMistakes(chapter)).toBeGreaterThanOrEqual(10)
+    })
+
+    it('runs each exercise deep enough to be a real position', () => {
+      expect(deepestFullMove(chapterOf(alapin, 'ch6'))).toBeGreaterThanOrEqual(10)
+    })
+  })
+})
+
 describe('the courses together', () => {
   // Course scoping makes this structural rather than lucky: a card key is the
   // course id and the position. The acceptance asks for it proved anyway,
@@ -1140,6 +1246,25 @@ describe('the courses together', () => {
       (position) => caro.get(position) === 'c6' && najdorf.get(position) === 'c5',
     )
     expect(afterE4, 'the two courses answer 1.e4 differently').toBeTruthy()
+  })
+
+  it('has three White courses agreeing on 1.e4, and only the Alapin answering 1...c5', () => {
+    // The Ruy, the Vienna and the Alapin all begin 1.e4, so all three hold the
+    // card for the initial position and hand it the same move. Only the Alapin
+    // reaches the position after 1...c5; the other two have no card for it,
+    // which the test states rather than assumes, because a White course that
+    // answered 1...c5 by accident would be arguing with this one on Drill.
+    const answers = (id: string) =>
+      new Map(allCards(courseById(id)).cards.map((card) => [card.position, card.san]))
+    const [ruy, vienna, alapin] = ['ruy-lopez-exchange', 'vienna-gambit', 'alapin-sicilian'].map(answers)
+    const start = [...alapin.keys()].find((position) => ruy.has(position) && vienna.has(position))
+    expect(start, 'a position all three reach').toBeTruthy()
+    expect([ruy.get(start!), vienna.get(start!), alapin.get(start!)]).toEqual(['e4', 'e4', 'e4'])
+
+    const afterC5 = [...alapin.keys()].find((position) => alapin.get(position) === 'c3')
+    expect(afterC5, 'the Alapin answers 1...c5').toBeTruthy()
+    expect(ruy.has(afterC5!), 'the Ruy has no answer to 1...c5').toBe(false)
+    expect(vienna.has(afterC5!), 'the Vienna has no answer to 1...c5').toBe(false)
   })
 
   it('has three Black courses answering 1.e4 three different ways', () => {

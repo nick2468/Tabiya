@@ -210,7 +210,7 @@
                                       "children": [
                                         {
                                           "san": "Nxe5",
-                                          "note": "Take, and the bishop on g4 is hanging to the queen: Black has to take back on e5 rather than on f3.",
+                                          "note": "Take. The knight leaves f3, so the bishop on g4 now looks straight at the queen on d1, and the queen has to move next; it moves with a hit on b7.",
                                           "tags": ["tactics"],
                                           "mistakes": [
                                             { "san": "Be2", "grade": "inaccuracy", "note": "7...Nxf3+ 8.Bxf3 Bxf3 9.Qxf3 and Black has traded two pieces off the board in a position where White wanted them on it." }
@@ -219,18 +219,54 @@
                                             {
                                               "san": "dxe5",
                                               "weight": 9,
-                                              "note": "Black takes back with the pawn.",
+                                              "note": "Black takes back with the pawn, and the bishop on g4 is looking at the queen.",
                                               "children": [
                                                 {
-                                                  "san": "O-O",
-                                                  "note": "Castle. The pawn on d5 is a wedge in Black's camp, the bishop on g4 has no knight to pin, and f4 is coming to open the f-file.",
-                                                  "tags": ["king-safety"],
+                                                  "san": "Qb3",
+                                                  "note": "The queen off the file with a hit on b7 and d5 held. Castling first would lose the queen: the bishop on g4 takes it.",
+                                                  "tags": ["tactics"],
                                                   "mistakes": [
-                                                    { "san": "f3", "grade": "inaccuracy", "note": "8...Bd7 and the pawn move has weakened the king before it has castled." },
-                                                    { "san": "Qa4+", "grade": "playable", "note": "Sound, picking up nothing: 8...Bd7 9.Qb3 b6 and the queen has moved twice." }
+                                                    { "san": "O-O", "grade": "mistake", "note": "8...Bxd1 and the queen has gone: the knight that shielded it left f3 on the last move." },
+                                                    { "san": "Qc2", "grade": "playable", "note": "Sound, off the file and holding e4. b3 hits b7 as well." },
+                                                    { "san": "f3", "grade": "playable", "note": "Sound, blocking the bishop with a pawn, and it weakens the king for nothing the queen move does not do better." }
                                                   ],
-                                                  "plan": "f3 to hit the bishop and then f4 against the e5 pawn, with the knight coming to d2 and c4. The pawn on d5 is the wedge; the game is on the kingside behind it.",
-                                                  "name": "2...d6, the bishop before the knight"
+                                                  "children": [
+                                                    {
+                                                      "san": "Qc7",
+                                                      "weight": 7,
+                                                      "note": "The queen defends b7.",
+                                                      "children": [
+                                                        {
+                                                          "san": "Bb5+",
+                                                          "note": "The check, forcing the bishop back to d7 where it blocks the queen's defence of nothing and can be traded.",
+                                                          "tags": ["tactics"],
+                                                          "mistakes": [
+                                                            { "san": "Nd2", "grade": "playable", "note": "Sound and it comes next anyway: 9...g6 10.Nc4 and the same shape." }
+                                                          ],
+                                                          "children": [
+                                                            {
+                                                              "san": "Bd7",
+                                                              "weight": 8,
+                                                              "note": "Black blocks.",
+                                                              "children": [
+                                                                {
+                                                                  "san": "Bxd7+",
+                                                                  "note": "Trade, so that the knight takes back onto d7 and blocks Black's own queen, and the knight on b1 comes to d2 and c4 against a pawn on e5 that has only the queen to hold it.",
+                                                                  "tags": ["development"],
+                                                                  "mistakes": [
+                                                                    { "san": "Nd2", "grade": "playable", "note": "Sound and the same thing a move later: 10...g6 11.Nc4 Bg7 12.Bxd7+." },
+                                                                    { "san": "Qc4", "grade": "inaccuracy", "note": "10...Bxb5 11.Qxb5+ Qd7 and the queens come off with White's edge traded away." }
+                                                                  ],
+                                                                  "plan": "Nd2 and Nc4 against the pawn on e5, castle, and f4 to open the f-file when the knight is on c4. The pawn on d5 is a wedge in Black's camp, and the king on e8 has no good home.",
+                                                                  "name": "2...d6, the queen off the file"
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }
@@ -348,55 +384,56 @@
                                       "note": "The bishop to g7, looking at e5 and d4.",
                                       "children": [
                                         {
-                                          "san": "Nf3",
-                                          "note": "Develop, holding d4 and e5.",
+                                          "san": "Bb5",
+                                          "note": "The pin on the knight that holds d4 and e5, before the king's knight comes out, so that ...Bg4 has nothing to pin when it comes.",
                                           "tags": ["development"],
                                           "mistakes": [
-                                            { "san": "Bb5", "grade": "playable", "note": "Sound: 7...Bg4 8.f3 and the pin has cost White a pawn move. The knight first." },
-                                            { "san": "f4", "grade": "inaccuracy", "note": "7...Bg4 8.Nf3 e6 and the pawn on f4 has weakened e3 and the king for nothing." }
+                                            { "san": "h3", "grade": "playable", "note": "Sound, taking g4 away first. The pin asks the knight a question now." },
+                                            { "san": "Be2", "grade": "playable", "note": "Fine and quieter." },
+                                            { "san": "Nf3", "grade": "playable", "note": "Sound: 7...Bg4 pins it and the bishop has to answer. The pin first keeps the knight's choice." },
+                                            { "san": "Bf4", "grade": "playable", "note": "Sound, holding e5 with a piece." }
                                           ],
                                           "children": [
                                             {
-                                              "san": "Bg4",
-                                              "weight": 7,
-                                              "note": "The pin.",
+                                              "san": "f6",
+                                              "weight": 6,
+                                              "note": "Black hits the wedge, the only way to fight for the centre with the bishop on g7 looking at it.",
                                               "children": [
                                                 {
-                                                  "san": "Bb5",
-                                                  "note": "The pin back, on the knight that holds d4 and e5. Black cannot take on f3 without the recapture defending d4 again.",
+                                                  "san": "Nf3",
+                                                  "note": "Develop, holding e5 and d4.",
                                                   "tags": ["development"],
                                                   "mistakes": [
-                                                    { "san": "Be2", "grade": "playable", "note": "Fine and quieter. The pin on b5 asks a question the knight on c6 has to answer." }
+                                                    { "san": "exf6", "grade": "playable", "note": "Sound: 8...Nxf6 and the bishop on g7 has the diagonal. Holding the pawn keeps it shut." }
                                                   ],
                                                   "children": [
                                                     {
-                                                      "san": "e6",
+                                                      "san": "Bg4",
                                                       "weight": 7,
-                                                      "note": "Black covers d5 and prepares to develop the knight to e7.",
+                                                      "note": "The pin.",
                                                       "children": [
                                                         {
-                                                          "san": "O-O",
-                                                          "note": "Castle. The centre is White's, both bishops are placed, and h3 asks the bishop next.",
-                                                          "tags": ["king-safety"],
+                                                          "san": "h3",
+                                                          "note": "Ask the bishop, so that the trade on f3 comes now and the queen takes back with the centre intact.",
+                                                          "tags": ["development"],
                                                           "mistakes": [
-                                                            { "san": "Bxc6+", "grade": "inaccuracy", "note": "9...bxc6 and Black's bishop pair points at the centre with the pin on f3 still standing." },
-                                                            { "san": "h3", "grade": "playable", "note": "Sound: 9...Bxf3 10.Qxf3 and the queen is on the right diagonal. The king first." }
+                                                            { "san": "O-O", "grade": "playable", "note": "Sound: 9...fxe5 10.dxe5 and the wedge stands. The question first." }
                                                           ],
                                                           "children": [
                                                             {
-                                                              "san": "Nge7",
+                                                              "san": "Bxf3",
                                                               "weight": 8,
-                                                              "note": "The knight comes to e7.",
+                                                              "note": "Black gives up the bishop.",
                                                               "children": [
                                                                 {
-                                                                  "san": "Be3",
-                                                                  "note": "The bishop holds d4 and the setup is complete: the full centre, both knights out, the king castled, and Black's bishop on g7 still looking at a pawn on e5.",
+                                                                  "san": "Qxf3",
+                                                                  "note": "The queen takes back and points at d5 and f6, with the pin on b5 still holding c6 and the wedge on e5 standing.",
                                                                   "tags": ["development"],
                                                                   "mistakes": [
-                                                                    { "san": "h3", "grade": "playable", "note": "Sound. The bishop first, so that d4 is held before ...Nf5 hits it." }
+                                                                    { "san": "gxf3", "grade": "inaccuracy", "note": "The pawn takes back and the king has no cover: 10...fxe5 11.dxe5 e6 and Black's bishop on g7 is the best piece on the board." }
                                                                   ],
-                                                                  "plan": "h3 to ask the bishop, Qd2 and Rac1, and Bxc6 followed by d5 when the knight on c6 is the only thing holding the break back.",
-                                                                  "name": "2...g6, the full centre and the pin"
+                                                                  "plan": "Castle, Bf4 behind the wedge, and exf6 when ...e6 has shut the bishop on g7 in. The pawn on d5 is a target for the rook on d1 and the bishop pair points at both wings.",
+                                                                  "name": "2...g6, the pin and the trade on f3"
                                                                 }
                                                               ]
                                                             }
@@ -602,6 +639,7 @@
                                   "note": "Castle.",
                                   "tags": ["king-safety"],
                                   "mistakes": [
+                                    { "san": "Ng5", "grade": "playable", "note": "Sound and stronger: 6...d5 7.exd5 and the tactics on f7 begin. It is a forcing line the course does not need, under the fork rule; the quiet move keeps the structure and the edge." },
                                     { "san": "Bg5", "grade": "playable", "note": "Sound. The king first." }
                                   ],
                                   "children": [

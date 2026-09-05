@@ -95,15 +95,35 @@
                                                                       "note": "Black castles, into the queen's line but out of the centre.",
                                                                       "children": [
                                                                         {
-                                                                          "san": "Bd3",
-                                                                          "note": "The bishop swings to the kingside, where the queen already is, and points at h7. The knight on c6 is no longer pinned, and it was never going anywhere.",
+                                                                          "san": "Bxc6",
+                                                                          "note": "Now the trade, because it does two things at once: it doubles Black's pawns on the c-file, and it clears the way for the bishop on c1 to come to h6 with the queen already on g4. The pin has done its work and the bishop has a better job.",
                                                                           "tags": ["kingside-attack"],
                                                                           "mistakes": [
-                                                                            { "san": "Bxc6", "grade": "inaccuracy", "note": "It trades the bishop pair for a knight that was doing nothing, and 14...Qxc6 has Black's queen on the long diagonal." },
-                                                                            { "san": "Rd1", "grade": "playable", "note": "Fine. The bishop to d3 first, because the attack needs it more than the d-pawn needs the rook." }
+                                                                            { "san": "Bd3", "grade": "mistake", "note": "14...Nxd4 and the pawn has gone: the bishop on b5 was all that kept the knight off d4, and the queen on g4 cannot take back because ...Qxd4 follows." },
+                                                                            { "san": "Rd1", "grade": "playable", "note": "Sound, holding d4 with the rook. The trade first wins the bishop the tempo it needs." },
+                                                                            { "san": "Be3", "grade": "playable", "note": "Sound and it lets 14...f5 push the queen around. The trade first." },
+                                                                            { "san": "Qe4", "grade": "inaccuracy", "note": "14...Rac8 15.Rd1 Rfd8 and the queen has moved twice to defend a pawn the trade would have solved." }
                                                                           ],
-                                                                          "plan": "Rooks to d1 and e1, then d5 when it opens lines towards Black's king, or Ne4 heading for g5. If Black plays ...f5 to chase the queen, take en passant and the e-file is open with the king on it.",
-                                                                          "name": "The main line, 13.Qg4 and 14.Bd3"
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "bxc6",
+                                                                              "weight": 9,
+                                                                              "note": "The pawn takes back.",
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "Bh6",
+                                                                                  "note": "The bishop to h6 with the queen behind it, hitting g7. Black has to give up the bishop pair or the dark squares round his king, and the pawns on c6 and c7 are targets for the rest of the game.",
+                                                                                  "tags": ["kingside-attack"],
+                                                                                  "mistakes": [
+                                                                                    { "san": "Rd1", "grade": "playable", "note": "Sound and quiet: the bishop move asks the question the queen went to g4 for." },
+                                                                                    { "san": "Be3", "grade": "playable", "note": "Sound and it does nothing the queen on g4 wanted. h6 is the square." }
+                                                                                  ],
+                                                                                  "plan": "Rad1 and Rfe1, then Ne4 heading for c5 or g5. If Black plays ...Bf6, Bg5 trades the piece that holds his king, and the pawns on c6 and c7 are the ending's target.",
+                                                                                  "name": "The main line, 13.Qg4 and 14.Bxc6"
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
                                                                         }
                                                                       ]
                                                                     }
@@ -536,28 +556,47 @@
                               "note": "Black offers a trade of knights to ease the pressure.",
                               "children": [
                                 {
-                                  "san": "Nxd7",
-                                  "note": "Take, so that the recapture blocks Black's own bishop for a move.",
-                                  "tags": ["development"],
+                                  "san": "O-O",
+                                  "note": "Castle, and let Black be the one to trade on e5: the knight there is defended, and a queen on g4 comes next against a king that has not castled.",
+                                  "tags": ["king-safety"],
                                   "mistakes": [
-                                    { "san": "Bxd5", "grade": "inaccuracy", "note": "9...Nxe5 10.Bxb7 Bxb7 11.dxe5 and White has traded the good bishop for a pawn structure Black is happy with." },
-                                    { "san": "Nf3", "grade": "playable", "note": "Fine, and the knight has gone to e5 and back for nothing." }
+                                    { "san": "Nxd7", "grade": "inaccuracy", "note": "9...Bxd7 and the bishop takes back to a good square with the tension gone; the knight on e5 was worth more kept." },
+                                    { "san": "Bxd5", "grade": "playable", "note": "Sound: 9...exd5 10.Nd3 and White has traded the good bishop for a knight. The king first." },
+                                    { "san": "Qg4", "grade": "playable", "note": "Sound, and 9...N7f6 hits it. The king first, then the queen." },
+                                    { "san": "Bb3", "grade": "playable", "note": "Fine: 9...Bb4+ 10.Nd2 O-O and the bishop has retreated for nothing." }
                                   ],
                                   "children": [
                                     {
-                                      "san": "Bxd7",
+                                      "san": "Be7",
                                       "weight": 8,
-                                      "note": "The bishop takes back.",
+                                      "note": "Black develops.",
                                       "children": [
                                         {
-                                          "san": "O-O",
-                                          "note": "Castle. White has the isolated pawn with a bishop on c4 hitting the knight and the freer game.",
-                                          "tags": ["king-safety"],
+                                          "san": "Qg4",
+                                          "note": "The queen to g4 against the king in the middle, hitting g7 and eyeing e6, with the knight on e5 behind it.",
+                                          "tags": ["kingside-attack"],
                                           "mistakes": [
-                                            { "san": "Nc3", "grade": "playable", "note": "Also fine: 10...Nxc3 11.bxc3 and the pawns on c3 and d4 are a centre. The king first." }
+                                            { "san": "Nc3", "grade": "playable", "note": "Sound: 10...Nxc3 11.bxc3 and the pawns on c3 and d4 are a centre. The queen first, while the king has not castled." }
                                           ],
-                                          "plan": "Nc3 to hit the knight, Re1 and Qe2 behind the e-file, and d5 when it opens the bishop on c4 towards f7.",
-                                          "name": "5...d6 and 6...dxe5, the early trade"
+                                          "children": [
+                                            {
+                                              "san": "O-O",
+                                              "weight": 8,
+                                              "note": "Black castles.",
+                                              "children": [
+                                                {
+                                                  "san": "Re1",
+                                                  "note": "The rook behind the knight on e5, so that ...Nxe5 can be met by dxe5 with the rook holding it, and the e-file is White's.",
+                                                  "tags": ["development"],
+                                                  "mistakes": [
+                                                    { "san": "Nc3", "grade": "playable", "note": "Sound: 11...Nxc3 12.bxc3 and the same shape with the pawns doubled. The rook first keeps the knight in the centre." }
+                                                  ],
+                                                  "plan": "Nc3 to hit the knight on d5, Bd3 when it moves, and Bh6 with the queen on g4 when the bishop on e7 has gone to f6. The knight on e5 is the piece Black has to trade, and trading it costs a move.",
+                                                  "name": "5...d6 and 6...dxe5, the early trade"
+                                                }
+                                              ]
+                                            }
+                                          ]
                                         }
                                       ]
                                     }

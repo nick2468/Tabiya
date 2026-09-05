@@ -2,7 +2,7 @@
   "id": "ch5-everything-else",
   "title": "Everything else",
   "defaultTags": ["big-centre"],
-  "intro": "The moves that are left: the ones a club player plays once and never again, and the two queen moves that look like they are doing something. One safe recipe each. None of them needs more than the rule from chapter 3, play d4 and take back with the pawn, with one exception that the chapter makes a point of: 2...Qa5 pins the c-pawn to the king, so the pawn cannot take back until the king has moved.\n\n## The moves\n\n2...a6 is a waiting move and d4 comes at once. 2...Qc7 puts the queen on the c-file early and d4 asks what it is doing there. 2...Qa5 is the one with a point, the pin on c3, and the answer is to develop, castle, and only then play d4. 2...f5 gives up a pawn for nothing much and the recipe takes it and keeps it. And 2...Nc6 3.d4 with an early ...cxd4 and ...Qb6 is the try that hits b2 while the queen's knight is still at home; the pawn goes to d5 at once, hitting the knight, and the queen's raid on b2 runs into Bd4 and a check that ends on c3.\n\n## Typical mistakes at this level\n\nAgainst 2...Qa5, playing d4 and finding that cxd4 is illegal, so that the knight has to take back. Against ...Qb6, defending b2 rather than hitting the knight with d5, and worst of all playing Nc3, after which ...Qxb2 and ...Qxa1 take a rook. And against 2...f5, declining a free pawn to keep the structure: the pawn is the structure.",
+  "intro": "The moves that are left: the ones a club player plays once and never again, and the two queen moves that look like they are doing something. One safe recipe each. None of them needs more than the rule from chapter 3, play d4 and take back with the pawn, with one exception that the chapter makes a point of: 2...Qa5 pins the c-pawn to the king, so the pawn cannot take back until the king has moved.\n\n## The moves\n\n2...a6 is a waiting move and d4 comes at once. 2...Qc7 puts the queen on the c-file early and d4 asks what it is doing there. 2...Qa5 is the one with a point, the pin on c3, and the answer is to develop, hold e4 with the queen, castle, and only then play d4. 2...f5 gives up a pawn for nothing much and the recipe takes it and keeps it. And 2...Nc6 3.d4 with an early ...cxd4 and ...Qb6 is the try that hits b2 while the queen's knight is still at home; the pawn goes to d5 at once, hitting the knight, and the queen's raid on b2 runs into Bd4 and a check that ends on c3.\n\n## Typical mistakes at this level\n\nAgainst 2...Qa5, playing d4 and finding that cxd4 is illegal, so that the knight has to take back. Against ...Qb6, defending b2 rather than hitting the knight with d5, and worst of all playing Nc3, after which ...Qxb2 and ...Qxa1 take a rook. And against 2...f5, declining a free pawn to keep the structure: the pawn is the structure.",
   "stem": ["e4", "c5", "c3"],
   "tree": [
     {
@@ -79,15 +79,51 @@
                                               "note": "The queen to d6.",
                                               "children": [
                                                 {
-                                                  "san": "Be2",
-                                                  "note": "Develop. With the pawn on a6, ...Nb4 is not a threat and a3 is not needed; the bishop goes to the quiet square and castles.",
-                                                  "tags": ["development"],
+                                                  "san": "d5",
+                                                  "note": "The push, because the knight on c6 has to move and the only square that is not a retreat is e5, where it is traded with check to follow: after 8...Ne5 9.Nxe5 Qxe5+ 10.Be2 Black's queen has moved four times and White's pieces are all coming out.",
+                                                  "tags": ["big-centre"],
                                                   "mistakes": [
-                                                    { "san": "Bd3", "grade": "playable", "note": "Sound: 8...Nf6 9.O-O and the bishop on d3 is the main line's. Either square works here." },
-                                                    { "san": "d5", "grade": "inaccuracy", "note": "8...Nb4 and the pawn on d5 is a target with Black's queen and knight around it." }
+                                                    { "san": "Be2", "grade": "inaccuracy", "note": "Sound development and it lets the moment go: 8...Nf6 9.O-O and it is a level isolated-pawn game, where the push was a pawn's worth better." },
+                                                    { "san": "Bc4", "grade": "playable", "note": "Sound: 8...Nf6 9.d5 Ne5 10.Bb3 and the push comes a move later." },
+                                                    { "san": "g3", "grade": "playable", "note": "Sound, and the push is simpler." }
                                                   ],
-                                                  "plan": "Castle, Be3 behind the pawn, Qd2 and the rooks to c1 and d1, and the main line's plan against the isolated pawn: Ne5 and the d5 break. The pawn on a6 has given Black nothing.",
-                                                  "name": "2...a6, chapter 2 with a move wasted"
+                                                  "children": [
+                                                    {
+                                                      "san": "Ne5",
+                                                      "weight": 8,
+                                                      "note": "The knight goes forward.",
+                                                      "children": [
+                                                        {
+                                                          "san": "Nxe5",
+                                                          "note": "Take, so that the queen has to take back and walk into a check that develops a piece.",
+                                                          "tags": ["tactics"],
+                                                          "mistakes": [
+                                                            { "san": "Be2", "grade": "playable", "note": "Sound: 9...Nxf3+ 10.Bxf3 and the same shape with the queens on. The trade first gains the tempo." }
+                                                          ],
+                                                          "children": [
+                                                            {
+                                                              "san": "Qxe5+",
+                                                              "weight": 9,
+                                                              "note": "The queen takes back with check.",
+                                                              "children": [
+                                                                {
+                                                                  "san": "Be2",
+                                                                  "note": "Block with the bishop, developing with tempo: the queen on e5 is in the centre with White's pieces about to hit it.",
+                                                                  "tags": ["development"],
+                                                                  "mistakes": [
+                                                                    { "san": "Qe2", "grade": "inaccuracy", "note": "10...Qxe2+ 11.Bxe2 and the queens are off with White's edge traded away." },
+                                                                    { "san": "Ne2", "grade": "playable", "note": "Sound, and the bishop is the piece that wants e2; the knight is better on c3." }
+                                                                  ],
+                                                                  "plan": "Castle, Re1 hitting the queen, Bf4 and Qd2. The pawn on d5 is a wedge in Black's camp and the queen on e5 has to move again before Black has developed anything.",
+                                                                  "name": "2...a6, the push to d5"
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }
@@ -248,42 +284,61 @@
                       "note": "Black develops and hits e4.",
                       "children": [
                         {
-                          "san": "O-O",
-                          "note": "Castle. The king leaves e1, and with it the pin on c3 is gone: d4 comes next with the pawn able to take back.",
-                          "tags": ["king-safety"],
+                          "san": "Qe2",
+                          "note": "The queen defends e4, which the knight is hitting, and it does so without moving the king: the pin on c3 is still there, and castling first would leave e4 to be taken.",
+                          "tags": ["development"],
                           "mistakes": [
-                            { "san": "e5", "grade": "inaccuracy", "note": "5...Nd5 and the knight is on its best square with the king still in the middle and the pin still on." },
-                            { "san": "Qe2", "grade": "playable", "note": "Sound, defending e4, and the king still has to move before d4 works." }
+                            { "san": "O-O", "grade": "mistake", "note": "5...Nxe4 and the pawn has gone: nothing was defending it once the knight came to f6." },
+                            { "san": "e5", "grade": "playable", "note": "Sound: 5...d5 6.Be2 Nd7 7.d4 and the wedge is held. The queen move keeps the structure the course teaches." },
+                            { "san": "d3", "grade": "playable", "note": "Sound, defending with the pawn, and the d-pawn wants to go two squares once the king has moved." }
                           ],
                           "children": [
                             {
-                              "san": "e6",
+                              "san": "d6",
                               "weight": 7,
-                              "note": "Black covers d5 and opens the bishop.",
+                              "note": "Black holds e5 and opens the bishop.",
                               "children": [
                                 {
-                                  "san": "d4",
-                                  "note": "Now the centre, with the king on g1 and the c-pawn free to take back.",
-                                  "tags": ["big-centre"],
+                                  "san": "O-O",
+                                  "note": "Castle. The king leaves e1, and with it the pin on c3 is gone: d4 comes next with the pawn able to take back.",
+                                  "tags": ["king-safety"],
                                   "mistakes": [
-                                    { "san": "Re1", "grade": "playable", "note": "Sound and slow. The pawn now, because the pin that stopped it has gone." },
-                                    { "san": "e5", "grade": "inaccuracy", "note": "6...Nd5 and the knight is on its best square with the centre still to be built." }
+                                    { "san": "d4", "grade": "inaccuracy", "note": "6...cxd4 and the c-pawn is still pinned to the king: 7.Nxd4 is the open Sicilian the course was chosen to avoid." },
+                                    { "san": "h3", "grade": "playable", "note": "Sound and slow. The king first, because it is the pin that has to go." }
                                   ],
                                   "children": [
                                     {
-                                      "san": "cxd4",
+                                      "san": "e6",
                                       "weight": 7,
-                                      "note": "Black takes.",
+                                      "note": "Black covers d5 and opens the bishop.",
                                       "children": [
                                         {
-                                          "san": "cxd4",
-                                          "note": "The pawn takes back, and the queen on a5 is on the edge of a game that is happening in the centre.",
+                                          "san": "d4",
+                                          "note": "Now the centre, with the king on g1 and the c-pawn free to take back.",
                                           "tags": ["big-centre"],
                                           "mistakes": [
-                                            { "san": "Nxd4", "grade": "inaccuracy", "note": "The knight takes and the centre is one pawn: 7...Nxd4 8.cxd4 d5 and Black has traded the fight away." }
+                                            { "san": "Bb3", "grade": "playable", "note": "Sound and quiet, taking the bishop off the file Black's pawn may open. The pawn move is the point of the opening." },
+                                            { "san": "Re1", "grade": "playable", "note": "Sound and slow. The pawn now, because the pin that stopped it has gone." }
                                           ],
-                                          "plan": "Nc3 with tempo on the queen, Re1 and e5 against the knight on f6, and Bd2 when the queen wants a5 for a second time. The queen has to move again before Black has castled.",
-                                          "name": "2...Qa5, castle before d4"
+                                          "children": [
+                                            {
+                                              "san": "cxd4",
+                                              "weight": 7,
+                                              "note": "Black takes.",
+                                              "children": [
+                                                {
+                                                  "san": "cxd4",
+                                                  "note": "The pawn takes back, and the queen on a5 is on the edge of a game that is happening in the centre.",
+                                                  "tags": ["big-centre"],
+                                                  "mistakes": [
+                                                    { "san": "Nxd4", "grade": "inaccuracy", "note": "The knight takes and the centre is one pawn, where the pawn recapture keeps two and the queen on a5 keeps looking at nothing." }
+                                                  ],
+                                                  "plan": "Nc3 with tempo on the queen, Bd2 when the queen wants a5 for a second time, and e5 against the knight on f6. The queen has to move again before Black has castled.",
+                                                  "name": "2...Qa5, the queen holds e4"
+                                                }
+                                              ]
+                                            }
+                                          ]
                                         }
                                       ]
                                     }
