@@ -4190,7 +4190,25 @@ rendered sent a request with no moves, which was the drive's haste and not a fau
 second attempt with a pause between the steps was right. Storage cleared, no console
 errors.
 
-- [ ] **Review gate 33**
+Gate 33 findings (2026-09-05):
+
+- **Verified for the gate from the repo:** 1003 tests in 9.5 seconds and `tsc -b` clean;
+  version 1.7.3 in all three files; nothing under `courses/`; the tree clean at the start.
+  The rule reads twenty seconds in `docs/testing.md` and SPEC section 8 with its reason.
+- **One mutation checked by hand.** Making the box count for every launch shape except
+  "From a Study position" turns "starts at the position with the trainee as White, and the
+  course has already answered" red. Restored from git.
+- **Driven against a fresh server at v1.7.3, 1200x980.** Study in the Caro-Kann, one step to
+  1.e4, Play from here: the From radio read "From 1.e4" with the box unticked beside it.
+  Ticking the box showed the two-setting fieldset with "The course move every time"
+  checked. Start: the engine answered 1...c6 at once, the trainee was White to move with
+  the board White's way up, and the header read "playing the other side".
+- **The builder's note about a request with no moves is not a fault**: Play from here at
+  the chapter's start sends an empty move list, which is the start position.
+- **Nick's own files were not listed and not reported.** The browser build's storage was
+  cleared afterwards.
+
+- [x] **Review gate 33 passed** (2026-09-05)
 
 ## Phase 34 - the Scandinavian Defence, an eighth course
 
