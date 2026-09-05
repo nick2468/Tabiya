@@ -649,6 +649,29 @@ describe('a game played against the course', () => {
     expect(await session.playOpponent()).toEqual({ san: 'Bd3', fromBook: false })
   })
 
+  /**
+   * From a position, with the course to move there. The Caro-Kann fixture is
+   * a Black course, so on the other side the trainee is White; a position
+   * after 1.e4 has Black, the course, to move, and the engine has to answer
+   * out of the book before the trainee gets a move at all. Phase 33.
+   */
+  it('answers at once from a position where the course is to move', async () => {
+    const session = new PlaySession({
+      book: buildBook(blackCourse()),
+      engine: fakeEngine(),
+      profile,
+      length: 'full',
+      side: 'other',
+      startMoves: ['e4'],
+      random: () => 0.5,
+    })
+    expect(session.studentColour).toBe('white')
+    expect(session.studentToMove).toBe(false)
+    expect(await session.playOpponent()).toEqual({ san: 'c6', fromBook: true })
+    expect(session.studentToMove).toBe(true)
+    expect(session.moves.map((move) => move.san)).toEqual(['e4', 'c6'])
+  })
+
   it('takes the trainee move as Black and refuses one as White', async () => {
     const session = new PlaySession({ book, engine: fakeEngine(), profile, length: 'full', side: 'other' })
     expect(session.playStudent('d4')).toBe(false)

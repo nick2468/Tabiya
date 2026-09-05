@@ -118,12 +118,13 @@ export interface PlayRequest {
 }
 
 /**
- * The four ways to start. The first three say which lines the engine draws
- * on; the fourth swaps the sides, and carries its own choice of lines
- * underneath it, because playing against the whole course and playing
- * against one chapter of it are both things a person wants.
+ * The three ways to start, which say where the game begins and which lines
+ * the engine draws on. Which SIDE the trainee is on is a separate choice that
+ * goes with any of them: phase 32 made it a fourth radio here, which meant a
+ * person could play against the course from move one and not from a Study
+ * position they had just been looking at. Nick ruled it a checkbox.
  */
-type Shape_ = 'any' | 'chapter' | 'here' | 'other'
+type Shape_ = 'any' | 'chapter' | 'here'
 
 export function Play({
   course,
@@ -142,9 +143,9 @@ export function Play({
   const chapters = course.chapters
   const [launch, setLaunch] = useState<Shape_>(request ? 'here' : 'any')
   const [chapterId, setChapterId] = useState(chapters[0]?.id ?? '')
-  // Which lines the engine plays when it has the course's side: the whole
-  // course, or one chapter of it. Empty means the whole course.
-  const [otherChapterId, setOtherChapterId] = useState('')
+  // The other side, ticked for this game. A launch choice like the radios,
+  // so it is not remembered; the setting under it is.
+  const [otherTicked, setOtherTicked] = useState(false)
   const { courseMoves, setCourseMoves } = useCourseMoves()
   const [length, setLength] = useState<GameLength>('move15')
   const [level, setLevel] = useState(4)
@@ -175,11 +176,14 @@ export function Play({
   // The chapter a resumed game was sparring against, when it names one, so
   // the opponent is steered the way it was steered the first time.
   const resumeChapter = launch === 'here' && request?.chapterOnly ? request.chapterId : null
-  const targetChapter =
-    launch === 'chapter' ? chapterId : launch === 'other' ? otherChapterId || null : resumeChapter
-  // The other side, chosen here or carried by a resumed game that was played
-  // on it. A game resumed the usual way stays on the trainee's own side.
-  const otherSide = launch === 'other' || (launch === 'here' && request?.side === 'other')
+  const targetChapter = launch === 'chapter' ? chapterId : resumeChapter
+  // A request that carries a side is a recorded game being played on or
+  // replayed, and the record's side wins: switching a course-side game to
+  // the other side would be a different game. The box is shown ticked and
+  // held for that case rather than hidden, so the screen says which side the
+  // game is on.
+  const sideFixed = launch === 'here' && request?.side === 'other'
+  const otherSide = sideFixed || otherTicked
 
   const book = useMemo(() => {
     if (targetChapter) {
@@ -425,35 +429,26 @@ export function Play({
             />
             {request ? `From ${request.label}` : 'From a Study position (start one from Study)'}
           </label>
-          {/* The sides swapped. The sentence under it is the whole idea, and
-              the two choices under that are which lines the engine plays and
-              whether it ever strays from them. */}
-          <label>
+          {/* The sides swapped, and it goes with whichever radio is chosen:
+              the radios say where the game starts and which lines the engine
+              draws on, and this says which side of them the trainee is on.
+              The setting under it is only shown while the box is ticked. */}
+          <label className="other-side-box">
             <input
-              type="radio"
-              checked={launch === 'other'}
-              onChange={() => setLaunch('other')}
+              type="checkbox"
+              checked={otherSide}
+              disabled={sideFixed}
+              title={
+                sideFixed
+                  ? 'This game was played on the other side, and it carries on there.'
+                  : undefined
+              }
+              onChange={(event) => setOtherTicked(event.target.checked)}
             />
             Play the other side
           </label>
           <p className="hint">You play against the course. The engine plays its moves.</p>
-          {launch === 'other' ? (
-            <>
-              <select
-                aria-label="Which lines the course plays"
-                value={otherChapterId}
-                onChange={(event) => setOtherChapterId(event.target.value)}
-              >
-                <option value="">Any line</option>
-                {chapters.map((chapter) => (
-                  <option key={chapter.id} value={chapter.id}>
-                    {chapter.title}
-                  </option>
-                ))}
-              </select>
-              <CourseMovesChoice value={courseMoves} onChange={setCourseMoves} />
-            </>
-          ) : null}
+          {otherSide ? <CourseMovesChoice value={courseMoves} onChange={setCourseMoves} /> : null}
         </fieldset>
 
         <fieldset>
