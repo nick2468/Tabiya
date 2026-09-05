@@ -4374,14 +4374,30 @@ lives in the provider, which does not. No chess content. After phase 35.
 Chipped as `chips/phase-36-replay-survives.md`. The replay ply moves into `PlayProvider`,
 cleared with the report; a DOM test shown red first; one Help clause. Version 1.8.2.
 
-- [ ] 36.1 The replay ply in the provider, cleared with the report.
-- [ ] 36.2 Arrows, clickable moves and slips, Play from here read it from there.
-- [ ] 36.3 DOM test red first.
-- [ ] 36.4 Help.
-- [ ] 36.5 Version 1.8.2.
-- [ ] 36.6 Proved in the browser build.
+- [x] 36.1 The replay ply in the provider, cleared with the report.
+- [x] 36.2 Arrows, clickable moves and slips, Play from here read it from there.
+- [x] 36.3 DOM test red first.
+- [x] 36.4 Help.
+- [x] 36.5 Version 1.8.2.
+- [x] 36.6 Proved in the browser build.
 
 Acceptance: as the chip's final paragraph.
+
+**For the gate.** `PlayGame` gains `replayPly: number | null` and `setReplayPly`, cleared
+beside the report in all four places the report is set or cleared (`start`, `resume`,
+`finish`, `reset`), which is every launch shape, Keep playing and New game. `Play.tsx`
+reads and writes it through `usePlay()`; the phase 25 "which report" guard is now the
+provider clearing the ply in the same update that changes the report, and the screen clamps
+the ply to the moves it has. The arrows, the move list, the slips and Play from here all go
+through the one `step` as before. The DOM test was written first and shown red on the old
+code with exactly Nick's symptom (the list marked Nf6 where d5 was expected after a trip to
+Study); green after, with a second case that a new review starts at the end. 1049 tests in
+9.9 seconds, `tsc -b` clean.
+
+Driven at 1200x980 against a fresh server at 1.8.2: a Caro-Kann game to 3.exd5, Stop and
+review, back two plies to 2.d4, Study, Play: the list still marked 2.d4 and the board
+showed the position before ...d5. New game cleared it. No console errors; storage cleared
+afterwards. Nick's own files were not listed and not reported.
 
 - [ ] **Review gate 36**
 

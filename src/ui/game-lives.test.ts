@@ -115,6 +115,8 @@ function game(over: Partial<PlayGame> = {}): PlayGame {
     canResume: false,
     resume: () => {},
     report: null,
+    replayPly: null,
+    setReplayPly: () => {},
     scanning: null,
     evaluations: new Map(),
     thinking: false,

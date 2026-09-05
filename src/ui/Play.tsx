@@ -152,14 +152,12 @@ export function Play({
   // "This chapter's line" is the one people misread here, so the launch
   // options carry the screen's only `?`.
   const [askLaunch, setAskLaunch] = useState(false)
-  // Which position of a reviewed game is showing, as a count of moves played,
-  // and WHICH report it belongs to. Holding the report alongside is what puts
-  // the viewer back at the end when a new one arrives: an effect watching the
-  // report would leave one render showing the old ply against the new game.
-  const [replay, setReplay] = useState<{ of: GameReport | null; ply: number }>({
-    of: null,
-    ply: 0,
-  })
+  // Which position of a reviewed game is showing lives in the provider since
+  // phase 36, beside the report it belongs to, so that it survives a trip to
+  // another screen the way the game does. The phase 25 guard about WHICH
+  // report the ply belongs to went with it: the provider clears the ply in the
+  // same update that changes the report, so no render sees an old ply against
+  // a new game.
 
   useEffect(() => {
     if (request) setLaunch('here')
@@ -281,10 +279,11 @@ export function Play({
   const moves = useMemo(() => session?.moves ?? [], [session])
   const atEnd = moves.length
   // A report nobody has walked yet shows its end, which is the final position.
-  const ply = replay.of === report && report !== null ? replay.ply : atEnd
+  const ply = report !== null && game.replayPly !== null ? clampPly(moves, game.replayPly) : atEnd
+  const setReplayPly = game.setReplayPly
   const step = useCallback(
-    (to: number) => setReplay({ of: report, ply: clampPly(moves, to) }),
-    [moves, report],
+    (to: number) => setReplayPly(clampPly(moves, to)),
+    [moves, setReplayPly],
   )
 
   // The arrows only listen while a report is showing. Study puts the same

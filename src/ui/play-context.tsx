@@ -116,6 +116,15 @@ export interface PlayGame {
    */
   recordedAt: string | null
   report: GameReport | null
+  /**
+   * Where a reviewed game's viewer is standing, as a count of moves played,
+   * or null when nobody has stepped it and it shows the end. Held here rather
+   * than on the screen since phase 36, because the screen unmounts on a view
+   * change and Nick came back from Study to find the board at the final move.
+   * View state only: it never touches the session's moves.
+   */
+  replayPly: number | null
+  setReplayPly: (ply: number | null) => void
   scanning: { done: number; total: number } | null
   evaluations: Map<string, number>
   thinking: boolean
@@ -209,6 +218,9 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
   const [thinking, setThinking] = useState(false)
   const [engineError, setEngineError] = useState<string | null>(null)
   const [report, setReport] = useState<GameReport | null>(null)
+  // Cleared beside the report everywhere the report is: a ply that outlived
+  // its report would show the wrong position for one render.
+  const [replayPly, setReplayPly] = useState<number | null>(null)
   const [scanning, setScanning] = useState<{ done: number; total: number } | null>(null)
   const [evaluations, setEvaluations] = useState<Map<string, number>>(() => new Map())
   const [hint, setHint] = useState<Hint | null>(null)
@@ -281,6 +293,7 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
     async (options: StartOptions) => {
       setEngineError(null)
       setReport(null)
+      setReplayPly(null)
       setThinking(true)
       evaluationsRef.current = new Map()
       setEvaluations(new Map())
@@ -466,6 +479,7 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
   const resume = useCallback(() => {
     if (!sessionRef.current || sessionRef.current.outcome) return
     setReport(null)
+    setReplayPly(null)
   }, [])
 
   /**
@@ -541,6 +555,7 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
         running.hints,
         setup.side ?? 'course',
       )
+      setReplayPly(null)
       setReport(built)
       // A replayed game that nobody has moved in is already on disk, and the
       // scan that just ran is a second opinion at 150 ms, not a new fact:
@@ -611,6 +626,7 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
     remember(null)
     setSession(null)
     setReport(null)
+    setReplayPly(null)
     setScanning(null)
     setEngineError(null)
     setHint(null)
@@ -643,6 +659,8 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
     side: setup?.side ?? 'course',
     recordedAt,
     report,
+    replayPly,
+    setReplayPly,
     scanning,
     evaluations,
     thinking,
