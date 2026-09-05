@@ -1,0 +1,581 @@
+{
+  "id": "ch1-nf6-the-wedge",
+  "title": "2...Nf6: the e5 wedge",
+  "defaultTags": ["vs-nf6"],
+  "intro": "This is the main line, and the one a prepared opponent plays. 2...Nf6 hits e4, the pawn goes to e5 with tempo, and the knight lands on d5, the best square it will ever have. Everything White does for the next ten moves is about that knight: hit it with the bishop, hit it with the c-pawn where the c-pawn is free, and make it choose between b6, where it hits the bishop and does nothing else, and a retreat.\n\n## The shape\n\n3.e5 Nd5 4.d4 cxd4 5.Nf3, and only now the recapture on d4. The knight comes first because it defends the pawn that is about to arrive, and because 5.cxd4 Nc6 would hit d4 a move before it had a defender. Black's three replies at move five are 5...Nc6, 5...e6 and 5...d6, and this chapter has a recipe for each. The main one, 5...Nc6 6.cxd4 d6 7.Bc4 Nb6 8.Bb5, is chapter 0's line run further: the bishop pins the knight, e5 is taken and taken back, the bishops come off on d7, and White castles into a level position with the freer pieces.\n\n## The recapture question\n\nTake back on d4 with the pawn every time the pawn can do it. The knight on d4 is what the open Sicilian gets, and this course was chosen to get something else. The one time the pawn cannot take back, after 5...e6 6.cxd4 b6 and a trade on c3, the b-pawn takes back and White has a pawn on c3 beside the one on d4: a different centre, still a centre.\n\n## What the wedge does\n\nThe pawn on e5 takes f6 and d6 from Black's knights, so the king's knight has nowhere natural to go once it leaves d5, and the bishop on f8 has to come out by e7. When Black plays ...d6 to hit the pawn, the pin on b5 makes ...dxe5 cost the knight on c6, and when Black plays ...e6 first the pawn stands for good. Do not defend it with pieces; let it be taken when taking it costs Black something.\n\n## Typical mistakes at this level\n\nTaking back on d4 with the knight. Playing c4 to hit the knight on d5 before d4 is in, which gives up the centre for one tempo. Letting the pin on b5 go by trading on c6 when the knight could take on d7 instead. And castling long, or not castling at all, in a position where the centre is about to open.",
+  "stem": ["e4", "c5", "c3", "Nf6", "e5", "Nd5", "d4", "cxd4", "Nf3"],
+  "tree": [
+    {
+      "san": "Nc6",
+      "weight": 7,
+      "note": "The main move. Black hits d4 a second time before White has taken back, so the pawn recapture has to come now.",
+      "children": [
+        {
+          "san": "cxd4",
+          "note": "The pawn takes back with the knight on f3 defending it. The centre the opening promised.",
+          "tags": ["big-centre"],
+          "children": [
+            {
+              "san": "d6",
+              "weight": 7,
+              "note": "The main move, hitting the wedge at once.",
+              "children": [
+                {
+                  "san": "Bc4",
+                  "note": "The bishop hits the knight, which has to decide.",
+                  "tags": ["development"],
+                  "children": [
+                    {
+                      "san": "Nb6",
+                      "weight": 7,
+                      "note": "The knight hits back, its only active choice.",
+                      "children": [
+                        {
+                          "san": "Bb5",
+                          "note": "The pin, so that ...dxe5 costs the knight on c6.",
+                          "tags": ["tactics"],
+                          "children": [
+                            {
+                              "san": "dxe5",
+                              "weight": 7,
+                              "note": "Black takes the wedge.",
+                              "children": [
+                                {
+                                  "san": "Nxe5",
+                                  "note": "The knight takes back and c6 is attacked twice.",
+                                  "tags": ["tactics"],
+                                  "children": [
+                                    {
+                                      "san": "Bd7",
+                                      "weight": 8,
+                                      "note": "Black breaks the pin by offering the bishops.",
+                                      "children": [
+                                        {
+                                          "san": "Nxd7",
+                                          "note": "Take with the knight, so the bishop keeps the pin one more move.",
+                                          "tags": ["development"],
+                                          "children": [
+                                            {
+                                              "san": "Qxd7",
+                                              "weight": 9,
+                                              "note": "The queen takes back.",
+                                              "children": [
+                                                {
+                                                  "san": "Nc3",
+                                                  "note": "The queen's knight to the square the c-pawn left.",
+                                                  "tags": ["development"],
+                                                  "children": [
+                                                    {
+                                                      "san": "e6",
+                                                      "weight": 8,
+                                                      "note": "Black covers d5 and gets ready to castle.",
+                                                      "children": [
+                                                        {
+                                                          "san": "O-O",
+                                                          "note": "Castle. Chapter 0 stops here; this chapter goes on.",
+                                                          "tags": ["king-safety"],
+                                                          "children": [
+                                                            {
+                                                              "san": "Be7",
+                                                              "weight": 8,
+                                                              "note": "Black develops the last minor piece and is one move from castling.",
+                                                              "children": [
+                                                                {
+                                                                  "san": "Qg4",
+                                                                  "note": "The queen comes out to g4 while Black's king is still in the middle. It eyes g7 and e6, and it makes Black castle into it rather than develop first.",
+                                                                  "tags": ["kingside-attack"],
+                                                                  "mistakes": [
+                                                                    { "san": "Re1", "grade": "playable", "note": "Sound and quiet: the rook behind the e-file. The queen move asks a question first." },
+                                                                    { "san": "d5", "grade": "inaccuracy", "note": "13...exd5 14.Nxd5 Nxd5 15.Qxd5 Qxd5 16.Bxc6+ bxc6 and White is a pawn down for nothing: the knight on c6 was never loose." }
+                                                                  ],
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "O-O",
+                                                                      "weight": 8,
+                                                                      "note": "Black castles, into the queen's line but out of the centre.",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Bd3",
+                                                                          "note": "The bishop swings to the kingside, where the queen already is, and points at h7. The knight on c6 is no longer pinned, and it was never going anywhere.",
+                                                                          "tags": ["kingside-attack"],
+                                                                          "mistakes": [
+                                                                            { "san": "Bxc6", "grade": "inaccuracy", "note": "It trades the bishop pair for a knight that was doing nothing, and 14...Qxc6 has Black's queen on the long diagonal." },
+                                                                            { "san": "Rd1", "grade": "playable", "note": "Fine. The bishop to d3 first, because the attack needs it more than the d-pawn needs the rook." }
+                                                                          ],
+                                                                          "plan": "Rooks to d1 and e1, then d5 when it opens lines towards Black's king, or Ne4 heading for g5. If Black plays ...f5 to chase the queen, take en passant and the e-file is open with the king on it.",
+                                                                          "name": "The main line, 13.Qg4 and 14.Bd3"
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "san": "Bd7",
+                              "weight": 3,
+                              "note": "Black breaks the pin before taking on e5.",
+                              "children": [
+                                {
+                                  "san": "Bxc6",
+                                  "note": "Take, so that the recapture leaves Black with a bishop on c6 that has to move again when d5 comes.",
+                                  "tags": ["development"],
+                                  "mistakes": [
+                                    { "san": "exd6", "grade": "playable", "note": "Fine: 9...exd6 10.O-O and the d-file is open with White to castle. The trade on c6 first keeps the structure the plan wants." },
+                                    { "san": "Ba4", "grade": "inaccuracy", "note": "The bishop retreats to keep the pin, and 9...dxe5 10.Nxe5 Nxe5 11.dxe5 Bxa4 12.Qxa4+ Qd7 and the queens come off with nothing to show." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Bxc6",
+                                      "weight": 9,
+                                      "note": "The bishop takes back.",
+                                      "children": [
+                                        {
+                                          "san": "exd6",
+                                          "note": "Now the wedge trades itself for the d-file, because the bishop on c6 is the piece the open centre hurts.",
+                                          "tags": ["big-centre"],
+                                          "mistakes": [
+                                            { "san": "O-O", "grade": "playable", "note": "Sound, and 10...dxe5 11.Nxe5 gives Black the bishop pair against the wedge. Taking first keeps the d-file for the rooks." }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "exd6",
+                                              "weight": 7,
+                                              "note": "Black takes back with the pawn.",
+                                              "children": [
+                                                {
+                                                  "san": "Nc3",
+                                                  "note": "Develop, covering d5 and e4 and getting ready to castle. The pawn on d6 is backward on an open file and the knight on b6 has nowhere to go.",
+                                                  "tags": ["development"],
+                                                  "mistakes": [
+                                                    { "san": "O-O", "grade": "playable", "note": "Also fine. The knight first so that ...Bxf3 can be answered by the queen without losing the pawn on d4." },
+                                                    { "san": "Qb3", "grade": "inaccuracy", "note": "11...Bd5 blocks with tempo and the queen has to move again." }
+                                                  ],
+                                                  "plan": "Castle, put a rook on d1 against the backward pawn, and play Nd2 to b3 or e4. Black's bishop on c6 is good and his knight on b6 is not; trade the bishop when it comes to d5.",
+                                                  "name": "8...Bd7, the bishops trade early"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "e6",
+                      "weight": 4,
+                      "note": "Black covers the knight rather than moving it, and gets ready to castle.",
+                      "children": [
+                        {
+                          "san": "O-O",
+                          "note": "Castle, with the bishop already on the best diagonal. The knight on d5 is left standing; it is answered by the queen next move.",
+                          "tags": ["king-safety"],
+                          "mistakes": [
+                            { "san": "Bxd5", "grade": "inaccuracy", "note": "It trades the good bishop for the knight and 8...exd5 gives Black the centre pawns and the bishop pair." },
+                            { "san": "exd6", "grade": "inaccuracy", "note": "8...Bxd6 and Black has traded the wedge away for free development." }
+                          ],
+                          "children": [
+                            {
+                              "san": "Be7",
+                              "weight": 8,
+                              "note": "Black develops.",
+                              "children": [
+                                {
+                                  "san": "Qe2",
+                                  "note": "The queen comes behind the e-pawn, so that ...dxe5 can be met by dxe5 with the queen defending it, and the d-file is left for a rook.",
+                                  "tags": ["development"],
+                                  "mistakes": [
+                                    { "san": "exd6", "grade": "inaccuracy", "note": "9...Qxd6 and Black is developed with the wedge gone." },
+                                    { "san": "Nc3", "grade": "playable", "note": "Sound: 9...Nxc3 10.bxc3 and the pawns on c3 and d4 are a centre still. The queen move keeps the knight on the board to be chased." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "O-O",
+                                      "weight": 8,
+                                      "note": "Black castles.",
+                                      "children": [
+                                        {
+                                          "san": "Rd1",
+                                          "note": "The rook behind the d-pawn, so that d4 is defended when the knight leaves d5 and the d-file is White's if it opens.",
+                                          "tags": ["development"],
+                                          "mistakes": [
+                                            { "san": "Nc3", "grade": "playable", "note": "Also fine. The rook first, because the knight can go to c3 or d2 depending on what Black does with d6." },
+                                            { "san": "Bd2", "grade": "playable", "note": "Quiet and sound. The rook is the piece with a job on the d-file." }
+                                          ],
+                                          "plan": "Nc3 to hit the knight, Bd3 if it leaves d5, and Qe4 pointing at h7 when the bishop is on d3. If Black takes on e5, take back with the pawn and the e-pawn is a wedge again with a rook behind d4.",
+                                          "name": "7...e6, the queen behind the wedge"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "e6",
+              "weight": 3,
+              "note": "Black covers d5 before hitting the wedge.",
+              "children": [
+                {
+                  "san": "Bc4",
+                  "note": "The bishop hits the knight anyway; ...e6 only means that ...Nb6 is the reply rather than a choice.",
+                  "tags": ["development"],
+                  "mistakes": [
+                    { "san": "Bd3", "grade": "playable", "note": "Sound, and the bishop on c4 asks the knight a question that the bishop on d3 does not." },
+                    { "san": "Nc3", "grade": "playable", "note": "Fine: 7...Nxc3 8.bxc3 and the doubled pawn is a centre pawn. The bishop first keeps the knight on the board." }
+                  ],
+                  "children": [
+                    {
+                      "san": "Nb6",
+                      "weight": 8,
+                      "note": "The knight hits the bishop.",
+                      "children": [
+                        {
+                          "san": "Bb5",
+                          "note": "The pin again, and with the pawn on e6 there is no ...d6 to take the wedge with tempo.",
+                          "tags": ["tactics"],
+                          "mistakes": [
+                            { "san": "Bb3", "grade": "playable", "note": "Sound. The pin does more: it holds the knight on c6 while White castles and brings the other knight to c3." },
+                            { "san": "Bd3", "grade": "inaccuracy", "note": "8...Nb4 hits the bishop and the pawn on d4 is short of a defender." }
+                          ],
+                          "children": [
+                            {
+                              "san": "Be7",
+                              "weight": 8,
+                              "note": "Black develops.",
+                              "children": [
+                                {
+                                  "san": "O-O",
+                                  "note": "Castle.",
+                                  "tags": ["king-safety"],
+                                  "mistakes": [
+                                    { "san": "Nc3", "grade": "playable", "note": "Also fine. The king first, because ...d6 is coming and the centre opens with it." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "O-O",
+                                      "weight": 8,
+                                      "note": "Black castles.",
+                                      "children": [
+                                        {
+                                          "san": "Nc3",
+                                          "note": "The knight to c3, covering d5 and e4, and White has the whole setup with a wedge Black has not yet touched.",
+                                          "tags": ["development"],
+                                          "mistakes": [
+                                            { "san": "Bxc6", "grade": "inaccuracy", "note": "10...dxc6 and Black has the bishop pair and the d-file, and the wedge has no target to hold." },
+                                            { "san": "Re1", "grade": "playable", "note": "Sound. The knight first, because d5 is the square the game is about." }
+                                          ],
+                                          "plan": "Re1 behind the wedge and Bd3 when the knight on c6 moves. Black's break is ...d6 or ...f6; meet ...d6 with exd6 only when Bxd6 can be hit by Ne4, and meet ...f6 with exf6 and the e-file.",
+                                          "name": "6...e6, the wedge stands"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "e6",
+      "weight": 4,
+      "note": "The second main move. Black covers the knight first and keeps ...Nc6 and ...d6 for later.",
+      "children": [
+        {
+          "san": "cxd4",
+          "note": "The pawn takes back, defended by the knight.",
+          "tags": ["big-centre"],
+          "mistakes": [
+            { "san": "Bc4", "grade": "playable", "note": "Fine: 6...Nb6 7.Bb3 and the pawn takes back next. The pawn first leaves nothing hanging." },
+            { "san": "Nxd4", "grade": "inaccuracy", "note": "The knight takes and the centre is a pawn on e5 with nothing beside it: 6...Nc6 7.Nxc6 bxc6 and Black has the centre pawns." }
+          ],
+          "children": [
+            {
+              "san": "b6",
+              "weight": 5,
+              "note": "The bishop is coming to b7, where it looks at the knight's square and the long diagonal.",
+              "children": [
+                {
+                  "san": "Nc3",
+                  "note": "The knight hits the knight. With the bishop coming to b7 to defend d5, the trade on c3 is the moment to force.",
+                  "tags": ["development"],
+                  "mistakes": [
+                    { "san": "Bd3", "grade": "playable", "note": "Sound and slower: 7...Bb7 and the knight on d5 is defended twice." },
+                    { "san": "Bc4", "grade": "playable", "note": "Fine: 7...Bb7 8.O-O and the knight sits on d5 defended by the bishop." }
+                  ],
+                  "children": [
+                    {
+                      "san": "Nxc3",
+                      "weight": 8,
+                      "note": "Black trades.",
+                      "children": [
+                        {
+                          "san": "bxc3",
+                          "note": "The b-pawn takes back, and White has pawns on c3, d4 and e5: a centre with a doubled pawn in it, and the b-file half open for a rook.",
+                          "tags": ["big-centre"],
+                          "mistakes": [
+                            { "san": "Qd2", "grade": "inaccuracy", "note": "8...Nd5 puts a knight back on the square with the pawn still on c3, and the queen has to guard it." }
+                          ],
+                          "children": [
+                            {
+                              "san": "Qc7",
+                              "weight": 7,
+                              "note": "The queen hits the wedge and the pawn on c3 behind it.",
+                              "children": [
+                                {
+                                  "san": "Bd2",
+                                  "note": "The bishop defends c3 without blocking anything, and it is heading for d3 to point at h7.",
+                                  "tags": ["development"],
+                                  "mistakes": [
+                                    { "san": "Qd2", "grade": "playable", "note": "Fine, and the queen is not where it wants to be. The bishop does the job." },
+                                    { "san": "Bd3", "grade": "inaccuracy", "note": "9...Qxc3+ 10.Bd2 Qc7 and Black has taken a pawn for one tempo." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Bb7",
+                                      "weight": 8,
+                                      "note": "Black develops the bishop to the long diagonal.",
+                                      "children": [
+                                        {
+                                          "san": "Bd3",
+                                          "note": "The bishop points at h7, and with the wedge on e5 keeping Black's knight off f6, that diagonal is the attack.",
+                                          "tags": ["kingside-attack"],
+                                          "mistakes": [
+                                            { "san": "Be2", "grade": "playable", "note": "Sound and passive. The diagonal to h7 is what the wedge was for." },
+                                            { "san": "c4", "grade": "inaccuracy", "note": "It fixes the pawns before the pieces are out, and 10...Nc6 hits d4 with the bishop on b7 looking through." }
+                                          ],
+                                          "plan": "Castle, Qe2, and Ng5 with the queen behind it when Black's knight is not on f6. The pawn on c3 is a target and c4 is the answer to ...Nc6, closing the diagonal on b7.",
+                                          "name": "5...e6 and 6...b6, the b7 bishop"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "d6",
+              "weight": 5,
+              "note": "Black hits the wedge with ...e6 already in.",
+              "children": [
+                {
+                  "san": "Bc4",
+                  "note": "The bishop hits the knight, as always.",
+                  "tags": ["development"],
+                  "mistakes": [
+                    { "san": "exd6", "grade": "inaccuracy", "note": "7...Bxd6 and Black is a move from castling with the wedge gone." }
+                  ],
+                  "children": [
+                    {
+                      "san": "Nb6",
+                      "weight": 8,
+                      "note": "The knight hits back.",
+                      "children": [
+                        {
+                          "san": "Bb3",
+                          "note": "Back to b3, keeping the diagonal, because there is no knight on c6 to pin.",
+                          "tags": ["development"],
+                          "mistakes": [
+                            { "san": "Bb5+", "grade": "playable", "note": "Fine: 8...Bd7 9.Bd3 and the bishop has spent two moves to go where it could go in one." },
+                            { "san": "Bd3", "grade": "playable", "note": "Sound. b3 keeps the pressure on e6 and f7 for the day the centre opens." }
+                          ],
+                          "children": [
+                            {
+                              "san": "Nc6",
+                              "weight": 7,
+                              "note": "Black develops and hits d4 and e5 at once.",
+                              "children": [
+                                {
+                                  "san": "exd6",
+                                  "note": "Now the wedge trades itself, because with the knight on c6 and the pawn on e6 there is no pin to hold it and d4 needs the file.",
+                                  "tags": ["big-centre"],
+                                  "mistakes": [
+                                    { "san": "O-O", "grade": "playable", "note": "Sound: 9...dxe5 10.dxe5 Qxd1 11.Rxd1 and the ending is level. Taking first keeps the queens on." },
+                                    { "san": "Nc3", "grade": "inaccuracy", "note": "9...dxe5 10.dxe5 Qxd1+ 11.Nxd1 and the knight has taken back on the wrong square." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Qxd6",
+                                      "weight": 6,
+                                      "note": "The queen takes back and stands in the centre.",
+                                      "children": [
+                                        {
+                                          "san": "O-O",
+                                          "note": "Castle, with an isolated d-pawn and the pieces to play behind it. This is chapter 2's structure reached from chapter 1.",
+                                          "tags": ["king-safety"],
+                                          "mistakes": [
+                                            { "san": "Nc3", "grade": "playable", "note": "Also fine. The king first, because ...Nxd4 tricks appear once the knight leaves c3's cover of d4 behind." }
+                                          ],
+                                          "plan": "Nc3, Re1 and Be3 behind the pawn, with Ne4 hitting the queen on d6 when the moment comes. The d5 break is the plan, and Black's queen on d6 is in its way.",
+                                          "name": "5...e6 and 6...d6, the isolated pawn"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "d6",
+      "weight": 3,
+      "note": "Black hits the wedge before anything else.",
+      "children": [
+        {
+          "san": "cxd4",
+          "note": "The pawn takes back, defended by the knight.",
+          "tags": ["big-centre"],
+          "mistakes": [
+            { "san": "Bc4", "grade": "playable", "note": "Fine: 6...Nb6 7.Bb3 dxe5 8.Nxe5 and the pawn is still to be taken back on d4." },
+            { "san": "exd6", "grade": "inaccuracy", "note": "6...Qxd6 and the wedge is gone for nothing, with the queen standing well." }
+          ],
+          "children": [
+            {
+              "san": "Nc6",
+              "weight": 7,
+              "note": "Black develops with a hit on d4 and e5.",
+              "children": [
+                {
+                  "san": "Bc4",
+                  "note": "The bishop hits the knight and the position is the main line by another order: 7...Nb6 8.Bb5 is chapter 0.",
+                  "tags": ["development"],
+                  "plan": "Chapter 0's line from here: 7...Nb6 8.Bb5 dxe5 9.Nxe5 Bd7 10.Nxd7 Qxd7 11.Nc3 e6 12.O-O.",
+                  "name": "5...d6, into the main line"
+                }
+              ]
+            },
+            {
+              "san": "dxe5",
+              "weight": 4,
+              "note": "Black takes the wedge at once, before the knight on c6 can be pinned.",
+              "children": [
+                {
+                  "san": "Nxe5",
+                  "note": "The knight takes back, and with no knight on c6 the pawn on d4 is safe: 7...Qxd4 would simply lose the queen to 8.Qxd4.",
+                  "tags": ["development"],
+                  "mistakes": [
+                    { "san": "dxe5", "grade": "inaccuracy", "note": "7...Qxd1+ 8.Kxd1 and the queens are off with White's king in the middle and the pawn on e5 loose." }
+                  ],
+                  "children": [
+                    {
+                      "san": "e6",
+                      "weight": 7,
+                      "note": "Black covers the knight and opens the bishop.",
+                      "children": [
+                        {
+                          "san": "Bc4",
+                          "note": "The bishop hits the knight, which has nothing to hide behind now.",
+                          "tags": ["development"],
+                          "mistakes": [
+                            { "san": "Bd3", "grade": "playable", "note": "Sound, and it does not ask the knight anything." }
+                          ],
+                          "children": [
+                            {
+                              "san": "Nd7",
+                              "weight": 6,
+                              "note": "Black offers a trade of knights to ease the pressure.",
+                              "children": [
+                                {
+                                  "san": "Nxd7",
+                                  "note": "Take, so that the recapture blocks Black's own bishop for a move.",
+                                  "tags": ["development"],
+                                  "mistakes": [
+                                    { "san": "Bxd5", "grade": "inaccuracy", "note": "9...Nxe5 10.Bxb7 Bxb7 11.dxe5 and White has traded the good bishop for a pawn structure Black is happy with." },
+                                    { "san": "Nf3", "grade": "playable", "note": "Fine, and the knight has gone to e5 and back for nothing." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Bxd7",
+                                      "weight": 8,
+                                      "note": "The bishop takes back.",
+                                      "children": [
+                                        {
+                                          "san": "O-O",
+                                          "note": "Castle. White has the isolated pawn with a bishop on c4 hitting the knight and the freer game.",
+                                          "tags": ["king-safety"],
+                                          "mistakes": [
+                                            { "san": "Nc3", "grade": "playable", "note": "Also fine: 10...Nxc3 11.bxc3 and the pawns on c3 and d4 are a centre. The king first." }
+                                          ],
+                                          "plan": "Nc3 to hit the knight, Re1 and Qe2 behind the e-file, and d5 when it opens the bishop on c4 towards f7.",
+                                          "name": "5...d6 and 6...dxe5, the early trade"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

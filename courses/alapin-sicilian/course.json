@@ -1,0 +1,27 @@
+{
+  "id": "alapin-sicilian",
+  "title": "The Alapin Sicilian",
+  "colour": "white",
+  "tagline": "The pawn centre against the Sicilian, as White.",
+  "formatVersion": 1,
+  "chapters": [
+    "ch0-the-idea.json",
+    "ch1-nf6-the-wedge.json",
+    "ch2-d5-the-isolated-pawn.json",
+    "ch3-other-second-moves.json",
+    "ch4-the-full-centre.json",
+    "ch5-everything-else.json",
+    "ch6-tactics-and-plans.json"
+  ],
+  "tagExtensions": [
+    "e5-wedge",
+    "isolated-pawn",
+    "big-centre",
+    "d5-break",
+    "queenside-space",
+    "vs-nf6",
+    "vs-d5",
+    "vs-closed",
+    "vs-qb6"
+  ]
+}
