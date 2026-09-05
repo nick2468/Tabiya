@@ -4351,19 +4351,34 @@ hanging pawn (one line id changes, accepted); the Caro-Kann lists 5...Qxd4 as a 
 alternative; two notes in the Najdorf and the Slav; the seventeen floor findings go into
 `accepted.md`; the register entry for the second pass is closed.
 
-- [ ] 35.1 The Scandinavian's Nge2 line takes the pawn; the old move graded a mistake.
-- [ ] 35.2 The Caro-Kann lists the pawn grab as playable.
-- [ ] 35.3 Two notes, Najdorf and Slav.
-- [ ] 35.4 Seventeen floor findings into `accepted.md`.
-- [ ] 35.5 Checkers on what changed, outputs under `docs/engine-runs/phase-35/`.
-- [ ] 35.6 Four bundles regenerated.
-- [ ] 35.7 Register entry closed; ruling logged.
-- [ ] 35.8 Version 1.8.1.
-- [ ] 35.9 Suite green; exactly one line id changed.
+- [x] 35.1 The Scandinavian's Nge2 line takes the pawn; the old move graded a mistake.
+- [x] 35.2 The Caro-Kann lists the pawn grab as playable.
+- [x] 35.3 Two notes, Najdorf and Slav.
+- [x] 35.4 Seventeen floor findings into `accepted.md`.
+- [x] 35.5 Checkers on what changed, outputs under `docs/engine-runs/phase-35/`.
+- [x] 35.6 Four bundles regenerated.
+- [x] 35.7 Register entry closed; ruling logged.
+- [x] 35.8 Version 1.8.1.
+- [x] 35.9 Suite green; exactly one line id changed.
 
 Acceptance: as the chip's final paragraph.
 
-- [ ] **Review gate 35**
+Gate 35 findings (2026-09-05, orchestrator):
+
+- The builder landed the four content changes, the accepted entries, the register closure
+  and the ruling (commits a4b035a to 3273f83) but did not tick the boxes; ticked here after
+  verification. Exactly one line id changed, the Scandinavian's Nge2 line, as ruled. Four
+  bundles regenerated. The version bump to 1.8.1 was superseded by 36 and 37.
+- **The mistakes pass the record promised was missing** and was run at the gate over the
+  two courses whose entries changed (`docs/engine-runs/phase-35/engine-mistakes-2500-*.txt`).
+  It disputed four grades; each was re-asked alone on a quiet machine
+  (`gate-recheck-2500.md`). Two came down to inaccuracy on unanimous numbers (the new
+  Scandinavian "castle instead of taking" entry, and the Panov's 4...dxc4); two stay
+  mistakes under the straddle ruling (the Exchange's 3...Qxd5, the Panov's 10...b6).
+- Nick found a wrong note by reading ch0 ("White pins the knight" with the queen on d6);
+  fixed by the builder in the same phase.
+
+- [x] **Review gate 35 passed** (2026-09-05)
 
 ## Phase 36 - the replay position survives leaving the screen
 
@@ -4399,7 +4414,13 @@ review, back two plies to 2.d4, Study, Play: the list still marked 2.d4 and the 
 showed the position before ...d5. New game cleared it. No console errors; storage cleared
 afterwards. Nick's own files were not listed and not reported.
 
-- [ ] **Review gate 36**
+Gate 36 findings (2026-09-05, orchestrator):
+
+- 1061 tests and `tsc -b` clean at the time of the gate. Driven: a reviewed game stepped
+  back one move, Study, Play, and the board, the marked move and the slip's arrow were where
+  they had been left.
+
+- [x] **Review gate 36 passed** (2026-09-05)
 
 ## Phase 37 - the report says what was better
 
@@ -4450,7 +4471,18 @@ Copy game said Copied and the text carried "the engine preferred 2.d5" in the co
 reads). No console errors; storage cleared afterwards. Nick's own files were not listed
 and not reported.
 
-- [ ] **Review gate 37**
+Gate 37 findings (2026-09-05, orchestrator):
+
+- Driven: 1...f6 in a Caro-Kann game reviewed as "An inaccuracy on move 1: f6 turned
+  \"level\" into \"clearly better for white\". The engine preferred 1...e5." Clicking it put
+  the position before the move on the board with the preferred move as a blue arrow beside
+  the move played.
+- Nick's own PGN at this gate exposed a bug outside the phase: a replayed checkmate reported
+  "Stopped" and "Not scanned". Fixed at the gate as the orchestrator's commit (8507c8b):
+  the session works its outcome out after replaying a record's moves, and a mated final
+  position takes the outcome as its verdict. Two tests.
+
+- [x] **Review gate 37 passed** (2026-09-05)
 
 ## Phase 38 - the report and the game list name the line
 
@@ -4512,4 +4544,18 @@ line at move 2 correctly rather than a chapter; the Study start was the way to t
 No console errors in a fresh tab; storage cleared. Nick's own files were not listed and not
 reported.
 
-- [ ] **Review gate 38**
+Gate 38 findings (2026-09-05, orchestrator):
+
+- 1083 tests in about eleven seconds under the twenty-second rule; `tsc -b` clean; version
+  1.8.4; nothing under `courses/` from this phase and 378 line ids unchanged.
+- **Mutation checked**: removing the fork check from `lineFollowed` turns five tests red,
+  including "agrees with Lines played about which line a game counts for".
+- Driven against a server on the phase's source: a London game 1.d4 e6 2.e4 reviewed as
+  "You were in The ...e6 move order and left it on move 2 with e4. The line plays Bf4.",
+  and the Play on list's new Line column showing the same name.
+- The builder's decision to name the chapter by the lines a game agreed with rather than
+  by stem alone is right; the drive that caught "Classical" for a 2...c5 game is the reason.
+- Nick's own files were not listed and not reported. The browser build's storage was
+  cleared afterwards.
+
+- [x] **Review gate 38 passed** (2026-09-05)
