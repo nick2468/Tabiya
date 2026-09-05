@@ -185,6 +185,16 @@ describe('games played against the course', () => {
     ...over,
   })
 
+  it('leave the counts when archived, phase 39', () => {
+    const state = {
+      ...emptyProgress(),
+      playGames: [played({}), played({ archived: true, deviated: true, at: '2026-08-27T09:00:01.000Z' })],
+    }
+    const stats = playStats([], state)
+    expect(stats.games).toBe(1)
+    expect(stats.deviations).toBe(0)
+  })
+
   it('are counted in the total and said apart', () => {
     const state = {
       ...emptyProgress(),
@@ -354,6 +364,12 @@ describe('linesPlayed', () => {
     }
     expect(anyGameRecorded(course, state)).toBe(false)
     expect(linesPlayed(course, state)).toEqual([])
+  })
+
+  it('leaves out an archived game, and does not count it as recorded', () => {
+    const state = { ...emptyProgress(), playGames: [{ ...game([...lines[0].path]), archived: true }] }
+    expect(linesPlayed(course, state)).toEqual([])
+    expect(anyGameRecorded(course, state)).toBe(false)
   })
 
   it('ignores a game that left the repertoire at once', () => {

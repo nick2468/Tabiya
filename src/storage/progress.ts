@@ -115,6 +115,12 @@ export interface PlayRecord {
    */
   hints?: number
   /**
+   * Put away, phase 39. Absent means not archived, so every record on disk
+   * keeps its meaning. An archived game leaves every list and count and
+   * stays in the file, where the history cap still counts it.
+   */
+  archived?: boolean
+  /**
    * How the game ended, when it ended by itself: the session's own sentence,
    * "You won by checkmate" or "Drawn by stalemate". A game that was stopped
    * has none, and the screen says "Stopped" plus the verdict instead.
@@ -495,6 +501,35 @@ export function tagAccuracy(state: ProgressState, courseId: string, tag: string)
 export function recordGame(state: ProgressState, game: PlayRecord): ProgressState {
   const kept = state.playGames.filter((held) => held.at !== game.at)
   return { ...state, playGames: [...kept, game].slice(-PLAY_HISTORY) }
+}
+
+/**
+ * Puts a game away. `at` is the record's identity, as everywhere else. The
+ * record keeps its place in the list, so unarchiving puts nothing out of
+ * order, and a game that is not there is left alone.
+ */
+export function archiveGame(state: ProgressState, at: string): ProgressState {
+  return {
+    ...state,
+    playGames: state.playGames.map((game) => (game.at === at ? { ...game, archived: true } : game)),
+  }
+}
+
+/** Brings a game back, dropping the flag rather than writing `false`. */
+export function unarchiveGame(state: ProgressState, at: string): ProgressState {
+  return {
+    ...state,
+    playGames: state.playGames.map((game) => {
+      if (game.at !== at) return game
+      const { archived: _archived, ...rest } = game
+      return rest
+    }),
+  }
+}
+
+/** Removes a game for good. The only destructive operation in the store. */
+export function deleteGame(state: ProgressState, at: string): ProgressState {
+  return { ...state, playGames: state.playGames.filter((game) => game.at !== at) }
 }
 
 /** How many answers the rolling window currently holds for a concept. */

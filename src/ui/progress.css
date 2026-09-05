@@ -127,3 +127,35 @@
 .play-on-table td.faint {
   color: var(--text-faint);
 }
+
+/* The archive line reads as a link inside a sentence, the way the Study
+   screen's do; the style lives in study.css and is repeated here so the
+   Progress screen does not depend on Study having been loaded. */
+.play-on-link,
+button.link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--link);
+  cursor: pointer;
+  font: inherit;
+}
+
+button.link:hover {
+  text-decoration: underline;
+  background: none;
+}
+
+/* An armed Delete says so in the colour the app uses for a bad verdict, so
+   the second click is a choice and not a slip. */
+button.danger {
+  color: var(--bad);
+  border-color: var(--bad);
+}
+
+/* The games table is wider than the window once it carries a Line column and
+   four buttons; it scrolls inside its own box rather than the page. */
+.play-on-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+}

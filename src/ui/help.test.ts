@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest'
 import { Shell } from './App'
 import { Drill, Feedback } from './Drill'
 import { CourseMovesChoice, Play, PlayActions, PlayControls, PlayHead, Report } from './Play'
-import { Progress } from './Progress'
+import { PlayOn, Progress } from './Progress'
 import { Study } from './Study'
 import { CatalogContext, type Catalog } from './catalog-context'
 import { PlayProvider } from './play-context'
@@ -65,6 +65,9 @@ function progressValue(state: ProgressState): ProgressValue {
     toggleHidden: () => {},
     answer: () => {},
     recordPlay: () => {},
+    archivePlay: () => {},
+    unarchivePlay: () => {},
+    deletePlay: () => {},
     exportJson: async () => JSON.stringify(state),
     importJson: async () => {},
   }
@@ -83,6 +86,16 @@ const learntOne: ProgressState = {
       level: 4,
       at: '2026-09-03T09:00:00.000Z',
       sans: ['d4', 'd5', 'Bf4'],
+    },
+    // And one archived, so the archive view and its controls can render.
+    {
+      courseId: course.id,
+      deviated: false,
+      moves: 2,
+      level: 4,
+      at: '2026-09-02T09:00:00.000Z',
+      sans: ['d4', 'd5', 'Bf4'],
+      archived: true,
     },
   ],
 }
@@ -241,6 +254,7 @@ const screens: Record<Screen, string> = {
         engineError: null,
         onExtend: () => {},
         onFinish: () => {},
+        onDiscard: () => {},
       }),
     ) +
     renderToStaticMarkup(
@@ -264,7 +278,10 @@ const screens: Record<Screen, string> = {
         onNext: () => {},
       }),
     ),
-  progress: inApp(learntOne, createElement(Progress, { courseId: course.id, onPlayOn: () => {} })),
+  progress:
+    inApp(learntOne, createElement(Progress, { courseId: course.id, onPlayOn: () => {} })) +
+    // The archive view, which the screen shows only after a click.
+    inApp(learntOne, createElement(PlayOn, { onPlayOn: () => {}, initialView: 'archive' })),
 }
 
 /**

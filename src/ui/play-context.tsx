@@ -157,6 +157,13 @@ export interface PlayGame {
   extend: (by: 5 | 'full') => Promise<void>
   finish: () => Promise<void>
   reset: () => void
+  /**
+   * Ends a game in progress with nothing kept: no scan, no report, no record.
+   * Phase 39, Nick's "Stop and discard". It is `reset` under another name,
+   * because that is exactly what New game already did to a running game; the
+   * name is here so the screen says what it means.
+   */
+  discard: () => void
 }
 
 /**
@@ -702,6 +709,7 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
     extend,
     finish,
     reset,
+    discard: reset,
   }
 }
 

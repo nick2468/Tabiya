@@ -11,7 +11,10 @@ import {
   parseProgress,
   parseProgressJson,
   recordAnswer,
+  archiveGame,
+  deleteGame,
   recordGame,
+  unarchiveGame,
   scheduleFor,
   tagAccuracy,
   tagAnswerCount,
@@ -469,6 +472,49 @@ describe('play history', () => {
     let state = recordGame(emptyProgress(), game)
     state = recordGame(state, { ...game, at: '2026-08-27T09:00:01.000Z' })
     expect(state.playGames).toHaveLength(2)
+  })
+
+  // Phase 39: putting a game away, bringing it back, and removing it.
+  it('archives a game by its identity and leaves the rest alone', () => {
+    const other = { ...game, at: '2026-08-27T09:00:01.000Z' }
+    const state = archiveGame(recordGame(recordGame(emptyProgress(), game), other), game.at)
+    expect(state.playGames.map((held) => [held.at, held.archived])).toEqual([
+      [game.at, true],
+      [other.at, undefined],
+    ])
+  })
+
+  it('unarchives by dropping the flag rather than writing false', () => {
+    const state = unarchiveGame(archiveGame(recordGame(emptyProgress(), game), game.at), game.at)
+    expect(state.playGames).toEqual([game])
+    expect('archived' in state.playGames[0]).toBe(false)
+  })
+
+  it('reads the flag back from a file, and a record without one is not archived', () => {
+    const text = JSON.stringify({
+      ...emptyProgress(),
+      playGames: [{ ...game, archived: true }, { ...game, at: '2026-08-27T09:00:01.000Z' }],
+    })
+    const read = parseProgressJson(text)
+    expect(read.playGames.map((held) => held.archived)).toEqual([true, undefined])
+  })
+
+  it('deletes a game for good, by its identity', () => {
+    const other = { ...game, at: '2026-08-27T09:00:01.000Z' }
+    const state = deleteGame(recordGame(recordGame(emptyProgress(), game), other), game.at)
+    expect(state.playGames).toEqual([other])
+    // A game that is not there is not an error.
+    expect(deleteGame(state, 'never').playGames).toEqual([other])
+  })
+
+  it('counts an archived game against the history cap', () => {
+    let state = archiveGame(recordGame(emptyProgress(), game), game.at)
+    for (let i = 1; i < PLAY_HISTORY + 1; i++) {
+      state = recordGame(state, { ...game, at: `2026-08-28T09:${String(Math.floor(i / 60)).padStart(2, '0')}:${String(i % 60).padStart(2, '0')}.000Z` })
+    }
+    expect(state.playGames).toHaveLength(PLAY_HISTORY)
+    // The archived game was the oldest and has gone with the cap.
+    expect(state.playGames.some((held) => held.archived)).toBe(false)
   })
 })
 

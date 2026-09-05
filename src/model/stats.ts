@@ -169,7 +169,8 @@ export interface PlayStats {
 }
 
 export function playStats(courses: LoadedCourse[], state: ProgressState): PlayStats {
-  const games = state.playGames
+  // An archived game is out of every count, phase 39. It stays in the file.
+  const games = state.playGames.filter((game) => !game.archived)
   const chapters = courses.flatMap((course) => course.chapters)
   const otherSide = games.filter((game) => game.side === 'other')
   const own = games.filter((game) => game.side !== 'other')
@@ -282,6 +283,7 @@ export function linesPlayed(course: LoadedCourse, state: ProgressState): LinePla
     (game) =>
       game.courseId === course.id &&
       game.side !== 'other' &&
+      !game.archived &&
       game.sans &&
       game.sans.length > 0,
   )
@@ -368,7 +370,7 @@ function sharedPrefix(a: string[], b: string[]): number {
 /** True when any game of this course kept its moves, so the section is worth showing. */
 export function anyGameRecorded(course: LoadedCourse, state: ProgressState): boolean {
   return state.playGames.some(
-    (game) => game.courseId === course.id && game.sans && game.sans.length > 0,
+    (game) => game.courseId === course.id && !game.archived && game.sans && game.sans.length > 0,
   )
 }
 

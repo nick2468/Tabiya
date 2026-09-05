@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import {
   PLAY_ON_LIMIT,
   canReplayMoves,
+  archivedGames,
   endedText,
   lineOf,
   positionText,
@@ -121,6 +122,22 @@ describe('the request a recorded game builds', () => {
     expect(requestFor(record({ side: 'other' }), london).side).toBe('other')
     expect(requestFor(record(), london).side).toBeUndefined()
     expect(replayRequest(record({ side: 'other' }), london).side).toBe('other')
+  })
+})
+
+describe('archived games, phase 39', () => {
+  it('are left out of Play on and listed newest first on the archive', () => {
+    const games = [
+      record({ at: '2026-09-01T09:00:00.000Z', archived: true }),
+      record({ at: '2026-09-02T09:00:00.000Z' }),
+      record({ at: '2026-09-03T09:00:00.000Z', archived: true, sans: undefined }),
+    ]
+    expect(recentPlayable(games).map((game) => game.at)).toEqual(['2026-09-02T09:00:00.000Z'])
+    // The archive lists every archived game, moves or no moves.
+    expect(archivedGames(games).map((game) => game.at)).toEqual([
+      '2026-09-03T09:00:00.000Z',
+      '2026-09-01T09:00:00.000Z',
+    ])
   })
 })
 

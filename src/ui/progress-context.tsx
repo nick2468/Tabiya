@@ -6,7 +6,10 @@ import {
   isHidden,
   isLearnt,
   recordAnswer,
+  archiveGame,
+  deleteGame,
   recordGame,
+  unarchiveGame,
   toggleHidden as hideOrShow,
   toggleLearnt,
   type PlayRecord,
@@ -74,6 +77,10 @@ export interface Progress {
   answer: (card: Card, verdict: Verdict, rating?: Rating) => void
   /** Records a finished game, for the play stats. */
   recordPlay: (game: PlayRecord) => void
+  /** Puts a recorded game away, brings it back, or removes it for good. */
+  archivePlay: (at: string) => void
+  unarchivePlay: (at: string) => void
+  deletePlay: (at: string) => void
   /** The whole state as JSON text, for keeping somewhere safe. */
   exportJson: () => Promise<string>
   /** Replaces everything from exported text. Rejects when the text is bad. */
@@ -158,6 +165,18 @@ export function useProgressStateFor(store: ProgressStore): Progress {
     setState((previous) => recordGame(previous, game))
   }, [])
 
+  // The same path as recordPlay: a state change, and the saving effect writes
+  // it out, so the second copy under the local app data folder follows.
+  const archivePlay = useCallback((at: string) => {
+    setState((previous) => archiveGame(previous, at))
+  }, [])
+  const unarchivePlay = useCallback((at: string) => {
+    setState((previous) => unarchiveGame(previous, at))
+  }, [])
+  const deletePlay = useCallback((at: string) => {
+    setState((previous) => deleteGame(previous, at))
+  }, [])
+
   // Putting the copy back is the trainee replacing the state deliberately, so
   // it clears the block the same way an import does. The saving effect above
   // then writes it out, which is what makes the copy live again.
@@ -197,6 +216,9 @@ export function useProgressStateFor(store: ProgressStore): Progress {
     toggleHidden,
     answer,
     recordPlay,
+    archivePlay,
+    unarchivePlay,
+    deletePlay,
     exportJson,
     importJson,
   }

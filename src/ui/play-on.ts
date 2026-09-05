@@ -35,10 +35,22 @@ export const PLAY_ON_LIMIT = 10
  */
 export function recentPlayable(games: PlayRecord[], limit = PLAY_ON_LIMIT): PlayRecord[] {
   return games
-    .filter((game) => game.sans && game.sans.length > 0)
+    .filter((game) => game.sans && game.sans.length > 0 && !game.archived)
     .slice()
     .sort((a, b) => new Date(b.at).getTime() - new Date(a.at).getTime())
     .slice(0, limit)
+}
+
+/**
+ * The archived games, newest first, for the archive view. Every one of them,
+ * moves or no moves: a game put away is a game the trainee chose to keep out
+ * of sight, and the view is where it can be brought back or removed.
+ */
+export function archivedGames(games: PlayRecord[]): PlayRecord[] {
+  return games
+    .filter((game) => game.archived)
+    .slice()
+    .sort((a, b) => new Date(b.at).getTime() - new Date(a.at).getTime())
 }
 
 /**

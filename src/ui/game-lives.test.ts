@@ -52,6 +52,9 @@ function progressValue(state: ProgressState): ProgressValue {
     toggleHidden: () => {},
     answer: () => {},
     recordPlay: () => {},
+    archivePlay: () => {},
+    unarchivePlay: () => {},
+    deletePlay: () => {},
     exportJson: async () => JSON.stringify(state),
     importJson: async () => {},
   }
@@ -129,6 +132,7 @@ function game(over: Partial<PlayGame> = {}): PlayGame {
     extend: async () => {},
     finish: async () => {},
     reset: () => {},
+    discard: () => {},
     ...over,
   }
 }

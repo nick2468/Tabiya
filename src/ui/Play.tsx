@@ -579,6 +579,7 @@ export function Play({
               engineError={engineError}
               onExtend={game.extend}
               onFinish={game.finish}
+              onDiscard={game.discard}
             />
           )}
         </div>
@@ -873,6 +874,7 @@ export function PlayActions({
   engineError,
   onExtend,
   onFinish,
+  onDiscard,
 }: {
   session: PlaySession
   scanning: { done: number; total: number } | null
@@ -880,6 +882,8 @@ export function PlayActions({
   engineError: string | null
   onExtend: (by: 5 | 'full') => void
   onFinish: () => void
+  /** Phase 39: end the game with nothing kept. */
+  onDiscard: () => void
 }) {
   const finished = session.isFinished()
   const capped = session.finishedByCap()
@@ -901,13 +905,23 @@ export function PlayActions({
           </button>
         </div>
       ) : null}
-      <button type="button" className="primary" onClick={onFinish} disabled={thinking}>
-        {scanning
-          ? `Scanning ${scanning.done} of ${scanning.total}...`
-          : finished
-            ? 'Review the game'
-            : 'Stop and review'}
-      </button>
+      {/* Review, or throw the game away. Discard sits second because review
+          is what a game is for; there is no confirmation, because an unsaved
+          game is the smallest thing the app holds and New game already ends
+          one the same way. Once a report exists this block is gone and Delete
+          on Progress is the way out. */}
+      <div className="play-extend">
+        <button type="button" className="primary" onClick={onFinish} disabled={thinking}>
+          {scanning
+            ? `Scanning ${scanning.done} of ${scanning.total}...`
+            : finished
+              ? 'Review the game'
+              : 'Stop and review'}
+        </button>
+        <button type="button" onClick={onDiscard} disabled={thinking}>
+          Stop and discard
+        </button>
+      </div>
       {engineError ? <p className="notice bad">{engineError}</p> : null}
     </div>
   )

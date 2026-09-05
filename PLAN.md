@@ -4571,16 +4571,54 @@ list and count respects the flag; Archive and a two-step Delete on each Play on 
 archive view inside Progress with Unarchive and Delete; the game on Play protected. Version
 1.8.5.
 
-- [ ] 39.1 Stop and discard.
-- [ ] 39.2 The flag and the three operations, with tests.
-- [ ] 39.3 Lists and counts respect the flag.
-- [ ] 39.4 Archive and two-step Delete on each row.
-- [ ] 39.5 The archive view.
-- [ ] 39.6 DOM tests red first; help test mutation-checked.
-- [ ] 39.7 Help and SPEC.
-- [ ] 39.8 Version 1.8.5.
-- [ ] 39.9 Proved in the browser build.
+- [x] 39.1 Stop and discard.
+- [x] 39.2 The flag and the three operations, with tests.
+- [x] 39.3 Lists and counts respect the flag.
+- [x] 39.4 Archive and two-step Delete on each row.
+- [x] 39.5 The archive view.
+- [x] 39.6 DOM tests red first; help test mutation-checked.
+- [x] 39.7 Help and SPEC.
+- [x] 39.8 Version 1.8.5.
+- [x] 39.9 Proved in the browser build.
 
 Acceptance: as the chip's final paragraph.
+
+**For the gate.** Six DOM tests in `game-history.dom.test.tsx`, four written first and
+shown red on 1.8.4 (Stop and discard, the archive round trip, the two-click delete, the
+timeout), two added with the code (the disabled controls on the game on Play, and a click
+elsewhere disarming Delete). `discard` on the provider is `reset` under a name that says
+what the screen means, because New game already did exactly this to a running game; the
+button sits second beside Stop and review in `PlayActions`, secondary style, no
+confirmation. `archived?: boolean` on the record; `archiveGame`, `unarchiveGame` (drops
+the flag rather than writing false) and `deleteGame` in `progress.ts` with tests including
+the flag read back from a file and an archived game counting against the cap; exposed as
+`archivePlay`/`unarchivePlay`/`deletePlay` through the same `setState` path as
+`recordPlay`, so the same save. `recentPlayable`, `playStats`, `linesPlayed` and
+`anyGameRecorded` all skip archived records, each with a test; `archivedGames` lists them
+newest first, moves or no moves. `DeleteButton` is a small component used in both tables:
+armed for `DELETE_WINDOW_MS` (5000), disarmed by the timer or a document click outside
+itself, the armed label "Delete for good?" in the bad-verdict colour. The archive view is
+the same table with Unarchive and Delete and no Play on or Replay, "Nothing is archived
+now." when it empties under the reader, Back to your games below; the "N archived games"
+line is a link-styled button shown only when there is something to show. The game on
+Play (`game.session` and `game.recordedAt === record.at`) has Archive and Delete disabled
+with "Finish or replace this game on Play first." The help test renders `PlayOn` with
+`initialView: 'archive'` beside Progress, on a seeded archived record, and was
+mutation-checked on Stop and discard, Unarchive and Back to your games, each red. One
+thing the drive found: with the Line column and four buttons the games table is 1286 px
+wide at 1200, so both tables now scroll inside their own box rather than the page. 1102
+tests in 10.5 seconds, `tsc -b` clean.
+
+Driven at 1200x980 against another session's server on 5175 (files touched so its watcher
+saw them; HMR of the context modules then logged provider errors that a full reload
+cleared, none on the new code). A London game, 1.d4, Stop and discard: the start screen,
+zero games in the store. Two games reviewed; on Progress the game still on Play had
+Archive and Delete disabled with the title and the other row was free. Archive: the count
+fell to 1, one row, "1 archived game"; the archive view showed the row with Unarchive and
+Delete and Back to your games; Unarchive and Back: 2 games, 2 rows, no line. Delete: the
+first click read "Delete for good?" in red, the second removed the row and the record
+(one earlier attempt was disarmed because the pane clicked a stale coordinate beside the
+widened button, which is the "anything else puts it back" rule doing its job). Storage
+cleared afterwards. Nick's own files were not listed and not reported.
 
 - [ ] **Review gate 39**

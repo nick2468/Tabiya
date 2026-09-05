@@ -85,7 +85,8 @@ implementation in section 5). A live evaluation bar sits to the left of the boar
 the game is going, in the board's own orientation, and it carries no number. The game
 names the course it belongs to above the board, and the chapter when it is sparring
 against one. A reviewed game can be walked through move by move, copied out as PGN, and
-resumed from where it stopped. After the game or segment, a report:
+resumed from where it stopped. A game in progress can also be stopped and discarded, with
+no report and no record (phase 39). After the game or segment, a report:
 
 - The first White move that left the repertoire, with the book move and its note. If
   Black left book first, the report says from which move it was "just chess".
@@ -98,7 +99,10 @@ resumed from where it stopped. After the game or segment, a report:
 Per-chapter completion (lines learnt / lines total), due-card counts, per-concept
 accuracy (by tag, rolling window), and play stats (games per chapter, deviation rate).
 Plain numbers, no badges. Export and import buttons for the whole progress state (also
-the migration path when the Tauri wrap changes where state lives).
+the migration path when the Tauri wrap changes where state lives). Every saved game can
+be archived, which takes it out of every list and count and into an archive view inside
+this screen where it can be brought back, or deleted for good with a two-click control
+(phase 39).
 
 ## 3. Content
 
@@ -847,6 +851,22 @@ One was a fault: the Scandinavian's 4.Nge2 line castled on move nine where a paw
 free on d4, +0.83 against +0.33. **Nick ruled "fix it"**, accepting that the line's id,
 which is its moves, changes: one learnt line at most, on a course a day old. The line
 takes the pawn, and the old castling move is a mistake entry saying why.
+
+2026-09-05, phase 39: **the games the app keeps can be managed.** Three things Nick asked
+for in one sitting. A game in progress is stoppable without a review and without a
+record: **Stop and discard** beside Stop and review, no confirmation, because the app has
+no dialogs and an unsaved game is the smallest thing it holds; it does exactly what New
+game does to a running game. Every saved game has **Archive** and **Delete** beside it on
+Progress. Archive is a flag on the record, absent meaning not archived, so no file needs
+rewriting; an archived game leaves the Play on list, the Games played numbers and Lines
+played, stays in the file, and still counts against the history cap of 100. The archive is
+a view inside Progress rather than a sixth mode, reached by the "N archived games" line
+and left by Back to your games, with Unarchive and Delete on each row and neither Play on
+nor Replay. **Delete is the app's first destructive control**, and the ruling is that it
+is a two-step button: the first click turns it into "Delete for good?" for five seconds,
+a second click within that time deletes, and anything else, the time passing or a click
+elsewhere, puts it back. The game on the Play screen cannot be archived or deleted from
+Progress until it has finished there, the rule Play on already followed.
 
 ## 9. v1 acceptance
 

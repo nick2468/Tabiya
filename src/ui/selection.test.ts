@@ -57,6 +57,9 @@ function progressValue(state: ProgressState): ProgressValue {
     toggleHidden: () => {},
     answer: () => {},
     recordPlay: () => {},
+    archivePlay: () => {},
+    unarchivePlay: () => {},
+    deletePlay: () => {},
     exportJson: async () => JSON.stringify(state),
     importJson: async () => {},
   }

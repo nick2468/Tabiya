@@ -13,14 +13,23 @@ import {
 import { dueCount, newCount } from '../model/queue'
 import { levelName } from '../engine'
 import { colourName, type LoadedCourse } from '../model/types'
-import type { PlayRecord, ProgressState } from '../storage/progress'
+import { PLAY_HISTORY, type PlayRecord, type ProgressState } from '../storage/progress'
 import type { Card } from '../model/cards'
 import { backupCopy, isDesktop, readBackup, saveBackup, type BackupCopy } from './backup'
 import { profileFolders, type ProfileFolders } from './folders'
 import { HelpPanel } from './Help'
 import { nextCardLine } from './card-words'
 import { usePlay } from './play-context'
-import { endingOf, lineOf, playedOn, recentPlayable, replayRequest, requestFor, sparringAgainst } from './play-on'
+import {
+  archivedGames,
+  endingOf,
+  lineOf,
+  playedOn,
+  recentPlayable,
+  replayRequest,
+  requestFor,
+  sparringAgainst,
+} from './play-on'
 import type { PlayRequest } from './Play'
 import './progress.css'
 
@@ -259,7 +268,8 @@ function CourseProgress({
 }
 
 /**
- * Recent games that can be picked up where they were left.
+ * Recent games that can be picked up where they were left, and the archive
+ * they can be put away in.
  *
  * Nick stopped a game at move 20, upgraded the app, and the game was gone: it
  * was in his progress file and nothing could turn it back into a game. Every
@@ -274,101 +284,264 @@ function CourseProgress({
  * starts. A reviewed game is over and is cleared without ceremony; a game
  * still being played is not, and the button waits rather than throwing it
  * away behind the trainee's back.
+ *
+ * Phase 39 added Archive and Delete to each row, and the archive: a view of
+ * this same section rather than a sixth mode, reached by the "N archived
+ * games" line and left by "Back to your games". An archived game is out of
+ * every list and count and stays in the file. Delete is the app's first
+ * destructive control and takes two clicks, see `DeleteButton`.
  */
-function PlayOn({ onPlayOn }: { onPlayOn: (request: PlayRequest) => void }) {
-  const { state } = useProgress()
+export function PlayOn({
+  onPlayOn,
+  initialView = 'games',
+}: {
+  onPlayOn: (request: PlayRequest) => void
+  /** The help test renders the archive view directly; the screen never does. */
+  initialView?: 'games' | 'archive'
+}) {
+  const { state, archivePlay, unarchivePlay, deletePlay } = useProgress()
   const { courses } = useCatalog()
   const game = usePlay()
+  const [view, setView] = useState<'games' | 'archive'>(initialView)
   const rows = useMemo(() => recentPlayable(state.playGames), [state.playGames])
-  const playable = rows
-    .map((record) => ({ record, course: courses.find((entry) => entry.id === record.courseId) }))
-    .filter((row): row is { record: PlayRecord; course: LoadedCourse } => Boolean(row.course))
+  const archived = useMemo(() => archivedGames(state.playGames), [state.playGames])
+  const withCourse = (records: PlayRecord[]) =>
+    records
+      .map((record) => ({ record, course: courses.find((entry) => entry.id === record.courseId) }))
+      .filter((row): row is { record: PlayRecord; course: LoadedCourse } => Boolean(row.course))
+  const playable = withCourse(rows)
+  const putAway = withCourse(archived)
 
-  if (playable.length === 0) return null
+  if (playable.length === 0 && putAway.length === 0 && view === 'games') return null
 
-  return (
-    <>
-      <h4>Play on</h4>
-      <table className="play-on-table">
-        <thead>
-          <tr>
-            <th>Played</th>
-            <th>Course</th>
-            <th>Sparring against</th>
-            <th>Line</th>
-            <th>Strength</th>
-            <th className="num">Moves</th>
-            <th>Ended</th>
-            <th>Position</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
-          {playable.map(({ record, course }) => {
-            const chapter = course.chapters.find((entry) => entry.id === record.chapterId)
-            const ending = endingOf(record, course.colour)
-            const line = lineOf(record, course)
-            // Why the two buttons are dead, when they are. A game being played
-            // and a game being scanned are both "in progress"; they are not
-            // the same wait, and a title that said only one would be wrong
-            // half the time.
-            const waiting = game.scanning
-              ? 'The game is being reviewed; wait for the report.'
-              : 'A game is being played. Finish or replace it on Play first.'
-            return (
+  // Why the buttons are dead, when they are. A game being played and a game
+  // being scanned are both "in progress"; they are not the same wait, and a
+  // title that said only one would be wrong half the time.
+  const waiting = game.scanning
+    ? 'The game is being reviewed; wait for the report.'
+    : 'A game is being played. Finish or replace it on Play first.'
+  // And the game on the Play screen itself, played or reviewed, cannot be
+  // archived or deleted from here: the same rule Play on follows.
+  const onPlay = (record: PlayRecord) => game.session !== null && game.recordedAt === record.at
+  const onPlayTitle = 'Finish or replace this game on Play first.'
+
+  const cells = (record: PlayRecord, course: LoadedCourse) => {
+    const chapter = course.chapters.find((entry) => entry.id === record.chapterId)
+    const ending = endingOf(record, course.colour)
+    const line = lineOf(record, course)
+    return (
+      <>
+        <td>{playedOn(record.at)}</td>
+        <td>{course.title}</td>
+        <td>{sparringAgainst(record, chapter?.title)}</td>
+        <td className={line?.faint ? 'faint' : undefined}>{line?.text ?? ''}</td>
+        <td>{levelName(record.level)}</td>
+        <td className="num">{record.moves}</td>
+        <td>{ending.ended}</td>
+        <td>{ending.position}</td>
+      </>
+    )
+  }
+  const head = (
+    <thead>
+      <tr>
+        <th>Played</th>
+        <th>Course</th>
+        <th>Sparring against</th>
+        <th>Line</th>
+        <th>Strength</th>
+        <th className="num">Moves</th>
+        <th>Ended</th>
+        <th>Position</th>
+        <th />
+      </tr>
+    </thead>
+  )
+
+  if (view === 'archive') {
+    return (
+      <>
+        <h4>Archived games</h4>
+        {putAway.length === 0 ? <p className="hint">Nothing is archived now.</p> : null}
+        <div className="play-on-scroll">
+        <table className="play-on-table" aria-label="Archived games">
+          {head}
+          <tbody>
+            {putAway.map(({ record, course }) => (
               <tr key={record.at}>
-                <td>{playedOn(record.at)}</td>
-                <td>{course.title}</td>
-                <td>{sparringAgainst(record, chapter?.title)}</td>
-                <td className={line?.faint ? 'faint' : undefined}>{line?.text ?? ''}</td>
-                <td>{levelName(record.level)}</td>
-                <td className="num">{record.moves}</td>
-                <td>{ending.ended}</td>
-                <td>{ending.position}</td>
+                {cells(record, course)}
                 <td className="row-actions">
                   <button
                     type="button"
-                    disabled={game.inProgress}
-                    title={game.inProgress ? waiting : undefined}
-                    onClick={() => {
-                      game.reset()
-                      onPlayOn(requestFor(record, course))
-                    }}
+                    disabled={onPlay(record)}
+                    title={onPlay(record) ? onPlayTitle : undefined}
+                    onClick={() => unarchivePlay(record.at)}
                   >
-                    Play on
+                    Unarchive
                   </button>
-                  <button
-                    type="button"
-                    disabled={game.inProgress}
-                    title={game.inProgress ? waiting : undefined}
-                    onClick={() => {
-                      game.reset()
-                      onPlayOn(replayRequest(record, course))
-                    }}
-                  >
-                    Replay
-                  </button>
+                  <DeleteButton
+                    disabled={onPlay(record)}
+                    title={onPlay(record) ? onPlayTitle : undefined}
+                    onDelete={() => deletePlay(record.at)}
+                  />
                 </td>
               </tr>
-            )
-          })}
-        </tbody>
-      </table>
-      <p className="hint">
-        Picks a game up where it stopped, in its own course and at the strength it was
-        played at, with no length to stop it again. Replay puts the same game up with its
-        report, to look through rather than carry on. Either way the game keeps its
-        identity, so reviewing it again replaces it rather than counting it twice. Only
-        games played since version 1.6.7 are here: earlier ones did not keep their moves.
-        Ended is worked out from the moves when the game itself did not record it, so a
-        game that finished in checkmate says so however old it is; a game from before
-        1.6.12 that simply ran out of moves reads as stopped, because nothing kept the
-        length it was given. Position is the verdict on the last position, blank where no
-        evaluation was kept and beside a checkmate, which has said it already. A game you
-        are still playing, or one being reviewed, has to finish first, because the app
-        holds one game at a time.
-      </p>
+            ))}
+          </tbody>
+        </table>
+        </div>
+        <p className="hint">
+          Games put away. They are out of every list and count on this screen and still
+          in your progress file, where the {PLAY_HISTORY} most recent games are kept,
+          archived or not. Unarchive brings a game back to the list above; Delete removes
+          it for good, and asks twice.
+        </p>
+        <button type="button" onClick={() => setView('games')}>
+          Back to your games
+        </button>
+      </>
+    )
+  }
+
+  return (
+    <>
+      {playable.length > 0 ? (
+        <>
+          <h4>Play on</h4>
+          <div className="play-on-scroll">
+          <table className="play-on-table">
+            {head}
+            <tbody>
+              {playable.map(({ record, course }) => (
+                <tr key={record.at}>
+                  {cells(record, course)}
+                  <td className="row-actions">
+                    <button
+                      type="button"
+                      disabled={game.inProgress}
+                      title={game.inProgress ? waiting : undefined}
+                      onClick={() => {
+                        game.reset()
+                        onPlayOn(requestFor(record, course))
+                      }}
+                    >
+                      Play on
+                    </button>
+                    <button
+                      type="button"
+                      disabled={game.inProgress}
+                      title={game.inProgress ? waiting : undefined}
+                      onClick={() => {
+                        game.reset()
+                        onPlayOn(replayRequest(record, course))
+                      }}
+                    >
+                      Replay
+                    </button>
+                    <button
+                      type="button"
+                      disabled={onPlay(record)}
+                      title={onPlay(record) ? onPlayTitle : undefined}
+                      onClick={() => archivePlay(record.at)}
+                    >
+                      Archive
+                    </button>
+                    <DeleteButton
+                      disabled={onPlay(record)}
+                      title={onPlay(record) ? onPlayTitle : undefined}
+                      onDelete={() => deletePlay(record.at)}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          </div>
+          <p className="hint">
+            Picks a game up where it stopped, in its own course and at the strength it was
+            played at, with no length to stop it again. Replay puts the same game up with its
+            report, to look through rather than carry on. Either way the game keeps its
+            identity, so reviewing it again replaces it rather than counting it twice. Only
+            games played since version 1.6.7 are here: earlier ones did not keep their moves.
+            Ended is worked out from the moves when the game itself did not record it, so a
+            game that finished in checkmate says so however old it is; a game from before
+            1.6.12 that simply ran out of moves reads as stopped, because nothing kept the
+            length it was given. Position is the verdict on the last position, blank where no
+            evaluation was kept and beside a checkmate, which has said it already. A game you
+            are still playing, or one being reviewed, has to finish first, because the app
+            holds one game at a time. Archive puts a game away, out of every list and count
+            here; Delete removes it for good, and asks twice.
+          </p>
+        </>
+      ) : null}
+      {putAway.length > 0 ? (
+        <p>
+          <button type="button" className="link" onClick={() => setView('archive')}>
+            {putAway.length} archived {putAway.length === 1 ? 'game' : 'games'}
+          </button>
+        </p>
+      ) : null}
     </>
+  )
+}
+
+/** How long a Delete stays armed before it goes back to being a Delete. */
+export const DELETE_WINDOW_MS = 5000
+
+/**
+ * Delete, in two clicks.
+ *
+ * The app has no dialogs, and this is its first destructive control, so the
+ * confirmation is the button itself: the first click turns it into "Delete
+ * for good?" for five seconds, a second click within that time deletes, and
+ * anything else, the time passing or a click anywhere else on the page, puts
+ * it back. The label changes between the clicks so that the second is a
+ * choice and not a slip.
+ */
+export function DeleteButton({
+  onDelete,
+  disabled,
+  title,
+}: {
+  onDelete: () => void
+  disabled?: boolean
+  title?: string
+}) {
+  const [armed, setArmed] = useState(false)
+  const self = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    if (!armed) return
+    const timer = setTimeout(() => setArmed(false), DELETE_WINDOW_MS)
+    const elsewhere = (event: MouseEvent) => {
+      if (self.current && event.target instanceof Node && self.current.contains(event.target)) return
+      setArmed(false)
+    }
+    document.addEventListener('click', elsewhere)
+    return () => {
+      clearTimeout(timer)
+      document.removeEventListener('click', elsewhere)
+    }
+  }, [armed])
+
+  return (
+    <button
+      ref={self}
+      type="button"
+      className={armed ? 'danger' : undefined}
+      disabled={disabled}
+      title={title}
+      onClick={() => {
+        if (armed) {
+          setArmed(false)
+          onDelete()
+        } else {
+          setArmed(true)
+        }
+      }}
+    >
+      {armed ? 'Delete for good?' : 'Delete'}
+    </button>
   )
 }
 
