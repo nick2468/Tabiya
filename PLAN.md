@@ -5015,4 +5015,29 @@ the Alapin plays on with 10.Nxd7, which the leaf scoping keeps out of the test o
 and which a reader of both courses will still notice. Nick's own files were not listed
 and not reported.
 
-- [ ] **Review gate 43**
+Gate 43 findings (2026-09-06, orchestrator):
+
+- 1196 tests in twelve seconds and `tsc -b` clean; version 1.10.1; the tree clean at the
+  start. Line ids: 523 before, 532 after, one gone and ten added, the one gone being the
+  London's 10.Bh2 leaf now extended with `Ne4 Qc2`, exactly as the commit names.
+- **The new rule was shown red by the orchestrator** against the pre-fix content: with the
+  courses checked out from the commit that added the test, "has every White course and
+  every Black course agreeing at their shared positions" fails; on main it passes.
+- **The three scopings the builder chose are right**: a stem counts; a position counts only
+  once both courses have made a move of their own to reach it, or the rule would demand
+  that courses agree about which opening to play; and a leaf is not silence. The first
+  draft without them listed 29, of which 22 were courses "disagreeing" about the opening.
+- Seven mismatches found, seven fixed, none deferred, every one by listing the other
+  course's move with an engine-checked answer. Spot-checked by the orchestrator at 2500 ms:
+  the London's new 11.Qc2 after 10...Ne4 is the engine's first choice (-0.01 against -0.25
+  and -0.31 for the knight retreats).
+- Engine records complete with conditions for the five courses touched; `accepted.md`
+  gains the London's 10.Bh2 with both numbers; SPEC section 3 has the rule and section 8
+  the ruling.
+- **Two things the builder noticed and left, recorded here for a later phase**: the Slav's
+  chapter 5 has ten lines ending on a White move, which the loader still allows for older
+  courses; and the Najdorf's anti-Sicilian line stops at 9...Bd7 where the Alapin plays on
+  with 10.Nxd7, which the leaf scoping keeps out of the test on purpose.
+- Nick's own files were not listed and not reported.
+
+- [x] **Review gate 43 passed** (2026-09-06)
