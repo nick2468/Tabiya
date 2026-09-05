@@ -148,7 +148,7 @@
                                                                                   "note": "Take, and the queen comes to d2: the knight on d7 goes to c5 or f6 next with nothing on d2 to hit it.",
                                                                                   "tags": ["development"],
                                                                                   "mistakes": [
-                                                                                    { "san": "f5", "grade": "playable", "note": "Sound: 12.Nxe4 fxe4 13.Nd2 and the pawn on e4 is held by the knight. The trade first keeps the structure." },
+                                                                                    { "san": "f5", "grade": "mistake", "note": "12.Nxe4 fxe4 13.Nd2 and the pawn on e4 is hit by the knight and held by nothing: it goes, and the trade first keeps the structure." },
                                                                                     { "san": "Ndf6", "grade": "inaccuracy", "note": "12.Nxe4 Nxe4 13.Qc2 and the knight on e4 is hit with the queen on c2 hitting nothing else." }
                                                                                   ],
                                                                                   "children": [
@@ -272,7 +272,7 @@
                                                                                           "tags": ["tactics"],
                                                                                           "mistakes": [
                                                                                             { "san": "Be6", "grade": "playable", "note": "Sound: 13.Qb3 c6 14.Rd1 and the pawn is not back yet, but the pieces are out. The knight to d3 wins it back at once." },
-                                                                                            { "san": "Nxc4", "grade": "inaccuracy", "note": "13.Bxc4 and the knight has been traded for the bishop with the pawn count still White's." },
+                                                                                            { "san": "Nxc4", "grade": "mistake", "note": "13.Bxc4 Qxd1 14.Rxd1 Bxb2 15.Nd2 Bxa1 16.Rxa1 and White has a knight and a bishop against a rook, with the pawn still White's: the knight to d3 gets the pawn back cleanly." },
                                                                                             { "san": "f5", "grade": "inaccuracy", "note": "13.Nc3 and the knight on e5 has to decide with the kingside loosened for nothing." }
                                                                                           ],
                                                                                           "children": [
@@ -299,7 +299,7 @@
                                                                                                           "note": "Take on b2. The pawn is back, the rook on a1 is hit, and the knight on b1 has to come out to a3 to hold everything.",
                                                                                                           "tags": ["tactics"],
                                                                                                           "mistakes": [
-                                                                                                            { "san": "Be6", "grade": "inaccuracy", "note": "15.Nc3 and the pawn on b2 has been held: the bishop takes it while it is free." },
+                                                                                                            { "san": "Be6", "grade": "mistake", "note": "15.Nc3 and the pawn on b2 is held for good: White is a pawn up with the pieces out. The bishop takes it while it is free." },
                                                                                                             { "san": "Bxh3", "grade": "mistake", "note": "15.gxh3 and the bishop has gone for a pawn." }
                                                                                                           ],
                                                                                                           "plan": "...Bxa3 when Na3 comes, or ...Be5 with the bishop kept, ...Be6 hitting c4, ...Rad8 for the file. Level, and Black's pieces are the active ones.",
@@ -410,7 +410,7 @@
                                                                   "tags": ["tactics"],
                                                                   "mistakes": [
                                                                     { "san": "exd4", "grade": "mistake", "note": "10.exd4 and the bishop has escaped: it was there to be taken." },
-                                                                    { "san": "Ne4", "grade": "inaccuracy", "note": "10.Nxe4 exf4 11.exf4 and the bishop has gone for the knight, with the pawn count level: take the bishop first." }
+                                                                    { "san": "Ne4", "grade": "mistake", "note": "10.Bh2 Nxc3 11.bxc3 and the bishop has escaped: it was there to be taken, and the knight has been traded instead." }
                                                                   ],
                                                                   "plan": "...Nf8 and ...c6, or ...Ne4 and the extra piece in a middlegame where White has nothing for it.",
                                                                   "name": "The London with 9.Nc3, the bishop hangs"
@@ -1201,7 +1201,7 @@
                                   "note": "The pawn to d6, and 6.Be2 e5 is chapter 1.",
                                   "tags": ["development"],
                                   "mistakes": [
-                                    { "san": "d5", "grade": "playable", "note": "Sound and a Grünfeld shape with the king castled." },
+                                    { "san": "d5", "grade": "inaccuracy", "note": "6.e5 Ne4 7.Nxe4 dxe4 and the pawn on e4 is loose: a Grünfeld shape a move too late." },
                                     { "san": "c5", "grade": "playable", "note": "Sound: 6.d5 and a Benoni." }
                                   ],
                                   "children": [
@@ -1405,7 +1405,7 @@
                   "tags": ["development", "dark-bishop"],
                   "mistakes": [
                     { "san": "d5", "grade": "playable", "note": "Sound and the engine's choice: 4.e3 Bg7 5.c3 and a quiet game. The bishop first keeps the four moves." },
-                    { "san": "Ne4", "grade": "inaccuracy", "note": "4.Nxe4 and the knight has been traded before it did anything, with the bishop on g5 kept." }
+                    { "san": "Ne4", "grade": "mistake", "note": "4.Nxe4 and the knight has gone: nothing takes back on e4 with the d-pawn still on d7." }
                   ],
                   "children": [
                     {
@@ -1538,7 +1538,7 @@
                                   "note": "Castle.",
                                   "tags": ["king-safety"],
                                   "mistakes": [
-                                    { "san": "e5", "grade": "inaccuracy", "note": "6.dxe5 dxe5 7.Qxd8+ Kxd8 and the king is in the middle. Castle first." }
+                                    { "san": "e5", "grade": "mistake", "note": "6.dxe5 dxe5 7.Qxd8+ Kxd8 8.Nd5 and the king is in the middle with the knight in on d5 and the bishop on g5 pinning: castle first." }
                                   ],
                                   "children": [
                                     {

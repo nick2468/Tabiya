@@ -59,7 +59,7 @@
                                   "note": "The pawn that makes this the King's Indian. It holds e5 for the pawn that is coming there, and keeps e4 from advancing.",
                                   "tags": ["development", "e5-lever"],
                                   "mistakes": [
-                                    { "san": "d5", "grade": "playable", "note": "The Grünfeld again, and its move order is worse here: 5.e5 hits the knight before Black is ready. This course's pawn goes one square." },
+                                    { "san": "d5", "grade": "inaccuracy", "note": "5.e5 and the knight is hit before Black is ready: 5...Ne4 6.Nxe4 dxe4 and the pawn on e4 is loose. This course's pawn goes one square." },
                                     { "san": "O-O", "grade": "playable", "note": "Sound and it transposes after ...d6. The pawn first stops 5.e5, which is only a nuisance but is a nuisance." },
                                     { "san": "c5", "grade": "playable", "note": "Sound: 5.d5 d6 is a Benoni shape, with a plan that is not in this course." }
                                   ],
@@ -136,7 +136,7 @@
                                                                           "mistakes": [
                                                                             { "san": "f6", "grade": "playable", "note": "Sound: 10.Bc1 and the bishop has gone home with ...f6 played, which weakens e6 a little. The queen move first keeps ...f6 in reserve." },
                                                                             { "san": "Qd7", "grade": "inaccuracy", "note": "10.d5 and the queen on d7 is in the way of the knight that wants that square, and the bishop on c8 is shut in." },
-                                                                            { "san": "h6", "grade": "inaccuracy", "note": "10.Bh4 g5 11.Bg3 and the bishop is on the long diagonal against e5 with the kingside pawns loosened for nothing." }
+                                                                            { "san": "h6", "grade": "mistake", "note": "10.Bxd8 and the queen has gone: the bishop on g5 was looking at d8 through the knight that had left f6. The queen moves first, and only then is the bishop asked." }
                                                                           ],
                                                                           "children": [
                                                                             {
@@ -163,7 +163,7 @@
                                                                                           "tags": ["tactics"],
                                                                                           "mistakes": [
                                                                                             { "san": "Nf6", "grade": "inaccuracy", "note": "12.Bxf6 Bxf6 and the bishop on g7 has left the diagonal, which is the one thing the setup never allows without a reason." },
-                                                                                            { "san": "Nh6", "grade": "inaccuracy", "note": "12.Be3 and the knight on h6 is hit next by Bxh6, or sits on the edge doing nothing while the bishop on g5 has gone home for free." }
+                                                                                            { "san": "Nh6", "grade": "mistake", "note": "12.Qd2 and the knight on h6 is hit by the bishop with the queen behind it: 12...Ng4 13.hxg4 Bxg4 and a piece has gone for a pawn." }
                                                                                           ],
                                                                                           "children": [
                                                                                             {

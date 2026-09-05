@@ -18,7 +18,7 @@
             { "san": "e5", "grade": "playable", "note": "Sound: 7.d5 and the closed centre, where g4 and h4 come faster than ...f5. The fork rule takes ...c5 here." },
             { "san": "Nc6", "grade": "playable", "note": "Sound and sharp: 7.Nge2 a6 8.Qd2 Rb8 and ...b5, with the pawn on e5 to come. Playable, and more to remember." },
             { "san": "Nbd7", "grade": "inaccuracy", "note": "7.Qd2 e5 8.d5 and the closed centre with the knight blocking the bishop: the position White wants." },
-            { "san": "Nh5", "grade": "mistake", "note": "7.g4 and the knight has to go back to f6 with a tempo lost: the pawn on f3 has taken g4 away from the knight and given it to White's pawn." }
+            { "san": "Nh5", "grade": "inaccuracy", "note": "7.g4 and the knight has to go back to f6 with a tempo lost: the pawn on f3 has taken g4 away from the knight and given it to White's pawn." }
           ],
           "children": [
             {
@@ -48,7 +48,7 @@
                           "mistakes": [
                             { "san": "Na5", "grade": "playable", "note": "Sound and it hits c4: 9.Ng3 e6 and the same break. The knight on e5 is the better square." },
                             { "san": "Nb8", "grade": "inaccuracy", "note": "Two moves lost: 9.Nf4 and White is ahead in every part of the board." },
-                            { "san": "Nb4", "grade": "mistake", "note": "9.a3 and the knight has to go back the way it came, and 9...Na6 10.Nf4 leaves it on the rim for good." }
+                            { "san": "Nb4", "grade": "inaccuracy", "note": "9.a3 and the knight has to go back the way it came: 9...Na6 10.Nf4 and it is on the rim with a move lost." }
                           ],
                           "children": [
                             {
@@ -63,7 +63,7 @@
                                   "mistakes": [
                                     { "san": "h5", "grade": "playable", "note": "Sound, and it comes next anyway: 10.Be2 e6 is the same. The break first makes White answer it." },
                                     { "san": "a6", "grade": "playable", "note": "Sound and slower: 10.Be2 b5 11.cxb5 axb5 12.Bxb5 and the pawn has gone for the open file." },
-                                    { "san": "Nh5", "grade": "mistake", "note": "10.Nxh5 gxh5 11.Qd2 and the kingside is broken with the knight gone: the knight on g3 was placed to take it." }
+                                    { "san": "Nh5", "grade": "playable", "note": "Sound: 10.Nxh5 gxh5 and the kingside pawns are broken, which the engine minds less than the eye does. The break first." }
                                   ],
                                   "children": [
                                     {
@@ -173,7 +173,7 @@
                                   "tags": ["development"],
                                   "mistakes": [
                                     { "san": "Nb4", "grade": "mistake", "note": "10.a3 and the knight has to go back: 10...Na6 11.Nf4 and it is on the rim." },
-                                    { "san": "Nd4", "grade": "inaccuracy", "note": "10.Nxd4 cxd4 11.Bxd4 and the pawn on d4 is White's with the bishop on it: the knight went to d4 with nothing behind it." }
+                                    { "san": "Nd4", "grade": "mistake", "note": "10.Nxd4 cxd4 11.Bxd4 Nh5 12.Bxg7 Nxg7 and a pawn has gone with the bishop on g7 traded: the knight went to d4 with nothing behind it." }
                                   ],
                                   "children": [
                                     {
@@ -216,7 +216,7 @@
                   "note": "Take back with the pawn. The queens are coming off and Black is going to be a pawn down for a while, and this is the line White has to know rather than Black: every Black piece comes out with a threat.",
                   "tags": ["vs-samisch"],
                   "mistakes": [
-                    { "san": "Qa5", "grade": "playable", "note": "Sound and sharper: 8.cxd6 exd6 9.Bd2 and Black has a weak pawn on d6 for the open lines. The pawn recapture keeps the structure." },
+                    { "san": "Qa5", "grade": "inaccuracy", "note": "8.cxd6 exd6 9.Bd2 and Black has a weak pawn on d6 for open lines White is in no hurry to use. The pawn recapture keeps the structure." },
                     { "san": "Nc6", "grade": "inaccuracy", "note": "8.cxd6 exd6 9.Qxd6 and two pawns have gone for the open lines: too many." }
                   ],
                   "children": [
@@ -243,7 +243,7 @@
                                   "note": "The knight out, hitting d4 and covering e7 and b4. Black is a pawn down and every piece is coming out with tempo: ...Nd7 to hit the bishop, ...Be6 to hit c4, ...Rac8 and ...Nd4.",
                                   "tags": ["development", "endgame"],
                                   "mistakes": [
-                                    { "san": "Nbd7", "grade": "inaccuracy", "note": "10.Ba3 and the bishop keeps the pawn from the side, with the knight on d7 blocking the bishop on c8 and the rook on d8 both." },
+                                    { "san": "Nbd7", "grade": "mistake", "note": "10.Bxe7 and a second pawn has gone with the rook on d8 hit: the knight on c6 covers e7, and the knight on d7 does not." },
                                     { "san": "b6", "grade": "inaccuracy", "note": "10.Ba3 and the pawn on b6 has taken the square the knight wanted, with the bishop on a3 holding everything." },
                                     { "san": "Nxe4", "grade": "mistake", "note": "10.Nxe4 and the knight has gone: the pawn on f3 holds e4 and the knight on c3 was defending it as well." }
                                   ],
@@ -274,7 +274,7 @@
                                                   "tags": ["development"],
                                                   "mistakes": [
                                                     { "san": "Be6", "grade": "playable", "note": "Sound: 12.Nf4 and the bishop is hit. The knight first, so that ...Be6 comes when the knight on f4 has moved." },
-                                                    { "san": "Nb4", "grade": "playable", "note": "Sound: 12.Rc1 and the knight on b4 is on a square White can push it off with a3." }
+                                                    { "san": "Nb4", "grade": "mistake", "note": "12.Bxb4 and the knight has gone: the bishop on a3 was looking at b4 all along." }
                                                   ],
                                                   "plan": "...Nde5 and ...Nc5, ...Be6 hitting c4, ...Rac8 and ...Bxc3 when it wins the pawn back. The pawn on c4 is the one that comes back, and the ending after it is level with Black's rooks on the open files.",
                                                   "name": "7.dxc5, the ending with 10.Nge2"
@@ -291,9 +291,9 @@
                                                   "note": "The knight to b4, hitting a2 and c2 with the d-file already Black's. White's pieces are still at home and every square the knight looks at is loose: the pawn comes back with interest.",
                                                   "tags": ["tactics"],
                                                   "mistakes": [
-                                                    { "san": "Nd7", "grade": "inaccuracy", "note": "12.O-O-O Bb7 13.Nd4 and White has caught up on development with the pawn kept." },
-                                                    { "san": "Be6", "grade": "playable", "note": "Sound, hitting c4 at once: 12.Nf4 Bxc4 13.Nfd5 and the pawn is back with the knight on d5. The knight to b4 hits more." },
-                                                    { "san": "Ba6", "grade": "playable", "note": "Sound: 12.Nf4 e6 13.Be2 and the bishop on a6 is hitting c4 through the bishop on e2. The knight first." }
+                                                    { "san": "Nd7", "grade": "mistake", "note": "12.O-O-O Bb7 13.Nd4 Nxd4 14.Bxd4 and White has caught up on development with the pawn kept and the bishop on g7 about to be traded." },
+                                                    { "san": "Be6", "grade": "mistake", "note": "12.Nf4 and the bishop is hit with c4 held: 12...Rac8 13.Nfd5 and White has kept the pawn with a knight on d5. The knight to b4 hits what cannot be held." },
+                                                    { "san": "Ba6", "grade": "inaccuracy", "note": "12.Nf4 e6 13.Be2 and the bishop on a6 hits c4 through a bishop that holds it: the pawn stays. The knight to b4 hits what cannot be held." }
                                                   ],
                                                   "plan": "...Nxa2 or ...Nc2+ when it is free, ...Ba6 against c4, and ...Nd7 to e5 when the knight on b4 has done its work. The pawn on c4 is the one that comes back, and White has to spend Kf2 or Rc1 on holding what is left.",
                                                   "name": "7.dxc5, the ending with 11.Be3"
@@ -330,7 +330,7 @@
                                                   "tags": ["tactics"],
                                                   "mistakes": [
                                                     { "san": "Nde5", "grade": "inaccuracy", "note": "12.Nxe7+ Nxe7 13.Bxe7 and the bishop has taken a second pawn with the rook on d8 hit." },
-                                                    { "san": "Nb6", "grade": "playable", "note": "Sound: 12.Nxb6 axb6 and the knight has gone, with the bishop on a3 still holding c5 and the a-file half open. The pawn push traps the knight instead." }
+                                                    { "san": "Nb6", "grade": "inaccuracy", "note": "12.Nxb6 axb6 and the knights have come off with the bishop on a3 still holding c5: the pawn stays. The pawn push traps the knight instead." }
                                                   ],
                                                   "children": [
                                                     {
@@ -411,7 +411,7 @@
                                   "mistakes": [
                                     { "san": "Re8", "grade": "playable", "note": "Sound: 10.Nge2 Nbd7 11.Ng3 and the same shape with a4 not yet played. The pawn first makes a4 cost White a move." },
                                     { "san": "Nbd7", "grade": "playable", "note": "Sound: 10.Nh3 Ne5 11.Be2 and the knight is on e5. ...a6 first, because Nb5 is a move White wants." },
-                                    { "san": "Nh5", "grade": "mistake", "note": "10.g4 and the knight has to go back to f6 with White's pawn storm a move on: the pawn on f3 took g4 away from Black and gave it to White." }
+                                    { "san": "Nh5", "grade": "inaccuracy", "note": "10.g4 and the knight has to go back to f6 with White's pawn storm a move on: the pawn on f3 took g4 away from Black and gave it to White." }
                                   ],
                                   "children": [
                                     {

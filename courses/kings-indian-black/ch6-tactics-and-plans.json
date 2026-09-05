@@ -65,8 +65,8 @@
                                                   "note": "Exercise 3: take on e4. The fork on e7 wins nothing, because the knight on e7 is traded for the bishop on c8 and the pawn on e4 was free. The same capture loses when White has not castled, because Nxc7 hits both rooks; here the rook on a8 is covered by the knight on a6.",
                                                   "tags": ["tactics"],
                                                   "mistakes": [
-                                                    { "san": "Nd7", "grade": "playable", "note": "Sound and it keeps everything level. The capture on e4 is the exercise." },
-                                                    { "san": "Nxd5", "grade": "inaccuracy", "note": "12.cxd5 and the pawn on d5 is a wedge with the bishop pair White's." }
+                                                    { "san": "Nd7", "grade": "inaccuracy", "note": "12.Nc3 and the ending is level, with the pawn on e4 still on the board: the capture on e4 is the exercise." },
+                                                    { "san": "Nxd5", "grade": "mistake", "note": "12.cxd5 Nb8 13.Rac1 and the pawn on d5 is a wedge with the bishop pair White's and the knight back on b8." }
                                                   ],
                                                   "children": [
                                                     {
@@ -425,7 +425,7 @@
                                                           "tags": ["dark-bishop", "tactics"],
                                                           "mistakes": [
                                                             { "san": "Bg7", "grade": "inaccuracy", "note": "13.Bb2 and the bishop has gone back to g7 with White's bishop on b2 where it wanted to be: the trade was there and was not taken." },
-                                                            { "san": "f5", "grade": "inaccuracy", "note": "13.Bxh6 and the bishop has been traded on White's terms with the kingside loosened." }
+                                                            { "san": "f5", "grade": "mistake", "note": "13.Bxh6 fxe4 14.Ng5 and the bishop on g7 has gone for nothing with the knight arriving on g5: the trade on c1 first." }
                                                           ],
                                                           "children": [
                                                             {
@@ -587,7 +587,7 @@
                                                                                           "tags": ["kingside-attack", "tactics"],
                                                                                           "mistakes": [
                                                                                             { "san": "Nb6", "grade": "inaccuracy", "note": "17.Bg1 and the knight on b6 has left the kingside, where the attack is." },
-                                                                                            { "san": "g4", "grade": "inaccuracy", "note": "17.fxg4 Qxg4 18.Bf3 and the queen has been pushed with the f-file open for White's rook." },
+                                                                                            { "san": "g4", "grade": "mistake", "note": "17.fxg4 Qg5 18.b4 and the pawn has gone with the f-file open for White's rook: the rook lift first." },
                                                                                             { "san": "Qxh2+", "grade": "mistake", "note": "The pawn on h2 is held by the king: 17.Kxh2 and the queen has gone." }
                                                                                           ],
                                                                                           "plan": "...Nf6 and ...g4, ...Nh5 to g3 when the bishop has gone to g1. The queenside pawn White took is worth nothing against the kingside it left.",
@@ -693,7 +693,7 @@
                                                                   "tags": ["development"],
                                                                   "mistakes": [
                                                                     { "san": "Bh6", "grade": "playable", "note": "Sound: 14.Kh1 Bd7 and the same. The bishop on c8 first, so that ...Na4 later comes with the bishop taking back." },
-                                                                    { "san": "Nc5", "grade": "playable", "note": "Sound: 14.b3 Bd7 15.Rb1 and the same shape. The bishop first." }
+                                                                    { "san": "Nc5", "grade": "inaccuracy", "note": "14.b4 axb4 15.axb4 Na4 16.Nxa4 and the knight has been traded before the bishop on c8 could take back: the bishop first." }
                                                                   ],
                                                                   "children": [
                                                                     {
@@ -871,7 +871,7 @@
                                                           "note": "Exercise 2: take on h3. The knight cannot be taken back, because the bishop on f1 has gone to f3 and the knight on h2 does not see h3. A pawn up with the king's cover gone, and ...f4 next.",
                                                           "tags": ["tactics"],
                                                           "mistakes": [
-                                                            { "san": "fxe4", "grade": "playable", "note": "Sound: 13.Nxe4 and the knight on f4 has to decide. The capture on h3 wins a pawn first." },
+                                                            { "san": "fxe4", "grade": "inaccuracy", "note": "13.Nxe4 and the knight on f4 has to decide with the centre opened on White's terms. The capture on h3 wins a pawn first." },
                                                             { "san": "Nb4", "grade": "inaccuracy", "note": "13.gxf4 exf4 14.Bd2 and the knight has gone for two pawns with the position closed." },
                                                             { "san": "Nh5", "grade": "inaccuracy", "note": "13.Bxh5 gxh5 14.exf5 and the kingside is broken with a pawn gone." }
                                                           ],
@@ -887,7 +887,7 @@
                                                                   "tags": ["kingside-attack", "tactics"],
                                                                   "mistakes": [
                                                                     { "san": "Nc5", "grade": "inaccuracy", "note": "14.Bxc5 dxc5 15.Bg2 and the knight on h3 is hit by the bishop with nothing holding it." },
-                                                                    { "san": "fxe4", "grade": "playable", "note": "Sound: 14.Nxe4 Nc5 and a pawn up. The push keeps the knight on h3 defended by the f-pawn's opening of the bishop." }
+                                                                    { "san": "fxe4", "grade": "inaccuracy", "note": "14.Nxe4 Nc5 15.Bxc5 dxc5 16.Qh6 and the knight on h3 is loose with the queen arriving: the push keeps the knight held." }
                                                                   ],
                                                                   "children": [
                                                                     {
@@ -1005,8 +1005,8 @@
                                                   "tags": ["tactics", "endgame"],
                                                   "mistakes": [
                                                     { "san": "Re8", "grade": "playable", "note": "Sound: the rook holds the bishop from e8, and 12.Nf6+ is answered by 12...Bxf6+ with check from the rook behind it. The rook to d4 hits the knight and the pawn on c4 instead." },
-                                                    { "san": "f6", "grade": "playable", "note": "Sound: 12.Be3 and the bishop has gone back. The rook to d4 hits two things." },
-                                                    { "san": "Bxb2", "grade": "mistake", "note": "12.Bxd8 and the rook has gone: the bishop on g5 was hitting it." }
+                                                    { "san": "f6", "grade": "mistake", "note": "12.Nxf6+ Bxf6 13.Bxf6 and the bishop on g7 has gone for the knight: the pawn on f6 walked into a fork." },
+                                                    { "san": "Bxb2", "grade": "playable", "note": "Sound: 12.Bxd8 Bxa1 and the rooks have been traded for each other with the bishop on a1 to come out. The rook to d4 keeps more." }
                                                   ],
                                                   "children": [
                                                     {
@@ -1019,7 +1019,7 @@
                                                           "note": "The king steps up, and the knight on f6 is hit by the bishop on e5.",
                                                           "tags": ["king-safety"],
                                                           "mistakes": [
-                                                            { "san": "Kf8", "grade": "playable", "note": "Sound: 13.Nd5 c6 and the same. The king on g7 holds f6 as well." },
+                                                            { "san": "Kf8", "grade": "inaccuracy", "note": "13.Nd5 c6 14.Be3 and the rook on d4 is hit with the king on f8 in the way of the rook on h8: the king on g7 keeps everything connected." },
                                                             { "san": "Bxf6", "grade": "inaccuracy", "note": "13.Bxf6 and the bishop on g7 has gone for the knight: the bishop pair, which was the point of the ending, has been given away." }
                                                           ],
                                                           "children": [
@@ -1033,7 +1033,7 @@
                                                                   "note": "Push the knight. It goes back, and Black has the better bishop, the d-file and the pawn on c4 to aim at.",
                                                                   "tags": ["endgame"],
                                                                   "mistakes": [
-                                                                    { "san": "Bd6", "grade": "inaccuracy", "note": "14.Be3 and the rook on d4 is hit with the bishop having left the long diagonal." },
+                                                                    { "san": "Bd6", "grade": "mistake", "note": "14.Bf6+ Kg8 15.Bxd4 and the rook has gone: the bishop on d6 stopped holding d4." },
                                                                     { "san": "Re4+", "grade": "playable", "note": "Sound: 14.Be3 Bxb2 15.Rb1 and the pawn count is level. The knight first." }
                                                                   ],
                                                                   "plan": "...Nd7 and ...Nc5, ...Be6 hitting c4, ...Rd8 for the file. The pawn White took on e5 came back with interest.",

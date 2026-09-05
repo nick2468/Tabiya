@@ -48,7 +48,7 @@
                           "mistakes": [
                             { "san": "f6", "grade": "playable", "note": "Sound: 10.Bc1 and the bishop has gone home with ...f6 played, which weakens e6 a little. The queen move keeps ...f6 in reserve." },
                             { "san": "Qd7", "grade": "inaccuracy", "note": "10.d5 and the queen on d7 is in the way of everything: the knight that wants d7 and the bishop on c8." },
-                            { "san": "h6", "grade": "inaccuracy", "note": "10.Bh4 g5 11.Bg3 and the bishop is on the long diagonal against e5 with the kingside pawns loosened for nothing." }
+                            { "san": "h6", "grade": "mistake", "note": "10.Bxd8 and the queen has gone: the bishop on g5 was looking at d8 through the knight that had left f6. The queen moves first, and only then is the bishop asked." }
                           ],
                           "children": [
                             {
@@ -75,7 +75,7 @@
                                           "tags": ["tactics"],
                                           "mistakes": [
                                             { "san": "Nf6", "grade": "inaccuracy", "note": "12.Bxf6 Bxf6 and the bishop on g7 has left the diagonal, which the setup never allows without a reason." },
-                                            { "san": "Nh6", "grade": "inaccuracy", "note": "12.Be3 and the knight on h6 sits on the edge doing nothing while the bishop on g5 has gone home for free." }
+                                            { "san": "Nh6", "grade": "mistake", "note": "12.Qd2 and the knight on h6 is hit by the bishop with the queen behind it: 12...Ng4 13.hxg4 Bxg4 and a piece has gone for a pawn." }
                                           ],
                                           "children": [
                                             {
@@ -288,7 +288,7 @@
                   "mistakes": [
                     { "san": "exd4", "grade": "playable", "note": "Sound: 9.Nxd4 Re8 and the open centre, a move earlier than the course plays it. The pawn on c6 first keeps d5 covered." },
                     { "san": "Ng4", "grade": "inaccuracy", "note": "9.h3 Nf6 10.Bf1 and the knight has spent two moves for h3, which White wanted anyway." },
-                    { "san": "Nc5", "grade": "inaccuracy", "note": "9.dxc5 dxc5 10.Qxd8 Rxd8 11.Nxe5 and a pawn has gone: the knight left a6 while d4 was still hitting c5." }
+                    { "san": "Nc5", "grade": "mistake", "note": "9.dxc5 dxc5 10.Bg5 Qxd1 11.Raxd1 and a pawn has gone with the bishop on g5 hitting the knight: the knight left a6 while d4 was still hitting c5." }
                   ],
                   "children": [
                     {
@@ -302,7 +302,7 @@
                           "tags": ["open-centre", "tactics"],
                           "mistakes": [
                             { "san": "Bg4", "grade": "inaccuracy", "note": "10.d5 and the bishop on g4 is on the wrong side with the centre closed: the pin on f3 does nothing." },
-                            { "san": "Nc5", "grade": "inaccuracy", "note": "10.dxc5 dxc5 11.Qxd8 Rxd8 12.Nxe5 and a pawn has gone." },
+                            { "san": "Nc5", "grade": "mistake", "note": "10.dxc5 dxc5 11.Qxd8 Rxd8 12.Nxe5 and a pawn has gone with the queens off and the knight on e5 sitting on Black's square: the knight left a6 while d4 was still hitting c5." },
                             { "san": "Qc7", "grade": "playable", "note": "Sound and slow: 10.d5 c5 and a closed centre with the knight on a6 out of the game for a while." }
                           ],
                           "children": [
@@ -344,7 +344,7 @@
                                                   "note": "Take back on d4. Piece for piece, and the queen sits in the middle of the board with White's kingside pawns broken.",
                                                   "tags": ["tactics"],
                                                   "mistakes": [
-                                                    { "san": "Qxb2", "grade": "inaccuracy", "note": "13.Na4 and the queen is chased while the knight on d4 stays: 13...Qb4 14.Bd2 and Black has a pawn for the piece." }
+                                                    { "san": "Qxb2", "grade": "mistake", "note": "13.Bxb2 and the queen has gone: the bishop on c1 was looking at b2 all along. The queen takes on d4, where nothing holds the knight." }
                                                   ],
                                                   "children": [
                                                     {
@@ -462,7 +462,7 @@
                                   "tags": ["tactics"],
                                   "mistakes": [
                                     { "san": "Qe8", "grade": "inaccuracy", "note": "11.Bxf6 Bxf6 12.Nd2 and the bishop on g7 has left the diagonal for nothing: the pawn on h6 asks the bishop first." },
-                                    { "san": "Ne8", "grade": "inaccuracy", "note": "11.Nd2 and the knight has gone the wrong way: from e8 it neither holds e4 nor prepares ...f5 with the bishop on g5 still on the board." }
+                                    { "san": "Ne8", "grade": "mistake", "note": "11.Bxd8 and the queen has gone: the bishop on g5 was pinning the knight to it, and the knight walked away." }
                                   ],
                                   "children": [
                                     {
@@ -604,7 +604,7 @@
                                           "tags": ["dark-bishop"],
                                           "mistakes": [
                                             { "san": "Bd7", "grade": "playable", "note": "Sound: 12.Rb1 Bh6 and the same a move later." },
-                                            { "san": "Nh5", "grade": "mistake", "note": "12.Bxh5 gxh5 and the kingside is broken: the knight on f3 has gone to d2, so the bishop on e2 sees h5." }
+                                            { "san": "Nh5", "grade": "inaccuracy", "note": "12.Bxh5 gxh5 and the kingside pawns are broken for nothing: the knight on f3 has gone to d2, so the bishop on e2 sees h5." }
                                           ],
                                           "plan": "...b6 and ...Bd7, ...Ne8 and ...f5, and ...Bxd2 only when the bishop on c1 has been sent to b2 and the knight is the piece holding everything. The pawn on a4 has taken White's queenside plan away.",
                                           "name": "8.d5 Nc5 9.Nd2 with 10.a3"
@@ -674,8 +674,8 @@
                                           "note": "Take the pawn. The knight on d5 looks like a fork, and it is not one: 12.Ne7+ Kf8 13.Nxc8 Raxc8 and the knight has taken a bishop and been traded for it, while the pawn on e4 has gone for nothing. The bishop on g5 hangs to the knight on e4 as well, so White has no time.",
                                           "tags": ["tactics", "endgame"],
                                           "mistakes": [
-                                            { "san": "Nxd5", "grade": "inaccuracy", "note": "12.cxd5 and the pawn on d5 is a wedge with the bishop pair White's: the knight has done White's work." },
-                                            { "san": "Nd7", "grade": "playable", "note": "Sound and it keeps everything: 12.Nc3 and the ending is level. The capture wins a pawn for nothing, and it is the one to know." }
+                                            { "san": "Nxd5", "grade": "mistake", "note": "12.cxd5 Nb8 13.Rac1 and the pawn on d5 is a wedge with the bishop pair White's and the knight back on b8: the knight has done White's work." },
+                                            { "san": "Nd7", "grade": "inaccuracy", "note": "12.Nc3 and the ending is level, with the pawn on e4 still on the board: the capture wins it for nothing, and it is the one to know." }
                                           ],
                                           "children": [
                                             {
@@ -1015,7 +1015,7 @@
                                   "note": "Take, because the pawn that comes to d5 can be undermined by ...c6, and there is no fork left.",
                                   "tags": ["endgame"],
                                   "mistakes": [
-                                    { "san": "Nbd7", "grade": "playable", "note": "Sound: 11.Nxf6+ Bxf6 12.Bxf6 Nxf6 and the ending is level. The capture keeps the bishop on g7." },
+                                    { "san": "Nbd7", "grade": "mistake", "note": "11.Nxc7 and the knight forks the rooks: 11...Rb8 12.Nxe8 and the exchange has gone. The knight on d5 has to be taken before it reaches c7." },
                                     { "san": "Nxe4", "grade": "mistake", "note": "11.Nxc7 and the knight forks the rooks: 11...Nxg5 12.Nxg5 Re7 13.Nxa8 and the rook has gone. In the castled line the same capture is safe, because there the knight on a6 covers c7 and there is no fork." }
                                   ],
                                   "children": [
@@ -1029,7 +1029,7 @@
                                           "note": "Hit the wedge at once. It comes off or it is held by pieces that would rather be elsewhere.",
                                           "tags": ["endgame"],
                                           "mistakes": [
-                                            { "san": "Nd7", "grade": "playable", "note": "Sound and slow: 12.O-O-O and White has the file with the wedge kept." },
+                                            { "san": "Nd7", "grade": "inaccuracy", "note": "12.O-O-O and White has the file with the wedge kept and the knight on d7 in the way of the rook: the pawn on c6 hits the wedge first." },
                                             { "san": "f6", "grade": "inaccuracy", "note": "12.Be3 and the bishop on g7 is blocked by its own pawn." }
                                           ],
                                           "children": [
@@ -1090,7 +1090,7 @@
                           "note": "Take, and ...c6 undermines the pawn that arrives.",
                           "tags": ["endgame"],
                           "mistakes": [
-                            { "san": "Nbd7", "grade": "playable", "note": "Sound: 10.Nxf6+ Nxf6 and it is level. The capture first." }
+                            { "san": "Nbd7", "grade": "inaccuracy", "note": "10.Nxf6+ Nxf6 11.Bg5 and the knight on f6 is pinned to the rook with the bishop on g7 the only piece that can break it: the capture first, then ...c6." }
                           ],
                           "children": [
                             {
@@ -1148,7 +1148,7 @@
                   "tags": ["f5-break"],
                   "mistakes": [
                     { "san": "Qe8", "grade": "playable", "note": "Sound: 9.O-O and it is the main line by another order. ...f6 first makes the bishop move now." },
-                    { "san": "h6", "grade": "inaccuracy", "note": "9.Bh4 g5 10.Bg3 and the bishop is on the diagonal against e5 with Black's king loosened." }
+                    { "san": "h6", "grade": "mistake", "note": "9.Bxd8 and the queen has gone: the bishop on g5 sees d8 through the square the knight left. The pawn on f6 hits the bishop without opening that diagonal." }
                   ],
                   "children": [
                     {

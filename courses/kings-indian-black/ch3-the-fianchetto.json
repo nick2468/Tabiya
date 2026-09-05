@@ -826,7 +826,7 @@
                                                                           "tags": ["development"],
                                                                           "mistakes": [
                                                                             { "san": "Bg4", "grade": "playable", "note": "Sound: 10.h3 Be6 and the same a move later." },
-                                                                            { "san": "Nd4", "grade": "playable", "note": "Sound: 10.Nxd4 exd4 11.Nd5 and the knight is in on d5. The bishop first." }
+                                                                            { "san": "Nd4", "grade": "inaccuracy", "note": "10.Nxd4 exd4 11.Nd5 and the knight is in on d5 with the pawn on d4 hit by the bishop on e3. The bishop first." }
                                                                           ],
                                                                           "children": [
                                                                             {
@@ -1224,7 +1224,7 @@
                                           "tags": ["development"],
                                           "mistakes": [
                                             { "san": "c5", "grade": "playable", "note": "Sound and a Symmetrical English. The lever is this course's." },
-                                            { "san": "e5", "grade": "playable", "note": "Sound: 6.d4 and the pawn on e5 is hit before the knight on d7 holds it: 6...e4 7.Ng5 and the pawn is loose. The pawn to d6 first." }
+                                            { "san": "e5", "grade": "inaccuracy", "note": "6.d4 and the pawn on e5 is hit before anything holds it: 6...e4 7.Ng5 and the pawn is loose. The pawn to d6 first." }
                                           ],
                                           "children": [
                                             {
@@ -1438,7 +1438,7 @@
                                                                                   "note": "The knight hits the bishop, which has to go to d2 or c1, and the knight on c6 is going to d4.",
                                                                                   "tags": ["tactics"],
                                                                                   "mistakes": [
-                                                                                    { "san": "Nd4", "grade": "playable", "note": "Sound: 11.Nxd4 exd4 12.Bd2 and the pawn on d4 is a wedge. The knight to g4 first hits the bishop." },
+                                                                                    { "san": "Nd4", "grade": "inaccuracy", "note": "11.Nxd4 exd4 12.Bd2 and the pawn on d4 is held by nothing with the knight on c3 coming to b5. The knight to g4 first hits the bishop." },
                                                                                     { "san": "Be6", "grade": "playable", "note": "Sound: 11.Nd5 and the knight is in. The bishop on e3 is hit first." }
                                                                                   ],
                                                                                   "plan": "...Nd4 and ...c6 or ...f5, ...Be6 hitting c4, and ...Qd7 with ...Bh3 to trade the bishop on g2. The Botvinnik wall has left d4 and f4 to Black's knights.",
@@ -1613,7 +1613,7 @@
                                           "note": "The pawn to d6, and 6.Be2 e5 is the Classical.",
                                           "tags": ["development"],
                                           "mistakes": [
-                                            { "san": "d5", "grade": "playable", "note": "Sound and a Grünfeld shape with the king castled." }
+                                            { "san": "d5", "grade": "inaccuracy", "note": "6.e5 Ne4 7.Nxe4 dxe4 and the pawn on e4 is loose: a Grünfeld shape a move too late." }
                                           ],
                                           "children": [
                                             {
