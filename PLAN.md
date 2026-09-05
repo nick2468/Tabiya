@@ -4065,17 +4065,50 @@ a remembered setting. The report's repertoire part becomes "The course"; Hint sh
 reply club players make most often; records carry the side, are counted apart on Progress
 and excluded from Lines played. Version 1.7.2.
 
-- [ ] 32.1 The book carries each position's listed alternatives.
-- [ ] 32.2 The session plays either side, with tests for both settings.
-- [ ] 32.3 The other-side report and PGN.
-- [ ] 32.4 The start screen: the fourth radio and the remembered setting.
-- [ ] 32.5 Hint from the book's weights.
-- [ ] 32.6 Progress: counted apart, excluded from Lines played, Play on resumes the side.
-- [ ] 32.7 DOM tests red first; help test mutation-checked.
-- [ ] 32.8 Help and SPEC.
-- [ ] 32.9 Version 1.7.2.
-- [ ] 32.10 Proved in the browser build.
+- [x] 32.1 The book carries each position's listed alternatives.
+- [x] 32.2 The session plays either side, with tests for both settings.
+- [x] 32.3 The other-side report and PGN.
+- [x] 32.4 The start screen: the fourth radio and the remembered setting.
+- [x] 32.5 Hint from the book's weights.
+- [x] 32.6 Progress: counted apart, excluded from Lines played, Play on resumes the side.
+- [x] 32.7 DOM tests red first; help test mutation-checked.
+- [x] 32.8 Help and SPEC.
+- [x] 32.9 Version 1.7.2.
+- [x] 32.10 Proved in the browser build.
 
 Acceptance: as the chip's final paragraph.
+
+**Open items, for the gate.**
+
+*One tension in the chip, settled by the builder.* The ruling says Play the other side
+combines with the existing launch shapes, and 32.4 asks for a fourth radio, which cannot
+combine with the radios beside it. The radio is what is built, and under it a dropdown
+of which lines the course plays, Any line first, which delivers the any-line and
+this-chapter combinations. From-a-position on the other side arrives through Play on of
+a game that was itself played on the other side, which the ruling names. **Study's Play
+from here stays on the trainee's own side**, because the From radio and the other-side
+radio are two choices in one group. If Nick wants to play against the course from a
+Study position, that is a ruling about the control's shape, not a line of code.
+
+*The DOM tests were shown red the phase 29 way, after the fact.* The screen was built
+before the tests were written, so red was shown by checking out the tree from before the
+screen commit, running the five, and restoring: all five fail on "Play the other side"
+not existing, all five pass on main. The help test was mutation-checked on each of the
+three new names in turn.
+
+*The suite is at the edge of its budget.* 997 tests in 9.4 to 9.7 seconds on repeat,
+against the phase 29 rule of ten. The five new DOM tests cost about three seconds of
+test time between them, at the going rate of one full app render each. One more DOM
+file of this size crosses the line, and the next builder should know.
+
+*Driven at 1200x980 on this session's own server, banner 1.7.2.* The Najdorf on the
+other side: the trainee to move first as White, 1.e4 answered by the course's 1...c5,
+Hint saying "Club players most often play 2.Nf3 here" with the blue arrow, 2.Nf3 answered
+by 2...d6, and the report leading with The course and "The course played its book to the
+end." The record carried side other, no deviation and one hint; Progress read "1 game, 1
+of them playing the other side", the Play on row said "other side", and Lines played
+listed nothing, which is the exclusion. The London on the other side: the engine opened
+1.d4 and the board was Black's way up. The setting flipped to Sometimes a listed
+alternative and held across a reload. Storage cleared, no console errors.
 
 - [ ] **Review gate 32**
