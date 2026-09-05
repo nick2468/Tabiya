@@ -4943,15 +4943,76 @@ added and answered; 10.Bh2 kept under the floor rule and recorded; the 8.c3 note
 threatens); every other mismatch fixed by listing or extending, never by moving a repertoire
 move, with a stop rule at about twenty. Version 1.10.1.
 
-- [ ] 43.1 The cross-course test, run first, mismatches recorded.
-- [ ] 43.2 The London's ch3 against the King's Indian.
-- [ ] 43.3 Every other mismatch, or deferred with counts.
-- [ ] 43.4 Checkers on what changed, with conditions.
-- [ ] 43.5 Bundles regenerated.
-- [ ] 43.6 SPEC sections 3 and 8.
-- [ ] 43.7 Version 1.10.1.
-- [ ] 43.8 Suite green; line ids as the commits name.
+- [x] 43.1 The cross-course test, run first, mismatches recorded.
+- [x] 43.2 The London's ch3 against the King's Indian.
+- [x] 43.3 Every other mismatch, or deferred with counts.
+- [x] 43.4 Checkers on what changed, with conditions.
+- [x] 43.5 Bundles regenerated.
+- [x] 43.6 SPEC sections 3 and 8.
+- [x] 43.7 Version 1.10.1.
+- [x] 43.8 Suite green; line ids as the commits name.
 
 Acceptance: as the chip's final paragraph.
+
+**For the gate.** 43.1: the test is `has every White course and every Black course
+agreeing at their shared positions` in `content.test.ts`, one `it` over every White
+course against every Black course, walking stems and trees by position key and reporting
+every mismatch in one failure with course, chapter, line and the listed replies. Three
+scopings, each argued in the test's comment and in SPEC section 8: a stem counts; a
+position counts only once both courses have made a move of their own on the way to it
+(the first draft, without this, listed 29 mismatches, 22 of them courses "disagreeing"
+about which opening to play, which no course can list without becoming another course);
+and a leaf is not silence, because a rule that read the deeper course's next move as a
+fault could never be satisfied. **Run first, the test listed seven**, and that list was
+the phase's scope: the Colle's `Be2` against the King's Indian's fianchetto line (which
+assumed Bd3); the Colle's `b3` and the London's `Bf4` in the Caro-Kann Exchange
+structure, which both system courses reach by 1.d4 c5 2.e3 cxd4 3.exd4 d5; and four in
+the Slav's chapter 5, its `...c5` after 2.Bf4 Nf6 3.e3, its `...Nc6` after 4.Nf3 in the
+...Nf6 first order and its `...c4` after 6.Qb3 against the London, and its `...c5` after
+2.Nf3 Nf6 3.e3 against the Colle. The three phase 42 gaps at the London's 10.Bh2 leaf are
+not in the test's list, by the leaf scoping, and were closed by ruling under 43.2.
+
+43.2: the London's ch3 lists `10...Ne4` (weight 6) and answers `11.Qc2` (+0.21 at 2500 ms,
+against -0.13 for Nfd2 and -0.23 for Nbd2), with the leaf's plan and name moved to it. The
+line id changed from `london-white/ch3-kings-indian:d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6
+h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Bh2` to the same with ` Ne4 Qc2` appended. `10.Bh2` stays
+under the floor rule and is in `accepted.md` with both numbers (+0.27 kept of +0.52) and the
+reason the engine's Nxe5 is not a free pawn. The `8.c3` entry keeps its grade and says the
+one thing c3 threatens.
+
+43.3, all seven fixed, none deferred, every one by listing the other course's move with
+an engine-checked answer and never by moving a repertoire move. **The Colle and the King's
+Indian**: the King's Indian lists `4.Be2` and follows the Colle's own line to 8.c4, then
+`8...Qe7` (+0.20, the engine's first). **The two systems and the Caro-Kann**: the Caro-Kann
+lists `4.Bf4` and answers `4...Nf6` (+0.30, the move the London lists; the engine's ...Nc6
+is +0.23) with `5.Nf3 Nc6` (+0.32); it lists `7.b3` and answers `7...Bd6` (+0.14, the
+chapter's square; the engine's ...b6 is +0.09); the Colle lists `7...Bd6` in turn and
+answers `8.Bb2` (-0.17 against -0.05 for Nc3, the system's move). **The systems and the
+Slav**: the London lists `3...c5` after 2...Nf6 3.e3 and answers `4.Nf3` into its chapter
+2 position; lists `4...Nc6` in the ...Nf6 first order and answers `5.c3`, the same
+position as its ...Nc6 first line; lists `6...c4` and answers `7.Qxb6` (-0.32, the
+engine's first; Qd1 and Bxc4 both about -2.5). The Colle lists `3...c5` and answers
+`4.Bd3` (-0.29 against the engine's 4.c4 +0.18: kept as the system's move at the edge of
+the floor, recorded here for the next pass) with `4...Nc6 5.O-O` (-0.24, the engine's
+first; b3 at once is -0.46 to ...cxd4). The Slav lists `4.Bd3` and answers `4...Nc6`
+(-0.29, its first). Nine new line ids, each named in its commit; 532 line ids now, one
+changed and nine added, none gone. Every note added obeys the direction and check-mark
+rules, and the suite's one-grade rule held throughout.
+
+43.4, under `docs/engine-runs/phase-43/` with conditions (load 18 to 21 per cent, no
+build, one engine, sequential): `engine-ask-2500.txt` with every number above;
+`engine-mistakes-2500-<course>.txt` for the five courses touched, nothing on any entry the phase added, and four of the King's Indian's own
+entries at band edges regraded by the number (their commit says which); `note-lines`
+and `note-claims` for each, zero faults and zero unsupported claims. 43.5: five bundles
+regenerated; the other five are byte-identical. 43.6 and 43.7 as their commits say.
+43.8: 1196 tests in 12.5 seconds, `tsc -b` clean.
+
+Deferred, deliberately: nothing from the list. Two things noticed and left, for the
+orchestrator: the Slav's chapter 5 has ten lines ending on a White move, which the
+loader allows for the older courses and which the newer courses' rule (a leaf on the
+student's move) would refuse; and the Najdorf's anti-Sicilian line ends at 9...Bd7 where
+the Alapin plays on with 10.Nxd7, which the leaf scoping keeps out of the test on purpose
+and which a reader of both courses will still notice. Nick's own files were not listed
+and not reported.
 
 - [ ] **Review gate 43**
