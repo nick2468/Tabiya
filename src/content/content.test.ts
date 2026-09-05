@@ -4,6 +4,7 @@ import { bundledCourses as courses, bundledEntries as courseEntries, contentErro
 import { splitIntro } from '../model/intro'
 import { deepestFullMove, positionsWithMistakes, walkNodes } from '../model/loader'
 import { allCards } from '../model/cards'
+import { positionKey } from '../model/position'
 import { chapterLines } from '../model/lines'
 import { colourName, type LoadedChapter, type LoadedCourse } from '../model/types'
 import { HARD, checkChapter } from '../../scripts/lib/note-lines.mjs'
@@ -1267,6 +1268,106 @@ describe('the courses together', () => {
       }
     }
     expect(owner.size).toBeGreaterThan(0)
+  })
+
+  it('has every White course and every Black course agreeing at their shared positions', () => {
+    // Nick's ruling of 2026-09-06, after the King's Indian met his own London
+    // course and disagreed with it in three places: the courses must be
+    // consistent with each other. Where a White course and a Black course
+    // reach the same position, the repertoire move one of them plays there
+    // must be a reply the other one lists. A course may list more replies than
+    // the other plays; it may not be silent about the move the other plays.
+    //
+    // Three scoping rules, all from what a course is. A leaf is not silence:
+    // where a line ends, the course has said what it means to say, and a rule
+    // that made the deeper course's next move a fault would never terminate,
+    // because the shallower course's answer would then be one move deeper
+    // still. Phase 42's finding at the London's 10.Bh2 leaf was closed by a
+    // ruling (43.2), not by this rule. A stem counts: its moves
+    // are the course's moves and the other side's replies as much as a tree's
+    // are, only without weights. And a position is shared only once BOTH
+    // courses have already made a move of their own on the way to it. Before
+    // that, the two are still choosing an opening rather than disagreeing
+    // about one: every White course plays a first move the Black courses of
+    // the other family never list, and every Black course answers 1.e4 or
+    // 1.d4 with a move the White courses of the other reply never list, and
+    // a course cannot list those without becoming another course. Same-colour
+    // pairs are out on purpose: the London and the Colle both answer 1...d5
+    // and are meant to differ.
+    type Move = { key: string; san: string; own: boolean; committed: boolean; where: string }
+    const movesOf = (course: LoadedCourse): Move[] => {
+      const out: Move[] = []
+      for (const chapter of course.chapters) {
+        // The stem, replayed from the initial position.
+        const board = new Chess()
+        let own = 0
+        chapter.stem.forEach((san, ply) => {
+          const mine = (ply % 2 === 0 ? 'white' : 'black') === course.colour
+          out.push({
+            key: positionKey(board.fen()),
+            san,
+            own: mine,
+            committed: own > 0,
+            where: `${chapter.id} stem ${chapter.stem.slice(0, ply + 1).join(' ')}`,
+          })
+          if (mine) own += 1
+          board.move(san)
+        })
+        // The tree, where the loader has done the walking.
+        for (const node of walkNodes(chapter)) {
+          const before = node.path.slice(0, -1).filter((_, ply) => (ply % 2 === 0 ? 'white' : 'black') === course.colour)
+          out.push({
+            key: node.key,
+            san: node.san,
+            own: node.isStudent,
+            committed: before.length > 0,
+            where: `${chapter.id} ${node.path.join(' ')}`,
+          })
+        }
+      }
+      return out
+    }
+
+    type Seen = { plays: Map<string, Move>; lists: Map<string, Set<string>> }
+    const seen = new Map<string, Seen>()
+    for (const course of courses) {
+      const plays = new Map<string, Move>()
+      const lists = new Map<string, Set<string>>()
+      for (const move of movesOf(course)) {
+        if (move.own) {
+          if (!plays.has(move.key)) plays.set(move.key, move)
+        } else {
+          if (!lists.has(move.key)) lists.set(move.key, new Set())
+          lists.get(move.key)!.add(move.san)
+        }
+      }
+      seen.set(course.id, { plays, lists })
+    }
+
+    const mismatches: string[] = []
+    const check = (player: LoadedCourse, lister: LoadedCourse) => {
+      const played = seen.get(player.id)!.plays
+      const listerMoves = movesOf(lister)
+      const listerCommitted = new Set(listerMoves.filter((move) => move.committed).map((move) => move.key))
+      const listed = seen.get(lister.id)!.lists
+      for (const [key, move] of played) {
+        if (!move.committed || !listerCommitted.has(key)) continue
+        const replies = listed.get(key)
+        if (!replies || replies.has(move.san)) continue
+        mismatches.push(
+          `${player.id} plays ${move.san} (${move.where}) where ${lister.id} lists ${[...replies].join(', ')}`,
+        )
+      }
+    }
+    const white = courses.filter((course) => course.colour === 'white')
+    const black = courses.filter((course) => course.colour === 'black')
+    for (const w of white) {
+      for (const b of black) {
+        check(w, b)
+        check(b, w)
+      }
+    }
+    expect(mismatches.sort()).toEqual([])
   })
 
   it('reaches the same positions across colours and still cannot collide', () => {
