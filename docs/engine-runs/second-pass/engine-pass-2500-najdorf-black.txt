@@ -1,0 +1,27 @@
+engine-pass.mjs at 2500 ms over courses/najdorf-black, the verdict-strength second pass (2026-09-05).
+Conditions: Nick declared the machine idle; CPU load sampled at 12-21% across 16 logical processors before the run;
+no build, no test run, no dev server and no second engine process; the eight courses run one after another in one script.
+Started 2026-09-05T06:01:00Z
+
+140 student moves across 7 chapters, 280 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+  ...25/280
+  ...50/280
+  ...75/280
+  ...100/280
+  ...125/280
+  ...150/280
+  ...175/280
+  ...200/280
+  ...225/280
+  ...250/280
+  ...275/280
+
+2 moves cost 0.5 of a pawn or more:
+
+0.75  ch1-bg5  e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bg5 e6 f4 Be7 Qe2 Qc7
+      before -0.37  after 0.38
+0.50  ch3-classical-and-quiet  e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 g3 e5 Nde2 Be7 Bg2 O-O O-O b5 h3 Bb7
+      before -0.16  after 0.34
+
+Finished 2026-09-05T06:12:40Z
