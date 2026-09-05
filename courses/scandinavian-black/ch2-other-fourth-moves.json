@@ -182,7 +182,7 @@
                   "note": "The structure. The pawn on c6 also blunts the bishop on g2, which is looking straight at b7.",
                   "tags": ["queen-safety"],
                   "mistakes": [
-                    { "san": "Bg4", "grade": "inaccuracy", "note": "6.Nf3 and the bishop is pinning nothing yet, and 7.h3 comes with the pawn on c7 not yet giving the queen a square." },
+                    { "san": "Bg4", "grade": "inaccuracy", "note": "6.Nf3 and the bishop is pinning nothing yet, and the h-pawn will ask it a question with the pawn on c7 not yet giving the queen a square." },
                     { "san": "e5", "grade": "playable", "note": "Sound, and it hands the bishop on g2 an open diagonal once the centre clears. The pawn on c6 keeps it shut." }
                   ],
                   "children": [
@@ -202,14 +202,14 @@
                           "children": [
                             {
                               "san": "d4",
-                              "note": "White takes the centre, and this is chapter 1's 6.g3 line exactly.",
+                              "note": "White takes the centre, and this is chapter 1's fianchetto line exactly.",
                               "weight": 8,
                               "children": [
                                 {
                                   "san": "e6",
                                   "note": "The pawn goes, and the game is chapter 1 from here.",
                                   "tags": ["development"],
-                                  "plan": "Chapter 1's 6.g3 line takes it from here: the bishop to e7, castle, and answer h3 and g4 by retreating the bishop to h5 and then g6.",
+                                  "plan": "Chapter 1's fianchetto line takes it from here: the bishop to e7, castle, and answer the h-pawn and the g-pawn by retreating the bishop to h5 and then g6.",
                                   "name": "4.g3, back into the fianchetto line"
                                 }
                               ]
@@ -276,7 +276,7 @@
                                   "note": "The pawn goes. With White's bishop on f4 and knight on g3 the light-squared bishop has no good square outside yet, so it waits.",
                                   "tags": ["development"],
                                   "mistakes": [
-                                    { "san": "Bg4", "grade": "inaccuracy", "note": "8.f3 hits it and 9.Bd3 follows, and the bishop has cost Black two moves." }
+                                    { "san": "Bg4", "grade": "inaccuracy", "note": "8.f3 hits it and the bishop to d3 follows, and Black's bishop has cost two moves." }
                                   ],
                                   "children": [
                                     {

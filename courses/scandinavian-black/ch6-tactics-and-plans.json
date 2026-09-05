@@ -1,0 +1,509 @@
+{
+  "id": "ch6-tactics-and-plans",
+  "title": "Typical tactics and plans",
+  "defaultTags": ["tactics"],
+  "intro": "Six positions, each running through a line from an earlier chapter and stopping on the move that matters. Play the line and find the last move yourself. Three of them are about the queen, because the queen out early is the one thing every opponent knows about this opening, and knowing where it goes when it is hit is most of what there is to know.\n\n## What each one is about\n\nThe first is the knight to b5. It hits the queen and eyes c7, and the answer is the retreat that covers c7 rather than the active square that leaves it.\n\nThe second is the check on b5. The pawn that was going to c6 anyway blocks it with tempo, and the bishop has to move again.\n\nThe third is the knight jump. With the queens off and White's king stuck on the open file, a knight comes to b4 and the fork on c2 is in the air.\n\nThe fourth is the break with the c-pawn. The whole structure is built, every piece is placed, and the pawn hits d4 at the moment the pieces are ready to take back.\n\nThe fifth is the break with the e-pawn. The bishop comes to f4 hitting the queen, and the pawn to e5 blocks the diagonal, hits the bishop and hits d4 in one move.\n\nThe sixth is defence. A knight on g5 and a bishop on c4 are both looking at f7, and one pawn move covers everything.\n\n## Typical mistakes at this level\n\nAnswering a hit on the queen with the most active square rather than the safest. Blocking a check with a piece when a pawn does it with tempo. Playing a pawn break before the pieces are placed to take back on it. And meeting an attack on f7 by counting attackers, when the pawn to e6 makes the count irrelevant.",
+  "stem": ["e4", "d5"],
+  "tree": [
+    {
+      "san": "exd5",
+      "note": "The capture, which is what nearly every game has.",
+      "weight": 9,
+      "children": [
+        {
+          "san": "Qxd5",
+          "note": "The queen takes back.",
+          "tags": ["queen-safety"],
+          "children": [
+            {
+              "san": "Nc3",
+              "note": "The hit on the queen.",
+              "weight": 9,
+              "children": [
+                {
+                  "san": "Qd6",
+                  "note": "The modern square.",
+                  "tags": ["queen-safety"],
+                  "children": [
+                    {
+                      "san": "d4",
+                      "note": "The centre.",
+                      "weight": 8,
+                      "children": [
+                        {
+                          "san": "Nf6",
+                          "note": "Develop.",
+                          "tags": ["development"],
+                          "children": [
+                            {
+                              "san": "Nb5",
+                              "note": "Exercise 1. The knight hits the queen and eyes c7, where a fork of the king and rook is waiting. Black to play.",
+                              "weight": 5,
+                              "children": [
+                                {
+                                  "san": "Qd8",
+                                  "note": "Home to d8, which covers c7. The knight on b5 now has nothing to do there and will have to go back, so the tempo is given and taken back at once.",
+                                  "tags": ["queen-safety"],
+                                  "mistakes": [
+                                    { "san": "Qd5", "grade": "mistake", "note": "It leaves c7: 6.Nxc7+ Kd8 7.Nxa8 and White has taken a rook." },
+                                    { "san": "Qb6", "grade": "playable", "note": "Sound, and it also covers c7 while hitting b2. It gives White the a-pawn to chase it again, which is why the quieter square is the course's." },
+                                    { "san": "Qe6+", "grade": "inaccuracy", "note": "6.Be3 blocks with a developing move and c7 is still hanging, so the queen has to move again." }
+                                  ],
+                                  "plan": "Play the pawn to a6 to send the knight back, then c6, and develop as usual. The queen comes out again to c7 once the knight has gone.",
+                                  "name": "Exercise 1: the knight on b5"
+                                }
+                              ]
+                            },
+                            {
+                              "san": "Bb5+",
+                              "note": "Exercise 2. The check. Black to play, and there is a block that comes with tempo.",
+                              "weight": 4,
+                              "children": [
+                                {
+                                  "san": "c6",
+                                  "note": "Block with the pawn that was going to c6 anyway. It hits the bishop, which has to move a second time, and the structure is a move further on for free.",
+                                  "tags": ["queen-safety"],
+                                  "mistakes": [
+                                    { "san": "Bd7", "grade": "inaccuracy", "note": "It blocks with a piece the structure wanted elsewhere, and 6.Bxd7+ Nbxd7 has traded off the bishop that belongs on f5 or g4." },
+                                    { "san": "Nbd7", "grade": "inaccuracy", "note": "The pin stays on and the knight is stuck on d7 until it is broken." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Ba4",
+                                      "note": "The bishop retreats, keeping the pin along the diagonal for later.",
+                                      "weight": 7,
+                                      "children": [
+                                        {
+                                          "san": "Bf5",
+                                          "note": "The bishop comes out before the pawn goes to e6, as always.",
+                                          "tags": ["light-squares"],
+                                          "mistakes": [
+                                            { "san": "e6", "grade": "inaccuracy", "note": "Shut in. The bishop comes out first." },
+                                            { "san": "b5", "grade": "playable", "note": "It hits the bishop again, which is fine, and it commits the queenside pawns before the pieces are out." }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "Nf3",
+                                              "note": "Develop.",
+                                              "weight": 8,
+                                              "children": [
+                                                {
+                                                  "san": "e6",
+                                                  "note": "The pawn goes with the bishop out.",
+                                                  "tags": ["development"],
+                                                  "mistakes": [
+                                                    { "san": "Nbd7", "grade": "playable", "note": "Fine. The pawn first frees the bishop on f8." }
+                                                  ],
+                                                  "children": [
+                                                    {
+                                                      "san": "O-O",
+                                                      "note": "White castles.",
+                                                      "weight": 8,
+                                                      "children": [
+                                                        {
+                                                          "san": "Be7",
+                                                          "note": "Develop.",
+                                                          "tags": ["development"],
+                                                          "mistakes": [
+                                                            { "san": "Nbd7", "grade": "playable", "note": "Fine. The bishop first keeps castling one move away." }
+                                                          ],
+                                                          "children": [
+                                                            {
+                                                              "san": "Re1",
+                                                              "note": "The rook comes to the open file.",
+                                                              "weight": 7,
+                                                              "children": [
+                                                                {
+                                                                  "san": "O-O",
+                                                                  "note": "Castle. The check cost White a tempo and Black has the full structure.",
+                                                                  "tags": ["king-safety"],
+                                                                  "mistakes": [
+                                                                    { "san": "Nbd7", "grade": "playable", "note": "Fine. The king first, because nothing is waiting." }
+                                                                  ],
+                                                                  "plan": "Knight to d7, queen to c7, and the pawn to c5. The bishop on a4 is looking at nothing and will have to come back to trade.",
+                                                                  "name": "Exercise 2: the check blocked with tempo"
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "san": "Nf3",
+                              "note": "Develop.",
+                              "weight": 8,
+                              "children": [
+                                {
+                                  "san": "c6",
+                                  "note": "The structure.",
+                                  "tags": ["queen-safety"],
+                                  "children": [
+                                    {
+                                      "san": "Be2",
+                                      "note": "Exercise 4 runs through chapter 0's line and one move further.",
+                                      "weight": 5,
+                                      "children": [
+                                        {
+                                          "san": "Bf5",
+                                          "note": "Out before e6.",
+                                          "tags": ["light-squares"],
+                                          "children": [
+                                            {
+                                              "san": "O-O",
+                                              "note": "Castle.",
+                                              "weight": 8,
+                                              "children": [
+                                                {
+                                                  "san": "e6",
+                                                  "note": "The pawn goes.",
+                                                  "tags": ["development"],
+                                                  "children": [
+                                                    {
+                                                      "san": "Bg5",
+                                                      "note": "The pin.",
+                                                      "weight": 6,
+                                                      "children": [
+                                                        {
+                                                          "san": "Be7",
+                                                          "note": "Break it by developing.",
+                                                          "tags": ["development"],
+                                                          "children": [
+                                                            {
+                                                              "san": "Qd2",
+                                                              "note": "Connecting.",
+                                                              "weight": 6,
+                                                              "children": [
+                                                                {
+                                                                  "san": "Nbd7",
+                                                                  "note": "The last piece.",
+                                                                  "tags": ["development"],
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Rad1",
+                                                                      "note": "A rook behind the d-pawn.",
+                                                                      "weight": 6,
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "O-O",
+                                                                          "note": "Castle. The structure is complete.",
+                                                                          "tags": ["king-safety"],
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Rfe1",
+                                                                              "note": "The other rook comes to the centre. Every White piece is placed and so is every Black one. Black to play: the structure was built for one pawn move.",
+                                                                              "weight": 7,
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "c5",
+                                                                                  "note": "The break. It hits d4 at the moment the knight on d7 and the queen on d6 are both ready to take back on c5, so the pawn cannot be won and the centre opens for Black's pieces.",
+                                                                                  "tags": ["c5-break"],
+                                                                                  "mistakes": [
+                                                                                    { "san": "Qc7", "grade": "playable", "note": "The queen moves before it is asked to. The break was ready and this delays it a move." },
+                                                                                    { "san": "h6", "grade": "playable", "note": "It asks the bishop a question that costs Black the move the break wanted." }
+                                                                                  ],
+                                                                                  "plan": "If White takes on c5, take back with the knight or trade the queens on d2 first. If White holds d4, put the rook on d8 and keep the tension until it breaks in Black's favour.",
+                                                                                  "name": "Exercise 4: the break with the c-pawn"
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "san": "Bd3",
+                                      "note": "Exercise 5 runs through chapter 1's 6.Bd3 line and two moves further.",
+                                      "weight": 5,
+                                      "children": [
+                                        {
+                                          "san": "Bg4",
+                                          "note": "The pin.",
+                                          "tags": ["light-squares"],
+                                          "children": [
+                                            {
+                                              "san": "h3",
+                                              "note": "The question.",
+                                              "weight": 8,
+                                              "children": [
+                                                {
+                                                  "san": "Bh5",
+                                                  "note": "Keep the pin.",
+                                                  "tags": ["light-squares"],
+                                                  "children": [
+                                                    {
+                                                      "san": "O-O",
+                                                      "note": "Castle.",
+                                                      "weight": 9,
+                                                      "children": [
+                                                        {
+                                                          "san": "e6",
+                                                          "note": "The pawn goes.",
+                                                          "tags": ["development"],
+                                                          "children": [
+                                                            {
+                                                              "san": "Re1",
+                                                              "note": "The rook.",
+                                                              "weight": 7,
+                                                              "children": [
+                                                                {
+                                                                  "san": "Be7",
+                                                                  "note": "Develop.",
+                                                                  "tags": ["development"],
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Ne4",
+                                                                      "note": "The knight jumps in.",
+                                                                      "weight": 7,
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Nxe4",
+                                                                          "note": "Trade it.",
+                                                                          "tags": ["tactics"],
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Bxe4",
+                                                                              "note": "The bishop takes back.",
+                                                                              "weight": 9,
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "O-O",
+                                                                                  "note": "Castle.",
+                                                                                  "tags": ["king-safety"],
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "c3",
+                                                                                      "note": "White props up d4.",
+                                                                                      "weight": 7,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "Nd7",
+                                                                                          "note": "The knight comes out to d7, where it covers e5 and c5 and is ready for either break.",
+                                                                                          "tags": ["development"],
+                                                                                          "mistakes": [
+                                                                                            { "san": "Qc7", "grade": "playable", "note": "The queen moves before it is asked. The knight first, so that the break has a piece behind it." },
+                                                                                            { "san": "f5", "grade": "inaccuracy", "note": "It hits the bishop and weakens e6 for good, and 13.Bd3 leaves Black with a hole and a bishop on h5 that has lost its retreat." }
+                                                                                          ],
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "san": "Bf4",
+                                                                                              "note": "The bishop hits the queen. Black to play, and the queen does not have to move.",
+                                                                                              "weight": 7,
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "san": "e5",
+                                                                                                  "note": "The break. The pawn blocks the bishop's diagonal to the queen, hits the bishop, and hits d4, all in one move; and the knight on f3 cannot help, because it is pinned to the queen on d1 by the bishop on h5.",
+                                                                                                  "tags": ["e5-break"],
+                                                                                                  "mistakes": [
+                                                                                                    { "san": "Qc7", "grade": "playable", "note": "The retreat is sound, and it gives back the tempo the pawn move wins." },
+                                                                                                    { "san": "Nb6", "grade": "mistake", "note": "The queen is still on d6 with the bishop on f4 pointing at it: 14.Bxd6 simply takes the queen." }
+                                                                                                  ],
+                                                                                                  "plan": "If the bishop takes on e5, the knight takes back and the knight on f3 still cannot join in. If the bishop retreats, take on d4 and the centre is Black's.",
+                                                                                                  "name": "Exercise 5: the break with the e-pawn"
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "d3",
+      "note": "Exercise 3 runs through chapter 4's 2.d3 line and one move further.",
+      "weight": 3,
+      "children": [
+        {
+          "san": "dxe4",
+          "note": "Take.",
+          "tags": ["development"],
+          "children": [
+            {
+              "san": "dxe4",
+              "note": "White takes back.",
+              "weight": 9,
+              "children": [
+                {
+                  "san": "Qxd1+",
+                  "note": "Trade with check.",
+                  "tags": ["endgame"],
+                  "children": [
+                    {
+                      "san": "Kxd1",
+                      "note": "The king takes back.",
+                      "weight": 10,
+                      "children": [
+                        {
+                          "san": "Nc6",
+                          "note": "Develop.",
+                          "tags": ["development"],
+                          "children": [
+                            {
+                              "san": "Nf3",
+                              "note": "Develop.",
+                              "weight": 8,
+                              "children": [
+                                {
+                                  "san": "Bg4",
+                                  "note": "The pin.",
+                                  "tags": ["light-squares"],
+                                  "children": [
+                                    {
+                                      "san": "Be2",
+                                      "note": "Breaking the pin.",
+                                      "weight": 7,
+                                      "children": [
+                                        {
+                                          "san": "O-O-O+",
+                                          "note": "Castle long with check.",
+                                          "tags": ["king-safety"],
+                                          "children": [
+                                            {
+                                              "san": "Ke1",
+                                              "note": "The only square: c1 has the bishop and e2 has the other one. Black to play, and there is a knight jump.",
+                                              "weight": 10,
+                                              "children": [
+                                                {
+                                                  "san": "Nb4",
+                                                  "note": "The jump. The knight threatens the fork on c2, which hits the king and the rook on a1, and with the queens off White has no easy way to cover the square.",
+                                                  "tags": ["tactics"],
+                                                  "mistakes": [
+                                                    { "san": "Bxf3", "grade": "inaccuracy", "note": "8.Bxf3 and the pin is gone for nothing, with White's bishop now on the long diagonal." },
+                                                    { "san": "Nd4", "grade": "playable", "note": "Also a good square, hitting c2 and e2. The jump to b4 keeps the knight on f3 pinned while it threatens the same fork." }
+                                                  ],
+                                                  "plan": "If White covers c2 with the king or a knight, take on f3 and double the pawns, or bring the knight to d5 and play the ending a move ahead. If White does not, take on c2 and then the rook.",
+                                                  "name": "Exercise 3: the knight jump to b4"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Nf3",
+      "note": "Exercise 6 is the Tennison Gambit from chapter 5, to the moment two pieces look at f7.",
+      "weight": 5,
+      "children": [
+        {
+          "san": "dxe4",
+          "note": "Take.",
+          "tags": ["development"],
+          "children": [
+            {
+              "san": "Ng5",
+              "note": "The knight eyes f7.",
+              "weight": 7,
+              "children": [
+                {
+                  "san": "Nf6",
+                  "note": "Defend the pawn.",
+                  "tags": ["development"],
+                  "children": [
+                    {
+                      "san": "Bc4",
+                      "note": "The bishop joins in. Black to play: two pieces on f7, and one pawn move answers both.",
+                      "weight": 8,
+                      "children": [
+                        {
+                          "san": "e6",
+                          "note": "The pawn covers f7 and d5 at once. Counting attackers does not matter once the square has a pawn in front of it, and the knight on g5 is now the piece with nothing to do.",
+                          "tags": ["king-safety"],
+                          "plan": "Develop the bishop to e7, castle, and let White take the pawn on e4 back with the knight while every Black piece comes out. Chapter 5 has the line.",
+                          "name": "Exercise 6: f7 defended by a pawn"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

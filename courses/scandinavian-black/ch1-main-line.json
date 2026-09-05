@@ -140,7 +140,7 @@
           "note": "Develop with a hit on the knight. It has to decide now, and both its moves give Black something.",
           "tags": ["development"],
           "mistakes": [
-            { "san": "Bf5", "grade": "inaccuracy", "note": "7.Nc4 hits the queen and 8.Qf3 hits the bishop, and Black is answering threats rather than developing." },
+            { "san": "Bf5", "grade": "inaccuracy", "note": "7.Nc4 hits the queen, and the queen coming to f3 next hits the bishop, so Black is answering threats rather than developing." },
             { "san": "Qc7", "grade": "playable", "note": "Sound, and it moves the queen before it has been asked to. The knight move develops and makes White decide." }
           ],
           "children": [
