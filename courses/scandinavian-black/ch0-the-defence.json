@@ -106,12 +106,12 @@
                                                           "children": [
                                                             {
                                                               "san": "Bg5",
-                                                              "note": "White pins the knight and hopes to make the queen uncomfortable.",
+                                                              "note": "The bishop comes out with a small threat: Bxf6 would spoil Black's pawns unless the queen takes back, which it can. Nothing is pinned, because the queen left d8 on move two.",
                                                               "weight": 6,
                                                               "children": [
                                                                 {
                                                                   "san": "Be7",
-                                                                  "note": "Break the pin by developing. The bishop was going here anyway.",
+                                                                  "note": "Develop, and the bishop was going here anyway. It also means the queen never has to recapture on f6.",
                                                                   "tags": ["development"],
                                                                   "mistakes": [
                                                                     { "san": "h6", "grade": "playable", "note": "It asks the bishop a question first, which is fine. Developing keeps the tempo for the king." }

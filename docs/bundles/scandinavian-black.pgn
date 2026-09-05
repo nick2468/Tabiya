@@ -87,8 +87,11 @@ Moving the queen a second time when it is not attacked, which is how one tempo b
 {Now the pawn goes, with the bishop already outside. The dark-squared bishop has its square and the king is two moves from safety.}
 ( 7... Nbd7!?
 {Fine and it transposes. The pawn first means the bishop on f8 can come out next move whatever White does.}
-) 8. Bg5 {White pins the knight and hopes to make the queen uncomfortable. [%weight 6]}
-8... Be7 {Break the pin by developing. The bishop was going here anyway.} ( 8... h6!?
+) 8. Bg5
+{The bishop comes out with a small threat: Bxf6 would spoil Black's pawns unless the queen takes back, which it can. Nothing is pinned, because the queen left d8 on move two. [%weight 6]}
+8... Be7
+{Develop, and the bishop was going here anyway. It also means the queen never has to recapture on f6.}
+( 8... h6!?
 {It asks the bishop a question first, which is fine. Developing keeps the tempo for the king.}
 ) 9. Qd2 {White connects the rooks and eyes the f4 square. [%weight 6]} 9... Nbd7
 {The last minor piece comes out to the square that covers e5 and c5, which is where the breaks come from.}
