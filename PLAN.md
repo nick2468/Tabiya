@@ -4158,16 +4158,37 @@ start from a position is tested, Play on and Replay keep a record's side with th
 ticked and disabled, and the suite rule becomes twenty seconds with its reason written
 down. Version 1.7.3.
 
-- [ ] 33.1 The checkbox replaces the radio and its dropdown.
-- [ ] 33.2 The side goes on every launch shape; a record's side wins.
-- [ ] 33.3 The engine-first start from a position, tested.
-- [ ] 33.4 DOM tests red first; help test mutation-checked.
-- [ ] 33.5 The suite rule at twenty seconds, in the testing page and the SPEC.
-- [ ] 33.6 Help and SPEC.
-- [ ] 33.7 Version 1.7.3.
-- [ ] 33.8 Proved in the browser build.
+- [x] 33.1 The checkbox replaces the radio and its dropdown.
+- [x] 33.2 The side goes on every launch shape; a record's side wins.
+- [x] 33.3 The engine-first start from a position, tested.
+- [x] 33.4 DOM tests red first; help test mutation-checked.
+- [x] 33.5 The suite rule at twenty seconds, in the testing page and the SPEC.
+- [x] 33.6 Help and SPEC.
+- [x] 33.7 Version 1.7.3.
+- [x] 33.8 Proved in the browser build.
 
 Acceptance: as the chip's final paragraph.
+
+**For the gate.** The four DOM tests were written first this time and shown red on the
+phase 32 radio, all four failing on there being no checkbox by that name, and green after
+the control changed. The engine-first start from a position needed no provider change:
+`start` already lets the engine move first when the position has it to move, out of the
+book when the book has the position. It is pinned on the session with the fake engine (a
+Caro-Kann position after 1.e4: the trainee is White, the engine answers 1...c6 at once,
+the trainee is then to move) and driven on the screen. The help test was mutation-checked
+on the box's name. 1003 tests in 9.0 to 9.5 seconds against the new rule of twenty.
+
+Driven at 1200x980 against another session's server on 5175, banner 1.7.2 (the version
+is baked at that server's start; the source is served from disk and the three version
+files read 1.7.3). Study in the Caro-Kann, one step to 1.e4, Play from here: the From
+radio read "From 1.e4" and the box sat beside it, ticked without unticking the radio.
+Start: the engine answered 1...c6 at once, the board was White's way up, "Your move", and
+the header read "playing the other side". Reviewed, then Progress: the Play on row said
+"other side", and Play on landed with the box ticked and disabled and its title saying the
+game carries on there. One note from the drive: a click on Study before the screen had
+rendered sent a request with no moves, which was the drive's haste and not a fault; the
+second attempt with a pause between the steps was right. Storage cleared, no console
+errors.
 
 - [ ] **Review gate 33**
 
