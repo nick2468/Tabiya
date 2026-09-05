@@ -243,6 +243,11 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
     setRecordedAt(at)
   }, [])
   const evaluationsRef = useRef<Map<string, number>>(new Map())
+  // The engine's move at each position, from the same search as the number,
+  // so a game reviewed after the live bar has seen it carries the same facts
+  // as one scanned from scratch. A ref only: nothing renders from it, and the
+  // report takes it at review time.
+  const bestMovesRef = useRef<Map<string, string>>(new Map())
 
   // The worker goes when the app goes, and not before. Leaving the Play
   // screen used to stop it, which is what threw the game away.
@@ -283,6 +288,8 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
       const next = new Map(evaluationsRef.current)
       next.set(key, whitePovPawns(best.score, side))
       evaluationsRef.current = next
+      const move = result.bestMove ?? best.move
+      if (move) bestMovesRef.current.set(key, move)
       setEvaluations(next)
     } finally {
       await running.setStrength(strengthProfile(playing))
@@ -296,6 +303,7 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
       setReplayPly(null)
       setThinking(true)
       evaluationsRef.current = new Map()
+      bestMovesRef.current = new Map()
       setEvaluations(new Map())
       try {
         const profile = strengthProfile(options.level)
@@ -528,14 +536,16 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
       // What the bar already worked out is handed over rather than searched
       // again: the scan is shorter, and the report cannot disagree with the
       // numbers that were on the screen during the game.
-      const scanned = await scanGame(
+      const { evaluations: scanned, bestMoves } = await scanGame(
         running.moves,
         runningEngine,
         SCAN_MOVETIME,
         (done, total) => setScanning({ done, total }),
         evaluationsRef.current,
+        bestMovesRef.current,
       )
       evaluationsRef.current = scanned
+      bestMovesRef.current = bestMoves
       setEvaluations(scanned)
       // The SAME `at` when this game already has one. A game reviewed, carried
       // on and reviewed again is one game, and `at` is what says so: a fresh
@@ -554,6 +564,7 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
         outcome,
         running.hints,
         setup.side ?? 'course',
+        bestMoves,
       )
       setReplayPly(null)
       setReport(built)
@@ -631,6 +642,7 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
     setEngineError(null)
     setHint(null)
     evaluationsRef.current = new Map()
+    bestMovesRef.current = new Map()
     setEvaluations(new Map())
     engineRef.current?.stop()
     engineRef.current = null

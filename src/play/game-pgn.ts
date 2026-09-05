@@ -1,6 +1,13 @@
 import { Movetext, pgnTag } from '../model/pgn'
 import { colourName, type Colour } from '../model/types'
-import { describeDeviation, verdictInWords, type GameReport, type PlayedMove } from './report'
+import {
+  describeDeviation,
+  numberedMove,
+  verdictInWords,
+  type GameReport,
+  type MoveReview,
+  type PlayedMove,
+} from './report'
 
 /**
  * A played game written out as PGN, with the report written into it.
@@ -63,12 +70,16 @@ export function pgnResult(outcome: string | undefined, studentColour: Colour): s
 }
 
 /** How a slip reads in a comment: short, because it sits inside the moves. */
-function slipComment(tag: string, before: number, after: number): string {
-  const was = verdictInWords(before).toLowerCase()
-  const now = verdictInWords(after).toLowerCase()
-  return was === now
-    ? `${tag}: gave up more ground in a position already ${was}`
-    : `${tag}: ${was} to ${now}`
+function slipComment(slip: MoveReview): string {
+  const was = verdictInWords(slip.before).toLowerCase()
+  const now = verdictInWords(slip.after).toLowerCase()
+  const said =
+    was === now
+      ? `${slip.tag}: gave up more ground in a position already ${was}`
+      : `${slip.tag}: ${was} to ${now}`
+  return slip.better
+    ? `${said}; the engine preferred ${numberedMove(slip.ply, slip.better)}`
+    : said
 }
 
 export function gameToPgn(game: GameForPgn): string {
@@ -111,7 +122,7 @@ export function gameToPgn(game: GameForPgn): string {
     const strayed = report.deviation.alternatives?.find((played) => played.ply === move.ply)
     if (strayed) notes.push(`The course grades this ${strayed.grade}.`)
     const slip = slips.get(move.ply)
-    if (slip) notes.push(slipComment(slip.tag, slip.before, slip.after))
+    if (slip) notes.push(slipComment(slip))
     if (notes.length) out.comment(notes.join(' '))
   }
 

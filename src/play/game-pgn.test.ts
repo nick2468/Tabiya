@@ -39,7 +39,7 @@ const report: GameReport = {
     label: '3.e3',
   },
   slips: [
-    { ply: 4, san: 'Nf3', before: 0.2, after: -1.4, loss: 1.6, tag: 'mistake' },
+    { ply: 4, san: 'Nf3', before: 0.2, after: -1.4, loss: 1.6, tag: 'mistake', better: 'e3' },
     { ply: 2, san: 'Bf4', before: 0.3, after: -0.3, loss: 0.6, tag: 'inaccuracy' },
   ],
   verdict: 'Clearly better for Black',
@@ -94,6 +94,12 @@ describe('gameToPgn', () => {
     expect(played[4].comment).toContain('mistake:')
     // And the moves the report said nothing about carry nothing.
     expect(played[0].comment).toBeNull()
+  })
+
+  it('says what the engine preferred, on the slip that has it', () => {
+    const played = parsePgn(gameToPgn(game)).games[0].moves
+    expect(played[4].comment).toContain('the engine preferred 3.e3')
+    expect(played[2].comment).not.toContain('preferred')
   })
 
   it('says where the game left the repertoire, on the move that left it', () => {

@@ -370,8 +370,13 @@ export function Play({
 
   const replayed = report ? positionAtPly(moves, ply) : null
   const shown = replayed ?? session?.fen ?? ''
+  // Standing on the position a slip was played from, the highlight is the
+  // slip itself, the move about to be played, so that it and the engine's
+  // arrow are on the board together. Anywhere else it is the move that led
+  // here, as it always was.
+  const slipHere = report?.slips.find((slip) => slip.ply === ply && slip.better)
   const highlight = report
-    ? squaresOf(moveAtPly(moves, ply))
+    ? squaresOf(slipHere ? (moves[ply] ?? null) : moveAtPly(moves, ply))
     : squaresOf(session?.moves.at(-1) ?? null)
 
   if (!session) {
@@ -522,7 +527,7 @@ export function Play({
               movableColor={finished || thinking || report ? undefined : session.studentColour}
               dests={finished || thinking || report ? undefined : legalDests(session.fen)}
               lastMove={highlight}
-              shapes={hintShapes(game.hint, shown)}
+              shapes={report ? preferredShapes(report, ply, shown) : hintShapes(game.hint, shown)}
               onMove={game.play}
               size={BOARD_SIZE}
             />
@@ -822,6 +827,21 @@ export function PlayControls({
       ) : null}
     </>
   )
+}
+
+/**
+ * The engine's preferred move as a blue arrow, while the replay is standing
+ * on the position a slip was played from. The move that was played stays
+ * highlighted as the last move, so both are on the board at once: what was
+ * done and what the engine would have done. Blue is the engine hint's colour,
+ * because it is the same kind of answer.
+ */
+export function preferredShapes(report: GameReport, ply: number, fen: string): Shape[] {
+  const slip = report.slips.find((entry) => entry.ply === ply && entry.better)
+  if (!slip?.better) return []
+  const squares = squaresForSan(fen, slip.better)
+  if (!squares) return []
+  return [{ orig: squares.from, dest: squares.to, brush: 'blue' }]
 }
 
 /** The hint as an arrow: the repertoire's move in green, the engine's in blue. */

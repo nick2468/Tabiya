@@ -4411,16 +4411,43 @@ Chipped as `chips/phase-37-better-move.md`. The scan keeps the best move; every 
 sentence ends "The engine preferred 4.Nc3."; clicking the slip draws that move as a blue
 arrow beside the move played; the PGN comment says it too. Version 1.8.3.
 
-- [ ] 37.1 The scan and the live evaluation keep the best move per position.
-- [ ] 37.2 A slip carries its better move.
-- [ ] 37.3 The sentence, in move-list notation.
-- [ ] 37.4 The blue arrow on the clicked slip.
-- [ ] 37.5 The PGN comment.
-- [ ] 37.6 Tests.
-- [ ] 37.7 Help.
-- [ ] 37.8 Version 1.8.3.
-- [ ] 37.9 Proved in the browser build.
+- [x] 37.1 The scan and the live evaluation keep the best move per position.
+- [x] 37.2 A slip carries its better move.
+- [x] 37.3 The sentence, in move-list notation.
+- [x] 37.4 The blue arrow on the clicked slip.
+- [x] 37.5 The PGN comment.
+- [x] 37.6 Tests.
+- [x] 37.7 Help.
+- [x] 37.8 Version 1.8.3.
+- [x] 37.9 Proved in the browser build.
 
 Acceptance: as the chip's final paragraph.
+
+**For the gate.** `scanGame` now returns `{ evaluations, bestMoves }` from the one search
+it already makes per position, taking `result.bestMove` and falling back to the first
+candidate; the provider's live `evaluate` stores the same in a `bestMovesRef` beside the
+evaluations, cleared where they are cleared, so a reviewed game and a replayed one carry
+the same facts. `Evaluations` is untouched; `BestMoves` sits beside it. `MoveReview.better`
+is the SAN converted with chess.js on the position the slip was played FROM, left out when
+the engine's move is the move played or when nothing was kept, and `buildReport` takes the
+map as a trailing optional argument. `describeSlip` appends "The engine preferred 4.Nc3."
+in move-list notation (`numberedMove`, exported: "4.Nc3" for White, "4...Nc3" for Black);
+the PGN comment appends "; the engine preferred 3.e3" in the same words. On the board,
+`preferredShapes` draws the move as a blue arrow while the replay stands on the slip's
+position, and on that position the last-move highlight is the slip itself rather than the
+move that led there, so both are visible at once; the hint's own shapes are unchanged
+outside a review. Tests: `scanForSlips` with a best-move map in both directions, absent
+when unknown or when the engine agrees, the sentence in both colours, `buildReport` passing
+it through, `scanGame` returning the fake engine's move, the PGN comment, and a string test
+on the arrow shapes. 1059 tests in 10 seconds, `tsc -b` clean.
+
+Driven at 1200x980 against a fresh server at 1.8.3: a London game with a deliberate 2.Kd2,
+Stop and review, and Your moves read "A blunder on move 2: Kd2 turned "slightly better for
+white" into "clearly better for black". The engine preferred 2.d5." Clicking it put the
+position after 1...c5 on the board with the blue arrow d4 to d5 and e1-d2 highlighted.
+Copy game said Copied and the text carried "the engine preferred 2.d5" in the comment on
+2.Kd2 (read through a hook on the clipboard write, since the pane refuses clipboard
+reads). No console errors; storage cleared afterwards. Nick's own files were not listed
+and not reported.
 
 - [ ] **Review gate 37**

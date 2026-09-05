@@ -427,6 +427,77 @@ describe('scanForSlips', () => {
   })
 })
 
+describe('what the engine preferred', () => {
+  // Phase 37: Nick was told 4.Nf3 was an inaccuracy and nothing said what was
+  // better. The scan had the answer all along and threw it away.
+  const moves = playedMoves(['d4', 'd5', 'Bf4', 'Nf6', 'e3'])
+
+  function allLevel() {
+    const map = new Map<string, number>()
+    for (const move of moves) {
+      map.set(positionKey(move.fen), 0)
+      map.set(positionKey(move.after), 0)
+    }
+    return map
+  }
+
+  it('gives a slip the engine\'s move from the position it was played in, as SAN', () => {
+    const evaluations = allLevel()
+    evaluations.set(positionKey(moves[4].after), -0.8)
+    // e3 was the slip; the engine wanted the knight out. UCI, as the engine
+    // says it; the slip says it the way a move list does.
+    const bestMoves = new Map([[positionKey(moves[4].fen), 'g1f3']])
+    const [slip] = scanForSlips(moves, evaluations, 'white', bestMoves)
+    expect(slip.san).toBe('e3')
+    expect(slip.better).toBe('Nf3')
+  })
+
+  it('says nothing when no best move was kept, and carries no key for it', () => {
+    const evaluations = allLevel()
+    evaluations.set(positionKey(moves[4].after), -0.8)
+    const [slip] = scanForSlips(moves, evaluations, 'white')
+    expect(slip.better).toBeUndefined()
+    expect('better' in slip).toBe(false)
+  })
+
+  it('says nothing when the engine\'s move is the move that was played', () => {
+    const evaluations = allLevel()
+    evaluations.set(positionKey(moves[4].after), -0.8)
+    const bestMoves = new Map([[positionKey(moves[4].fen), 'e2e3']])
+    const [slip] = scanForSlips(moves, evaluations, 'white', bestMoves)
+    expect(slip.better).toBeUndefined()
+  })
+
+  it('names it in the sentence, numbered as the move list writes it', () => {
+    expect(
+      describeSlip({ ply: 6, san: 'Nf3', before: 0.5, after: 0.1, loss: 0.4, tag: 'inaccuracy', better: 'Nc3' }),
+    ).toBe(
+      'An inaccuracy on move 4: Nf3 turned "slightly better for white" into "level". The engine preferred 4.Nc3.',
+    )
+    // Black's move, with the dots.
+    expect(
+      describeSlip({ ply: 7, san: 'e6', before: 0.1, after: 1.2, loss: 1.1, tag: 'mistake', better: 'Bf5' }),
+    ).toBe(
+      'A mistake on move 4: e6 turned "level" into "clearly better for white". The engine preferred 4...Bf5.',
+    )
+  })
+
+  it('leaves the sentence alone when there is nothing to prefer', () => {
+    expect(
+      describeSlip({ ply: 6, san: 'Nf3', before: 0.5, after: 0.1, loss: 0.4, tag: 'inaccuracy' }),
+    ).not.toContain('preferred')
+  })
+
+  it('reaches the report through buildReport', () => {
+    const book = buildBook({ colour: 'white', chapters: [chapter] })
+    const evaluations = allLevel()
+    evaluations.set(positionKey(moves[4].after), -0.8)
+    const bestMoves = new Map([[positionKey(moves[4].fen), 'g1f3']])
+    const report = buildReport(moves, book, evaluations, undefined, 0, 'course', bestMoves)
+    expect(report.slips[0].better).toBe('Nf3')
+  })
+})
+
 describe('fullMove', () => {
   it('counts a White move and the Black reply as one move', () => {
     expect(fullMove(0)).toBe(1)
@@ -881,9 +952,13 @@ describe('scanGame', () => {
   it('evaluates every position once, from White\'s point of view', async () => {
     const moves = playedMoves(['d4', 'd5'])
     const engine = fakeEngine({ cp: 30 })
-    const evaluations = await scanGame(moves, engine, 50)
+    const { evaluations, bestMoves } = await scanGame(moves, engine, 50)
     // Three positions: before d4, after d4, after d5.
     expect(evaluations.size).toBe(3)
+    // And the engine's move at each, from the same search: the fake plays
+    // the first legal move, which from the start is a3.
+    expect(bestMoves.size).toBe(3)
+    expect(bestMoves.get(positionKey(moves[0].fen))).toBe('a2a3')
     // The engine always says +0.30 for the side to move, so White's view flips.
     expect(evaluations.get(positionKey(moves[0].fen))).toBe(0.3)
     expect(evaluations.get(positionKey(moves[1].fen))).toBe(-0.3)
@@ -899,7 +974,7 @@ describe('scanGame', () => {
     const moves = playedMoves(['d4', 'd5'])
     const known = new Map([[positionKey(moves[0].fen), 1.5]])
     const seen: number[] = []
-    const evaluations = await scanGame(
+    const { evaluations } = await scanGame(
       moves,
       fakeEngine({ cp: 30 }),
       10,

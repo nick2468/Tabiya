@@ -1,3 +1,4 @@
+import { Chess } from 'chess.js'
 import { MATE_PAWNS } from '../engine/uci'
 import { positionKey } from '../model/position'
 import { colourName, type Colour, type MistakeGrade } from '../model/types'
@@ -44,6 +45,13 @@ export interface PlayedMove {
 
 /** What the engine thought of a position, in pawns from White's point of view. */
 export type Evaluations = Map<string, number>
+
+/**
+ * And what it would have played there, as UCI, from the same search. Kept
+ * beside the evaluations rather than inside them so that everything reading
+ * a number keeps reading a number.
+ */
+export type BestMoves = Map<string, string>
 
 export type DeviationKind =
   | 'student-left-book'
@@ -93,6 +101,12 @@ export interface MoveReview {
   /** How much the STUDENT's position got worse. Negative means it improved. */
   loss: number
   tag: MoveTag
+  /**
+   * The engine's move in the position BEFORE this one, as SAN, when the scan
+   * kept it and it is not the move that was played. Phase 37: Nick was told a
+   * move was an inaccuracy and nothing told him what was better.
+   */
+  better?: string
 }
 
 export interface GameReport {
@@ -251,6 +265,7 @@ export function scanForSlips(
   moves: PlayedMove[],
   evaluations: Evaluations,
   studentColour: Colour = 'white',
+  bestMoves?: BestMoves,
 ): MoveReview[] {
   const slips: MoveReview[] = []
   for (const move of moves) {
@@ -260,7 +275,17 @@ export function scanForSlips(
     if (before === undefined || after === undefined) continue
     const loss = studentColour === 'white' ? before - after : after - before
     const tag = tagFor(loss)
-    if (tag) slips.push({ ply: move.ply, san: move.san, before, after, loss, tag })
+    if (!tag) continue
+    const better = betterMove(move, bestMoves?.get(positionKey(move.fen)))
+    slips.push({
+      ply: move.ply,
+      san: move.san,
+      before,
+      after,
+      loss,
+      tag,
+      ...(better ? { better } : {}),
+    })
   }
   // Most recent first, not worst first: Nick reads the report against the
   // game he has just played, and the end of it is what he remembers.
@@ -344,9 +369,42 @@ export function describeSlip(slip: MoveReview): string {
   const before = verdictInWords(slip.before).toLowerCase()
   const after = verdictInWords(slip.after).toLowerCase()
   const where = `${name} on move ${fullMove(slip.ply)}: ${slip.san}`
-  return before === after
-    ? `${where} gave up more ground in a position already ${before}.`
-    : `${where} turned "${before}" into "${after}".`
+  const said =
+    before === after
+      ? `${where} gave up more ground in a position already ${before}.`
+      : `${where} turned "${before}" into "${after}".`
+  // "Preferred", not "better was": at the scan's fixed effort this is the
+  // engine's choice, and the wording keeps that honest.
+  return slip.better ? `${said} The engine preferred ${numberedMove(slip.ply, slip.better)}.` : said
+}
+
+/**
+ * The engine's move as SAN, converted on the position the slip was played
+ * FROM: the same UCI string means a different move on any other board. Absent
+ * when the engine's move is the move that was played, which cannot be a slip
+ * and would only say so to a reader who already knows.
+ */
+function betterMove(move: PlayedMove, uci: string | undefined): string | undefined {
+  if (!uci) return undefined
+  try {
+    const chess = new Chess(move.fen)
+    const played = chess.move({
+      from: uci.slice(0, 2),
+      to: uci.slice(2, 4),
+      promotion: uci.length > 4 ? uci[4] : undefined,
+    })
+    return played.san === move.san ? undefined : played.san
+  } catch {
+    return undefined
+  }
+}
+
+/**
+ * A move as the move list writes it: "4.Nc3" for White, "4...Nc3" for Black.
+ * The ply is the move's own, so the number is the move's own too.
+ */
+export function numberedMove(ply: number, san: string): string {
+  return `${fullMove(ply)}${ply % 2 === 0 ? '.' : '...'}${san}`
 }
 
 /** Puts the whole report together. */
@@ -357,6 +415,7 @@ export function buildReport(
   outcome?: string,
   hints = 0,
   side: 'course' | 'other' = 'course',
+  bestMoves?: BestMoves,
 ): GameReport {
   const last = moves.at(-1)
   const finalEval = last ? evaluations.get(positionKey(last.after)) : undefined
@@ -367,7 +426,7 @@ export function buildReport(
     side === 'other' ? book.opponentColour : book.studentColour
   return {
     deviation: side === 'other' ? findCourseBookEnd(moves, book) : findDeviation(moves, book),
-    slips: scanForSlips(moves, evaluations, trainee),
+    slips: scanForSlips(moves, evaluations, trainee, bestMoves),
     verdict: finalEval === undefined ? 'Not scanned' : verdictInWords(finalEval),
     finalEval,
     outcome,

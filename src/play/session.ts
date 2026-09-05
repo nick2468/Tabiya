@@ -437,8 +437,12 @@ export async function scanGame(
   movetime: number,
   onProgress?: (done: number, total: number) => void,
   known?: Map<string, number>,
-): Promise<Map<string, number>> {
+  knownBest?: Map<string, string>,
+): Promise<{ evaluations: Map<string, number>; bestMoves: Map<string, string> }> {
   const evaluations = new Map<string, number>(known)
+  // The engine's move at each position, from the same search as the number.
+  // One search per position: the best move is in the answer already.
+  const bestMoves = new Map<string, string>(knownBest)
   const positions: { key: string; fen: string; side: 'white' | 'black' }[] = []
   const seen = new Set<string>()
 
@@ -457,7 +461,9 @@ export async function scanGame(
     const result = await engine.search(position.fen, movetime)
     const best = result.candidates[0]
     if (best) evaluations.set(position.key, whitePovPawns(best.score, position.side))
+    const move = result.bestMove ?? best?.move
+    if (move) bestMoves.set(position.key, move)
     onProgress?.(index + 1, positions.length)
   }
-  return evaluations
+  return { evaluations, bestMoves }
 }

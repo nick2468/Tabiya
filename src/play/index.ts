@@ -43,6 +43,7 @@ export {
   verdictInWords,
   type AlternativePlayed,
   type Deviation,
+  type BestMoves,
   type Evaluations,
   type GameReport,
   type MoveReview,
