@@ -4364,3 +4364,23 @@ alternative; two notes in the Najdorf and the Slav; the seventeen floor findings
 Acceptance: as the chip's final paragraph.
 
 - [ ] **Review gate 35**
+
+## Phase 36 - the replay position survives leaving the screen
+
+Goal: Nick, 2026-09-05, stepped a replay back to a reported inaccuracy, went to Study, and
+came back to the final move. The replay ply lives in the screen, which unmounts; the game
+lives in the provider, which does not. No chess content. After phase 35.
+
+Chipped as `chips/phase-36-replay-survives.md`. The replay ply moves into `PlayProvider`,
+cleared with the report; a DOM test shown red first; one Help clause. Version 1.8.2.
+
+- [ ] 36.1 The replay ply in the provider, cleared with the report.
+- [ ] 36.2 Arrows, clickable moves and slips, Play from here read it from there.
+- [ ] 36.3 DOM test red first.
+- [ ] 36.4 Help.
+- [ ] 36.5 Version 1.8.2.
+- [ ] 36.6 Proved in the browser build.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 36**
