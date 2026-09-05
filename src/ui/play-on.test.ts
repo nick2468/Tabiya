@@ -3,6 +3,7 @@ import {
   PLAY_ON_LIMIT,
   canReplayMoves,
   endedText,
+  lineOf,
   positionText,
   recentPlayable,
   replayRequest,
@@ -132,6 +133,26 @@ describe('what a game was sparring against', () => {
   it('says other side for a game played against the course, with the chapter when there was one', () => {
     expect(sparringAgainst(record({ side: 'other' }), undefined)).toBe('other side')
     expect(sparringAgainst(record({ side: 'other' }), 'The system')).toBe('other side, The system')
+  })
+})
+
+describe('what line a game was in', () => {
+  // Phase 38. The London's chapters share 1.d4 d5 2.Bf4; the ch1 stem runs
+  // on to 2...Nf6 3.e3, and its lines part after that.
+  it('names the line, once the game was past the fork', () => {
+    const line = lineOf(record({ sans: ['d4', 'd5', 'Bf4', 'Nf6', 'e3', 'e6', 'Nf3', 'c5', 'c3'] }), london)
+    expect(line?.faint).toBe(false)
+    expect(line?.text).toBeTruthy()
+    expect(line?.text).not.toContain('chapter')
+  })
+
+  it('names the chapter, faintly, for a game that stopped in the trunk', () => {
+    expect(lineOf(record({ sans: ['d4', 'd5', 'Bf4', 'Nf6'] }), london)).toMatchObject({ faint: true })
+  })
+
+  it('says nothing for a record without moves', () => {
+    expect(lineOf(record({ sans: undefined }), london)).toBeNull()
+    expect(lineOf(record({ sans: [] }), london)).toBeNull()
   })
 })
 

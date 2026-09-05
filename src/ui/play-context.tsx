@@ -11,6 +11,7 @@ import {
 } from '../engine'
 import { sanForMove } from '../model/grade'
 import { positionKey } from '../model/position'
+import type { LoadedCourse } from '../model/types'
 import {
   PlaySession,
   bookEndedAt,
@@ -65,6 +66,11 @@ export interface StartOptions {
   chapterId?: string
   /** The course's title, captured now, because the header can change later. */
   courseTitle: string
+  /**
+   * And the course itself, so the report can name the line the game followed
+   * (phase 38). Optional because a test can start a game from a book alone.
+   */
+  course?: LoadedCourse
   /** And the chapter's, for a game sparring against one. */
   chapterTitle?: string
   /**
@@ -565,6 +571,7 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
         running.hints,
         setup.side ?? 'course',
         bestMoves,
+        { course: setup.course, chapterTitle: setup.chapterTitle },
       )
       setReplayPly(null)
       setReport(built)

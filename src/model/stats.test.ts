@@ -6,6 +6,7 @@ import {
   conceptAccuracy,
   courseTotals,
   forkDepth,
+  lineFollowed,
   linesPlayed,
   playStats,
   playedLine,
@@ -358,5 +359,88 @@ describe('linesPlayed', () => {
   it('ignores a game that left the repertoire at once', () => {
     const state = { ...emptyProgress(), playGames: [game(['e4', 'e5', 'Nf3'])] }
     expect(linesPlayed(course, state)).toEqual([])
+  })
+})
+
+describe('lineFollowed', () => {
+  // Phase 38: the one line a game followed, for the report and the game
+  // list. The fixture's two lines part at 3...e6 / 3...c5 (ply 6).
+  const game = (sans: string[]) => ({
+    courseId: COURSE,
+    deviated: false,
+    moves: 10,
+    level: 4,
+    at: NOW.toISOString(),
+    sans,
+  })
+
+  it('names the line a game went through to the leaf', () => {
+    expect(lineFollowed(course, [...lines[0].path]).line?.name).toBe(lines[0].name)
+    expect(lineFollowed(course, [...lines[1].path, 'Nbd2', 'Be7']).line?.name).toBe(lines[1].name)
+  })
+
+  it('names the line a game stopped in, once it was past the fork', () => {
+    const followed = lineFollowed(course, lines[1].path.slice(0, 6))
+    expect(followed.line?.name).toBe(lines[1].name)
+    expect(followed.chapter?.title).toBe('Test chapter')
+  })
+
+  it('names the chapter and no line for a game that stopped in the trunk', () => {
+    const followed = lineFollowed(course, lines[0].path.slice(0, 5))
+    expect(followed.line).toBeUndefined()
+    expect(followed.chapter?.title).toBe('Test chapter')
+  })
+
+  it('names the chapter a game started in when it left on move one, and nothing otherwise', () => {
+    // 1.d4 e5 followed the stem for one ply and then left it.
+    expect(lineFollowed(course, ['d4', 'e5']).chapter?.title).toBe('Test chapter')
+    expect(lineFollowed(course, ['d4', 'e5']).line).toBeUndefined()
+    // 1.e4 never agreed with any stem.
+    expect(lineFollowed(course, ['e4', 'e5'])).toEqual({})
+    expect(lineFollowed(course, [])).toEqual({})
+  })
+
+  it('agrees with Lines played about which line a game counts for', () => {
+    // The same rule, narrowed to one answer: whatever the table counts a game
+    // for, the name is one of those lines, and a game the table counts for
+    // nothing because it stopped in the trunk is named no line here either.
+    const cases = [
+      [...lines[0].path],
+      lines[1].path.slice(0, 6),
+      lines[0].path.slice(0, 5),
+      ['d4', 'e5'],
+      [...lines[1].path, 'Nbd2'],
+    ]
+    for (const sans of cases) {
+      const counted = linesPlayed(course, { ...emptyProgress(), playGames: [game(sans)] }).map(
+        (row) => row.name,
+      )
+      const named = lineFollowed(course, sans).line?.name
+      if (named) expect(counted).toContain(named)
+      else expect(counted).toEqual([])
+    }
+  })
+
+  it('names the line a game left after choosing it, which the table does not count', () => {
+    // The Nf3 line chosen at ply 6 and left at ply 7: the report reads
+    // "you were in The Nf3 line and left it", and Lines played, which counts
+    // lines a game never contradicted, counts nothing. Both are right.
+    const left = [...lines[0].path.slice(0, 6), 'Nc3']
+    expect(lineFollowed(course, left).line?.name).toBe(lines[0].name)
+    expect(linesPlayed(course, { ...emptyProgress(), playGames: [game(left)] })).toEqual([])
+  })
+})
+
+describe('lineFollowed between chapters sharing a stem', () => {
+  // The London's Classical and ...c5 chapters both begin 1.d4 d5 2.Bf4. A
+  // game that played 2...c5 and then left is in the second, not the first
+  // in course order: driven at phase 38, the report had named the wrong one.
+  it('picks the chapter the first move after the stem belongs to', async () => {
+    const { bundledCourses } = await import('../content')
+    const london = bundledCourses.find((entry) => entry.id === 'london-white')
+    if (!london) throw new Error('the London is not in the bundled set')
+    expect(lineFollowed(london, ['d4', 'd5', 'Bf4', 'c5']).chapter?.title).toBe('The ...c5 and ...Qb6 lines')
+    expect(lineFollowed(london, ['d4', 'd5', 'Bf4', 'e6']).chapter?.title).toBe('Classical Black')
+    expect(lineFollowed(london, ['d4', 'd5', 'Bf4', 'c5']).line).toBeUndefined()
   })
 })

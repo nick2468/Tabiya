@@ -1,5 +1,5 @@
 import { buildCards, type Card } from './cards'
-import { chapterLines } from './lines'
+import { chapterLines, type Line } from './lines'
 import { dueCount, newCount } from './queue'
 import {
   courseTags,
@@ -9,7 +9,7 @@ import {
   type PlayRecord,
   type ProgressState,
 } from '../storage/progress'
-import type { LoadedCourse } from './types'
+import type { LoadedChapter, LoadedCourse } from './types'
 
 /**
  * The label for games that were not aimed at a chapter.
@@ -302,6 +302,67 @@ export function linesPlayed(course: LoadedCourse, state: ProgressState): LinePla
     }
   }
   return rows.sort((a, b) => b.games - a.games || a.name.localeCompare(b.name))
+}
+
+/**
+ * The one line a game followed, or the chapter it was in when it never
+ * reached a line.
+ *
+ * Nick, 2026-09-05, reading his own PGN: the report and the game list said
+ * which course and chapter a game was against and where it left the course,
+ * and never which LINE. The rule is the Lines played one applied to the part
+ * of the game that agreed with the course: the named line is the one the game
+ * agreed with for longest, counted from the first move, provided it agreed
+ * past the ply where that line parts from every other line (`forkDepth`). A
+ * game that never contradicted a line is named the line `linesPlayed` counts
+ * it for; a game that left a line after choosing it is named that line too,
+ * which is the whole point, since a report is mostly read after leaving.
+ *
+ * A game that stopped, or left the course, in a trunk several lines share has
+ * not chosen between them and has no line. It still has a chapter: the one
+ * whose lines it agreed with for longest from the first move, the first in
+ * course order when several agree equally. A game whose first move is in no
+ * chapter has neither.
+ */
+export function lineFollowed(
+  course: LoadedCourse,
+  sans: string[],
+): { line?: Line; chapter?: LoadedChapter } {
+  if (sans.length === 0) return {}
+  const every = course.chapters.flatMap((chapter) => chapterLines(chapter).map((line) => line.path))
+  let best: { line: Line; chapter: LoadedChapter; shared: number } | undefined
+  for (const chapter of course.chapters) {
+    for (const line of chapterLines(chapter)) {
+      const shared = sharedPrefix(sans, line.path)
+      if (shared < forkDepth(line.path, every)) continue
+      if (!best || shared > best.shared) best = { line, chapter, shared }
+    }
+  }
+  if (best) return { line: best.line, chapter: best.chapter }
+
+  // No line, so the chapter: the one whose lines the game agreed with for
+  // longest, counted from the first move. Two chapters can share a stem (the
+  // London's Classical and ...c5 chapters both begin 1.d4 d5 2.Bf4), so the
+  // stem alone cannot tell them apart; the first move after it can. A game
+  // that left on move one still started somewhere, and the first chapter in
+  // course order it agreed with for that one move is where; a game whose
+  // first move is in no chapter started nowhere the course knows.
+  let followed: { chapter: LoadedChapter; shared: number } | undefined
+  for (const chapter of course.chapters) {
+    let longest = 0
+    for (const line of chapterLines(chapter)) {
+      longest = Math.max(longest, sharedPrefix(sans, line.path))
+    }
+    if (longest > 0 && (!followed || longest > followed.shared)) followed = { chapter, shared: longest }
+  }
+  return followed ? { chapter: followed.chapter } : {}
+}
+
+/** How many plies two move lists agree on, counted from the first. */
+function sharedPrefix(a: string[], b: string[]): number {
+  let shared = 0
+  while (shared < a.length && shared < b.length && a[shared] === b[shared]) shared += 1
+  return shared
 }
 
 /** True when any game of this course kept its moves, so the section is worth showing. */

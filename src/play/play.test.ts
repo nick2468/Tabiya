@@ -20,13 +20,13 @@ import {
   type PlayedMove,
 } from './report'
 import { GAME_LENGTHS, PlaySession, lengthCap, scanGame, type GameLength } from './session'
-import { blackCourse, loadFixture as load } from '../test/fixtures'
+import { blackCourse, loadFixture as load, loadFixtureCourse, manifest } from '../test/fixtures'
 import { positionKey } from '../model/position'
 import { strengthProfile } from '../engine'
 import { fakeEngine } from '../test/fake-engine'
 
 /** 1.d4 d5 2.Bf4, with two Black replies of different popularity. */
-const chapter = load({
+const RAW_CHAPTER = {
   id: 'ch-book',
   title: 'Book',
   intro: 'Typical mistakes: none.',
@@ -64,7 +64,11 @@ const chapter = load({
       children: [{ san: 'e3', note: 'Hold the centre.', name: 'The ...c5 line', plan: 'Meet ...Qb6 with Nc3.' }],
     },
   ],
-})
+}
+const chapter = load(RAW_CHAPTER)
+
+/** The fixture chapter as the course it belongs to, for naming the line a game was in. */
+const course = loadFixtureCourse(manifest({ chapters: ['book.json'] }), { 'book.json': RAW_CHAPTER })
 
 /** A second chapter reaching the same position by another move order. */
 const transposing = load({
@@ -987,6 +991,98 @@ describe('scanGame', () => {
     expect(evaluations.size).toBe(3)
     // And the scan is two positions shorter than it would have been.
     expect(seen).toEqual([2, 2])
+  })
+})
+
+describe('the line a game was in', () => {
+  // Phase 38. The fixture's two lines, "The Nf3 line" and "The ...c5 line",
+  // part at Black's second move: 2...Nf6 is the first, 2...c5 the second.
+  const book = buildBook({ colour: 'white', chapters: [chapter] })
+  const place = (sans: string[], side: 'course' | 'other' = 'course') =>
+    buildReport(playedMoves(sans), book, new Map(), undefined, 0, side, undefined, { course })
+      .deviation
+
+  it('names the line a game left, and what the line plays', () => {
+    const deviation = place(['d4', 'd5', 'Bf4', 'Nf6', 'e3', 'e6', 'Nc3'])
+    expect(deviation).toMatchObject({ kind: 'student-left-book', lineName: 'The Nf3 line' })
+    expect(describeDeviation(deviation, 'black')).toBe(
+      'You were in The Nf3 line and left it on move 4 with Nc3. The line plays Nf3.',
+    )
+  })
+
+  it('names the chapter when the game left in the trunk, before any line', () => {
+    // 2.Bf4 is in every line of the chapter; leaving there chose none of them.
+    const deviation = place(['d4', 'd5', 'Nf3'])
+    expect(deviation.lineName).toBeUndefined()
+    expect(deviation.chapterTitle).toBe('Book')
+    expect(describeDeviation(deviation, 'black')).toBe(
+      'You were in the Book chapter and left it on move 2 with Nf3. The line plays Bf4.',
+    )
+  })
+
+  it('names the line the engine left', () => {
+    const deviation = place(['d4', 'd5', 'Bf4', 'Nf6', 'e3', 'a6'])
+    expect(describeDeviation(deviation, 'black')).toBe(
+      'The engine left The Nf3 line on move 3 with a6. From there it was just chess, so nothing after it counts as a deviation.',
+    )
+  })
+
+  it('names the line a game stayed in to the end', () => {
+    const deviation = place(['d4', 'd5', 'Bf4', 'c5', 'e3'])
+    expect(deviation).toMatchObject({ kind: 'stayed-in-book', lineName: 'The ...c5 line' })
+    expect(describeDeviation(deviation, 'black')).toBe('You stayed in The ...c5 line for the whole game.')
+  })
+
+  it('says the chapter for a game that stayed in book without reaching a line', () => {
+    expect(describeDeviation(place(['d4', 'd5', 'Bf4']), 'black')).toBe(
+      'You stayed in the repertoire for the whole game, in the Book chapter.',
+    )
+  })
+
+  it('prefers the chapter a game was sparring against to the one the stem points at', () => {
+    const report = buildReport(playedMoves(['d4', 'd5', 'Nf3']), book, new Map(), undefined, 0, 'course', undefined, {
+      course,
+      chapterTitle: 'Chosen',
+    })
+    expect(report.deviation.chapterTitle).toBe('Chosen')
+  })
+
+  it('says the same about the course\'s own line on the other side', () => {
+    expect(describeDeviation(place(['d4', 'd5', 'Bf4', 'Nf6', 'e3', 'e6', 'Nf3'], 'other'), 'white')).toBe(
+      'The course played The Nf3 line to the end.',
+    )
+    // The game agreed with The Nf3 line for five plies, past its fork, before
+    // the trainee's 3...c5 took it out of the book: that is the line it was in.
+    expect(describeDeviation(place(['d4', 'd5', 'Bf4', 'Nf6', 'e3', 'c5', 'Nf3'], 'other'), 'white')).toBe(
+      "The course's book ran out at move 4, in The Nf3 line.",
+    )
+  })
+
+  it('does not say "the The" when the chapter title has its own article', () => {
+    expect(
+      describeDeviation(
+        { kind: 'student-left-book', ply: 4, played: 'Nc3', bookMove: 'e3', chapterTitle: 'The ...c5 and ...Qb6 lines' },
+        'black',
+      ),
+    ).toBe('You were in The ...c5 and ...Qb6 lines chapter and left it on move 3 with Nc3. The line plays e3.')
+  })
+
+  it('reads as it always did when the course is not known', () => {
+    const deviation = buildReport(playedMoves(['d4', 'd5', 'Nf3']), book, new Map()).deviation
+    expect(describeDeviation(deviation, 'black')).toBe(
+      'You left the repertoire on move 2 with Nf3. The line plays Bf4.',
+    )
+  })
+
+  it('names the line from Black\'s side too', () => {
+    const black = blackCourse()
+    const blackBook = buildBook({ colour: 'black', chapters: black.chapters })
+    const report = buildReport(playedMoves(['e4', 'c6', 'd4', 'd5', 'Nc3', 'Nf6']), blackBook, new Map(), undefined, 0, 'course', undefined, {
+      course: black,
+    })
+    expect(describeDeviation(report.deviation, 'white')).toBe(
+      'You were in The main line, with ...dxe4 and left it on move 3 with Nf6. The line plays dxe4.',
+    )
   })
 })
 

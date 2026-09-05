@@ -4462,14 +4462,54 @@ followed, built on the Lines played rule; the report's repertoire paragraph, a n
 column on the Play on list and the PGN comment all say it, or name the chapter when the
 game never reached a line. Version 1.8.4.
 
-- [ ] 38.1 `lineFollowed`, with tests, agreeing with Lines played.
-- [ ] 38.2 The report sentences, both colours and the other side.
-- [ ] 38.3 The Line column on the Play on list.
-- [ ] 38.4 The PGN comment.
-- [ ] 38.5 Help.
-- [ ] 38.6 Version 1.8.4.
-- [ ] 38.7 Proved in the browser build.
+- [x] 38.1 `lineFollowed`, with tests, agreeing with Lines played.
+- [x] 38.2 The report sentences, both colours and the other side.
+- [x] 38.3 The Line column on the Play on list.
+- [x] 38.4 The PGN comment.
+- [x] 38.5 Help.
+- [x] 38.6 Version 1.8.4.
+- [x] 38.7 Proved in the browser build.
 
 Acceptance: as the chip's final paragraph.
+
+**For the gate.** `lineFollowed(course, sans)` in `stats.ts`: the named line is the one the
+game agreed with for longest, counted from the first move, provided it agreed past that
+line's `forkDepth`; ties go to course order. With no line, the chapter is the one whose
+LINES the game agreed with for longest (not its stem alone: the London's Classical and
+...c5 chapters share a stem, and the drive caught the report naming Classical for a game
+that had played 2...c5), first in course order on a tie; a first move in no chapter gives
+nothing. **One reading of the hazard to know about.** "Agrees with Lines played" holds as
+the same rule: every line the table counts a game for is a candidate here, and a game the
+table counts for nothing because it stopped in the trunk is named no line. But the table
+counts only games that never contradicted a line, and this names a line a game left after
+choosing it, because that is the sentence Nick was missing ("You were in X and left it on
+move 3"). A test pins both halves. The report passes the whole game, so the Play on list,
+which has only a record's moves, gets the same answer from the same call. `Deviation` gains
+`lineName?` and `chapterTitle?`; `buildReport` takes `{ course, chapterTitle }` as a
+trailing context, with the chosen chapter winning over the one the moves point at;
+`StartOptions` carries the course. The sentences: "You were in X and left it on move 3 with
+Nd5. The line plays Nc3.", "You were in the Y chapter and left it...", "The engine left X on
+move N with ...", "You stayed in X for the whole game.", and on the other side "The course
+played X to the end." and "The course's book ran out at move 4, in X."; a title that brings
+its own article reads "in The ...c5 and ...Qb6 lines chapter" (the drive caught "the The").
+The Play on list's Line column sits between Sparring against and Strength, the chapter in
+`--text-faint`; a record without moves is not listed at all (`recentPlayable`), so the
+blank case is the pure function's null. The PGN comment goes through `describeDeviation`
+and so carries the line. Help: the Play repertoire sentence, the Progress Line column, and
+Chapter and Line in Words we use tightened to say how a game is "in" a line. 1083 tests in
+11 seconds, `tsc -b` clean.
+
+Driven at 1200x980 against another session's server on 5175 (its watcher had missed the
+edits and served stale modules until the files were touched; noted for the hazard list).
+A London game sparring against King's Indian setups, 1.d4 Nf6 2.Bf4 g6 3.e3 d6 4.Nf3 Bg7
+5.Be2 O-O 6.a4, reviewed: "You were in ...d6 before the bishop and left it on move 6 with
+a4. The line plays h3." A game from the Study position 1.d4 d5 2.Bf4, 2...c5 3.Nc3: "You
+were in The ...c5 and ...Qb6 lines chapter and left it on move 3 with Nc3. The line plays
+e3.", and the same sentence in the copied PGN. Progress showed the Line column with "...d6
+before the bishop" and the ...c5 chapter faint side by side. Two "Any line" games got
+1...f5 and 1...c5 as replies, each a one-line chapter in the London, so both were named a
+line at move 2 correctly rather than a chapter; the Study start was the way to the trunk.
+No console errors in a fresh tab; storage cleared. Nick's own files were not listed and not
+reported.
 
 - [ ] **Review gate 38**

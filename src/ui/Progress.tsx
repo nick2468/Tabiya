@@ -20,7 +20,7 @@ import { profileFolders, type ProfileFolders } from './folders'
 import { HelpPanel } from './Help'
 import { nextCardLine } from './card-words'
 import { usePlay } from './play-context'
-import { endingOf, playedOn, recentPlayable, replayRequest, requestFor, sparringAgainst } from './play-on'
+import { endingOf, lineOf, playedOn, recentPlayable, replayRequest, requestFor, sparringAgainst } from './play-on'
 import type { PlayRequest } from './Play'
 import './progress.css'
 
@@ -295,6 +295,7 @@ function PlayOn({ onPlayOn }: { onPlayOn: (request: PlayRequest) => void }) {
             <th>Played</th>
             <th>Course</th>
             <th>Sparring against</th>
+            <th>Line</th>
             <th>Strength</th>
             <th className="num">Moves</th>
             <th>Ended</th>
@@ -306,6 +307,7 @@ function PlayOn({ onPlayOn }: { onPlayOn: (request: PlayRequest) => void }) {
           {playable.map(({ record, course }) => {
             const chapter = course.chapters.find((entry) => entry.id === record.chapterId)
             const ending = endingOf(record, course.colour)
+            const line = lineOf(record, course)
             // Why the two buttons are dead, when they are. A game being played
             // and a game being scanned are both "in progress"; they are not
             // the same wait, and a title that said only one would be wrong
@@ -318,6 +320,7 @@ function PlayOn({ onPlayOn }: { onPlayOn: (request: PlayRequest) => void }) {
                 <td>{playedOn(record.at)}</td>
                 <td>{course.title}</td>
                 <td>{sparringAgainst(record, chapter?.title)}</td>
+                <td className={line?.faint ? 'faint' : undefined}>{line?.text ?? ''}</td>
                 <td>{levelName(record.level)}</td>
                 <td className="num">{record.moves}</td>
                 <td>{ending.ended}</td>

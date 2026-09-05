@@ -1,5 +1,6 @@
 import { Chess } from 'chess.js'
 import { endingFromMoves, isCheckmateOutcome, lengthCap, verdictForYou } from '../play'
+import { lineFollowed } from '../model/stats'
 import type { PlayRequest } from './Play'
 import type { PlayRecord } from '../storage/progress'
 import type { Colour, LoadedCourse } from '../model/types'
@@ -161,6 +162,23 @@ export function positionText(record: PlayRecord, courseColour: Colour): string {
 export function sparringAgainst(record: PlayRecord, chapterTitle: string | undefined): string {
   if (record.side === 'other') return chapterTitle ? `other side, ${chapterTitle}` : 'other side'
   return chapterTitle ?? 'Any line'
+}
+
+/**
+ * What the Line column says: the line the game followed by name, the chapter
+ * it was in when it never reached one (marked faint, because it is the
+ * weaker answer), or nothing for a record that kept no moves. The same rule
+ * as the report's sentence, so the two never disagree about a game.
+ */
+export function lineOf(
+  record: PlayRecord,
+  course: LoadedCourse,
+): { text: string; faint: boolean } | null {
+  if (!record.sans || record.sans.length === 0) return null
+  const followed = lineFollowed(course, record.sans)
+  if (followed.line) return { text: followed.line.name, faint: false }
+  if (followed.chapter) return { text: followed.chapter.title, faint: true }
+  return null
 }
 
 /** Both, for a row that shows them side by side. */

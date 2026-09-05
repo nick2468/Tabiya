@@ -107,6 +107,18 @@ describe('gameToPgn', () => {
     expect(played[4].comment).toContain('You left the repertoire on move 3 with Nf3')
   })
 
+  it('names the line the game was in, when the report knows it', () => {
+    // Phase 38: the comment goes through the same words as the report.
+    const named = {
+      ...game,
+      report: { ...report, deviation: { ...report.deviation, lineName: 'The Nf3 line' } },
+    }
+    const text = gameToPgn(named)
+    const played = parsePgn(text).games[0].moves
+    expect(played[4].comment).toContain('You were in The Nf3 line and left it on move 3 with Nf3')
+    expect(parsePgn(text).errors).toEqual([])
+  })
+
   it('ends on the verdict', () => {
     const played = parsePgn(gameToPgn(game)).games[0].moves
     expect(played.at(-1)?.comment).toBe(

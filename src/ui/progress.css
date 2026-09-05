@@ -121,3 +121,9 @@
 .row-actions button + button {
   margin-left: 6px;
 }
+
+/* The Line column names the chapter, faintly, when a game never reached a
+   line: the weaker answer, said in the weaker voice. */
+.play-on-table td.faint {
+  color: var(--text-faint);
+}

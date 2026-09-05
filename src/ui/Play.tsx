@@ -194,6 +194,7 @@ export function Play({
   const startOptions = () => ({
     courseId: course.id,
     courseTitle: course.title,
+    course,
     book,
     length,
     level,
@@ -232,6 +233,7 @@ export function Play({
     return {
       courseId: course.id,
       courseTitle: course.title,
+      course,
       book: buildBook({ colour: course.colour, chapters: chapter ? [chapter] : chapters }),
       length: 'full' as GameLength,
       level: from.level ?? level,

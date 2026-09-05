@@ -1,7 +1,8 @@
 import { Chess } from 'chess.js'
 import { MATE_PAWNS } from '../engine/uci'
 import { positionKey } from '../model/position'
-import { colourName, type Colour, type MistakeGrade } from '../model/types'
+import { lineFollowed } from '../model/stats'
+import { colourName, type Colour, type LoadedCourse, type MistakeGrade } from '../model/types'
 import type { Book } from './book'
 
 /**
@@ -87,6 +88,14 @@ export interface Deviation {
   label?: string
   /** For a game against the course: the alternatives the engine took, in order. */
   alternatives?: AlternativePlayed[]
+  /**
+   * The named line the game followed, up to where it left the course, under
+   * the Lines played rule (`lineFollowed`). Phase 38: Nick could read which
+   * course and chapter a game was against and never which line.
+   */
+  lineName?: string
+  /** The chapter the game was in, when it never reached a line. */
+  chapterTitle?: string
 }
 
 export type MoveTag = 'blunder' | 'mistake' | 'inaccuracy'
@@ -206,19 +215,71 @@ export function fullMove(ply: number): number {
  * @param opponentColour so the sentence names the side the engine played
  */
 export function describeDeviation(deviation: Deviation, opponentColour: Colour): string {
+  // Where the game was, in the words the chip rules: the line by name, or
+  // "the X chapter" when it never reached one, or nothing when the course
+  // was not known (the tests that build a deviation by hand, and any record
+  // whose course has gone).
+  const where = deviation.lineName ?? (deviation.chapterTitle ? chapterPhrase(deviation.chapterTitle) : undefined)
+  const move = fullMove(deviation.ply ?? 0)
   switch (deviation.kind) {
     case 'stayed-in-book':
-      return 'You stayed in the repertoire for the whole game.'
+      if (deviation.lineName) return `You stayed in ${deviation.lineName} for the whole game.`
+      return where
+        ? `You stayed in the repertoire for the whole game, in ${where}.`
+        : 'You stayed in the repertoire for the whole game.'
     case 'student-left-book':
-      return `You left the repertoire on move ${fullMove(deviation.ply ?? 0)} with ${deviation.played}. The line plays ${deviation.bookMove}.`
+      return where
+        ? `You were in ${where} and left it on move ${move} with ${deviation.played}. The line plays ${deviation.bookMove}.`
+        : `You left the repertoire on move ${move} with ${deviation.played}. The line plays ${deviation.bookMove}.`
     case 'opponent-left-book-first':
-      return `${colourName(opponentColour)} left the repertoire on move ${fullMove(deviation.ply ?? 0)} with ${deviation.played}. From there it was just chess, so nothing after it counts as a deviation.`
+      return `${where ? 'The engine' : colourName(opponentColour)} left ${where ?? 'the repertoire'} on move ${move} with ${deviation.played}. From there it was just chess, so nothing after it counts as a deviation.`
     case 'course-book-ended':
       // No "you left" sentence exists on this side: the trainee was never in
       // the book to leave it.
-      return deviation.ply === undefined
-        ? 'The course played its book to the end.'
+      if (deviation.ply === undefined) {
+        return deviation.lineName
+          ? `The course played ${deviation.lineName} to the end.`
+          : where
+            ? `The course played its book to the end, in ${where}.`
+            : 'The course played its book to the end.'
+      }
+      return where
+        ? `The course's book ran out at move ${fullMove(deviation.ply)}, in ${where}.`
         : `The course's book ran out at move ${fullMove(deviation.ply)}.`
+  }
+}
+
+/**
+ * "the Classical Black chapter", or "The ...c5 and ...Qb6 lines chapter" when
+ * the title brings its own article: driven at phase 38, the sentence had read
+ * "in the The ...c5 and ...Qb6 lines chapter".
+ */
+function chapterPhrase(title: string): string {
+  return /^the\s/i.test(title) ? `${title} chapter` : `the ${title} chapter`
+}
+
+/**
+ * Names the line, or failing that the chapter, a game was in. The whole game
+ * goes to `lineFollowed`, which counts agreement from the first move and
+ * stops counting where the game and the line part, so the Play on list,
+ * which has only the record's moves, gets the same answer from the same
+ * call. The chosen chapter wins over the one the moves point at, because a
+ * game sparring against a chapter was in that chapter whatever its first
+ * moves have in common with another.
+ */
+export function placeDeviation(
+  deviation: Deviation,
+  moves: PlayedMove[],
+  course: LoadedCourse | undefined,
+  chapterTitle?: string,
+): Deviation {
+  if (!course) return chapterTitle ? { ...deviation, chapterTitle } : deviation
+  const followed = lineFollowed(course, moves.map((move) => move.san))
+  const title = chapterTitle ?? followed.chapter?.title
+  return {
+    ...deviation,
+    ...(followed.line ? { lineName: followed.line.name } : {}),
+    ...(title ? { chapterTitle: title } : {}),
   }
 }
 
@@ -416,6 +477,8 @@ export function buildReport(
   hints = 0,
   side: 'course' | 'other' = 'course',
   bestMoves?: BestMoves,
+  /** The course the game was in, so the report can name the line it followed. */
+  context?: { course?: LoadedCourse; chapterTitle?: string },
 ): GameReport {
   const last = moves.at(-1)
   const finalEval = last ? evaluations.get(positionKey(last.after)) : undefined
@@ -425,7 +488,12 @@ export function buildReport(
   const trainee: Colour =
     side === 'other' ? book.opponentColour : book.studentColour
   return {
-    deviation: side === 'other' ? findCourseBookEnd(moves, book) : findDeviation(moves, book),
+    deviation: placeDeviation(
+      side === 'other' ? findCourseBookEnd(moves, book) : findDeviation(moves, book),
+      moves,
+      context?.course,
+      context?.chapterTitle,
+    ),
     slips: scanForSlips(moves, evaluations, trainee, bestMoves),
     // A mated final position has no evaluation to scan, because the engine
     // has no move to search. The outcome has already said what the position
