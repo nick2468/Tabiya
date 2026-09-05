@@ -4692,7 +4692,22 @@ that game took the row out and Play showed its start options. Study, Classical B
 arrow steps to 2...e6 3.e3, Play, Study: the same chapter, trail and position. No console
 errors; storage cleared afterwards. Nick's own files were not listed and not reported.
 
-- [ ] **Review gate 40**
+Gate 40 findings (2026-09-06, orchestrator, unattended run):
+
+- 1195 tests in twelve seconds under the twenty-second rule and `tsc -b` clean at the end of
+  the three phases. Two mutations checked: locking a reviewed game's row again turns "can be
+  archived from Progress, and Play goes back to its options" red; making the Study provider
+  forget its place turns both Study-place tests red.
+- Driven against a server on the phases' source: Study stepped to 1.e4 c5 in the Alapin,
+  Play, back to Study, the trail unchanged. A reviewed game's row on Progress had Play on,
+  Replay, Archive and Delete all live. The games cells measured `--text-dim` at 14.4px, the
+  rows 32px tall with 26px buttons.
+- The pane caps its viewport at 1280 wide, so five tiles were not seen here: at 1280 the
+  grid gave four. The arithmetic holds for the window Nick opens (1400 less the shell's 48
+  is 1352, and five 250px tiles with four 12px gaps need 1298), and the builder measured it
+  at 1400. Nick sees it on install.
+
+- [x] **Review gate 40 passed** (2026-09-06)
 
 ## Phase 41 - the Alapin Sicilian, a ninth course
 
@@ -4774,7 +4789,19 @@ console errors on a fresh load (the provider errors in the log were the touched 
 module's HMR invalidations, gone on reload); storage cleared afterwards; viewport reset.
 Nick's own files were not listed and not reported.
 
-- [ ] **Review gate 41**
+Gate 41 findings (2026-09-06, orchestrator, unattended run):
+
+- The Alapin: 43 lines, intros 265 to 497 words, every node noted and every leaf named,
+  mistake entries 21, 53, 57, 70, 45, 54 and 31 across ch0 to ch6. The other eight courses
+  untouched, 378 line ids intact. Bundle present.
+- Engine records complete with conditions (load 2 to 27 per cent, one engine): six 500 ms
+  passes across the drafting, a 2500 ms pass over the whole course reporting three kept
+  numbers, the mistakes pass at 2500 ms with 23 regrades and a confirming run that found
+  two band-edge straddles, both regraded stricter. Spot-checked by the orchestrator: the
+  2...Nf6 main line after 5...Nc6 is +0.12 either way at 2500 ms.
+- Driven: from the other side the engine answered 1.e4 c5 with 2.c3.
+
+- [x] **Review gate 41 passed** (2026-09-06)
 
 ## Phase 42 - the King's Indian Defence, a tenth course
 
@@ -4882,4 +4909,23 @@ Screenshots timed out whenever an engine pass was running in the background, so 
 catalog was measured through the DOM and photographed after the passes. Nick's own files
 were not listed and not reported.
 
-- [ ] **Review gate 42**
+Gate 42 findings (2026-09-06, orchestrator, unattended run):
+
+- The King's Indian: 102 lines, intros 433 to 489 words, every node noted and every leaf
+  named, mistake entries 31, 138, 85, 161, 178, 177 and 70 across ch0 to ch6. The largest
+  course in the app. 7...Na6 in the Classical by the decision rule, with the engine's
+  numbers recorded (7...exd4 +0.52, 7...Na6 +0.61, 7...Nc6 below the top five).
+- Engine records complete with conditions (load 18 to 21 per cent, one engine, four hung
+  shells ended before the first pass): the 2500 ms pass over the whole course reported
+  nothing; the mistakes pass moved 61 grades, the confirming run four band-edge straddles.
+  Spot-checked by the orchestrator: the Classical after 7...Na6 is +0.61 at 2500 ms, the
+  opening's own number.
+- **The London gaps the chip asked for are recorded, not fixed**: after the London's 10.Bh2
+  this course plays 10...Ne4, which the London's plan does not expect; the engine prefers
+  10.Nxe5 to 10.Bh2 there; and 8...e5 after 8.c3 loses a pawn. Worth a London follow-up
+  when Nick wants one.
+- Version 1.10.0 in all three files and the version test accepts the two-digit minor.
+- Nick's own files were not listed and not reported. The browser build's storage was
+  cleared afterwards.
+
+- [x] **Review gate 42 passed** (2026-09-06)
