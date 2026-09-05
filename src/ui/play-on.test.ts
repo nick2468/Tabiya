@@ -171,6 +171,20 @@ describe('how a game ended', () => {
     expect(endedText(record({ finalEval: 1.6 }), 'white')).toBe('Stopped')
   })
 
+  it('reads the verdict and the mate from the side the trainee actually held', () => {
+    // A Black course, played on the other side: the trainee was White, and
+    // +0.45 is good news for them, not for the engine.
+    const white = record({ side: 'other', finalEval: 0.45 })
+    expect(positionText(white, 'black')).toBe('Slightly better for you')
+    expect(positionText(record({ finalEval: 0.45 }), 'black')).toBe('Slightly better for the engine')
+    // And a mate delivered by White in that game is the trainee's win.
+    const mate = record({ side: 'other', sans: 'e4 e5 Qh5 Nc6 Bc4 Nf6 Qxf7#'.split(' ') })
+    expect(endedText(mate, 'black')).toBe('You won by checkmate')
+    expect(endedText(record({ sans: 'e4 e5 Qh5 Nc6 Bc4 Nf6 Qxf7#'.split(' ') }), 'black')).toBe(
+      'You were checkmated',
+    )
+  })
+
   it('says only Stopped for a game recorded before any of this was kept', () => {
     expect(endedText(record({ sans: undefined }), 'white')).toBe('Stopped')
   })

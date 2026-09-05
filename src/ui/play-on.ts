@@ -112,8 +112,23 @@ export interface GameEnding {
  * not merely reach it: a game carried on past its limit by Play on did not
  * stop at the limit.
  */
-export function endedText(record: PlayRecord, studentColour: Colour): string {
-  const ending = record.outcome ?? endingFromMoves(record.sans ?? [], studentColour)
+/**
+ * The colour the trainee actually held in a recorded game.
+ *
+ * The course's colour is the trainee's in every game but one kind: a game
+ * played on the other side (phase 32) has the trainee on the opposite colour,
+ * and a verdict or a checkmate read against the course's colour there says the
+ * opposite of the truth. Driven at gate 32: a game the trainee played as White
+ * at +0.45 read "Slightly better for the engine".
+ */
+export function traineeColour(record: PlayRecord, courseColour: Colour): Colour {
+  if (record.side !== 'other') return courseColour
+  return courseColour === 'white' ? 'black' : 'white'
+}
+
+export function endedText(record: PlayRecord, courseColour: Colour): string {
+  const you = traineeColour(record, courseColour)
+  const ending = record.outcome ?? endingFromMoves(record.sans ?? [], you)
   if (ending) return ending
   const cap = record.length ? lengthCap(record.length) : null
   return cap !== null && record.moves === cap ? 'Move limit' : 'Stopped'
@@ -128,11 +143,12 @@ export function endedText(record: PlayRecord, studentColour: Colour): string {
  * "Drawn by repetition" and "Winning for you" together say something worth
  * knowing about how the draw was reached.
  */
-export function positionText(record: PlayRecord, studentColour: Colour): string {
+export function positionText(record: PlayRecord, courseColour: Colour): string {
   if (record.finalEval === undefined) return ''
-  const ending = record.outcome ?? endingFromMoves(record.sans ?? [], studentColour)
+  const you = traineeColour(record, courseColour)
+  const ending = record.outcome ?? endingFromMoves(record.sans ?? [], you)
   if (isCheckmateOutcome(ending)) return ''
-  const said = verdictForYou(record.finalEval, studentColour)
+  const said = verdictForYou(record.finalEval, you)
   return said.charAt(0).toUpperCase() + said.slice(1)
 }
 
