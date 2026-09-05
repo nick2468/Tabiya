@@ -4641,3 +4641,24 @@ Gate 39 findings (2026-09-05):
   cleared afterwards.
 
 - [x] **Review gate 39 passed** (2026-09-05)
+
+## Phase 40 - a wider window, a lighter games table, and a Study board that stays put
+
+Goal: Nick's six findings after installing 1.8.5 (2026-09-05). No chess content.
+
+Chipped as `chips/phase-40-wider-and-lighter.md`. A reviewed game's Archive and Delete
+are live on Progress (only a game still being played is guarded); the window opens at
+1400 by 980 with five tiles to a row; the games tables use the width, in the Progress
+lead's muted voice with thin buttons; Study's place is kept per course in a small
+provider across screen changes. Version 1.8.6.
+
+- [ ] 40.1 Archive and Delete live after a review; Play resets when its record goes.
+- [ ] 40.2 Window 1400 by 980; five tiles; the games table given room.
+- [ ] 40.3 The games table lighter and tighter, measured, both themes.
+- [ ] 40.4 Study's place kept per course; DOM test red first.
+- [ ] 40.5 Version 1.8.6.
+- [ ] 40.6 Proved at 1400x980 in both themes.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 40**
