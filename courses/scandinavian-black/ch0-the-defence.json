@@ -1,0 +1,181 @@
+{
+  "id": "ch0-the-defence",
+  "title": "The defence and its idea",
+  "defaultTags": ["development"],
+  "intro": "The Scandinavian answers 1.e4 with 1...d5, and offers to trade the centre pawn on move one. White takes, the queen takes back, and Black spends the rest of the opening building one structure that turns up against nearly everything White does. That is the whole defence, and it is the simple one.\n\n## Three answers to the same move\n\nThree Black courses against 1.e4, three temperaments. The Caro-Kann builds a wall and waits. The Najdorf hands over the centre and counterpunches. The Scandinavian trades the centre away at once and gets on with development, and what it builds looks a great deal like a Caro-Kann with the moves in another order: pawn on c6, bishop on f5 or g4, pawn on e6, knight on d7. If you know the Caro-Kann, these middlegames will feel like home.\n\n## What the trade buys, and costs\n\nIt buys clarity. There is no tension in the centre to manage, because White has one good reply and it is the capture, and Black knows what the position will look like by move six in almost every game.\n\nIt costs a tempo, because the queen comes out early and White develops a knight by hitting it. Every opponent knows that, and chapter 1 is the answer.\n\n## The queen out early\n\nAfter 2...Qxd5 3.Nc3 the queen has to move, and where it goes is the defining choice. This course plays 3...Qd6, the modern square. From d6 the queen covers the c7 and e7 squares, watches d4, and is not in the way of any piece. It is hit less often than it looks: the knight on c3 has already done its hitting, and the moves that chase the queen further usually cost White something.\n\nThe classical square is a5, rejected in one sentence: a fine square with two tricks to know against it, Bd2 unmasking the knight and Nd5 hitting the queen, and the fork rule prefers the square with nothing to memorise. Taking back with the knight, 2...Nf6, is out for the same reason: it is a gambit with theory of its own.\n\n## The one structure\n\nPawns on c6 and e6, the knight on f6, the other knight on d7, the light-squared bishop outside the pawns on f5 or g4 before the pawn goes to e6, the dark-squared bishop on e7, the king castled short. Then the queen goes back to c7 or d8 when it is asked to, and the pawn breaks are ...c5 against the d-pawn and ...e5 when the centre allows it.\n\n## Typical mistakes at this level\n\nMoving the queen a second time when it is not attacked, which is how one tempo becomes two. Playing ...e6 before the bishop is out, which shuts the same bishop in as in the Caro-Kann. Taking on d5 with the knight to avoid the queen move, which trades a simple opening for a sharp one. And forgetting that the pawn on c6 is there so the queen has c7 to go back to.",
+  "stem": [],
+  "tree": [
+    {
+      "san": "e4",
+      "note": "The most popular first move in club chess. White takes the centre and opens lines for the queen and the light-squared bishop.",
+      "weight": 10,
+      "children": [
+        {
+          "san": "d5",
+          "note": "The Scandinavian. Black hits the pawn on e4 at once and offers to trade the centre away on move one.",
+          "tags": ["development"],
+          "mistakes": [
+            { "san": "c6", "grade": "playable", "note": "The Caro-Kann, which is the other solid course here. It reaches similar middlegames a move later and with more theory on the way." },
+            { "san": "c5", "grade": "playable", "note": "The Sicilian Najdorf is the third Black course in this app. Sound, sharp, and a different temperament." },
+            { "san": "e5", "grade": "playable", "note": "The most common reply in the world and perfectly sound. It is a different repertoire with a great deal more to learn." }
+          ],
+          "children": [
+            {
+              "san": "exd5",
+              "note": "White takes, and almost always does. Anything else gives Black the centre or a comfortable game, and chapters 4 and 5 cover those.",
+              "weight": 9,
+              "children": [
+                {
+                  "san": "Qxd5",
+                  "note": "The queen takes back. It comes out early on purpose: the pawn is regained at once and the centre is already traded away, which is what this defence is for.",
+                  "tags": ["queen-safety"],
+                  "mistakes": [
+                    { "san": "Nf6", "grade": "playable", "note": "A gambit, the Portuguese and Icelandic lines. Sound and sharp, and out of this course under the fork rule: it has a theory of its own to learn." }
+                  ],
+                  "children": [
+                    {
+                      "san": "Nc3",
+                      "note": "White develops with a hit on the queen, which is the one tempo the early capture costs.",
+                      "weight": 9,
+                      "children": [
+                        {
+                          "san": "Qd6",
+                          "note": "The modern square. The queen covers c7 and e7, watches d4, and stands in the way of nothing. It is hit less often from here than it looks.",
+                          "tags": ["queen-safety"],
+                          "mistakes": [
+                            { "san": "Qa5", "grade": "playable", "note": "The classical square and a good one. It has two tricks to know against it, the bishop to d2 unmasking the knight and the knight jumping to d5, and the fork rule prefers the square with nothing to memorise." },
+                            { "san": "Qd8", "grade": "inaccuracy", "note": "Safe and a whole tempo behind. The queen has come out and gone home, and White has a free developing move to show for it." },
+                            { "san": "Qe5+", "grade": "inaccuracy", "note": "4.Be2 blocks the check with a developing move, and the queen has to move again next turn." }
+                          ],
+                          "children": [
+                            {
+                              "san": "d4",
+                              "note": "White takes the centre with the pawn the trade left behind. This is the main line and chapter 1.",
+                              "weight": 8,
+                              "children": [
+                                {
+                                  "san": "Nf6",
+                                  "note": "Develop. The knight comes to its best square and covers the d5 square the queen has just left.",
+                                  "tags": ["development"],
+                                  "mistakes": [
+                                    { "san": "c6", "grade": "playable", "note": "The same setup with the moves swapped, and it usually transposes. The knight first keeps the option of ...Bg4 before the pawn commits." },
+                                    { "san": "e5", "grade": "inaccuracy", "note": "It opens the centre while the queen is the only piece out, and 5.Nf3 hits the pawn with a free move." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Nf3",
+                                      "note": "White develops the other knight and gets ready to castle.",
+                                      "weight": 8,
+                                      "children": [
+                                        {
+                                          "san": "c6",
+                                          "note": "The pawn that makes the structure. It gives the queen c7 to retreat to, takes b5 and d5 away from White's knights, and it is the same pawn a Caro-Kann player puts there on move one.",
+                                          "tags": ["queen-safety"],
+                                          "mistakes": [
+                                            { "san": "a6", "grade": "playable", "note": "The other modern setup, with the queenside pawns coming. Sound, and it has more to remember, so this course keeps to the pawn on c6." },
+                                            { "san": "Bg4", "grade": "playable", "note": "The pin is a good idea and it comes a move later in most lines. Playing it now lets 6.h3 Bxf3 7.Qxf3 gain a free move on the queen with the bishop pair." },
+                                            { "san": "g6", "grade": "inaccuracy", "note": "It mixes two systems. The bishop belongs on e7 in this structure, and a fianchetto leaves the queen on d6 with fewer squares." }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "Be2",
+                                              "note": "Quiet development, and the move to learn the shape from. White castles and works out what to do afterwards.",
+                                              "weight": 5,
+                                              "children": [
+                                                {
+                                                  "san": "Bf5",
+                                                  "note": "The bishop comes outside the pawns before the pawn goes to e6, which is the whole reason the Caro-Kann player feels at home here.",
+                                                  "tags": ["light-squares"],
+                                                  "mistakes": [
+                                                    { "san": "e6", "grade": "inaccuracy", "note": "The bishop is shut in behind its own pawn, which is the one thing this whole structure exists to avoid." },
+                                                    { "san": "Bg4", "grade": "playable", "note": "Also good and often played. The bishop on f5 keeps the pin in reserve and cannot be asked a question by h3 so easily." }
+                                                  ],
+                                                  "children": [
+                                                    {
+                                                      "san": "O-O",
+                                                      "note": "White castles and the position is quiet.",
+                                                      "weight": 8,
+                                                      "children": [
+                                                        {
+                                                          "san": "e6",
+                                                          "note": "Now the pawn goes, with the bishop already outside. The dark-squared bishop has its square and the king is two moves from safety.",
+                                                          "tags": ["development"],
+                                                          "mistakes": [
+                                                            { "san": "Nbd7", "grade": "playable", "note": "Fine and it transposes. The pawn first means the bishop on f8 can come out next move whatever White does." }
+                                                          ],
+                                                          "children": [
+                                                            {
+                                                              "san": "Bg5",
+                                                              "note": "White pins the knight and hopes to make the queen uncomfortable.",
+                                                              "weight": 6,
+                                                              "children": [
+                                                                {
+                                                                  "san": "Be7",
+                                                                  "note": "Break the pin by developing. The bishop was going here anyway.",
+                                                                  "tags": ["development"],
+                                                                  "mistakes": [
+                                                                    { "san": "h6", "grade": "playable", "note": "It asks the bishop a question first, which is fine. Developing keeps the tempo for the king." }
+                                                                  ],
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Qd2",
+                                                                      "note": "White connects the rooks and eyes the f4 square.",
+                                                                      "weight": 6,
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Nbd7",
+                                                                          "note": "The last minor piece comes out to the square that covers e5 and c5, which is where the breaks come from.",
+                                                                          "tags": ["development"],
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Rad1",
+                                                                              "note": "White puts a rook behind the d-pawn.",
+                                                                              "weight": 6,
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "O-O",
+                                                                                  "note": "Castle. The structure is complete: pawns on c6 and e6, both bishops out, both knights placed, king safe.",
+                                                                                  "tags": ["king-safety"],
+                                                                                  "plan": "Put the queen on c7 when it is asked to move, then play for the pawn to c5 against d4. If White ever lets the e-pawn go to e5, take that instead.",
+                                                                                  "name": "The shape: 6.Be2 and the full setup"
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "scandinavian-black",
+  "title": "The Scandinavian Defence",
+  "colour": "black",
+  "tagline": "The simple answer to 1.e4, as Black.",
+  "formatVersion": 1,
+  "chapters": [
+    "ch0-the-defence.json",
+    "ch1-main-line.json",
+    "ch2-other-fourth-moves.json",
+    "ch3-other-third-moves.json",
+    "ch4-white-does-not-take.json",
+    "ch5-everything-else.json",
+    "ch6-tactics-and-plans.json"
+  ],
+  "tagExtensions": [
+    "vs-nc3",
+    "vs-nf3",
+    "vs-blackmar",
+    "vs-no-capture",
+    "vs-anti-scandinavian",
+    "queen-safety",
+    "light-squares",
+    "c5-break",
+    "e5-break"
+  ]
+}
