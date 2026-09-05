@@ -3,6 +3,7 @@ import { Board } from './Board'
 import { BOARD_SIZE } from './board-size'
 import { HelpAsk, HelpSaid } from './Help'
 import { usePlay } from './play-context'
+import { useCourseMoves } from './prefs'
 import {
   requestFromReplay,
   whyNotPlayable,
@@ -20,6 +21,7 @@ import {
   PlaySession,
   buildBook,
   clampPly,
+  describeAlternatives,
   describeDeviation,
   describeSlip,
   evalBarLayout,
@@ -34,6 +36,7 @@ import {
   type GameLength,
   type GameReport,
   type Hint,
+  type PlaySide,
   type PlayedMove,
 } from '../play'
 import './play.css'
@@ -105,9 +108,21 @@ export interface PlayRequest {
    * so the trainee lands on the report rather than on the launch options.
    */
   reviewAtOnce?: boolean
+  /**
+   * Which side the recorded game was played on. A game played against the
+   * course is resumed and replayed against the course; absent is the
+   * course's own side, which is every game before phase 32.
+   */
+  side?: PlaySide
 }
 
-type Shape_ = 'any' | 'chapter' | 'here'
+/**
+ * The four ways to start. The first three say which lines the engine draws
+ * on; the fourth swaps the sides, and carries its own choice of lines
+ * underneath it, because playing against the whole course and playing
+ * against one chapter of it are both things a person wants.
+ */
+type Shape_ = 'any' | 'chapter' | 'here' | 'other'
 
 export function Play({
   course,
@@ -126,6 +141,10 @@ export function Play({
   const chapters = course.chapters
   const [launch, setLaunch] = useState<Shape_>(request ? 'here' : 'any')
   const [chapterId, setChapterId] = useState(chapters[0]?.id ?? '')
+  // Which lines the engine plays when it has the course's side: the whole
+  // course, or one chapter of it. Empty means the whole course.
+  const [otherChapterId, setOtherChapterId] = useState('')
+  const { courseMoves, setCourseMoves } = useCourseMoves()
   const [length, setLength] = useState<GameLength>('move15')
   const [level, setLevel] = useState(4)
   // "This chapter's line" is the one people misread here, so the launch
@@ -155,7 +174,11 @@ export function Play({
   // The chapter a resumed game was sparring against, when it names one, so
   // the opponent is steered the way it was steered the first time.
   const resumeChapter = launch === 'here' && request?.chapterOnly ? request.chapterId : null
-  const targetChapter = launch === 'chapter' ? chapterId : resumeChapter
+  const targetChapter =
+    launch === 'chapter' ? chapterId : launch === 'other' ? otherChapterId || null : resumeChapter
+  // The other side, chosen here or carried by a resumed game that was played
+  // on it. A game resumed the usual way stays on the trainee's own side.
+  const otherSide = launch === 'other' || (launch === 'here' && request?.side === 'other')
 
   const book = useMemo(() => {
     if (targetChapter) {
@@ -177,6 +200,7 @@ export function Play({
       ? chapters.find((entry) => entry.id === targetChapter)?.title
       : undefined,
     at: launch === 'here' ? request?.at : undefined,
+    ...(otherSide ? { side: 'other' as const, courseMoves } : {}),
   })
 
   const start = async () => {
@@ -214,6 +238,9 @@ export function Play({
       at: from.at,
       // Reading, not playing: the engine must not add a reply to the record.
       holdOpponent: true,
+      // A game played against the course is read against the course, so the
+      // report says how far the book lasted rather than who left it.
+      side: from.side,
     }
   }
 
@@ -242,7 +269,6 @@ export function Play({
   }, [request])
 
   const { session, report, scanning, thinking, engineError, evaluations } = game
-  const playBook = game.book ?? book
 
   // The game ends by itself on mate or the length cap.
   const finished = session?.isFinished() ?? false
@@ -286,8 +312,9 @@ export function Play({
       studentColour: session.studentColour,
       level: game.level ?? 0,
       at: game.recordedAt ?? new Date().toISOString(),
+      side: game.side,
     })
-  }, [game.courseTitle, game.level, game.recordedAt, report, session])
+  }, [game.courseTitle, game.level, game.recordedAt, game.side, report, session])
 
   // Built once, so the arrows under the board and anything else that walks
   // the game are driven by the same object rather than two copies of it.
@@ -397,6 +424,58 @@ export function Play({
             />
             {request ? `From ${request.label}` : 'From a Study position (start one from Study)'}
           </label>
+          {/* The sides swapped. The sentence under it is the whole idea, and
+              the two choices under that are which lines the engine plays and
+              whether it ever strays from them. */}
+          <label>
+            <input
+              type="radio"
+              checked={launch === 'other'}
+              onChange={() => setLaunch('other')}
+            />
+            Play the other side
+          </label>
+          <p className="hint">You play against the course. The engine plays its moves.</p>
+          {launch === 'other' ? (
+            <>
+              <select
+                aria-label="Which lines the course plays"
+                value={otherChapterId}
+                onChange={(event) => setOtherChapterId(event.target.value)}
+              >
+                <option value="">Any line</option>
+                {chapters.map((chapter) => (
+                  <option key={chapter.id} value={chapter.id}>
+                    {chapter.title}
+                  </option>
+                ))}
+              </select>
+              <fieldset className="other-side">
+                <legend>How the course plays</legend>
+                <label>
+                  <input
+                    type="radio"
+                    checked={courseMoves === 'always'}
+                    onChange={() => setCourseMoves('always')}
+                  />
+                  The course move every time
+                </label>
+                <p className="hint">The pure line, so you meet the opening as the course teaches it.</p>
+                <label>
+                  <input
+                    type="radio"
+                    checked={courseMoves === 'sometimes'}
+                    onChange={() => setCourseMoves('sometimes')}
+                  />
+                  Sometimes a listed alternative
+                </label>
+                <p className="hint">
+                  Three times in four the course move; otherwise one of the tries the course
+                  grades at that position, so you meet the ways it goes slightly wrong.
+                </p>
+              </fieldset>
+            </>
+          ) : null}
         </fieldset>
 
         <fieldset>
@@ -447,8 +526,8 @@ export function Play({
     <div className="play">
       <PlayHead
         session={session}
-        opening={openingLine(game.courseTitle, game.chapterTitle, game.level)}
-        opponentColour={playBook.opponentColour}
+        opening={openingLine(game.courseTitle, game.chapterTitle, game.level, game.side)}
+        opponentColour={session.engineColour}
         thinking={thinking}
         reviewed={report !== null}
       />
@@ -509,7 +588,7 @@ export function Play({
           {report ? (
             <Report
               report={report}
-              opponentColour={playBook.opponentColour}
+              opponentColour={session.engineColour}
               pgn={pgn}
               replay={replayControls}
             />
@@ -546,9 +625,11 @@ function openingLine(
   courseTitle: string | null,
   chapterTitle: string | null,
   level: number | null,
+  side: PlaySide = 'course',
 ): string | null {
   if (!courseTitle) return null
   const parts = [`Opening: ${courseTitle}`]
+  if (side === 'other') parts.push('playing the other side')
   if (chapterTitle) parts.push(`sparring against ${chapterTitle}`)
   if (level !== null) parts.push(`against ${levelName(level)}`)
   return parts.join(', ')
@@ -907,11 +988,16 @@ export function Report({
   replay: ReplayControls
 }) {
   const deviationPly = report.deviation.ply
+  const against = report.deviation.kind === 'course-book-ended'
+  const strayed = describeAlternatives(report.deviation)
   return (
     <div className="report">
       <h3>The report</h3>
 
-      <h4>The repertoire</h4>
+      {/* No repertoire to be judged against on the other side, so the first
+          part is about the course instead: how far its book lasted, and
+          where the engine took one of the tries the course grades. */}
+      <h4>{against ? 'The course' : 'The repertoire'}</h4>
       {deviationPly === undefined ? (
         <p>{describeDeviation(report.deviation, opponentColour)}</p>
       ) : (
@@ -929,6 +1015,17 @@ export function Report({
         <p className="book-note">
           <strong>{report.deviation.label}</strong> {report.deviation.note}
         </p>
+      ) : null}
+      {strayed.length > 0 ? (
+        <ul className="strayed">
+          {report.deviation.alternatives?.map((played, index) => (
+            <li key={played.ply}>
+              <button type="button" className="jump" onClick={() => replay.onJump(played.ply)}>
+                {strayed[index]}
+              </button>
+            </li>
+          ))}
+        </ul>
       ) : null}
 
       <h4>Your moves</h4>

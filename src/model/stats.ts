@@ -148,9 +148,19 @@ export function courseTotals(
 /** What the Progress view shows about games played. */
 export interface PlayStats {
   games: number
+  /**
+   * Games played against the course, with the engine on the course's side.
+   * Counted in `games` and said apart, because "you left the repertoire
+   * first" is not a sentence that can be about one of them.
+   */
+  otherSide: number
   /** Games where the student was the first to leave the repertoire. */
   deviations: number
-  /** From 0 to 1, or null when no games have been played. */
+  /**
+   * From 0 to 1, or null when no games have been played. Over the games the
+   * trainee played the course's side: a game where the engine played the
+   * repertoire cannot count as one the trainee stayed in.
+   */
   deviationRate: number | null
   /** The average full move number where the student left, when it happened. */
   averageDeviationMove: number | null
@@ -161,6 +171,8 @@ export interface PlayStats {
 export function playStats(courses: LoadedCourse[], state: ProgressState): PlayStats {
   const games = state.playGames
   const chapters = courses.flatMap((course) => course.chapters)
+  const otherSide = games.filter((game) => game.side === 'other')
+  const own = games.filter((game) => game.side !== 'other')
   const deviated = games.filter((game) => game.deviated)
   const moves = deviated
     .map((game) => game.deviationMove)
@@ -188,8 +200,9 @@ export function playStats(courses: LoadedCourse[], state: ProgressState): PlaySt
 
   return {
     games: games.length,
+    otherSide: otherSide.length,
     deviations: deviated.length,
-    deviationRate: games.length > 0 ? deviated.length / games.length : null,
+    deviationRate: own.length > 0 ? deviated.length / own.length : null,
     averageDeviationMove:
       moves.length > 0 ? moves.reduce((sum, move) => sum + move, 0) / moves.length : null,
     byChapter,
@@ -262,8 +275,15 @@ export function forkDepth(path: string[], others: string[][]): number {
  * screen says rather than leaving a trainee with fifty games wondering.
  */
 export function linesPlayed(course: LoadedCourse, state: ProgressState): LinePlayed[] {
+  // Not games played against the course. The engine played the line in
+  // those, and crediting the trainee with a line the engine played would make
+  // this table say the opposite of what it is for.
   const games = state.playGames.filter(
-    (game) => game.courseId === course.id && game.sans && game.sans.length > 0,
+    (game) =>
+      game.courseId === course.id &&
+      game.side !== 'other' &&
+      game.sans &&
+      game.sans.length > 0,
   )
   if (games.length === 0) return []
 

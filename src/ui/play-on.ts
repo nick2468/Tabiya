@@ -136,6 +136,17 @@ export function positionText(record: PlayRecord, studentColour: Colour): string 
   return said.charAt(0).toUpperCase() + said.slice(1)
 }
 
+/**
+ * What the Sparring against column says. A game on the other side was not
+ * sparring against a chapter; it was playing against the course, and the
+ * column says so in the words the launch option uses. The chapter still
+ * follows when the game was against one chapter of it.
+ */
+export function sparringAgainst(record: PlayRecord, chapterTitle: string | undefined): string {
+  if (record.side === 'other') return chapterTitle ? `other side, ${chapterTitle}` : 'other side'
+  return chapterTitle ?? 'Any line'
+}
+
 /** Both, for a row that shows them side by side. */
 export function endingOf(record: PlayRecord, studentColour: Colour): GameEnding {
   return {
@@ -165,6 +176,7 @@ export function requestFor(record: PlayRecord, course: LoadedCourse): PlayReques
     courseId: course.id,
     level: record.level,
     at: record.at,
+    ...(record.side === 'other' ? { side: 'other' as const } : {}),
   }
 }
 

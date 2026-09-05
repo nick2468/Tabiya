@@ -8,6 +8,7 @@ import {
   replayRequest,
   requestFor,
   resumeLabel,
+  sparringAgainst,
 } from './play-on'
 import { bundledCourses } from '../content'
 import type { PlayRecord } from '../storage/progress'
@@ -108,6 +109,29 @@ describe('the request a recorded game builds', () => {
 
   it('says which game it is, in words a person recognises', () => {
     expect(resumeLabel(record())).toMatch(/^your game of .+, move 3$/)
+  })
+
+  /**
+   * A game played against the course is resumed against the course, and one
+   * played the usual way carries no side at all, so every request built from
+   * a record written before phase 32 is exactly what it was.
+   */
+  it('carries the side for a game played against the course, and nothing otherwise', () => {
+    expect(requestFor(record({ side: 'other' }), london).side).toBe('other')
+    expect(requestFor(record(), london).side).toBeUndefined()
+    expect(replayRequest(record({ side: 'other' }), london).side).toBe('other')
+  })
+})
+
+describe('what a game was sparring against', () => {
+  it('names the chapter, or any line', () => {
+    expect(sparringAgainst(record(), 'The system')).toBe('The system')
+    expect(sparringAgainst(record(), undefined)).toBe('Any line')
+  })
+
+  it('says other side for a game played against the course, with the chapter when there was one', () => {
+    expect(sparringAgainst(record({ side: 'other' }), undefined)).toBe('other side')
+    expect(sparringAgainst(record({ side: 'other' }), 'The system')).toBe('other side, The system')
   })
 })
 

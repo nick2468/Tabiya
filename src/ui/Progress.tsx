@@ -20,7 +20,7 @@ import { profileFolders, type ProfileFolders } from './folders'
 import { HelpPanel } from './Help'
 import { nextCardLine } from './card-words'
 import { usePlay } from './play-context'
-import { endingOf, playedOn, recentPlayable, replayRequest, requestFor } from './play-on'
+import { endingOf, playedOn, recentPlayable, replayRequest, requestFor, sparringAgainst } from './play-on'
 import type { PlayRequest } from './Play'
 import './progress.css'
 
@@ -120,8 +120,12 @@ export function Progress({
         ) : (
           <>
             <p>
-              <strong>{play.games}</strong> {play.games === 1 ? 'game' : 'games'}. You left the
-              repertoire first in <strong>{play.deviations}</strong> of them
+              <strong>{play.games}</strong> {play.games === 1 ? 'game' : 'games'}
+              {play.otherSide > 0
+                ? `, ${play.otherSide} of them playing the other side`
+                : ''}
+              . You left the repertoire first in <strong>{play.deviations}</strong>
+              {play.otherSide > 0 ? ' of the rest' : ' of them'}
               {play.deviationRate === null
                 ? ''
                 : `, which is ${Math.round(play.deviationRate * 100)}%`}
@@ -313,7 +317,7 @@ function PlayOn({ onPlayOn }: { onPlayOn: (request: PlayRequest) => void }) {
               <tr key={record.at}>
                 <td>{playedOn(record.at)}</td>
                 <td>{course.title}</td>
-                <td>{chapter ? chapter.title : 'Any line'}</td>
+                <td>{sparringAgainst(record, chapter?.title)}</td>
                 <td>{levelName(record.level)}</td>
                 <td className="num">{record.moves}</td>
                 <td>{ending.ended}</td>

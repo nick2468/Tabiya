@@ -174,6 +174,49 @@ describe('the labels shown to both colours', () => {
   })
 })
 
+describe('games played against the course', () => {
+  const played = (over: object) => ({
+    courseId: 'c',
+    deviated: false,
+    moves: 12,
+    level: 4,
+    at: NOW.toISOString(),
+    ...over,
+  })
+
+  it('are counted in the total and said apart', () => {
+    const state = {
+      ...emptyProgress(),
+      playGames: [played({}), played({ side: 'other' }), played({ side: 'other' })],
+    }
+    const stats = playStats([], state)
+    expect(stats.games).toBe(3)
+    expect(stats.otherSide).toBe(2)
+  })
+
+  it('are left out of the rate at which the trainee left the repertoire', () => {
+    // Two games on the course's side, one of them left; two on the other
+    // side. The rate is one in two, not one in four: a game where the engine
+    // played the repertoire is not one the trainee stayed in.
+    const state = {
+      ...emptyProgress(),
+      playGames: [
+        played({ deviated: true, deviationMove: 6 }),
+        played({}),
+        played({ side: 'other' }),
+        played({ side: 'other' }),
+      ],
+    }
+    expect(playStats([], state).deviationRate).toBe(0.5)
+  })
+
+  it('count for nothing at all when there are none, so old histories read as before', () => {
+    const state = { ...emptyProgress(), playGames: [played({}), played({})] }
+    expect(playStats([], state).otherSide).toBe(0)
+    expect(playStats([], state).deviationRate).toBe(0)
+  })
+})
+
 /**
  * Which lines a game followed.
  *
@@ -260,6 +303,27 @@ describe('linesPlayed', () => {
   it('names the chapter the line belongs to', () => {
     const state = { ...emptyProgress(), playGames: [game([...lines[0].path])] }
     expect(linesPlayed(course, state)[0].chapterTitle).toBe('Test chapter')
+  })
+
+  /**
+   * The hazard the chip names. A game played against the course is the
+   * engine playing the line, and the trainee playing the replies: crediting
+   * the trainee with that line would make the table say the opposite of
+   * what it is for. Absent side is the course's own, so every record before
+   * phase 32 still counts exactly as it did.
+   */
+  it('leaves out a game played against the course, however far it ran', () => {
+    const state = {
+      ...emptyProgress(),
+      playGames: [
+        { ...game([...lines[0].path]), side: 'other' as const },
+        { ...game([...lines[1].path]), side: 'course' as const },
+        game([...lines[1].path]),
+      ],
+    }
+    expect(linesPlayed(course, state).map((row) => [row.name, row.games])).toEqual([
+      [lines[1].name, 2],
+    ])
   })
 
   it('counts a game that stopped in the shared trunk for NO line', () => {
