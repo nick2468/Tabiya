@@ -218,7 +218,7 @@
                                               "children": [
                                                 {
                                                   "san": "cxd4",
-                                                  "note": "The pawn takes back, and this is chapter 1's 6...e6 line with the bishop on b3 rather than b5.",
+                                                  "note": "The pawn takes back, and this is chapter 1's line with the pawn on e6, with the bishop on b3 rather than b5.",
                                                   "tags": ["big-centre"],
                                                   "mistakes": [
                                                     { "san": "Nxd4", "grade": "inaccuracy", "note": "8...Nxe5 and the wedge is simply lost: the knight on d4 does not defend e5." }
@@ -283,9 +283,9 @@
                           ],
                           "children": [
                             {
-                              "san": "Nf6",
+                              "san": "Nc6",
                               "weight": 8,
-                              "note": "Black develops.",
+                              "note": "Black develops the knight, hitting d4, and still does not take.",
                               "children": [
                                 {
                                   "san": "Bd3",
@@ -297,9 +297,9 @@
                                   ],
                                   "children": [
                                     {
-                                      "san": "Nc6",
+                                      "san": "Nf6",
                                       "weight": 7,
-                                      "note": "Black develops, hitting d4.",
+                                      "note": "Black develops the other knight.",
                                       "children": [
                                         {
                                           "san": "O-O",

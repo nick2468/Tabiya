@@ -511,10 +511,10 @@
               "children": [
                 {
                   "san": "Nxe5",
-                  "note": "The knight takes back, and with no knight on c6 the pawn on d4 is safe: 7...Qxd4 would simply lose the queen to 8.Qxd4.",
+                  "note": "The knight takes back, and with no knight on c6 the pawn on d4 is not even attacked: Black's own knight on d5 stands in the queen's way.",
                   "tags": ["development"],
                   "mistakes": [
-                    { "san": "dxe5", "grade": "inaccuracy", "note": "7...Qxd1+ 8.Kxd1 and the queens are off with White's king in the middle and the pawn on e5 loose." }
+                    { "san": "dxe5", "grade": "inaccuracy", "note": "The pawn takes back and the knight on f3 has to guard it for the rest of the game: 7...e6 and Black develops against a wedge with nothing behind it." }
                   ],
                   "children": [
                     {

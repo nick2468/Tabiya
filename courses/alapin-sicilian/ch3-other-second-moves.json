@@ -99,7 +99,7 @@
                                                           "tags": ["development"],
                                                           "mistakes": [
                                                             { "san": "Bg5", "grade": "playable", "note": "Sound: 9...O-O 10.Nbd2 and the same shape with the bishop out. The knight to b3 first, because the bishop on c5 is the piece to hit." },
-                                                            { "san": "b4", "grade": "inaccuracy", "note": "9...Bxb4 10.cxb4 Nxb4 and the pawn has been given for nothing." }
+                                                            { "san": "b4", "grade": "playable", "note": "Sound: the bishop goes back to b6 and the pawn has taken c5 from it. The knight to b3 hits the bishop with a piece instead and keeps the pawn on b2." }
                                                           ],
                                                           "children": [
                                                             {
@@ -252,7 +252,7 @@
                                   "note": "The pawn takes back.",
                                   "tags": ["big-centre"],
                                   "mistakes": [
-                                    { "san": "Nxd4", "grade": "inaccuracy", "note": "6...Nxd4 7.Qxd4? no: 7.cxd4 is fine but the knight has gone for a pawn and the centre with it. The pawn recapture keeps the centre." }
+                                    { "san": "Nxd4", "grade": "inaccuracy", "note": "The knight takes and 6...Nxd4 7.cxd4 leaves one pawn in the centre where there were two. The pawn takes back and keeps both." }
                                   ],
                                   "children": [
                                     {
@@ -461,13 +461,13 @@
                       "children": [
                         {
                           "san": "Nf3",
-                          "note": "Develop, and the position is chapter 2's 5...Nc6 line with the moves in another order.",
+                          "note": "Develop, and the position is chapter 2's line with the knight on c6, reached by another order.",
                           "tags": ["development"],
                           "mistakes": [
                             { "san": "dxc5", "grade": "inaccuracy", "note": "5...Qxd1+ 6.Kxd1 e5 and Black has the centre with the queens off and White's king on d1." },
                             { "san": "Be3", "grade": "playable", "note": "Fine, and 5...cxd4 6.cxd4 e5 hits the pawn with nothing covering e5. The knight first covers e5 as well as d4." }
                           ],
-                          "plan": "Chapter 2's 5...Nc6 line from here: Be3 to hold d4, Be2 against the pin, and the knight to c3 with tempo once the c-pawn has gone.",
+                          "plan": "Chapter 2's knight-on-c6 line from here: Be3 to hold d4, Be2 against the pin, and the knight to c3 with tempo once the c-pawn has gone.",
                           "name": "2...Nc6 and 3...d5, into chapter 2"
                         }
                       ]

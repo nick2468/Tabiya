@@ -32,7 +32,7 @@
                   "shapes": [{ "orig": "d4", "dest": "d5", "brush": "green" }],
                   "mistakes": [
                     { "san": "Nxd4", "grade": "inaccuracy", "note": "The knight takes and it is an open Sicilian with Black's queen already on d5: a fine game for Black, and not the one the course was chosen for." },
-                    { "san": "Bxd4", "grade": "inaccuracy", "note": "7...Nc6 hits the bishop and 8.Bc3 Qxd1+ has the queens off with nothing kept." }
+                    { "san": "Bxd4", "grade": "inaccuracy", "note": "7...Nc6 8.Be3 and the bishop has moved twice to reach the square it could have had in one, with the c-pawn still on c3 and no pawn in the centre at all." }
                   ],
                   "children": [
                     {
@@ -349,7 +349,7 @@
                                                           "tags": ["tactics"],
                                                           "mistakes": [
                                                             { "san": "Ne5", "grade": "playable", "note": "Sound and good, and 12...Bxe2 13.Qxe2 trades the bishop that was annoying White. The queen move asks about b7 first." },
-                                                            { "san": "d5", "grade": "inaccuracy", "note": "12...exd5 13.Nxd5 Nxd5 14.Qxd5 Bxf3 15.Bxf3 Qxd5 and the queens are off a pawn down." }
+                                                            { "san": "d5", "grade": "inaccuracy", "note": "12...exd5 13.Nxd5 Nxd5 14.Qxd5 Bxf3 15.Bxf3 Qxd5 16.Bxd5 and everything has come off for nothing: the break opened no line onto anything." }
                                                           ],
                                                           "plan": "Rfd1 and Rac1 behind the pawn, Ne5 hitting the bishop on h5 through the one on e2, and d5 when the knight on c6 moves. If Black plays ...O-O, Qxb7 is not on: the rook on b8 comes next with tempo; take the pawn only when the rook cannot chase the queen.",
                                                           "name": "5...Bg4, the queen on b7"
