@@ -396,7 +396,7 @@ Moving the queen before it is attacked. Playing ...e6 before the bishop has come
 {White castles, and leaves the pawn on d4 with nothing guarding it: the knight that would have gone to f3 went to g3, and the queen on d1 is all that is left. [%weight 8]}
 9... Qxd4
 {Take it. The pawn is free because the knight went to g3 and nothing else guards d4, and the queen that went home on move six comes out again with a pawn to show for it. White gets some activity for it, and Black castles next. [%tags tactics]}
-( 9... O-O?
+( 9... O-O?!
 {It walks past a free pawn. The queen went home to d8 to be safe, not to be shy, and 10.Re1 leaves White with the centre and the move for nothing.}
 ) ( 9... Nbd7?!
 {Development with the pawn still hanging. 10.Re1 and White keeps the centre.} ) 10. Nce4

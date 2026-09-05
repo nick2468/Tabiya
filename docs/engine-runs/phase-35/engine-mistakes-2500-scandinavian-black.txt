@@ -1,0 +1,29 @@
+engine-mistakes.mjs at 2500 ms over courses/scandinavian-black, run by the orchestrator at gate 35 (2026-09-05) because the builder's record named this file and it was not there.
+Conditions: CPU load sampled at 17-20% across 16 logical processors; no build, no test run, one idle dev server, one engine process; the two courses one after the other.
+Started 2026-09-05T10:47:33Z
+
+240 mistake entries across 7 chapters, 387 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+  ...25/387
+  ...50/387
+  ...75/387
+  ...100/387
+  ...125/387
+  ...150/387
+  ...175/387
+  ...200/387
+  ...225/387
+  ...250/387
+  ...275/387
+  ...300/387
+  ...325/387
+  ...350/387
+  ...375/387
+
+1 entries where the grade and the engine disagree:
+
+ 0.41  mistake    graded too harshly  ch2-other-fourth-moves
+      e4 d5 exd5 Qxd5 Nc3 Qd6 Nge2 Nf6 d4 c6 Bf4 Qd8 Ng3 e6 Bd3 Be7 O-O : Qxd4 not O-O
+      "It walks past a free pawn. The queen went home to d8 to be safe, not to be shy, and 10.Re1 leaves White with the centre and the move for nothing."
+
+Finished 2026-09-05T11:03:41Z

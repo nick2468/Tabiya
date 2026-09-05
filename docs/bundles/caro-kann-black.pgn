@@ -610,7 +610,7 @@ Blockade it, trade pieces, then win it. The square in front of the pawn, d5, is 
 Taking on c4 and giving up the centre for a pawn that cannot be held. Recapturing on d5 with the e-pawn, which leaves Black with the isolated pawn instead. Blocking the c-file with the queen's knight before the bishops have squares. And trading off the blockading knight for nothing, which sets White's centre free.}
 1. e4 c6 2. d4 d5 3. exd5 cxd5 4. c4 Nf6
 {Develop and defend d5 at the same time. This is the move that keeps everything simple. [%tags development]}
-( 4... dxc4?
+( 4... dxc4?!
 {The pawn cannot be held: 5.Bxc4 takes it straight back, and Black has handed over the centre for nothing.}
 ) ( 4... e6!?
 {Sound, and it usually transposes. Developing a piece first is more useful than a pawn move.}

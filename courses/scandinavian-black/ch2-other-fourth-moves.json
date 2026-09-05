@@ -302,7 +302,7 @@
                                                   "note": "Take it. The pawn is free because the knight went to g3 and nothing else guards d4, and the queen that went home on move six comes out again with a pawn to show for it. White gets some activity for it, and Black castles next.",
                                                   "tags": ["tactics"],
                                                   "mistakes": [
-                                                    { "san": "O-O", "grade": "mistake", "note": "It walks past a free pawn. The queen went home to d8 to be safe, not to be shy, and 10.Re1 leaves White with the centre and the move for nothing." },
+                                                    { "san": "O-O", "grade": "inaccuracy", "note": "It walks past a free pawn. The queen went home to d8 to be safe, not to be shy, and 10.Re1 leaves White with the centre and the move for nothing." },
                                                     { "san": "Nbd7", "grade": "inaccuracy", "note": "Development with the pawn still hanging. 10.Re1 and White keeps the centre." }
                                                   ],
                                                   "children": [
