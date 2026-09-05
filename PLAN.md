@@ -4786,17 +4786,100 @@ Classical's seventh move by the fork rule pointing at 7...Na6; the Sämisch, the
 with the flank move orders, the Four Pawns and Averbakh, White without c4 and e4 read
 against the London's own chapter, tactics with ten mistake entries. Version 1.10.0.
 
-- [ ] 42.1 Rulings and decision rules (done in the chip).
-- [ ] 42.2 Seven chapters to the section 3 bar, student Black.
-- [ ] 42.3 Suite green after every chapter.
-- [ ] 42.4 Checkers with conditions, including the 2500 ms pass over the course.
-- [ ] 42.5 The course's test block with two course-specific claims.
-- [ ] 42.6 Scoping test: the two 1.d4 Black courses and the flank openings.
-- [ ] 42.7 Bundle exported and round-tripped.
-- [ ] 42.8 Prose counts say ten.
-- [ ] 42.9 Version 1.10.0.
-- [ ] 42.10 Proved in the browser build at 1400x980.
+- [x] 42.1 Rulings and decision rules (done in the chip).
+- [x] 42.2 Seven chapters to the section 3 bar, student Black.
+- [x] 42.3 Suite green after every chapter.
+- [x] 42.4 Checkers with conditions, including the 2500 ms pass over the course.
+- [x] 42.5 The course's test block with two course-specific claims.
+- [x] 42.6 Scoping test: the two 1.d4 Black courses and the flank openings.
+- [x] 42.7 Bundle exported and round-tripped.
+- [x] 42.8 Prose counts say ten.
+- [x] 42.9 Version 1.10.0.
+- [x] 42.10 Proved in the browser build at 1400x980.
 
 Acceptance: as the chip's final paragraph.
+
+**For the gate.** 42.1 and 42.2: the course is `courses/kings-indian-black/`, id
+`kings-indian-black`, permanent, seven chapters and 102 lines, student Black. **The
+seventh move in the Classical is 7...Na6.** The decision rule was to take it unless the
+engine at 2500 ms and the chapter both came out better for 7...Nbd7 or 7...exd4: the
+engine at 2500 ms gave 7...exd4 +0.52, 7...Na6 +0.61 and neither 7...Nc6 nor 7...Nbd7 in
+its top five (below +0.66), and the chapter is built on the knight reaching c5 without
+blocking the bishop on c8 or the c-pawn, so the knight goes to a6; 7...Nc6 is rejected in
+one sentence in ch1's intro and named playable where it arises, which the suite holds.
+**Every other fork, each in a sentence where it arises:** 6...c5 against the Saemisch
+rather than 6...e5 (ch2 root, because the closed centre is what the pawn storm wants);
+...exd4 against the Fianchetto rather than 8...c6 (ch3, because the open centre asks
+less); 6...Na6 against the Averbakh rather than 6...c5 (ch4, keeping the lever); ...Nh5
+and ...Nf4 in the h3 lines only where the knight on f3 blocks the bishop (ch4, said in
+the intro and in the entries); 2...g6 against the Trompowsky rather than 2...Ne4 (ch5,
+keeping the four moves); and against the London's c3 the lever waits for ...b6 and ...Bb7
+(ch5, because the trade on e5 and a knight there is a pawn). Mistake positions: ch0 12,
+ch1 68, ch2 35, ch3 94, ch4 85, ch5 87, ch6 28; deepest Black move 13 in ch1, ch3 and ch5,
+12 in ch2 and ch4, 17 in ch6. Chapter 3 starts from the initial position on
+purpose, so that 1.d4, 1.c4 and 1.Nf3 are three roots of one tree and the flank move
+orders reach the main house by transposition; the shared-position rule was checked
+across the whole course by a scratch checker before every suite run, and it bit twice
+(ch4's two h3 orders reaching one position with different knight moves, ch5's 2.Nf3 3.c4
+order reaching ch3's position with ...d6 where ch3 castles), both fixed by making the
+moves agree.
+
+**The London gaps.** Chapter 5's London lines were written against
+`courses/london-white/ch3-kings-indian.json` and every Black move they play in a
+position that course reaches is a move that course lists, with one exception, found by
+a scratch script that walks both trees: after the London's 10.Bh2, its leaf, this course
+plays 10...Ne4 (the engine's first choice at 2500 ms, -0.06), and the London's plan for
+that leaf ("Nc3, Qc2 and the rooks to d1 and e1... a slow squeeze") does not expect it.
+Two more things the London may want to know, recorded and not fixed: the engine at 2500
+ms prefers 10.Nxe5 (+0.52) to the London's 10.Bh2 (+0.27) in that position, and this
+course answers it with 10...Nh5 and a knight to d3 that wins the pawn back; and after
+8.c3 instead of the London's 8.c4, 8...e5 loses a pawn to 9.dxe5 dxe5 10.Nxe5, which is
+why this course holds the lever back there.
+
+42.4, the checkers, all under `docs/engine-runs/phase-42/`. Conditions for every 2500 ms
+run: CPU load sampled at 18 to 21 per cent before it, no build, no test run beside it,
+one engine process, every run sequential; four hung python shells from this session's
+own scratch work were found spinning at 40 per cent before the first pass and were ended
+before it began. Engine-pass at 500 ms twice: the first found six (one real blunder,
+13...Qxd3?? into 14.Qxd3 in the London's 10.Nxe5 line, and five moves the engine put half
+a pawn or more behind), all six rewritten after re-checks at 2500 ms, and the seventh
+exercise moved to the Petrosian because its line stood on a move nine tenths behind; the
+second found one, 11...f4 in the ...f5 storm at +0.36, re-checked at 2500 ms as +0.05
+against 11...Nac5 at -0.06, a cost of eleven hundredths on the theory move: KEPT, the only
+engine finding kept in the phase. The 2500 ms engine-pass over the whole course, once,
+reported nothing: no Black move costs half a pawn. The mistakes pass at 2500 ms found 61,
+every one acted on: 29 up to mistake with the punishment asked at 2500 ms and written
+into the note (the recurring pattern is the bishop on g5 looking at d8 through the square
+a knight has just left, and a knight on d5 reaching c7 before it was taken), 17 playable
+entries between 0.92 and 1.74 to inaccuracy, and 15 mistakes down, nine of them the knight
+to h5 in the Bd3 lines where the note had claimed Nxe5 and Qxh5 won a knight and the
+bishop on g7 in fact takes back on e5. The confirming run found four at band edges, two
+of them straddlers of the 1.8 ceiling in exercise 2, all regraded by the number; grades
+only, so no third run. Note-lines: zero faults, four soft
+back-references for a human, all naming an earlier move order on purpose. Note-claims:
+zero unsupported. `accepted.md` is untouched: every kept number is in the phase folder
+for the next pass to compare.
+
+42.5 to 42.9: the course block holds the bishop on g7 among Black's first four moves in
+every repertoire line and Na6 at the Classical position wherever it is reached, with
+7...Nc6 never played; the scoping tests hold the Slav and the King's Indian to 1.d4 with
+different replies and the King's Indian to be the only course with a card after 1.c4 or
+1.Nf3. The bundle round-trips byte for byte, the other nine bundles are byte-identical to
+their committed files, and the other nine courses' 421 line ids are intact (523 now, none
+gone). SPEC section 3 says ten and section 8 carries the phase 42 rulings. Version
+1.10.0 in the four files; `version.test.ts` accepts a two-digit minor as it stands. 1195
+tests in 11.5 seconds, `tsc -b` clean.
+
+42.10, driven at 1400x980 against another session's server on 5175 (files touched for its
+watcher): ten tiles as two rows of five, measured by the tiles' tops, the King's Indian's
+reading "Concede the centre, then hit it: one setup against 1.d4, 1.c4 and 1.Nf3, as
+Black." with 102 lines; Study opened ch0 naming "The shape: the Classical to move 12"
+and ch1 naming all 22 lines; the main line marked learnt; Drill gave six cards, Black to
+move, "The King's Indian Defence: The Classical"; Play as Black had the engine open 1.d4
+out of the book; Play the other side had the engine answer 1.d4 with 1...Nf6 and 2.c4 with
+2...g6. No console errors on a fresh load; storage cleared afterwards; viewport reset.
+Screenshots timed out whenever an engine pass was running in the background, so the
+catalog was measured through the DOM and photographed after the passes. Nick's own files
+were not listed and not reported.
 
 - [ ] **Review gate 42**
