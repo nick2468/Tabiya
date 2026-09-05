@@ -4299,4 +4299,14 @@ SPEC section 8 carries the phase 34 ruling: the pairing of three Black answers, 
 square, the forks, and the shared-position rule the course was the first to be written
 under.
 
+**Driven at 1200x980 against another session's server on 5175**, banner 1.7.3 (baked at
+that server's start; the source is served from disk and the four version files read
+1.8.0). Eight tiles in two rows of four, the Scandinavian's reading "The simple answer to
+1.e4, as Black." with 34 lines. Study opened ch0 with its one line named, and ch1 named
+all five. The main line marked learnt gave Drill seven cards and a Black-to-move
+main-line position. Play as Black: the board Black's way up, the engine's 1.e4 played at
+once from the book, "Your move". Play the other side: White to move, and after 1.e4 the
+engine answered 1...d5 at once. No console errors; storage cleared afterwards. Nick's own
+files were not listed and not reported.
+
 - [ ] **Review gate 34**
