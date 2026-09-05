@@ -35,6 +35,7 @@ import {
   verdictInWords,
   type GameLength,
   type GameReport,
+  type CourseMoves,
   type Hint,
   type PlaySide,
   type PlayedMove,
@@ -450,30 +451,7 @@ export function Play({
                   </option>
                 ))}
               </select>
-              <fieldset className="other-side">
-                <legend>How the course plays</legend>
-                <label>
-                  <input
-                    type="radio"
-                    checked={courseMoves === 'always'}
-                    onChange={() => setCourseMoves('always')}
-                  />
-                  The course move every time
-                </label>
-                <p className="hint">The pure line, so you meet the opening as the course teaches it.</p>
-                <label>
-                  <input
-                    type="radio"
-                    checked={courseMoves === 'sometimes'}
-                    onChange={() => setCourseMoves('sometimes')}
-                  />
-                  Sometimes a listed alternative
-                </label>
-                <p className="hint">
-                  Three times in four the course move; otherwise one of the tries the course
-                  grades at that position, so you meet the ways it goes slightly wrong.
-                </p>
-              </fieldset>
+              <CourseMovesChoice value={courseMoves} onChange={setCourseMoves} />
             </>
           ) : null}
         </fieldset>
@@ -678,6 +656,45 @@ export function PlayHead({
               : 'Your move'}
       </p>
     </header>
+  )
+}
+
+/**
+ * How the engine plays the course when it has the course's side.
+ *
+ * Its own component because it only appears once Play the other side is
+ * chosen, and the help test renders screens to a string with no way to
+ * choose anything: rendered on its own, both names are held to the screen
+ * the same way the buttons under the board are.
+ */
+export function CourseMovesChoice({
+  value,
+  onChange,
+}: {
+  value: CourseMoves
+  onChange: (next: CourseMoves) => void
+}) {
+  return (
+    <fieldset className="other-side">
+      <legend>How the course plays</legend>
+      <label>
+        <input type="radio" checked={value === 'always'} onChange={() => onChange('always')} />
+        The course move every time
+      </label>
+      <p className="hint">The pure line, so you meet the opening as the course teaches it.</p>
+      <label>
+        <input
+          type="radio"
+          checked={value === 'sometimes'}
+          onChange={() => onChange('sometimes')}
+        />
+        Sometimes a listed alternative
+      </label>
+      <p className="hint">
+        Three times in four the course move; otherwise one of the tries the course grades at
+        that position, so you meet the ways it goes slightly wrong.
+      </p>
+    </fieldset>
   )
 }
 

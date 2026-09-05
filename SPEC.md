@@ -66,6 +66,16 @@ Full or partial games as White against Stockfish, in three launch shapes:
   gets played again. That kind carries the recorded game's own course, chapter and
   strength, and deliberately carries no identity: it is a new game, so the game being
   read is left recorded exactly as it is.
+- **Play the other side** (phase 32): the trainee takes the opponent's colour and the
+  engine plays the course, against the whole course or one chapter of it. While the game
+  is inside the course the engine plays the repertoire move every time, or under a
+  remembered setting a listed alternative one time in four; once the course has nothing
+  to say it plays at the chosen strength. The report's first part becomes The course,
+  saying how far its book lasted and which alternatives the engine took, because there is
+  no repertoire for the trainee's side to be judged against. Hint on this side says what
+  club players most often play, from the course's own weights. Such games are recorded
+  with their side, counted apart on Progress, resumed and replayed against the course,
+  and left out of Lines played.
 
 Options: game length (to move 10, to move 15, or full game) and strength (a 1-8 scale;
 implementation in section 5). A live evaluation bar sits to the left of the board while
@@ -749,6 +759,24 @@ The one that is not a fork is the e-pawn. Black plays it two squares against eve
 White sixth move and one square against 6.Bg5 and 6.Bc4, and the course teaches that as a
 rule with two named exceptions rather than as a judgement, because a rule with exceptions
 is what a club player can actually hold.
+
+2026-09-05, phase 32: **play the other side.** Nick wants to play AGAINST the opening he
+has learnt, with the engine playing the course, so he gets experience on the other side
+of his own lines. A fourth way to start a game, beside any line, this chapter's line and
+from a position: the trainee takes the opponent's colour and the engine plays the course.
+Ruled the same day: a before-play choice of whether the engine plays the course move every
+time or sometimes a listed alternative, defaulting to every time. Under the second setting
+the engine plays the course move three times in four and otherwise one of the alternatives
+the course lists and grades at that position, chosen equally among them; where a position
+lists none, the course move. The setting is remembered; the side is a launch choice like
+the others and is not.
+
+Two consequences worth writing down. The report has no repertoire to judge the trainee
+against on this side, so its first part is about the course instead, and no sentence
+about leaving the repertoire exists there. And a game on the other side is the engine
+playing the line, so it is recorded with its side, counted apart in Games played, and left
+out of Lines played, because crediting the trainee with a line the engine played would
+make that table say the opposite of what it is for.
 
 ## 9. v1 acceptance
 

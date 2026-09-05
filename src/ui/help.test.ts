@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { Shell } from './App'
 import { Drill, Feedback } from './Drill'
-import { Play, PlayActions, PlayControls, PlayHead, Report } from './Play'
+import { CourseMovesChoice, Play, PlayActions, PlayControls, PlayHead, Report } from './Play'
 import { Progress } from './Progress'
 import { Study } from './Study'
 import { CatalogContext, type Catalog } from './catalog-context'
@@ -195,6 +195,10 @@ const screens: Record<Screen, string> = {
   study: inApp(learntOne, createElement(Study, { course, onPlayFrom: () => {} })),
   play:
     inApp(learntOne, createElement(Play, { course, request: null, onRequestUsed: () => {} })) +
+    // The two settings under Play the other side only render once that radio
+    // is chosen, and a string render chooses nothing, so they are rendered on
+    // their own the way the button rows are.
+    renderToStaticMarkup(createElement(CourseMovesChoice, { value: 'always', onChange: () => {} })) +
     renderToStaticMarkup(
       createElement(PlayHead, {
         session: gameInProgress,
