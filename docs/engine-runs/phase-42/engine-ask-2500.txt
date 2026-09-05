@@ -1,0 +1,1732 @@
+engine-ask.mjs: the authoring asks (1500 ms, four lines) that chose the lines, then every finding re-checked at 2500 ms, in the order they were run.
+Conditions: 16 logical processors, CPU load sampled at 18-21% before each run (the idle Vite dev servers of
+other projects and this session's own shells; no javac, cargo, rustc or tauri process), no build, no test run
+beside any 2500 ms run, one engine process at a time, every run in this phase sequential. Four hung python
+shells from this session's own scratch work were found spinning at 40% before the first pass and ended before
+it began; no engine run of this phase overlapped them.
+Evaluations are from White's point of view: positive favours White, so a Black move that gives something
+away makes the number go UP. The course's own bar (chip 42.4): a flagged Black move is kept if the position
+after it is no worse than about +0.6 for White and it is the theory move, judged by its cost against the
+engine's best.
+
+=== 1. The seventh move in the Classical, the decision rule at 2500 ms ===
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O
+  +0.51  Bg4 d5 Nfd7 Be3 a5 Ne1
+  +0.52  exd4 Nxd4 Nc6 Be3 Re8 f3
+  +0.61  a6
+  +0.61  Na6 Be3 Qe7 dxe5 dxe5 a3
+  +0.66  b6 Be3 Nbd7 Qc2 Ng4 Bg5
+
+=== 2a. Authoring asks at 1500 ms, first batch ===
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3
+  +0.53  Qe7
+  +0.62  b6 Re1 exd4 Nxd4 Bb7 f3
+  +0.64  Qe8 Re1 exd4 Bxd4 b6 Nd5
+  +0.65  c6 Qc2 exd4 Nxd4 Re8 Rad1
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 dxe5 dxe5 h3 h6 Bd2 Nf6 Be3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 dxe5 dxe5 h3 h6 Bd2 Nf6 Be3
+  +0.62  b6 Qc2 Nd7 Rfd1 Ndc5 a3
+  +0.79  Qe7 Nd5 Qe6 c5 Rd8 Qb3
+  +0.82  Nh5 Qd2 Kh7 a3 c6 Rad1
+  +0.88  Kh7 a3 Nh5 b4 Nf4 Bxf4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bc1
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bc1
+  +0.54  exd4 Nxd4 Qf6 Nb3 Qh4 h3
+  +0.56  c6 Bg5 f6 Bh4 Nh6 h3
+  +0.58  Nf6 Be3 Qe7 dxe5 dxe5 a3
+  +0.61  Qe8 h3 Nf6 dxe5 dxe5 Be3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 c6 Bf1
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 c6 Bf1
+  +0.29  exd4 Nxd4 Ng4 h3 Qb6 hxg4
+  +0.87  Bg4 d5 Kh8 Rb1 c5 Bg5
+  +0.91  h6 d5
+  +0.85  Nb4 h3 exd4 Nxd4 Re8 Bg5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Bg5 h6 Be3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Bg5 h6 Be3
+  +0.32  b6 Nd2 Bd7 Nb3 Nxb3 Qxb3
+  +0.34  Nh7 Nd2 Bd7 Kh1 b6 Rad1
+  +0.35  Qe7 g3
+  +0.46  Nh5 g3 b6 Kh1 Kh7 Nd2
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 b3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 b3
+  -0.12  Bh6 Qc2 Kh8 Bb2 Rg8 Kh1
+  +0.04  Bd7 a3 Bh6 Qc2 Nh5 Bxh5
+  +0.10  Ne8 Rb1 f5 a3 Bd7 Qc2
+  +0.16  h5 Rb1
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 dxe5 dxe5 Qxd8 Rxd8 Bg5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 dxe5 dxe5 Qxd8 Rxd8 Bg5
+  -0.08  Nc5 b4 Ne6 Rfd1 Rxd1+ Rxd1
+  +0.01  Re8 Be3 Ng4 Bd2 Nf6 Rfd1
+  +0.03  h6
+  +0.24  Be6 Nd5 Nxe4 Bxd8 Rxd8 Rfd1
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Na6 Nd2 Qe8 O-O
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Na6 Nd2 Qe8 O-O
+  +0.16  Nc5 h3 Bd7 Re1 Kh8 Rc1
+  +0.24  Bd7 a3 g5 Bg3 Nc5 b4
+  +0.26  Nh7 Nb5 h5 h3 Bd7 a3
+  +0.41  g5 Bg3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4 Bf2 g5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4 Bf2 g5
+  +0.42  Rb1 Nac5 b3 b6 a3 a4
+  +0.27  b3 Nf6
+  +0.28  a3 Nac5 b4 axb4 axb4 Rxa1
+  +0.23  Kh1 Nac5 b3 Rf6 g3 Rh6
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5 Nxd5 cxd5 c6 Bc4 cxd5 Bxd5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5 Nxd5 cxd5 c6 Bc4 cxd5 Bxd5
+  +0.01  Nd7 Nd2 Nc5 O-O Be6 Rfd1
+  +0.06  Na6 O-O Nc7 Bc4 b5 Bb3
+  +0.29  h6 Be3 Nd7 Nd2 Nf6 Bb3
+  +0.40  Nc6 O-O-O Nb4 Bb3 Nc6 Kb1
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 Be3 Ng4 Bg5 f6 Bh4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 Be3 Ng4 Bg5 f6 Bh4
+  +0.50  g5 Bg3 Nh6 c5 Nc6 Qb3+
+  +0.60  Na6 O-O Nh6 h3 c5 dxe5
+  +0.67  Nc6 d5
+  +0.75  Nd7 Qd2 Nh6 Rd1 Nf7 O-O
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 Be3 Ng4 Bg5 f6 Bc1
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 Be3 Ng4 Bg5 f6 Bc1
+  +0.35  exd4 Nxd4 f5 h3 Nh6 exf5
+  +0.36  Nc6 h3 exd4 Nxd4 Nge5 Nxc6
+  +0.64  Nh6 O-O
+  +0.62  f5 exf5 Bxf5 h3 Nf6 Be3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 Nge2 Nc6 d5 Ne5 Ng3 e6 Be2 exd5 cxd5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 Nge2 Nc6 d5 Ne5 Ng3 e6 Be2 exd5 cxd5
+  +0.50  h5 O-O Nh7 h3 h4 Nh1
+  +0.57  b5
+  +0.58  a6 a4 Bd7 h3 Ne8 O-O
+  +0.71  Rb8 a4 h5 Bg5 Qb6 Qd2
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6
+  +0.31  Nge2 b6 Ba3 Nd7 Nf4 e6
+  +0.22  Rd1 Rxd1+ Kxd1 Nd7 Bf2 Bxc3
+  +0.27  Be3 Be6
+  +0.19  Nd5 Nd7 Nxe7+ Nxe7 Bxe7 Bxb2
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 d5 e6 Qd2 exd5 cxd5 a6 a4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 d5 e6 Qd2 exd5 cxd5 a6 a4
+  +0.34  Qa5 Ra3 Re8 Nge2 Nbd7 Nd1
+  +0.30  Re8 Be2
+  +0.32  Nbd7 Nh3
+  +0.50  Qe7 Be2 Re8 Bg5 Qc7 Bh6
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Bg5 c5 d5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Bg5 c5 d5
+  +0.30  e6 Qd2 exd5 cxd5 Re8 Bd3
+  +0.45  a6 Qd2 Qa5 h4 Nbd7 h5
+  +0.47  Qa5 Qd2 a6 h4 Nbd7 h5
+  +0.55  Qc7 Qd2
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Nge2 c5 d5 e6 Ng3 exd5 cxd5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Nge2 c5 d5 e6 Ng3 exd5 cxd5
+  +0.40  h5 Bg5 a6 a4 Qe8 Bd3
+  +0.56  a6 a4 h5 Bg5 Qe8 Qd2
+  +0.57  Re8 Be2 a6 a4 h5 Bg5
+  +0.67  Na6 h4
+### d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 e4 exd4 Nxd4 Re8 h3 Nc5 Re1 a5 Qc2 c6 Be3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 e4 exd4 Nxd4 Re8 h3 Nc5 Re1 a5 Qc2 c6 Be3
+  +0.59  a4 Rad1 Nfd7 f4 Qa5 Bf2
+  +0.76  Qe7 Rad1 a4 b4 axb3 axb3
+  +0.79  Qb6 Nb3
+  +0.76  Bd7 Rad1 a4 Bf4 Bf8 b4
+### d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 Qc2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 Qc2
+  +0.35  exd4 Nxd4
+  +0.46  Re8 Rd1 c6 e4 exd4 Nxd4
+  +0.47  c6 e4 exd4 Nxd4 Re8 Rd1
+  +0.56  h6 dxe5 dxe5 Rd1 Qe7 Nd2
+### d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 h3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 h3
+  +0.45  Re8 e4 b6 d5 Nc5 Ne1
+  +0.49  exd4 Nxd4 Nb6 b3 d5 Ba3
+  +0.58  c6 e4 Re8 Re1 a6 Be3
+  +0.61  a6 e4 b5 Be3 b4 Nd5
+### d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 b3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 b3
+  +0.41  Re8 Bb2 c6 e4 exd4 Nxd4
+  +0.51  exd4 Nxd4 Nc5 Qc2 Re8 Bb2
+  +0.56  a5 Qc2 Re8 dxe5 dxe5 Ba3
+  +0.60  c6 Ba3
+### d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 e3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 e3
+  +0.20  c6 a4
+  +0.19  Re8 b3 c6 Bb2 a5 e4
+  +0.37  a6 dxe5 dxe5 e4 Re8 Qc2
+  +0.41  exd4 Nxd4 Re8 b3 Nc5 Qc2
+### c4 Nf6 Nc3 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O e5 d3 Nc6 Rb1 a5 a3 h6 b4 axb4 axb4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: c4 Nf6 Nc3 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O e5 d3 Nc6 Rb1 a5 a3 h6 b4 axb4 axb4
+  +0.30  Bg4 h3 Be6 e4 Nd7 Qe2
+  +0.34  Be6
+  +0.34  Ne7 Bb2 Be6 Ra1 Qd7 Qb3
+  +0.37  Re8 b5 Ne7 Qc2 Be6 Bb2
+### Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O d3 d6 e4 e5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O d3 d6 e4 e5
+  +0.22  b4 a6 Bb2 Nc6 c3 Be6
+  +0.15  Nc3 Nc6 Be3 Be6 Re1 Re8
+  +0.11  c4 Bg4 h3 Bxf3 Bxf3 Nc6
+  +0.05  a4 Nc6
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 d5 e6 Be2 exd5 cxd5 Bg4 O-O Nbd7 h3 Bxf3 Bxf3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 d5 e6 Be2 exd5 cxd5 Bg4 O-O Nbd7 h3 Bxf3 Bxf3
+  +0.55  Re8
+  +0.61  a6 a4 Re8 g4 h6 Qe2
+  +0.64  Rb8 a4 a6 a5 Ne8 Qd3
+  +0.67  Ne8 a4 Rb8 Qd3 Nc7 Bg4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 dxc5 Qa5 Bd3 Qxc5 Qe2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 dxc5 Qa5 Bd3 Qxc5 Qe2
+  +0.44  Bg4 Be3 Qa5 O-O Nc6 Rac1
+  +0.48  Nc6 Be3 Qh5 h3 Bg4 O-O
+  +0.52  Na6 Be3 Qa5 O-O Nb4 Kh1
+  +0.56  Nbd7 Be3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5 c5 d5 e6 Qd2 exd5 exd5 Re8 Nf3 Bg4 O-O Nbd7
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5 c5 d5 e6 Qd2 exd5 exd5 Re8 Nf3 Bg4 O-O Nbd7
+  +0.71  a4 Qa5 h3 Bxf3 Bxf3 a6
+  +0.68  h3 Bxf3 Bxf3 a6 a4 Qa5
+  +0.46  Rae1 a6
+  +0.46  Rfe1 Qb6 h3 Bf5 Bd3 Bxd3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 h3 O-O Be3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 h3 O-O Be3
+  +0.63  c5 Nf3 Qb6 Rb1 cxd4 Nxd4
+  +0.63  Nfd7 Qd2 e5 dxe5 dxe5 O-O-O
+  +0.63  Nbd7 Nf3 b6 Qc2 c5 d5
+  +0.63  e5 d5 Na6 g4 Nc5 f3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 h3 O-O Be3 e5 d5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 h3 O-O Be3 e5 d5
+  +0.66  Nbd7 g4
+  +0.67  Nfd7 g4 f5 exf5 gxf5 gxf5
+  +0.67  Na6 g4 Nc5 f3 Nfd7 h4
+  +0.70  c6 g4 cxd5 cxd5 Na6 f3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 h3 O-O Bg5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 h3 O-O Bg5
+  +0.40  c5 d5 e6 Bd3 exd5 cxd5
+  +0.47  a6 Nf3 c5 Be2 cxd4 Nxd4
+  +0.49  Re8 Nf3 c5 dxc5 dxc5 Qxd8
+  +0.64  Na6 Nf3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 d5 Na6 Be3 Nh5 Nh2 Qe8 Be2 Nf4 Bf3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 d5 Na6 Be3 Nh5 Nh2 Qe8 Be2 Nf4 Bf3
+  +0.09  f5
+  +0.29  Qe7 a3 f5 b4 Nb8 O-O
+  +0.34  Nc5 Bxc5 dxc5 h4 f5 g3
+  +0.38  Nb4 O-O Bd7 Qd2 a5 a3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3
+  +0.38  Bg4 Be2 Nfd7 h4 Bxf3 Bxf3
+  +0.41  e5 d5 a5 Bc2 Na6 a3
+  +0.44  a5 h3 e5 O-O Nc6 d5
+  +0.51  Na6
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Bd3 O-O Nge2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Bd3 O-O Nge2
+  +0.37  Nc6 O-O
+  +0.49  e5 d5 Nh5 Be3 Qh4 O-O
+  +0.53  c5 d5 e6 O-O exd5 cxd5
+  +0.59  Na6 h3 e5 d5 Nd7 Bc2
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Bh2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Bh2
+  +0.11  Ne4 Qc2 f5 Nbd2 Nxd2 Qxd2
+  +0.26  Qe7 Nc3 a5 Qc2 c6 Rfd1
+  +0.31  c6 Nc3 Qe7 Qc2 a5 Rfd1
+  +0.32  a5 Nc3 Qe7 Qc2 c6 Rfd1
+### d4 Nf6 Nf3 g6 Bg5 Bg7 Nbd2 O-O e4 d6 c3 Nbd7 Be2 e5 O-O h6 Bh4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Nf3 g6 Bg5 Bg7 Nbd2 O-O e4 d6 c3 Nbd7 Be2 e5 O-O h6 Bh4
+  +0.35  Qe8 Re1 Nb6 Bd3 Nh5 Nf1
+  +0.37  g5 Bg3 Re8 Qc2 exd4 Nxd4
+  +0.38  Re8 Qc2 g5 Bg3 exd4 cxd4
+  +0.39  exd4
+### d4 Nf6 Nf3 g6 Bg5 Bg7 Nbd2 O-O e3 d6 Be2 Nbd7 O-O e5 c3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Nf3 g6 Bg5 Bg7 Nbd2 O-O e3 d6 Be2 Nbd7 O-O e5 c3
+  +0.01  Qe8 Bh4
+  +0.05  Re8 dxe5 dxe5 h3 h6 Bh4
+  +0.05  h6 Bh4 Re8 h3 a5 a4
+  +0.20  a5 Bh4 h6 e4 Qe8 a4
+### d4 Nf6 Nf3 g6 e3 Bg7 Bd3 O-O O-O d6 Nbd2 Nbd7 e4 e5 c3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Nf3 g6 e3 Bg7 Bd3 O-O O-O d6 Nbd2 Nbd7 e4 e5 c3
+  +0.25  Re8 a4 c6 Re1 d5 exd5
+  +0.27  exd4 cxd4
+  +0.21  a5 Re1 a4 Nf1 c6 Bg5
+  +0.35  b6 a4 Re8 d5 Bb7 a5
+### d4 Nf6 Bg5 g6 Bxf6 exf6 e3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bg5 g6 Bxf6 exf6 e3
+  -0.08  d5 c4
+  +0.03  c6 c4 d5 cxd5 Qxd5 Nc3
+  +0.11  Bg7 c4 d5 Nc3 dxc4 Bxc4
+  +0.15  f5 c4 Bb4+ Nd2 O-O a3
+### d4 Nf6 Bg5 g6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bg5 g6
+  +0.13  Nd2 d5 e3 Bg7 c3 O-O
+  +0.03  c3
+  -0.01  Bxf6 exf6
+  +0.10  c4 Ne4 Bf4 c5 Nd2 Nxd2
+DONE
+
+=== 2b. Second batch ===
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 d5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 d5
+  +0.46  f5 Nh4 Bf6 Bxf6 Nxf6 exf5
+  +0.46  f6 Bh4
+  +0.60  h6 Bd2 Nf6 Qb1 Nh5 b4
+  +0.70  b6 a3 f6 Bd2 f5 b4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 h3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 h3
+  +0.83  h6 Bh4
+  +0.83  exd4 Nxd4 Nf6 f3 Nc5 Qd2
+  +0.86  f6 Bh4 Nh6 Re1 c6 c5
+  +0.99  Nf6 Re1 h6 Bxf6 Bxf6 c5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 c6 Bf1 exd4 Nxd4 Ng4 h3 Qb6 hxg4 Qxd4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 c6 Bf1 exd4 Nxd4 Ng4 h3 Qb6 hxg4 Qxd4
+  +0.51  Qe2 Qe5 g3 Nc5 Bf4 Qe7
+  +0.43  Qf3 Qe5 Be3 Qe7 Qg3 Nc5
+  +0.29  Be3
+  +0.30  Bg5 Qxd1 Raxd1 Bxg4 f3 Be6
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 c6 Bf1 exd4 Nxd4 Ng4 Nf3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 c6 Bf1 exd4 Nxd4 Ng4 Nf3
+  +0.23  Ne5 h3 Qf6 Be2 Nxf3+ Bxf3
+  +0.30  Qb6
+  +0.26  Nc5 h3
+  +0.44  Re8 h3 Ne5 Be3 Nxf3+ Qxf3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Bg5 h6 Be3 b6 Nd2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Bg5 h6 Be3 b6 Nd2
+  +0.33  Qe8 Nb3 Na6 h3 Nh7 Rad1
+  +0.37  Nh7 Nb3 Bd7 Kh1 f5 exf5
+  +0.42  Bd7 b3
+  +0.37  Ng4 Bxg4 Bxg4 a3 Bc8 b4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 b3 Bh6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 b3 Bh6
+  -0.11  Qc2 Nh5 Bxh5 gxh5 Nf3 Bxc1
+  -0.38  Bf3 Nd3 Ba3 Nd7 Be2 N3c5
+  -0.44  h3 b6 Qc2 Kh8 Bb2 Bf4
+  -0.43  Re1 Bxd2 Qxd2 Ncxe4 Qe3 Nxc3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5
+  -1.35  Nxe4 Ne7+ Kf8 Nxc8 Raxc8 Be3
+  -0.09  Nd7 c5
+  +0.65  Nh5 c5 Be6 c6 Bxd5 exd5
+  +0.94  Nxd5 cxd5 h6 Be3 Nb8 Rac1
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Na6 Nd2 Qe8 O-O Nh7
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Na6 Nd2 Qe8 O-O Nh7
+  +0.29  f3 Bd7 Nb5 Bf6 Bf2 Qe7
+  +0.24  Nb5 Bd7 f3 h5 a3 Bh6
+  +0.23  a3 h5
+  +0.21  h3 Ng5 Bg4 f5 exf5 gxf5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4 Bf2 g5 Rb1
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4 Bf2 g5 Rb1
+  +0.23  Qe8
+  +0.27  Rf6 Qa4 Qe8 Qxa5 Rh6 g4
+  +0.31  Nac5 b3 Nf6 a3 Bd7 Kh1
+  +0.49  b6 a3 Qf6 b4 Qg6 bxa5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Nd3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Nd3
+  -0.02  f5 a3 Nac5 Nxc5 Nxc5 Be3
+  -0.01  Ndc5 Be3
+  +0.04  Nac5 Be3 f5 exf5 gxf5 f4
+  +0.14  b6 a3 Nac5 Nxc5 Nxc5 Be3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 Be3 Ng4 Bg5 f6 Bh4 g5 Bg3 Nh6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 Be3 Ng4 Bg5 f6 Bh4 g5 Bg3 Nh6
+  +0.63  h3 exd4 Nxd4 Nc6 h4 f5
+  +0.48  dxe5 dxe5
+  +0.46  O-O Nc6 dxe5 dxe5 Qb3 g4
+  +0.39  c5 g4 Nh4 Nc6 dxe5 dxe5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 Be3 Ng4 Bg5 f6 Bc1 Nc6 d5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 Be3 Ng4 Bg5 f6 Bc1 Nc6 d5
+  +0.30  Nd4 Nxd4 exd4 Nb5 f5 O-O
+  +0.87  Ne7 h3 Nh6 h4 f5 h5
+  +0.96  Nb8 h3 Nh6 g4 Kh8 Qc2
+  +1.01  Nb4 a3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 Nge2 Nc6 d5 Ne5 Ng3 e6 Be2 exd5 cxd5 h5 O-O
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 Nge2 Nc6 d5 Ne5 Ng3 e6 Be2 exd5 cxd5 h5 O-O
+  +0.46  Nh7 Nh1
+  +0.49  h4 Nh1 h3 g4 b5 Nxb5
+  +0.47  Bd7 Rc1 b5 Nxb5 Qb8 a4
+  +0.48  a6 h3 b5 Bg5 Ned7 f4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6 Nge2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6 Nge2
+  +0.23  b6
+  +0.32  Nd7 Bf2 Nde5 Nf4 b6 Rc1
+  +0.55  Nh5 g4 Nf6 Nf4 Nd7 Bf2
+  +0.79  Be6 Nf4 Nd7 Bf2 Na5 Nxe6
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6 Nd5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6 Nd5
+  +0.11  Nd7 Ba3 e6 Nc7 Rb8 f4
+  +0.36  e6 Ne7+
+  +0.53  Nxd5 cxd5 b6 Ba3 Nd4 O-O-O
+  +0.62  Rd7 O-O-O e6 Nxf6+ Bxf6 Rxd7
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 d5 e6 Qd2 exd5 cxd5 a6 a4 Re8 Nge2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 d5 e6 Qd2 exd5 cxd5 a6 a4 Re8 Nge2
+  +0.23  Nbd7
+  +0.60  h5 Nc1 Nbd7 Be2 Ne5 h3
+  +0.61  Qa5 Nd1 Qxd2+ Kxd2 Nbd7 Nec3
+  +0.63  b6 g4 Nbd7 Ng3 Ne5 Be2
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Bg5 c5 d5 e6 Qd2 exd5 cxd5 Re8 Bd3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Bg5 c5 d5 e6 Qd2 exd5 cxd5 Re8 Bd3
+  -0.10  Nbd7 Nge2 Ne5 O-O h6 Be3
+  -0.08  a6 a4 Nbd7 Nge2 Ne5 O-O
+  +0.22  h6 Bf4
+  +0.34  Qc7 a4 Nbd7 Nge2 Ne5 O-O
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Nge2 c5 d5 e6 Ng3 exd5 cxd5 h5 Bg5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Nge2 c5 d5 e6 Ng3 exd5 cxd5 h5 Bg5
+  +0.47  a6 a4 Qc7 Qd2 Nh7 Bh6
+  +0.59  Qe8 Qd2 a6 Bd3 b5 O-O
+  +0.66  Qa5 a4 Nbd7 Be2 Nh7 Be7
+  +0.66  Qc7
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 Nge2 Nc6 d5 Ne5 Ng3 e6 Be2 exd5 cxd5 h5 Bg5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 Nge2 Nc6 d5 Ne5 Ng3 e6 Be2 exd5 cxd5 h5 Bg5
+  +0.19  Qb6 Qd2 Nh7 Bh4 c4 O-O-O
+  +0.29  c4
+  +0.40  b5 Bxb5 Rb8 Rb1 c4 O-O
+  +0.53  Qa5 O-O c4 Qd2 b5 a3
+### d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 Qc2 exd4 Nxd4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 Qc2 exd4 Nxd4
+  +0.23  Nb6 Bg5 h6 Bxf6 Qxf6 Rad1
+  +0.47  Re8 b3 c6 e4 Nc5 Bb2
+  +0.49  c6 Rd1 Qe7 Bf4 Ne5 b3
+  +0.52  Ne5 b3
+### d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 h3 Re8 e4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 h3 Re8 e4
+  +0.58  b6 Bg5
+  +0.58  c6 Qc2 exd4 Nxd4 Nc5 Re1
+  +0.63  exd4 Nxd4 Nc5 Re1 a5 b3
+  +0.70  a5 Be3 exd4 Nxd4 Nc5 Qc2
+### d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 b3 Re8 Bb2 c6 e4 exd4 Nxd4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 b3 Re8 Bb2 c6 e4 exd4 Nxd4
+  +0.32  h5 Qc2 h4 Rad1 Nc5 b4
+  +0.35  Nc5 Qc2
+  +0.39  a5 Qc2 Nc5 Rad1 Qb6 h3
+  +0.45  Qb6 Na4 Qc7 Re1 a6 Nc3
+### d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 e3 Re8 b3 c6 Bb2 a5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 e3 Re8 b3 c6 Bb2 a5
+  +0.40  Rc1 exd4 Nxd4 h5 h3 Nc5
+  +0.29  a4
+  +0.18  dxe5 dxe5 Na4 Ne4 Rc1 Nec5
+  +0.13  Qc2 e4 Nd2 d5 cxd5 cxd5
+### d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 dxe5 dxe5 e4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 dxe5 dxe5 e4
+  +0.24  Nc5 Nxe5 Nfxe4 Nxe4 Nxe4 Qxd8
+  +0.37  c6 Qc2 Qe7 Be3 a5 Rad1
+  +0.40  Re8 Qc2 c6 h3 Qc7 Rd1
+  +0.50  b6 Be3
+### d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 e4 c6 h3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 e4 c6 h3
+  +0.58  Re8 Be3 exd4 Nxd4 Nc5 Qc2
+  +0.66  exd4 Nxd4 Re8 Bf4 Nc5 Re1
+  +0.68  b6
+  +0.72  a6 Be3 Re8 d5 cxd5 cxd5
+### d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 e4 exd4 Nxd4 Re8 h3 Nc5 Re1 a5 Qc2 c6 Be3 a4 Rad1
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 e4 exd4 Nxd4 Re8 h3 Nc5 Re1 a5 Qc2 c6 Be3 a4 Rad1
+  +0.61  Qa5 Bf4 Bf8 Nf3 Rd8 Qc1
+  +0.67  Nfd7 f4 Qa5 g4 Nb6 Nb1
+  +0.71  Qb6 Kh1 Qa5 f4 Nfd7 g4
+  +0.71  Qc7 f4 Qa5 Kh1 Nfd7 g4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 d5 e6 Be2 exd5 exd5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 d5 e6 Be2 exd5 exd5
+  -0.03  Bf5 O-O Ne4 Nxe4 Bxe4 Bd3
+  +0.13  Bd7 O-O
+  +0.25  Re8 O-O Na6 Bd3 Bd7 Bb1
+  +0.27  Na6 O-O Bd7 a3 Rb8 Re1
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 Be2 cxd4 Nxd4 Nc6 Be3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 Be2 cxd4 Nxd4 Nc6 Be3
+  +0.25  Ng4 Bxg4 Bxd4 Bxd4 Bxg4 Qxg4
+  +0.26  Bg4 Nxc6 Bxe2 Nxd8 Bxd1 Rxd1
+  +0.39  Re8 O-O Bg4 Nb3 Bxe2 Qxe2
+  +0.46  e5 Nxc6 bxc6 fxe5 Ne8 exd6
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 dxc5 Qa5 Bd3 Qxc5 Qe2 Bg4 Be3 Qa5 O-O Nc6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 dxc5 Qa5 Bd3 Qxc5 Qe2 Bg4 Be3 Qa5 O-O Nc6
+  +0.47  Rac1 Nd7 Bb1 Bxf3 Qxf3 Nb6
+  +0.46  Kh1 Bxf3 Qxf3 Nd7 Rac1 Bxc3
+  +0.27  h3 Bxf3 Qxf3 Nd7 Rac1 Bxc3
+  +0.23  Rf2 Nb4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5
+  +0.49  Na6 Nf3 e5 dxe5 dxe5 Qxd8
+  +0.52  c5 d5 e6 Qd2 exd5 exd5
+  +0.55  a6 Qd2 c5 Nf3 cxd4 Nxd4
+  +0.60  h6 Be3 c5 d5 e6 Qd2
+  +0.63  Nc6 d5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5 Na6 Qd2 e5 d5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5 Na6 Qd2 e5 d5
+  +0.41  Qe8 Nf3 Nc5 Qc2 a5 Nd2
+  +0.65  c6 f3 Qa5 g4 h5 h3
+  +0.71  Bd7 h4 Qe8 O-O-O Nc5 f3
+  +0.76  Rb8 f3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5 c5 d5 e6 Qd2 exd5 exd5 Re8 Nf3 Bg4 O-O Nbd7 h3 Bxf3 Bxf3 a6 a4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5 c5 d5 e6 Qd2 exd5 exd5 Re8 Nf3 Bg4 O-O Nbd7 h3 Bxf3 Bxf3 a6 a4
+  +0.56  h5 a5 Qc7 Kh1 Rab8 Bf4
+  +0.59  Qa5 Qc2 Re7 Rad1 Rae8 b3
+  +0.64  Qc7 g4
+  +0.68  Qe7 a5 Qf8 Bf4 Rab8 b3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 d5 Na6 Bg5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 d5 Na6 Bg5
+  +0.65  h6
+  +0.70  Kh8 g4 Bd7 Be2 c6 a3
+  +0.70  c6 Nd2 h6 Be3 Ne8 g4
+  +0.72  Nc5 b4 Ncd7 g4 a5 b5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8 Nxe5 Nxe4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8 Nxe5 Nxe4
+  -0.39  Nxe4 Bxe5 Bg5 Rd4 Nf6+ Kg7
+  -2.59  f4 Nxc3 bxc3 Nd7 Be2 Nxe5
+  -3.56  Nxf7 Bxc3+ bxc3 Kxf7 Bf4 Re8
+  -3.73  Nd5 Bxe5 Be3 Bxb2 Rd1 Rxd5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8
+  +0.19  Bg5 Re8
+  +0.00  Be2 h6 Be3 Nc6 Rd1 Rxd1+
+  +0.00  Nd5 Rd7 Nxe5 Nxd5 Nxd7 Nb4
+  -0.04  a3 Nc6 Bg5 Rd7 Rd1 Rxd1+
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3 e5 d5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3 e5 d5
+  +0.39  a5 Bc2 Na6 a3 Qe8 h3
+  +0.41  Qe8 Bc2 a5 h3 Na6 a3
+  +0.52  Nh5 O-O Nd7 Bc2 Ndf6 Re1
+  +0.44  Na6 a3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3 e5 O-O
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3 e5 O-O
+  +0.23  Nc6 dxe5 dxe5 h3 a5 Nd5
+  +0.27  exd4 Nxd4 Nc6 Nde2 Re8 h3
+  +0.39  a5 h3 Nc6 d5 Nd4 Nxd4
+  +0.49  Na6 h3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Bd3 O-O Nge2 Nc6 O-O e5 d5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Bd3 O-O Nge2 Nc6 O-O e5 d5
+  +0.43  Nd4 Bg5 c5 Qd2 a6 b3
+  +0.63  Ne7 f3 Kh8 g4 Nfg8 Ng3
+  +0.72  Nb4 Bb1
+  +0.92  Nb8 Bg5 a5 Qd2 Na6 f3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 h3 O-O Be3 e5 d5 Na6 g4 Nc5 f3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 h3 O-O Be3 e5 d5 Na6 g4 Nc5 f3
+  +0.64  Ne8 h4
+  +0.72  c6 h4 h5 g5 Nfd7 b4
+  +0.73  a5 h4 h5 g5 Nfd7 Qd2
+  +0.79  Nfd7 h4 f5 b4 fxe4 fxe4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 h3 O-O Bg5 c5 d5 e6 Bd3 exd5 cxd5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 h3 O-O Bg5 c5 d5 e6 Bd3 exd5 cxd5
+  +0.46  h6 Be3 b5 Nxb5 Re8 Nc3
+  +0.47  Re8 Nge2 Nbd7 O-O h6 Bh4
+  +0.51  b5 Bxb5 h6 Bd2 Nbd7 Nge2
+  +0.54  a6 a4
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Bh2 Ne4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Bh2 Ne4
+  +0.15  Qc2
+  -0.20  Nfd2 Nxd2 Qxd2 Qg5 Kh1 b6
+  -0.23  Qd5 Nec5 Qd2 c6 Nc3 a5
+  -0.29  Nbd2 Nxd2 Nxd2 a5 Ne4 Qe7
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Bh2 Ne4 Nbd2 Nxd2 Qxd2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Bh2 Ne4 Nbd2 Nxd2 Qxd2
+  -0.50  a5 c5 e4 c6 exf3 cxd7
+  -0.44  Qe7 a3 a5 b4 c5 Rab1
+  -0.30  c6 a3 a5 b4 c5 e4
+  -0.17  a6 Rfd1
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c3 e5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c3 e5
+  +0.71  dxe5 dxe5 Nxe5 Nh5 Bxh5 Nxe5
+  +0.42  Bh2
+  +0.16  Bg3 Qe7 a4 a5 Bh2 c6
+  +0.05  Bg5 h6 Bh4 c6 a4 a5
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c3 e5 Bh2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c3 e5 Bh2
+  +0.28  Ne4 a4 a5 Na3 c6 Bd3
+  +0.38  Qe7 a4 Ne4 a5 a6 Re1
+  +0.47  exd4 cxd4 Nb6 Re1 Bd7 Bd3
+  +0.53  Nh5 Re1 b6 g4 Nhf6 dxe5
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 Bh2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 Bh2
+  -0.06  Ne4 Bd3 exd4 exd4 Ng5 Nxg5
+  +0.03  exd4 exd4 Ne4 Nbd2 b6 Nxe4
+  +0.27  a5 Nc3 exd4 exd4 Ne4 Nxe4
+  +0.47  a6 dxe5
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 Bh2 e4 Nd4
+C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529
+                throw new Error(`Invalid move: ${move}`);
+                      ^
+
+Error: Invalid move: Nd4
+    at Chess.move (C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529:23)
+    at file:///C:/Users/nick2/Code/London/scripts/engine-ask.mjs:22:31
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v20.20.2
+### d4 Nf6 Bg5 g6 Nd2 Bg7
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bg5 g6 Nd2 Bg7
+  +0.12  e4 d6 c3 O-O Ngf3 c5
+  +0.18  e3 d5 c3 O-O Ngf3 Bf5
+  +0.16  c3 d5 e3 O-O Ngf3 c5
+  +0.16  Ngf3 d5 c3 c5 dxc5 O-O
+### d4 Nf6 Bg5 g6 c4 Bg7 Nc3 d6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bg5 g6 c4 Bg7 Nc3 d6
+  +0.36  e4
+  +0.24  Nf3 h6 Bh4 g5 Bg3 Nh5
+  +0.22  e3 c5 Bd3 Nc6 Nge2 h6
+  +0.19  h3 h6 Bf4 Nfd7 e3 e5
+### d4 Nf6 Bg5 g6 Bxf6 exf6 e3 Bg7 c4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bg5 g6 Bxf6 exf6 e3 Bg7 c4
+  +0.20  d5 h4 dxc4 Bxc4 O-O h5
+  +0.25  d6 Nc3 h5 h4 O-O Nge2
+  +0.31  h5 Nc3 d6 Nge2 h4 Nf4
+  +0.33  c5 Nc3
+### d4 Nf6 Nf3 g6 Bg5 Bg7 Nbd2 O-O e4 d6 c3 Nbd7 Be2 e5 O-O h6 Bh4 Qe8 Re1
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Nf3 g6 Bg5 Bg7 Nbd2 O-O e4 d6 c3 Nbd7 Be2 e5 O-O h6 Bh4 Qe8 Re1
+  +0.44  Nb6 a4
+  +0.50  a6 a4 b6 b4 Bb7 Bf1
+  +0.50  Nh5 a4 a5 Bb5 g5 Bg3
+  +0.52  a5 Bb5 Nh5 Nc4 g5 Bg3
+### d4 Nf6 Nf3 g6 Bg5 Bg7 Nbd2 O-O e3 d6 Be2 Nbd7 O-O e5 c3 h6 Bh4 Re8 h3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Nf3 g6 Bg5 Bg7 Nbd2 O-O e3 d6 Be2 Nbd7 O-O e5 c3 h6 Bh4 Re8 h3
+  +0.16  a5 dxe5 dxe5 Qc2 Qe7 Rfd1
+  +0.18  e4 Nh2
+  +0.18  b6 a4 a5 e4 Bb7 dxe5
+  +0.19  Qe7 Re1 e4 Nh2 Nb6 c4
+### d4 Nf6 Nf3 g6 e3 Bg7 Bd3 O-O O-O d6 Nbd2 Nbd7 e4 e5 c3 Re8 a4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Nf3 g6 e3 Bg7 Bd3 O-O O-O d6 Nbd2 Nbd7 e4 e5 c3 Re8 a4
+  +0.10  d5 dxe5 Nxe5 Nxe5 dxe4 Nxe4
+  +0.32  c6 Re1
+  +0.32  b6 d5 Nc5 Bc2 Bd7 b4
+  +0.33  a5 Re1 d5 dxe5 Nxe5 Nxe5
+### d4 Nf6 Nf3 g6 e3 Bg7 Bd3 O-O O-O d6 c4 Nbd7 Nc3 e5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Nf3 g6 e3 Bg7 Bd3 O-O O-O d6 c4 Nbd7 Nc3 e5
+  +0.23  h3 Re8
+  +0.33  e4 exd4 Nxd4 Re8 h3 Nc5
+  +0.30  Qc2 c6 Rd1 Qe7 d5 cxd5
+  +0.24  Re1 Re8 e4 exd4 Nxd4 Nc5
+### Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O d3 d6 e4 e5 Nc3 Nc6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O d3 d6 e4 e5 Nc3 Nc6
+  +0.08  Re1
+  +0.07  h3 Be6
+  +0.10  Be3 Re8 Re1 Be6 Qc1 a5
+  +0.03  a3 Re8 Be3 Be6 Re1 Qc8
+### Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O d3 d6 e4 e5 Nbd2 Nc6 c3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O d3 d6 e4 e5 Nbd2 Nc6 c3
+  +0.02  a5 a4 h6 Re1 Re8 h3
+  +0.21  b5 d4 a5 a4 b4 Re1
+  +0.24  h6 b4 Be6 a4 Re8 Qc2
+  +0.27  d5 b4 dxe4 dxe4 Qd3 Qb3
+### Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O d3 d6 e4 e5 b4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O d3 d6 e4 e5 b4
+  +0.11  d5 exd5 Nxd5 Bg5 Qd7 b5
+  +0.14  Re8 a4 d5 Nbd2 dxe4 Nxe4
+  +0.20  Na6 a3 c5 Bd2 b5 Re1
+  +0.24  c6 a4 Re8 Nbd2 Na6 Ba3
+### c4 Nf6 Nc3 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O e5 d3 Nc6 Rb1 a5 a3 h6 b4 axb4 axb4 Be6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: c4 Nf6 Nc3 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O e5 d3 Nc6 Rb1 a5 a3 h6 b4 axb4 axb4 Be6
+  +0.38  Nd2 d5 b5 Ne7 cxd5 Nfxd5
+  +0.33  b5 Ne7 Qc2 c6 Bb2 Qc7
+  +0.29  Re1 Ne7 b5 c6 Qb3 Qc7
+  +0.27  Be3 Ne7
+### c4 Nf6 Nc3 g6 g3 Bg7 Bg2 O-O e4 d6 Nge2 e5 O-O
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: c4 Nf6 Nc3 g6 g3 Bg7 Bg2 O-O e4 d6 Nge2 e5 O-O
+  +0.25  c5 d3 Nc6 a3 a6 Rb1
+  +0.37  Nc6 d3 a5 Bg5 h6 Be3
+  +0.44  Be6 d3 Qd7 Bg5 Nc6 Nd5
+  +0.44  Re8 d3 c5 a3 Nc6 Rb1
+### c4 Nf6 Nc3 g6 g3 Bg7 Bg2 O-O e4 d6 Nge2 e5 O-O Nc6 d3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: c4 Nf6 Nc3 g6 g3 Bg7 Bg2 O-O e4 d6 Nge2 e5 O-O Nc6 d3
+  +0.31  a5 Bg5 h6 Be3 Ng4 Bd2
+  +0.37  Nh5 Rb1 a5 b3 Kh8 Qd2
+  +0.45  a6 Bg5 h6 Be3 Rb8 h3
+  +0.47  Re8 Rb1 a5 b3 Nd7 f4
+### c4 Nf6 Nc3 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O e5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: c4 Nf6 Nc3 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O e5
+  +0.55  d4 exd4 Nxd4 Re8 h3 c6
+  +0.25  d3 Nc6 Re1 a5 a3 Bd7
+  +0.23  Re1 Nc6
+  +0.25  h3 c5 d3 Nc6 Re1 h6
+DONE
+
+=== 2c. Third batch ===
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5 Na6 Qd2 e5 d5 Qe8
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5 Na6 Qd2 e5 d5 Qe8
+  +0.40  h3 Nc5 Bf3 a5 Nge2 Nfd7
+  +0.40  Nf3 Bd7 O-O Nh5 Rfe1 f5
+  +0.22  h4 Nc5
+  +0.27  g3 Nd7 Nf3 Ndc5 Nh4 Nb4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5 Na6 Qd2 e5 d5 Qe8 Nf3 Nc5 Qc2 a5 Nd2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5 Na6 Qd2 e5 d5 Qe8 Nf3 Nc5 Qc2 a5 Nd2
+  +0.18  Nh5 Be3 b6 O-O-O f5 f3
+  +0.48  Nfd7 Be3 f5 f3 Nf6 Bxc5
+  +0.48  Bd7 Be3 Ng4 Bxg4 Bxg4 f3
+  +0.49  b6 Nb5 Na6 f3 Nh5 g3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5 Na6 Nf3 e5 dxe5 dxe5 Qxd8 Rxd8
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5 Na6 Nf3 e5 dxe5 dxe5 Qxd8 Rxd8
+  +0.44  Nd5 Nxd5 cxd5 f6 Be3 Nb4
+  +0.12  Nd2
+  +0.02  Nxe5 h6
+  -0.01  O-O Nc5 Rad1 Re8 Nd2 Ne6
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3 e5 d5 a5 O-O Na6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3 e5 d5 a5 O-O Na6
+  +0.41  a3 Nc5 Bc2 a4 Be3 Bd7
+  +0.41  Bc2 Kh8 a3 Ng8 b4 Bd7
+  +0.40  Re1 Bd7 Bc2 Nc5 b3 Nh5
+  +0.35  Rb1 Qe8 Re1 Nc5 Bc2 Nh5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3 e5 O-O Nc6 d5 Nd4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3 e5 O-O Nc6 d5 Nd4
+  +0.26  Nb5
+  +0.22  Nxd4 exd4 Ne2 Nd7 f3 Re8
+  +0.14  h3 c5 dxc6 bxc6 b4 Nd7
+  +0.08  Rb1 Bg4 Be2 Nxe2+ Qxe2 Nh5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Bd3 O-O Nge2 Nc6 O-O e5 d5 Nd4 Nxd4 exd4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Bd3 O-O Nge2 Nc6 O-O e5 d5 Nd4 Nxd4 exd4
+  +0.30  Ne2 Re8 Bg5 h6 Bxf6 Qxf6
+  +0.07  Nb5 Re8 Re1 a6 Nxd4 Nxd5
+  -0.20  Nb1 Nd7
+  -0.48  Na4 Ng4 b3 Qh4 Bf4 Ne5
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5
+  +0.52  Nxe5
+  +0.27  Bh2 Ne4 Qc2 f5 Nbd2 Nxd2
+  +0.17  Bg3 Ne4 Bh4 Bf6 Bxf6 Nexf6
+  -0.24  Bg5 h6 Bh4 g5 Bg3 Ne4
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c3
+  -0.04  b6 Bh2 Bb7 a4 a6 Nbd2
+  +0.09  a6 Bh2 b6 c4 Ne4 Bd3
+  +0.16  a5 Bh2 b6 Qc2 Bb7 Rd1
+  +0.30  Rb8 Bh2
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Bh2 Ne4 Qc2 f5 Nbd2 Nxd2 Qxd2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Bh2 Ne4 Qc2 f5 Nbd2 Nxd2 Qxd2
+  +0.01  Qe7 b4 c5 Rfd1 cxb4 c5
+  +0.05  a5 c5 Nxc5 Qxd8 Rxd8 Bxe5
+  +0.20  Kh8 c5 Qe7 b4 a5 a3
+  +0.26  c5 Rad1
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Nd3 f5 a3 Nac5 Nxc5 Nxc5 Be3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Nd3 f5 a3 Nac5 Nxc5 Nxc5 Be3
+  +0.00  b6 b4 axb4 axb4 Rxa1 Qxa1
+  +0.06  Qe7 b4 axb4 axb4 Rxa1 Qxa1
+  +0.12  Bd7 exf5
+  +0.12  Rf7 b3 f4 Bxc5 dxc5 Bg4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 c6 Bf1 exd4 Nxd4 Ng4 h3 Qb6 hxg4 Qxd4 Qe2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 c6 Bf1 exd4 Nxd4 Ng4 h3 Qb6 hxg4 Qxd4 Qe2
+  +0.55  Qf6 g5
+  +0.53  Qe5 g3 Nc5 Bf4 Qe7 Rad1
+  +0.66  Re8 Be3 Qe5 Rad1 Nc5 f3
+  +0.85  Qc5 Bf4 Be5 Be3 Bd4 Bxd4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 d5 f6 Bh4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 d5 f6 Bh4
+  +0.36  f5 a3 Nc5 Nb5 Qd7 Nd2
+  +0.63  Bd7 Rb1 Nc5 b4 Na4 Nxa4
+  +0.69  g5 Bg3
+  +0.66  h5 Nd2 g5 Bg3 f5 exf5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 h3 h6 Bh4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 h3 h6 Bh4
+  +0.62  exd4 Nxd4 Nf6 Bd3 Nc5 Ndb5
+  +0.78  Nf6
+  +1.40  g5 Bg3 exd4 Nxd4 Nf6 Bf3
+  +1.90  f5 exf5 Nf6 Bxf6 Rxf6 dxe5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 h3 exd4 Nxd4 Nf6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 h3 exd4 Nxd4 Nf6
+  +0.76  Bd3 Nc5 Re1 h6 Bf4 b6
+  +0.72  f3 Nh5
+  +0.69  Bf3 Nc5 Re1 Qe5 Be3 Bd7
+  +0.37  Re1 Nxe4 Bf3 Qe5 Nxe4 Qxd4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 Nge2 Nc6 Qd2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 Nge2 Nc6 Qd2
+  +0.30  Qa5 d5 Ne5 Ng3 h5 Be2
+  +0.31  a6 dxc5 dxc5 Qxd8 Rxd8 Bxc5
+  +0.47  e6 dxc5
+  +0.32  Bd7 d5
+### d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 dxe5 dxe5 e4 Nc5 Nxe5 Nfxe4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 dxe5 dxe5 e4 Nc5 Nxe5 Nfxe4
+  +0.18  Nxe4 Nxe4
+  +0.20  Qxd8 Rxd8 Nxf7 Kxf7 Nxe4 Nxe4
+  -0.22  Bxe4 Qxd1 Rxd1 Nxe4 Nxg6 fxg6
+  -0.39  Be3 Qxd1 Raxd1 Nxc3 bxc3 Na4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Nd2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Nd2
+  -0.13  Nfd7 Nb3 f5 exf5 gxf5 f4
+  -0.12  b6
+  -0.02  Bh6 b3 Nh5 Bxh5 gxh5 Nf3
+  +0.04  Ne8 Nb3 b6 Be3 Bd7 Qd2
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 b3 Bh6 Qc2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 b3 Bh6 Qc2
+  -0.08  Ne8 Nf3 Bxc1 Raxc1 Qe7 a3
+  -0.03  Bd7 Rb1 Nh5 Bxh5 gxh5 Na4
+  +0.01  Kh8 Bb2
+  +0.11  Nh5 Bxh5 gxh5 Nf3 Bxc1 Qxc1
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5 Nxe4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5 Nxe4
+  -1.40  Ne7+ Kf8 Nxc8 Raxc8 Be3 Nb4
+  -2.06  Rad1 h6 Be3 c6 Nc3 Nxc3
+  -2.25  Be3 c6 Nc3 Nxc3 bxc3 f5
+  -2.34  h4 Nxg5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8 Nxe5 Nxe4 Nxe4 Bxe5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8 Nxe5 Nxe4 Nxe4 Bxe5
+  -0.32  Bg5 Rd4 Nf6+ Kg7 Nd5 c6
+  -0.72  Nc3 Be6 Bd2 a5 O-O-O a4
+  -0.89  Be2 Nc6 Bg5 Bf5 Bxd8 Bxe4
+  -0.99  g4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 Be2 cxd4 Nxd4 Nc6 Be3 Bg4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 Be2 cxd4 Nxd4 Nc6 Be3 Bg4
+  +0.25  Nxc6 Bxe2 Nxd8 Bxd1 Rxd1 Rfxd8
+  +0.16  Nf3 Bd7 Qd2 Ng4 Bg1 Qa5
+  +0.11  Nb3 Bxe2 Qxe2 Nd7 Rc1 a5
+  -0.09  Bxg4 Nxg4 Qxg4 Nxd4 Qd1 Nc6
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 Be2 cxd4 Nxd4 Nc6 Be3 Bg4 Nxc6 Bxe2 Nxd8 Bxd1 Rxd1 Rfxd8
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 Be2 cxd4 Nxd4 Nc6 Be3 Bg4 Nxc6 Bxe2 Nxd8 Bxd1 Rxd1 Rfxd8
+  +0.22  Ke2
+  +0.22  b3 a6
+  +0.18  Rd3 a6 Ke2 b5 c5 dxc5
+  +0.08  O-O a6 h3 Nd7 Nd5 e6
+### c4 Nf6 Nc3 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O e5 d4 Nbd7
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: c4 Nf6 Nc3 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O e5 d4 Nbd7
+  +0.55  e4 Re8 Re1 exd4 Nxd4 Nc5
+  +0.49  Qc2 Re8
+  +0.48  h3 exd4 Nxd4 c6 e4 Nc5
+  +0.44  b3 Re8 Qc2 c6 e4 exd4
+### Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O d3 d6 e4 e5 b4 Na6 a3 c5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O d3 d6 e4 e5 b4 Na6 a3 c5
+  +0.22  b5 Nc7 a4 b6 c4 a6
+  +0.11  bxc5 Nxc5 a4 d5 exd5 Nxd5
+  +0.07  Qd2 d5
+  +0.16  Bd2 d5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 Nge2 Nc6 d5 Ne5 Ng3 e6 Be2 exd5 cxd5 h5 O-O Nh7
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 Nge2 Nc6 d5 Ne5 Ng3 e6 Be2 exd5 cxd5 h5 O-O Nh7
+  +0.56  Qd2 h4 Nh1 a6 Nf2 b5
+  +0.52  Nh1 f5 Qd2 a6 a4 Qe7
+  +0.37  h3 h4 Nh1 f5 Qd2 Nf7
+  +0.30  a4 h4
+DONE
+
+=== 2d. Fourth batch (the London questions at 2500 ms) ===
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5 Nxe4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5 Nxe4
+  +2.85  Nxc7 Nxg5 Nxg5 Re7 Nxa8 e4
+  +0.92  c5 Nc6 Nxc7 Be6 O-O Nd4
+  -1.03  Be3 Na6 Ng5 Nf6 O-O-O e4
+  -1.34  O-O Na6 Ne7+ Kf8 Nxc8 Raxc8
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4
+  -0.06  Ne4 Qc2 e5 dxe5 dxe5 Bh2
+  -0.05  e5
+  +0.32  b6 Nc3 Bb7 Nd2 e5 Bg5
+  +0.48  a6 Nc3 b6 Nd2 Bb7 Bg3
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O
+  +0.08  b6 c4 Bb7 Nc3 Ne4 Nxe4
+  +0.17  Ne4 Bd3 e5 Bxe4 exf4 exf4
+  +0.29  a5
+  +0.35  Re8 Nc3 b6 e4 Bb7 e5
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Qe7 c4 e5
+C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529
+                throw new Error(`Invalid move: ${move}`);
+                      ^
+
+Error: Invalid move: Qe7
+    at Chess.move (C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529:23)
+    at file:///C:/Users/nick2/Code/London/scripts/engine-ask.mjs:22:31
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v20.20.2
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Qe7 c4 e5 dxe5 dxe5 Bh2
+C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529
+                throw new Error(`Invalid move: ${move}`);
+                      ^
+
+Error: Invalid move: Qe7
+    at Chess.move (C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529:23)
+    at file:///C:/Users/nick2/Code/London/scripts/engine-ask.mjs:22:31
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v20.20.2
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Qe7 c3 e5
+C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529
+                throw new Error(`Invalid move: ${move}`);
+                      ^
+
+Error: Invalid move: Qe7
+    at Chess.move (C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529:23)
+    at file:///C:/Users/nick2/Code/London/scripts/engine-ask.mjs:22:31
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v20.20.2
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Qe7 c3 e5 Bh2
+C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529
+                throw new Error(`Invalid move: ${move}`);
+                      ^
+
+Error: Invalid move: Qe7
+    at Chess.move (C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529:23)
+    at file:///C:/Users/nick2/Code/London/scripts/engine-ask.mjs:22:31
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v20.20.2
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Nxe5 Nxe5 Qxd8 Rxd8 Bxe5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Nxe5 Nxe5 Qxd8 Rxd8 Bxe5
+  +1.10  Ne4 Bxg7 Kxg7 Rd1 Bf5 Na3
+  +1.40  c6 Nc3 Bf5 Rfd1 Ne4 Bxg7
+  +1.51  Bf5 Bxc7
+  +1.46  Re8 Bd4 Ne4 Bxg7 Kxg7 Rd1
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3 e5 O-O Nc6 d5 Nd4 Nb5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3 e5 O-O Nc6 d5 Nd4 Nb5
+  +0.16  Nxb5 cxb5 Bd7 Qe2 Re8 Bg5
+  +0.20  Nxf3+
+  +0.23  c5 a4
+  +0.27  Re8 Nbxd4 exd4 Qc2 Nd7 Bg5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3 e5 d5 a5 O-O Na6 a3 Nc5 Bc2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3 e5 d5 a5 O-O Na6 a3 Nc5 Bc2
+  +0.49  Bd7
+  +0.55  a4 Be3
+  +0.61  c6 Bg5 cxd5 cxd5 Bd7 b4
+  +0.64  Qe8 b3 Nh5 Nb5 Na6 Bd2
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5 Na6 Qd2 e5 d5 Qe8 h3 Nc5 Bf3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5 Na6 Qd2 e5 d5 Qe8 h3 Nc5 Bf3
+  +0.29  a5 Nge2 a4 O-O h5 Be3
+  +0.35  Nfd7 b4
+  +0.44  Kh8 b4 Na4 Nb5 Qd7 Qc2
+  +0.50  h5 b4 Ncd7 Nb5 Qd8 Rc1
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 Nge2 Nc6 Qd2 a6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 Nge2 Nc6 Qd2 a6
+  +0.57  dxc5
+  +0.22  Rd1 Qa5 dxc5 dxc5 Nd5 Qxd2+
+  +0.13  d5 Ne5 b3 b5 cxb5 axb5
+  +0.05  Kf2 e6 dxc5 dxc5 Qxd8 Rxd8
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 Nge2 Nc6 Qd2 a6 d5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 Nge2 Nc6 Qd2 a6 d5
+  +0.03  Ne5 Ng3 h5 Bg5 Nh7 Bh4
+  +0.16  Na5 Ng3
+  +0.78  Nb8 Nf4 Nbd7 Be2 Ne5 b3
+  +0.90  Na7 h4 b5 h5 bxc4 Ng3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 d5 f6 Bh4 f5 a3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 d5 f6 Bh4 f5 a3
+  +0.43  fxe4 Nxe4 Rf4 Bd3 Bf5 Qc2
+  +0.44  Nc5 Nb5 Qd7 Nd2 Nxe4 Nxe4
+  +0.61  Bf6 b4 Qe7 Bxf6 Nxf6 c5
+  +0.82  Nf6 b4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Nd2 Nfd7 Nb3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Nd2 Nfd7 Nb3
+  -0.17  f5 exf5 gxf5 f4 a4 Nxc5
+  -0.08  b6 Bg4 f5 exf5 a4 Nxc5
+  +0.09  f6 Bg4 f5 exf5 a4 Nxc5
+  +0.20  Qe7 Bg4
+### d4 Nf6 Nf3 g6 e3 Bg7 Bd3 O-O O-O d6 Nbd2 Nbd7 e4 e5 c3 Re8 a4 c6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Nf3 g6 e3 Bg7 Bd3 O-O O-O d6 Nbd2 Nbd7 e4 e5 c3 Re8 a4 c6
+  +0.37  Re1 d5 exd5 Nxd5 Ne4 exd4
+  +0.31  a5 d5 dxe5 Nxe5 Nxe5 dxe4
+  +0.21  Nc4 d5
+  +0.15  dxe5 Nxe5 Nxe5 Rxe5 h3 Re7
+### d4 Nf6 Nf3 g6 Bg5 Bg7 Nbd2 O-O e4 d6 c3 Nbd7 Be2 e5 O-O h6 Bh4 Qe8 Re1 Nh5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Nf3 g6 Bg5 Bg7 Nbd2 O-O e4 d6 c3 Nbd7 Be2 e5 O-O h6 Bh4 Qe8 Re1 Nh5
+  +0.59  a4 a5 Nc4 b6 Ne3 Ndf6
+  +0.38  Bd3 Nf4 Bf1 a5 Bb5 c6
+  +0.30  Nf1 Ndf6
+  +0.28  Bb5 a6 Bd3 b6 Bc2 a5
+### d4 Nf6 Bg5 g6 Bxf6 exf6 e3 Bg7 c4 d6 Nc3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bg5 g6 Bxf6 exf6 e3 Bg7 c4 d6 Nc3
+  +0.36  c6 Nge2 h5 h4 O-O g3
+  +0.36  h5 Nge2 c6 h4 O-O g3
+  +0.41  O-O g3 Re8 Bg2 c6 Nge2
+  +0.45  Nd7 g3
+### d4 Nf6 Bg5 g6 Nd2 Bg7 e4 d6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bg5 g6 Nd2 Bg7 e4 d6
+  +0.15  Ngf3 O-O c3 c5 Be2 h6
+  +0.13  c3 O-O Ngf3 c5 Be2 h6
+  +0.14  Bd3 h6 Bh4 Nh5 c3 c5
+  +0.11  h3 c5 dxc5 dxc5 Bb5+ Bd7
+### d4 Nf6 Bg5 g6 Nd2 Bg7 e4 d6 c3 O-O Ngf3 Nbd7
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bg5 g6 Nd2 Bg7 e4 d6 c3 O-O Ngf3 Nbd7
+  +0.38  h3 h6
+  +0.36  Bc4 h6 Bh4 c5 O-O cxd4
+  +0.35  Bd3 h6 Bh4 c5 O-O Nh5
+  +0.33  Be2 h6 Bh4 c5 O-O cxd4
+### c4 Nf6 Nc3 g6 g3 Bg7 Bg2 O-O e4 d6 Nge2 e5 O-O Nc6 d3 a5 Bg5 h6 Be3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: c4 Nf6 Nc3 g6 g3 Bg7 Bg2 O-O e4 d6 Nge2 e5 O-O Nc6 d3 a5 Bg5 h6 Be3
+  +0.49  Ng4 Bc1 Nd4 Nxd4 exd4 Ne2
+  +0.54  Be6 h3 Nh5 g4 Nf6 f4
+  +0.67  Kh7 h3
+  +0.71  Bg4 f3 Bd7 d4 exd4 Nxd4
+### Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O d3 d6 e4 e5 Nc3 Nc6 Be3 Re8 Re1 Be6 Qc1 a5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O d3 d6 e4 e5 Nc3 Nc6 Be3 Re8 Re1 Be6 Qc1 a5
+  +0.05  h3 Qc8 Kh2 d5 Bh6 d4
+  +0.02  a4 Bg4 Qd2 Qd7 h4 Bh3
+  +0.01  b3 Bg4 Qd2 Qd7 h4 b6
+  -0.02  Nb5 a4 c3 Qd7 Ng5 Nd8
+### Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O d3 d6 e4 e5 Nbd2 Nc6 c3 a5 a4 h6 Re1 Re8
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O d3 d6 e4 e5 Nbd2 Nc6 c3 a5 a4 h6 Re1 Re8
+  +0.12  d4 exd4 Nxd4 Bg4 f3 Bd7
+  +0.07  Nb3 b6 d4 Qd7 d5 Ne7
+  -0.06  h3 d5 exd5 Nxd5 Nc4 b6
+  -0.21  Nc4 Be6 Bf1 Qd7 Rb1 b6
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 d5 e6 Be2 exd5 exd5 Bf5 O-O Ne4 Nxe4 Bxe4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 d5 e6 Be2 exd5 exd5 Bf5 O-O Ne4 Nxe4 Bxe4
+  -0.09  Bd3 Bxd3 Qxd3 Nd7 a4 Nf6
+  -0.27  Nd2 Re8
+  -0.27  Ng5 Re8 Kh1 Nd7 Nxe4 Rxe4
+  -0.29  Kh1 Nd7 Ng5 Re8 Nxe4 Rxe4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 d5 e6 Be2 exd5 cxd5 Bg4 O-O Nbd7 h3 Bxf3 Bxf3 Re8
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 d5 e6 Be2 exd5 cxd5 Bg4 O-O Nbd7 h3 Bxf3 Bxf3 Re8
+  +0.62  a4 c4 Be3 Rc8 Bxa7 b6
+  +0.58  g4
+  +0.49  Qc2 c4 Be3 b5 a3 a5
+  +0.39  Re1 c4 Be3 Rc8 Qa4 a6
+DONE
+
+=== 2e. The London recaptures ===
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5
+  +0.25  dxe5 Nxe5
+  +0.32  Ne4 Qc2 dxe5 Bh2 Nec5 Nc3
+  +0.95  Nxe5 Nxe5 dxe5 Qxd8 Rxd8 Bxe5
+  +1.81  Nh5 Bg5 f6 exf6 Ndxf6 Nc3
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c3 e5 dxe5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c3 e5 dxe5
+  +0.83  dxe5 Nxe5 Nh5 Bxh5 Nxe5 Be2
+  +1.08  Nxe5 Nxe5 dxe5 Qxd8 Rxd8 Bxe5
+  +1.60  Nh5 Bg5
+  +1.78  Ne4 exd6 cxd6 Bxd6 b5 Bh2
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 Nxe5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 Nxe5
+  +0.87  Nxe5 dxe5 Qxd8 Rxd8 Bxe5 Ne4
+  +0.30  Nc3
+  +0.02  Bxe5 dxe5 Qxd8 Rxd8 Nc3 e4
+  -0.14  Nfd2 Bf5 Bg3 Nd3 Bh4 d5
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 Nc3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 Nc3
+  -3.72  exf4 exf4 Nf8 Re1 c6 d5
+  -0.22  Ne4 Bh2 Nxc3 bxc3 b6 a4
+  +0.27  exd4 exd4 Nf8 Re1 Bf5 Bf1
+  +0.63  Qe7 Bg3 exd4 exd4 b6 Nd2
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 Nxe5 Nxe5 dxe5 Bh2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 Nxe5 Nxe5 dxe5 Bh2
+  -0.29  Ne4 Qxd8 Rxd8 f3 Nc5 Nc3
+  -0.23  Qe7 Nc3
+  -0.14  Bf5 Nc3 Ne4 Nxe4 Bxe4 Bf3
+  +0.00  Nd7 Nc3 a5 Nb5 c6 Nd6
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 Nxe5 Nxe5 dxe5 Bg3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 Nxe5 Nxe5 dxe5 Bg3
+  -0.73  Ne4 Qxd8 Rxd8 Bh4 g5 Bf3
+  -0.41  Qxd1 Rxd1
+  -0.08  Bf5 Bh4 c6 Nc3 Qb6 g4
+  +0.01  Qe7 Nc3 c6 Bh4 h6 Qc2
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c3 e5 dxe5 Nxe5 Nxe5 dxe5 Bh2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c3 e5 dxe5 Nxe5 Nxe5 dxe5 Bh2
+  -0.38  Ne4 f3 Nc5 b4 Nd7 Nd2
+  -0.17  Qe7 Nd2 a5 a4 Nd7 Qc2
+  -0.16  Bf5 Nd2 Re6 Qc1 Bd3 Bxd3
+  -0.02  Nd7 Nd2 Qe7 Qc2 a5 Rfd1
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c3 e5 Bh2 Ne4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c3 e5 Bh2 Ne4
+  +0.28  a4 a5 Re1 c6 Qc2 d5
+  +0.29  Qc2 f5 Rd1 a5 dxe5 dxe5
+  +0.27  Re1 b6 Qb3 Bb7 Bc4 Re7
+  +0.17  Nbd2 Nxd2 Qxd2 a5 Rfd1 Qe7
+### d4 Nf6 Nf3 g6 e3 Bg7 Bd3 O-O O-O d6 c4 Nbd7 Nc3 e5 h3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Nf3 g6 e3 Bg7 Bd3 O-O O-O d6 c4 Nbd7 Nc3 e5 h3
+  +0.30  c6 e4
+  +0.27  Re8 Qc2 c6 Rd1 Qe7 dxe5
+  +0.36  a6 Re1 Re8 e4 exd4 Nxd4
+  +0.45  Qe7 e4 exd4 Nxd4 Nc5 Re1
+### d4 Nf6 Nf3 g6 e3 Bg7 Bd3 O-O O-O d6 c4 Nbd7 Nc3 e5 e4 exd4 Nxd4 Re8 h3 Nc5 Bc2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Nf3 g6 e3 Bg7 Bd3 O-O O-O d6 c4 Nbd7 Nc3 e5 e4 exd4 Nxd4 Re8 h3 Nc5 Bc2
+  -1.18  Ncxe4 Nxe4 Nxe4 Re1 Qh4 Qf3
+  -1.12  Nfxe4 Nxe4 Nxe4 Re1 Qf6 Be3
+  -0.07  b5 cxb5 Nfxe4 Nxe4 Nxe4 Be3
+  +0.13  c6 Re1
+DONE
+
+=== 2f. The London with c3 ===
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Nxe5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Nxe5
+  -0.07  Nh5 Bxh5 Nxe5 Be2 Nd3 Bxd3
+  +0.47  Ne4 Nd3 c6 Qc1 Ndc5 Nxc5
+  +0.63  c6 Nxd7 Nxd7 Nc3 Qa5 Qc1
+  +0.75  g5 Bh2
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c3 b6 Bh2 Bb7
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c3 b6 Bh2 Bb7
+  -0.01  Nfd2 e5 a4 a6 Na3 d5
+  -0.02  Re1 e5 a4 a6 Nfd2 Rc8
+  -0.05  a4 a6 Re1 e5 Nfd2 h5
+  -0.09  Qb3 e5
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c3 b6 Bh2 Bb7 a4 a6 Nbd2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c3 b6 Bh2 Bb7 a4 a6 Nbd2
+  +0.18  e5 b4
+  +0.30  Rc8 b4 e5 Qb3 Qe7 Rfd1
+  +0.38  c5 b4 a5 bxc5 bxc5 Bb5
+  +0.39  Rb8 a5 b5 b4 e5 dxe5
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c3 b6 Bh2 Bb7 Nbd2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c3 b6 Bh2 Bb7 Nbd2
+  +0.00  a6 a4 e5 Qb3 Qe7 Rfd1
+  +0.01  e5 a4 a6 Qb3 Qe7 Rfd1
+  +0.15  a5 Bb5 c6 Bd3 a4 e4
+  +0.32  Rb8 a4 a5 Qc2 e5 dxe5
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 Bh2 Ne4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 Bh2 Ne4
+  -0.01  Nbd2 Nxd2 Qxd2 b6 Rfd1 Bb7
+  -0.05  Qc2 exd4 Nxd4 Qe7 Nd2 Bxd4
+  -0.09  a4 a5 Na3 b6 Qc2 Bb7
+  -0.16  a3 exd4
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 Bh2 Ne4 Bd3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 Bh2 Ne4 Bd3
+  -0.37  Ng5 Nxg5
+  -0.13  exd4 exd4 Ng5 Nbd2 Nxf3+ Nxf3
+  +0.21  f5 Qc2 exd4 Bxe4 fxe4 Nxd4
+  +0.40  Nef6 Bc2 b6 Nc3 Bb7 d5
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 Bh2 Ne4 Qc2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 Bh2 Ne4 Qc2
+  -0.19  exd4 Nxd4 Ndc5 Nd2 Nxd2 Qxd2
+  -0.13  Ng5
+  +0.19  f5 c5 dxc5 Bc4+ Kh8 dxe5
+  +0.59  Ndf6 dxe5 dxe5 Nxe5 Nc5 Rd1
+DONE
+
+=== 2g. The exercises ===
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4 Bf2 g5 Rb1 Rf6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4 Bf2 g5 Rb1 Rf6
+  +0.39  a3 Qe8 g4 h5 Kg2 Rh6
+  -0.02  g4 Nac5 a3 a4 Kg2 h5
+  -0.06  b3 Qe8 g4 h5 h3 Rh6
+  -0.08  Nd3 Nac5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4 Bf2 g5 Rb1 Rf6 Qa4 Qe8 Qxa5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4 Bf2 g5 Rb1 Rf6 Qa4 Qe8 Qxa5
+  -0.70  Qh5 Kh1 Rh6 Bg1 Qh4 c5
+  -0.27  Rh6 g4 fxg3 Bxg3 Nf6 Qb5
+  +0.43  Bf8 Nd3 Be7 Be1 Nb6 Qb5
+  +0.53  Rg6 c5 dxc5 Qa4 Bf8 a3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4 Bf2 g5 Rb1 Rf6 Nd3 Rh6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4 Bf2 g5 Rb1 Rf6 Nd3 Rh6
+  +0.31  g4 Nac5 Kg2 Bf8 Rh1 Nxd3
+  +0.08  g3 Nac5 g4 Nxd3 Bxd3 Rg6
+  -0.05  Be1
+  -0.13  a3 Qe8 g4 fxg3 Bxg3 Ndc5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 d5 Na6 Be3 Nh5 Nh2 Qe8 Be2 Nf4 Bf3 f5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 d5 Na6 Be3 Nh5 Nh2 Qe8 Be2 Nf4 Bf3 f5
+  +0.08  O-O Nc5 Bxc5 dxc5 h4 g5
+  +0.00  a3 Nc5 Bxc5 dxc5 h4 c6
+  -0.06  a4
+  -0.27  b3 b6 O-O Nc5 Qd2 h5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 d5 Na6 Be3 Nh5 Nh2 Qe8 Be2 Nf4 Bf3 f5 g3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 d5 Na6 Be3 Nh5 Nh2 Qe8 Be2 Nf4 Bf3 f5 g3
+  -1.15  Nxh3 Qd2 f4 gxf4 exf4 Bd4
+  -0.20  fxe4 Nxe4
+  +0.22  Nb4 gxf4 exf4 Bd2 Nd3+ Kf1
+  +0.50  b6 gxf4 exf4 Bd4 fxe4 Nxe4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 d5 Na6 Be3 Nh5 Nh2 Qe8 Be2 Nf4 Bf3 f5 exf5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 d5 Na6 Be3 Nh5 Nh2 Qe8 Be2 Nf4 Bf3 f5 exf5
+  -0.78  e4
+  -0.43  gxf5 O-O Ng6 Bh5 f4 Bd2
+  -0.17  Nc5 O-O Bxf5 Bxc5 dxc5 Ne4
+  -0.10  Bxf5 O-O Nc5 Bxc5 dxc5 Re1
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5 Nxe4 Ne7+ Kf8 Nxc8 Raxc8 Be3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5 Nxe4 Ne7+ Kf8 Nxc8 Raxc8 Be3
+  -1.37  f5 g3 Nb4 Rfc1 c5 a3
+  -1.37  Nb4 Rad1 b6 Nd2 Nf6 g4
+  -1.34  b6 Rad1 Nb4 Nd2 Nf6 c5
+  -1.25  Nec5 Rfd1 b6 Rab1 Ne6 Kf1
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8 Nxe5 Nxe4 Nxe4 Bxe5 Bg5 Rd4 Nf6+ Kg7 Nd5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8 Nxe5 Nxe4 Nxe4 Bxe5 Bg5 Rd4 Nf6+ Kg7 Nd5
+  -0.36  c6
+  -0.17  Re4+ Be3 Bxb2 Rb1 Be5 Bd3
+  +0.00  Be6 Be3 Re4 O-O-O Nd7 f3
+  +0.21  Na6 Be3 Re4 O-O-O Be6 Nc3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 c6 Bf1 exd4 Nxd4 Ng4 h3 Qb6 hxg4 Qxd4 Qe2 Qe5 g3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 c6 Bf1 exd4 Nxd4 Ng4 h3 Qb6 hxg4 Qxd4 Qe2 Qe5 g3
+  +0.52  Qe7 Bf4 Be5 Rad1 Re8 Bh6
+  +0.52  Nc5 Bf4 Qe7 Rad1 Be5 Kg2
+  +0.62  Qe6 f3 Nc5 Bf4 Be5 Qf2
+  +0.67  Re8 Bf4 Qe7 f3 g5 Be3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 c6 Bf1 exd4 Nxd4 Ng4 h3 Qb6 hxg4 Qxd4 Qe2 Qe5 g3 Nc5 Bf4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 c6 Bf1 exd4 Nxd4 Ng4 h3 Qb6 hxg4 Qxd4 Qe2 Qe5 g3 Nc5 Bf4
+  +0.53  Qe7 Rad1 Be5 Bh6 Re8 Bg2
+  +0.89  Qe6 Rad1 Be5 Qe3 Bxf4 Qxf4
+  +1.08  Qf6 Rad1 Ne6 Bxd6 Nd4 Rxd4
+  +2.78  Qe8 Bxd6
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 b3 Bh6 Qc2 Ne8 Nf3 Bxc1 Raxc1
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 b3 Bh6 Qc2 Ne8 Nf3 Bxc1 Raxc1
+  -0.14  f5 a3 Nf6 Nd2 Qe7 Rce1
+  -0.11  Qe7 a3 f5 exf5 Bxf5 Qd1
+  -0.11  Ng7 a3 f5 Nd2 Bd7 Qb2
+  +0.03  Bd7 a3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Na6 Nd2 Qe8 O-O Nh7 a3 Bd7 b3 h5 f3 Bh6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Na6 Nd2 Qe8 O-O Nh7 a3 Bd7 b3 h5 f3 Bh6
+  +0.41  Kh1 Be3 Rb1 Bc5 Qc1 Kh8
+  +0.40  Rb1 Be3+ Kh1 Bc5 Qc1 Kh8
+  +0.35  Qc2
+  +0.24  Nb5 Bg5 Bxg5 Nxg5 Qe1 Qe7
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Na6 Nd2 Qe8 O-O Nh7 a3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Na6 Nd2 Qe8 O-O Nh7 a3
+  +0.25  h5 f3 Bd7 Kh1 Bh6 Qc2
+  +0.27  Bd7
+  +0.42  f5 exf5 Bxf5 f3 Nc5 Nb5
+  +0.57  Rb8 f3 h5 Rb1 b6 b4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Na6 Nd2 Qe8 O-O Nh7 a3 Bd7 b3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Na6 Nd2 Qe8 O-O Nh7 a3 Bd7 b3
+  +0.30  h5 f3 Bh6 Qc2 Be3+ Bf2
+  +0.45  f5 exf5
+  +0.43  b6 f3 f5 Bf2 Nf6 Qb1
+  +0.50  Nf6 Rb1 g5 Bg3 Nc5 h3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Bg5 h6 Be3 b6 Nd2 Qe8 Nb3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Bg5 h6 Be3 b6 Nd2 Qe8 Nb3
+  +0.37  Nfd7 Nb5 Na6 Rad1 a4 Nc1
+  +0.43  Nb7
+  +0.44  Na6 Rae1 Bd7 Bd1 Qe7 Qd2
+  +0.48  Ng4 Bd2 Na6 h3 Nf6 Rae1
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Bg5 h6 Be3 b6 Nd2 Qe8 Nb3 Na6 a3 Nh7 b4
+C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529
+                throw new Error(`Invalid move: ${move}`);
+                      ^
+
+Error: Invalid move: b4
+    at Chess.move (C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529:23)
+    at file:///C:/Users/nick2/Code/London/scripts/engine-ask.mjs:22:31
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v20.20.2
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Bg5 h6 Be3 b6 Nd2 Qe8 Nb3 Na6 a3 Nh7 b4 axb4 axb4 f5 c5
+C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529
+                throw new Error(`Invalid move: ${move}`);
+                      ^
+
+Error: Invalid move: b4
+    at Chess.move (C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529:23)
+    at file:///C:/Users/nick2/Code/London/scripts/engine-ask.mjs:22:31
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v20.20.2
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Bg5 h6 Be3 b6 Nd2 Qe8 Nb3 Na6 a3 Nh7 b4 axb4 axb4 f5 c5 bxc5 bxc5
+C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529
+                throw new Error(`Invalid move: ${move}`);
+                      ^
+
+Error: Invalid move: b4
+    at Chess.move (C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529:23)
+    at file:///C:/Users/nick2/Code/London/scripts/engine-ask.mjs:22:31
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v20.20.2
+DONE
+
+=== 2h. The exercises, continued ===
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Na6 Nd2 Qe8 O-O Nh7 a3 h5 f3 Bd7 b3 Bh6 Rb1 Nc5 b4 axb4 axb4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Na6 Nd2 Qe8 O-O Nh7 a3 h5 f3 Bd7 b3 Bh6 Rb1 Nc5 b4 axb4 axb4
+  +0.32  Na4 Nxa4 Rxa4 Qc2 Be3+ Bf2
+  +0.48  Be3+ Bf2 Bxf2+ Rxf2 Na4 Nxa4
+  +0.75  Na6 Kh1
+  +0.70  g5 Bf2
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Na6 Nd2 Qe8 O-O Nh7 a3 h5 f3 Bd7 b3 Bh6 Rb1 Nc5 b4 axb4 axb4 Na4 Nxa4 Bxa4 c5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Na6 Nd2 Qe8 O-O Nh7 a3 h5 f3 Bd7 b3 Bh6 Rb1 Nc5 b4 axb4 axb4 Na4 Nxa4 Bxa4 c5
+  -4.60  Bxd1 Rfxd1 Ra2 Be1 Kh8 Ra1
+  -4.44  Be3+ Kh1 Bxd1 Rbxd1 Bxd2 Rxd2
+  -3.06  g5 Qc1 gxh4 b5 dxc5 f4
+  -0.27  dxc5 Qe1 cxb4 Rxb4 b6 Rb2
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 a3 Bd7 Rb1 Qe8 b4 axb4 axb4 Na6 c5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 a3 Bd7 Rb1 Qe8 b4 axb4 axb4 Na6 c5
+  +0.15  dxc5 Bxa6 cxb4 Rxb4 Rxa6 Rxb7
+  +1.23  Qe7
+  +1.30  Qd8 cxd6 cxd6 Nc4 Qc7 Qd3
+  +1.28  Qb8 Bxa6 bxa6 c6 Be8 b5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 a3 Bd7 Rb1 Qe8 b4 axb4 axb4 Na6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 a3 Bd7 Rb1 Qe8 b4 axb4 axb4 Na6
+  +0.69  Nf3 Qe7 Bg5 h6 Be3 Rfb8
+  +0.54  Rb2 Qe7 Ndb1 c5 b5 Nb4
+  +0.50  Qb3 c5 b5 Nb4 Ba3 Nc2
+  +0.46  Re1 c5 dxc6 bxc6 Na4 Nc7
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 a3 Bd7 Rb1
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 a3 Bd7 Rb1
+  -0.49  a4 Re1 b6 Bf1 Bh6 b4
+  +0.05  Bh6 Nb3
+  +0.13  Qe7 b3 Ne8 b4 axb4 axb4
+  +0.37  h5 b3 Bh6 Qc2 Bg4 Bd1
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 d5 Na6 Be3 Nh5 Nh2 Qe8 Be2 Nf4 Bf3 f5 exf5 e4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 d5 Na6 Be3 Nh5 Nh2 Qe8 Be2 Nf4 Bf3 f5 exf5 e4
+  -0.82  Nxe4 Bxf5 Bxf4 Bxe4 Be3 Nb4
+  -1.20  O-O Nxh3+
+  -1.46  f6 exf3 fxg7 Nxg2+ Kd2 Kxg7
+  -2.12  Bxf4 exf3+ Kf1 fxg2+ Kxg2 Bxf5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4 Bf2 g5 Rb1 Rf6 Qa4 Qe8 Qxa5 Qh5 Kh1 Rh6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4 Bf2 g5 Rb1 Rf6 Qa4 Qe8 Qxa5 Qh5 Kh1 Rh6
+  -0.81  Bg1 Nf6
+  -1.60  h4 Nf6 Kg1 g4 fxg4 Nxg4
+  -2.30  h3 Nf6 h4 g4 fxg4 Nxg4
+  -4.78  Bg3 fxg3 h3 Qh4 Kg1 Nb6
+DONE
+
+=== 2i. The queenside defences ===
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Bg5 h6 Be3 b6 Nd2 Qe8 Nb3 Nfd7 Nxc5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Bg5 h6 Be3 b6 Nd2 Qe8 Nb3 Nfd7 Nxc5
+  +0.38  Nxc5 Rae1 h5 b3 Kh7 f3
+  +0.62  bxc5 Nb5 Qd8 Bg4 a4 f3
+  +1.08  dxc5
+  +4.04  a4 Nd3 f5 Nb5 Qd8 f3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Bg5 h6 Be3 b6 Nd2 Qe8 Nb3 Nfd7 Nxc5 Nxc5 b4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Bg5 h6 Be3 b6 Nd2 Qe8 Nb3 Nfd7 Nxc5 Nxc5 b4
+  -0.73  axb4 Nb5 Qe7 Bd2 f5 f3
+  +0.35  Na6 bxa5
+  +0.79  Nb7 a3 f5 exf5 gxf5 f3
+  +1.06  Nd7 Nb5 Qd8 c5 bxc5 bxc5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Bg5 h6 Be3 b6 Nd2 Qe8 Nb3 Nfd7 Nxc5 Nxc5 b4 axb4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Bg5 h6 Be3 b6 Nd2 Qe8 Nb3 Nfd7 Nxc5 Nxc5 b4 axb4
+  -0.79  Nb5 Qe7
+  -1.06  Bxc5 dxc5 Nb5 Qd7 a3 c6
+  -2.31  Nd1 f5 f3 Qa4 Qb2 fxe4
+  -2.64  Nb1 Qa4 Qxa4 Rxa4 Bd1 Ra7
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Nd3 f5 a3 Nac5 Nxc5 Nxc5 Be3 b6 b4 axb4 axb4 Rxa1 Qxa1
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Nd3 f5 a3 Nac5 Nxc5 Nxc5 Be3 b6 b4 axb4 axb4 Rxa1 Qxa1
+  +0.17  Nb3 Qa2 Nd4 f3 Bd7 Bd3
+  +0.47  Nxe4 Nxe4 fxe4 Qc1 h5 c5
+  +0.80  Nd7
+  +1.01  f4 Bxc5 bxc5 bxc5 dxc5 Rb1
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Nd3 f5 a3 Nac5 Nxc5 Nxc5 Be3 b6 b4 axb4 axb4 Rxa1 Qxa1 Nd7 c5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Nd3 f5 a3 Nac5 Nxc5 Nxc5 Be3 b6 b4 axb4 axb4 Rxa1 Qxa1 Nd7 c5
+  -0.06  dxc5 bxc5
+  +0.00  bxc5 Rb1 cxb4 Rxb4 f4 Bd2
+  +0.00  f4 Bd2 bxc5 Rb1 cxb4 Rxb4
+  +0.99  Nf6 cxb6 cxb6 Qa7 Rf7 Qa8
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Nd3 f5 a3 Nac5 Nxc5 Nxc5 Be3 b6 b4 axb4 axb4 Rxa1 Qxa1 Nd7 c5 bxc5 bxc5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Nd3 f5 a3 Nac5 Nxc5 Nxc5 Be3 b6 b4 axb4 axb4 Rxa1 Qxa1 Nd7 c5 bxc5 bxc5
+  -0.25  f4 Bd2 Nxc5 Rb1 Bd7 Qa7
+  +0.04  Nxc5
+  +0.78  dxc5 Qa5 f4 Bd2 Rf7 Rb1
+  +1.30  Nf6 c6 Nxe4 Nxe4 fxe4 Rb1
+DONE
+
+=== 3. The first 500 ms pass re-checked at 2500 ms ===
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Nxe5 Nh5 Bxh5 Nxe5 Be2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Nxe5 Nh5 Bxh5 Nxe5 Be2
+  +0.30  Nd3 Qxd3 Qxd3 Bxd3 Bxb2 Na3
+  +0.51  Be6 Qb3 c6 Rd1 Qe7 Nd2
+  +0.56  Bf5 Qb3 Qe7 Nc3 c6 Rac1
+  +0.53  c6 Qc2
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Nxe5 Nh5 Bxh5 Nxe5 Be2 Nd3 Bxd3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Nxe5 Nh5 Bxh5 Nxe5 Be2 Nd3 Bxd3
+  +0.22  Bxb2 Na3 Bxa3 Qa4 Qe7 Bg5
+  +3.58  g5 Bxh7+ Kxh7 Qh5+ Kg8 Bxg5
+  +3.38  Bxh3
+  +4.13  Bf5 Bxf5 Bxb2 Qxd8 Rexd8 Bxc7
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6 Nge2 b6 Be3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6 Nge2 b6 Be3
+  -1.26  Nb4
+  +0.17  Ba6 Nf4 e6 Be2 Nd7 Rc1
+  +0.44  Rd3 Kf2 Ne5 Nd1 Neg4+ fxg4
+  +0.60  Nd7 O-O-O Bb7 Nd4 Nxd4 Bxd4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 dxe5 dxe5 Nd5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 dxe5 dxe5 Nd5
+  +0.09  f6 Bc1
+  +0.47  c6 Ne7+ Kh8 Nxc8 Rxc8 Qd6
+  +0.98  Qd7 c5 Nxc5 Qc2 Ne6 Rad1
+  +1.11  Kh8 h3 f6 Bc1 Nh6 c5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 a3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 a3
+  -0.64  a4 Qc2 Bh6 Rb1 b6 Re1
+  -0.33  Bh6 Rb1 b6 b4 Bxd2 Qxd2
+  -0.06  Bd7 b3 Bh6 Qc2 Nh5 Bxh5
+  +0.01  Nh5 Bxh5 gxh5 Qxh5 f5 Rb1
+### d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 e3 Re8 b3 c6 Bb2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 e3 Re8 b3 c6 Bb2
+  -0.11  e4 Nd2 d5 f3 exf3 Qxf3
+  +0.19  h5
+  +0.22  Rb8 a4 h5 a5 e4 Ng5
+  +0.29  a6 a4 a5 Rc1 exd4 Nxd4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Na6 Nd2 Qe8 O-O Nh7 a3 h5 f3 Bd7 b3 Bh6 Rb1
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Na6 Nd2 Qe8 O-O Nh7 a3 h5 f3 Bd7 b3 Bh6 Rb1
+  +0.34  Bg5 Bf2 Qe7 Kh1 h4 b4
+  +0.43  Be3+ Kh1
+  +0.47  Nc5 Kh1 f5 Qc2 Nf6 b4
+  +0.49  f5 Kh1 Nc5 Qc2 Nf6 b4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Na6 Nd2 Qe8 O-O Nh7 a3 h5 f3 Bd7 b3 Bh6 Rb1 Nc5 b4 axb4 axb4 Na4 Nxa4 Bxa4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Na6 Nd2 Qe8 O-O Nh7 a3 h5 f3 Bd7 b3 Bh6 Rb1 Nc5 b4 axb4 axb4 Na4 Nxa4 Bxa4
+  +0.26  Qc1 f5 exf5 Bd7 fxg6 Qxg6
+  +0.18  Qe1 f5 Bd3 Bd7 c5 Ra3
+  -0.11  Nb3 f5
+  -3.18  Rb3 Bxd2 Qxd2 Bxb3 c5 f6
+DONE
+
+=== 4. The mistakes-pass punishments and the 2500 ms pass re-checks ===
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3
+  -0.06  Nac5 Nd3 b6 exf5 gxf5 f4
+  +0.05  f4
+  +0.28  Nf6 a3 Nc5 b4 axb4 axb4
+  +0.31  b6 a3 Nac5 b4 axb4 axb4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4
+  +0.22  Bf2 Nac5 b3 g5 Rb1 Nf6
+  -0.21  Bd2 Nac5
+  -0.49  Bc1 Nf6 Nd3 Nh5 c5 Ng3
+  -3.11  Qa4 fxe3 Qxa5 Bh6 b4 Nb6
+DONE
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 c6 Bf1 exd4 Nxd4 Ng4 h3 Qb6 hxg4 Qxb2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 c6 Bf1 exd4 Nxd4 Ng4 h3 Qb6 hxg4 Qxb2
+  +6.88  Bxb2 Bxg4 f3 Bh5 g4 Bxg4
+  +1.87  Nde2 Qxa1 Qc2 Nb4 Qd2 Bxg4
+  +1.15  Re3 Qxa1 Nb3 Qxc3 Rxc3 Bxc3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8 Nxe5 Nxe4 Nxe4 Bxe5 Bg5 Rd4 Nf6+ Kg7 Nd5 Bd6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8 Nxe5 Nxe4 Nxe4 Bxe5 Bg5 Rd4 Nf6+ Kg7 Nd5 Bd6
+  +4.84  Bf6+ Kg8 Bxd4 Na6 O-O-O Nb4
+  +0.76  Be3 Re4 O-O-O Na6 Bd3 Re6
+  +1.00  g4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Bg5 Ne8
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Bg5 Ne8
+  +5.21  Bxd8 f6 Nb5 Bd7 Be7 Rf7
+  +0.84  b4 f6 bxc5 fxg5 cxd6 cxd6
+  +0.33  a3 f6 Be3 f5 b4 Nxe4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 Be3 Ng4 Bg5 h6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 Be3 Ng4 Bg5 h6
+  +5.05  Bxd8 exd4 Nxd4 Rxd8 Nc2 Nf6
+  +0.56  Bh4
+  +0.00  Bc1 exd4 Nxd4 Qh4 g3 Qh3
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 b3 Bh6 Qc2 Ne8 Nf3 f5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 b3 Bh6 Qc2 Ne8 Nf3 f5
+  +4.37  Bxh6 fxe4 Ng5 Bf5 Qd2 Nf6
+  +0.06  b4 Bxc1 bxc5 Ba3 cxd6 cxd6
+  -0.11  a3 Bxc1 Raxc1 Nf6 Nd2 b6
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 d5 e6 Be2 exd5 cxd5 Bg4 O-O Nbd7 h3 Be6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 d5 e6 Be2 exd5 cxd5 Bg4 O-O Nbd7 h3 Be6
+  +4.75  dxe6 fxe6 Qxd6 Qe8 Bc4 Kh8
+  +2.85  Ng5 Bxd5 exd5 a6 a4 Re8
+  +2.95  f5 Bxf5 exf5 a6 a4 Re8
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Nxe5 Nh5 Bxh5 Nxe5 Be2 Nd3 Qxd3 Qxd3 Bxd3 Be6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Nxe5 Nh5 Bxh5 Nxe5 Be2 Nd3 Qxd3 Qxd3 Bxd3 Be6
+  +4.40  Nc3 a5 Be2 c6 Rfd1 a4
+  +3.81  a4 Bxb2 Ra2 Bg7 Nd2 Rad8
+  +3.63  a3 Rad8 Be2 b5 e4 a5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6 Nge2 b6 Ba3 Nb4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6 Nge2 b6 Ba3 Nb4
+  +4.62  Bxb4 Ba6 Bxe7 Re8 Ba3 Bxc4
+  +0.13  Kf2 a5 Rd1 Ba6 Nf4 Rxd1
+  -0.33  Nd4 a5 O-O-O Nxe4 fxe4 Rxd4
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 d5 e6 Be2 exd5 exd5 Bf5 O-O Ne4 Nxe4 Re8
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 d5 e6 Be2 exd5 exd5 Bf5 O-O Ne4 Nxe4 Re8
+  +3.94  Ng3 Bg4 a4 Nd7 Ra3 h5
+  +3.79  Nc3 a6 a4 Nd7 h3 Bxc3
+  +3.69  Nf2 b5 cxb5 Qc8 Nh4 Bd7
+### d4 Nf6 Bg5 g6 Nd2 Ne4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bg5 g6 Nd2 Ne4
+  +3.77  Nxe4 d5 Nc5 Nc6 c3 f6
+  +0.32  Bf4 d5 e3 Bg7 h4 c5
+  +0.27  Bh4 d5 Nxe4 dxe4 e3 c5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5 Na6 Nf3 e5 dxe5 dxe5 Qxd8 Rxd8 Nd5 Nc5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5 Na6 Nf3 e5 dxe5 dxe5 Qxd8 Rxd8 Nd5 Nc5
+  +4.37  Nxf6+ Bxf6 Bxf6 Rd7 O-O Nxe4
+  +3.64  Bxf6 Bxf6 Nxf6+ Kg7 Nd5 c6
+  +1.39  Rd1 Nxd5 Bxd8 Nf4 Be7 Nce6
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5 Nbd7
+C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529
+                throw new Error(`Invalid move: ${move}`);
+                      ^
+
+Error: Invalid move: Nbd7
+    at Chess.move (C:\Users\nick2\Code\London\node_modules\chess.js\dist\cjs\chess.js:2529:23)
+    at file:///C:/Users/nick2/Code/London/scripts/engine-ask.mjs:22:31
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v20.20.2
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 c6 Bf1 Nc5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 c6 Bf1 Nc5
+  +4.18  dxc5 dxc5 Qxd8 Rxd8 Nxe5 a5
+  +0.97  d5 cxd5
+  +0.47  h3 exd4 Nxd4 Re8 Qc2 a5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4 Bf2 g5 Rb1 Rf6 Qa4 Qe8 Qxa5 Qh5 Kh1 g4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4 Bf2 g5 Rb1 Rf6 Qa4 Qe8 Qxa5 Qh5 Kh1 g4
+  +2.87  fxg4 Qg5 b4 Nb6 Bxb6 cxb6
+  -1.47  Bg1 g3 c5 dxc5 d6 Rxd6
+  -1.51  g3 Rh6
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 Nc5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 Nc5
+  +4.04  dxc5 dxc5 Bg5 Qxd1 Raxd1 h6
+  +0.48  Bf1 exd4
+  +0.27  dxe5 dxe5 Qc2 c6 Be3 Qe7
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5 Nbd7
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5 Nbd7
+  +3.33  Nxc7 Rb8 Nxe8 Nxe8 Be3 b6
+  +2.61  Bxf6 Nxf6 Nxc7 Be6 Nxe8 Rxe8
+  +0.98  Rc1 Nxd5 cxd5 c6 dxc6 bxc6
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 Nc3 Ne4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 Nc3 Ne4
+  -0.30  Bh2 Nxc3 bxc3 b6 Nd2 Bb7
+  -0.90  Bg3 Nxg3 fxg3 Bh6 Qd3 f5
+  -1.44  Nxe4 exf4 Bd3 fxe3 fxe3 Bh6
+### d4 Nf6 Bg5 g6 c4 Bg7 Nc3 d6 e4 e5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bg5 g6 c4 Bg7 Nc3 d6 e4 e5
+  +3.37  dxe5 dxe5 Qxd8+ Kxd8 Nd5 h6
+  +0.69  d5 h6 Be3 Nbd7 Bd3 h5
+  +0.38  Be2 exd4 Qxd4 h6 Be3 Nc6
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 dxe5 dxe5 h3 Nh6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 dxe5 dxe5 h3 Nh6
+  +3.16  Qd2 Ng4 hxg4 Bxg4 Rad1 Nc5
+  +3.13  Qc1 Ng4 hxg4 Bxg4 Rd1 c6
+  +1.11  Qd5 Kh8 c5 c6 Qd2 Ng8
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 Be2 cxd4 Nxd4 Nc6 Be3 Bg4 Nxc6 bxc6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 Be2 cxd4 Nxd4 Nc6 Be3 Bg4 Nxc6 bxc6
+  +2.81  Bxg4 Rb8 Bf3 Rxb2 O-O Qa5
+  +0.12  O-O Bxe2 Qxe2 Qa5 Rad1 Rad8
+  -0.05  Rc1 Bxe2 Qxe2 Qa5 Bd2 Qh5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6 Nge2 b6 Be3 Be6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6 Nge2 b6 Be3 Be6
+  +0.99  Nf4 Rac8 Nfd5 Bd7 Rc1 Be8
+  +0.40  Nd5 Nxd5 cxd5 Nb4 O-O-O Nxa2+
+  +0.13  Rc1 Bxc4 b3 Ba6 Nf4 Bxf1
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5 Nxd5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5 Nxd5
+  +0.74  cxd5 Nb8 Rac1 c6 Rfd1 h6
+  -0.57  exd5 e4
+  -4.05  c5 Nf4 Bxf4 exf4 Bb5 c6
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Nxe5 Nh5 Bxh5 Nxe5 Be2 Nxc4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Nxe5 Nh5 Bxh5 Nxe5 Be2 Nxc4
+  +2.38  Bxc4 Qxd1 Rxd1 Bxb2 Nd2 Bxa1
+  +0.22  Qxd8 Rxd8 Bxc4 Bxb2 Na3 Bxa3
+  -0.13  Nc3 Qxd1
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nbd7
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nbd7
+  +2.54  Bxe7 Re8 Bd6 Ne5 O-O-O Bd7
+  +1.47  O-O-O Kf8 Be3 b6 Nge2 Bb7
+  +1.45  Rd1 Kf8 Nge2 b6 Be3 Bb7
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6 Nge2 b6 Be3 Nd7
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6 Nge2 b6 Be3 Nd7
+  +0.71  O-O-O Bb7 Nd4 Nxd4 Bxd4 Ne5
+  +0.30  Rd1 Bb7 Nd4 Nc5 Nxc6 Bxc3+
+  +0.26  Rc1 Nc5
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Bh2 Ne4 Nbd2 f5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Bh2 Ne4 Nbd2 f5
+  +1.62  Nxe4 fxe4 Nd2 Nf6 c5 Be6
+  +0.21  Rc1 Ndc5
+  +0.20  Qc2 Nxd2 Nxd2 Qe7 Rac1 b6
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8 Nxe5 Nxe4 Nxe4 Bxe5 Bg5 f6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8 Nxe5 Nxe4 Nxe4 Bxe5 Bg5 f6
+  +1.47  Nxf6+ Bxf6 Bxf6 Re8+ Kd2 Bf5
+  -0.61  f4 Bxb2
+  -1.14  Be3 Nc6 f4 Bxb2 Rb1 Bf5
+### d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 Nge2 Nc6 Qd2 Qa5 d5 Nd4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 Nge2 Nc6 Qd2 Qa5 d5 Nd4
+  +2.06  Nxd4 cxd4 Bxd4 Nh5 Bxg7 Nxg7
+  +0.81  Bxd4 cxd4 Nxd4 Nd7 Be2 Nc5
+  +0.67  Rd1 Nxe2 Bxe2 a6 Ra1 Rb8
+DONE
+### d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 e4 exd4 Nxd4 Re8 h3 Nc5 Re1 a5 Qc2 Nfxe4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 e4 exd4 Nxd4 Re8 h3 Nc5 Re1 a5 Qc2 Nfxe4
+  +1.31  Nxe4 Bxd4 Bg5 Qd7 Nf6+ Bxf6
+  -1.11  Bf4 Nxc3 bxc3 Bd7 Qd2 Ba4
+  -1.35  Bh6 Bxh6 Nxe4 Nxe4 Rxe4 Rxe4

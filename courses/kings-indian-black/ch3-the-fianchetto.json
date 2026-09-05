@@ -177,7 +177,7 @@
                                                                                                   "tags": ["open-centre"],
                                                                                                   "mistakes": [
                                                                                                     { "san": "Bd7", "grade": "playable", "note": "Sound, and slower: 13.Be3 and the bishop on d7 is in the way of the queen. The pawn first." },
-                                                                                                    { "san": "Nfxe4", "grade": "mistake", "note": "13.Nxe4 Nxe4 14.Rxe4 and the rook is not hanging to anything: the bishop on g7 does not see e4 with the knight on d4 blocking, so a knight has gone for a pawn." }
+                                                                                                    { "san": "Nfxe4", "grade": "inaccuracy", "note": "13.Nxe4 Bxd4 14.Bg5 and the pawn has come at the price of the bishop on g7 leaving the diagonal, with Nf6+ next: the bishop is the defence and it has been sent to d4." }
                                                                                                   ],
                                                                                                   "children": [
                                                                                                     {
@@ -335,7 +335,7 @@
                                                                                                   "note": "The pawn takes d5 from the pieces and it is the main line by another order: the same position, the same plans.",
                                                                                                   "tags": ["open-centre"],
                                                                                                   "mistakes": [
-                                                                                                    { "san": "Nfxe4", "grade": "mistake", "note": "13.Nxe4 Nxe4 14.Rxe4 and a knight has gone for a pawn." }
+                                                                                                    { "san": "Nfxe4", "grade": "inaccuracy", "note": "13.Nxe4 Bxd4 14.Bg5 and the pawn has come at the price of the bishop on g7 leaving the diagonal, with Nf6+ next." }
                                                                                                   ],
                                                                                                   "plan": "...a4, ...Qe7 and ...Nfd7, ...Bd7 or ...Be6. The main line's shape, reached by 8.h3.",
                                                                                                   "name": "8.h3, the same house"

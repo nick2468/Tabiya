@@ -1,0 +1,43 @@
+engine-pass.mjs at 500 ms, the first run over the finished chapters, before any engine-led fix.
+Conditions: 16 logical processors, CPU load sampled at 18-21% before each run (the idle Vite dev servers of
+other projects and this session's own shells; no javac, cargo, rustc or tauri process), no build, no test run
+beside any 2500 ms run, one engine process at a time, every run in this phase sequential. Four hung python
+shells from this session's own scratch work were found spinning at 40% before the first pass and ended before
+it began; no engine run of this phase overlapped them.
+Evaluations are from White's point of view: positive favours White, so a Black move that gives something
+away makes the number go UP. The course's own bar (chip 42.4): a flagged Black move is kept if the position
+after it is no worse than about +0.6 for White and it is the theory move, judged by its cost against the
+engine's best.
+
+377 student moves across 7 chapters, 747 positions to evaluate at 500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+7 moves cost 0.5 of a pawn or more:
+
+5.27  ch5-without-c4-and-e4  d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Nxe5 Nh5 Bxh5 Nxe5 Be2 Nd3 Bxd3 Qxd3
+      before 0.08  after 5.35
+1.90  ch2-the-samisch  d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6 Nge2 b6 Be3 Nd7
+      before -1.26  after 0.64
+1.33  ch1-the-classical  d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 dxe5 dxe5 Nd5 h6
+      before 0.11  after 1.44
+0.89  ch6-tactics-and-plans  d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 a3 Bd7 Rb1 Qe8
+      before -0.50  after 0.39
+0.62  ch1-the-classical  d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 a3 Bd7
+      before -0.70  after -0.08
+0.62  ch6-tactics-and-plans  d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 a3 Bd7 Rb1 Qe8 b4 axb4 axb4 Na6
+      before 0.14  after 0.76
+0.54  ch3-the-fianchetto  d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 e3 Re8 b3 c6 Bb2 a5
+      before -0.23  after 0.31
+
+What it found, and what was done (every finding re-checked at 2500 ms in engine-ask-2500.txt, section 2):
+  ch5 London, 10.Nxe5 Nh5 11.Bxh5 Nxe5 12.Be2 Nd3 13.Bxd3 Qxd3?? at +5.35: the queen on d1 sees d3 once the
+    d-pawn has gone. The knight still goes to d3 (+0.30 at 2500 ms, the engine's choice): the line is now
+    13.Qxd3 Qxd3 14.Bxd3 Bxb2, and 13.Bxd3 is met by 13...Bxb2 (+0.22).
+  ch2 Saemisch ending, 11.Be3 Nd7 at +0.64 against 11...Nb4 at -1.26: rewritten to ...Nb4.
+  ch1 Classical, 11.Nd5 h6 at +1.44 against 11...f6 at +0.09: rewritten to ...f6, with ...c6 (+0.47), ...Qd7
+    (+0.98) and ...Kh8 (+1.11) as the entries beside it.
+  ch1 Classical, 10.a3 Bd7 at -0.08 against 10...a4 at -0.64: rewritten to ...a4 11.Qc2 Bh6.
+  ch6 exercise 7, 11.Rb1 Qe8 at +0.39 against 11...a4 at -0.50, and 13...Na6 at +0.76: the exercise stood on a
+    move the engine put nine tenths behind, so it was moved to the Petrosian, where ...Na4 meets the storm
+    (17...Na4 at +0.32, the engine's first choice) and the c5 break loses the queen to ...Bxd1.
+  ch3 Fianchetto quiet line, 10.Bb2 a5 at +0.31 against 10...e4 at -0.11: rewritten to ...e4 11.Nd2 d5.

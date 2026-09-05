@@ -1,0 +1,22 @@
+engine-pass.mjs at 500 ms, the second run, after the rewrites above.
+Conditions: 16 logical processors, CPU load sampled at 18-21% before each run (the idle Vite dev servers of
+other projects and this session's own shells; no javac, cargo, rustc or tauri process), no build, no test run
+beside any 2500 ms run, one engine process at a time, every run in this phase sequential. Four hung python
+shells from this session's own scratch work were found spinning at 40% before the first pass and ended before
+it began; no engine run of this phase overlapped them.
+Evaluations are from White's point of view: positive favours White, so a Black move that gives something
+away makes the number go UP. The course's own bar (chip 42.4): a flagged Black move is kept if the position
+after it is no worse than about +0.6 for White and it is the theory move, judged by its cost against the
+engine's best.
+
+381 student moves across 7 chapters, 755 positions to evaluate at 500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+1 moves cost 0.5 of a pawn or more:
+
+0.58  ch1-the-classical  d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4
+      before -0.22  after 0.36
+
+Verdict: one finding, ch1's 11...f4 in the ...f5 storm line (7.d5 a5 8.O-O Na6 9.Ne1 Nd7 10.Be3 f5 11.f3 f4),
++0.36 at 500 ms. Re-checked at 2500 ms (engine-ask-2500.txt, section 4): ...f4 is +0.05 against 11...Nac5 at
+-0.06, a cost of eleven hundredths, and it is the theory move the whole line exists for. KEPT.

@@ -273,7 +273,7 @@
                                                   "note": "The knight to d7, going to e5 and c5: from c5 it hits e4 and holds the queenside, and the pawn on c4 has nothing to defend it but the bishop.",
                                                   "tags": ["development"],
                                                   "mistakes": [
-                                                    { "san": "Be6", "grade": "playable", "note": "Sound: 12.Nf4 and the bishop is hit. The knight first, so that ...Be6 comes when the knight on f4 has moved." },
+                                                    { "san": "Be6", "grade": "inaccuracy", "note": "12.Nf4 and the bishop is hit with the pawn on c4 still held: the bishop came a move too soon. The knight first, so that ...Be6 comes when the knight on f4 has moved." },
                                                     { "san": "Nb4", "grade": "mistake", "note": "12.Bxb4 and the knight has gone: the bishop on a3 was looking at b4 all along." }
                                                   ],
                                                   "plan": "...Nde5 and ...Nc5, ...Be6 hitting c4, ...Rac8 and ...Bxc3 when it wins the pawn back. The pawn on c4 is the one that comes back, and the ending after it is level with Black's rooks on the open files.",

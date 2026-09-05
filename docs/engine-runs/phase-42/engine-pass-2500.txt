@@ -1,0 +1,18 @@
+engine-pass.mjs at 2500 ms over the whole course, once, after the last content edit: the second-pass standard.
+Conditions: 16 logical processors, CPU load sampled at 18-21% before each run (the idle Vite dev servers of
+other projects and this session's own shells; no javac, cargo, rustc or tauri process), no build, no test run
+beside any 2500 ms run, one engine process at a time, every run in this phase sequential. Four hung python
+shells from this session's own scratch work were found spinning at 40% before the first pass and ended before
+it began; no engine run of this phase overlapped them.
+Evaluations are from White's point of view: positive favours White, so a Black move that gives something
+away makes the number go UP. The course's own bar (chip 42.4): a flagged Black move is kept if the position
+after it is no worse than about +0.6 for White and it is the theory move, judged by its cost against the
+engine's best.
+
+381 student moves across 7 chapters, 755 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+0 moves cost 0.5 of a pawn or more:
+
+
+Verdict: nothing reported. No Black move in the course costs half a pawn at 2500 ms; the two kept findings of the 500 ms samplers (11...f4 in the storm line) are inside the threshold here.

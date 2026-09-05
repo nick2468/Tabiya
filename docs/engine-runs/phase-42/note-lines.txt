@@ -1,0 +1,23 @@
+note-lines.mjs after the last content edit.
+
+
+=== kings-indian-black: 1838 notes read, 4 findings, 0 in intros
+    illegal 0, misnumbered 0, marker 0, unplaceable 0, back-reference 4, widened 0, deliberate 0
+
+  [back-reference] ch3-the-fianchetto  d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Qc2 e5  (plan)
+      "Qc2": every move in it has already been played on this line
+      ...exd4 and ...Nb6 against c4, ...Re8 and ...c6. The same plans as against 8.Qc2 in the main line, reached a move earlier.
+
+  [back-reference] ch4-four-pawns-averbakh-h3  d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 h3 O-O Be3 e5 d5 Na6 Nf3  (note)
+      "h3": every move in it has already been played on this line
+      The knight to f3, and it is the 6.h3 line of the Classical with the bishop already on e3: the same position, by another order.
+
+  [back-reference] ch4-four-pawns-averbakh-h3  d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 h3 O-O Be3 e5 d5 Na6 Nf3 Nh5  (note)
+      "h3": every move in it has already been played on this line
+      The knight to h5, as in the 6.h3 line: the knight on f3 blocks the bishop on f1, so nothing takes on h5, and the knight goes to f4 next with the queen coming to e8 behind it.
+
+  [back-reference] ch4-four-pawns-averbakh-h3  d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 h3 O-O Be3 e5 d5 Na6 Nf3 Nh5  (plan)
+      "h3": every move in it has already been played on this line
+      ...Qe8 and ...Nf4 after Nh2 and Be2, ...f5 behind the knight, ...Nc5 and ...a5. The 6.h3 line of the Classical, reached with the h-pawn first.
+
+0 faults, 4 for a human to read.

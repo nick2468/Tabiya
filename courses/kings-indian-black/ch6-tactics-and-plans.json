@@ -871,9 +871,9 @@
                                                           "note": "Exercise 2: take on h3. The knight cannot be taken back, because the bishop on f1 has gone to f3 and the knight on h2 does not see h3. A pawn up with the king's cover gone, and ...f4 next.",
                                                           "tags": ["tactics"],
                                                           "mistakes": [
-                                                            { "san": "fxe4", "grade": "inaccuracy", "note": "13.Nxe4 and the knight on f4 has to decide with the centre opened on White's terms. The capture on h3 wins a pawn first." },
+                                                            { "san": "fxe4", "grade": "mistake", "note": "13.Nxe4 and the knight on f4 has to decide with the centre opened on White's terms and the knight on e4 the best piece on the board. The capture on h3 wins a pawn first." },
                                                             { "san": "Nb4", "grade": "inaccuracy", "note": "13.gxf4 exf4 14.Bd2 and the knight has gone for two pawns with the position closed." },
-                                                            { "san": "Nh5", "grade": "inaccuracy", "note": "13.Bxh5 gxh5 14.exf5 and the kingside is broken with a pawn gone." }
+                                                            { "san": "Nh5", "grade": "mistake", "note": "13.Bxh5 gxh5 14.exf5 and the kingside is broken with a pawn gone and the knight back where it came from." }
                                                           ],
                                                           "children": [
                                                             {

@@ -1,0 +1,217 @@
+engine-mistakes.mjs at 2500 ms, the first run, after the last edit to the course's lines.
+Conditions: 16 logical processors, CPU load sampled at 18-21% before each run (the idle Vite dev servers of
+other projects and this session's own shells; no javac, cargo, rustc or tauri process), no build, no test run
+beside any 2500 ms run, one engine process at a time, every run in this phase sequential. Four hung python
+shells from this session's own scratch work were found spinning at 40% before the first pass and ended before
+it began; no engine run of this phase overlapped them.
+Evaluations are from White's point of view: positive favours White, so a Black move that gives something
+away makes the number go UP. The course's own bar (chip 42.4): a flagged Black move is kept if the position
+after it is no worse than about +0.6 for White and it is the theory move, judged by its cost against the
+engine's best.
+Bands: playable to 0.9, inaccuracy -0.4 to 1.8, mistake 0.7 and up, all as the cost to Black in White's favour.
+
+797 mistake entries across 7 chapters, 1157 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+61 entries where the grade and the engine disagree:
+
+ 6.30  inaccuracy graded too kindly  ch1-the-classical
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 c6 Bf1 exd4 Nxd4 Ng4 h3 Qb6 hxg4 : Qxd4 not Qxb2
+      "13.Na4 and the queen is chased while the knight on d4 stays: 13...Qb4 14.Bd2 and Black has a pawn for the piece."
+ 5.30  inaccuracy graded too kindly  ch6-tactics-and-plans
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8 Nxe5 Nxe4 Nxe4 Bxe5 Bg5 Rd4 Nf6+ Kg7 Nd5 : c6 not Bd6
+      "14.Be3 and the rook on d4 is hit with the bishop having left the long diagonal."
+ 5.07  inaccuracy graded too kindly  ch1-the-classical
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Qc2 a5 Bg5 : h6 not Ne8
+      "11.Nd2 and the knight has gone the wrong way: from e8 it neither holds e4 nor prepares ...f5 with the bishop on g5 still on the board."
+ 4.48  inaccuracy graded too kindly  ch1-the-classical
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 Be3 Ng4 Bg5 : f6 not h6
+      "9.Bh4 g5 10.Bg3 and the bishop is on the diagonal against e5 with Black's king loosened."
+ 4.39  inaccuracy graded too kindly  ch6-tactics-and-plans
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 b3 Bh6 Qc2 Ne8 Nf3 : Bxc1 not f5
+      "13.Bxh6 and the bishop has been traded on White's terms with the kingside loosened."
+ 4.27  inaccuracy graded too kindly  ch4-four-pawns-averbakh-h3
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 d5 e6 Be2 exd5 cxd5 Bg4 O-O Nbd7 h3 : Bxf3 not Be6
+      "12.Ng5 and the bishop is hit again, having done nothing but move twice."
+ 4.27  inaccuracy graded too kindly  ch5-without-c4-and-e4
+      d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Nxe5 Nh5 Bxh5 Nxe5 Be2 Nd3 Qxd3 Qxd3 Bxd3 : Bxb2 not Be6
+      "15.Nc3 and the pawn on b2 has been held: the bishop takes it while it is free."
+ 4.20  playable   graded too kindly  ch2-the-samisch
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6 Nge2 b6 Ba3 : Nd7 not Nb4
+      "Sound: 12.Rc1 and the knight on b4 is on a square White can push it off with a3."
+ 4.00  inaccuracy graded too kindly  ch0-the-defence
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 : Qe8 not h6
+      "10.Bh4 g5 11.Bg3 and the bishop is on the long diagonal against e5 with the kingside pawns loosened for nothing."
+ 3.87  inaccuracy graded too kindly  ch4-four-pawns-averbakh-h3
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 d5 e6 Be2 exd5 exd5 Bf5 O-O Ne4 Nxe4 : Bxe4 not Re8
+      "12.Nc3 and White has kept the piece with the rook on e8 hitting nothing."
+ 3.72  inaccuracy graded too kindly  ch5-without-c4-and-e4
+      d4 Nf6 Bg5 g6 Nd2 : Bg7 not Ne4
+      "4.Nxe4 and the knight has been traded before it did anything, with the bishop on g5 kept."
+ 3.63  inaccuracy graded too kindly  ch4-four-pawns-averbakh-h3
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5 Na6 Nf3 e5 dxe5 dxe5 Qxd8 Rxd8 Nd5 : Nxd5 not Nc5
+      "11.Nxf6+ Bxf6 12.Bxf6 and the bishop has gone."
+ 3.56  playable   graded too kindly  ch1-the-classical
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5 : Nxd5 not Nbd7
+      "Sound: 11.Nxf6+ Bxf6 12.Bxf6 Nxf6 and the ending is level. The capture keeps the bishop on g7."
+ 3.49  inaccuracy graded too kindly  ch1-the-classical
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 c6 Bf1 : exd4 not Nc5
+      "10.dxc5 dxc5 11.Qxd8 Rxd8 12.Nxe5 and a pawn has gone."
+ 3.39  inaccuracy graded too kindly  ch6-tactics-and-plans
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4 Bf2 g5 Rb1 Rf6 Qa4 Qe8 Qxa5 Qh5 Kh1 : Rh6 not g4
+      "17.fxg4 Qxg4 18.Bf3 and the queen has been pushed with the f-file open for White's rook."
+ 3.32  inaccuracy graded too kindly  ch1-the-classical
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Re1 : c6 not Nc5
+      "9.dxc5 dxc5 10.Qxd8 Rxd8 11.Nxe5 and a pawn has gone: the knight left a6 while d4 was still hitting c5."
+ 3.16  playable   graded too kindly  ch4-four-pawns-averbakh-h3
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5 : Nxd5 not Nbd7
+      "Sound: 11.Nxf6+ Bxf6 12.Bxf6 Nxf6 and it is level."
+ 3.12  inaccuracy graded too kindly  ch5-without-c4-and-e4
+      d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 Nc3 : exf4 not Ne4
+      "10.Nxe4 exf4 11.exf4 and the bishop has gone for the knight, with the pawn count level: take the bishop first."
+ 2.96  inaccuracy graded too kindly  ch5-without-c4-and-e4
+      d4 Nf6 Bg5 g6 c4 Bg7 Nc3 d6 e4 : O-O not e5
+      "6.dxe5 dxe5 7.Qxd8+ Kxd8 and the king is in the middle. Castle first."
+ 2.65  inaccuracy graded too kindly  ch0-the-defence
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 Be3 Ng4 Bg5 Qe8 dxe5 dxe5 h3 : h6 not Nh6
+      "12.Be3 and the knight on h6 is hit next by Bxh6, or sits on the edge doing nothing while the bishop on g5 has gone home for free."
+ 2.56  inaccuracy graded too kindly  ch4-four-pawns-averbakh-h3
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4 O-O Nf3 c5 Be2 cxd4 Nxd4 Nc6 Be3 Bg4 Nxc6 : Bxe2 not bxc6
+      "11.Bxg4 Nxg4 12.Qxg4 and the bishop has gone for a knight with the pawn on c6 doubled: the sequence had to be played in order."
+ 2.26  playable   graded too kindly  ch2-the-samisch
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6 Nge2 b6 Be3 : Nb4 not Be6
+      "Sound, hitting c4 at once: 12.Nf4 Bxc4 13.Nfd5 and the pawn is back with the knight on d5. The knight to b4 hits more."
+ 2.20  inaccuracy graded too kindly  ch1-the-classical
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5 : Nxe4 not Nxd5
+      "12.cxd5 and the pawn on d5 is a wedge with the bishop pair White's: the knight has done White's work."
+ 2.09  inaccuracy graded too kindly  ch5-without-c4-and-e4
+      d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Nxe5 Nh5 Bxh5 Nxe5 Be2 : Nd3 not Nxc4
+      "13.Bxc4 and the knight has been traded for the bishop with the pawn count still White's."
+ 2.07  inaccuracy graded too kindly  ch2-the-samisch
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 : Nc6 not Nbd7
+      "10.Ba3 and the bishop keeps the pawn from the side, with the knight on d7 blocking the bishop on c8 and the rook on d8 both."
+ 1.95  inaccuracy graded too kindly  ch2-the-samisch
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6 Nge2 b6 Be3 : Nb4 not Nd7
+      "12.O-O-O Bb7 13.Nd4 and White has caught up on development with the pawn kept."
+ 1.92  playable   graded too kindly  ch5-without-c4-and-e4
+      d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Bh2 Ne4 Nbd2 : Nxd2 not f5
+      "Sound: 12.Nxe4 fxe4 13.Nd2 and the pawn on e4 is held by the knight. The trade first keeps the structure."
+ 1.91  playable   graded too kindly  ch6-tactics-and-plans
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8 Nxe5 Nxe4 Nxe4 Bxe5 Bg5 : Rd4 not f6
+      "Sound: 12.Be3 and the bishop has gone back. The rook to d4 hits two things."
+ 1.81  inaccuracy graded too kindly  ch2-the-samisch
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 Nge2 Nc6 Qd2 Qa5 d5 : Ne5 not Nd4
+      "10.Nxd4 cxd4 11.Bxd4 and the pawn on d4 is White's with the bishop on it: the knight went to d4 with nothing behind it."
+ 1.74  playable   graded too kindly  ch6-tactics-and-plans
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 d5 Na6 Be3 Nh5 Nh2 Qe8 Be2 Nf4 Bf3 f5 g3 : Nxh3 not fxe4
+      "Sound: 13.Nxe4 and the knight on f4 has to decide. The capture on h3 wins a pawn first."
+ 1.67  playable   graded too kindly  ch2-the-samisch
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6 Nge2 b6 Be3 : Nb4 not Ba6
+      "Sound: 12.Nf4 e6 13.Be2 and the bishop on a6 is hitting c4 through the bishop on e2. The knight first."
+ 1.67  playable   graded too kindly  ch1-the-classical
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5 : Nxe4 not Nd7
+      "Sound and it keeps everything: 12.Nc3 and the ending is level. The capture wins a pawn for nothing, and it is the one to know."
+ 1.50  playable   graded too kindly  ch1-the-classical
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 dxe5 dxe5 Qxd8 Rxd8 Nd5 : Nxd5 not Nbd7
+      "Sound: 10.Nxf6+ Nxf6 and it is level. The capture first."
+ 1.47  playable   graded too kindly  ch6-tactics-and-plans
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8 Nxe5 Nxe4 Nxe4 Bxe5 Bg5 Rd4 Nf6+ : Kg7 not Kf8
+      "Sound: 13.Nd5 c6 and the same. The king on g7 holds f6 as well."
+ 1.46  playable   graded too kindly  ch3-the-fianchetto
+      Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O d3 d6 e4 e5 Nc3 Nc6 Be3 Re8 Re1 : Be6 not Nd4
+      "Sound: 10.Nxd4 exd4 11.Nd5 and the knight is in on d5. The bishop first."
+ 1.23  playable   graded too kindly  ch4-four-pawns-averbakh-h3
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5 Na6 Nf3 e5 dxe5 dxe5 Qxd8 Rxd8 Nd5 Nxd5 cxd5 : f6 not Re8
+      "Sound: the rook steps off the diagonal and holds e5. The pawn on f6 does the same and hits the bishop."
+ 1.19  playable   graded too kindly  ch2-the-samisch
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 : dxc5 not Qa5
+      "Sound and sharper: 8.cxd6 exd6 9.Bd2 and Black has a weak pawn on d6 for the open lines. The pawn recapture keeps the structure."
+ 1.16  playable   graded too kindly  ch6-tactics-and-plans
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Na6 Nd2 Qe8 O-O Nh7 a3 h5 f3 : Bd7 not Nc5
+      "Sound: 14.b3 Bd7 15.Rb1 and the same shape. The bishop first."
+ 1.10  playable   graded too kindly  ch3-the-fianchetto
+      c4 Nf6 Nc3 g6 g3 Bg7 Bg2 O-O e4 d6 Nge2 e5 O-O Nc6 d3 a5 Bg5 h6 Be3 : Ng4 not Nd4
+      "Sound: 11.Nxd4 exd4 12.Bd2 and the pawn on d4 is a wedge. The knight to g4 first hits the bishop."
+ 1.01  playable   graded too kindly  ch4-four-pawns-averbakh-h3
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8 Nxe5 : Nxe4 not h6
+      "Sound and quieter: the knight on e5 has to be held or go, and 10.Nf3 Nc6 keeps the pieces on. The capture on e4 does the job at once."
+ 0.99  playable   graded too kindly  ch6-tactics-and-plans
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 d5 Na6 Be3 Nh5 Nh2 Qe8 Be2 Nf4 Bf3 f5 g3 Nxh3 Qd2 : f4 not fxe4
+      "Sound: 14.Nxe4 Nc5 and a pawn up. The push keeps the knight on h3 defended by the f-pawn's opening of the bishop."
+ 0.98  playable   graded too kindly  ch3-the-fianchetto
+      c4 Nf6 Nc3 g6 g3 Bg7 Bg2 O-O Nf3 : d6 not e5
+      "Sound: 6.d4 and the pawn on e5 is hit before the knight on d7 holds it: 6...e4 7.Ng5 and the pawn is loose. The pawn to d6 first."
+ 0.96  playable   graded too kindly  ch3-the-fianchetto
+      c4 Nf6 Nf3 g6 Nc3 Bg7 d4 O-O e4 : d6 not d5
+      "Sound and a Grünfeld shape with the king castled."
+ 0.95  playable   graded too kindly  ch0-the-defence
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 : d6 not d5
+      "The Grünfeld again, and its move order is worse here: 5.e5 hits the knight before Black is ready. This course's pawn goes one square."
+ 0.93  playable   graded too kindly  ch1-the-classical
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 dxe5 dxe5 Qxd8 Rxd8 Bg5 Re8 Nd5 Nxd5 cxd5 : c6 not Nd7
+      "Sound and slow: 12.O-O-O and White has the file with the wedge kept."
+ 0.92  playable   graded too kindly  ch2-the-samisch
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6 Nd5 Nd7 Ba3 : e6 not Nb6
+      "Sound: 12.Nxb6 axb6 and the knight has gone, with the bishop on a3 still holding c5 and the a-file half open. The pawn push traps the knight instead."
+ 0.66  mistake    graded too harshly  ch4-four-pawns-averbakh-h3
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3 e5 O-O Nc6 d5 : Nd4 not Nb8
+      "Two moves lost: 9.Bg5 a5 10.Qd2 and White is ahead everywhere."
+ 0.59  mistake    graded too harshly  ch2-the-samisch
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 Nge2 Nc6 d5 : Ne5 not Nb4
+      "9.a3 and the knight has to go back the way it came, and 9...Na6 10.Nf4 leaves it on the rim for good."
+ 0.55  mistake    graded too harshly  ch1-the-classical
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Na6 d5 Nc5 Nd2 a5 a3 a4 Qc2 : Bh6 not Nh5
+      "12.Bxh5 gxh5 and the kingside is broken: the knight on f3 has gone to d2, so the bishop on e2 sees h5."
+ 0.54  mistake    graded too harshly  ch2-the-samisch
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 d5 e6 Qd2 exd5 cxd5 : a6 not Nh5
+      "10.g4 and the knight has to go back to f6 with White's pawn storm a move on: the pawn on f3 took g4 away from Black and gave it to White."
+ 0.53  mistake    graded too harshly  ch2-the-samisch
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 : c5 not Nh5
+      "7.g4 and the knight has to go back to f6 with a tempo lost: the pawn on f3 has taken g4 away from the knight and given it to White's pawn."
+ 0.53  mistake    graded too harshly  ch4-four-pawns-averbakh-h3
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Bd3 O-O Nge2 Nc6 O-O e5 d5 : Nd4 not Nb8
+      "Two moves lost: 9.Bg5 and White is ahead everywhere."
+ 0.51  mistake    graded too harshly  ch4-four-pawns-averbakh-h3
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3 e5 O-O Nc6 d5 Nd4 Nb5 Nxb5 cxb5 : Bd7 not Nh5
+      "11.Nxe5 dxe5 12.Qxh5 and the knight has gone."
+ 0.39  mistake    graded too harshly  ch4-four-pawns-averbakh-h3
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Be2 O-O Bg5 Na6 Qd2 e5 d5 Qe8 h3 Nc5 Bf3 : a5 not Nh5
+      "11.Bxh5 gxh5 and the kingside is broken for nothing."
+ 0.20  mistake    graded too harshly  ch4-four-pawns-averbakh-h3
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3 e5 d5 a5 O-O Na6 a3 : Nc5 not Nh5
+      "10.Nxe5 dxe5 11.Qxh5 and the knight has gone."
+ 0.19  mistake    graded too harshly  ch4-four-pawns-averbakh-h3
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3 e5 d5 a5 O-O Na6 a3 Nc5 Bc2 : Bd7 not Nh5
+      "11.Nxe5 dxe5 12.Qxh5 and the knight has gone."
+ 0.18  mistake    graded too harshly  ch6-tactics-and-plans
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 dxe5 dxe5 Qxd8 Rxd8 Nxe5 Nxe4 Nxe4 Bxe5 Bg5 : Rd4 not Bxb2
+      "12.Bxd8 and the rook has gone: the bishop on g5 was hitting it."
+ 0.18  mistake    graded too harshly  ch2-the-samisch
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 Nge2 Nc6 d5 Ne5 Ng3 : e6 not Nh5
+      "10.Nxh5 gxh5 11.Qd2 and the kingside is broken with the knight gone: the knight on g3 was placed to take it."
+ 0.17  mistake    graded too harshly  ch4-four-pawns-averbakh-h3
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 h3 O-O Be3 e5 d5 : Na6 not Nh5
+      "8.g4 and the knight on h5 has nowhere to go: the pawn on h3 was played so that g4 comes with the knight trapped."
+ 0.09  mistake    graded too harshly  ch4-four-pawns-averbakh-h3
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3 e5 d5 : a5 not Nh5
+      "8.Nxe5 dxe5 9.Qxh5 and the knight has gone: the bishop on d3 does not see h5, but the queen does once the knight on f3 has moved with a capture."
+ 0.03  mistake    graded too harshly  ch4-four-pawns-averbakh-h3
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Bd3 e5 d5 a5 O-O : Na6 not Nh5
+      "9.Nxe5 dxe5 10.Qxh5 and the knight has gone: the bishop on d3 does not see h5, but the queen does once the knight on f3 has moved with tempo."
+
+What was done with the 61: every one acted on, and the punishments behind the new mistake notes were asked at
+2500 ms (engine-ask-2500.txt, section 4).
+  29 inaccuracies or playables at 1.8 and above became mistakes, with the note rewritten to say what the engine
+     plays. The pattern that recurs: the bishop on g5 looking at d8 through the square a knight has just left
+     (ch0 and ch1 ...h6 and ...Nh6 after 9.Bg5, ch1 ...Ne8 after 10.Bg5, ch1 7.Be3 Ng4 8.Bg5 h6), the knight on
+     d5 reaching c7 before it was taken (...Nbd7 in three endings), ...Qxb2 walking into Bxb2, and the Four
+     Pawns' ...Be6 walking onto the square d5 was attacking.
+  17 playable entries between 0.92 and 1.74 became inaccuracies with their notes saying the cost.
+  15 mistakes graded too harshly came down: eight to playable and seven to inaccuracy. Nine of the fifteen were
+     the knight to h5 in the Bd3 and Makagonov lines, where the note had claimed Nxe5 and Qxh5 won the knight
+     and the bishop on g7 in fact takes the knight on e5 back; those notes now say why the move is only quiet
+     (0.03 to 0.55). The two ...Nb8 retreats (0.66, 0.53) are inaccuracies; ...Bxb2 into Bxd8 Bxa1 (0.18) is a
+     rook trade and playable.
+  Three shared positions carried different grades in two chapters after the regrades and were brought into
+     one, which the suite holds.
+Grades only, so the engine-pass results stand; the confirming run follows.

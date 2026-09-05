@@ -1,0 +1,37 @@
+engine-mistakes.mjs at 2500 ms, the confirming run after the regrades.
+Conditions: 16 logical processors, CPU load sampled at 18-21% before each run (the idle Vite dev servers of
+other projects and this session's own shells; no javac, cargo, rustc or tauri process), no build, no test run
+beside any 2500 ms run, one engine process at a time, every run in this phase sequential. Four hung python
+shells from this session's own scratch work were found spinning at 40% before the first pass and ended before
+it began; no engine run of this phase overlapped them.
+Evaluations are from White's point of view: positive favours White, so a Black move that gives something
+away makes the number go UP. The course's own bar (chip 42.4): a flagged Black move is kept if the position
+after it is no worse than about +0.6 for White and it is the theory move, judged by its cost against the
+engine's best.
+
+797 mistake entries across 7 chapters, 1157 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+4 entries where the grade and the engine disagree:
+
+ 1.92  inaccuracy graded too kindly  ch6-tactics-and-plans
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 d5 Na6 Be3 Nh5 Nh2 Qe8 Be2 Nf4 Bf3 f5 g3 : Nxh3 not fxe4
+      "13.Nxe4 and the knight on f4 has to decide with the centre opened on White's terms. The capture on h3 wins a pawn first."
+ 1.85  inaccuracy graded too kindly  ch6-tactics-and-plans
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O h3 e5 d5 Na6 Be3 Nh5 Nh2 Qe8 Be2 Nf4 Bf3 f5 g3 : Nxh3 not Nh5
+      "13.Bxh5 gxh5 14.exf5 and the kingside is broken with a pawn gone."
+ 0.96  playable   graded too kindly  ch2-the-samisch
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5 dxc5 dxc5 Qxd8 Rxd8 Bxc5 Nc6 Nge2 b6 Ba3 : Nd7 not Be6
+      "Sound: 12.Nf4 and the bishop is hit. The knight first, so that ...Be6 comes when the knight on f4 has moved."
+ 0.68  mistake    graded too harshly  ch3-the-fianchetto
+      d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 e4 exd4 Nxd4 Re8 h3 Nc5 Re1 a5 Qc2 : c6 not Nfxe4
+      "13.Nxe4 Nxe4 14.Rxe4 and the rook is not hanging to anything: the bishop on g7 does not see e4 with the knight on d4 blocking, so a knight has gone for a pawn."
+
+Verdict: four, all at band edges after the 61 regrades, and all regraded by the number. Exercise 2's ...fxe4
+(1.74 in the first run, 1.92 here) and ...Nh5 (inside the band in the first run, 1.85 here) straddle the
+inaccuracy ceiling of 1.8 and are mistakes now; the Saemisch ending's ...Be6 at the Ba3 position (0.96 against
+the playable ceiling of 0.9) is an inaccuracy; and the Fianchetto's ...Nfxe4 at 12...c6 (0.68 against the
+mistake floor of 0.7) comes down to an inaccuracy, with its note rewritten from the engine's 13.Nxe4 Bxd4
+14.Bg5, because the note had claimed a knight for a pawn and the bishop on g7 takes on d4. The same entry at
+the same position by the 8.h3 order was brought to the same grade. Grades only, so the engine-pass results
+stand and no third run was made; the next mistakes pass will say whether the two straddlers settle.
