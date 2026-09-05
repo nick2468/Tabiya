@@ -4111,4 +4111,36 @@ listed nothing, which is the exclusion. The London on the other side: the engine
 1.d4 and the board was Black's way up. The setting flipped to Sometimes a listed
 alternative and held across a reload. Storage cleared, no console errors.
 
-- [ ] **Review gate 32**
+Gate 32 findings (2026-09-05):
+
+- **Verified for the gate from the repo:** 998 tests in under ten seconds and `tsc -b`
+  clean; version 1.7.2 in all three files; nothing under `courses/`; 344 line ids
+  unchanged; the tree clean at the start of the gate.
+- **Two mutations checked by hand.** Making the trainee colour always the course's turns
+  three of the five other-side DOM tests red. Removing the side filter from Lines played
+  turns "leaves out a game played against the course, however far it ran" red. Both
+  restored from git.
+- **Driven against a fresh server at v1.7.2, 1200x980.** The Najdorf on the other side: the
+  fourth radio with its two-setting fieldset under it, the default "The course move every
+  time" checked; the trainee to move first as White with the board White's way up; 1.e4
+  answered by the course's 1...c5 and 2.Nf3 by 2...d6; Hint "Club players most often play
+  2.Nf3 here"; the report leading with The course; the record carrying `side: 'other'`
+  and one hint; Progress reading "1 game, 1 of them playing the other side", the Play on
+  row saying "other side", and Lines played empty.
+- **One bug found by the drive and fixed at the gate as the orchestrator's commit.** The
+  Position column read "Slightly better for the engine" for a game the trainee played as
+  White at +0.45: `endedText` and `positionText` took the trainee's colour from the
+  course. A derived checkmate would have been attributed to the wrong side the same way.
+  `traineeColour` turns the record's side into the colour actually held, with a test both
+  ways, and the row now reads "Slightly better for you".
+- **The builder's design call stands**: the fourth radio cannot combine with the From
+  radio in the same group, so the other side is chosen with a dropdown of the course's
+  lines under it, and Study's Play from here stays on the trainee's own side. If Nick wants
+  to face the course from a Study position, that is a ruling about the control's shape.
+- **The suite is at its budget**: 997 to 998 tests in 8.7 to 9.7 seconds against the phase
+  29 rule of ten. The next DOM file of any size crosses it, and the next chip should say
+  whether the rule bends or the tests get cheaper.
+- **Nick's own files were not listed and not reported.** The browser build's storage was
+  cleared afterwards.
+
+- [x] **Review gate 32 passed** (2026-09-05)
