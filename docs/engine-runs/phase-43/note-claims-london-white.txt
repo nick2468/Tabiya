@@ -1,0 +1,15 @@
+note-claims.mjs over london-white after this phase's additions.
+
+209 mistake entries, 3 with a material claim and a move sequence to check it, 6 claiming material without naming a move.
+
+0 claims the board does not support:
+
+
+6 claiming material with no sequence to check, for a human:
+
+  ch2-c5-qb6  Rb1 not Nc7+: "It loses a piece: ...Nxc7 takes the knight, and Bxc7 Qxc7 leaves White a bishop down as well."
+  ch2-c5-qb6  Nxd5 not dxc5: "It wins nothing: the queen on b6 takes straight back on c5. Nxd5 is the capture that actually wins a pawn, because nothing is guarding d5."
+  ch6-everything-else  c4 not Ne5: "The square is not covered yet: ...dxe5 wins a knight for a pawn whichever way White recaptures."
+  ch6-everything-else  Nf3 not Bd3: "It hangs g2. The bishop on f1 was the only thing defending it, and the bishop on b7 is looking straight down that diagonal: ...Bxg2 wins a pawn and the rook is next. Play Nf3 first and the diagonal is shut."
+  ch7-tactics-and-plans  Rf3 not f5: "It releases the tension too early. Black answers ...exf5 and the knight on e5 loses the pawn that was holding it."
+  ch7-tactics-and-plans  Rf3 not Qh5: "It loses the queen: the knight on f6 plays ...Nxh5 and nothing recaptures. The rook goes to f3 first for exactly this reason, so that the queen arrives with company rather than alone."

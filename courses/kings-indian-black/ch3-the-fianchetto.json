@@ -518,7 +518,7 @@
                                                                                           "tags": ["e5-lever"],
                                                                                           "mistakes": [
                                                                                             { "san": "Nf8", "grade": "inaccuracy", "note": "12.Qc2 and the pawn on e4 is hit twice with the knight on f8 holding nothing." },
-                                                                                            { "san": "Qe7", "grade": "inaccuracy", "note": "12.Qc2 d5 13.cxd5 cxd5 14.Rac1 and the c-file is White's with the queen on e7 in the way of the rook." }
+                                                                                            { "san": "Qe7", "grade": "mistake", "note": "12.Qc2 d5 13.cxd5 cxd5 14.Rac1 and the c-file is White's with the queen on e7 in the way of the rook." }
                                                                                           ],
                                                                                           "plan": "...Nf8 and ...Ne6 against d4, ...h5 and ...Bf5 when f3 has been met, ...Qe7. The quiet line has become a centre for Black, and the bishop on b2 looks at a wall.",
                                                                                           "name": "8.e3, the quiet line"

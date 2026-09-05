@@ -1000,7 +1000,9 @@ Playing the Slav structure with ...c6 anyway, and drifting into a passive positi
 {This is the position White is playing for. The bishop on c8 watches the whole game from behind its own pawn.}
 ) ( 3... Bf5!?
 {Also sensible, and 4.c4 turns the game back into a Slav where Black has committed the bishop early.}
-) 4. c3
+) 4. Bd3
+{The bishop first, which is what the Colle-Zukertort course plays here: the bishop to d3 whatever Black does, with b3 and Bb2 to follow, and the pawn on c2 kept for c4. [%weight 5]}
+( 4. c3
 {The Colle proper. White builds the little pyramid and prepares Bd3 and e4. [%weight 7]}
 4... Nc6
 {Develop and press d4. The pressure is what stops White from getting e4 in for free. The engine slightly prefers 4...e6 first, keeping the knight's choice of square open; the course develops the knight first because it is the piece that does the pressing, and the pawn move comes anyway.}
@@ -1030,6 +1032,14 @@ Playing the Slav structure with ...c6 anyway, and drifting into a passive positi
 {Take the centre instead of the pawn. With pawns on d5 and e5 Black has more space than White has extra material. [%tags e5-break] [%plan Play ...Be7 or ...Bxc5, castle, and only then decide about the pawn. If White holds it with b4, the queenside squares White gave up are worth more than the pawn.] [%line The Colle, with 5.dxc5]}
 ( 5... Qa5?!
 {It is not a check: the pawn on c3 blocks the diagonal. White answers 6.b4, hitting the queen and holding the extra pawn, so the queen moves again and nothing has been won.}
+) ) 4... Nc6
+{Develop and hit d4 again, as against 4.c3. The bishop on d3 has not held d4, so ...cxd4 is a threat White has to answer before the b3 and Bb2 setup arrives, and ...Bg4 comes next as in the main line. [%tags development c5-break] [%plan ...Bg4 and ...e6, ...Bd6 and ...O-O, with ...cxd4 the moment b3 has been played and the pawn on d4 is held by the e-pawn alone. Against the Colle-Zukertort the bishop on b2 looks at a wall while the pawn on d4 stands.] [%line The Colle, with 4.Bd3]}
+( 4... cxd4!?
+{Sound and the engine's choice against b3: 5.exd4 Nc6 6.c3 Bg4 and the isolated pawn is the target. The knight first keeps the tension a move longer.}
+) ( 4... e6?!
+{It shuts the bishop in for nothing: 5.b3 Be7 6.O-O and White has the setup this course exists to avoid handing over.}
+) ( 4... Bg4!?
+{Sound: 5.h3 Bxf3 6.Qxf3 Nc6 7.c3 and the same shape with the bishop traded. The knight first.}
 ) ) ( 2. e3
 {A quiet start that usually becomes a Colle. White has committed nothing except the bishop on c1. [%weight 3]}
 2... Nf6 {Develop and see what White is building.} 3. Bd3

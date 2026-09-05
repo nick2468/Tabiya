@@ -1,0 +1,38 @@
+note-lines.mjs over slav-black after this phase's additions.
+
+
+=== slav-black: 698 notes read, 7 findings, 1 in intros
+    illegal 0, misnumbered 0, marker 0, unplaceable 0, back-reference 0, widened 5, deliberate 2
+
+  [widened] ch2-quiet  d4 d5 c4 c6 Nf3 Nf6 e3 Bf5 cxd5 cxd5 Qb3 Qc7 Bd2 a6 Nc3 e6 not Nc6  (mistake Nc6)
+      "Qxd5": plays with Nxd5 inserted, which the note leaves out
+      9.Nxd5! Nxd5 10.Qxd5 wins a pawn: with the queen on c7 rather than d8, the pawn on d5 has one defender against two attackers. ...e6 fixes that first.
+
+  [widened] ch3-exchange  d4 d5 c4 c6 cxd5 cxd5 Nc3 Nf6 Bf4 Nc6 e3 Bf5 Qb3 Na5 Qa4+ Bd7  (note)
+      "Bxa4": plays with Nxd5 inserted, which the note leaves out
+      Block with the bishop, and notice that it attacks the queen on a4 as it does so. That is what saves the knight: 9.Qxa5 now loses the queen to 9...Bxa4.
+
+  [widened] ch4-sidelines  d4 d5 c4 c6 Nf3  (note)
+      "Nc3": plays with dxc4 inserted, which the note leaves out
+      The main developing move. What follows here is everything except 4.Nc3, 4.e3 and 4.Bf4.
+
+  [widened] ch4-sidelines  d4 d5 c4 c6 Nf3  (note)
+      "e3": plays with dxc4 inserted, which the note leaves out
+      The main developing move. What follows here is everything except 4.Nc3, 4.e3 and 4.Bf4.
+
+  [widened] ch4-sidelines  d4 d5 c4 c6 Nf3  (note)
+      "Bf4": plays with dxc4 inserted, which the note leaves out
+      The main developing move. What follows here is everything except 4.Nc3, 4.e3 and 4.Bf4.
+
+  [deliberate] ch2-quiet  d4 d5 c4 c6 Nf3 Nf6 e3 Bf5 Nc3 e6 Nh4 Bg6 Nxg6 hxg6 Bd3 Nbd7 O-O Bd6 Qc2 Bxh2+  (note)
+      "Kxh2": Kxh2 is refused, and the note says so
+      The bishop cannot be taken. The rook on h8 defends h2 down the file that ...hxg6 opened, so 11.Kxh2 is not even legal.
+
+  [deliberate] ch6-tactics-and-plans  d4 d5 c4 c6 Nf3 Nf6 e3 Bf5 Nc3 e6 Nh4 Bg6 Nxg6 hxg6 Bd3 Nbd7 O-O Bd6 Qc2 Bxh2+  (note)
+      "Kxh2": Kxh2 is refused, and the note says so
+      The bishop cannot be captured. The rook on h8 defends h2 down the file that ...hxg6 opened, so 11.Kxh2 is not a legal move at all.
+
+  [intro/widened] ch2-quiet
+      "Qxc1+": plays with Qxb7 inserted, which the note leaves out
+
+0 faults, 7 for a human to read.

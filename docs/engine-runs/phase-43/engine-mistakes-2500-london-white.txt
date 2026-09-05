@@ -1,0 +1,63 @@
+engine-mistakes.mjs at 2500 ms over london-white, after this phase's additions to it.
+Conditions: 16 logical processors, CPU load sampled at 18-21% before each run (the idle Vite dev servers of
+other projects and this session's own shells; no javac, cargo, rustc or tauri process), no build, no test run
+beside any run, one engine process at a time, every run in this phase sequential.
+Evaluations are from White's point of view: positive favours White.
+Bands: playable to 0.9, inaccuracy -0.4 to 1.8, mistake 0.7 and up, as the cost to the student side.
+
+198 mistake entries across 8 chapters, 292 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+16 entries where the grade and the engine disagree:
+
+ 0.95  playable   graded too kindly  ch2-c5-qb6
+      d4 d5 Bf4 c5 e3 Qb6 Nc3 e6 : Nb5 not Na4
+      "Hitting the queen is fine here too, but the knight on a4 has less to do than the one on b5."
+ 0.67  mistake    graded too harshly  ch3-kings-indian
+      d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 : h3 not Ng5
+      "The knight has nothing to attack and Black plays ...h6, winning time."
+ 0.59  mistake    graded too harshly  ch4-gruenfeld
+      d4 Nf6 Bf4 g6 e3 d5 Nf3 Bg7 Be2 O-O O-O c5 c3 Nc6 h3 b6 Nbd2 Bb7 : Ne5 not g4
+      "A pawn storm in front of your own castled king, with the centre still open and a bishop on b7 aiming at it."
+-0.52  inaccuracy graded too harshly  ch5-harassment
+      d4 d5 Bf4 Nf6 e3 e6 Nf3 Nh5 : Bg3 not Bg5
+      "The bishop cannot be chased off it: 5...h6 6.Bxd8 costs Black the queen for a bishop, because g5 looks straight at d8 through the empty f6 square. The objection is positional. 5.Bg3 keeps the bishop on the diagonal the system is built on, and invites Nxg3, when hxg3 opens the h-file."
+ 0.51  mistake    graded too harshly  ch6-everything-else
+      d4 c5 e3 cxd4 : exd4 not Qxd4
+      "The queen comes out early and ...Nc6 chases it straight away."
+ 0.46  mistake    graded too harshly  ch6-everything-else
+      d4 f5 : Bf4 not g4
+      "Attacking with the pawn in front of your own king before a single piece is out."
+ 0.45  mistake    graded too harshly  ch5-harassment
+      d4 d5 Bf4 Nf6 e3 Ne4 Nd2 Nxd2 : Qxd2 not Kxd2
+      "The king walks into the middle of the board with queens still on. There is never a reason for this here."
+ 0.41  mistake    graded too harshly  ch4-gruenfeld
+      d4 Nf6 Bf4 g6 e3 d5 Nf3 Bg7 Be2 O-O : O-O not h4
+      "An attack with the king still in the centre, against a position with no weaknesses. Black opens the centre and White is worse."
+ 0.32  mistake    graded too harshly  ch6-everything-else
+      d4 f5 Bf4 Nf6 e3 e6 Nf3 Be7 Be2 O-O O-O d6 c4 Ne4 h3 b6 : Nfd2 not Nc3
+      "Still the wrong knight. Taking back on c3 with a pawn is exactly what Black wants."
+-0.25  mistake    graded too harshly  ch6-everything-else
+      d4 g6 : Bf4 not h4
+      "The pawn lunge against a fianchetto, before any development. Black castles and opens the centre."
+ 0.24  mistake    graded too harshly  ch5-harassment
+      d4 d5 Bf4 Bf5 e3 e6 Bd3 Bg6 Nf3 Nf6 : O-O not h4
+      "An attack before castling, against a position with no weakness. Black opens the centre with ...c5 and the king on e1 is the one in danger."
+ 0.13  mistake    graded too harshly  ch3-kings-indian
+      d4 Nf6 Bf4 g6 : e3 not h4
+      "The pawn storm before any development. Black castles, opens the centre with ...c5 or ...e5, and White has nothing."
+-0.12  mistake    graded too harshly  ch5-harassment
+      d4 d5 Bf4 Bf5 e3 e6 Bd3 Bxd3 : Qxd3 not cxd3
+      "It doubles the pawns, gives up the good diagonal and takes away the c3 square the pawn needs. There is no upside."
+ 0.09  mistake    graded too harshly  ch2-c5-qb6
+      d4 d5 Bf4 c5 e3 Nc6 Nf3 Nf6 c3 Qb6 : Qb3 not Nbd2
+      "b2 is hanging. Black takes it, and proving compensation without the Nc3 and Nb5 idea is much harder."
+-0.09  mistake    graded too harshly  ch0-the-system
+      d4 d5 : Bf4 not e3
+      "The bishop is now trapped behind its own pawns and has no future. This is the exact error the London exists to avoid."
+ 0.05  mistake    graded too harshly  ch6-everything-else
+      d4 f5 Bf4 Nf6 e3 e6 : Nf3 not Bd3
+      "Look at the diagonal: the pawn on f5 sits right across it. The bishop would be aiming at its own dead end."
+
+Verdict: Nothing on the entries this phase added (at 11.Qc2, 7.Qxb6, the new 5.c3 and 4.Nf3). The sixteen reported
+are the standing "graded too harshly" set, which docs/engine-runs/accepted.md deliberately leaves unlisted.

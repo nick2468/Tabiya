@@ -524,7 +524,20 @@ Recapturing with the queen and losing a move to Nc3. Answering 7.Qb3 by defendin
 {Perfectly good and it pins the knight. Developing the knight first keeps ...Bg4 for the moment White commits the bishop.}
 ) 5. Bd3 {White returns to the main setup. [%weight 6]} 5... Nf6
 {Develop and cover d5 and e4, exactly as in the main line. [%tags development] [%plan This is the main line of this chapter by a different order. Expect 6.h3 e6 7.O-O Bd6, or 6.c3 Bg4 with the ...Na5 idea against Qb3.] [%line The plain 4.Nf3]}
-) 4... Nc6
+) ( 4. Bf4
+{The bishop out first, the London player's habit: the London course reaches this structure by 1.d4 c5 2.e3 cxd4 3.exd4 d5 and plays exactly this. [%weight 3]}
+4... Nf6
+{Develop, the move the London course expects. The bishop on f4 has taken the square the knight on c6 would have hit, so the plan is ...Nc6 and ...Bg4 as against 4.Bd3, with ...Qb6 hitting b2 once the bishop has left c1. [%tags development]}
+( 4... Nc6!?
+{Sound and the engine's choice: 5.Nf3 Bg4 6.c3 e6 and the same setup. The knight on f6 first meets the London course on its own ground.}
+) ( 4... Bf5!? {Sound: 5.c4 and the centre opens with the bishop out. The knight first.} )
+( 4... Qb6?!
+{5.Nc3 and the pawn on b2 is held by nothing but the queen has no follow-up: 5...Qxb2 6.Nb5 and the queen is in trouble.}
+) 5. Nf3 {The knight, and the London course's line ends here. [%weight 8]} 5... Nc6
+{The knight to c6, hitting d4, and ...Bg4 or ...Bf5 next. With the bishop on f4 the queen on d8 sees b6, and ...Qb6 comes when c3 has been played and b2 is loose. [%tags development] [%plan ...Bf5 or ...Bg4, ...e6 and ...Bd6 to trade the bishop on f4, ...Qb6 when c3 has left b2 loose. The Exchange structure with White's bishop already committed.] [%line 4.Bf4, the London player's bishop]}
+( 5... Bg4!? {Sound: 6.c3 e6 and the same setup with the bishop out first.} ) ( 5... Qb6!?
+{Sound: 6.Nc3 Bd7 7.Qd2 e6 and the pawn on b2 is held. The knight first.} ) ( 5... e6?!
+{It shuts the bishop on c8 in before it has chosen f5 or g4.} ) ) 4... Nc6
 {Develop towards the centre and put a second attacker on d4. [%tags development]} (
 4... Nf6!?
 {Also good, and it usually transposes. The queenside knight is the one with an obvious square.}
@@ -539,7 +552,15 @@ Recapturing with the queen and losing a move to Nc3. Answering 7.Qb3 by defendin
 {With g4 taken away the bishop has no outside square, so the structure comes first and the bishop goes to d7 later. [%tags development]}
 ( 6... Bf5?
 {It does not get the bishop out, it gives it away: 7.Bxf5 and nothing recaptures, with no pawn on e6 and none on g6. Play ...e6 first.}
-) 7. O-O {White castles. [%weight 5]} 7... Bd6
+) 7. O-O {White castles. [%weight 5]} ( 7. b3
+{The pawn to b3 before castling, the Colle-Zukertort course's move: it reaches this structure by 1.d4 c5 2.e3 cxd4 3.exd4 d5 and puts the bishop on b2. [%weight 4]}
+7... Bd6
+{The bishop to d6, as in every line of this chapter: it looks at h2, and the bishop that is going to b2 looks at nothing while the pawn on d4 blocks it. The Colle course expects ...Be7 here and this is the better square. [%tags development bishop-placement] [%plan ...O-O, ...b6 and ...Bb7, ...Re8 and ...Ne4 when the knight on f3 is the only piece holding it. Level, with the bishop on d6 the better of the two dark bishops.] [%line 5.Nf3 before c3, with 7.b3]}
+( 7... Be7!? {Sound, and the move the Colle course lists. On d6 the bishop does more.} ) (
+7... b6!?
+{Sound and the engine's choice: 8.O-O Bb7 9.c3 Bd6 and the same setup with both bishops out. The bishop first.}
+) ( 7... Nb4!? {Sound: 8.Be2 Bd6 9.O-O O-O and the knight has hit the bishop for nothing.}
+) ) 7... Bd6
 {Get ready to castle and take the diagonal aimed at h2. [%tags bishop-placement] [%plan Castle, play ...Rc8 or ...Bd7 and ...Rc8, and look for ...Ne4 or the ...e5 break once the pieces are all out.] [%line 5.Nf3 before c3]}
 ) 5... Nf6 {Develop and cover e4 and d5. [%tags development]} ( 5... g6!?
 {A perfectly sound setup with ...Bg7. It is a different plan and it gives up on the quick ...Bg4.}

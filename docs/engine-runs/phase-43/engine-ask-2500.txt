@@ -1,0 +1,140 @@
+engine-ask.mjs at 2500 ms on every new White or Black move of the phase, in the order they were asked.
+Conditions: 16 logical processors, CPU load sampled at 18-21% before each run (the idle Vite dev servers of
+other projects and this session's own shells; no javac, cargo, rustc or tauri process), no build, no test run
+beside any run, one engine process at a time, every run in this phase sequential.
+Evaluations are from White's point of view: positive favours White.
+
+What each ask decided:
+  1. The London after 10...Ne4: 11.Qc2 +0.21, the engine's first choice, against 11.Nfd2 -0.13 and 11.Nbd2
+     -0.23. The London's new leaf. The two asks after it read the King's Indian's own continuation for the
+     plan text and are not moves of either course.
+  2. The King's Indian against the Colle's 4.Be2 line, after 8.c4: 8...Qe7 +0.20, the engine's first choice,
+     against ...exd4 +0.25 and ...e4 +0.35.
+  3. The Caro-Kann after the Colle's 7.b3: ...b6 +0.09 is the engine's first choice; ...Bd6 +0.14 is the
+     course's, the bishop's square throughout the chapter, at a cost of five hundredths. KEPT as written.
+  4. The Caro-Kann after the London's 4.Bf4: ...Nc6 +0.23 is the engine's; ...Nf6 +0.30 is the move the London
+     lists and the course plays, at a cost of seven hundredths. KEPT. After 5.Nf3: ...Nc6 +0.32, first choice.
+  5. The London after 6...c4: 7.Qxb6 -0.32, the engine's first choice (7.Qd1 and 7.Bxc4 both lose material at
+     about -2.5). The line was already a little worse for White before this move, which accepted.md records for
+     the Slav's side of it.
+  6. The Colle after 3...c5: 4.Bd3 -0.29 against the engine's 4.c4 +0.18. KEPT under the floor rule as the
+     system's move, at the edge of the bar; the ask at five lines a move later shows why b3 at once is wrong
+     (5.b3 cxd4 -0.46) and why the course castles first (5.O-O -0.24, the engine's choice there).
+  7. The Slav after 4.Bd3: 4...Nc6 -0.29, the engine's first choice.
+  8. The Colle after 7...Bd6: 8.Bb2 -0.17 against 8.Nc3 -0.05, the system's move at a cost of twelve hundredths.
+
+=== 1. The London after 10...Ne4 ===
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Bh2 Ne4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Bh2 Ne4
+  +0.21  Qc2 Nec5 Rd1 a5 Nc3 c6
+  -0.13  Nfd2 Nxd2 Qxd2 Nc5 Qxd8 Rxd8
+  -0.23  Nbd2 Nxd2 Nxd2 a5 Ne4 Qh4
+  -0.23  Qd5 Nec5 Qd2 c6 Nc3 a5
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Bh2 Ne4 Nbd2 Nxd2 Qxd2
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Bh2 Ne4 Nbd2 Nxd2 Qxd2
+  -0.41  Qe7 a3 b6 Rad1 a5 b4
+  -0.36  a5 c5 e4 c6 exf3 cxd7
+  -0.31  c6
+  -0.21  Qf6 Rfd1 c5 Qd5 Qe7 a4
+### d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Bh2 Ne4 Nbd2 Nxd2 Qxd2 a5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Bh2 Ne4 Nbd2 Nxd2 Qxd2 a5
+  -0.38  Rac1 Nc5 Qxd8 Rxd8 Rfd1 Re8
+  -0.37  c5 e4 c6 exf3 cxd7 Qxd7
+  -0.50  Rad1 Qe7 Ne1 b6 b3 Nc5
+  -0.60  Rfd1 Qe7 Ne1 c6 Bg4 f5
+
+=== 2 to 7. The rest, in the order run ===
+### d4 Nf6 Nf3 g6 e3 Bg7 Be2 O-O O-O d6 b3 Nbd7 Bb2 e5 c4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 Nf6 Nf3 g6 e3 Bg7 Be2 O-O O-O d6 b3 Nbd7 Bb2 e5 c4
+  +0.20  Qe7 Nfd2 c6 Nc3 d5 a4
+  +0.25  exd4 Nxd4 Re8 Nc3 c6 Qc2
+  +0.35  e4
+  +0.35  Re8 dxe5 Ne4 Qc2 Nxe5 Nxe5
+### e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6 Nf3 Nf6 h3 e6 b3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6 Nf3 Nf6 h3 e6 b3
+  +0.09  b6 O-O Bb7 c3 Bd6 Re1
+  +0.14  Bd6 O-O Nb4 Be2 O-O c4
+  +0.14  Nb4 Be2 Bd6 O-O O-O c4
+  +0.16  Ne4 O-O
+### e4 c6 d4 d5 exd5 cxd5 Bf4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: e4 c6 d4 d5 exd5 cxd5 Bf4
+  +0.23  Nc6 Nf3 Bg4 c3 e6 Qb3
+  +0.25  Bf5 c4
+  +0.30  Nf6 Nf3 Nc6 c3 Bf5 Qb3
+  +0.34  e6 c3 Nf6 Nf3 Bd6 Bxd6
+### e4 c6 d4 d5 exd5 cxd5 Bf4 Nf6 Nf3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: e4 c6 d4 d5 exd5 cxd5 Bf4 Nf6 Nf3
+  +0.32  Nc6 c3 Bf5 Qb3 Qc8 Nbd2
+  +0.35  Bg4 c3
+  +0.26  Qb6 Nc3 Bd7 Qd2 e6 Bd3
+  +0.30  a6 c3 Nc6 Bd3 Bg4 Nbd2
+### d4 d5 Bf4 c5 e3 Nc6 Nf3 Nf6 c3 Qb6 Qb3 c4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 d5 Bf4 c5 e3 Nc6 Nf3 Nf6 c3 Qb6 Qb3 c4
+  -0.32  Qxb6 axb6
+  -0.32  Qc2 Bf5 Qc1 e6 Nbd2 Be7
+  -2.51  Bxc4 dxc4 Qc2 Qa6 e4 e6
+  -2.52  Qd1 Qxb2 Nbd2 Qxc3 Be2 Bf5
+### d4 d5 Bf4 c5 e3 Nc6 Nf3 Nf6 c3 Qb6 Qb3 c4 Qxb6 axb6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 d5 Bf4 c5 e3 Nc6 Nf3 Nf6 c3 Qb6 Qb3 c4 Qxb6 axb6
+  -0.36  Na3 Na7 Be2 b5 O-O Bf5
+  -0.46  Be2 Bf5
+  -0.46  Nbd2 Bf5 Nh4 Bd7 Nhf3 b5
+  -0.46  a3 Bf5 Be2 e6 Nbd2 h6
+### d4 d5 Nf3 Nf6 e3 c5
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 d5 Nf3 Nf6 e3 c5
+  +0.18  c4 cxd4 exd4 g6 cxd5 Nxd5
+  +0.14  Be2 g6 O-O Bg7 dxc5 Qa5
+  +0.11  Bb5+ Bd7 Be2 e6 O-O Nc6
+  -0.04  dxc5 e6 a3 Bxc5 b4 Bd6
+### d4 d5 Nf3 Nf6 e3 c5 Bd3 Nc6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 d5 Nf3 Nf6 e3 c5 Bd3 Nc6
+  -0.27  Be2 Bf5 O-O e6 c4 dxc4
+  -0.27  O-O Bg4 Be2 e6 h3 Bxf3
+  -0.30  h3 c4
+  -0.31  Ne5 Qc7 Nxc6 bxc6 c4 cxd4
+### d4 d5 Nf3 Nf6 e3 c5 Bd3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 d5 Nf3 Nf6 e3 c5 Bd3
+  -0.29  Nc6 c4 Bg4 dxc5 e6 cxd5
+  -0.15  g6 c4 Bg7 Nc3 Nc6 O-O
+  -0.09  Bg4 h3 Bxf3 Qxf3 Nc6 c3
+  +0.05  e6 b3 Be7 O-O b6 Bb2
+DONE
+
+=== 8. The Colle's eighth, and the Colle's fifth at seven lines ===
+### e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6 Nf3 Nf6 h3 e6 b3 Bd6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6 Nf3 Nf6 h3 e6 b3 Bd6
+  -0.05  Nc3 b6 Nb5 Bb8 O-O a6
+  -0.07  O-O b6 Nc3 Bb7 Bg5 h6
+  -0.11  a4 O-O O-O b6 Re1 Bb7
+  -0.17  Bb2
+### d4 d5 Nf3 Nf6 e3 c5 Bd3 Nc6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: d4 d5 Nf3 Nf6 e3 c5 Bd3 Nc6
+  -0.30  Be2 Bf5 O-O e6 c4 dxc4
+  -0.24  O-O Bg4
+  -0.27  c4 Bg4 cxd5 Nxd5 O-O e6
+  -0.28  Nbd2 Bg4 h3 Bh5 dxc5 e6
+  -0.30  Ne5 cxd4 Nxc6 bxc6 exd4 Bg4
+  -0.34  Bb5 Bg4 h3 Bxf3 Bxc6+ bxc6
+  -0.37  c3 Bg4 O-O e6 Nbd2 Bd6
+### d4 d5 Nf3 Nf6 e3 c5 Bd3 Nc6 b3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 d5 Nf3 Nf6 e3 c5 Bd3 Nc6 b3
+  -0.46  cxd4
+  -0.29  Bg4 Be2 e6 Bb2 Bxf3 Bxf3
+  -0.26  Qc7 h3 e5 dxe5 Nxe5 Bb5+
+  -0.12  Bd7 h3 Rc8 Bb2 cxd4 exd4
+DONE

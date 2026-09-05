@@ -286,7 +286,7 @@
                                                                                                   "note": "Take the queen.",
                                                                                                   "tags": ["tactics"],
                                                                                                   "mistakes": [
-                                                                                                    { "san": "Bxb2", "grade": "mistake", "note": "14.Qxd8 Rxd8 15.Nd2 and a knight has gone for a pawn: the queen on d3 had to be taken first." }
+                                                                                                    { "san": "Bxb2", "grade": "inaccuracy", "note": "14.Qxd8 Rxd8 15.Nd2 and a knight has gone for a pawn: the queen on d3 had to be taken first." }
                                                                                                   ],
                                                                                                   "children": [
                                                                                                     {

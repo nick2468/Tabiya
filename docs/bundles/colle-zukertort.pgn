@@ -285,6 +285,23 @@ Taking on f3 with the g-pawn and opening your own king. Playing h3 and then g4 w
 {With the bishop pair and no bishop of Black's to trade, open the position rather than aiming at a kingside that is fully defended. [%tags c4-break] [%plan Play Nd2 or Nc3, then the rooks to c1 and d1, and take on d5 when it wins time. The attack with Ne5 and f4 is second choice here, because Black's kingside still has all its defenders.] [%line Black trades on f3]}
 ( 10. Nd2!?
 {Quiet development, and it leaves the position closed. Two bishops are worth having only when there are lines for them, so open one.}
+) ) ( 3... c5
+{Black hits d4 before the bishop on c8 has decided: the Slav course's move against this setup, played before ...e6 so that the bishop keeps its diagonal. [%weight 5]}
+4. Bd3
+{The bishop to its square, as always. The engine would rather 4.c4, and the Zukertort player keeps the setup: the bishop first, and the pawn to b3 or c4 once the knight on b8 has said where it is going. [%tags development bishop-placement]}
+( 4. c3!?
+{The Colle proper, holding d4 with the pawn. Sound, and it is the other course: this one puts the bishop out and the pawn on b3.}
+) ( 4. dxc5!?
+{Sound: 4...e6 5.a3 Bxc5 6.b4 and the pawn is kept for a while. It gives Black the centre for it.}
+) ( 4. b3?!
+{The setup a move too early: 4...Nc6 5.Bb2 cxd4 6.exd4 Bg4 and the bishop on f1 is still at home with the centre open.}
+) 4... Nc6 {Development, with a second attacker on d4. [%weight 7]} 5. O-O
+{Castle first. With the knight on c6 hitting d4, b3 at once lets ...cxd4 open the centre before the king is safe; castled, the setup follows with b3 and Bb2, or c4 if Black takes on d4. [%tags king-safety] [%plan b3 and Bb2 when ...e6 has shut the bishop on c8 in, c4 when Black takes on d4 first. The position is level and the structure is the one the course teaches; the difference from the main line is only that the bishop on c8 is still free, so Bb2 waits for ...e6.] [%line The early ...c5, with the bishop on d3]}
+( 5. b3?!
+{5...cxd4 6.exd4 Bg4 and the centre has opened with the king still on e1 and the bishop on c1 not yet on b2.}
+) ( 5. c3!? {Sound and the Colle proper. Castling keeps the choice of b3 or c4.} ) (
+5. Ne5?!
+{5...cxd4 6.Nxc6 bxc6 7.exd4 Bg4 and the knight has been traded for a knight that was doing nothing, with the pawn on c6 holding d5.}
 ) ) 4. Bd3
 {Offer the trade. Black's bishop and yours are on one diagonal and yours is worth less here. [%tags bishop-placement]}
 ( 4. c4!?
@@ -560,7 +577,15 @@ Meeting the Dutch with an immediate g4 or h3, which loses the structure that mad
 {The setup on autopilot. It allows ...Bg4, pinning the knight that defends the isolated pawn. Ask the bishop the question first.}
 ) 6... e6 {Black closes the centre. [%weight 7]} 7. b3
 {The setup, now that the pin is off the table. [%tags long-diagonal]} 7... Be7
-{Development. [%weight 7]} 8. Bb2
+{Development. [%weight 7]} ( 7... Bd6
+{The bishop to d6 rather than e7, which is what the Caro-Kann course plays here: the same structure arrives from 1.e4 c6 by the Exchange, and that course puts the bishop on the diagonal that looks at h2. [%weight 4]}
+8. Bb2
+{Home, as always. The bishop on d6 changes nothing about the setup: the bishop on b2 faces the pawn on d4's defender and the plan is c4 next. [%plan Castle, then c4 as in the main line, with Re1 and Nbd2. The bishop on d6 is aiming at h2, so Nbd2 and Nf1 hold the kingside before anything opens.] [%line The early ...c5, with ...Bd6]}
+( 8. Nc3?!
+{The knight blocks the c-pawn, which wants to go to c4 in this line: 8...O-O 9.Bb2 a6 and the push has been made harder for nothing.}
+) ( 8. c4?!
+{The push before the bishop is home: 8...dxc4 9.bxc4 and the pawn on d4 is held by the queen alone.}
+) ) 8. Bb2
 {Home. A second defender for d4, which is the point of the whole formation. [%tags long-diagonal]}
 ( 8. c3?!
 {It defends d4 with a pawn and shuts the bishop out of the diagonal it was going to. That is the London, not this.}

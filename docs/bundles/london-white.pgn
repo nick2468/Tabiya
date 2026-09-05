@@ -316,7 +316,13 @@ Panicking and playing b3, which weakens the queenside for the rest of the game. 
 {Develop normally. Black's queen on b6 is hitting nothing and will have to move again before the rooks connect. [%tags development] [%plan Play c3, Bd3 and castle. Once the pawn reaches c3 the Qb3 trade offer is available whenever you want it, and Black's queen has to keep watching for it.] [%line ...c6 and ...Qb6]}
 ( 5. c4?!
 {It opens the position while White's queen sits awkwardly on c1 and the king is still in the centre.}
-) ) 3. e3
+) ) ( 2... Nf6
+{The knight first, and ...c5 comes next: the Slav course's order into the same lines. [%weight 5]}
+3. e3 {Build the triangle as always. [%tags development]} 3... c5
+{Hitting d4, and it is chapter 2's subject by another order. [%weight 7]} 4. Nf3
+{Develop, and it is the position after 2...c5 3.e3 Nf6 4.Nf3: the same position, with ...e6 or ...Nc6 to come. [%tags development] [%plan The ...c5 lines from here: c3 against ...Nc6, and the ...e6 setup as in the ...Nf6 first line.] [%line ...Nf6 and then ...c5]}
+( 4. dxc5?! {It gives up the centre for a pawn Black takes back with 4...e6 or 4...Qa5+.}
+) ( 4. Nc3?! {It blocks the c-pawn that holds d4.} ) ) 3. e3
 {Hold the centre and finish the setup. The d4 pawn cannot be won by force, so there is nothing to panic about. [%tags vs-c5 development]}
 ( 3. dxc5?!
 {It gives up the centre. Black recaptures with the bishop or the e-pawn and has an easy game.}
@@ -392,6 +398,15 @@ Panicking and playing b3, which weakens the queenside for the rest of the game. 
 {It holds the pawn but leaves the dark squares around the queenside weak for the rest of the game.}
 ) ( 6. Qc1!? {Safe but passive, and it undoes the point of having played c3.} ) 6... Qxb3
 {Black takes, which is the consistent choice: the queen came out to be active, and retreating now would hand back the time it cost. [%weight 6]}
+( 6... c4
+{The pawn hits the queen instead of trading, which is what the Slav course plays here: it takes b3 from the queen and fixes the queenside, and the trade that follows is on Black's terms, with the a-file opened. [%weight 5]}
+7. Qxb6
+{Take, because the queen has nowhere better: 7.Qc2 Bf5 hits it again, and 7.Qd1 Qxb2 loses the pawn. After 7...axb6 the queenside is a little loose for Black and the game is level, with the pawn on c4 a target for b3 later. [%tags development] [%plan 7...axb6 8.Nbd2, then Be2, O-O and b3 to hit the pawn on c4. Level; the pawn on c4 is the target and the doubled b-pawns are Black's price for the a-file.] [%line ...Qb6 and ...c4, the queens off]}
+( 7. Qd1? {7...Qxb2 and the pawn has gone with the knight on b1 pinned to the rook.} ) (
+7. Bxc4?
+{7...dxc4 and the bishop has gone for a pawn: the queen on b3 does not take back on c4 with the queen on b6 hitting it.}
+) ( 7. Qc2!?
+{Sound: 7...Bf5 8.Qc1 and the queen has been chased twice. The trade keeps it simple.} ) )
 7. axb3
 {Take towards the centre. White gets the open a-file, a rook that is already on it, and a completely safe position. [%tags endgame] [%plan Play Nbd2, Bd3 and castle, then use the a-file with Ra1 to a7 ideas. The queens are off, so simply out-develop Black and squeeze.] [%line ...Nc6 first, with the queen trade] [%cal Ra1a7]}
 ) ( 3... Nf6
@@ -400,7 +415,14 @@ Panicking and playing b3, which weakens the queenside for the rest of the game. 
 {Develop and wait. Black has not committed to anything yet, and neither has White. [%tags development]}
 4... e6
 {Black settles for the solid setup. The sting of ...Qb6 fades once both sides are developed. [%weight 7]}
+( 4... Nc6
+{The knight comes out, and it is the ...Nc6 line by another order: the Slav course reaches this position with ...Nf6 first. [%weight 6]}
 5. c3
+{Hold d4 with the pawn, as in the ...Nc6 first line: the same position, so the same move, and 5...Qb6 6.Qb3 follows as it does there. [%tags development] [%plan The ...Nc6 first line from here: Qb3 against ...Qb6, Nbd2, Bd3 and O-O. One position, two move orders.] [%line ...Nf6 first, then ...Nc6]}
+( 5. Nc3?!
+{It blocks the c-pawn that holds d4, and 5...cxd4 6.exd4 Bg4 leaves the pawn on d4 with one defender.}
+) ( 5. dxc5?! {It gives up the centre for a pawn Black takes back at once with 5...e6.} )
+) 5. c3
 {The usual triangle. This is the main line by transposition. [%tags development] [%plan Play Nbd2, Bd3 and castle, then Ne5 and f4. If Black tries ...Qb6 now, the answer is Qb3 offering the trade.] [%line ...c5 with ...Nf6 first]}
 ) ( 3... cxd4 {The immediate release, before either side has developed. [%weight 4]}
 4. exd4

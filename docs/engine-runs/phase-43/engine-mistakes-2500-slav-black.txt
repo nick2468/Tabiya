@@ -1,0 +1,15 @@
+engine-mistakes.mjs at 2500 ms over slav-black, after this phase's additions to it.
+Conditions: 16 logical processors, CPU load sampled at 18-21% before each run (the idle Vite dev servers of
+other projects and this session's own shells; no javac, cargo, rustc or tauri process), no build, no test run
+beside any run, one engine process at a time, every run in this phase sequential.
+Evaluations are from White's point of view: positive favours White.
+Bands: playable to 0.9, inaccuracy -0.4 to 1.8, mistake 0.7 and up, as the cost to the student side.
+
+169 mistake entries across 7 chapters, 282 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+0 entries where the grade and the engine disagree:
+
+
+Verdict: Nothing reported: every entry in the course, the phase's new ones at 4...Nc6 against the Colle's 4.Bd3 included, sits inside its band.
+

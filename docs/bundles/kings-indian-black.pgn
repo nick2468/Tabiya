@@ -1223,7 +1223,7 @@ Playing ...f5 against the bishop on g2, which opens the diagonal for it. Playing
 {The pawn to d5, and the pawns on d5 and e4 are a centre with the rook on e8 behind them. If cxd5 cxd5 the c-file is open and Black's pawns hold; if f3 exf3 the knight on f6 comes to g4. [%tags e5-lever] [%plan ...Nf8 and ...Ne6 against d4, ...h5 and ...Bf5 when f3 has been met, ...Qe7. The quiet line has become a centre for Black, and the bishop on b2 looks at a wall.] [%line 8.e3, the quiet line]}
 ( 11... Nf8?!
 {12.Qc2 and the pawn on e4 is hit twice with the knight on f8 holding nothing.} ) (
-11... Qe7?!
+11... Qe7?
 {12.Qc2 d5 13.cxd5 cxd5 14.Rac1 and the c-file is White's with the queen on e7 in the way of the rook.}
 ) ) ( 8. dxe5 {White trades on e5 and hopes for a quiet game. [%weight 3]} 8... dxe5
 {Take back with the pawn. The knight on d7 holds e5 and the queens may come off, and the d-file is Black's with the knight going to c5. [%tags e5-lever]}
@@ -1812,9 +1812,36 @@ Playing ...e5 against the London with nothing behind it, so that dxe5 and a knig
 {The Colle: e3 and the bishop to d3, with the knight on f3 already out. [%weight 3]}
 3... Bg7 {The bishop to g7. [%tags development dark-bishop]} ( 3... d5!?
 {Sound and the Colle proper. The fianchetto keeps the shape.} ) ( 3... c5!?
-{Sound: 4.c3 and the Colle player is happy.} ) 4. Bd3 {The bishop to d3. [%weight 8]}
-4... O-O {Castle. [%tags king-safety]} ( 4... d6!? {Sound and it transposes.} ) (
-4... d5!? {Sound and a different structure.} ) 5. O-O {White castles. [%weight 9]} 5... d6
+{Sound: 4.c3 and the Colle player is happy.} ) 4. Bd3 {The bishop to d3. [%weight 8]} (
+4. Be2
+{The bishop to e2 rather than d3: the Colle-Zukertort course's own move against the fianchetto, because the pawn on g6 already covers h7 and d3 would aim at nothing. [%weight 4]}
+4... O-O {Castle. [%tags king-safety]} ( 4... d6!?
+{Sound and it transposes. The king first.} ) ( 4... d5!?
+{Sound and a Grünfeld shape against the Colle. This course keeps the pawn on d6.} ) 5. O-O
+{White castles. [%weight 9]} 5... d6 {The pawn to d6, holding e5 for the lever.} (
+5... d5!?
+{Sound: 6.b3 c5 7.Bb2 and the Colle course has its Grünfeld line. The pawn to d6 keeps the lever.}
+) ( 5... c5!? {Sound: 6.b3 cxd4 7.exd4 d5 and the open d-file. The lever keeps the shape.}
+) 6. b3
+{The pawn to b3, the Zukertort setup: the bishop is going to b2, facing the bishop on g7 down the long diagonal. [%weight 8]}
+6... Nbd7 {The knight to d7, holding e5 for the lever.} ( 6... Nc6?!
+{7.Bb2 e5 8.d5 and the knight is hit.} ) ( 6... e5?!
+{7.dxe5 dxe5 8.Nxe5 and the pawn has gone: the knight was not on d7 to take back.} )
+7. Bb2 {The bishop to b2. [%weight 9]} 7... e5
+{The lever. The bishop on b2 looks at e5 through the pawn on d4, and the pawn on e5 is held by the knight on d7. [%tags e5-lever]}
+( 7... c5!?
+{Sound: 8.c4 and the Colle course has its ...c5 line. The lever keeps the shape.} ) (
+7... Re8!? {Sound: 8.c4 e5 and the same a move later.} ) 8. c4
+{The pawn to c4, holding the centre with pawns: the Colle course's move, which declines the trade on e5. [%weight 7]}
+8... Qe7
+{The queen to e7, holding e5 a second time and connecting the rooks. The pawn on e5 is the stake and the queen behind it keeps ...exd4 and ...e4 both as choices. [%plan ...Re8 and ...c6, ...e4 when the knight on f3 has to move and the pawn can be held, ...Nf8 and ...Ne6 against d4. The Colle-Zukertort with c4 is the London's shape without the bishop on f4, and the lever is held.] [%line The Colle with 4.Be2 and b3]}
+( 8... exd4!?
+{Sound: 9.Nxd4 Re8 and the open centre with the bishop on b2 well placed. The queen first keeps the pawn.}
+) ( 8... e4!?
+{Sound: 9.Nfd2 Re8 and the pawn on e4 is held but the bishop on g7 looks at a wall.} ) (
+8... Re8!? {Sound: 9.dxe5 Ne4 and the same shape a move later.} ) ) 4... O-O
+{Castle. [%tags king-safety]} ( 4... d6!? {Sound and it transposes.} ) ( 4... d5!?
+{Sound and a different structure.} ) 5. O-O {White castles. [%weight 9]} 5... d6
 {The pawn to d6, holding e5.} ( 5... c5!?
 {Sound: 6.c3 and the Colle player has the structure. The lever keeps the shape.} ) (
 5... d5!? {Sound and the Colle proper.} ) 6. Nbd2
@@ -2153,7 +2180,7 @@ Playing ...e5 against the London with nothing behind it, so that dxe5 and a knig
 {14.Qxd3 and the queen has gone: the queen on d1 was looking straight at d3.} ) (
 13... g5? {14.Bxh7+ Kxh7 15.Qh5+ Kg8 16.Bxg5 and the king has been opened for a pawn.} ) (
 13... Bxh3? {14.gxh3 and the bishop has gone for a pawn.} ) ) 13... Qxd3
-{Take the queen. [%tags tactics]} ( 13... Bxb2?
+{Take the queen. [%tags tactics]} ( 13... Bxb2?!
 {14.Qxd8 Rxd8 15.Nd2 and a knight has gone for a pawn: the queen on d3 had to be taken first.}
 ) 14. Bxd3 {The bishop takes back. [%weight 9]} 14... Bxb2
 {Take on b2. The pawn is back, the rook on a1 is hit, and the knight on b1 has to come out to a3 to hold everything. [%tags tactics] [%plan ...Bxa3 when Na3 comes, or ...Be5 with the bishop kept, ...Be6 hitting c4, ...Rad8 for the file. Level, and Black's pieces are the active ones.] [%line The London with 10.Nxe5 and ...Nh5]}
@@ -2352,10 +2379,10 @@ Lifting the rook before the f-pawn has closed the kingside. Retreating the knigh
 ) 15. Qxa5 {The queen takes the pawn, and it is a long way from the kingside. [%weight 8]}
 15... Qh5
 {The queen to h5, behind the rook. ...Rh6 next and the pawn on h2 is hit twice with the g-pawn ready to go to g4. [%tags kingside-attack tactics]}
-( 15... Rh6!?
+( 15... Rh6?!
 {Sound and the same attack in the other order: 16.g4 fxg3 17.Bxg3 Nf6 and the queen comes to h5 next. The queen first, because it is the piece White cannot answer.}
 ) ( 15... Bf8?! {16.Nd3 and the bishop has gone back with the attack a move slower.} ) (
-15... Rg6?!
+15... Rg6?
 {16.c5 and the rook on g6 is not the lift: h6 is the square, with h2 the target.} )
 16. Kh1 {The king steps to the corner. [%weight 8]} 16... Rh6
 {Exercise 1, the last move: the rook to h6. The pawn on h2 is hit by the rook and the queen, Bg1 is the only defence, and ...Nf6 with ...g4 comes next. White's queen is on a5. [%tags kingside-attack tactics] [%plan ...Nf6 and ...g4, ...Nh5 to g3 when the bishop has gone to g1. The queenside pawn White took is worth nothing against the kingside it left.] [%line Exercise 1: the storm and the rook lift]}

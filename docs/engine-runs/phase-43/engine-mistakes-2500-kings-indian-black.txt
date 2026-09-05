@@ -1,0 +1,32 @@
+engine-mistakes.mjs at 2500 ms over kings-indian-black, after this phase's additions to it.
+Conditions: 16 logical processors, CPU load sampled at 18-21% before each run (the idle Vite dev servers of
+other projects and this session's own shells; no javac, cargo, rustc or tauri process), no build, no test run
+beside any run, one engine process at a time, every run in this phase sequential.
+Evaluations are from White's point of view: positive favours White.
+Bands: playable to 0.9, inaccuracy -0.4 to 1.8, mistake 0.7 and up, as the cost to the student side.
+
+808 mistake entries across 7 chapters, 1173 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+4 entries where the grade and the engine disagree:
+
+ 1.91  inaccuracy graded too kindly  ch6-tactics-and-plans
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4 Bf2 g5 Rb1 Rf6 Qa4 Qe8 Qxa5 : Qh5 not Rg6
+      "16.c5 and the rook on g6 is not the lift: h6 is the square, with h2 the target."
+ 1.88  inaccuracy graded too kindly  ch3-the-fianchetto
+      d4 Nf6 c4 g6 g3 Bg7 Bg2 O-O Nf3 d6 O-O Nbd7 Nc3 e5 e3 Re8 b3 c6 Bb2 e4 Nd2 : d5 not Qe7
+      "12.Qc2 d5 13.cxd5 cxd5 14.Rac1 and the c-file is White's with the queen on e7 in the way of the rook."
+ 0.91  playable   graded too kindly  ch6-tactics-and-plans
+      d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 O-O Na6 Ne1 Nd7 Be3 f5 f3 f4 Bf2 g5 Rb1 Rf6 Qa4 Qe8 Qxa5 : Qh5 not Rh6
+      "Sound and the same attack in the other order: 16.g4 fxg3 17.Bxg3 Nf6 and the queen comes to h5 next. The queen first, because it is the piece White cannot answer."
+ 0.68  mistake    graded too harshly  ch5-without-c4-and-e4
+      d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5 Nxe5 Nh5 Bxh5 Nxe5 Be2 Nd3 Qxd3 : Qxd3 not Bxb2
+      "14.Qxd8 Rxd8 15.Nd2 and a knight has gone for a pawn: the queen on d3 had to be taken first."
+
+Verdict: Nothing on the entries this phase added (the 4.Be2 line in chapter 5). Four reported, all at band edges and
+none of them touched by this phase: exercise 1's ...Rg6 (1.91) and chapter 3's ...Qe7 in the quiet line's
+...e4 branch (1.88) straddle the inaccuracy ceiling of 1.8 and are mistakes now; exercise 1's ...Rh6 (0.91)
+and chapter 5's ...Bxb2 in the London's 10.Nxe5 line (0.68) straddle the playable ceiling and the mistake
+floor and come down one grade each. Regraded by the number, grades only; the next pass will say whether they
+settle.
+

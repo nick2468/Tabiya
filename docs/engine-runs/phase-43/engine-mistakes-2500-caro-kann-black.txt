@@ -1,0 +1,18 @@
+engine-mistakes.mjs at 2500 ms over caro-kann-black, after this phase's additions to it.
+Conditions: 16 logical processors, CPU load sampled at 18-21% before each run (the idle Vite dev servers of
+other projects and this session's own shells; no javac, cargo, rustc or tauri process), no build, no test run
+beside any run, one engine process at a time, every run in this phase sequential.
+Evaluations are from White's point of view: positive favours White.
+Bands: playable to 0.9, inaccuracy -0.4 to 1.8, mistake 0.7 and up, as the cost to the student side.
+
+117 mistake entries across 7 chapters, 196 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+1 entries where the grade and the engine disagree:
+
+ 0.58  mistake    graded too harshly  ch3-exchange
+      e4 c6 d4 d5 exd5 : cxd5 not Qxd5
+      "4.Nc3 develops a piece and hits the queen, so White gets a free move. This is a Scandinavian, and a poor version of one."
+
+Verdict: Nothing on the entries this phase added (at 4...Nf6, 5...Nc6 and 7...Bd6). The one reported, 3...Qxd5 graded a mistake at 0.58, is a standing "graded too harshly" finding from before this phase, of the kind docs/engine-runs/accepted.md deliberately leaves unlisted.
+

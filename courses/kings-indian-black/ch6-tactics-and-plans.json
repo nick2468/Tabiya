@@ -571,9 +571,9 @@
                                                                                   "note": "The queen to h5, behind the rook. ...Rh6 next and the pawn on h2 is hit twice with the g-pawn ready to go to g4.",
                                                                                   "tags": ["kingside-attack", "tactics"],
                                                                                   "mistakes": [
-                                                                                    { "san": "Rh6", "grade": "playable", "note": "Sound and the same attack in the other order: 16.g4 fxg3 17.Bxg3 Nf6 and the queen comes to h5 next. The queen first, because it is the piece White cannot answer." },
+                                                                                    { "san": "Rh6", "grade": "inaccuracy", "note": "Sound and the same attack in the other order: 16.g4 fxg3 17.Bxg3 Nf6 and the queen comes to h5 next. The queen first, because it is the piece White cannot answer." },
                                                                                     { "san": "Bf8", "grade": "inaccuracy", "note": "16.Nd3 and the bishop has gone back with the attack a move slower." },
-                                                                                    { "san": "Rg6", "grade": "inaccuracy", "note": "16.c5 and the rook on g6 is not the lift: h6 is the square, with h2 the target." }
+                                                                                    { "san": "Rg6", "grade": "mistake", "note": "16.c5 and the rook on g6 is not the lift: h6 is the square, with h2 the target." }
                                                                                   ],
                                                                                   "children": [
                                                                                     {
