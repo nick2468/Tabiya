@@ -4559,3 +4559,28 @@ Gate 38 findings (2026-09-05, orchestrator):
   cleared afterwards.
 
 - [x] **Review gate 38 passed** (2026-09-05)
+
+## Phase 39 - managing the games you have played
+
+Goal: Nick, 2026-09-05: stop a game without a record, archive or delete saved games from
+Progress, and an archive view to bring them back. No chess content.
+
+Chipped as `chips/phase-39-game-history.md`. Stop and discard beside Stop and review; an
+`archived` flag on the record with archive, unarchive and delete as pure functions; every
+list and count respects the flag; Archive and a two-step Delete on each Play on row; an
+archive view inside Progress with Unarchive and Delete; the game on Play protected. Version
+1.8.5.
+
+- [ ] 39.1 Stop and discard.
+- [ ] 39.2 The flag and the three operations, with tests.
+- [ ] 39.3 Lists and counts respect the flag.
+- [ ] 39.4 Archive and two-step Delete on each row.
+- [ ] 39.5 The archive view.
+- [ ] 39.6 DOM tests red first; help test mutation-checked.
+- [ ] 39.7 Help and SPEC.
+- [ ] 39.8 Version 1.8.5.
+- [ ] 39.9 Proved in the browser build.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 39**
