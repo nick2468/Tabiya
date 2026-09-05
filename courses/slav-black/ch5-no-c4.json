@@ -355,6 +355,25 @@
                   ],
                   "children": [
                     {
+                      "san": "Bd3",
+                      "note": "The bishop first, which is what the Colle-Zukertort course plays here: the bishop to d3 whatever Black does, with b3 and Bb2 to follow, and the pawn on c2 kept for c4.",
+                      "weight": 5,
+                      "children": [
+                        {
+                          "san": "Nc6",
+                          "note": "Develop and hit d4 again, as against 4.c3. The bishop on d3 has not held d4, so ...cxd4 is a threat White has to answer before the b3 and Bb2 setup arrives, and ...Bg4 comes next as in the main line.",
+                          "tags": ["development", "c5-break"],
+                          "mistakes": [
+                            { "san": "cxd4", "grade": "playable", "note": "Sound and the engine's choice against b3: 5.exd4 Nc6 6.c3 Bg4 and the isolated pawn is the target. The knight first keeps the tension a move longer." },
+                            { "san": "e6", "grade": "inaccuracy", "note": "It shuts the bishop in for nothing: 5.b3 Be7 6.O-O and White has the setup this course exists to avoid handing over." },
+                            { "san": "Bg4", "grade": "playable", "note": "Sound: 5.h3 Bxf3 6.Qxf3 Nc6 7.c3 and the same shape with the bishop traded. The knight first." }
+                          ],
+                          "plan": "...Bg4 and ...e6, ...Bd6 and ...O-O, with ...cxd4 the moment b3 has been played and the pawn on d4 is held by the e-pawn alone. Against the Colle-Zukertort the bishop on b2 looks at a wall while the pawn on d4 stands.",
+                          "name": "The Colle, with 4.Bd3"
+                        }
+                      ]
+                    },
+                    {
                       "san": "c3",
                       "note": "The Colle proper. White builds the little pyramid and prepares Bd3 and e4.",
                       "weight": 7,

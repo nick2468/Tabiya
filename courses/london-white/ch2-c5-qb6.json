@@ -375,6 +375,39 @@
                                         }
                                       ],
                                       "note": "Black takes, which is the consistent choice: the queen came out to be active, and retreating now would hand back the time it cost."
+                                    },
+                                    {
+                                      "san": "c4",
+                                      "weight": 5,
+                                      "note": "The pawn hits the queen instead of trading, which is what the Slav course plays here: it takes b3 from the queen and fixes the queenside, and the trade that follows is on Black's terms, with the a-file opened.",
+                                      "children": [
+                                        {
+                                          "san": "Qxb6",
+                                          "note": "Take, because the queen has nowhere better: 7.Qc2 Bf5 hits it again, and 7.Qd1 Qxb2 loses the pawn. After 7...axb6 the queenside is a little loose for Black and the game is level, with the pawn on c4 a target for b3 later.",
+                                          "tags": [
+                                            "development"
+                                          ],
+                                          "mistakes": [
+                                            {
+                                              "san": "Qd1",
+                                              "grade": "mistake",
+                                              "note": "7...Qxb2 and the pawn has gone with the knight on b1 pinned to the rook."
+                                            },
+                                            {
+                                              "san": "Bxc4",
+                                              "grade": "mistake",
+                                              "note": "7...dxc4 and the bishop has gone for a pawn: the queen on b3 does not take back on c4 with the queen on b6 hitting it."
+                                            },
+                                            {
+                                              "san": "Qc2",
+                                              "grade": "playable",
+                                              "note": "Sound: 7...Bf5 8.Qc1 and the queen has been chased twice. The trade keeps it simple."
+                                            }
+                                          ],
+                                          "plan": "7...axb6 8.Nbd2, then Be2, O-O and b3 to hit the pawn on c4. Level; the pawn on c4 is the target and the doubled b-pawns are Black's price for the a-file.",
+                                          "name": "...Qb6 and ...c4, the queens off"
+                                        }
+                                      ]
                                     }
                                   ]
                                 }
@@ -598,6 +631,34 @@
                         }
                       ],
                       "note": "Black settles for the solid setup. The sting of ...Qb6 fades once both sides are developed."
+                    },
+                    {
+                      "san": "Nc6",
+                      "weight": 6,
+                      "note": "The knight comes out, and it is the ...Nc6 line by another order: the Slav course reaches this position with ...Nf6 first.",
+                      "children": [
+                        {
+                          "san": "c3",
+                          "note": "Hold d4 with the pawn, as in the ...Nc6 first line: the same position, so the same move, and 5...Qb6 6.Qb3 follows as it does there.",
+                          "tags": [
+                            "development"
+                          ],
+                          "mistakes": [
+                            {
+                              "san": "Nc3",
+                              "grade": "inaccuracy",
+                              "note": "It blocks the c-pawn that holds d4, and 5...cxd4 6.exd4 Bg4 leaves the pawn on d4 with one defender."
+                            },
+                            {
+                              "san": "dxc5",
+                              "grade": "inaccuracy",
+                              "note": "It gives up the centre for a pawn Black takes back at once with 5...e6."
+                            }
+                          ],
+                          "plan": "The ...Nc6 first line from here: Qb3 against ...Qb6, Nbd2, Bd3 and O-O. One position, two move orders.",
+                          "name": "...Nf6 first, then ...Nc6"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -698,6 +759,50 @@
                       "note": "With b2 defended, the queen sortie is over for now, so Black develops normally."
                     }
                   ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Nf6",
+      "weight": 5,
+      "note": "The knight first, and ...c5 comes next: the Slav course's order into the same lines.",
+      "children": [
+        {
+          "san": "e3",
+          "note": "Build the triangle as always.",
+          "tags": [
+            "development"
+          ],
+          "children": [
+            {
+              "san": "c5",
+              "weight": 7,
+              "note": "Hitting d4, and it is chapter 2's subject by another order.",
+              "children": [
+                {
+                  "san": "Nf3",
+                  "note": "Develop, and it is the position after 2...c5 3.e3 Nf6 4.Nf3: the same position, with ...e6 or ...Nc6 to come.",
+                  "tags": [
+                    "development"
+                  ],
+                  "mistakes": [
+                    {
+                      "san": "dxc5",
+                      "grade": "inaccuracy",
+                      "note": "It gives up the centre for a pawn Black takes back with 4...e6 or 4...Qa5+."
+                    },
+                    {
+                      "san": "Nc3",
+                      "grade": "inaccuracy",
+                      "note": "It blocks the c-pawn that holds d4."
+                    }
+                  ],
+                  "plan": "The ...c5 lines from here: c3 against ...Nc6, and the ...e6 setup as in the ...Nf6 first line.",
+                  "name": "...Nf6 and then ...c5"
                 }
               ]
             }

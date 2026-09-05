@@ -512,6 +512,73 @@
           ]
         }
       ]
+    },
+    {
+      "san": "c5",
+      "weight": 5,
+      "note": "Black hits d4 before the bishop on c8 has decided: the Slav course's move against this setup, played before ...e6 so that the bishop keeps its diagonal.",
+      "children": [
+        {
+          "san": "Bd3",
+          "note": "The bishop to its square, as always. The engine would rather 4.c4, and the Zukertort player keeps the setup: the bishop first, and the pawn to b3 or c4 once the knight on b8 has said where it is going.",
+          "tags": [
+            "development",
+            "bishop-placement"
+          ],
+          "mistakes": [
+            {
+              "san": "c3",
+              "grade": "playable",
+              "note": "The Colle proper, holding d4 with the pawn. Sound, and it is the other course: this one puts the bishop out and the pawn on b3."
+            },
+            {
+              "san": "dxc5",
+              "grade": "playable",
+              "note": "Sound: 4...e6 5.a3 Bxc5 6.b4 and the pawn is kept for a while. It gives Black the centre for it."
+            },
+            {
+              "san": "b3",
+              "grade": "inaccuracy",
+              "note": "The setup a move too early: 4...Nc6 5.Bb2 cxd4 6.exd4 Bg4 and the bishop on f1 is still at home with the centre open."
+            }
+          ],
+          "children": [
+            {
+              "san": "Nc6",
+              "weight": 7,
+              "note": "Development, with a second attacker on d4.",
+              "children": [
+                {
+                  "san": "O-O",
+                  "note": "Castle first. With the knight on c6 hitting d4, b3 at once lets ...cxd4 open the centre before the king is safe; castled, the setup follows with b3 and Bb2, or c4 if Black takes on d4.",
+                  "tags": [
+                    "king-safety"
+                  ],
+                  "mistakes": [
+                    {
+                      "san": "b3",
+                      "grade": "inaccuracy",
+                      "note": "5...cxd4 6.exd4 Bg4 and the centre has opened with the king still on e1 and the bishop on c1 not yet on b2."
+                    },
+                    {
+                      "san": "c3",
+                      "grade": "playable",
+                      "note": "Sound and the Colle proper. Castling keeps the choice of b3 or c4."
+                    },
+                    {
+                      "san": "Ne5",
+                      "grade": "inaccuracy",
+                      "note": "5...cxd4 6.Nxc6 bxc6 7.exd4 Bg4 and the knight has been traded for a knight that was doing nothing, with the pawn on c6 holding d5."
+                    }
+                  ],
+                  "plan": "b3 and Bb2 when ...e6 has shut the bishop on c8 in, c4 when Black takes on d4 first. The position is level and the structure is the one the course teaches; the difference from the main line is only that the bishop on c8 is still free, so Bb2 waits for ...e6.",
+                  "name": "The early ...c5, with the bishop on d3"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "defaultTags": [
