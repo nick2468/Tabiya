@@ -917,6 +917,121 @@ describe('the Najdorf course', () => {
   })
 })
 
+describe('the Scandinavian course', () => {
+  const scandi = courseById('scandinavian-black')
+
+  it('is a Black course of seven chapters', () => {
+    expect(scandi.colour).toBe('black')
+    expect(scandi.opponentColour).toBe('white')
+    expect(scandi.chapters.length).toBe(7)
+  })
+
+  it('declares the tags it uses beyond the core set', () => {
+    // light-squares and c5-break are shared with the other Black courses on
+    // purpose: they mean the same thing and Progress compares by the string.
+    expect(scandi.tags).toContain('queen-safety')
+    expect(scandi.tags).toContain('light-squares')
+    expect(scandi.tags).not.toContain('vs-bg5')
+  })
+
+  it('has the queen off d8 by move three in every repertoire chapter', () => {
+    // The claim that makes this course the Scandinavian rather than some other
+    // 1...d5: the queen takes back on d5 on move two and is hit on move three,
+    // and every repertoire chapter from 1 to 3 hangs off a stem that says so.
+    // Chapters 4 and 5 are the lines where White does not take, and the queen
+    // stays home there by design.
+    for (const id of ['ch1', 'ch2', 'ch3']) {
+      const stem = chapterOf(scandi, id).stem
+      expect(stem.slice(0, 4), `${id} stem`).toEqual(['e4', 'd5', 'exd5', 'Qxd5'])
+    }
+  })
+
+  it('never takes back on d5 with the knight', () => {
+    // Ruled at phase 34 under the theory fork rule: 2...Nf6 is the gambit
+    // family, sound and with a theory of its own. Black never plays it
+    // anywhere in the course, and the move IS named where a trainee would
+    // reach for it, as a playable alternative with the reason beside it.
+    const afterExd5 = 'rnbqkbnr/ppp1pppp/8/3P4/8/8/PPPP1PPP/RNBQKBNR b'
+    for (const chapter of scandi.chapters) {
+      for (const node of walkNodes(chapter)) {
+        if (node.isStudent && node.parentFen.startsWith(afterExd5)) {
+          expect(node.san, `${chapter.id} ${node.path.join(' ')}`).toBe('Qxd5')
+        }
+      }
+    }
+    const refusals = scandi.chapters
+      .flatMap((chapter) => walkNodes(chapter))
+      .filter((node) => node.parentFen.startsWith(afterExd5))
+      .flatMap((node) => node.mistakes ?? [])
+      .filter((entry) => entry.san === 'Nf6')
+    expect(refusals.length, 'the gambit is refused where it arises').toBeGreaterThan(0)
+    for (const entry of refusals) {
+      expect(entry.grade).toBe('playable')
+      expect(entry.note).toMatch(/fork rule/)
+    }
+  })
+
+  describe('chapter 0, the defence', () => {
+    it('has an intro of 300 to 500 words', () => {
+      const intro = chapterOf(scandi, 'ch0').intro
+      expect(words(intro)).toBeGreaterThanOrEqual(300)
+      expect(words(intro)).toBeLessThanOrEqual(500)
+    })
+
+    it('carries mistake entries on its core setup decisions', () => {
+      expect(positionsWithMistakes(chapterOf(scandi, 'ch0'))).toBeGreaterThanOrEqual(4)
+    })
+  })
+
+  describe('the repertoire chapters', () => {
+    for (const id of ['ch1', 'ch2', 'ch3', 'ch4', 'ch5']) {
+      it(`${id} runs its deepest line to move 10 or beyond`, () => {
+        expect(deepestFullMove(chapterOf(scandi, id))).toBeGreaterThanOrEqual(10)
+      })
+
+      it(`${id} carries mistake entries on at least ten positions`, () => {
+        expect(positionsWithMistakes(chapterOf(scandi, id))).toBeGreaterThanOrEqual(10)
+      })
+
+      it(`${id} weights every White reply by club frequency`, () => {
+        for (const node of walkNodes(chapterOf(scandi, id))) {
+          if (!node.isStudent) {
+            expect(node.weight ?? 1, node.path.join(' ')).toBeGreaterThanOrEqual(1)
+            expect(node.weight ?? 1, node.path.join(' ')).toBeLessThanOrEqual(10)
+          }
+        }
+      })
+
+      it(`${id} tags every Black move with at least one concept`, () => {
+        for (const node of walkNodes(chapterOf(scandi, id))) {
+          if (node.isStudent) expect(node.tags.length, node.path.join(' ')).toBeGreaterThan(0)
+        }
+      })
+    }
+  })
+
+  describe('chapter 6, the exercises', () => {
+    it('ends every exercise on a Black move worth drilling', () => {
+      const chapter = chapterOf(scandi, 'ch6')
+      for (const line of walkNodes(chapter).filter((node) => node.isLeaf)) {
+        expect(line.isStudent, line.path.join(' ')).toBe(true)
+      }
+    })
+
+    it('carries at least four exercises, and at least ten authored mistake entries', () => {
+      const chapter = chapterOf(scandi, 'ch6')
+      const leaves = walkNodes(chapter).filter((node) => node.isLeaf)
+      expect(leaves.length).toBeGreaterThanOrEqual(4)
+      // The chip's own bar for this chapter, on top of the section 3 one.
+      expect(positionsWithMistakes(chapter)).toBeGreaterThanOrEqual(10)
+    })
+
+    it('runs each exercise deep enough to be a real position', () => {
+      expect(deepestFullMove(chapterOf(scandi, 'ch6'))).toBeGreaterThanOrEqual(10)
+    })
+  })
+})
+
 describe('the courses together', () => {
   // Course scoping makes this structural rather than lucky: a card key is the
   // course id and the position. The acceptance asks for it proved anyway,
@@ -1025,5 +1140,22 @@ describe('the courses together', () => {
       (position) => caro.get(position) === 'c6' && najdorf.get(position) === 'c5',
     )
     expect(afterE4, 'the two courses answer 1.e4 differently').toBeTruthy()
+  })
+
+  it('has three Black courses answering 1.e4 three different ways', () => {
+    // The Scandinavian is the third Black answer to 1.e4, added at phase 34.
+    // All three hold the card for the position after 1.e4, and they hand it
+    // three different moves: c6, c5 and d5. Course scoping is what lets one
+    // schedule hold all three without any of them answering for another.
+    const answers = (id: string) =>
+      new Map(allCards(courseById(id)).cards.map((card) => [card.position, card.san]))
+    const courses = ['caro-kann-black', 'najdorf-black', 'scandinavian-black'].map(answers)
+
+    const afterE4 = [...courses[0].keys()].find((position) =>
+      courses.every((course) => course.has(position)),
+    )
+    expect(afterE4, 'a position all three reach').toBeTruthy()
+    const replies = courses.map((course) => course.get(afterE4!))
+    expect(replies.sort()).toEqual(['c5', 'c6', 'd5'])
   })
 })
