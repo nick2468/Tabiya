@@ -4144,3 +4144,54 @@ Gate 32 findings (2026-09-05):
   cleared afterwards.
 
 - [x] **Review gate 32 passed** (2026-09-05)
+
+## Phase 33 - the other side from any start, and a suite budget that fits the app
+
+Goal: Nick, 2026-09-05, wants to play the other side from a Study position too, and has
+relaxed the ten-second suite rule. No chess content. Done before phase 34.
+
+Chipped as `chips/phase-33-other-side-anywhere.md`. "Play the other side" becomes a
+checkbox that goes with every launch shape, the lines dropdown goes, the engine-first
+start from a position is tested, Play on and Replay keep a record's side with the box
+ticked and disabled, and the suite rule becomes twenty seconds with its reason written
+down. Version 1.7.3.
+
+- [ ] 33.1 The checkbox replaces the radio and its dropdown.
+- [ ] 33.2 The side goes on every launch shape; a record's side wins.
+- [ ] 33.3 The engine-first start from a position, tested.
+- [ ] 33.4 DOM tests red first; help test mutation-checked.
+- [ ] 33.5 The suite rule at twenty seconds, in the testing page and the SPEC.
+- [ ] 33.6 Help and SPEC.
+- [ ] 33.7 Version 1.7.3.
+- [ ] 33.8 Proved in the browser build.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 33**
+
+## Phase 34 - the Scandinavian Defence, an eighth course
+
+Goal: Nick commissioned the Scandinavian on 2026-09-05 as his fourth Black course and his
+third answer to 1.e4: the simple one beside the solid Caro-Kann and the counterpunching
+Najdorf.
+
+Chipped as `chips/phase-34-scandinavian.md`. Id `scandinavian-black`, permanent. 2...Qxd5
+with 2...Nf6 out by the fork rule; the queen's square after 3.Nc3 is a decision rule
+pointing at 3...Qd6. Seven chapters in the house shape with at least ten mistake entries in
+every chapter from ch1 to ch6. All four checkers with the mistakes pass at 2500 ms and the
+run conditions recorded. Version 1.8.0.
+
+- [ ] 34.1 Rulings and decision rules (done in the chip).
+- [ ] 34.2 Seven chapters to the section 3 bar, student Black.
+- [ ] 34.3 Suite green after every chapter.
+- [ ] 34.4 Four checkers, outputs under `docs/engine-runs/phase-34/`.
+- [ ] 34.5 The course's test block with two course-specific claims.
+- [ ] 34.6 Scoping test: three Black answers to 1.e4.
+- [ ] 34.7 Bundle exported and round-tripped.
+- [ ] 34.8 Prose counts say eight.
+- [ ] 34.9 Version 1.8.0.
+- [ ] 34.10 Proved in the browser build.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 34**
