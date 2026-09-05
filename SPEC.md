@@ -218,8 +218,10 @@ system against 1...d5, chosen so that the two structures teach each other, and t
 Vienna Gambit at phase 18 as his second White answer to 1...e5, chosen so that the
 two ask opposite questions about the same first move, and the Sicilian Najdorf at phase
 31 as his second Black answer to 1.e4, chosen for the same reason from the other side:
-the Caro-Kann is the solid one and the Najdorf is the counterpunching one. Seven courses,
-two colours, four of them White.
+the Caro-Kann is the solid one and the Najdorf is the counterpunching one, and the
+Scandinavian at phase 34 as his third Black answer to 1.e4, the simple one: it trades
+the centre away on move one and builds a Caro-Kann structure without the Caro-Kann's
+tension. Eight courses, two colours, four of them White.
 
 Deferred with reasons (the register; a later phase working nearby may take one along):
 
@@ -800,6 +802,31 @@ better app is the wrong rule. The purpose stays and is written beside the number
 `docs/testing.md`: a bar nobody waits for is a bar nobody runs, so the suite must stay
 fast enough that a builder runs it after every change, and twenty seconds on this
 machine is that. The number is a ceiling, not a target.
+
+2026-09-05, phase 34: **the Scandinavian Defence**, 1.e4 d5 2.exd5 Qxd5 3.Nc3 Qd6, as
+Nick's third answer to 1.e4 and the eighth course. The reason is the one the three Black
+courses make together: the Caro-Kann is the solid answer, the Najdorf is the
+counterpunching one, and the Scandinavian is the simple one. It trades the centre away on
+move one and builds the Caro-Kann's structure, pawns on c6 and e6 and the bishop outside
+them, without the Caro-Kann's tension to manage. The course id is `scandinavian-black`
+and it is permanent, for the same reason the Najdorf's is.
+
+**The queen goes to d6**, by the decision rule: it is a modern square with less to
+memorise than a5, which is a fine square with two tricks to know against it, Bd2
+unmasking the knight and Nd5 hitting the queen. The rejection takes one sentence in
+chapter 0 and no more. **2...Nf6 is out** under the theory fork rule, in one sentence
+for the same reason: the Portuguese and Icelandic gambits are sound and have a theory
+of their own. Three more forks, each in a sentence where it arises: 5...c6 over 5...a6
+and 5...Bg4 in the main line, because c6 gives the queen its retreat square and is the
+shape every chapter shares; 3...Nf6 over 3...Bg4 against 3.Nf3, because the pin invites
+a theory Black does not need; and against the Blackmar-Diemer, decline with 4...Bf5
+rather than take on f3, because the pawn is not worth the attack it buys.
+
+The rule the Scandinavian adds to the checkers is a rule about **chapters sharing a
+position**. Chapters 2, 3 and 6 pass through positions that chapters 0 and 1 already
+grade, and under the one-grade rule from phase 31 those positions carry mistake entries
+in one chapter only. The suite already says so; the course is the first written knowing
+it.
 
 ## 9. v1 acceptance
 

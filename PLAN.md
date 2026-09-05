@@ -4222,17 +4222,81 @@ pointing at 3...Qd6. Seven chapters in the house shape with at least ten mistake
 every chapter from ch1 to ch6. All four checkers with the mistakes pass at 2500 ms and the
 run conditions recorded. Version 1.8.0.
 
-- [ ] 34.1 Rulings and decision rules (done in the chip).
-- [ ] 34.2 Seven chapters to the section 3 bar, student Black.
-- [ ] 34.3 Suite green after every chapter.
-- [ ] 34.4 Four checkers, outputs under `docs/engine-runs/phase-34/`.
-- [ ] 34.5 The course's test block with two course-specific claims.
-- [ ] 34.6 Scoping test: three Black answers to 1.e4.
-- [ ] 34.7 Bundle exported and round-tripped.
-- [ ] 34.8 Prose counts say eight.
-- [ ] 34.9 Version 1.8.0.
-- [ ] 34.10 Proved in the browser build.
+- [x] 34.1 Rulings and decision rules (done in the chip).
+- [x] 34.2 Seven chapters to the section 3 bar, student Black.
+- [x] 34.3 Suite green after every chapter.
+- [x] 34.4 Four checkers, outputs under `docs/engine-runs/phase-34/`.
+- [x] 34.5 The course's test block with two course-specific claims.
+- [x] 34.6 Scoping test: three Black answers to 1.e4.
+- [x] 34.7 Bundle exported and round-tripped.
+- [x] 34.8 Prose counts say eight.
+- [x] 34.9 Version 1.8.0.
+- [x] 34.10 Proved in the browser build.
 
 Acceptance: as the chip's final paragraph.
+
+**For the gate.** Seven chapters, 155 student moves, 234 mistake entries on 144 positions
+(ch0 8, ch1 27, ch2 21, ch3 20, ch4 28, ch5 28, ch6 12), deepest lines at move 12 in ch1 and
+14 in ch6, every other chapter at 10. The suite is at 1047 tests with the course's own block
+and the three-way scoping test; `tsc -b` clean. The one-grade rule held throughout, which
+is why ch2, ch3 and ch6 carry no mistake entries on the positions they share with ch0 and
+ch1.
+
+**The queen square is 3...Qd6**, by the decision rule: less to memorise than a5, whose two
+tricks (Bd2 unmasking the knight, Nd5 hitting the queen) are the whole reason to prefer the
+square with none. Qa5 is rejected in one sentence in ch0 and nowhere else.
+
+**The forks, one sentence each where they arise.** 2...Nf6 out: the Portuguese and
+Icelandic gambits are sound and have a theory of their own (ch0, and a playable entry with
+the fork rule beside it). 5...c6 over 5...a6 and 5...Bg4 in the main line: c6 gives the
+queen c7 and is the shape every chapter shares (ch1). 3...Nf6 over 3...Bg4 against 3.Nf3:
+the pin invites a theory Black does not need (ch3). Against the Blackmar-Diemer, decline
+with 4...Bf5 rather than take on f3: the pawn is not worth the attack it buys (ch4). The
+chip's "...Nb4 jump against Bd3" theme has no sound instance in this repertoire, because
+the queen's knight goes to d7 and not c6, so exercise 3 is the queens-off jump from the
+2.d3 line instead.
+
+**The engine passes ran, and they ran clean at 2500 ms.** Load was 17-46% on 16 cores
+throughout, with one java process from another project of Nick's holding about one core;
+no build, no test run, one engine at a time. The first 500 ms pass found eight things, and
+the three big ones were White moves I had authored that hung a piece: 13.Bf4?? in exercise
+5 and 10.Bf4?? in the 6.h3 line both put a bishop on the queen's diagonal with nothing
+behind it, and 5.Ne2?? in the 2.Bd3 line let ...e4 trap the bishop on f3. The "before"
+numbers of -3.4 to -4.1 were the engine seeing the free piece. Five Black moves failed the
++0.4 bar at 2500 ms and were rewritten: 10...e6 in the 6.Ne5 line (+1.16; the line now
+ends 10.Nxb6 Qxb6 at +0.19), the ...c5 break in exercise 4 (+0.74, a move early; the
+exercise is now the knight to d5 at +0.13), the ...e5 break in exercise 5 (+1.3 whatever
+White played; the exercise is now the ...c5 break a line later, at +0.22 with the best
+move at +0.22), 6.Bc4 Bf5 (+0.73; now 6...Bg4 at +0.36, the same pin as against 6.Bd3, and
+the old note's claim that the pin fails to Bxf7+ tricks was false), and 3.Be2 Nf6 (+0.45
+with 3...Qxg2 at -1.15: the course was declining a free pawn, and now takes it, 4.Bf3
+Qg6). Two 500 ms passes after the last content edit found seven and two moves over 0.5,
+every one re-checked at 2500 ms and kept: Tennison 3...Nf6 -0.29 and 8...b6 +0.22, 2.Nc3
+dxe4 +0.15, 4.g3 Nf6 +0.25, 2.e5 ... 6...Nge7 +0.30 (6...Bg4 -0.07 is the engine's choice;
+the knight to g6 is the plan taught), 2.f3 dxe4 -0.34, and 2.c4 d4 3.d3 c5 -0.35 (3...e5
+-0.91 is the engine's choice; c5 holds d4 and is the theory move). Every number is in
+`docs/engine-runs/phase-34/engine-ask-2500.txt` with the verdicts at the end.
+
+**The mistakes pass at 2500 ms moved 28 grades.** Eleven became mistakes, and eight of
+those were real errors of mine rather than band drift: entries graded inaccuracy or
+playable whose own note described losing the queen or a piece (Qd5 onto the knight, Nxc4
+with the queen still on c7, Bg4 with nothing on f3 to pin so Qxg4 takes it, twice, Bf5
+into a bishop on d3, Nd4 into Nxd4, ...Nc6 into Bxf7+ and Ne6 forking the queen, ...Be7
+losing the bishop on g6 to h5 because its own pawn on h7 took the retreat). Thirteen
+playable entries between 0.94 and 1.6 became inaccuracies with their "fine" and "sound"
+reworded. Four were too harsh, and one of those was a false note: 6...Nxc3 in the
+Blackmar-Diemer is sound, because the knight takes a knight before the bishop goes and
+gets away a pawn up; the note said the opposite and is rewritten. The confirming run,
+`engine-mistakes-2500-run2.txt`, reports three straddles at the -0.4 floor (too harsh by
+0.04 to 0.07, none seen by the first run), kept under the gate 20 straddle ruling.
+
+**note-lines and note-claims at zero** after every edit. The only human line is the
+standing ch2 "tempo given back for nothing", which claims no material.
+
+**Prose counts.** SPEC section 3's "Seven courses" was the one present-tense count; it is
+eight, with the Scandinavian added to the list sentence. help-text.ts and docs/ had none.
+SPEC section 8 carries the phase 34 ruling: the pairing of three Black answers, the queen
+square, the forks, and the shared-position rule the course was the first to be written
+under.
 
 - [ ] **Review gate 34**
