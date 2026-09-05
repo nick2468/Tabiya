@@ -2,7 +2,7 @@
   "id": "ch2-other-fourth-moves",
   "title": "3.Nc3 with the other fourth moves",
   "defaultTags": ["vs-nc3"],
-  "intro": "After 3.Nc3 Qd6 the main line takes the centre with 4.d4, and chapter 1 is about it. This chapter is every other fourth move, and the good news is that Black's setup does not change: knight to f6, pawn to c6, bishop out to g4 or f5, pawn to e6, bishop to e7, castle. What changes is what each White move concedes, and the note on each says so.\n\n## What each one gives up\n\n4.Nf3 is the same as the main line with the moves swapped, and it usually is the main line by move five. 4.Bc4 puts the bishop on the diagonal to f7 before the centre is settled, and the pawn on d3 that has to follow it means White has given up on d4. 4.g3 spends two moves on the fianchetto while Black develops normally. 4.Nge2 keeps the f-pawn free and aims the knight at f4 to hit the queen, and the queen simply goes home when it does. 4.d3 is the modest centre, and against it the pin on g4 is the most annoying thing Black can do.\n\n## The queen, again\n\nThe rule from chapter 1 holds: the queen stays on d6 until something attacks it, then goes to c7 or d8. Against the knight coming to f4 it goes to d8, because c7 is where the bishop on f4 would look next.\n\n## Typical mistakes at this level\n\nMoving the queen before it is attacked. Playing ...e6 before the bishop has come out. Answering 4.Bc4 with the pin on g4, where the bishop on c4 makes f7 a target the moment the queen leaves d6. And treating 4.d3 as harmless and developing slowly, when the pin and the pawn to e5 are both available and both good.",
+  "intro": "After 3.Nc3 Qd6 the main line takes the centre with 4.d4, and chapter 1 is about it. This chapter is every other fourth move, and the good news is that Black's setup does not change: knight to f6, pawn to c6, bishop out to g4 or f5, pawn to e6, bishop to e7, castle. What changes is what each White move concedes, and the note on each says so.\n\n## What each one gives up\n\n4.Nf3 is the same as the main line with the moves swapped, and it usually is the main line by move five. 4.Bc4 puts the bishop on the diagonal to f7 before the centre is settled, and the pawn on d3 that has to follow it means White has given up on d4. 4.g3 spends two moves on the fianchetto while Black develops normally. 4.Nge2 keeps the f-pawn free and aims the knight at f4 to hit the queen, and the queen simply goes home when it does; then the knight that should have guarded d4 goes to g3, and the queen comes back out to take the pawn. 4.d3 is the modest centre, and against it the pin on g4 is the most annoying thing Black can do.\n\n## The queen, again\n\nThe rule from chapter 1 holds: the queen stays on d6 until something attacks it, then goes to c7 or d8. Against the knight coming to f4 it goes to d8, because c7 is where the bishop on f4 would look next.\n\n## Typical mistakes at this level\n\nMoving the queen before it is attacked. Playing ...e6 before the bishop has come out. Answering 4.Bc4 with the pin on g4, where the bishop on c4 makes f7 a target the moment the queen leaves d6. And treating 4.d3 as harmless and developing slowly, when the pin and the pawn to e5 are both available and both good.",
   "stem": ["e4", "d5", "exd5", "Qxd5", "Nc3", "Qd6"],
   "tree": [
     {
@@ -294,15 +294,55 @@
                                           "children": [
                                             {
                                               "san": "O-O",
-                                              "note": "White castles.",
+                                              "note": "White castles, and leaves the pawn on d4 with nothing guarding it: the knight that would have gone to f3 went to g3, and the queen on d1 is all that is left.",
                                               "weight": 8,
                                               "children": [
                                                 {
-                                                  "san": "O-O",
-                                                  "note": "Castle. The queen went home, the pieces are out, and Black has a solid Caro-Kann shape a move behind, which is what this opening always costs.",
-                                                  "tags": ["king-safety"],
-                                                  "plan": "Bring the knight to d7 and the bishop to b7 after the pawn goes to b6, or to d7 after ...Nbd7 and ...Nb6. Play for the pawn to c5.",
-                                                  "name": "4.Nge2 and the queen sent home"
+                                                  "san": "Qxd4",
+                                                  "note": "Take it. The pawn is free because the knight went to g3 and nothing else guards d4, and the queen that went home on move six comes out again with a pawn to show for it. White gets some activity for it, and Black castles next.",
+                                                  "tags": ["tactics"],
+                                                  "mistakes": [
+                                                    { "san": "O-O", "grade": "mistake", "note": "It walks past a free pawn. The queen went home to d8 to be safe, not to be shy, and 10.Re1 leaves White with the centre and the move for nothing." },
+                                                    { "san": "Nbd7", "grade": "inaccuracy", "note": "Development with the pawn still hanging. 10.Re1 and White keeps the centre." }
+                                                  ],
+                                                  "children": [
+                                                    {
+                                                      "san": "Nce4",
+                                                      "note": "The knight jumps to the centre with a hit on the knight on f6, which is the activity White gets for the pawn.",
+                                                      "weight": 7,
+                                                      "children": [
+                                                        {
+                                                          "san": "Nxe4",
+                                                          "note": "Trade the knight that arrived. One pair of pieces off makes the extra pawn count for more and the queen easier to bring home.",
+                                                          "tags": ["development"],
+                                                          "mistakes": [
+                                                            { "san": "O-O", "grade": "playable", "note": "Also fine: 11.c3 Qd8 12.Nxf6+ Bxf6 and the trade happens anyway. Taking first chooses which knight goes." },
+                                                            { "san": "Qxb2", "grade": "playable", "note": "A second pawn, and 11.Nh5 Nxh5 12.Qxh5 brings White's queen to the kingside with Black's still away. One pawn is the point of the line; the second is not needed." }
+                                                          ],
+                                                          "children": [
+                                                            {
+                                                              "san": "Nxe4",
+                                                              "note": "The other knight takes back and sits in the centre.",
+                                                              "weight": 9,
+                                                              "children": [
+                                                                {
+                                                                  "san": "O-O",
+                                                                  "note": "Castle. A pawn up with the king safe, and the queen comes back to d8 when it is asked. White has the freer pieces and Black has the pawn, and the pawn lasts.",
+                                                                  "tags": ["king-safety"],
+                                                                  "mistakes": [
+                                                                    { "san": "e5", "grade": "playable", "note": "It hits the bishop and holds the centre, and 12.Be3 Qd5 13.Qh5 brings White's queen over before Black's king is safe. Castle first." },
+                                                                    { "san": "Qxb2", "grade": "inaccuracy", "note": "12.Nd6+ Bxd6 13.Bxd6 and the second pawn has cost the bishop pair and the dark squares round a king that has not castled." }
+                                                                  ],
+                                                                  "plan": "When the rook comes to e1, put the queen back on d8 and the knight on d7, and meet Qh5 with the pawn to e5. Then play the pieces to the same squares as every other chapter, a pawn up.",
+                                                                  "name": "4.Nge2 and the pawn on d4"
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }
