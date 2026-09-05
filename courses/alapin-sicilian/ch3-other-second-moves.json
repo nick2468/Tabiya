@@ -1,0 +1,729 @@
+{
+  "id": "ch3-other-second-moves",
+  "title": "Black's other second moves",
+  "defaultTags": ["big-centre"],
+  "intro": "2...Nf6 and 2...d5 are the two replies that hit e4 before White has played d4, and they are the two that need a chapter each. Everything else lets White play 3.d4 at once, and this chapter is one recipe for each of the six other moves a club player plays. Most of them reach a shape from chapter 1 or chapter 2 by another road, and the note on each says which.\n\n## The rule\n\nWhen the e-pawn is not attacked, play d4. Then take back on d4 with the c-pawn, develop the knight to f3 and the bishop to d3 or c4, and castle. Black has spent his second move on something other than the centre, and the centre is the answer to that.\n\n## The six moves\n\n2...e6 is a French player's move and after 3.d4 d5 White takes on d5 and gets the isolated pawn in Black's camp instead of his own. 2...d6 is a slow move, and 3.d4 Nf6 4.Bd3 is the one setup where the bishop goes to d3 before the knight to f3, so that e4 stays defended without e5. 2...g6 lets White build the full centre and meet the fianchetto with Nc3, Be3 and a quick Qd2. 2...Nc6 3.d4 usually turns into chapter 2's pin line with the knight already out. 2...e5 is a King's pawn game where the pawn on c3 is already useful, and 2...b6 is answered by the centre and the queen on e2 holding e4.\n\n## Typical mistakes at this level\n\nPlaying 3.Nf3 out of habit and letting Black have the open Sicilian anyway. Answering 2...e6 with 4.e5, the French Advance, which is a different course. Taking back on d4 with the knight. And against 2...g6, playing d5 before the pieces are out, which gives the bishop on g7 a diagonal for nothing.",
+  "stem": ["e4", "c5", "c3"],
+  "tree": [
+    {
+      "san": "e6",
+      "weight": 6,
+      "note": "A French player's move: the pawn goes to d5 next, and Black wants the French with the pawn on c3 in the way of White's knight.",
+      "children": [
+        {
+          "san": "d4",
+          "note": "The centre, as always when e4 is not attacked.",
+          "tags": ["big-centre"],
+          "mistakes": [
+            { "san": "Nf3", "grade": "playable", "note": "Fine, and 3...d5 4.e5 or 4.exd5 comes anyway. The pawn first." }
+          ],
+          "children": [
+            {
+              "san": "d5",
+              "weight": 8,
+              "note": "Black hits the centre.",
+              "children": [
+                {
+                  "san": "exd5",
+                  "note": "Take. The Advance, 4.e5, is a French and a different course; the trade gives an open game where Black will have the isolated pawn, on d5, and White the pieces to play against it.",
+                  "tags": ["isolated-pawn"],
+                  "mistakes": [
+                    { "san": "e5", "grade": "playable", "note": "The French Advance, sound and a whole opening of its own with the pawn on c3 in it. The fork rule keeps it out." },
+                    { "san": "Nd2", "grade": "inaccuracy", "note": "4...dxe4 5.Nxe4 cxd4 6.cxd4 and White has an isolated pawn with nothing developed to play with it." }
+                  ],
+                  "children": [
+                    {
+                      "san": "exd5",
+                      "weight": 8,
+                      "note": "Black takes back with the pawn, keeping the queen home.",
+                      "children": [
+                        {
+                          "san": "Nf3",
+                          "note": "Develop. The knight covers e5 and d4 and is ready for Bb5 to pin whatever comes to c6.",
+                          "tags": ["development"],
+                          "mistakes": [
+                            { "san": "dxc5", "grade": "inaccuracy", "note": "5...Bxc5 and Black has developed with tempo, with the d-pawn isolated and the bishop already looking at f2." },
+                            { "san": "Bb5+", "grade": "playable", "note": "Fine: 5...Nc6 6.Nf3 transposes, and 5...Bd7 trades the bishop White wanted to keep." }
+                          ],
+                          "children": [
+                            {
+                              "san": "Nc6",
+                              "weight": 7,
+                              "note": "Black develops, holding c5 and d4.",
+                              "children": [
+                                {
+                                  "san": "Bb5",
+                                  "note": "The pin. The knight on c6 holds d4 and c5; pinned, it holds neither, and dxc5 comes next with the bishop pair in hand.",
+                                  "tags": ["development"],
+                                  "mistakes": [
+                                    { "san": "Be2", "grade": "playable", "note": "Sound and quieter: 6...c4 and Black keeps the centre closed. The pin keeps the c5 pawn in play." },
+                                    { "san": "dxc5", "grade": "inaccuracy", "note": "6...Bxc5 and Black is developed with the isolated pawn no longer weak: nothing is pinned and nothing is behind." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Bd6",
+                                      "weight": 7,
+                                      "note": "Black develops the bishop to the diagonal that points at h2.",
+                                      "children": [
+                                        {
+                                          "san": "dxc5",
+                                          "note": "Take now, with the knight on c6 pinned: the bishop has to take back and it has spent two moves to reach c5.",
+                                          "tags": ["tactics"],
+                                          "mistakes": [
+                                            { "san": "O-O", "grade": "playable", "note": "Sound: 7...Nge7 8.dxc5 Bxc5 9.Nbd2 is the same a move later, and Black may play 7...c4 to keep the file closed." },
+                                            { "san": "c4", "grade": "inaccuracy", "note": "7...dxc4 and Black takes a pawn with the centre opening on a king that has not castled." }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "Bxc5",
+                                              "weight": 9,
+                                              "note": "The bishop takes back.",
+                                              "children": [
+                                                {
+                                                  "san": "O-O",
+                                                  "note": "Castle. The pawn on d5 is isolated in Black's camp, the bishop on b5 pins the knight that holds it, and the knight on b1 is going to b3 to hit the bishop.",
+                                                  "tags": ["king-safety"],
+                                                  "mistakes": [
+                                                    { "san": "Nbd2", "grade": "playable", "note": "Fine: 8...Nge7 9.Nb3 Bb6 10.O-O is the same. The king first." },
+                                                    { "san": "Bxc6+", "grade": "inaccuracy", "note": "8...bxc6 and Black's pawns are ugly and his bishops are both open; the pin was worth more kept." }
+                                                  ],
+                                                  "children": [
+                                                    {
+                                                      "san": "Nge7",
+                                                      "weight": 8,
+                                                      "note": "The knight comes to e7, defending c6 and d5 both.",
+                                                      "children": [
+                                                        {
+                                                          "san": "Nbd2",
+                                                          "note": "The knight on its way to b3, where it hits the bishop on c5 and looks at d4.",
+                                                          "tags": ["development"],
+                                                          "mistakes": [
+                                                            { "san": "Bg5", "grade": "playable", "note": "Sound: 9...O-O 10.Nbd2 and the same shape with the bishop out. The knight to b3 first, because the bishop on c5 is the piece to hit." },
+                                                            { "san": "b4", "grade": "inaccuracy", "note": "9...Bxb4 10.cxb4 Nxb4 and the pawn has been given for nothing." }
+                                                          ],
+                                                          "children": [
+                                                            {
+                                                              "san": "O-O",
+                                                              "weight": 8,
+                                                              "note": "Black castles.",
+                                                              "children": [
+                                                                {
+                                                                  "san": "Nb3",
+                                                                  "note": "The knight hits the bishop, which retreats to b6 or d6, and White has the d4 square for a piece against the isolated pawn.",
+                                                                  "tags": ["development"],
+                                                                  "mistakes": [
+                                                                    { "san": "Re1", "grade": "playable", "note": "Fine. The knight first, because it comes with tempo." }
+                                                                  ],
+                                                                  "plan": "Bd3 or Be2 when the pin has done its work, Nbd4 or Nfd4 on the square in front of the pawn, and Be3 to trade the bishop that defends it. The pawn on d5 is the target of the whole game.",
+                                                                  "name": "2...e6 and 3...d5, Black's isolated pawn"
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "d6",
+      "weight": 4,
+      "note": "A slow move. Black keeps every option and takes none of them.",
+      "children": [
+        {
+          "san": "d4",
+          "note": "The centre.",
+          "tags": ["big-centre"],
+          "mistakes": [
+            { "san": "Nf3", "grade": "playable", "note": "Fine, and 3...Nf6 4.d3 is the kind of move the pawn on c3 was not for." }
+          ],
+          "children": [
+            {
+              "san": "Nf6",
+              "weight": 8,
+              "note": "The knight hits e4 with the wedge no longer available: e5 would be met by ...dxe5.",
+              "children": [
+                {
+                  "san": "Bd3",
+                  "note": "The one line where the bishop comes before the knight. It defends e4 and keeps Nf3 for next move, so that ...Bg4 has nothing to pin yet and ...cxd4 can be taken back with the pawn.",
+                  "tags": ["development"],
+                  "mistakes": [
+                    { "san": "e5", "grade": "inaccuracy", "note": "4...dxe5 5.dxe5 Qxd1+ 6.Kxd1 Nd5 and the queens are off with White's king in the middle and the pawn on e5 loose." },
+                    { "san": "Nd2", "grade": "playable", "note": "Sound, defending e4 with the knight, and it blocks the bishop that wants d3 or c4." },
+                    { "san": "Nf3", "grade": "inaccuracy", "note": "4...Nxe4 and the pawn has gone: nothing was defending it." }
+                  ],
+                  "children": [
+                    {
+                      "san": "Nc6",
+                      "weight": 6,
+                      "note": "Black develops, hitting d4.",
+                      "children": [
+                        {
+                          "san": "Nf3",
+                          "note": "Now the knight, with d4 held by it and the queen. White has the full centre and every piece coming to a natural square.",
+                          "tags": ["development"],
+                          "mistakes": [
+                            { "san": "d5", "grade": "inaccuracy", "note": "5...Ne5 and the knight has a square in front of the pawn that nothing takes it from." },
+                            { "san": "Ne2", "grade": "playable", "note": "Sound and slower, keeping f3 for the pawn. The knight on f3 is the one the position wants." }
+                          ],
+                          "children": [
+                            {
+                              "san": "Bg4",
+                              "weight": 6,
+                              "note": "The pin, now that there is a knight to pin.",
+                              "children": [
+                                {
+                                  "san": "d5",
+                                  "note": "Now the push, hitting the knight, because the bishop on g4 has left b7 and the knight on c6 has one square, e5, where it can be taken.",
+                                  "tags": ["big-centre"],
+                                  "mistakes": [
+                                    { "san": "Be3", "grade": "playable", "note": "Sound, and 6...cxd4 7.cxd4 e5 hits the centre with the pin holding f3. The push first, while the knight has nowhere good." },
+                                    { "san": "O-O", "grade": "playable", "note": "Fine: 6...cxd4 7.cxd4 e6 and it is an isolated-pawn game with Black's pieces well placed." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Ne5",
+                                      "weight": 8,
+                                      "note": "The knight goes to the only square that is not a retreat.",
+                                      "children": [
+                                        {
+                                          "san": "Nxe5",
+                                          "note": "Take, and the bishop on g4 is hanging to the queen: Black has to take back on e5 rather than on f3.",
+                                          "tags": ["tactics"],
+                                          "mistakes": [
+                                            { "san": "Be2", "grade": "inaccuracy", "note": "7...Nxf3+ 8.Bxf3 Bxf3 9.Qxf3 and Black has traded two pieces off the board in a position where White wanted them on it." }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "dxe5",
+                                              "weight": 9,
+                                              "note": "Black takes back with the pawn.",
+                                              "children": [
+                                                {
+                                                  "san": "O-O",
+                                                  "note": "Castle. The pawn on d5 is a wedge in Black's camp, the bishop on g4 has no knight to pin, and f4 is coming to open the f-file.",
+                                                  "tags": ["king-safety"],
+                                                  "mistakes": [
+                                                    { "san": "f3", "grade": "inaccuracy", "note": "8...Bd7 and the pawn move has weakened the king before it has castled." },
+                                                    { "san": "Qa4+", "grade": "playable", "note": "Sound, picking up nothing: 8...Bd7 9.Qb3 b6 and the queen has moved twice." }
+                                                  ],
+                                                  "plan": "f3 to hit the bishop and then f4 against the e5 pawn, with the knight coming to d2 and c4. The pawn on d5 is the wedge; the game is on the kingside behind it.",
+                                                  "name": "2...d6, the bishop before the knight"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "san": "cxd4",
+                              "weight": 5,
+                              "note": "Black takes.",
+                              "children": [
+                                {
+                                  "san": "cxd4",
+                                  "note": "The pawn takes back.",
+                                  "tags": ["big-centre"],
+                                  "mistakes": [
+                                    { "san": "Nxd4", "grade": "inaccuracy", "note": "6...Nxd4 7.Qxd4? no: 7.cxd4 is fine but the knight has gone for a pawn and the centre with it. The pawn recapture keeps the centre." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Bg4",
+                                      "weight": 7,
+                                      "note": "The pin.",
+                                      "children": [
+                                        {
+                                          "san": "Be3",
+                                          "note": "The bishop holds d4 and the centre stands: two pawns abreast on d4 and e4 with every piece behind them.",
+                                          "tags": ["development"],
+                                          "mistakes": [
+                                            { "san": "d5", "grade": "playable", "note": "Sound: 7...Ne5 8.Nxe5 dxe5 is the other line. With the c-file open the push gives Black's rook the file." },
+                                            { "san": "Nbd2", "grade": "playable", "note": "Fine, and the bishop on e3 does the job the position asks for." }
+                                          ],
+                                          "plan": "Nc3, castle, h3 to ask the bishop, and the centre pawns stay where they are until Black's pieces are placed; then d5 or e5, whichever hits more.",
+                                          "name": "2...d6 and 5...cxd4, the full centre"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "g6",
+      "weight": 4,
+      "note": "The fianchetto. Black will put the bishop on the long diagonal and hit d4 with it.",
+      "children": [
+        {
+          "san": "d4",
+          "note": "The centre, and against the fianchetto it is the full centre: both pawns stay where they are and the bishop on g7 looks at a wall.",
+          "tags": ["big-centre"],
+          "mistakes": [
+            { "san": "Nf3", "grade": "playable", "note": "Fine: 3...Bg7 4.d4 is the same. The pawn first." }
+          ],
+          "children": [
+            {
+              "san": "cxd4",
+              "weight": 7,
+              "note": "Black takes.",
+              "children": [
+                {
+                  "san": "cxd4",
+                  "note": "The pawn takes back.",
+                  "tags": ["big-centre"],
+                  "mistakes": [
+                    { "san": "Nf3", "grade": "playable", "note": "Fine: 4...Bg7 5.cxd4 d5 is the same. The pawn first, before anything can hit it." }
+                  ],
+                  "children": [
+                    {
+                      "san": "d5",
+                      "weight": 7,
+                      "note": "Black hits the centre before it settles.",
+                      "children": [
+                        {
+                          "san": "e5",
+                          "note": "The wedge, as against 2...Nf6. With the knight still on g8 the pawn on e5 takes f6 away from it for good.",
+                          "tags": ["e5-wedge"],
+                          "mistakes": [
+                            { "san": "exd5", "grade": "playable", "note": "Sound: 5...Nf6 6.Bb5+ Nbd7 and the pawn on d5 is a target with Black's pieces developing against it. The wedge keeps the bishop on g7 looking at nothing." },
+                            { "san": "Nc3", "grade": "inaccuracy", "note": "5...dxe4 6.Nxe4 Bg7 and Black has traded the centre away with the bishop on the diagonal it wanted." }
+                          ],
+                          "children": [
+                            {
+                              "san": "Nc6",
+                              "weight": 8,
+                              "note": "Black develops, hitting d4.",
+                              "children": [
+                                {
+                                  "san": "Nc3",
+                                  "note": "The knight to c3 at once: it holds d5 against ...e6 and ...Nf5 ideas and it is where it wants to be.",
+                                  "tags": ["development"],
+                                  "mistakes": [
+                                    { "san": "Nf3", "grade": "playable", "note": "Fine: 6...Bg4 7.Be2 and the pin is a nuisance. The knight to c3 first keeps Bd3 or Bb5 free." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Bg7",
+                                      "weight": 8,
+                                      "note": "The bishop to g7, looking at e5 and d4.",
+                                      "children": [
+                                        {
+                                          "san": "Nf3",
+                                          "note": "Develop, holding d4 and e5.",
+                                          "tags": ["development"],
+                                          "mistakes": [
+                                            { "san": "Bb5", "grade": "playable", "note": "Sound: 7...Bg4 8.f3 and the pin has cost White a pawn move. The knight first." },
+                                            { "san": "f4", "grade": "inaccuracy", "note": "7...Bg4 8.Nf3 e6 and the pawn on f4 has weakened e3 and the king for nothing." }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "Bg4",
+                                              "weight": 7,
+                                              "note": "The pin.",
+                                              "children": [
+                                                {
+                                                  "san": "Bb5",
+                                                  "note": "The pin back, on the knight that holds d4 and e5. Black cannot take on f3 without the recapture defending d4 again.",
+                                                  "tags": ["development"],
+                                                  "mistakes": [
+                                                    { "san": "Be2", "grade": "playable", "note": "Fine and quieter. The pin on b5 asks a question the knight on c6 has to answer." }
+                                                  ],
+                                                  "children": [
+                                                    {
+                                                      "san": "e6",
+                                                      "weight": 7,
+                                                      "note": "Black covers d5 and prepares to develop the knight to e7.",
+                                                      "children": [
+                                                        {
+                                                          "san": "O-O",
+                                                          "note": "Castle. The centre is White's, both bishops are placed, and h3 asks the bishop next.",
+                                                          "tags": ["king-safety"],
+                                                          "mistakes": [
+                                                            { "san": "Bxc6+", "grade": "inaccuracy", "note": "9...bxc6 and Black's bishop pair points at the centre with the pin on f3 still standing." },
+                                                            { "san": "h3", "grade": "playable", "note": "Sound: 9...Bxf3 10.Qxf3 and the queen is on the right diagonal. The king first." }
+                                                          ],
+                                                          "children": [
+                                                            {
+                                                              "san": "Nge7",
+                                                              "weight": 8,
+                                                              "note": "The knight comes to e7.",
+                                                              "children": [
+                                                                {
+                                                                  "san": "Be3",
+                                                                  "note": "The bishop holds d4 and the setup is complete: the full centre, both knights out, the king castled, and Black's bishop on g7 still looking at a pawn on e5.",
+                                                                  "tags": ["development"],
+                                                                  "mistakes": [
+                                                                    { "san": "h3", "grade": "playable", "note": "Sound. The bishop first, so that d4 is held before ...Nf5 hits it." }
+                                                                  ],
+                                                                  "plan": "h3 to ask the bishop, Qd2 and Rac1, and Bxc6 followed by d5 when the knight on c6 is the only thing holding the break back.",
+                                                                  "name": "2...g6, the full centre and the pin"
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "Nc6",
+      "weight": 5,
+      "note": "Black develops the knight and waits to see what White does with the centre.",
+      "children": [
+        {
+          "san": "d4",
+          "note": "The centre.",
+          "tags": ["big-centre"],
+          "mistakes": [
+            { "san": "Nf3", "grade": "playable", "note": "Fine: 3...d5 4.exd5 Qxd5 5.d4 is chapter 2 with the knight out. The pawn first." }
+          ],
+          "children": [
+            {
+              "san": "d5",
+              "weight": 6,
+              "note": "Black hits e4 as in chapter 2, with the knight already out.",
+              "children": [
+                {
+                  "san": "exd5",
+                  "note": "Take, and the queen comes out as in chapter 2.",
+                  "tags": ["isolated-pawn"],
+                  "mistakes": [
+                    { "san": "e5", "grade": "playable", "note": "Sound: a French shape with the knight on c6 in it. The trade keeps the course's structure." }
+                  ],
+                  "children": [
+                    {
+                      "san": "Qxd5",
+                      "weight": 9,
+                      "note": "The queen takes back.",
+                      "children": [
+                        {
+                          "san": "Nf3",
+                          "note": "Develop, and the position is chapter 2's 5...Nc6 line with the moves in another order.",
+                          "tags": ["development"],
+                          "mistakes": [
+                            { "san": "dxc5", "grade": "inaccuracy", "note": "5...Qxd1+ 6.Kxd1 e5 and Black has the centre with the queens off and White's king on d1." },
+                            { "san": "Be3", "grade": "playable", "note": "Fine, and 5...cxd4 6.cxd4 e5 hits the pawn with nothing covering e5. The knight first covers e5 as well as d4." }
+                          ],
+                          "plan": "Chapter 2's 5...Nc6 line from here: Be3 to hold d4, Be2 against the pin, and the knight to c3 with tempo once the c-pawn has gone.",
+                          "name": "2...Nc6 and 3...d5, into chapter 2"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "san": "cxd4",
+              "weight": 5,
+              "note": "Black takes first.",
+              "children": [
+                {
+                  "san": "cxd4",
+                  "note": "The pawn takes back.",
+                  "tags": ["big-centre"],
+                  "mistakes": [
+                    { "san": "Nf3", "grade": "inaccuracy", "note": "4...dxc3 5.Nxc3 is the Smith-Morra a move late, a gambit the course does not play. The pawn takes back and keeps the centre." }
+                  ],
+                  "children": [
+                    {
+                      "san": "d5",
+                      "weight": 7,
+                      "note": "Black hits the centre.",
+                      "children": [
+                        {
+                          "san": "Nc3",
+                          "note": "The knight to c3, defending e4 and keeping the centre standing. With the c-pawn gone the knight has its square.",
+                          "tags": ["development"],
+                          "mistakes": [
+                            { "san": "exd5", "grade": "playable", "note": "Sound: 5...Qxd5 6.Nf3 is the chapter 2 shape. The knight keeps both pawns in the centre." },
+                            { "san": "e5", "grade": "playable", "note": "The French shape again, sound and closed. The knight keeps the game open." }
+                          ],
+                          "children": [
+                            {
+                              "san": "dxe4",
+                              "weight": 6,
+                              "note": "Black takes.",
+                              "children": [
+                                {
+                                  "san": "d5",
+                                  "note": "The push, hitting the knight, because the pawn on e4 is going to be taken back and the knight on c6 has to move first.",
+                                  "tags": ["big-centre"],
+                                  "mistakes": [
+                                    { "san": "Nxe4", "grade": "inaccuracy", "note": "6...Bf5 7.Ng3 Bg6 and Black has traded the centre away and developed with tempo on the knight." },
+                                    { "san": "Bb5", "grade": "playable", "note": "Sound, pinning: 6...Bd7 7.d5 is the same idea a move later." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Ne5",
+                                      "weight": 7,
+                                      "note": "The knight goes forward.",
+                                      "children": [
+                                        {
+                                          "san": "Qa4+",
+                                          "note": "The check that wins the pawn back: the king or a piece blocks, and Nxe4 comes with the knight on e5 short of squares.",
+                                          "tags": ["tactics"],
+                                          "mistakes": [
+                                            { "san": "Nxe4", "grade": "inaccuracy", "note": "7...Nf6 and Black has held the extra pawn's worth in development." },
+                                            { "san": "Bf4", "grade": "playable", "note": "Sound, hitting the knight, and 7...Nd3+ 8.Bxd3 exd3 9.Qxd3 is level with a pawn each." }
+                                          ],
+                                          "plan": "Nxe4 after the block, then Nf3 and Bb5 with the pawn on d5 cramping Black's whole queenside. The pawn on d5 is the wedge; keep it and play around it.",
+                                          "name": "2...Nc6 and 3...cxd4, the d5 push"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "e5",
+      "weight": 3,
+      "note": "A King's pawn game by a Sicilian player, with the pawn on c3 already in.",
+      "children": [
+        {
+          "san": "Nf3",
+          "note": "Develop with a hit on e5. d4 comes next, and with the pawn on c3 it comes with a pawn behind it.",
+          "tags": ["development"],
+          "mistakes": [
+            { "san": "d4", "grade": "playable", "note": "Sound: 3...cxd4 4.cxd4 exd4 5.Nf3 and it is an open game a pawn down for a move. The knight first." }
+          ],
+          "children": [
+            {
+              "san": "Nc6",
+              "weight": 8,
+              "note": "Black defends the pawn.",
+              "children": [
+                {
+                  "san": "Bc4",
+                  "note": "The bishop to the diagonal that points at f7, and d4 comes when it comes with a threat.",
+                  "tags": ["development"],
+                  "mistakes": [
+                    { "san": "d4", "grade": "playable", "note": "Fine: 4...cxd4 5.cxd4 exd4 6.Nxd4 is the open game. The bishop first keeps the pawn recapture." },
+                    { "san": "Bb5", "grade": "playable", "note": "Sound, a Ruy shape with the pawn on c3. The bishop on c4 points at the square Black's king will sit behind." }
+                  ],
+                  "children": [
+                    {
+                      "san": "Nf6",
+                      "weight": 7,
+                      "note": "Black develops and hits e4.",
+                      "children": [
+                        {
+                          "san": "d3",
+                          "note": "Defend the pawn. With the pawn on e5 in the way, d4 would only trade the centre, so the d-pawn stays modest and the pieces come out.",
+                          "tags": ["development"],
+                          "mistakes": [
+                            { "san": "Ng5", "grade": "inaccuracy", "note": "5...d5 6.exd5 Na5 and the bishop has to move, with nothing won on f7." },
+                            { "san": "d4", "grade": "playable", "note": "Sound: 5...cxd4 6.cxd4 exd4 7.e5 Nd5 8.O-O is a sharp open game. The quiet move keeps the structure the course teaches." }
+                          ],
+                          "children": [
+                            {
+                              "san": "d6",
+                              "weight": 7,
+                              "note": "Black holds the centre.",
+                              "children": [
+                                {
+                                  "san": "O-O",
+                                  "note": "Castle.",
+                                  "tags": ["king-safety"],
+                                  "mistakes": [
+                                    { "san": "Bg5", "grade": "playable", "note": "Sound. The king first." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Be7",
+                                      "weight": 8,
+                                      "note": "Black develops.",
+                                      "children": [
+                                        {
+                                          "san": "Nbd2",
+                                          "note": "The knight to d2, heading for f1 and g3 or e3, and d4 comes when the pieces are ready.",
+                                          "tags": ["development"],
+                                          "mistakes": [
+                                            { "san": "Re1", "grade": "playable", "note": "Fine. The knight first, because the rook's move is the same in every line." }
+                                          ],
+                                          "plan": "Re1, a bishop retreat to b3 when it is hit, Nf1 and Ng3, and d4 when it can be taken back with the pawn on c3. The same slow plan as a Ruy, with the pawn on c3 already in place.",
+                                          "name": "2...e5, a King's pawn game"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "san": "b6",
+      "weight": 2,
+      "note": "The bishop is coming to b7 to look at e4.",
+      "children": [
+        {
+          "san": "d4",
+          "note": "The centre.",
+          "tags": ["big-centre"],
+          "mistakes": [
+            { "san": "Nf3", "grade": "playable", "note": "Fine. The pawn first." }
+          ],
+          "children": [
+            {
+              "san": "Bb7",
+              "weight": 8,
+              "note": "The bishop to b7, hitting e4.",
+              "children": [
+                {
+                  "san": "Bd3",
+                  "note": "The bishop defends e4 and develops; the knight comes to f3 next.",
+                  "tags": ["development"],
+                  "mistakes": [
+                    { "san": "Nd2", "grade": "playable", "note": "Sound, defending with the knight, and it blocks the bishop." },
+                    { "san": "e5", "grade": "inaccuracy", "note": "4...Nc6 and the wedge has no knight to chase, while the bishop on b7 has the long diagonal for free." }
+                  ],
+                  "children": [
+                    {
+                      "san": "Nf6",
+                      "weight": 7,
+                      "note": "The knight hits e4 a second time.",
+                      "children": [
+                        {
+                          "san": "Qe2",
+                          "note": "The queen defends e4 a second time, keeping the wedge on e5 for the moment it is a threat and not a pawn to be taken.",
+                          "tags": ["development"],
+                          "mistakes": [
+                            { "san": "e5", "grade": "inaccuracy", "note": "5...Nd5 and the knight is on its best square with the bishop already behind it." },
+                            { "san": "Nd2", "grade": "playable", "note": "Sound, and the queen keeps the knight for c3." }
+                          ],
+                          "children": [
+                            {
+                              "san": "e6",
+                              "weight": 7,
+                              "note": "Black opens the other bishop.",
+                              "children": [
+                                {
+                                  "san": "Nf3",
+                                  "note": "Develop. Both e-pawn defenders are in place and the centre stands.",
+                                  "tags": ["development"],
+                                  "mistakes": [
+                                    { "san": "e5", "grade": "playable", "note": "Sound now: 6...Nd5 7.Nf3 and the wedge is held. The knight first keeps the choice." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "Be7",
+                                      "weight": 8,
+                                      "note": "Black develops.",
+                                      "children": [
+                                        {
+                                          "san": "O-O",
+                                          "note": "Castle. White has the centre and every piece out; e5 comes as a threat when the knight on f6 has nowhere good to go.",
+                                          "tags": ["king-safety"],
+                                          "mistakes": [
+                                            { "san": "e5", "grade": "playable", "note": "Sound: 7...Nd5 8.O-O and the same shape. The king first." }
+                                          ],
+                                          "plan": "Nbd2, Re1 and e5 to push the knight off f6, then Ne4 or Nc4 with the bishop on d3 pointing at h7.",
+                                          "name": "2...b6, the queen holds e4"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
