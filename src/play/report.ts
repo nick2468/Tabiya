@@ -427,7 +427,15 @@ export function buildReport(
   return {
     deviation: side === 'other' ? findCourseBookEnd(moves, book) : findDeviation(moves, book),
     slips: scanForSlips(moves, evaluations, trainee, bestMoves),
-    verdict: finalEval === undefined ? 'Not scanned' : verdictInWords(finalEval),
+    // A mated final position has no evaluation to scan, because the engine
+    // has no move to search. The outcome has already said what the position
+    // is, and "Not scanned" beside a checkmate reads as a fault in the scan.
+    verdict:
+      finalEval !== undefined
+        ? verdictInWords(finalEval)
+        : outcome && /checkmate/.test(outcome)
+          ? outcome
+          : 'Not scanned',
     finalEval,
     outcome,
     // Left off entirely when there were none, so a clean game carries no

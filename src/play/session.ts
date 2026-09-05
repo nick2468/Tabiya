@@ -147,6 +147,12 @@ export class PlaySession {
       })
     }
     this.floor = this.moves.length
+    // A game loaded from a record may already be over. Replay and Play on
+    // hand the constructor the whole game, and a checkmate replayed here is
+    // still a checkmate: without this, a replayed mate reported "Stopped" and
+    // its PGN said the game was unfinished. Found from Nick's own PGN at
+    // phase 37's gate.
+    this.noteOutcome()
   }
 
   get fen(): string {

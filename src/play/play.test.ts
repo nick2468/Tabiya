@@ -1028,6 +1028,30 @@ describe('buildReport', () => {
     expect(report.verdict).toBe('Not scanned')
     expect(report.finalEval).toBeUndefined()
   })
+
+  it('lets the checkmate speak where a mated position has nothing to scan', () => {
+    // The engine has no move to search in a mated position, so the final
+    // evaluation is missing. "Not scanned" beside a checkmate read as a
+    // fault in the scan; the outcome is the verdict.
+    const report = buildReport(playedMoves(['d4']), buildBook({ colour: 'white', chapters: [chapter] }), new Map(), 'You won by checkmate')
+    expect(report.verdict).toBe('You won by checkmate')
+    expect(report.finalEval).toBeUndefined()
+  })
+
+  it('knows a game loaded from a record is already over when it ended in mate', () => {
+    // Replay and Play on hand the whole game to the constructor. Found from
+    // Nick's own PGN: a replayed checkmate reported "Stopped after move 59".
+    const book = buildBook({ colour: 'white', chapters: [chapter] })
+    const session = new PlaySession({
+      book,
+      engine: fakeEngine(),
+      profile: strengthProfile(1),
+      length: 'full',
+      startMoves: ['e4', 'e5', 'Qh5', 'Nc6', 'Bc4', 'Nf6', 'Qxf7#'],
+    })
+    expect(session.outcome).toBe('You won by checkmate')
+    expect(session.isFinished()).toBe(true)
+  })
 })
 
 /**
