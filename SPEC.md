@@ -226,8 +226,10 @@ the Caro-Kann is the solid one and the Najdorf is the counterpunching one, and t
 Scandinavian at phase 34 as his third Black answer to 1.e4, the simple one: it trades
 the centre away on move one and builds a Caro-Kann structure without the Caro-Kann's
 tension, and the Alapin Sicilian at phase 41 as his first answer to 1...c5, the
-structural one: c3 and d4 for a pawn centre, the London player's chess reached by 1.e4.
-Nine courses, two colours, five of them White.
+structural one: c3 and d4 for a pawn centre, the London player's chess reached by 1.e4,
+and the King's Indian Defence at phase 42 as his second Black answer to 1.d4, the
+counterpunching partner to the solid Slav, and the one setup that also answers 1.c4
+and 1.Nf3, which no course had covered. Ten courses, two colours, five of them White.
 
 Deferred with reasons (the register; a later phase working nearby may take one along):
 
@@ -889,6 +891,29 @@ rather than the French Advance, which is a different course. **The one line the 
 rewrote before it shipped**: the answer to ...Qb6 hitting b2 with the queen's knight at
 home was going to be Nc3 and Nb5, and the engine showed ...Qxb2 and ...Qxa1 taking a rook;
 it is d5 now, hitting the knight, with Bd4 and a check that ends on c3 behind it.
+
+2026-09-06, phase 42: **the King's Indian Defence**, 1.d4 Nf6 2.c4 g6 3.Nc3 Bg7 4.e4 d6, as
+Nick's second Black answer to 1.d4 and the tenth course: the counterpunching partner to
+the solid Slav, the pairing the Najdorf makes with the Caro-Kann. It also fills a gap no
+course had covered, because the same four Black moves answer 1.c4 and 1.Nf3, and chapter
+3 is where those move orders are shown arriving at the same house. The course id is
+`kings-indian-black` and it is permanent.
+
+**The seventh move in the Classical is 7...Na6**, under the theory fork rule: after 5.Nf3
+O-O 6.Be2 e5 7.O-O the heaviest theory is 7...Nc6 8.d5 Ne7, the Mar del Plata race, and
+the decision rule was to take the Glek line unless the engine at 2500 ms and the chapter
+both came out better for 7...Nbd7 or 7...exd4. The engine put 7...exd4 nine hundredths
+ahead of 7...Na6 and 7...Nc6 outside its top five, and the chapter is built on the knight
+reaching c5 without blocking anything, so the knight goes to a6. 7...Nc6 is rejected in
+one sentence where it arises. **The other forks, each in a sentence**: 6...c5 against the
+Saemisch rather than 6...e5, because the closed centre is what White's pawn storm wants;
+...exd4 against the Fianchetto rather than 8...c6, because the open centre asks less and
+the plan is pieces; 6...Na6 against the Averbakh rather than 6...c5, keeping the lever;
+and 2...g6 against the Trompowsky rather than 2...Ne4, keeping the four moves. **Against
+the London**, the course answers the London course's own line move for move as far as
+that course goes, and stops one move later: the engine's 10.Nxe5 is met by 10...Nh5, and
+the London's 10.Bh2 by 10...Ne4, which the London's leaf does not list and which its plan
+should expect.
 
 ## 9. v1 acceptance
 

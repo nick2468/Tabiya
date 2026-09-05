@@ -1138,6 +1138,120 @@ describe('the Alapin course', () => {
   })
 })
 
+describe("the King's Indian course", () => {
+  const kid = courseById('kings-indian-black')
+
+  it('is a Black course of seven chapters', () => {
+    expect(kid.colour).toBe('black')
+    expect(kid.opponentColour).toBe('white')
+    expect(kid.chapters.length).toBe(7)
+  })
+
+  it('declares the tags it uses beyond the core set', () => {
+    // c5-break and vs-london are shared with the Slav on purpose: they mean
+    // the same thing there and Progress compares by the string.
+    expect(kid.tags).toContain('e5-lever')
+    expect(kid.tags).toContain('f5-break')
+    expect(kid.tags).toContain('vs-london')
+    expect(kid.tags).not.toContain('gambit-pawn')
+  })
+
+  it("has Black's bishop on g7 by move four in every repertoire chapter", () => {
+    // The claim that makes this course the King's Indian rather than some
+    // other 1...Nf6: the fianchetto is in place before the centre is decided.
+    // Every line in chapters 1 to 5 has Bg7 among Black's first four moves
+    // (a node's path carries the stem); chapter 3 starts from the initial
+    // position so that 1.c4 and 1.Nf3 can reach the same house, and the rule
+    // holds there line by line.
+    for (const id of ['ch1', 'ch2', 'ch3', 'ch4', 'ch5']) {
+      const chapter = chapterOf(kid, id)
+      for (const leaf of walkNodes(chapter).filter((node) => node.isLeaf)) {
+        const black = leaf.path.filter((_, ply) => ply % 2 === 1).slice(0, 4)
+        expect(black, `${id} ${leaf.path.join(' ')}`).toContain('Bg7')
+      }
+    }
+  })
+
+  it('never plays 7...Nc6 in the Classical', () => {
+    // Ruled at phase 42 under the theory fork rule: the Mar del Plata race is
+    // sound and is a memorisation contest, so the knight goes to a6. The
+    // position after 7.O-O is reached in chapters 0, 1, 3, 5 and 6, and in
+    // every one of them Black plays Na6 there; 7...Nc6 is named where it
+    // arises as playable, with the reason beside it.
+    const classical = 'rnbq1rk1/ppp2pbp/3p1np1/4p3/2PPP3/2N2N2/PP2BPPP/R1BQ1RK1 b'
+    let seen = 0
+    for (const chapter of kid.chapters) {
+      for (const node of walkNodes(chapter)) {
+        if (node.isStudent && node.parentFen.startsWith(classical)) {
+          seen += 1
+          expect(node.san, `${chapter.id} ${node.path.join(' ')}`).toBe('Na6')
+          const refusal = (node.mistakes ?? []).find((entry) => entry.san === 'Nc6')
+          if (refusal) expect(refusal.grade).toBe('playable')
+        }
+      }
+    }
+    expect(seen, 'the Classical position is reached').toBeGreaterThan(0)
+  })
+
+  describe('chapter 0, the defence', () => {
+    it('has an intro of 300 to 500 words', () => {
+      const intro = chapterOf(kid, 'ch0').intro
+      expect(words(intro)).toBeGreaterThanOrEqual(300)
+      expect(words(intro)).toBeLessThanOrEqual(500)
+    })
+
+    it('carries mistake entries on its core setup decisions', () => {
+      expect(positionsWithMistakes(chapterOf(kid, 'ch0'))).toBeGreaterThanOrEqual(4)
+    })
+  })
+
+  describe('the repertoire chapters', () => {
+    for (const id of ['ch1', 'ch2', 'ch3', 'ch4', 'ch5']) {
+      it(`${id} runs its deepest line to move 10 or beyond`, () => {
+        expect(deepestFullMove(chapterOf(kid, id))).toBeGreaterThanOrEqual(10)
+      })
+
+      it(`${id} carries mistake entries on at least ten positions`, () => {
+        expect(positionsWithMistakes(chapterOf(kid, id))).toBeGreaterThanOrEqual(10)
+      })
+
+      it(`${id} weights every White reply by club frequency`, () => {
+        for (const node of walkNodes(chapterOf(kid, id))) {
+          if (!node.isStudent) {
+            expect(node.weight ?? 1, node.path.join(' ')).toBeGreaterThanOrEqual(1)
+            expect(node.weight ?? 1, node.path.join(' ')).toBeLessThanOrEqual(10)
+          }
+        }
+      })
+
+      it(`${id} tags every Black move with at least one concept`, () => {
+        for (const node of walkNodes(chapterOf(kid, id))) {
+          if (node.isStudent) expect(node.tags.length, node.path.join(' ')).toBeGreaterThan(0)
+        }
+      })
+    }
+  })
+
+  describe('chapter 6, the exercises', () => {
+    it('ends every exercise on a Black move worth drilling', () => {
+      for (const line of walkNodes(chapterOf(kid, 'ch6')).filter((node) => node.isLeaf)) {
+        expect(line.isStudent, line.path.join(' ')).toBe(true)
+      }
+    })
+
+    it('carries at least four exercises, and at least ten authored mistake entries', () => {
+      const chapter = chapterOf(kid, 'ch6')
+      const leaves = walkNodes(chapter).filter((node) => node.isLeaf)
+      expect(leaves.length).toBeGreaterThanOrEqual(4)
+      expect(positionsWithMistakes(chapter)).toBeGreaterThanOrEqual(10)
+    })
+
+    it('runs each exercise deep enough to be a real position', () => {
+      expect(deepestFullMove(chapterOf(kid, 'ch6'))).toBeGreaterThanOrEqual(10)
+    })
+  })
+})
+
 describe('the courses together', () => {
   // Course scoping makes this structural rather than lucky: a card key is the
   // course id and the position. The acceptance asks for it proved anyway,
@@ -1282,5 +1396,38 @@ describe('the courses together', () => {
     expect(afterE4, 'a position all three reach').toBeTruthy()
     const replies = courses.map((course) => course.get(afterE4!))
     expect(replies.sort()).toEqual(['c5', 'c6', 'd5'])
+  })
+
+  it("has the Slav and the King's Indian agreeing on 1.d4 and disagreeing on Black's first move", () => {
+    // The King's Indian is the second Black answer to 1.d4, added at phase 42.
+    // Both courses hold the card for the position after 1.d4, and they hand it
+    // different moves: the Slav puts a pawn on d5 and the King's Indian a
+    // knight on f6. Two Black courses can collide on a Black card, which is
+    // why the test states it rather than assumes it.
+    const answers = (id: string) =>
+      new Map(allCards(courseById(id)).cards.map((card) => [card.position, card.san]))
+    const slav = answers('slav-black')
+    const kid = answers('kings-indian-black')
+
+    const afterD4 = [...kid.keys()].find(
+      (position) => slav.has(position) && slav.get(position) === 'd5' && kid.get(position) === 'Nf6',
+    )
+    expect(afterD4, 'both courses answer 1.d4, differently').toBeTruthy()
+    expect(afterD4!.startsWith('rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b')).toBe(true)
+  })
+
+  it("has the King's Indian as the only course answering 1.c4 and 1.Nf3", () => {
+    // The flank openings were a gap until phase 42: no course held a card for
+    // the position after 1.c4 or after 1.Nf3. Now one does, and only one,
+    // which the test states rather than assumes, because a second course
+    // answering either move would be arguing with this one on Drill.
+    const afterC4 = 'rnbqkbnr/pppppppp/8/8/2P5/8/PP1PPPPP/RNBQKBNR b'
+    const afterNf3 = 'rnbqkbnr/pppppppp/8/8/8/5N2/PPPPPPPP/RNBQKB1R b'
+    for (const start of [afterC4, afterNf3]) {
+      const holders = courses.filter((course) =>
+        allCards(course).cards.some((card) => card.position.startsWith(start)),
+      )
+      expect(holders.map((course) => course.id), start).toEqual(['kings-indian-black'])
+    }
   })
 })
