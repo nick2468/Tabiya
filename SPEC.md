@@ -143,6 +143,10 @@ memorisation and note the rejected one in a single sentence. A fork with real
 consequences the builder cannot judge is recorded as an open item and the simpler
 branch is taken.
 
+The courses agree with each other (ruled 2026-09-06, phase 43): where a White course and
+a Black course reach the same position, the repertoire move one of them plays there is a
+reply the other lists, and the suite holds it.
+
 ## 4. Content schema
 
 One JSON file per chapter, in the course folder (section 10 moved these from
@@ -914,6 +918,25 @@ the London**, the course answers the London course's own line move for move as f
 that course goes, and stops one move later: the engine's 10.Nxe5 is met by 10...Nh5, and
 the London's 10.Bh2 by 10...Ne4, which the London's leaf does not list and which its plan
 should expect.
+
+2026-09-06, phase 43: **the courses must be consistent with each other.** Nick's ruling,
+after writing the King's Indian found three places where his own London course and his
+own King's Indian course meet and do not agree. The rule, now in section 3 and held by a
+test: where a White course and a Black course reach the same position, the repertoire
+move one of them plays there must be a reply the other lists. A course may list more
+replies than the other plays; it may not be silent about the move the other plays. Three
+scopings, each from what a course is. A stem counts as moves and replies. A position
+counts only once both courses have made a move of their own on the way to it, because
+before that the two are choosing an opening rather than disagreeing about one, and a
+1.d4 defence that listed 1.e4 would be another course. And a leaf is not silence: where a
+line ends the course has said what it means to say, and a rule that read the deeper
+course's next move as a fault could never be satisfied, because the shallower course's
+answer would then be one move deeper still. **Agreement is reached by listing, never by
+moving a repertoire move**: a repertoire move moves only when the engine at 2500 ms says
+it is unsound, and that is a finding, not a consistency fix. Same-colour pairs are out on
+purpose; the London and the Colle both answer 1...d5 and are meant to differ. The first run
+found seven beyond the three phase 42 had named, all closed at phase 43 by listing the
+other course's move with an engine-checked answer.
 
 ## 9. v1 acceptance
 
