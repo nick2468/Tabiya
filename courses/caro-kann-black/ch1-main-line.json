@@ -377,6 +377,9 @@
                           "san": "Bxe4",
                           "note": "Take the knight. White has to recapture with the bishop, and Black gains a move on it next.",
                           "tags": ["tactics"],
+                          "mistakes": [
+                            { "san": "Qxd4", "grade": "playable", "note": "It takes a pawn, and it is sound: 6.Nf3 chases the queen and it comes home to d8 with the pawn kept. The course prefers the simple recapture, which asks nothing of the queen and leaves nothing to know." }
+                          ],
                           "children": [
                             {
                               "san": "Bxe4",

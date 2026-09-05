@@ -361,7 +361,7 @@
                       "children": [
                         {
                           "san": "Nc6",
-                          "note": "Develop and press d4. The pressure is what stops White from getting e4 in for free.",
+                          "note": "Develop and press d4. The pressure is what stops White from getting e4 in for free. The engine slightly prefers 4...e6 first, keeping the knight's choice of square open; the course develops the knight first because it is the piece that does the pressing, and the pawn move comes anyway.",
                           "mistakes": [
                             {
                               "san": "Qb6",

@@ -240,7 +240,7 @@
                       "children": [
                         {
                           "san": "Qc7",
-                          "note": "The same plan against the same setup. The queen takes the file and covers the e5 push.",
+                          "note": "The same plan against the same setup. The queen takes the file and covers the e5 push. The engine prefers 8...b5, the livelier try, by about half a pawn; the course keeps the shape it plays against 8.Qf3, because one plan held is worth more than two plans half known.",
                           "tags": ["development"],
                           "mistakes": [
                             { "san": "O-O", "grade": "inaccuracy", "note": "White has not committed the king yet, and castling first tells White which side to attack." },
