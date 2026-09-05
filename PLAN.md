@@ -4340,3 +4340,27 @@ Gate 34 findings (2026-09-05):
   cleared afterwards.
 
 - [x] **Review gate 34 passed** (2026-09-05)
+
+## Phase 35 - what the second pass found
+
+Goal: land the four things the verdict-strength second pass of 2026-09-05 left open. Nick
+ruled "fix it" on the one that changes a line id. Content only, version 1.8.1.
+
+Chipped as `chips/phase-35-second-pass-fixes.md`. The Scandinavian's Nge2 line takes the
+hanging pawn (one line id changes, accepted); the Caro-Kann lists 5...Qxd4 as a playable
+alternative; two notes in the Najdorf and the Slav; the seventeen floor findings go into
+`accepted.md`; the register entry for the second pass is closed.
+
+- [ ] 35.1 The Scandinavian's Nge2 line takes the pawn; the old move graded a mistake.
+- [ ] 35.2 The Caro-Kann lists the pawn grab as playable.
+- [ ] 35.3 Two notes, Najdorf and Slav.
+- [ ] 35.4 Seventeen floor findings into `accepted.md`.
+- [ ] 35.5 Checkers on what changed, outputs under `docs/engine-runs/phase-35/`.
+- [ ] 35.6 Four bundles regenerated.
+- [ ] 35.7 Register entry closed; ruling logged.
+- [ ] 35.8 Version 1.8.1.
+- [ ] 35.9 Suite green; exactly one line id changed.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 35**
