@@ -4662,3 +4662,53 @@ provider across screen changes. Version 1.8.6.
 Acceptance: as the chip's final paragraph.
 
 - [ ] **Review gate 40**
+
+## Phase 41 - the Alapin Sicilian, a ninth course
+
+Goal: Nick commissioned the Alapin on 2026-09-05: the structural answer to 1...c5, which
+his White repertoire had nothing against. After phase 40.
+
+Chipped as `chips/phase-41-alapin.md`. Id `alapin-sicilian`, permanent; 2.c3 over the
+Grand Prix by temperament; two main-line chapters (the e5 wedge, the isolated pawn), the
+other second moves, the closed centre, everything else, tactics with ten mistake entries.
+The checkers include a 2500 ms engine-pass over the whole course. Version 1.9.0.
+
+- [ ] 41.1 Rulings and decision rules (done in the chip).
+- [ ] 41.2 Seven chapters to the section 3 bar, student White.
+- [ ] 41.3 Suite green after every chapter.
+- [ ] 41.4 Checkers with conditions, including the 2500 ms pass over the course.
+- [ ] 41.5 The course's test block with two course-specific claims.
+- [ ] 41.6 Scoping test: the three 1.e4 courses.
+- [ ] 41.7 Bundle exported and round-tripped.
+- [ ] 41.8 Prose counts say nine.
+- [ ] 41.9 Version 1.9.0.
+- [ ] 41.10 Proved in the browser build at 1400x980.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 41**
+
+## Phase 42 - the King's Indian Defence, a tenth course
+
+Goal: Nick commissioned the King's Indian on 2026-09-05: the counterpunching partner to the
+Slav against 1.d4, and the one setup that also answers 1.c4 and 1.Nf3. After phase 41.
+
+Chipped as `chips/phase-42-kings-indian.md`. Id `kings-indian-black`, permanent; the
+Classical's seventh move by the fork rule pointing at 7...Na6; the Sämisch, the Fianchetto
+with the flank move orders, the Four Pawns and Averbakh, White without c4 and e4 read
+against the London's own chapter, tactics with ten mistake entries. Version 1.10.0.
+
+- [ ] 42.1 Rulings and decision rules (done in the chip).
+- [ ] 42.2 Seven chapters to the section 3 bar, student Black.
+- [ ] 42.3 Suite green after every chapter.
+- [ ] 42.4 Checkers with conditions, including the 2500 ms pass over the course.
+- [ ] 42.5 The course's test block with two course-specific claims.
+- [ ] 42.6 Scoping test: the two 1.d4 Black courses and the flank openings.
+- [ ] 42.7 Bundle exported and round-tripped.
+- [ ] 42.8 Prose counts say ten.
+- [ ] 42.9 Version 1.10.0.
+- [ ] 42.10 Proved in the browser build at 1400x980.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 42**
