@@ -4451,3 +4451,25 @@ reads). No console errors; storage cleared afterwards. Nick's own files were not
 and not reported.
 
 - [ ] **Review gate 37**
+
+## Phase 38 - the report and the game list name the line
+
+Goal: Nick, 2026-09-05, reading his own PGN: the report says where a game left the course
+but never which line it was in. No chess content.
+
+Chipped as `chips/phase-38-name-the-line.md`. One function decides the line a game
+followed, built on the Lines played rule; the report's repertoire paragraph, a new Line
+column on the Play on list and the PGN comment all say it, or name the chapter when the
+game never reached a line. Version 1.8.4.
+
+- [ ] 38.1 `lineFollowed`, with tests, agreeing with Lines played.
+- [ ] 38.2 The report sentences, both colours and the other side.
+- [ ] 38.3 The Line column on the Play on list.
+- [ ] 38.4 The PGN comment.
+- [ ] 38.5 Help.
+- [ ] 38.6 Version 1.8.4.
+- [ ] 38.7 Proved in the browser build.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 38**
