@@ -498,15 +498,34 @@
                                                                               "note": "The bishop to b2.",
                                                                               "children": [
                                                                                 {
-                                                                                  "san": "a5",
-                                                                                  "note": "The pawn to a5, taking b4 from White and preparing ...a4 against the pawn on b3.",
-                                                                                  "tags": ["queenside-defence"],
+                                                                                  "san": "e4",
+                                                                                  "note": "The pawn to e4, now that the bishop on b2 is looking at e5 and the knight on f3 has nowhere better to go. The pawn is held by the rook on e8 and the knight on f6, and ...d5 comes next to make it a centre.",
+                                                                                  "tags": ["e5-lever"],
                                                                                   "mistakes": [
-                                                                                    { "san": "e4", "grade": "inaccuracy", "note": "11.Nd2 d5 12.cxd5 cxd5 13.f3 and the pawn on e4 is a target." },
-                                                                                    { "san": "Qe7", "grade": "playable", "note": "Sound: 11.Qc2 a5 and the same. The pawn first." }
+                                                                                    { "san": "a5", "grade": "playable", "note": "Sound: 11.Qc2 e4 12.Nd2 d5 and the same a move later. The pawn first, because the bishop on b2 was aiming at e5." },
+                                                                                    { "san": "Qe7", "grade": "playable", "note": "Sound: 11.Qc2 e4 12.Nd2 and the same." },
+                                                                                    { "san": "exd4", "grade": "inaccuracy", "note": "11.exd4 and the bishop on b2 has the diagonal it wanted with the e-file open for White's rook." }
                                                                                   ],
-                                                                                  "plan": "...Qe7, ...a4 against b3, ...exd4 when the knight on f3 has to take back with the bishop on b2 behind it, and ...Nc5. The quiet line is about the queenside.",
-                                                                                  "name": "8.e3, the quiet line"
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "Nd2",
+                                                                                      "weight": 9,
+                                                                                      "note": "The knight goes back to d2, hitting e4.",
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "d5",
+                                                                                          "note": "The pawn to d5, and the pawns on d5 and e4 are a centre with the rook on e8 behind them. If cxd5 cxd5 the c-file is open and Black's pawns hold; if f3 exf3 the knight on f6 comes to g4.",
+                                                                                          "tags": ["e5-lever"],
+                                                                                          "mistakes": [
+                                                                                            { "san": "Nf8", "grade": "inaccuracy", "note": "12.Qc2 and the pawn on e4 is hit twice with the knight on f8 holding nothing." },
+                                                                                            { "san": "Qe7", "grade": "inaccuracy", "note": "12.Qc2 d5 13.cxd5 cxd5 14.Rac1 and the c-file is White's with the queen on e7 in the way of the rook." }
+                                                                                          ],
+                                                                                          "plan": "...Nf8 and ...Ne6 against d4, ...h5 and ...Bf5 when f3 has been met, ...Qe7. The quiet line has become a centre for Black, and the bishop on b2 looks at a wall.",
+                                                                                          "name": "8.e3, the quiet line"
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
                                                                                 }
                                                                               ]
                                                                             }

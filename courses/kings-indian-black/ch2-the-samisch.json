@@ -287,13 +287,15 @@
                                               "note": "The bishop back to e3, and the pawn on c5 has gone for nothing.",
                                               "children": [
                                                 {
-                                                  "san": "Nd7",
-                                                  "note": "The knight to d7 and e5 or c5, with c4 the pawn to win back.",
-                                                  "tags": ["development"],
+                                                  "san": "Nb4",
+                                                  "note": "The knight to b4, hitting a2 and c2 with the d-file already Black's. White's pieces are still at home and every square the knight looks at is loose: the pawn comes back with interest.",
+                                                  "tags": ["tactics"],
                                                   "mistakes": [
-                                                    { "san": "Be6", "grade": "playable", "note": "Sound, hitting c4 at once: 12.Nf4 Bxc4 13.Nfd5 and the bishop has taken the pawn with the knight on d5 in exchange. The knight first keeps it simpler." }
+                                                    { "san": "Nd7", "grade": "inaccuracy", "note": "12.O-O-O Bb7 13.Nd4 and White has caught up on development with the pawn kept." },
+                                                    { "san": "Be6", "grade": "playable", "note": "Sound, hitting c4 at once: 12.Nf4 Bxc4 13.Nfd5 and the pawn is back with the knight on d5. The knight to b4 hits more." },
+                                                    { "san": "Ba6", "grade": "playable", "note": "Sound: 12.Nf4 e6 13.Be2 and the bishop on a6 is hitting c4 through the bishop on e2. The knight first." }
                                                   ],
-                                                  "plan": "...Nde5 with ...Nxc4 or ...Nc5 and ...Be6, and the rooks to c8 and d8. Level, and Black's pieces are the ones that are out.",
+                                                  "plan": "...Nxa2 or ...Nc2+ when it is free, ...Ba6 against c4, and ...Nd7 to e5 when the knight on b4 has done its work. The pawn on c4 is the one that comes back, and White has to spend Kf2 or Rc1 on holding what is left.",
                                                   "name": "7.dxc5, the ending with 11.Be3"
                                                 }
                                               ]

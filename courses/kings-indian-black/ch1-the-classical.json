@@ -124,14 +124,15 @@
                                       "note": "The knight jumps in before the pawn asks the question.",
                                       "children": [
                                         {
-                                          "san": "h6",
-                                          "note": "Hit the bishop first. It has to decide, and then the knight on d5 is met by ...c6.",
+                                          "san": "f6",
+                                          "note": "Hit the bishop with the pawn. It has to go home to c1, because h4 walks into ...g5, and the knight on d5 is met by ...c6 next with the queen on e8 covering e7.",
                                           "tags": ["tactics"],
                                           "mistakes": [
-                                            { "san": "c6", "grade": "inaccuracy", "note": "12.Nc7 and the knight takes the rook or the exchange: the bishop on g5 hits the queen's diagonal so the knight on c7 is not simply taken." },
-                                            { "san": "Nxf2", "grade": "mistake", "note": "12.Rxf2 and the knight has been traded for a pawn: the bishop on g5 covers d8 so there is no follow-up." }
+                                            { "san": "c6", "grade": "inaccuracy", "note": "12.Ne7+ Kh8 13.Nxc8 Rxc8 14.Qd6 and the knight has taken the bishop with the queen landing on d6: the pawn on f6 first, so that e7 is covered." },
+                                            { "san": "Qd7", "grade": "inaccuracy", "note": "12.c5 Nxc5 13.Qc2 and the knight on c5 is hit with the queen on d7 in the way of the bishop." },
+                                            { "san": "Kh8", "grade": "inaccuracy", "note": "12.h3 f6 13.Bc1 Nh6 14.c5 and the knight on g4 has gone to the rim with the c-pawn arriving." }
                                           ],
-                                          "plan": "...c6 next to push the knight out, then ...Qe7, ...Rd8 and ...Nc5. The knight on d5 looks strong and has no support.",
+                                          "plan": "...c6 next to push the knight out, then ...Qe7, ...Rd8 and ...Nc5. The knight on d5 looks strong and has no support, and the bishop on g5 has been sent home.",
                                           "name": "8.Be3 Ng4 with 11.Nd5"
                                         }
                                       ]
@@ -583,15 +584,34 @@
                               "note": "The pawn to a3 first, so that b4 comes with the pawn on b2 held.",
                               "children": [
                                 {
-                                  "san": "Bd7",
-                                  "note": "The bishop out, and the queen's rook is connected. b4 will be met by ...axb4 and the a-file.",
-                                  "tags": ["development"],
+                                  "san": "a4",
+                                  "note": "The pawn to a4. It fixes the queenside: b4 can now be taken on the way through, so White's plan on that wing has to be rebuilt, and the knight on c5 is held for good.",
+                                  "tags": ["queenside-defence"],
                                   "mistakes": [
-                                    { "san": "Nh5", "grade": "inaccuracy", "note": "11.Bxh5 gxh5 and the pawns are broken." },
-                                    { "san": "b6", "grade": "playable", "note": "Sound, holding c5 with a pawn, and 11.Rb1 a4 fixes the queenside. The bishop first, so that the rook on a8 is connected when b4 comes." }
+                                    { "san": "Bd7", "grade": "playable", "note": "Sound: 11.Rb1 a4 and the same a move later. The pawn first, before Rb1 and b4 arrive." },
+                                    { "san": "Bh6", "grade": "playable", "note": "Sound: 11.Rb1 b6 12.b4 Bxd2 13.Qxd2 and the bishop on g7 has been traded for the knight that was holding e4. The pawn on a4 first." },
+                                    { "san": "b6", "grade": "playable", "note": "Sound, holding c5 with a pawn, and 11.Rb1 a4 fixes the queenside a move later." }
                                   ],
-                                  "plan": "...Nh5 and ...f5 when the bishop on e2 has moved, ...Qe8, and ...axb4 with the a-file when b4 comes. The knight on c5 stays as long as it can.",
-                                  "name": "8.d5 Nc5 9.Nd2 with 10.a3"
+                                  "children": [
+                                    {
+                                      "san": "Qc2",
+                                      "weight": 8,
+                                      "note": "The queen holds e4 so that the knight on d2 can move.",
+                                      "children": [
+                                        {
+                                          "san": "Bh6",
+                                          "note": "The bishop to h6, hitting the knight on d2 that holds e4, with the bishop on c1 stuck holding it.",
+                                          "tags": ["dark-bishop"],
+                                          "mistakes": [
+                                            { "san": "Bd7", "grade": "playable", "note": "Sound: 12.Rb1 Bh6 and the same a move later." },
+                                            { "san": "Nh5", "grade": "mistake", "note": "12.Bxh5 gxh5 and the kingside is broken: the knight on f3 has gone to d2, so the bishop on e2 sees h5." }
+                                          ],
+                                          "plan": "...b6 and ...Bd7, ...Ne8 and ...f5, and ...Bxd2 only when the bishop on c1 has been sent to b2 and the knight is the piece holding everything. The pawn on a4 has taken White's queenside plan away.",
+                                          "name": "8.d5 Nc5 9.Nd2 with 10.a3"
+                                        }
+                                      ]
+                                    }
+                                  ]
                                 }
                               ]
                             }

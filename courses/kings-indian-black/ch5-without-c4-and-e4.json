@@ -268,27 +268,65 @@
                                                                                       "children": [
                                                                                         {
                                                                                           "san": "Nd3",
-                                                                                          "note": "The knight to d3, hitting the bishop on f4 and the pawn on b2, held by nothing and on a square nothing can cover. White gives the bishop on e2 for it, and the queen takes back with a hit on the queenside.",
+                                                                                          "note": "The knight to d3, hitting the bishop on f4 and the pawn on b2, on a square nothing can hold. White gives the queen for the knight and the queen: 13.Qxd3 Qxd3 14.Bxd3, and then the bishop on g7 takes on b2 and the pawn is back.",
                                                                                           "tags": ["tactics"],
                                                                                           "mistakes": [
-                                                                                            { "san": "f5", "grade": "inaccuracy", "note": "13.Nc3 and the knight on e5 has to decide with the kingside loosened for nothing." },
-                                                                                            { "san": "Nxc4", "grade": "inaccuracy", "note": "13.Bxc4 and the knight has been traded for the bishop with the pawn count level and White's pieces the ones that are out." }
+                                                                                            { "san": "Be6", "grade": "playable", "note": "Sound: 13.Qb3 c6 14.Rd1 and the pawn is not back yet, but the pieces are out. The knight to d3 wins it back at once." },
+                                                                                            { "san": "Nxc4", "grade": "inaccuracy", "note": "13.Bxc4 and the knight has been traded for the bishop with the pawn count still White's." },
+                                                                                            { "san": "f5", "grade": "inaccuracy", "note": "13.Nc3 and the knight on e5 has to decide with the kingside loosened for nothing." }
                                                                                           ],
                                                                                           "children": [
                                                                                             {
-                                                                                              "san": "Bxd3",
-                                                                                              "weight": 9,
-                                                                                              "note": "The bishop takes the knight.",
+                                                                                              "san": "Qxd3",
+                                                                                              "weight": 8,
+                                                                                              "note": "The queen takes the knight, so that the bishop takes back after the trade.",
                                                                                               "children": [
                                                                                                 {
                                                                                                   "san": "Qxd3",
-                                                                                                  "note": "Take back with the queen. Level material, the queen in the middle of White's position, and the bishop on g7 looking at b2.",
+                                                                                                  "note": "Take the queen.",
                                                                                                   "tags": ["tactics"],
                                                                                                   "mistakes": [
-                                                                                                    { "san": "Bxb2", "grade": "inaccuracy", "note": "14.Bxg6 hxg6 15.Nd2 and the bishop has taken a pawn while the king's cover has gone." }
+                                                                                                    { "san": "Bxb2", "grade": "mistake", "note": "14.Qxd8 Rxd8 15.Nd2 and a knight has gone for a pawn: the queen on d3 had to be taken first." }
                                                                                                   ],
-                                                                                                  "plan": "...Bxb2 when it is free, ...Qe4 or ...Qd7 when the queen is hit, ...Rad8 and ...c6. The knight on f3 took a pawn it could not keep, and the game is level with Black's pieces the active ones.",
-                                                                                                  "name": "The London with 10.Nxe5 and ...Nh5"
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "san": "Bxd3",
+                                                                                                      "weight": 9,
+                                                                                                      "note": "The bishop takes back.",
+                                                                                                      "children": [
+                                                                                                        {
+                                                                                                          "san": "Bxb2",
+                                                                                                          "note": "Take on b2. The pawn is back, the rook on a1 is hit, and the knight on b1 has to come out to a3 to hold everything.",
+                                                                                                          "tags": ["tactics"],
+                                                                                                          "mistakes": [
+                                                                                                            { "san": "Be6", "grade": "inaccuracy", "note": "15.Nc3 and the pawn on b2 has been held: the bishop takes it while it is free." },
+                                                                                                            { "san": "Bxh3", "grade": "mistake", "note": "15.gxh3 and the bishop has gone for a pawn." }
+                                                                                                          ],
+                                                                                                          "plan": "...Bxa3 when Na3 comes, or ...Be5 with the bishop kept, ...Be6 hitting c4, ...Rad8 for the file. Level, and Black's pieces are the active ones.",
+                                                                                                          "name": "The London with 10.Nxe5 and ...Nh5"
+                                                                                                        }
+                                                                                                      ]
+                                                                                                    }
+                                                                                                  ]
+                                                                                                }
+                                                                                              ]
+                                                                                            },
+                                                                                            {
+                                                                                              "san": "Bxd3",
+                                                                                              "weight": 2,
+                                                                                              "note": "The bishop takes the knight, and the queen on d1 is hit by nothing yet.",
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "san": "Bxb2",
+                                                                                                  "note": "Take on b2, hitting the rook on a1. Not 13...Qxd3, which walks into 14.Qxd3: the queen on d1 sees d3 the moment the pawn on d4 has gone.",
+                                                                                                  "tags": ["tactics"],
+                                                                                                  "mistakes": [
+                                                                                                    { "san": "Qxd3", "grade": "mistake", "note": "14.Qxd3 and the queen has gone: the queen on d1 was looking straight at d3." },
+                                                                                                    { "san": "g5", "grade": "mistake", "note": "14.Bxh7+ Kxh7 15.Qh5+ Kg8 16.Bxg5 and the king has been opened for a pawn." },
+                                                                                                    { "san": "Bxh3", "grade": "mistake", "note": "14.gxh3 and the bishop has gone for a pawn." }
+                                                                                                  ],
+                                                                                                  "plan": "...Bxa3 after Na3, ...Qe7 and ...Be6, ...Rad8. The pawn is back and the rook on a1 has been hit on the way.",
+                                                                                                  "name": "The London with 10.Nxe5 and 13.Bxd3"
                                                                                                 }
                                                                                               ]
                                                                                             }
