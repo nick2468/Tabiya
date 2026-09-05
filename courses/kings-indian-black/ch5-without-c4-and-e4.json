@@ -1089,6 +1089,97 @@
                           ]
                         }
                       ]
+                    },
+                    {
+                      "san": "Be2",
+                      "weight": 4,
+                      "note": "The bishop to e2 rather than d3: the Colle-Zukertort course's own move against the fianchetto, because the pawn on g6 already covers h7 and d3 would aim at nothing.",
+                      "children": [
+                        {
+                          "san": "O-O",
+                          "note": "Castle.",
+                          "tags": ["king-safety"],
+                          "mistakes": [
+                            { "san": "d6", "grade": "playable", "note": "Sound and it transposes. The king first." },
+                            { "san": "d5", "grade": "playable", "note": "Sound and a Grünfeld shape against the Colle. This course keeps the pawn on d6." }
+                          ],
+                          "children": [
+                            {
+                              "san": "O-O",
+                              "weight": 9,
+                              "note": "White castles.",
+                              "children": [
+                                {
+                                  "san": "d6",
+                                  "note": "The pawn to d6, holding e5 for the lever.",
+                                  "tags": ["development"],
+                                  "mistakes": [
+                                    { "san": "d5", "grade": "playable", "note": "Sound: 6.b3 c5 7.Bb2 and the Colle course has its Grünfeld line. The pawn to d6 keeps the lever." },
+                                    { "san": "c5", "grade": "playable", "note": "Sound: 6.b3 cxd4 7.exd4 d5 and the open d-file. The lever keeps the shape." }
+                                  ],
+                                  "children": [
+                                    {
+                                      "san": "b3",
+                                      "weight": 8,
+                                      "note": "The pawn to b3, the Zukertort setup: the bishop is going to b2, facing the bishop on g7 down the long diagonal.",
+                                      "children": [
+                                        {
+                                          "san": "Nbd7",
+                                          "note": "The knight to d7, holding e5 for the lever.",
+                                          "tags": ["development"],
+                                          "mistakes": [
+                                            { "san": "Nc6", "grade": "inaccuracy", "note": "7.Bb2 e5 8.d5 and the knight is hit." },
+                                            { "san": "e5", "grade": "inaccuracy", "note": "7.dxe5 dxe5 8.Nxe5 and the pawn has gone: the knight was not on d7 to take back." }
+                                          ],
+                                          "children": [
+                                            {
+                                              "san": "Bb2",
+                                              "weight": 9,
+                                              "note": "The bishop to b2.",
+                                              "children": [
+                                                {
+                                                  "san": "e5",
+                                                  "note": "The lever. The bishop on b2 looks at e5 through the pawn on d4, and the pawn on e5 is held by the knight on d7.",
+                                                  "tags": ["e5-lever"],
+                                                  "mistakes": [
+                                                    { "san": "c5", "grade": "playable", "note": "Sound: 8.c4 and the Colle course has its ...c5 line. The lever keeps the shape." },
+                                                    { "san": "Re8", "grade": "playable", "note": "Sound: 8.c4 e5 and the same a move later." }
+                                                  ],
+                                                  "children": [
+                                                    {
+                                                      "san": "c4",
+                                                      "weight": 7,
+                                                      "note": "The pawn to c4, holding the centre with pawns: the Colle course's move, which declines the trade on e5.",
+                                                      "children": [
+                                                        {
+                                                          "san": "Qe7",
+                                                          "note": "The queen to e7, holding e5 a second time and connecting the rooks. The pawn on e5 is the stake and the queen behind it keeps ...exd4 and ...e4 both as choices.",
+                                                          "tags": ["development"],
+                                                          "mistakes": [
+                                                            { "san": "exd4", "grade": "playable", "note": "Sound: 9.Nxd4 Re8 and the open centre with the bishop on b2 well placed. The queen first keeps the pawn." },
+                                                            { "san": "e4", "grade": "playable", "note": "Sound: 9.Nfd2 Re8 and the pawn on e4 is held but the bishop on g7 looks at a wall." },
+                                                            { "san": "Re8", "grade": "playable", "note": "Sound: 9.dxe5 Ne4 and the same shape a move later." }
+                                                          ],
+                                                          "plan": "...Re8 and ...c6, ...e4 when the knight on f3 has to move and the pawn can be held, ...Nf8 and ...Ne6 against d4. The Colle-Zukertort with c4 is the London's shape without the bishop on f4, and the lever is held.",
+                                                          "name": "The Colle with 4.Be2 and b3"
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }
