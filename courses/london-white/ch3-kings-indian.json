@@ -172,7 +172,7 @@
                                                     {
                                                       "san": "c3",
                                                       "grade": "inaccuracy",
-                                                      "note": "Too modest. The whole point of Black's d6 is that c4 is available, and c3 wastes it."
+                                                      "note": "Too modest. The whole point of Black's d6 is that c4 is available, and c3 wastes it. It does threaten one thing, which a prepared Black player knows: 8...e5 9.dxe5 dxe5 10.Nxe5 wins the pawn, because 10...Nxe5 11.Qxd8 Rxd8 12.Bxe5 takes it back with the queens off, so the King's Indian course holds ...e5 back after c3."
                                                     },
                                                     {
                                                       "san": "e4",
@@ -247,8 +247,42 @@
                                                                       "brush": "blue"
                                                                     }
                                                                   ],
-                                                                  "plan": "Play Nc3, Qc2 and the rooks to d1 and e1. Black's pawn on e5 is a target and the dark-squared bishop on h2 is aiming straight through it. Do not rush: this is a slow squeeze, not an attack.",
-                                                                  "name": "The full main line, with ...e5"
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Ne4",
+                                                                      "weight": 6,
+                                                                      "note": "The knight jumps to e4, the square this setup leaves loose: no pawn reaches it with c4 and e3 played, and the bishop on e2 does not see it. This is what the King's Indian course plays here, and it asks a question the bishop on h2 does not answer.",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Qc2",
+                                                                          "note": "Hit the knight with the queen. It has to be held by ...f5 or traded by ...Nec5, and either way the pawn on e5 stays the target the bishop on h2 is aiming at. The engine's choice at 2500 ms, a little ahead of the knight moves.",
+                                                                          "tags": [
+                                                                            "development",
+                                                                            "dark-squares"
+                                                                          ],
+                                                                          "mistakes": [
+                                                                            {
+                                                                              "san": "Bxe5",
+                                                                              "grade": "mistake",
+                                                                              "note": "The pawn is still defended twice: 11...Nxe5 12.Nxe5 Rxe5 and a bishop has gone for a pawn."
+                                                                            },
+                                                                            {
+                                                                              "san": "Nfd2",
+                                                                              "grade": "playable",
+                                                                              "note": "Sound: 11...Nxd2 12.Qxd2 Nc5 and the queens are likely to come off level. The queen move keeps them on and keeps the target."
+                                                                            },
+                                                                            {
+                                                                              "san": "Nbd2",
+                                                                              "grade": "playable",
+                                                                              "note": "Sound: 11...Nxd2 12.Qxd2 and it is level. The queen first makes Black hold the knight before it is traded."
+                                                                            }
+                                                                          ],
+                                                                          "plan": "Play Nc3, Qc2 and the rooks to d1 and e1. Black's pawn on e5 is a target and the dark-squared bishop on h2 is aiming straight through it. Do not rush: this is a slow squeeze, not an attack.",
+                                                                          "name": "The full main line, with ...e5"
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
                                                                 }
                                                               ],
                                                               "note": "Black recaptures and the centre settles: the e5 pawn is Black's stake in the game, and also White's target."

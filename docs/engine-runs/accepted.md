@@ -95,6 +95,15 @@ a later pass reporting any of them at about these numbers reports nothing new.
   is the course's point and stays clearly better.
 - `vienna-gambit` ch6-tactics-and-plans, `9.Bd2` in the exercise: +3.11 kept of +3.81.
 
+**`london-white` ch3-kings-indian, `10.Bh2` after `...dxe5`: +0.27 kept of +0.52.**
+Line: `d4 Nf6 Bf4 g6 e3 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O Re8 c4 e5 dxe5 dxe5`, measured at
+phase 42 while the King's Indian was written against this chapter, and settled at phase 43
+under the floor rule: +0.27 is a good position, and the engine's `10.Nxe5` is not the free
+pawn its number looks like, because the King's Indian's answer `10...Nh5` (its ch5) wins
+the pawn back with a knight arriving on d3. The chapter's own note on Nxe5 names the trap
+the other way as well. A pass reporting Bh2 at about a quarter of a pawn reports nothing
+new.
+
 ## What is deliberately NOT here
 
 The "graded too harshly" side of `engine-mistakes.mjs`. It runs to a dozen or more
