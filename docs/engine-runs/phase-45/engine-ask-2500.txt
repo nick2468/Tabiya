@@ -1,0 +1,148 @@
+engine-ask.mjs at 2500 ms on every move this phase added.
+
+Section 1 is the ten moves the Slav's leaves needed, asked at the position each leaf ended on. Section 2 is the
+Najdorf's Alapin line, asked move by move as it was extended.
+Conditions: 16 logical processors, CPU load sampled at 17-27% before the first run (no javac, cargo, rustc
+or tauri process; the idle Vite dev servers of other projects), no build and no test run beside any engine
+run, one engine process at a time, every run in this phase sequential. Movetime is wall clock.
+Evaluations are from White's point of view: positive favours White, so a Black move that gives something
+away makes the number go UP. The Slav is a solid defence and its lines measure small numbers for White:
+a Black repertoire move is KEPT if its cost against the engine's best at the same position is no more than
+about 0.3, judged by that cost and not by its absolute number.
+
+The ten, and what was done with each. The move the leaf's own plan already named is the move added, and the
+decision rule was to take the engine's move instead only if the plan's move cost more than about 0.3.
+
+  ch2-quiet  6.a4          ...Nd5   -0.29  the engine's first choice.        KEPT
+  ch4        4.Nf3         ...dxc4  +0.35  the engine's first choice.        KEPT
+  ch4        5.Nf3         ...e6    +0.27  the engine's first choice.        KEPT
+  ch4        6.e3          ...Bf5   +0.31  the engine's first choice.        KEPT
+  ch4        4.Nf3 (3.e3)  ...Bf5   +0.28  the engine's first choice.        KEPT
+  ch4        4.Nc3 (3.e3)  ...Bf5   +0.39  of +0.33 for ...e6, a cost of 6 hundredths.   KEPT
+  ch5        4.e3          ...Nc6   +0.08  the engine's first choice.        KEPT
+  ch5        5.e3          ...Nc6   -0.04  of -0.11 for ...Qb6, a cost of 7 hundredths.  KEPT
+  ch5        3.Bf4         ...c5    +0.21  of +0.16 for ...g6, a cost of 5 hundredths.   KEPT
+  ch5        5.Nf3         ...Bg4   -0.37  the engine's first choice.        KEPT
+
+Nothing above the 0.3 bar, so no line was rewritten and no plan's prose had to be corrected.
+
+The Najdorf's four new moves, and the four mistake entries beside them:
+  10.Nxd7   +0.18  the engine's first choice, and the Alapin course's own move.
+  10...Qxd7 +0.19  the engine's first choice. The alternatives are 10...Nxd7 at +1.19 (a pawn, graded a
+                   mistake) and 10...Kxd7 at +3.20 (three, a mistake).
+  11.Nc3    +0.17  the engine's first choice, and the Alapin course's own move.
+  11...e6   +0.13  the engine's first choice. The alternatives are 11...Rd8 at +0.15 and 11...Nd5 at +0.35,
+                   both graded playable.
+
+=== 1. The Slav's ten leaves ===
+### d4 d5 c4 c6 Nf3 Nf6 Bf4 dxc4 Nc3 e6 a4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 d5 c4 c6 Nf3 Nf6 Bf4 dxc4 Nc3 e6 a4
+  -0.29  Nd5 Bg5 f6 Bd2 b5 e4
+  -0.28  Bb4 g3 a5 Bg2 Nd5 Bd2
+  -0.17  Nbd7 e3 b5 axb5 cxb5 Nxb5
+  -0.13  b5 axb5 Nd5 b6 Qxb6 Na4
+### d4 d5 c4 c6 Nc3 Nf6 Nf3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 d5 c4 c6 Nc3 Nf6 Nf3
+  +0.35  dxc4 a4 Bf5 e3 e6 Bxc4
+  +0.37  e6 e3 Nbd7 Bd3 dxc4 Bxc4
+  +0.38  g6
+  +0.46  a6 e3 g6 a4 Bg7 a5
+### d4 d5 c4 c6 Nc3 Nf6 e3 Bf5 Nf3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 d5 c4 c6 Nc3 Nf6 e3 Bf5 Nf3
+  +0.27  e6 Nh4 Bg6 Nxg6 hxg6 Bd2
+  +0.49  Qc7 Nh4
+  +0.48  a6 Ne5 Nbd7 Qb3 Qc7 cxd5
+  +0.51  Na6 Be2 e6 Nh4 Bg6 Nxg6
+### d4 d5 c4 c6 Nc3 Nf6 cxd5 cxd5 Bf4 Nc6 e3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 d5 c4 c6 Nc3 Nf6 cxd5 cxd5 Bf4 Nc6 e3
+  +0.31  Bf5 Qb3 Na5 Bb5+ Bd7 Qa4
+  +0.37  a6 Nf3 Nh5 Be5 f6 Bg3
+  +0.43  e6 Bd3 Bd6 Bxd6 Qxd6 f4
+  +0.47  Bg4 Nf3 a6 h3 Bxf3 Qxf3
+### d4 d5 c4 c6 e3 Nf6 Nf3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 d5 c4 c6 e3 Nf6 Nf3
+  +0.28  Bf5 Nc3 e6 Nh4 Bg6 Bd2
+  +0.29  Bg4 Nc3 e6 h3 Bh5 g4
+  +0.36  e6
+  +0.39  g6 Nc3 Bg7 Bd3 O-O O-O
+### d4 d5 c4 c6 e3 Nf6 Nc3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 d5 c4 c6 e3 Nf6 Nc3
+  +0.33  e6 Nf3
+  +0.37  Nbd7 Nf3 e6 Bd3 dxc4 Bxc4
+  +0.38  g6 Nf3 Bg7 Be2 O-O O-O
+  +0.39  Bf5 cxd5 cxd5 Qb3 Bc8 Bd3
+### d4 d5 Bf4 Nf6 Nf3 c5 e3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 d5 Bf4 Nf6 Nf3 c5 e3
+  +0.08  Nc6 Bb5 cxd4 exd4 Bg4 c3
+  +0.17  e6 Be2 Qb6 Nc3 c4 Rb1
+  +0.18  cxd4 exd4
+  +0.26  Qb6 c4 Qxb2 Nbd2 e6 Rb1
+### d4 d5 Nf3 Nf6 Bg5 Ne4 Bh4 c5 e3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 d5 Nf3 Nf6 Bg5 Ne4 Bh4 c5 e3
+  -0.11  Qb6 Nc3 Qa5 Be2 Nxc3 Qd2
+  -0.10  cxd4 exd4 Nc6 Nbd2 Bg4 c3
+  -0.04  Nc6 Nbd2
+  +0.20  h6 Nfd2 Nxd2 Nxd2 cxd4 exd4
+### d4 d5 Nf3 Nf6 Bf4
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 d5 Nf3 Nf6 Bf4
+  +0.16  g6
+  +0.18  Bf5 e3 e6 Be2 h6 c4
+  +0.20  e6 e3 c5 Be2 Qb6 Nc3
+  +0.21  c5 e3 e6 Nbd2 Qb6 Rb1
+### d4 d5 e3 Nf6 Bd3 c5 c3 Nc6 Nf3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: d4 d5 e3 Nf6 Bd3 c5 c3 Nc6 Nf3
+  -0.37  Bg4 Be2 e6 Nbd2 Qc7 O-O
+  -0.36  Qc7 Nbd2 Bg4 h3 Bh5 O-O
+  -0.20  a6 Be2 e6 O-O Bd6 b3
+  +0.01  e6 Nbd2 Bd6 dxc5 Bxc5 O-O
+DONE
+
+=== 2. The Najdorf's Alapin line ===
+### e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 Nc6 cxd4 d6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 Nc6 cxd4 d6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7
+  +0.18  Nxd7 Qxd7 Nc3 e6 O-O Rd8
+  +0.03  Bxc6 Bxc6 Nxc6 bxc6 Nc3 g6
+  +0.00  Nc3 Nxe5 dxe5 Bxb5 Nxb5 Qxd1+
+  -0.02  Qd3 a6 Bxc6 Bxc6 Nxc6 bxc6
+### e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 Nc6 cxd4 d6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 Nc6 cxd4 d6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7
+  +0.19  Qxd7 O-O e6 Nc3 Rd8 Qb3
+  +1.19  Nxd7 d5 Nce5 Nc3 a6 Be2
+  +3.20  Kxd7 d5
+  +4.43  Rc8 Nxb6 Qxb6 Nc3 g6 d5
+  +4.45  Nd5 Bxc6 bxc6 Ne5 e6 Nc3
+### e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 Nc6 cxd4 d6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7 Qxd7
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 Nc6 cxd4 d6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7 Qxd7
+  +0.17  Nc3 e6 O-O a6 Bxc6 Qxc6
+  +0.13  O-O g6
+  +0.01  Be3 Qd5 Bxc6+ Qxc6 O-O g6
+  -0.07  Qf3 e6 Nc3 a6 Bxc6 Qxc6
+### e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 Nc6 cxd4 d6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7 Qxd7 Nc3
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+Black to move after: e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 Nc6 cxd4 d6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7 Qxd7 Nc3
+  +0.13  e6 O-O Rd8 Be3 Be7 Qb3
+  +0.15  Rd8 O-O e6 Be3 Be7 Qg4
+  +0.35  Nd5 O-O e6 Qb3 Be7 Nxd5
+  +0.36  a6 Bxc6 bxc6 O-O e6 Qb3
+  +0.85  Qf5
+### e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 Nc6 cxd4 d6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7 Qxd7 Nc3 e6
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+White to move after: e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 Nc6 cxd4 d6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7 Qxd7 Nc3 e6
+  +0.19  O-O
+  +0.09  Be3 Be7 Qg4 O-O Rd1 f5
+  -0.09  Bxc6 Qxc6 O-O Nd5 Qg4 Rd8
+  -0.14  h3 Be7 Qg4 O-O Bxc6 Qxc6
+DONE

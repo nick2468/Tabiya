@@ -1,0 +1,18 @@
+engine-mistakes.mjs at 2500 ms over slav-black, after the ten new moves.
+Conditions: 16 logical processors, CPU load sampled at 17-27% before the first run (no javac, cargo, rustc
+or tauri process; the idle Vite dev servers of other projects), no build and no test run beside any engine
+run, one engine process at a time, every run in this phase sequential. Movetime is wall clock.
+Evaluations are from White's point of view: positive favours White, so a Black move that gives something
+away makes the number go UP. The Slav is a solid defence and its lines measure small numbers for White:
+a Black repertoire move is KEPT if its cost against the engine's best at the same position is no more than
+about 0.3, judged by that cost and not by its absolute number.
+Bands: playable to 0.9, inaccuracy -0.4 to 1.8, mistake 0.7 and up, as the cost to the student side.
+
+169 mistake entries across 7 chapters, 282 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+0 entries where the grade and the engine disagree:
+
+
+Verdict: nothing reported. Every entry in the course sits inside its band, and none of the ten new moves
+carries a mistake entry of its own: each is the move the line was always heading for.

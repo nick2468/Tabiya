@@ -1,0 +1,11 @@
+note-lines.mjs over najdorf-black after this phase's additions.
+
+
+=== najdorf-black: 754 notes read, 1 findings, 0 in intros
+    illegal 0, misnumbered 0, marker 0, unplaceable 0, back-reference 0, widened 1, deliberate 0
+
+  [widened] ch5-anti-sicilians  e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 Nc6 cxd4 d6 Bc4 Nb6 Bb5 dxe5 Nxe5 Bd7 Nxd7  (note)
+      "Bxc6 bxc6 Nxc6 Qd7": plays with Qxd4 inserted, which the note leaves out
+      White takes with the knight rather than the bishop, keeping the pin on c6 one move longer. It is what the Alapin course itself plays here; 10.Bxc6 bxc6 11.Nxc6 Qd7 is the other way and gives Black the bishop pair.
+
+0 faults, 1 for a human to read.

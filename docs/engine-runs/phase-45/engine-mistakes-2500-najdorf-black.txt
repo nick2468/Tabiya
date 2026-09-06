@@ -1,0 +1,28 @@
+engine-mistakes.mjs at 2500 ms over najdorf-black, after the Alapin line was extended.
+Conditions: 16 logical processors, CPU load sampled at 17-27% before the first run (no javac, cargo, rustc
+or tauri process; the idle Vite dev servers of other projects), no build and no test run beside any engine
+run, one engine process at a time, every run in this phase sequential. Movetime is wall clock.
+Evaluations are from White's point of view: positive favours White, so a Black move that gives something
+away makes the number go UP. The Slav is a solid defence and its lines measure small numbers for White:
+a Black repertoire move is KEPT if its cost against the engine's best at the same position is no more than
+about 0.3, judged by that cost and not by its absolute number.
+Bands: playable to 0.9, inaccuracy -0.4 to 1.8, mistake 0.7 and up, as the cost to the student side.
+
+248 mistake entries across 7 chapters, 370 positions to evaluate at 2500 ms each.
+Stockfish 18 Lite WASM by the Stockfish developers (see AUTHORS file)
+
+3 entries where the grade and the engine disagree:
+
+ 99.83  mistake    graded too kindly  ch4-bc4-and-h3
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3 Qc7 Qg3 O-O Bh6 : Ne8 not Nxe4
+      "It loses on the spot, and not because of the pawn: 12.Bxg7 cannot be answered by Kxg7, because the king would be stepping onto the file White's queen is already on. Black is lost."
+ 99.83  mistake    graded too kindly  ch4-bc4-and-h3
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3 Qc7 Qg3 O-O Bh6 : Ne8 not b4
+      "It loses by force. 12.Bxg7 and the pawn cannot be taken back, because Kxg7 would put the king on the file White's queen is looking down. The knight has to go to e8 first, and then a trade on g7 is answered by the knight."
+ 99.83  mistake    graded too kindly  ch4-bc4-and-h3
+      e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Bc4 e6 Bb3 b5 O-O Be7 Qf3 Qc7 Qg3 O-O Bh6 : Ne8 not Bb7
+      "A good square in almost every other position in this chapter, and here it loses: 12.Bxg7 and there is no recapture, because Kxg7 walks onto the queen's file. Everything waits until the knight has covered g7."
+
+Verdict: three reported and all three are settled. They are the standing 11...Ne8 trio in ch4-bc4-and-h3,
+recorded in docs/engine-runs/accepted.md at phase 31: a forced mate scores 99.83, which is outside every
+band, and mistake is the strongest grade the schema has. Nothing on the four entries this phase added.
