@@ -5054,15 +5054,72 @@ Chipped as `chips/phase-44-drill-feel.md`. The board shows the position after th
 move once a verdict exists; a "Come back in" unit scales the due date FSRS computes and
 nothing else, with the practice caveat in the Help. Version 1.10.2.
 
-- [ ] 44.1 The board after an answer shows the repertoire move played.
-- [ ] 44.2 The unit in the scheduler, the clock only.
-- [ ] 44.3 The "Come back in" control, remembered.
-- [ ] 44.4 DOM tests red first; help test mutation-checked.
-- [ ] 44.5 Help and SPEC.
-- [ ] 44.6 Every Play and Drill setting remembered between sessions (chapter per course).
-- [ ] 44.7 Version 1.10.2.
-- [ ] 44.8 Proved in the browser build.
+- [x] 44.1 The board after an answer shows the repertoire move played.
+- [x] 44.2 The unit in the scheduler, the clock only.
+- [x] 44.3 The "Come back in" control, remembered.
+- [x] 44.4 DOM tests red first; help test mutation-checked.
+- [x] 44.5 Help and SPEC.
+- [x] 44.6 Every Play and Drill setting remembered between sessions (chapter per course).
+- [x] 44.7 Version 1.10.2.
+- [x] 44.8 Proved in the browser build.
 
 Acceptance: as the chip's final paragraph.
+
+**For the gate.** 44.1: `shownAfter(card)` in `grade.ts` plays the card's own move and
+returns the position; the board takes it whenever a verdict exists, right or wrong, with
+`lastMove` the repertoire move and `answerShapes` unchanged in what it draws. A card whose
+move the board would refuse cannot exist, because the loader plays every move in every
+course, so the fallback is the card's own position rather than an error nobody could act
+on. 44.2: `review(schedule, rating, now, gap)` computes exactly as before and then, for
+minutes and hours, rewrites the due date alone: FSRS's own gap read as days and spent in
+the chosen unit, so three days becomes three hours or three minutes. Every other field is
+byte for byte what FSRS returned, which one of the scheduler tests asserts by comparing
+whole schedules with only the due date swapped. The gap is taken from the due date rather
+than from `scheduled_days`, so a learning step of ten minutes scales like everything else
+instead of collapsing; a floor of one minute stops any gap reaching zero. `scheduled_days`
+keeps FSRS's number, so a card answered again an hour later looks early to FSRS, which is
+what it is, and that caveat is in the Help and in the module's docblock.
+
+44.3 and 44.5: the "Come back in" fieldset sits under the two Drill boxes with Minutes,
+Hours and Days, hours by default, and one sentence saying which is which. `HELP_CONTROLS`
+gained the four names, the Drill help gained the two board behaviours and the unit with its
+caveat, SPEC section 2 gained the unit and the board, and section 8 carries the three
+rulings with the date and Nick's reasons.
+
+44.4: four DOM tests in `drill-feel.dom.test.tsx` and four in `remembered-settings.dom.test.tsx`,
+all written and watched fail first. The board stub grew a `data-shapes` attribute so a test
+can read the arrows, which is the third thing a person looks at on that screen. The help
+test was mutation-checked by renaming the legend and one radio: it went red on both.
+
+44.6: every Play setting is remembered under `london-trainer.play.*` and the two Drill boxes
+under `london-trainer.drill.*`, joining the scope and the gap. The chapter is kept PER
+COURSE, and a remembered chapter the course no longer has falls back to its first through
+`resolvePlayChapter`, which is `resolveCourse` in the same shape; a test seeds a chapter id
+that does not exist and starts a game on it. Two things are still not kept, and neither is
+a setting: a play request names a position, and a recorded game's side comes from the
+record. **Two earlier tests turned over**, each with the reason in its own comment: the
+phase 33 test that pinned the other-side box forgotten across a reload, and the phase 23
+reasoning about the not-due box, which the SPEC now records as reversed.
+
+44.7: version 1.10.2 in the four files. 44.8, driven at 1400x980 on the dev server: a right
+answer left the pawn on e4 under the green arrow with the buttons offering "back in 1
+minute" and "back in 8 minutes" under the minutes unit; a wrong answer put the red arrow on
+the move played and showed the repertoire move made on the board under the green one; the
+card came back into the ready queue when its one-minute gap ran out, from 10 ready to 11,
+with "Include cards that are not due yet" unticked; and a chapter, a length, a strength,
+the other-side box and both Drill boxes all held across a reload. **The pane's pointer
+mapping was wrong on this machine** (a hover at the board's own coordinates landed on the
+page behind it), so the two moves were played through the board's own `movable.events.after`
+seam, which is the callback chessground itself calls and the same seam the DOM tests drive;
+everything above it is the shipped path. No console errors; storage cleared afterwards;
+viewport reset. Nick's own files were not listed and not reported.
+
+**One fix beside the phase**, from Nick during the drive and landed as its own commit: on
+the Courses page in the light theme the WHITE badge was black and the BLACK badge white.
+They were painted with `--bar` over `--ground`, and those two swap with the theme. They use
+the piece colours now, which are deliberately the same in both themes, and the badges were
+photographed correct in the light theme.
+
+1212 tests in 12.8 seconds, `tsc -b` clean, nothing under `courses/`.
 
 - [ ] **Review gate 44**
