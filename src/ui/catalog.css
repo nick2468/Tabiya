@@ -63,15 +63,21 @@
   color: var(--text-dim);
 }
 
+/* The piece colours, which are the same in both themes on purpose: a badge
+   that says WHITE is a white badge whatever the frame around it is doing.
+   It used to be painted with --bar over --ground, and those two swap with the
+   theme, so in the light theme the White badge came out black and the Black
+   one came out white. Nick found it on 1.10.2. */
 .tile-colour.white {
-  background: var(--bar);
-  color: var(--ground);
-  border-color: var(--bar);
+  background: var(--piece-white);
+  color: var(--piece-black);
+  border-color: var(--line-strong);
 }
 
 .tile-colour.black {
-  background: var(--chip);
-  color: var(--text);
+  background: var(--piece-black);
+  color: var(--piece-white);
+  border-color: var(--line-strong);
 }
 
 .tile-title {
