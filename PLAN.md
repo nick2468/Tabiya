@@ -5174,15 +5174,83 @@ Chipped as `chips/phase-45-lines-finish-and-step-speed.md`. The ten Slav moves a
 ones each leaf's own plan already names, so the content change is mechanical rather than
 a fresh authoring job. A new test holds the rule for every course. Version 1.10.3.
 
-- [ ] 45.1 The Slav's ten lines get their last move.
-- [ ] 45.2 The leaf-colour rule as a test, plus the schema doc and SPEC.
-- [ ] 45.3 The Najdorf reaches at least move 11, with the Alapin's own White moves.
-- [ ] 45.4 Any cross-course mismatch the change created, closed by listing a reply.
-- [ ] 45.5 The checkers at 2500 ms, recorded with conditions; bundles regenerated.
-- [ ] 45.6 Auto step at 2000 ms with Slower and Faster, the gap shown and remembered.
-- [ ] 45.7 Version 1.10.3.
-- [ ] 45.8 Proved in the browser build.
+- [x] 45.1 The Slav's ten lines get their last move.
+- [x] 45.2 The leaf-colour rule as a test, plus the schema doc and SPEC.
+- [x] 45.3 The Najdorf reaches at least move 11, with the Alapin's own White moves.
+- [x] 45.4 Any cross-course mismatch the change created, closed by listing a reply.
+- [x] 45.5 The checkers at 2500 ms, recorded with conditions; bundles regenerated.
+- [x] 45.6 Auto step at 2000 ms with Slower and Faster, the gap shown and remembered.
+- [x] 45.7 Version 1.10.3.
+- [x] 45.8 Proved in the browser build.
 
 Acceptance: as the chip's final paragraph.
+
+**For the gate.** 45.2 first, which set the scope: the leaf-colour test in `content.test.ts`
+was written and run before any content moved, and it listed exactly the ten the phase 43
+gate notes had recorded, all in the Slav, and nothing else. The rule is in the schema doc's
+"What a leaf carries" and in SPEC section 3, both with the reason: a leaf is where the
+student is left standing, so it has to be their own move that put them there.
+
+45.1: each of the ten got the move its own plan already named, which made this a mechanical
+fix rather than fresh authoring, and each plan was rewritten from one move later so it is no
+longer telling the trainee to play the move now on the board. No name changed; none of the
+ten named the White move that used to end the line. **All ten checked at 2500 ms and all ten
+kept.** Six are the engine's own first choice: ...Nd5 -0.29, ...dxc4 +0.35, ...e6 +0.27,
+...Bf5 +0.31, ...Bf5 +0.28 and ...Bg4 -0.37. The other four cost at most seven hundredths
+against its best: ...Bf5 +0.39 of +0.33, ...Nc6 +0.08 (first choice), ...Nc6 -0.04 of -0.11,
+...c5 +0.21 of +0.16. Nothing came near the 0.3 bar, so no line and no plan's prose had to
+change and there was no finding to record.
+
+45.3: the Najdorf's Alapin line reaches 11...e6, which is depth 11 and inside the house bar,
+and it stops there because the position is a clear one: the plan names what the Alapin does
+next (12.O-O Be7 13.Qg4 O-O 14.Bxc6 bxc6) rather than the line running on. White's two moves
+are the Alapin's own, taken from that course, and the engine agrees with both: 10.Nxd7 +0.18
+and 11.Nc3 +0.17 are its first choices, as are Black's 10...Qxd7 +0.19 and 11...e6 +0.13.
+Four mistake entries beside them, every one measured: 10...Nxd7 +1.19 and 10...Kxd7 +3.20 are
+mistakes, 11...Rd8 +0.15 and 11...Nd5 +0.35 are playable. Nowhere do the two courses say
+different things about the same move, so nothing had to be recorded as a disagreement.
+
+45.4: **no cross-course mismatch appeared.** The phase 43 test stayed green through both
+content commits, which is the thing the chip asked to be confirmed rather than assumed: none
+of the ten new Black moves lands in a position a White course reaches and answers differently,
+and the Najdorf extension walks toward what the Alapin already plays, so agreement improved.
+Nothing in `london-white` or `colle-zukertort` had to be touched.
+
+45.5, under `docs/engine-runs/phase-45/` with the conditions at the top of each file (load 17
+to 27 per cent, no build, no test run beside a run, one engine, sequential): the asks above,
+`engine-mistakes` at 2500 ms over both courses, and the two prose checkers over each. The
+Slav's mistakes pass reports nothing at all. The Najdorf's reports three, and all three are
+the standing `11...Ne8` trio `accepted.md` settled at phase 31, where a forced mate scores
+99.83 and no band can hold it; nothing on the four entries this phase added. Note-lines and
+note-claims are at zero faults and zero unsupported claims for both. Both bundles regenerated;
+the other eight are byte-identical.
+
+**Eleven line ids changed, and each loses its learnt tick and its drill cards**, which is the
+price Nick ruled for. The ten Slav lines are the ten in the leaf list, each with one move
+appended: ch2-quiet's `...a4` gains `Nd5`; ch4-sidelines' `...Nc3 Nf6 Nf3` gains `dxc4`,
+`...e3 Bf5 Nf3` gains `e6`, `...cxd5 cxd5 Bf4 Nc6 e3` gains `Bf5`, and both `3.e3` orders
+gain `Bf5`; ch5-no-c4's `...Bf4 Nf6 Nf3 c5 e3` and `...Bg5 Ne4 Bh4 c5 e3` gain `Nc6`,
+`...Nf3 Nf6 Bf4` gains `c5`, and `...Bd3 c5 c3 Nc6 Nf3` gains `Bg4`. The eleventh is the
+Najdorf's `...Nxe5 Bd7`, which gains `Nxd7 Qxd7 Nc3 e6`. Those are the lines to tick again.
+
+45.6: the gap was 850 ms, not the 1000 it was read as, and it is 2000 now. Slower and Faster
+sit beside the stepping button with the gap between them as "2.0s", each disabled at its end
+of the 500 to 5000 range. The speed is remembered under `london-trainer.study.step-ms`, read
+once and written on change like the phase 44 settings, with anything that is not a half second
+inside the range falling back to two; Study's PLACE is untouched and stays in memory only,
+which is phase 40's ruling and a different thing. Changing the speed mid-line restarts the
+pending wait rather than serving out the old gap, which the timer effect's dependency buys and
+a comment says is deliberate. Five DOM tests written red first, the stepping one on fake
+timers; the help test was mutation-checked on both new names and went red on both.
+
+45.8, driven at 1400x980 on the dev server: the Slav's `3.Nc3 into the main line` now reads
+`3.Nc3 Nf6 4.Nf3 dxc4` in the table and ends on Black's move on the board, with its plan
+reading "Chapter 1 from here" rather than telling the trainee to take on c4; the Najdorf's
+Alapin line reads to `11.Nc3 e6`; auto step showed 2.0s, two presses of Slower made it 3.0s,
+and the board's first move then came 3.07 seconds after the button rather than 0.85; a reload
+brought 3.0s back. No console errors; storage cleared afterwards; viewport reset. Nick's own
+files were not listed and not reported.
+
+1231 tests, `tsc -b` clean.
 
 - [ ] **Review gate 45**
