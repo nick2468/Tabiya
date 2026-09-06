@@ -995,7 +995,7 @@ Taking the gambit pawn on c3 and then trying to remember twenty moves of a line 
 ) 9. Nxe5 {White recaptures with the knight and keeps the pin. [%weight 8]} 9... Bd7
 {Break the pin. The bishop develops and defends the knight, and Black has a free position with no weaknesses. [%tags bishop-placement]}
 10. Nxd7
-{White takes with the knight rather than the bishop, keeping the pin on c6 one move longer. It is what the Alapin course itself plays here; 10.Bxc6 bxc6 11.Nxc6 Qd7 is the other way and gives Black the bishop pair. [%weight 9]}
+{White takes with the knight rather than the bishop, keeping the pin on c6 one move longer, and it is what the Alapin course itself plays here. The other way is 10.Bxc6, and the bishop is the piece that takes back: 10...Bxc6 keeps the game level, while 10...bxc6 runs into 11.Qf3, when the pawn on c6 cannot be held. [%weight 9]}
 10... Qxd7
 {The queen takes back, which is the only recapture that keeps the position level. It also unpins the knight on c6 by putting a defender behind it. [%tags development]}
 ( 10... Nxd7?

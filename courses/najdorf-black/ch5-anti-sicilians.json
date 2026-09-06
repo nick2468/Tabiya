@@ -578,7 +578,7 @@
                                                                     {
                                                                       "san": "Nxd7",
                                                                       "weight": 9,
-                                                                      "note": "White takes with the knight rather than the bishop, keeping the pin on c6 one move longer. It is what the Alapin course itself plays here; 10.Bxc6 bxc6 11.Nxc6 Qd7 is the other way and gives Black the bishop pair.",
+                                                                      "note": "White takes with the knight rather than the bishop, keeping the pin on c6 one move longer, and it is what the Alapin course itself plays here. The other way is 10.Bxc6, and the bishop is the piece that takes back: 10...Bxc6 keeps the game level, while 10...bxc6 runs into 11.Qf3, when the pawn on c6 cannot be held.",
                                                                       "children": [
                                                                         {
                                                                           "san": "Qxd7",

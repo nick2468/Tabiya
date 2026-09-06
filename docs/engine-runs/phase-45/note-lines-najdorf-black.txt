@@ -9,3 +9,32 @@ note-lines.mjs over najdorf-black after this phase's additions.
       White takes with the knight rather than the bishop, keeping the pin on c6 one move longer. It is what the Alapin course itself plays here; 10.Bxc6 bxc6 11.Nxc6 Qd7 is the other way and gives Black the bishop pair.
 
 0 faults, 1 for a human to read.
+
+
+=== Re-run at review gate 45, 2026-09-06, after the orchestrator corrected the note.
+
+The [widened] finding above was not a widening. The note's line was wrong twice over, and
+the checker's own explanation (Qxd4 inserted) was the only way it could make the moves
+legal at all.
+
+  1. `Qd7` is illegal there. Black's bishop has stood on d7 since move 9, so after
+     10.Bxc6 bxc6 11.Nxc6 the queen's moves are Qc7, Qc8 and Qb8 and nothing else.
+  2. `11.Nxc6` loses a piece: 11...Bxc6 measures -3.79 at 2500 ms, and the knight has no
+     way out.
+  3. The recapture the note named is the wrong one anyway. After 10.Bxc6, taking with the
+     BISHOP is level (10...Bxc6, +0.06); taking with the b-pawn is +0.75, because 11.Qf3
+     comes and the pawn on c6 cannot be held (the engine plays 11...Be6 12.Qxc6+).
+
+  For the record, White's choice at move 10 is measured too: 10.Nxd7 +0.21 is the
+  engine's first choice and is what the course plays; 10.Bxc6 +0.03, 10.Nc3 +0.00,
+  10.a4 -0.02. The repertoire move is sound; only the note about the alternative was not.
+
+  The note now reads: "The other way is 10.Bxc6, and the bishop is the piece that takes
+  back: 10...Bxc6 keeps the game level, while 10...bxc6 runs into 11.Qf3, when the pawn
+  on c6 cannot be held."
+
+  note-lines over najdorf-black after the correction: 754 notes read, 0 findings,
+  0 faults and 0 for a human to read.
+
+  Conditions: same machine, CPU load 16 per cent sampled before the runs, no build and no
+  test run beside any engine run, one engine process at a time, every run sequential.
