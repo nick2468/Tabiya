@@ -5122,4 +5122,42 @@ photographed correct in the light theme.
 
 1212 tests in 12.8 seconds, `tsc -b` clean, nothing under `courses/`.
 
-- [ ] **Review gate 44**
+**Gate 44 passed, 2026-09-06.** `tsc -b` clean, 1214 tests in 13.8 seconds, 532 line ids
+unchanged and nothing under `courses/`. The scheduler claim was checked at source: the
+whole-schedule comparison test is real, `review` scales the due date from the DUE DATE
+rather than `scheduled_days` so a learning step scales instead of collapsing, and the one
+minute floor holds. The badge fix was checked the same way: `--piece-white` and
+`--piece-black` are defined in the bare `:root` above both theme blocks and redefined in
+neither, so they really are the same in both themes, and the light theme was photographed
+with a light WHITE badge and a dark BLACK one.
+
+**Driven in the browser at 1400x980, through real pointer input**, which is the part the
+builder could not do: the pane's pointer mapping worked here, so both moves went in as
+drags on the board. A right answer left the pawn on e4 with the green arrow behind it and
+offered "back in 1 minute" and "back in 8 hours" under the default unit. A wrong answer
+put the knight back on g1 under a red arrow and played c3 on the board under the green
+one, confirmed from the piece transforms rather than from a screenshot caught
+mid-animation. Hours was the default on a cleared profile. Every Play setting held across
+a real reload. No console errors in a fresh tab.
+
+**One fault found and fixed, [07452ef].** Phase 44 made How strong and How long
+remembered, and the effect that shows a resumed game its own strength and no cap was left
+pointing at the new writing setters. So a Play on from a game recorded at level 7
+replaced the strength and the length the trainee had chosen, for that game and for every
+game after it. Proved in jsdom before the fix (set level 2 and To move 15, Play on from a
+level 7 full game, storage came back 7 and full), fixed by giving `useRemembered` a setter
+that shows a value without writing it, mutation-checked by reverting the fix, and then
+driven in the browser: the screen shows 7 and Full while storage holds 2 and move15, and
+leaving Play and coming back restores the trainee's own settings. The builder had got the
+same case right for the other-side box, where `sideFixed` is derived and never written,
+which is what marks this as an oversight rather than a decision. SPEC section 8 now names
+all three things that are shown but not kept.
+
+**Two smaller gate items in the same commit.** A test that pins hours as the default gap
+unit, which was Nick's own re-ruling and which nothing held, mutation-checked by putting
+days back. And two comments that had stopped describing their code: the one on the
+launch-shape effect described a course change and a chapter fallback when the effect
+drops the shape back after a request is used up, and `useCourseMoves` still said the side
+box is not remembered, which is the ruling phase 44 reversed.
+
+- [x] **Review gate 44**
