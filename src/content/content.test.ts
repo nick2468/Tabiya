@@ -60,6 +60,27 @@ describe.each(courses.map((course) => [course.id, course] as const))(
     })
 
     /**
+     * A line ends where the student is left standing, so the last move on it
+     * has to be the student's own.
+     *
+     * A leaf on the opponent's move leaves the trainee looking at a position
+     * it is their turn to answer with nothing prepared, which is the one thing
+     * a repertoire is for. Every course written since phase 34 follows the
+     * rule; the loader allows the old shape because the first courses predate
+     * it, and nothing until now said so out loud. Nick ruled it at phase 45,
+     * after the phase 43 gate notes recorded ten leaves in the Slav.
+     */
+    it("ends every line on a move of the student's own colour", () => {
+      const ends: string[] = []
+      for (const chapter of course.chapters) {
+        for (const node of walkNodes(chapter)) {
+          if (node.isLeaf && !node.isStudent) ends.push(`${chapter.id} ${node.path.join(' ')}`)
+        }
+      }
+      expect(ends).toEqual([])
+    })
+
+    /**
      * A `+` or a `#` on a move is a claim about the board, and a false one is
      * the kind of small lie that costs a reader trust in everything else on
      * the screen.
