@@ -5253,4 +5253,59 @@ files were not listed and not reported.
 
 1231 tests, `tsc -b` clean.
 
-- [ ] **Review gate 45**
+**Gate 45 passed, 2026-09-06.** `tsc -b` clean, 1231 tests in 14.2 seconds. The line
+identity rebuild says exactly what it should: 532 lines before and after, eleven ids gone
+and eleven added, every new id its old id plus precisely the move the chip's table named
+and nothing else. An independent sweep, written before the builder ran, now finds ZERO
+leaves ending on the opponent's move across all ten courses.
+
+**The new rule was mutation-checked** by putting the old courses back with
+`git checkout 0863299 -- courses/`: the test goes red and names all ten at once with
+course, chapter and line. It sits inside the per-course `describe.each`, so it runs for
+every course rather than the Slav alone, and it reads `node.isStudent` from the loader's
+own walk rather than working out parity for itself.
+
+**The engine numbers were spot-checked at 2500 ms on a quiet machine (16 per cent).** All
+ten decisions hold, but the record's "of X for MOVE" attributions are not reliable to the
+hundredth. Of the three that were recorded as costing something: `...Bf5` after 4.Nc3 came
+back as the engine's own first choice at +0.36 rather than a 6 hundredth concession to
+...e6, `...c5` after 3.Bf4 came back first choice at +0.08 rather than a 5 hundredth
+concession to ...g6, and `...Nc6` in the Torre confirmed its 7 hundredth cost exactly
+though against ...cxd4 rather than the ...Qb6 recorded. Ordinary multipv variance in quiet
+positions at this movetime, and no decision turns on it, but the alternatives named in
+that file should not be quoted as settled.
+
+**Two real content faults found, both fixed, and both from the same process failure.** The
+phase reported the prose checkers clean because they printed "0 faults"; each also printed
+"for a human to read" and nobody read those. There were eight across the two courses. Six
+are benign and are now listed with the reason in the records. Two were wrong:
+
+- The Najdorf's note on 10.Nxd7 said "10.Bxc6 bxc6 11.Nxc6 Qd7 is the other way and gives
+  Black the bishop pair", and it was wrong three times over. `Qd7` is illegal, because
+  Black has had a bishop on d7 since move 9. `11.Nxc6` loses a piece to 11...Bxc6, which
+  measures -3.79. And the recapture it recommended is the wrong one: after 10.Bxc6 the
+  bishop takes back for +0.06 and equality, while 10...bxc6 is +0.75 because 11.Qf3 comes
+  and the pawn on c6 cannot be held. Fixed in [019ec26]. The repertoire move needed no
+  change: 10.Nxd7 at +0.21 is the engine's first choice, against 10.Bxc6 +0.03, 10.Nc3
+  +0.00 and 10.a4 -0.02.
+- The Slav's note on 8...Bd7 in ch3-exchange said "9.Qxa5 now loses the queen to
+  9...Bxa4". After 9.Qxa5 the a4 square is empty, because the queen has just left it, so
+  Bxa4 is not a legal move. The conclusion was right and the move was wrong: it is
+  9...Qxa5. Fixed in [28a5121], which also names c2 as where the queen goes instead.
+
+Both bundles regenerated; the other eight are byte-identical. note-lines over the Najdorf
+is now 0 findings and 0 for a human; over the Slav it is 6, all six in the benign list.
+
+**Driven in the browser at 1400x980.** Auto step showed 2.0s on a cleared profile. Slower
+twice and Faster once left it at 2.5s with 2500 in storage, so the arithmetic is right in
+both directions. Six more presses of Slower reached 5.0s with the button disabled at the
+end of its range. At 3.0s the measured gaps between moves were 3018 ms and 3017 ms, so the
+timer honours the setting. A reload brought 3.0s back, and a hand-written value of 17 in
+storage fell back to 2.0s. The Slav's chapter 4 lines table shows all five changed lines
+ending on Black's move. No console errors; storage cleared; viewport reset.
+
+**Eleven learnt ticks are gone**, which is the price Nick ruled for. The ten Slav lines and
+the Najdorf's Alapin line are listed with their old and new ids in the two content commits
+above.
+
+- [x] **Review gate 45**
