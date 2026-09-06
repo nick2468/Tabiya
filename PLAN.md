@@ -5161,3 +5161,28 @@ drops the shape back after a request is used up, and `useCourseMoves` still said
 box is not remembered, which is the ruling phase 44 reversed.
 
 - [x] **Review gate 44**
+
+## Phase 45 - every line ends on your own move, and auto step has a speed
+
+Goal: Nick, 2026-09-06, on 1.10.2. Fix the two courses gate 43 recorded and left: the
+Slav has ten leaves ending on a WHITE move, which leaves the student in a position they
+must answer with nothing prepared, and the Najdorf's Alapin line stops at 9...Bd7 where
+Nick's own Alapin course plays 10.Nxd7 and goes ten plies further. Then give auto step a
+speed: the default gap becomes 2000 ms, with Slower and Faster buttons in 500 ms steps.
+
+Chipped as `chips/phase-45-lines-finish-and-step-speed.md`. The ten Slav moves are the
+ones each leaf's own plan already names, so the content change is mechanical rather than
+a fresh authoring job. A new test holds the rule for every course. Version 1.10.3.
+
+- [ ] 45.1 The Slav's ten lines get their last move.
+- [ ] 45.2 The leaf-colour rule as a test, plus the schema doc and SPEC.
+- [ ] 45.3 The Najdorf reaches at least move 11, with the Alapin's own White moves.
+- [ ] 45.4 Any cross-course mismatch the change created, closed by listing a reply.
+- [ ] 45.5 The checkers at 2500 ms, recorded with conditions; bundles regenerated.
+- [ ] 45.6 Auto step at 2000 ms with Slower and Faster, the gap shown and remembered.
+- [ ] 45.7 Version 1.10.3.
+- [ ] 45.8 Proved in the browser build.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 45**
