@@ -574,8 +574,44 @@
                                                                   "san": "Bd7",
                                                                   "note": "Break the pin. The bishop develops and defends the knight, and Black has a free position with no weaknesses.",
                                                                   "tags": ["bishop-placement"],
-                                                                  "plan": "Trade on b5 if White allows it, then play the pawn to e6, the bishop to e7 and castle. White's pawn on d4 is isolated once the centre clears.",
-                                                                  "name": "The Alapin, 2...Nf6 and the trade"
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Nxd7",
+                                                                      "weight": 9,
+                                                                      "note": "White takes with the knight rather than the bishop, keeping the pin on c6 one move longer. It is what the Alapin course itself plays here; 10.Bxc6 bxc6 11.Nxc6 Qd7 is the other way and gives Black the bishop pair.",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Qxd7",
+                                                                          "note": "The queen takes back, which is the only recapture that keeps the position level. It also unpins the knight on c6 by putting a defender behind it.",
+                                                                          "tags": ["development"],
+                                                                          "mistakes": [
+                                                                            { "san": "Nxd7", "grade": "mistake", "note": "11.d5 and the pawn goes past: the knight on c6 has to move, and White has the space the whole opening was played for. A pawn's worth of position for nothing." },
+                                                                            { "san": "Kxd7", "grade": "mistake", "note": "11.d5 and the king is in the middle of an open board with the rooks still at home. Three pawns' worth, and the queen was the piece that wanted d7 anyway." }
+                                                                          ],
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Nc3",
+                                                                              "weight": 8,
+                                                                              "note": "The knight to the square the c-pawn left, covering d5 and e4. White's pawn on d4 is isolated now, and this is the piece that holds the squares in front of it.",
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "e6",
+                                                                                  "note": "Cover d5 and open the way for the bishop. The pawn on d4 cannot advance while e6 and the knight on b6 both watch d5, and that is what makes it a weakness rather than a spearhead.",
+                                                                                  "tags": ["development", "d5-break"],
+                                                                                  "mistakes": [
+                                                                                    { "san": "Rd8", "grade": "playable", "note": "Also good and it comes to the same thing: 12.O-O e6 13.Be3 Be7 and the rook is where it wants to be. The pawn first stops d5 for good." },
+                                                                                    { "san": "Nd5", "grade": "playable", "note": "Sound, and it invites 12.Nxd5 Qxd5 13.O-O, where the queen is exposed in the middle and the isolated pawn is harder to get at." }
+                                                                                  ],
+                                                                                  "plan": "...Be7 and castle, then a rook to d8 and pressure on the pawn on d4. If White plays Qg4 the answer is to castle into it, and after Bxc6 bxc6 the doubled pawns hold d5 and the open b-file is Black's.",
+                                                                                  "name": "The Alapin, 2...Nf6 and the trade"
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
                                                                 }
                                                               ]
                                                             }

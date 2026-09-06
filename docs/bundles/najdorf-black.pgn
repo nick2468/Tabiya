@@ -993,8 +993,24 @@ Taking the gambit pawn on c3 and then trying to remember twenty moves of a line 
 ( 8... Bd7!?
 {Solid and slower. Taking is the move that changes the structure while White's bishop is on the wrong square for it.}
 ) 9. Nxe5 {White recaptures with the knight and keeps the pin. [%weight 8]} 9... Bd7
-{Break the pin. The bishop develops and defends the knight, and Black has a free position with no weaknesses. [%tags bishop-placement] [%plan Trade on b5 if White allows it, then play the pawn to e6, the bishop to e7 and castle. White's pawn on d4 is isolated once the centre clears.] [%line The Alapin, 2...Nf6 and the trade]}
-) ( 2. d4
+{Break the pin. The bishop develops and defends the knight, and Black has a free position with no weaknesses. [%tags bishop-placement]}
+10. Nxd7
+{White takes with the knight rather than the bishop, keeping the pin on c6 one move longer. It is what the Alapin course itself plays here; 10.Bxc6 bxc6 11.Nxc6 Qd7 is the other way and gives Black the bishop pair. [%weight 9]}
+10... Qxd7
+{The queen takes back, which is the only recapture that keeps the position level. It also unpins the knight on c6 by putting a defender behind it. [%tags development]}
+( 10... Nxd7?
+{11.d5 and the pawn goes past: the knight on c6 has to move, and White has the space the whole opening was played for. A pawn's worth of position for nothing.}
+) ( 10... Kxd7?
+{11.d5 and the king is in the middle of an open board with the rooks still at home. Three pawns' worth, and the queen was the piece that wanted d7 anyway.}
+) 11. Nc3
+{The knight to the square the c-pawn left, covering d5 and e4. White's pawn on d4 is isolated now, and this is the piece that holds the squares in front of it. [%weight 8]}
+11... e6
+{Cover d5 and open the way for the bishop. The pawn on d4 cannot advance while e6 and the knight on b6 both watch d5, and that is what makes it a weakness rather than a spearhead. [%tags development d5-break] [%plan ...Be7 and castle, then a rook to d8 and pressure on the pawn on d4. If White plays Qg4 the answer is to castle into it, and after Bxc6 bxc6 the doubled pawns hold d5 and the open b-file is Black's.] [%line The Alapin, 2...Nf6 and the trade]}
+( 11... Rd8!?
+{Also good and it comes to the same thing: 12.O-O e6 13.Be3 Be7 and the rook is where it wants to be. The pawn first stops d5 for good.}
+) ( 11... Nd5!?
+{Sound, and it invites 12.Nxd5 Qxd5 13.O-O, where the queen is exposed in the middle and the isolated pawn is harder to get at.}
+) ) ( 2. d4
 {The Smith-Morra move order. White is offering a pawn to open the position before Black has developed anything. [%weight 4]}
 2... cxd4
 {Take. Declining the first pawn would hand White the centre for nothing, and the gambit is refused on the next move instead. [%tags tactics]}
