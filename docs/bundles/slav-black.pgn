@@ -439,7 +439,9 @@ Playing ...e6 first out of habit against 4.e3, when nothing is stopping ...Bf5. 
 {White develops the knight first and keeps every recapture available. [%weight 5]} 5... e6
 {Open the path for the bishop on f8 and get ready to give the pawn back on Black's terms. [%tags development]}
 6. a4
-{White stops ...b5 before taking the pawn, and the position is now the 5.a4 line above by another order. [%weight 6] [%plan Play ...Nd5, hitting the bishop on f4, then ...Be7 and castle. This is the same position the 5.a4 line reaches a move earlier.] [%line 4.Bf4 and 5.Nc3]}
+{White stops ...b5 before taking the pawn, and the position is now the 5.a4 line above by another order. [%weight 6]}
+6... Nd5
+{Hit the bishop on f4 and blockade in the middle. A knight on d5 is worth more than the pawn on c4, and this is the position the 5.a4 line reaches a move earlier. [%tags bishop-placement] [%plan Meet Bg5 with ...Be7 and trade the dark-squared bishops, castle, then ...b5 to hold the extra pawn or ...Nd7 and ...c5 to give it back for the centre.] [%line 4.Bf4 and 5.Nc3]}
 ) 5... b5
 {Hold the pawn, as in chapter 1's 5.e3 line. Winning it back is going to cost White real time. [%tags development]}
 ( 5... e6?!
@@ -776,11 +778,14 @@ Playing ...Bf5 before the knight is out, and running into cxd5 followed by Qb3. 
 3... Nf6 {Develop the knight first. There is no hurry and no threat to answer.} (
 3... Bf5!?
 {Also good here, because White has no quick Qb3. Bringing the knight out first never costs anything.}
-) 4. Nf3
-{White reaches the Slow Slav, which is the first half of chapter 2. [%weight 7] [%plan Play ...Bf5 at once, then ...e6, ...Nbd7 and a bishop to d6.] [%line 3.e3 into the main line]}
+) 4. Nf3 {White reaches the Slow Slav, which is the first half of chapter 2. [%weight 7]}
 ( 4. Nc3
-{The same position as 3.Nc3 Nf6 4.e3 above, reached the other way round. [%weight 5] [%plan Play ...Bf5, then ...e6 and ordinary development. Nothing in the position has changed with the move order.] [%line 3.e3 and then 4.Nc3]}
-) ) ( 3. g3
+{The same position as 3.Nc3 Nf6 4.e3 above, reached the other way round. [%weight 5]}
+4... Bf5
+{The same bishop move as against 4.Nf3, for the same reason: out before the pawn on e6 shuts it in. [%tags bishop-placement] [%plan ...e6 and ordinary development, ...Nbd7 and ...Bd6. Nothing in the position has changed with the move order.] [%line 3.e3 and then 4.Nc3]}
+) 4... Bf5
+{Out at once. With White's pawn already on e3 there is no Qb3 coming, so the bishop has nothing to wait for. [%tags bishop-placement] [%plan ...e6, ...Nbd7 and a bishop to d6, then castle: the Slow Slav of chapter 2.] [%line 3.e3 into the main line]}
+) ( 3. g3
 {A Catalan look. The bishop on g2 will aim at b7 and d5, which are the squares this whole opening is about. [%weight 3]}
 3... Nf6 {Develop and keep everything defended before deciding where the bishop goes.} (
 3... dxc4!?
@@ -893,14 +898,14 @@ Playing ...Bf5 before the knight is out, and running into cxd5 followed by Qb3. 
 {4.e4 gives White the whole centre and a big lead in development, and Black has to hold the pawn with ...b5 to show for it.}
 ) ( 3... e6!?
 {The Semi-Slav again, and it shuts in the bishop on c8. This repertoire keeps the diagonal open.}
-) 4. Nf3
-{White transposes into the main line of the whole opening. [%weight 7] [%plan This is exactly chapter 1: take on c4 and meet a4 with ...Bf5.] [%line 3.Nc3 into the main line]}
-( 4. e3
+) 4. Nf3 {White transposes into the main line of the whole opening. [%weight 7]} ( 4. e3
 {The quiet build-up with the knights placed differently, and it comes to the same thing. [%weight 5]}
 4... Bf5
 {Out it goes. With the pawn on e3 White has no way to punish it, exactly as in chapter 2. [%tags bishop-placement light-squares]}
 ( 4... e6!? {Solid, and it gives up the free move that 4.e3 handed Black.} ) 5. Nf3
-{White develops and the position is now word for word the one chapter 2 reaches. [%weight 7] [%plan Play ...e6, then ...Nbd7 and a bishop to d6, and meet Nh4 by recapturing on g6 with the h-pawn.] [%line 3.Nc3 and the quiet 4.e3]}
+{White develops and the position is now word for word the one chapter 2 reaches. [%weight 7]}
+5... e6
+{The pawn one square, behind the bishop rather than in front of it. That is the whole Slav in one move, and the position is now chapter 2 word for word. [%plan ...Nbd7 and a bishop to d6, then castle. Meet Nh4 by taking back on g6 with the h-pawn, which opens the h-file for the rook.] [%line 3.Nc3 and the quiet 4.e3]}
 ) ( 4. cxd5
 {White exchanges with the knights already out, which is the Exchange Slav a move later. [%weight 5]}
 4... cxd5
@@ -909,8 +914,12 @@ Playing ...Bf5 before the knight is out, and running into cxd5 followed by Qb3. 
 {5.e4 hits the knight and takes the centre, and Black's pawn on c6 is left doing nothing.}
 ) 5. Bf4 {The usual square for the bishop in this structure. [%weight 6]} 5... Nc6
 {Develop and press d4. Black is one move from the main position of chapter 3.} 6. e3
-{White finishes the small centre, and this is the Exchange Slav from chapter 3 exactly. [%weight 7] [%plan Play ...Bf5, then ...e6 and ...Bd6, castle, and take the c-file. If Qb3 comes, the answer is still ...Na5.] [%line 3.Nc3 into the Exchange]}
-) *
+{White finishes the small centre, and this is the Exchange Slav from chapter 3 exactly. [%weight 7]}
+6... Bf5
+{The bishop out before ...e6, as everywhere in this repertoire. This is chapter 3 exactly, and the c-file is already half open for the rook. [%tags bishop-placement] [%plan ...e6 and ...Bd6, castle and take the c-file. If Qb3 comes, the answer is still ...Na5.] [%line 3.Nc3 into the Exchange]}
+) 4... dxc4
+{Take, which is the move chapter 1 is built on: the pawn comes off before White can hold the centre with e3, and the bishop on c8 keeps the diagonal it would lose to ...e6. [%plan Chapter 1 from here: meet a4 with ...Bf5 and e3 with ...e6, then ...Bb4 and castle. The pawn on c4 is held only while holding it costs White time.] [%line 3.Nc3 into the main line]}
+*
 
 
 [CourseId "slav-black"]
@@ -971,7 +980,9 @@ Playing the Slav structure with ...c6 anyway, and drifting into a passive positi
 {The bishop stays on the diagonal and keeps an eye on the knight's retreat squares. [%weight 4]}
 4... c5 {Hit the centre while the bishop is off doing something else. [%tags c5-break]}
 5. e3
-{White props up d4 and the game settles into the same shape as the 4.Bf4 line. [%weight 7] [%plan Play ...Nc6 and ...Qb6 as usual, and remember the bishop on h4 is not defending b2 either.] [%line The Torre, with 4.Bh4]}
+{White props up d4 and the game settles into the same shape as the 4.Bf4 line. [%weight 7]}
+5... Nc6
+{The same move as against the London, and for the same reason: d4 is hit twice and ...Qb6 comes next. The bishop on h4 is not defending b2 either. [%plan ...Qb6 hitting b2, then ...cxd4 once the pawn has been given a defender. The knight on e4 sits on a square no pawn can reach.] [%line The Torre, with 4.Bh4]}
 ) 4... c5
 {Now hit the centre, with a knight already sitting on e4 and White a move behind. [%tags c5-break]}
 5. e3 {White shores up d4 and gets ready to develop. [%weight 7]} 5... Nc6
@@ -992,8 +1003,9 @@ Playing the Slav structure with ...c6 anyway, and drifting into a passive positi
 {Finish the development. Black has the two bishops pointing at a queenside White has not organised. [%tags development king-safety] [%plan Castle, then play ...Rfd8 and ...cxd4 at a moment when the recapture leaves White with a weak pawn. The bishop on e4 is the best piece on the board.] [%line The Torre, with 4.Bf4]}
 ( 10... cxd4?!
 {Too early. 11.exd4 or 11.cxd4 both give White a healthy centre while Black's king is still in the middle.}
-) ) ( 3. Bf4
-{The London by another route, with the knight already on f3. [%weight 5] [%plan Play ...c5 and follow the London lines above: ...Nc6, ...Qb6, and ...c4 against Qb3.] [%line 2.Nf3 into the London]}
+) ) ( 3. Bf4 {The London by another route, with the knight already on f3. [%weight 5]}
+3... c5
+{Hit d4 at once. Against the London the c-pawn is the lever, and the bishop has left b2 with nothing guarding it. [%tags c5-break] [%plan ...Nc6 and ...Qb6, and ...c4 against Qb3: the London lines above, by this move order.] [%line 2.Nf3 into the London]}
 ) 3... c5
 {Hit d4 before White is set up. The Colle needs a quiet centre and this refuses to give one. [%tags c5-break]}
 ( 3... e6?!
@@ -1046,7 +1058,9 @@ Playing the Slav structure with ...c6 anyway, and drifting into a passive positi
 {The Colle bishop comes out before the knight, which changes nothing important. [%weight 6]}
 3... c5 {Hit the centre as always against a system opening. [%tags c5-break]} 4. c3
 {White builds the pyramid. [%weight 6]} 4... Nc6 {Develop and press d4.} 5. Nf3
-{White is now in the Colle from the section above, by a different order. [%weight 7] [%plan Play ...Bg4 at once, before ...e6. That is the move the whole Colle set-up is designed to prevent.] [%line The 2.e3 move order]}
+{White is now in the Colle from the section above, by a different order. [%weight 7]}
+5... Bg4
+{Out before ...e6, and with a pin: the knight on f3 is holding d4 and cannot move without losing the queen behind it. This is the move the whole Colle set-up exists to prevent. [%tags bishop-placement] [%plan ...e6 and ...Bd6, castle, and take on d4 when White has to recapture with a pawn. The bishop is already outside the pawn chain, which is the thing the Colle wants to stop.] [%line The 2.e3 move order]}
 ) ( 2. Nc3
 {The Jobava set-up when it is followed by Bf4. It is sharper than the ordinary London and more common every year. [%weight 3]}
 2... Nf6 {Develop and stop e4 in its tracks.} 3. Bf4
@@ -1087,8 +1101,9 @@ Playing the Slav structure with ...c6 anyway, and drifting into a passive positi
 {White develops before e3, which is a slightly different order to the same set-up. [%weight 4]}
 3... c5
 {Hit the centre as always. The order White chooses does not change what Black is doing. [%tags c5-break vs-london]}
-4. e3
-{White is back in the main line of this chapter, one move order later. [%weight 8] [%plan Play ...Nc6, then ...Qb6 hitting b2, and answer Qb3 with ...c4 rather than the trade.] [%line The London, 3.Nf3 first]}
+4. e3 {White is back in the main line of this chapter, one move order later. [%weight 8]}
+4... Nc6
+{Develop with a second hit on d4. The knight on c6 and the pawn on c5 together are what make ...Qb6 a threat rather than a gesture. [%plan ...Qb6, hitting b2 with the bishop on f4 gone from c1, and ...c4 rather than the trade if Qb3 answers it.] [%line The London, 3.Nf3 first]}
 ) 3... c5
 {Hit the centre. White has not fought for d5, so Black takes a free hand and attacks d4 instead. [%tags c5-break vs-london]}
 ( 3... c6?!

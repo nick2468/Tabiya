@@ -650,9 +650,15 @@
                       "san": "a4",
                       "note": "White stops ...b5 before taking the pawn, and the position is now the 5.a4 line above by another order.",
                       "weight": 6,
-                      "plan": "Play ...Nd5, hitting the bishop on f4, then ...Be7 and castle. This is the same position the 5.a4 line reaches a move earlier.",
-                      "name": "4.Bf4 and 5.Nc3",
-                      "children": []
+                      "children": [
+                        {
+                          "san": "Nd5",
+                          "note": "Hit the bishop on f4 and blockade in the middle. A knight on d5 is worth more than the pawn on c4, and this is the position the 5.a4 line reaches a move earlier.",
+                          "tags": ["bishop-placement"],
+                          "plan": "Meet Bg5 with ...Be7 and trade the dark-squared bishops, castle, then ...b5 to hold the extra pawn or ...Nd7 and ...c5 to give it back for the centre.",
+                          "name": "4.Bf4 and 5.Nc3"
+                        }
+                      ]
                     }
                   ]
                 }

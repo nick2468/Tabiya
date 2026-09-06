@@ -30,9 +30,14 @@
               "san": "Nf3",
               "note": "White transposes into the main line of the whole opening.",
               "weight": 7,
-              "plan": "This is exactly chapter 1: take on c4 and meet a4 with ...Bf5.",
-              "name": "3.Nc3 into the main line",
-              "children": []
+              "children": [
+                {
+                  "san": "dxc4",
+                  "note": "Take, which is the move chapter 1 is built on: the pawn comes off before White can hold the centre with e3, and the bishop on c8 keeps the diagonal it would lose to ...e6.",
+                  "plan": "Chapter 1 from here: meet a4 with ...Bf5 and e3 with ...e6, then ...Bb4 and castle. The pawn on c4 is held only while holding it costs White time.",
+                  "name": "3.Nc3 into the main line"
+                }
+              ]
             },
             {
               "san": "e3",
@@ -55,9 +60,14 @@
                       "san": "Nf3",
                       "note": "White develops and the position is now word for word the one chapter 2 reaches.",
                       "weight": 7,
-                      "plan": "Play ...e6, then ...Nbd7 and a bishop to d6, and meet Nh4 by recapturing on g6 with the h-pawn.",
-                      "name": "3.Nc3 and the quiet 4.e3",
-                      "children": []
+                      "children": [
+                        {
+                          "san": "e6",
+                          "note": "The pawn one square, behind the bishop rather than in front of it. That is the whole Slav in one move, and the position is now chapter 2 word for word.",
+                          "plan": "...Nbd7 and a bishop to d6, then castle. Meet Nh4 by taking back on g6 with the h-pawn, which opens the h-file for the rook.",
+                          "name": "3.Nc3 and the quiet 4.e3"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -93,9 +103,15 @@
                               "san": "e3",
                               "note": "White finishes the small centre, and this is the Exchange Slav from chapter 3 exactly.",
                               "weight": 7,
-                              "plan": "Play ...Bf5, then ...e6 and ...Bd6, castle, and take the c-file. If Qb3 comes, the answer is still ...Na5.",
-                              "name": "3.Nc3 into the Exchange",
-                              "children": []
+                              "children": [
+                                {
+                                  "san": "Bf5",
+                                  "note": "The bishop out before ...e6, as everywhere in this repertoire. This is chapter 3 exactly, and the c-file is already half open for the rook.",
+                                  "tags": ["bishop-placement"],
+                                  "plan": "...e6 and ...Bd6, castle and take the c-file. If Qb3 comes, the answer is still ...Na5.",
+                                  "name": "3.Nc3 into the Exchange"
+                                }
+                              ]
                             }
                           ]
                         }
@@ -129,17 +145,29 @@
               "san": "Nf3",
               "note": "White reaches the Slow Slav, which is the first half of chapter 2.",
               "weight": 7,
-              "plan": "Play ...Bf5 at once, then ...e6, ...Nbd7 and a bishop to d6.",
-              "name": "3.e3 into the main line",
-              "children": []
+              "children": [
+                {
+                  "san": "Bf5",
+                  "note": "Out at once. With White's pawn already on e3 there is no Qb3 coming, so the bishop has nothing to wait for.",
+                  "tags": ["bishop-placement"],
+                  "plan": "...e6, ...Nbd7 and a bishop to d6, then castle: the Slow Slav of chapter 2.",
+                  "name": "3.e3 into the main line"
+                }
+              ]
             },
             {
               "san": "Nc3",
               "note": "The same position as 3.Nc3 Nf6 4.e3 above, reached the other way round.",
               "weight": 5,
-              "plan": "Play ...Bf5, then ...e6 and ordinary development. Nothing in the position has changed with the move order.",
-              "name": "3.e3 and then 4.Nc3",
-              "children": []
+              "children": [
+                {
+                  "san": "Bf5",
+                  "note": "The same bishop move as against 4.Nf3, for the same reason: out before the pawn on e6 shuts it in.",
+                  "tags": ["bishop-placement"],
+                  "plan": "...e6 and ordinary development, ...Nbd7 and ...Bd6. Nothing in the position has changed with the move order.",
+                  "name": "3.e3 and then 4.Nc3"
+                }
+              ]
             }
           ]
         }

@@ -304,9 +304,14 @@
                       "san": "e3",
                       "note": "White is back in the main line of this chapter, one move order later.",
                       "weight": 8,
-                      "plan": "Play ...Nc6, then ...Qb6 hitting b2, and answer Qb3 with ...c4 rather than the trade.",
-                      "name": "The London, 3.Nf3 first",
-                      "children": []
+                      "children": [
+                        {
+                          "san": "Nc6",
+                          "note": "Develop with a second hit on d4. The knight on c6 and the pawn on c5 together are what make ...Qb6 a threat rather than a gesture.",
+                          "plan": "...Qb6, hitting b2 with the bishop on f4 gone from c1, and ...c4 rather than the trade if Qb3 answers it.",
+                          "name": "The London, 3.Nf3 first"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -364,9 +369,21 @@
                           "note": "Develop and hit d4 again, as against 4.c3. The bishop on d3 has not held d4, so ...cxd4 is a threat White has to answer before the b3 and Bb2 setup arrives, and ...Bg4 comes next as in the main line.",
                           "tags": ["development", "c5-break"],
                           "mistakes": [
-                            { "san": "cxd4", "grade": "playable", "note": "Sound and the engine's choice against b3: 5.exd4 Nc6 6.c3 Bg4 and the isolated pawn is the target. The knight first keeps the tension a move longer." },
-                            { "san": "e6", "grade": "inaccuracy", "note": "It shuts the bishop in for nothing: 5.b3 Be7 6.O-O and White has the setup this course exists to avoid handing over." },
-                            { "san": "Bg4", "grade": "playable", "note": "Sound: 5.h3 Bxf3 6.Qxf3 Nc6 7.c3 and the same shape with the bishop traded. The knight first." }
+                            {
+                              "san": "cxd4",
+                              "grade": "playable",
+                              "note": "Sound and the engine's choice against b3: 5.exd4 Nc6 6.c3 Bg4 and the isolated pawn is the target. The knight first keeps the tension a move longer."
+                            },
+                            {
+                              "san": "e6",
+                              "grade": "inaccuracy",
+                              "note": "It shuts the bishop in for nothing: 5.b3 Be7 6.O-O and White has the setup this course exists to avoid handing over."
+                            },
+                            {
+                              "san": "Bg4",
+                              "grade": "playable",
+                              "note": "Sound: 5.h3 Bxf3 6.Qxf3 Nc6 7.c3 and the same shape with the bishop traded. The knight first."
+                            }
                           ],
                           "plan": "...Bg4 and ...e6, ...Bd6 and ...O-O, with ...cxd4 the moment b3 has been played and the pawn on d4 is held by the e-pawn alone. Against the Colle-Zukertort the bishop on b2 looks at a wall while the pawn on d4 stands.",
                           "name": "The Colle, with 4.Bd3"
@@ -645,9 +662,14 @@
                               "san": "e3",
                               "note": "White props up d4 and the game settles into the same shape as the 4.Bf4 line.",
                               "weight": 7,
-                              "plan": "Play ...Nc6 and ...Qb6 as usual, and remember the bishop on h4 is not defending b2 either.",
-                              "name": "The Torre, with 4.Bh4",
-                              "children": []
+                              "children": [
+                                {
+                                  "san": "Nc6",
+                                  "note": "The same move as against the London, and for the same reason: d4 is hit twice and ...Qb6 comes next. The bishop on h4 is not defending b2 either.",
+                                  "plan": "...Qb6 hitting b2, then ...cxd4 once the pawn has been given a defender. The knight on e4 sits on a square no pawn can reach.",
+                                  "name": "The Torre, with 4.Bh4"
+                                }
+                              ]
                             }
                           ]
                         }
@@ -661,9 +683,15 @@
               "san": "Bf4",
               "note": "The London by another route, with the knight already on f3.",
               "weight": 5,
-              "plan": "Play ...c5 and follow the London lines above: ...Nc6, ...Qb6, and ...c4 against Qb3.",
-              "name": "2.Nf3 into the London",
-              "children": []
+              "children": [
+                {
+                  "san": "c5",
+                  "note": "Hit d4 at once. Against the London the c-pawn is the lever, and the bishop has left b2 with nothing guarding it.",
+                  "tags": ["c5-break"],
+                  "plan": "...Nc6 and ...Qb6, and ...c4 against Qb3: the London lines above, by this move order.",
+                  "name": "2.Nf3 into the London"
+                }
+              ]
             }
           ]
         }
@@ -701,9 +729,15 @@
                               "san": "Nf3",
                               "note": "White is now in the Colle from the section above, by a different order.",
                               "weight": 7,
-                              "plan": "Play ...Bg4 at once, before ...e6. That is the move the whole Colle set-up is designed to prevent.",
-                              "name": "The 2.e3 move order",
-                              "children": []
+                              "children": [
+                                {
+                                  "san": "Bg4",
+                                  "note": "Out before ...e6, and with a pin: the knight on f3 is holding d4 and cannot move without losing the queen behind it. This is the move the whole Colle set-up exists to prevent.",
+                                  "tags": ["bishop-placement"],
+                                  "plan": "...e6 and ...Bd6, castle, and take on d4 when White has to recapture with a pawn. The bishop is already outside the pawn chain, which is the thing the Colle wants to stop.",
+                                  "name": "The 2.e3 move order"
+                                }
+                              ]
                             }
                           ]
                         }
