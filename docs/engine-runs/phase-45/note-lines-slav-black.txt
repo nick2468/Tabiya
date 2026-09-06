@@ -36,3 +36,29 @@ note-lines.mjs over slav-black after this phase's additions.
       "Qxc1+": plays with Qxb7 inserted, which the note leaves out
 
 0 faults, 7 for a human to read.
+
+
+=== Read at review gate 45, 2026-09-06. The seven were read, one by one.
+
+"0 faults, 7 for a human to read" is not a pass, and this phase reported the checkers
+clean without anybody reading the seven. Six are the checker finding a longer path to the
+same true statement. One was a real fault.
+
+  FAULT, fixed. ch3-exchange, the note on 8...Bd7: "9.Qxa5 now loses the queen to
+  9...Bxa4". After 9.Qxa5 the square a4 is EMPTY, because the queen has just left it, so
+  Bxa4 is not a legal move. The conclusion was right and the move was wrong: 9.Qxa5 loses
+  the queen to 9...Qxa5, the queen taking on a5 from d8. The note now says that, and
+  names c2 as where the queen goes instead, which is what the course plays.
+
+  Benign, checked and left. ch2-quiet's "9.Nxd5 Nxd5 10.Qxd5 wins a pawn" is legal and
+  does win the pawn; the checker split the fragment. The three ch4-sidelines ones quote
+  "4.Nc3, 4.e3 and 4.Bf4" as the chapters this one excludes, which is a scope sentence
+  and not a line to play. The two [deliberate] Kxh2 notes say the move is illegal, which
+  is the point they are making and the category the checker gives them. The ch2-quiet
+  intro's "7.Qxd5 loses a piece to 7...Qxc1+" is legal and correct as written.
+
+  After the fix: 708 notes read, 6 findings, 0 faults, 6 for a human to read, and every
+  one of the six is in the benign list above.
+
+  Conditions: same machine, CPU load 16 per cent sampled before the runs, no build and no
+  test run beside any engine run, one engine process at a time, every run sequential.

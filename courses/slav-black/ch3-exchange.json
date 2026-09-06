@@ -237,7 +237,7 @@
                                           "children": [
                                             {
                                               "san": "Bd7",
-                                              "note": "Block with the bishop, and notice that it attacks the queen on a4 as it does so. That is what saves the knight: 9.Qxa5 now loses the queen to 9...Bxa4.",
+                                              "note": "Block with the bishop, and notice that it attacks the queen on a4 as it does so. That is what saves the knight: the queen has to answer the bishop, and 9.Qxa5 simply drops her to 9...Qxa5. She goes to c2 instead.",
                                               "tags": ["development"],
                                               "mistakes": [
                                                 {

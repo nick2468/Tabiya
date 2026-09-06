@@ -681,7 +681,7 @@ Recapturing on d5 with the queen and losing a move to Nc3. Meeting Qb3 with ...R
 ) ( 7... e6? {It defends d5 and forgets b7: 8.Qxb7 simply wins a pawn.} ) 8. Qa4+
 {The queen has to leave, and she leaves with check so that Black cannot claim the whole tempo. [%weight 8]}
 8... Bd7
-{Block with the bishop, and notice that it attacks the queen on a4 as it does so. That is what saves the knight: 9.Qxa5 now loses the queen to 9...Bxa4. [%tags development]}
+{Block with the bishop, and notice that it attacks the queen on a4 as it does so. That is what saves the knight: the queen has to answer the bishop, and 9.Qxa5 simply drops her to 9...Qxa5. She goes to c2 instead. [%tags development]}
 ( 8... Qd7?
 {9.Qxa5 simply takes the knight. Only the bishop can block, because only the bishop attacks the queen on a4 while it does.}
 ) ( 8... Nc6?!
