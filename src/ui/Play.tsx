@@ -176,10 +176,9 @@ export function Play({
     if (request) setLaunchShape('here')
   }, [request])
 
-  // A course change under a mounted screen brings that course's chapter with
-  // it, and the shape falls back to Any line if the remembered chapter has
-  // gone: `resolvePlayChapter` picks the first one, which is a chapter the
-  // trainee did not choose but is at least a chapter that exists.
+  // A request is used up the moment its game starts, and the "From" radio it
+  // chose goes with it: the shape drops back to the remembered one, so the
+  // options a New game arrives at are the trainee's own again.
   useEffect(() => {
     if (launch === 'here' && !request) setLaunchShape(prefs.launch)
   }, [launch, prefs.launch, request])
@@ -187,9 +186,15 @@ export function Play({
   // A resumed game arrives with its own strength and no cap. Both are set on
   // the screen rather than applied behind it, so the options say what is about
   // to happen and can still be changed.
+  // SHOWN, not remembered. These two used to be written to storage, so a Play
+  // on from a game recorded at level 7 replaced the strength the trainee had
+  // chosen for every later game. Picking a game up is not choosing a setting.
   useEffect(() => {
-    if (request?.level !== undefined) setLevel(request.level)
-    if (request?.at !== undefined) setLength('full')
+    if (request?.level !== undefined) prefs.showLevel(request.level)
+    if (request?.at !== undefined) prefs.showLength('full')
+    // The arrival of a request is the only thing that may do this, and the
+    // two setters are stable.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [request])
 
   // The chapter a resumed game was sparring against, when it names one, so

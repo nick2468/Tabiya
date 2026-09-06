@@ -118,6 +118,18 @@ describe('the gap unit', () => {
     expect(stored.scheduled_days).toBe(scheduledDays)
   })
 
+  it('starts on hours, which is the default Nick ruled', async () => {
+    // Added at review gate 44. Hours was his second thought about this screen
+    // and nothing held it, so a later tidy-up could have put days back and the
+    // suite would have stayed green.
+    const { user } = renderApp()
+    await learnALine(user)
+    await goTo(user, 'Drill')
+    expect(((await screen.findByLabelText('Hours')) as HTMLInputElement).checked).toBe(true)
+    expect((screen.getByLabelText('Days') as HTMLInputElement).checked).toBe(false)
+    expect((screen.getByLabelText('Minutes') as HTMLInputElement).checked).toBe(false)
+  })
+
   it('remembers the unit between sessions', async () => {
     const first = renderApp()
     await learnALine(first.user)

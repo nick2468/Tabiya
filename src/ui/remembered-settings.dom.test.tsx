@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { cleanup, screen } from '@testing-library/react'
-import { goTo, renderApp } from '../test/dom'
+import { buttonIn, goTo, movesOnScreen, playOnRow, renderApp, storedGames } from '../test/dom'
 
 vi.mock('./Board', async () => await import('../test/board-stub'))
 
@@ -86,6 +86,54 @@ describe('the Play settings', () => {
     // And the game starts, which is the thing a broken memory must not stop.
     await user.click(screen.getByRole('button', { name: 'Start the game' }))
     expect(await screen.findByTestId('board')).toBeTruthy()
+  })
+})
+
+/**
+ * A game picked up from Progress is not a setting being chosen.
+ *
+ * Found at review gate 44. The resumed game's strength and length are shown
+ * on the launch options so the screen says what is about to happen, and both
+ * setters had just become the ones that write to storage. So a Play on from a
+ * game recorded at level 7 with no cap replaced the strength and length the
+ * trainee had chosen, for that game and for every game after it.
+ */
+describe('a resumed game', () => {
+  it('shows its own strength and length without remembering either', async () => {
+    const { user } = renderApp()
+    await user.selectOptions(await screen.findByLabelText('Course'), 'london-white')
+    await goTo(user, 'Play')
+    await user.selectOptions(screen.getByLabelText('How strong'), '7')
+    await user.click(screen.getByLabelText('To move 10'))
+    await user.click(await screen.findByRole('button', { name: 'Start the game' }))
+    await screen.findByTestId('board')
+    const before = movesOnScreen().length
+    await user.click(await screen.findByRole('button', { name: 'move d4' }))
+    await vi.waitFor(() => expect(movesOnScreen().length).toBeGreaterThan(before + 1))
+    await user.click(screen.getByRole('button', { name: 'Stop and review' }))
+    await screen.findByRole('heading', { name: 'The report' })
+    await vi.waitFor(() => expect(storedGames()).toHaveLength(1))
+
+    // The trainee changes their mind about how they want to play from now on.
+    await user.click(screen.getByRole('button', { name: 'New game' }))
+    await user.selectOptions(await screen.findByLabelText('How strong'), '2')
+    await user.click(screen.getByLabelText('To move 15'))
+
+    // And then picks the old, stronger, uncapped game back up.
+    await goTo(user, 'Progress')
+    await user.click(buttonIn(playOnRow('The London System'), 'Play on'))
+
+    // The screen says what that game is about to do.
+    expect((await screen.findByLabelText('How strong') as HTMLSelectElement).value).toBe('7')
+    expect(box('Full game').checked).toBe(true)
+
+    // The settings it was picked up with are untouched, this session and next.
+    expect(window.localStorage.getItem('london-trainer.play.level')).toBe('2')
+    expect(window.localStorage.getItem('london-trainer.play.length')).toBe('move15')
+    const again = await restart()
+    await goTo(again, 'Play')
+    expect((screen.getByLabelText('How strong') as HTMLSelectElement).value).toBe('2')
+    expect(box('To move 15').checked).toBe(true)
   })
 })
 

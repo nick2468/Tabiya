@@ -15,10 +15,14 @@ export type { DrillGap } from '../scheduler'
  * the reversal is that a setting the app forgets is one the trainee has to
  * re-make every time they come back, and the app is used every day.
  *
- * Two things are still NOT remembered, and neither is a setting. A play
- * request belongs to a position, so "From a Study position" cannot be
- * restored on a screen the position is no longer on. And which side of the
- * board a recorded game was played on comes from the record.
+ * Three things are still NOT remembered, and none of them is a setting. A
+ * play request belongs to a position, so "From a Study position" cannot be
+ * restored on a screen the position is no longer on. Which side of the board
+ * a recorded game was played on comes from the record. And the strength and
+ * length a RESUMED game arrives with are shown on the screen without being
+ * written down: that is the old game speaking, not the trainee choosing, and
+ * a game picked up from Progress must not quietly become the setting every
+ * later game starts from.
  *
  * They are remembered the way `theme.ts` remembers dark or light, for the same
  * reason it does.
@@ -103,7 +107,12 @@ function useRemembered<T>(initial: () => T, save: (value: T) => void) {
     },
     [save],
   )
-  return [value, set] as const
+  // Showing a value without writing it down. A resumed game arrives with its
+  // own strength and no cap, and the screen has to say so; that is the game
+  // speaking, not the trainee choosing, so it must not become the setting
+  // every later game starts from.
+  const show = useCallback((next: T) => setStored(next), [])
+  return [value, set, show] as const
 }
 
 /** The course id last opened, or null if nothing has been remembered yet. */
@@ -164,10 +173,10 @@ export function useDrillScope(): { scope: DrillScope; setScope: (scope: DrillSco
  * How the engine plays the course when the trainee plays the other side,
  * remembered between sessions the way the drill scope is.
  *
- * The SIDE is not remembered. It is a launch choice like the others, made
- * fresh each game; the setting is a preference about how those games go,
- * and a preference is what this file is for. Default "always", which is the
- * ruling: the course move every time unless the trainee asks otherwise.
+ * The BOX above it is remembered too since phase 44, by `usePlayPrefs`; this
+ * is the setting underneath, about how those games go once the box is ticked.
+ * Default "always", which is the ruling: the course move every time unless
+ * the trainee asks otherwise.
  */
 export function useCourseMoves(): {
   courseMoves: CourseMoves
@@ -280,8 +289,12 @@ export function usePlayPrefs(courseId: string): {
   setChapterId: (id: string) => void
   length: GameLength
   setLength: (length: GameLength) => void
+  /** Shows a resumed game length on the screen without remembering it. */
+  showLength: (length: GameLength) => void
   level: number
   setLevel: (level: number) => void
+  /** Shows a resumed game strength on the screen without remembering it. */
+  showLevel: (level: number) => void
   otherSide: boolean
   setOtherSide: (on: boolean) => void
 } {
@@ -289,11 +302,11 @@ export function usePlayPrefs(courseId: string): {
     () => readOneOf(PLAY_LAUNCH_KEY, ['any', 'chapter'] as const, 'any'),
     useCallback((next: PlayLaunch) => write(PLAY_LAUNCH_KEY, next), []),
   )
-  const [length, setLength] = useRemembered<GameLength>(
+  const [length, setLength, showLength] = useRemembered<GameLength>(
     () => readOneOf(PLAY_LENGTH_KEY, ['move10', 'move15', 'full'] as const, 'move15'),
     useCallback((next: GameLength) => write(PLAY_LENGTH_KEY, next), []),
   )
-  const [level, setLevel] = useRemembered<number>(
+  const [level, setLevel, showLevel] = useRemembered<number>(
     () => {
       const saved = Number(read(PLAY_LEVEL_KEY))
       return Number.isInteger(saved) && saved >= 1 && saved <= 8 ? saved : 4
@@ -326,8 +339,10 @@ export function usePlayPrefs(courseId: string): {
     setChapterId,
     length,
     setLength,
+    showLength,
     level,
     setLevel,
+    showLevel,
     otherSide,
     setOtherSide,
   }

@@ -975,9 +975,13 @@ the app every day. Play remembers its launch shape, the chapter it spars against
 COURSE (a chapter id from another course means nothing), how long, how strong and the
 other-side box; Drill remembers both boxes beside the scope and the gap unit. A remembered
 chapter the course no longer has falls back to its first chapter, the way a remembered
-course falls back to the first course. Two things are still not kept and neither is a
-setting: a play request, which belongs to a position, and the side a recorded game was
-played on, which belongs to the record.
+course falls back to the first course. Three things are still not kept and none of them
+is a setting: a play request, which belongs to a position; the side a recorded game was
+played on, which belongs to the record; and the strength and length a RESUMED game
+arrives with, which are shown on the launch options so the screen says what is about to
+happen but are never written down. Gate 44 found that last one being remembered, so a
+Play on from an old strong game replaced the strength every later game started from.
+Picking a game up is not choosing a setting.
 
 ## 9. v1 acceptance
 
