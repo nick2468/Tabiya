@@ -63,12 +63,14 @@ export function movesOnScreen(): string[] {
   )
 }
 
-/** What the board is showing, and what it is highlighting. */
-export function board(): { fen: string; lastMove: string } {
+/** What the board is showing, what it is highlighting, and its arrows. */
+export function board(): { fen: string; lastMove: string; shapes: string[] } {
   const node = screen.getByTestId('board')
+  const shapes = node.getAttribute('data-shapes') ?? ''
   return {
     fen: node.getAttribute('data-fen') ?? '',
     lastMove: node.getAttribute('data-last-move') ?? '',
+    shapes: shapes === '' ? [] : shapes.split(' '),
   }
 }
 

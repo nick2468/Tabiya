@@ -199,7 +199,13 @@ describe('what Drill draws on', () => {
     render(
       learntBoth,
       catalog,
-      createElement(Drill, { courseId: london.id, scope, onScope: () => {} }),
+      createElement(Drill, {
+        courseId: london.id,
+        scope,
+        onScope: () => {},
+        gap: 'hours' as const,
+        onGap: () => {},
+      }),
     )
 
   it('starts mixed, which is the ruling', () => {

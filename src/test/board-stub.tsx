@@ -15,14 +15,20 @@ import type { BoardProps } from '../ui/Board'
  * `onMove(from, to)` is what the live board calls and what `Play` passes to
  * the provider, so everything under it is the code that ships.
  *
- * The position and the last-move highlight come out as data attributes,
- * because they are two of the three things a person looks at on this screen
- * and a test should be able to look at them too.
+ * The position, the last-move highlight and the arrows come out as data
+ * attributes, because they are what a person looks at on this screen and a
+ * test should be able to look at them too. An arrow reads as brush, origin,
+ * destination: "greend2d4".
  */
-export function Board({ fen, onMove, lastMove, movableColor }: BoardProps) {
+export function Board({ fen, onMove, lastMove, movableColor, shapes }: BoardProps) {
   const legal = movableColor ? new Chess(fen).moves({ verbose: true }) : []
   return (
-    <div data-testid="board" data-fen={fen} data-last-move={lastMove ? lastMove.join('') : ''}>
+    <div
+      data-testid="board"
+      data-fen={fen}
+      data-last-move={lastMove ? lastMove.join('') : ''}
+      data-shapes={(shapes ?? []).map((shape) => `${shape.brush}${shape.orig}${shape.dest ?? ''}`).join(' ')}
+    >
       {legal.map((move) => (
         <button
           key={`${move.from}${move.to}${move.promotion ?? ''}`}

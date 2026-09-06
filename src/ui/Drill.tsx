@@ -8,6 +8,7 @@ import {
   judge,
   ratingFor,
   sanForMove,
+  shownAfter,
   squaresForSan,
   verdictDetail,
   verdictHeadline,
@@ -18,7 +19,7 @@ import { dueQueue, earlyQueue } from '../model/queue'
 import { describeInterval, newSchedule, review, type Rating } from '../scheduler'
 import { nextCardLine } from './card-words'
 import type { ProgressState } from '../storage/progress'
-import type { DrillScope } from './prefs'
+import { useDrillBoxes, type DrillGap, type DrillScope } from './prefs'
 import { colourName, type LoadedCourse, type Shape } from '../model/types'
 import './drill.css'
 
@@ -42,22 +43,33 @@ import './drill.css'
  * order. A card answered wrong goes to the back of that session rather than
  * straight back to the front, so a move that will not come to mind cannot lock
  * the session up.
+ *
+ * Once an answer is in, the board shows the position AFTER the repertoire
+ * move, right or wrong, with the green arrow saying where the piece went and
+ * the red one saying where it should not have. That is phase 44 and Nick's
+ * reason is visual memory: the right position, looked at while the note is
+ * read, teaches more than an arrow over the position before it.
  */
 export function Drill({
   courseId,
   scope,
   onScope,
+  gap,
+  onGap,
 }: {
   courseId: string | null
   scope: DrillScope
   onScope: (scope: DrillScope) => void
+  gap: DrillGap
+  onGap: (gap: DrillGap) => void
 }) {
   const { state, answer } = useProgress()
   const { courses } = useCatalog()
-  const [weakAreasFirst, setWeakAreasFirst] = useState(false)
-  // Deliberately not remembered. It is a decision for one sitting: a box that
-  // stayed ticked would make "due" mean nothing from then on.
-  const [includeEarly, setIncludeEarly] = useState(false)
+  // Both remembered since phase 44. "Include cards that are not due yet" was
+  // deliberately forgotten before that, on the reasoning that a box left
+  // ticked would make "due" mean nothing; Nick overruled it, because a
+  // setting the app forgets is one he has to make again every day.
+  const { weakAreasFirst, setWeakAreasFirst, includeEarly, setIncludeEarly } = useDrillBoxes()
   const [session, setSession] = useState<string[] | null>(null)
   const [verdict, setVerdict] = useState<Verdict | null>(null)
   const [done, setDone] = useState(0)
@@ -122,7 +134,7 @@ export function Drill({
   const next = useCallback(
     (rating?: Rating) => {
       if (!card || !verdict || !session) return
-      answer(card, verdict, rating)
+      answer(card, verdict, rating, gap)
       setDone((count) => count + 1)
       if (verdict.kind === 'exact') setCorrect((count) => count + 1)
       const applied = rating ?? ratingFor(verdict)
@@ -130,7 +142,7 @@ export function Drill({
       setSession(applied === 'again' ? [...rest, card.key] : rest)
       setVerdict(null)
     },
-    [answer, card, session, verdict],
+    [answer, card, gap, session, verdict],
   )
 
   if (everyCard.length === 0) {
@@ -226,6 +238,27 @@ export function Drill({
           is an ordinary answer: it is scheduled from when you gave it, so the gap it
           earns is a little shorter than it would have been on the day.
         </p>
+
+        {/* The unit the scheduled gap is spent in. The number is FSRS's own
+            and does not move: only the clock it is read against does. */}
+        <fieldset className="drill-gap">
+          <legend>Come back in</legend>
+          {GAP_UNITS.map((unit) => (
+            <label key={unit.value}>
+              <input
+                type="radio"
+                checked={gap === unit.value}
+                onChange={() => onGap(unit.value)}
+              />
+              {unit.label}
+            </label>
+          ))}
+        </fieldset>
+        <p className="hint">
+          Days is spaced repetition. Minutes and hours are for hammering a line today; the
+          schedule's memory of each card is the same either way.
+        </p>
+
         <button type="button" className="primary" onClick={start} disabled={queue.length === 0}>
           Start drilling
         </button>
@@ -261,12 +294,16 @@ export function Drill({
       </header>
 
       <div className="drill-body">
+        {/* Before an answer the card's own position, to be played from.
+            After one the position the repertoire move leads to, so the piece
+            is where it belongs while the note is read. */}
         <Board
-          fen={card.fen}
+          fen={verdict ? shownAfter(card) : card.fen}
           orientation={sideToMove(card.fen)}
           turnColor={sideToMove(card.fen)}
           movableColor={verdict ? undefined : sideToMove(card.fen)}
           dests={verdict ? undefined : legalDests(card.fen)}
+          lastMove={verdict ? [card.from, card.to] : undefined}
           shapes={verdict ? answerShapes(card, verdict) : []}
           onMove={onMove}
           size={BOARD_SIZE}
@@ -274,7 +311,7 @@ export function Drill({
 
         <div className="drill-side">
           {verdict ? (
-            <Feedback card={card} verdict={verdict} state={state} onNext={next} />
+            <Feedback card={card} verdict={verdict} state={state} gap={gap} onNext={next} />
           ) : (
             <div className="prompt">
               <h3>{colourName(sideToMove(card.fen))} to move</h3>
@@ -300,16 +337,19 @@ export function Feedback({
   card,
   verdict,
   state,
+  gap = 'days',
   onNext,
 }: {
   card: Card
   verdict: Verdict
   state: ProgressState
+  /** The unit the gap is spent in, so the buttons say what will happen. */
+  gap?: DrillGap
   onNext: (rating?: Rating) => void
 }) {
   const now = new Date()
   const current = state.cards[card.key] ?? newSchedule(now)
-  const preview = (rating: Rating) => describeInterval(review(current, rating, now), now)
+  const preview = (rating: Rating) => describeInterval(review(current, rating, now, gap), now)
 
   return (
     <div className={`feedback ${verdict.kind}`}>
@@ -368,6 +408,13 @@ export function Feedback({
     </div>
   )
 }
+
+/** The three units, in the order they read: shortest gap first. */
+const GAP_UNITS: { value: DrillGap; label: string }[] = [
+  { value: 'minutes', label: 'Minutes' },
+  { value: 'hours', label: 'Hours' },
+  { value: 'days', label: 'Days' },
+]
 
 /** Green for the repertoire move, red for the wrong move that was played. */
 function answerShapes(card: Card, verdict: Verdict): Shape[] {

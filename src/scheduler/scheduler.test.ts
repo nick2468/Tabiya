@@ -101,3 +101,53 @@ describe('describeInterval', () => {
     )
   })
 })
+
+describe('the gap unit', () => {
+  /**
+   * A card FSRS has taken past its learning steps, so its gap is a real number
+   * of days rather than a ten-minute step. Built by answering it rather than
+   * by hand: a schedule invented here would drift from the one FSRS makes.
+   */
+  function reviewing(): { schedule: ReturnType<typeof newSchedule>; at: Date } {
+    let schedule = newSchedule(NOW)
+    let at = NOW
+    for (let i = 0; i < 4; i += 1) {
+      schedule = review(schedule, 'good', at)
+      at = new Date(schedule.due)
+    }
+    return { schedule, at }
+  }
+
+  it('spends the same gap in minutes, hours or days', () => {
+    const { schedule, at } = reviewing()
+    const inDays = review(schedule, 'good', at, 'days')
+    const inHours = review(schedule, 'good', at, 'hours')
+    const inMinutes = review(schedule, 'good', at, 'minutes')
+
+    const gap = (next: typeof inDays) => msUntilDue(next, at)
+    expect(gap(inDays)).toBeGreaterThan(86_400_000)
+    expect(gap(inHours)).toBeCloseTo(gap(inDays) / 24, -2)
+    expect(gap(inMinutes)).toBeCloseTo(gap(inDays) / 1440, -2)
+  })
+
+  it('leaves everything FSRS worked out exactly as it was', () => {
+    const { schedule, at } = reviewing()
+    const inDays = review(schedule, 'good', at, 'days')
+    for (const unit of ['hours', 'minutes'] as const) {
+      const next = review(schedule, 'good', at, unit)
+      expect({ ...next, due: inDays.due }).toEqual(inDays)
+    }
+  })
+
+  it('never puts a card back sooner than a minute', () => {
+    // A new card's first gap is a learning step of minutes. In the minutes
+    // unit that would land inside the same second without the floor.
+    const next = review(newSchedule(NOW), 'again', NOW, 'minutes')
+    expect(msUntilDue(next, NOW)).toBe(60_000)
+  })
+
+  it('defaults to days, which is what every caller before phase 44 meant', () => {
+    const { schedule, at } = reviewing()
+    expect(review(schedule, 'good', at)).toEqual(review(schedule, 'good', at, 'days'))
+  })
+})

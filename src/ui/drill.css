@@ -151,3 +151,16 @@ button:disabled {
   color: var(--text-faint);
   font-size: 0.9rem;
 }
+
+/* The gap unit. Shaped exactly like the scope radios above it, because it is
+   the same kind of question asked in the same place. */
+.drill-gap {
+  margin: 16px 0 0;
+  max-width: 34rem;
+}
+
+.drill-gap label {
+  display: block;
+  padding: 3px 0;
+  cursor: pointer;
+}

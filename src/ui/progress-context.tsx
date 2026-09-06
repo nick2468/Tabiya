@@ -17,7 +17,7 @@ import {
   type ProgressStore,
 } from '../storage/progress'
 import type { BackupOffer } from '../storage/safety'
-import { newSchedule, review, type Rating } from '../scheduler'
+import { newSchedule, review, type DrillGap, type Rating } from '../scheduler'
 import { countsAsCorrect, ratingFor, type Verdict } from '../model/grade'
 import type { Card } from '../model/cards'
 
@@ -72,9 +72,10 @@ export interface Progress {
   /**
    * Records a drill answer: reschedules the card and marks its concepts.
    * `rating` overrides the one the verdict earns, which is how the Easy
-   * button works.
+   * button works. `gap` is the unit the wait is spent in, which changes the
+   * due date and nothing else FSRS worked out.
    */
-  answer: (card: Card, verdict: Verdict, rating?: Rating) => void
+  answer: (card: Card, verdict: Verdict, rating?: Rating, gap?: DrillGap) => void
   /** Records a finished game, for the play stats. */
   recordPlay: (game: PlayRecord) => void
   /** Puts a recorded game away, brings it back, or removes it for good. */
@@ -142,24 +143,28 @@ export function useProgressStateFor(store: ProgressStore): Progress {
     setState((previous) => hideOrShow(previous, courseId))
   }, [])
 
-  const answer = useCallback((card: Card, verdict: Verdict, rating?: Rating) => {
-    const now = new Date()
-    setState((previous) => {
-      const schedule = review(
-        previous.cards[card.key] ?? newSchedule(now),
-        rating ?? ratingFor(verdict),
-        now,
-      )
-      return recordAnswer(
-        previous,
-        card.courseId,
-        card.key,
-        card.tags,
-        countsAsCorrect(verdict),
-        schedule,
-      )
-    })
-  }, [])
+  const answer = useCallback(
+    (card: Card, verdict: Verdict, rating?: Rating, gap: DrillGap = 'days') => {
+      const now = new Date()
+      setState((previous) => {
+        const schedule = review(
+          previous.cards[card.key] ?? newSchedule(now),
+          rating ?? ratingFor(verdict),
+          now,
+          gap,
+        )
+        return recordAnswer(
+          previous,
+          card.courseId,
+          card.key,
+          card.tags,
+          countsAsCorrect(verdict),
+          schedule,
+        )
+      })
+    },
+    [],
+  )
 
   const recordPlay = useCallback((game: PlayRecord) => {
     setState((previous) => recordGame(previous, game))

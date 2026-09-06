@@ -102,6 +102,29 @@ export function squaresForSan(fen: string, san: string): { from: string; to: str
 }
 
 /**
+ * The position a card's own move leads to: what Drill shows once an answer is
+ * in, right or wrong.
+ *
+ * Nick's ruling of 2026-09-06. The board used to go back to the card's own
+ * position after any answer, so a piece just moved jumped home and an arrow
+ * pointed after it. The right position, looked at while the note is read, is
+ * worth more than the arrow alone.
+ *
+ * A card whose move the board refuses cannot happen - the move came out of a
+ * loaded course, and the loader plays every one - so the fallback is the
+ * card's own position rather than an error nobody could act on.
+ */
+export function shownAfter(card: Card): string {
+  const chess = new Chess(card.fen)
+  try {
+    chess.move(card.san)
+    return chess.fen()
+  } catch {
+    return card.fen
+  }
+}
+
+/**
  * Turns a move made on the board into SAN, or null when it is not legal.
  * Promotions become a queen, which is all this repertoire ever needs.
  */

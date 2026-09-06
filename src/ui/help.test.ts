@@ -269,7 +269,13 @@ const screens: Record<Screen, string> = {
   drill:
     inApp(
       learntOne,
-      createElement(Drill, { courseId: course.id, scope: 'mixed', onScope: () => {} }),
+      createElement(Drill, {
+        courseId: course.id,
+        scope: 'mixed',
+        onScope: () => {},
+        gap: 'hours' as const,
+        onGap: () => {},
+      }),
     ) +
     renderToStaticMarkup(
       createElement(Feedback, {

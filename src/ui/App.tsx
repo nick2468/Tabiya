@@ -14,6 +14,7 @@ import {
   rememberCourse,
   resolveCourse,
   savedCourse,
+  useDrillGap,
   useDrillScope,
   useRememberedCourse,
 } from './prefs'
@@ -98,6 +99,7 @@ export function Shell() {
   const [playRequest, setPlayRequest] = useState<PlayRequest | null>(null)
   const { theme, toggle } = useTheme()
   const { scope, setScope } = useDrillScope()
+  const { gap, setGap } = useDrillGap()
   const showDiagnostics = import.meta.env.DEV
 
   // Derived every render rather than stored: a remembered id that no longer
@@ -249,7 +251,13 @@ export function Shell() {
           />
         ) : null}
         {showing === 'drill' ? (
-          <Drill courseId={course?.id ?? null} scope={scope} onScope={setScope} />
+          <Drill
+            courseId={course?.id ?? null}
+            scope={scope}
+            onScope={setScope}
+            gap={gap}
+            onGap={setGap}
+          />
         ) : null}
         {showing === 'progress' ? (
           <Progress courseId={course?.id ?? null} onPlayOn={playFrom} />
