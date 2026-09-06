@@ -5046,7 +5046,9 @@ Gate 43 findings (2026-09-06, orchestrator):
 
 Goal: Nick, 2026-09-06, three things about Drill: a right answer leaves the piece where it
 went; a wrong answer shows the correct piece moved as well as the red arrow; the gap after a
-right answer has a remembered unit, minutes, hours or days. No chess content.
+right answer has a remembered unit, minutes, hours or days, hours the default. A fourth,
+ruled the same day: every Play and Drill setting is remembered between sessions, which
+reverses the one-sitting rulings of phases 23 and 33. No chess content.
 
 Chipped as `chips/phase-44-drill-feel.md`. The board shows the position after the repertoire
 move once a verdict exists; a "Come back in" unit scales the due date FSRS computes and
@@ -5057,8 +5059,9 @@ nothing else, with the practice caveat in the Help. Version 1.10.2.
 - [ ] 44.3 The "Come back in" control, remembered.
 - [ ] 44.4 DOM tests red first; help test mutation-checked.
 - [ ] 44.5 Help and SPEC.
-- [ ] 44.6 Version 1.10.2.
-- [ ] 44.7 Proved in the browser build.
+- [ ] 44.6 Every Play and Drill setting remembered between sessions (chapter per course).
+- [ ] 44.7 Version 1.10.2.
+- [ ] 44.8 Proved in the browser build.
 
 Acceptance: as the chip's final paragraph.
 
