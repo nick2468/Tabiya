@@ -50,6 +50,18 @@ const PLAY_CHAPTER_KEY = 'london-trainer.play.chapter'
 const PLAY_LENGTH_KEY = 'london-trainer.play.length'
 const PLAY_LEVEL_KEY = 'london-trainer.play.level'
 const PLAY_OTHER_SIDE_KEY = 'london-trainer.play.other-side'
+const STEP_MS_KEY = 'london-trainer.study.step-ms'
+
+/**
+ * Auto step's gap, in milliseconds.
+ *
+ * Two seconds by default (Nick, 2026-09-06: 850 ms was too fast to read a note
+ * in), moved in half seconds between half a second and five.
+ */
+export const STEP_DEFAULT_MS = 2000
+export const STEP_MIN_MS = 500
+export const STEP_MAX_MS = 5000
+export const STEP_INCREMENT_MS = 500
 
 /** What Drill draws its queue from. */
 export type DrillScope = 'mixed' | 'selected'
@@ -346,4 +358,28 @@ export function usePlayPrefs(courseId: string): {
     otherSide,
     setOtherSide,
   }
+}
+
+/**
+ * How long auto step waits between moves, remembered between sessions.
+ *
+ * A preference in the phase 44 sense: Nick ruled that the app should stop
+ * making him re-choose things, and how fast he reads a note is exactly that
+ * kind of choice. Study's PLACE is a different thing and stays in memory
+ * only, which is the phase 40 ruling.
+ *
+ * Anything stored that is not a number on the half second inside the range
+ * falls back to the default, so a hand-edited value cannot leave the board
+ * stepping every ten milliseconds.
+ */
+export function useStepMs(): { stepMs: number; setStepMs: (ms: number) => void } {
+  const [stepMs, setStepMs] = useRemembered<number>(
+    () => {
+      const saved = Number(read(STEP_MS_KEY))
+      const inRange = saved >= STEP_MIN_MS && saved <= STEP_MAX_MS
+      return inRange && saved % STEP_INCREMENT_MS === 0 ? saved : STEP_DEFAULT_MS
+    },
+    useCallback((next: number) => write(STEP_MS_KEY, String(next)), []),
+  )
+  return { stepMs, setStepMs }
 }

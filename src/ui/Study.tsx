@@ -3,6 +3,7 @@ import { useStudy } from './study-context'
 import { Prose } from './Prose'
 import { Board } from './Board'
 import { useProgress } from './progress-context'
+import { STEP_DEFAULT_MS, STEP_INCREMENT_MS, STEP_MAX_MS, STEP_MIN_MS, useStepMs } from './prefs'
 import { activeLineIndex, nextOnLine, walkedOn } from './study-lines'
 import { splitIntro } from '../model/intro'
 import { chapterLines, fullMoveNumber, moveList, moveTexts } from '../model/lines'
@@ -88,8 +89,17 @@ export function Study({
   )
 }
 
-/** One move every 850 ms: slow enough to read the note, fast enough to watch. */
-const STEP_MS = 850
+/**
+ * The speed is the trainee's, and it is remembered. Two seconds is the
+ * default, which is the phase 45 ruling: 850 ms was the old fixed gap, and
+ * Nick, who read it as about a second, wanted longer and wanted to choose.
+ */
+const SPEEDS = { min: STEP_MIN_MS, max: STEP_MAX_MS, step: STEP_INCREMENT_MS }
+
+/** "2.0s", the gap as the buttons beside it move it. */
+function speedLabel(ms: number): string {
+  return `${(ms / 1000).toFixed(1)}s`
+}
 
 /**
  * The board's edge in CSS pixels.
@@ -129,8 +139,10 @@ function ChapterStudy({
     [chapter.id, course.id, update],
   )
   // Auto step is the screen's own: its timer must not run unseen, so it stops
-  // with the screen and does not start again by itself on return.
+  // with the screen and does not start again by itself on return. The SPEED is
+  // a preference and outlives the screen, which is a different thing.
   const [stepping, setStepping] = useState(false)
+  const { stepMs, setStepMs } = useStepMs()
   const { learnt, toggle } = useProgress()
 
   const current = chain.at(-1)
@@ -182,9 +194,13 @@ function ChapterStudy({
     const timer = setTimeout(() => {
       setChain((previous) => [...previous, next])
       if (last) setStepping(false)
-    }, STEP_MS)
+    }, stepMs)
     return () => clearTimeout(timer)
-  }, [stepping, next, chain, lines, active, setChain])
+    // `stepMs` in the dependencies on purpose: changing the speed while the
+    // board is stepping restarts the pending wait at the new gap rather than
+    // serving out the old one first. Pressing Faster and watching nothing
+    // happen for two more seconds is how a speed control feels broken.
+  }, [stepping, next, chain, lines, active, setChain, stepMs])
 
   const jump = useCallback(
     (to: LoadedNode[]) => {
@@ -315,6 +331,8 @@ function ChapterStudy({
         active={active}
         learntCount={learntCount}
         stepping={stepping}
+        stepMs={stepMs}
+        onStepMs={setStepMs}
         canStep={next !== undefined}
         isLearnt={learnt}
         onToggle={toggle}
@@ -352,6 +370,8 @@ export function LinesTable({
   active,
   learntCount,
   stepping,
+  stepMs = STEP_DEFAULT_MS,
+  onStepMs,
   canStep,
   isLearnt,
   onToggle,
@@ -363,6 +383,10 @@ export function LinesTable({
   active: number
   learntCount: number
   stepping: boolean
+  /** The gap auto step waits between moves, in milliseconds. */
+  stepMs?: number
+  /** Called with the new gap when Slower or Faster is pressed. */
+  onStepMs?: (ms: number) => void
   canStep: boolean
   isLearnt: (id: string) => boolean
   onToggle: (id: string) => void
@@ -378,9 +402,33 @@ export function LinesTable({
             {learntCount} of {lines.length} learnt
           </span>
         </h3>
-        <button type="button" className="auto-step" onClick={onStep} disabled={!canStep}>
-          {stepping ? 'Stop stepping' : 'Auto step this line'}
-        </button>
+        {/* The gap is on the screen beside the buttons that move it. A
+            control that changes an invisible number is one you press twice to
+            find out what it did. */}
+        <div className="auto-step">
+          <button type="button" onClick={onStep} disabled={!canStep}>
+            {stepping ? 'Stop stepping' : 'Auto step this line'}
+          </button>
+          <button
+            type="button"
+            className="step-speed-button"
+            onClick={() => onStepMs?.(stepMs - SPEEDS.step)}
+            disabled={!onStepMs || stepMs <= SPEEDS.min}
+          >
+            Faster
+          </button>
+          <span className="step-speed" data-testid="step-speed">
+            {speedLabel(stepMs)}
+          </span>
+          <button
+            type="button"
+            className="step-speed-button"
+            onClick={() => onStepMs?.(stepMs + SPEEDS.step)}
+            disabled={!onStepMs || stepMs >= SPEEDS.max}
+          >
+            Slower
+          </button>
+        </div>
       </div>
       <div className="lines-table">
         <table>

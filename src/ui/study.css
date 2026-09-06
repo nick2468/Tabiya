@@ -317,9 +317,27 @@
   margin-left: 8px;
 }
 
+/* The stepping button, the two speed buttons and the gap between them, on one
+   line: the speed reads as part of the control it belongs to rather than as a
+   second thing to find. */
 .auto-step {
   justify-self: start;
   margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.step-speed-button {
+  padding: 2px 8px;
+  font-size: 0.85rem;
+}
+
+.step-speed {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  min-width: 3ch;
+  text-align: center;
 }
 
 /* The table scrolls sideways in here on a narrow window. The page body must
