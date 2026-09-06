@@ -158,6 +158,10 @@ The courses agree with each other (ruled 2026-09-06, phase 43): where a White co
 a Black course reach the same position, the repertoire move one of them plays there is a
 reply the other lists, and the suite holds it.
 
+Every line ends on a move of the student's own colour (ruled 2026-09-06, phase 45): a
+leaf is where the student is left standing, and a line that stopped on the opponent's
+move would leave them a position to answer with nothing prepared.
+
 ## 4. Content schema
 
 One JSON file per chapter, in the course folder (section 10 moved these from
@@ -982,6 +986,26 @@ arrives with, which are shown on the launch options so the screen says what is a
 happen but are never written down. Gate 44 found that last one being remembered, so a
 Play on from an old strong game replaced the strength every later game started from.
 Picking a game up is not choosing a setting.
+
+2026-09-06, phase 45: **two content rulings and one about the screen.** Nick's, after
+the phase 43 gate notes recorded two things and left them.
+
+**A line ends on the student's own move.** The Slav had ten leaves ending on White's,
+because it predates the rule the newer courses were written to and nothing had ever said
+the rule out loud. Fixed by adding the move each leaf's own plan already named, which the
+engine agreed with in every case, and now held by a test.
+
+**A course does not stop one move before another course's point.** The Najdorf's Alapin
+line ended at 9...Bd7 where Nick's own Alapin course plays 10.Nxd7 and carries on. The
+cross-course test of phase 43 excludes leaves on purpose, so nothing would ever have
+caught it. The Najdorf reaches 11...e6 now, with White's moves taken from the Alapin
+rather than invented.
+
+**Auto step has a speed and it is the trainee's.** The gap was a fixed 850 ms; it is 2000
+by default now, moved by Slower and Faster in half seconds between 500 and 5000, with the
+gap on the screen beside them. The speed is remembered, which follows the phase 44 ruling
+about settings; Study's PLACE stays in memory only, which is phase 40's, and the two are
+different things.
 
 ## 9. v1 acceptance
 

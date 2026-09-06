@@ -179,8 +179,11 @@ so two replies playing the same move are simply a duplicated branch and are reje
 
 ### What a leaf carries
 
-A leaf ends a line, and two fields belong to it alone. `plan` says how the student
-continues once the book runs out. `name` says what the line is, in the words a person
+A leaf ends a line, and it ends on a move of the STUDENT's own colour: a leaf is where
+the student is left standing, so it has to be their own move that put them there, and a
+line that stopped on the opponent's move would leave them a position to answer with
+nothing prepared. A test holds every course to it. `plan` says how the student continues
+once the book runs out. `name` says what the line is, in the words a person
 would use: "Black trades on g3", not "2...e6 3.e3 Nf6 4.Nf3 Bd6 5.Bg3 Bxg3". Study
 lists a chapter's lines by name, which is why the name has to be unique within the
 chapter and short enough to read in a table column.
