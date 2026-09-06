@@ -47,9 +47,20 @@ board appears, Nick plays a move, the app grades it.
 
 Cards are keyed by position (FEN) and deduplicated across chapters, so a shared setup
 move is only ever one card. A "drill my weak areas" filter prefers cards whose concept
-tags have the lowest rolling accuracy. A second, unremembered option, "Include cards
-that are not due yet", offers everything due first and then the cards nearest coming
-back; an early answer goes through the ordinary review path.
+tags have the lowest rolling accuracy. A second option, "Include cards that are not due
+yet", offers everything due first and then the cards nearest coming back; an early
+answer goes through the ordinary review path. Both are remembered between sessions, as
+every Play and Drill setting is.
+
+Once an answer is in, the board shows the position AFTER the repertoire move, right or
+wrong, with the green arrow saying where the piece went and a red one saying where a
+wrong move went instead.
+
+"Come back in" chooses the unit the scheduled gap is spent in: minutes, hours or days,
+hours by default. FSRS works the gap out in days as it always has and every parameter it
+computes is kept untouched; the unit is applied to the clock alone, so "back in 3 days"
+becomes "back in 3 hours" or "back in 3 minutes" and switching back to days costs
+nothing. Minutes and hours are for practice, not for remembering.
 
 ### Play
 
@@ -937,6 +948,36 @@ it is unsound, and that is a finding, not a consistency fix. Same-colour pairs a
 purpose; the London and the Colle both answer 1...d5 and are meant to differ. The first run
 found seven beyond the three phase 42 had named, all closed at phase 43 by listing the
 other course's move with an engine-checked answer.
+
+2026-09-06, phase 44: **three rulings about Drill and one about settings.** Nick's, all
+of them, after a day on 1.10.1.
+
+**The board shows the answer.** A right answer leaves the piece on the square he moved it
+to, and a wrong one puts his move back under the red arrow AND plays the repertoire move
+on the board under the green one. The board used to redraw the card's own position after
+any answer, so the piece jumped home and an arrow pointed after it. His reason: the
+visual memory of the right position will serve him better than an arrow alone.
+
+**The gap has a unit.** Minutes, hours or days, remembered, hours by default. FSRS works
+its gap out in days as it always has and every field it computes is written down
+untouched, `scheduled_days` included; the app applies that number in the chosen unit when
+it writes the due date and nowhere else. Switching the unit back to days therefore costs
+nothing, because the memory model was never told. The caveat, which the Help states: a
+card answered again an hour later looks early to FSRS, which is exactly what it is, so
+minutes and hours are for hammering a line today rather than for remembering it.
+
+**Every Play and Drill setting is remembered between sessions**, which reverses two
+earlier rulings recorded above. Phase 23 made "Include cards that are not due yet" a
+one-sitting choice, on the reasoning that a box left ticked would make "due" mean
+nothing; phase 33 made "Play the other side" a launch choice. Both are settings like any
+other now, because a setting the app forgets is one Nick re-makes every day and he uses
+the app every day. Play remembers its launch shape, the chapter it spars against PER
+COURSE (a chapter id from another course means nothing), how long, how strong and the
+other-side box; Drill remembers both boxes beside the scope and the gap unit. A remembered
+chapter the course no longer has falls back to its first chapter, the way a remembered
+course falls back to the first course. Two things are still not kept and neither is a
+setting: a play request, which belongs to a position, and the side a recorded game was
+played on, which belongs to the record.
 
 ## 9. v1 acceptance
 

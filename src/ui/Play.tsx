@@ -3,7 +3,7 @@ import { Board } from './Board'
 import { BOARD_SIZE } from './board-size'
 import { HelpAsk, HelpSaid } from './Help'
 import { usePlay } from './play-context'
-import { useCourseMoves } from './prefs'
+import { resolvePlayChapter, useCourseMoves, usePlayPrefs } from './prefs'
 import {
   requestFromReplay,
   whyNotPlayable,
@@ -141,14 +141,27 @@ export function Play({
   const { state } = useProgress()
   const game = usePlay()
   const chapters = course.chapters
-  const [launch, setLaunch] = useState<Shape_>(request ? 'here' : 'any')
-  const [chapterId, setChapterId] = useState(chapters[0]?.id ?? '')
-  // The other side, ticked for this game. A launch choice like the radios,
-  // so it is not remembered; the setting under it is.
-  const [otherTicked, setOtherTicked] = useState(false)
+  // Every launch setting is remembered between sessions (Nick's ruling,
+  // 2026-09-06), read once here and written as it is changed. Only "From a
+  // Study position" is not: it names a position, and the position is gone by
+  // the next run. The other-side box is remembered too, which reverses the
+  // phase 33 ruling that made it a per-game choice.
+  const prefs = usePlayPrefs(course.id)
+  const [launch, setLaunchShape] = useState<Shape_>(request ? 'here' : prefs.launch)
+  const chapter = resolvePlayChapter(prefs.chapterId, chapters)
+  const chapterId = chapter?.id ?? ''
   const { courseMoves, setCourseMoves } = useCourseMoves()
-  const [length, setLength] = useState<GameLength>('move15')
-  const [level, setLevel] = useState(4)
+  const { length, setLength, level, setLevel, otherSide: otherTicked, setOtherSide: setOtherTicked } = prefs
+
+  // The remembered shape is one of the two that can be restored; picking the
+  // third is a thing that happens to this game and not a preference.
+  const setLaunch = useCallback(
+    (next: Shape_) => {
+      setLaunchShape(next)
+      if (next !== 'here') prefs.setLaunch(next)
+    },
+    [prefs],
+  )
   // "This chapter's line" is the one people misread here, so the launch
   // options carry the screen's only `?`.
   const [askLaunch, setAskLaunch] = useState(false)
@@ -160,8 +173,16 @@ export function Play({
   // a new game.
 
   useEffect(() => {
-    if (request) setLaunch('here')
+    if (request) setLaunchShape('here')
   }, [request])
+
+  // A course change under a mounted screen brings that course's chapter with
+  // it, and the shape falls back to Any line if the remembered chapter has
+  // gone: `resolvePlayChapter` picks the first one, which is a chapter the
+  // trainee did not choose but is at least a chapter that exists.
+  useEffect(() => {
+    if (launch === 'here' && !request) setLaunchShape(prefs.launch)
+  }, [launch, prefs.launch, request])
 
   // A resumed game arrives with its own strength and no cap. Both are set on
   // the screen rather than applied behind it, so the options say what is about
@@ -418,7 +439,11 @@ export function Play({
             This chapter's line
           </label>
           {launch === 'chapter' ? (
-            <select value={chapterId} onChange={(event) => setChapterId(event.target.value)}>
+            <select
+              aria-label="Which chapter"
+              value={chapterId}
+              onChange={(event) => prefs.setChapterId(event.target.value)}
+            >
               {chapters.map((chapter) => (
                 <option key={chapter.id} value={chapter.id}>
                   {chapter.title}
@@ -473,7 +498,11 @@ export function Play({
 
         <fieldset>
           <legend>How strong</legend>
-          <select value={level} onChange={(event) => setLevel(Number(event.target.value))}>
+          <select
+            aria-label="How strong"
+            value={level}
+            onChange={(event) => setLevel(Number(event.target.value))}
+          >
             {allProfiles().map((profile) => (
               <option key={profile.level} value={profile.level}>
                 {levelName(profile.level)}

@@ -122,7 +122,8 @@ describe('how the course plays', () => {
     const again = renderApp()
     await again.user.selectOptions(await screen.findByLabelText('Course'), 'najdorf-black')
     await goTo(again.user, 'Play')
-    await again.user.click(await screen.findByLabelText('Play the other side'))
+    // The box comes back ticked since phase 44, so the setting under it is
+    // already showing and does not have to be revealed again.
     const held = (await screen.findByLabelText('Sometimes a listed alternative')) as HTMLInputElement
     expect(held.checked).toBe(true)
     expect(window.localStorage.getItem('london-trainer.other-side')).toBe('sometimes')

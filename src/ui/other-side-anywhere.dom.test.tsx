@@ -90,7 +90,14 @@ describe('the box on a resumed game', () => {
 })
 
 describe('what is remembered', () => {
-  it('forgets the box across a reload and keeps the setting under it', async () => {
+  /**
+   * This test used to pin the opposite. Phase 33 made the box a launch choice,
+   * made fresh each game, and this test held it forgotten across a reload.
+   * Nick reversed that on 2026-09-06: every Play and Drill setting is
+   * remembered, because a setting the app forgets is one he re-makes daily.
+   * The setting under the box was always remembered and still is.
+   */
+  it('remembers the box across a reload, and the setting under it', async () => {
     const { user } = renderApp()
     await openCaroKann(user)
     await goTo(user, 'Play')
@@ -103,10 +110,7 @@ describe('what is remembered', () => {
     const again = renderApp()
     await openCaroKann(again.user)
     await goTo(again.user, 'Play')
-    expect(otherSideBox().checked).toBe(false)
-    // The setting is a preference and the box is a launch choice: tick the
-    // box again and the setting is still what it was set to.
-    await again.user.click(otherSideBox())
+    expect(otherSideBox().checked).toBe(true)
     const held = (await screen.findByLabelText('Sometimes a listed alternative')) as HTMLInputElement
     expect(held.checked).toBe(true)
   })
