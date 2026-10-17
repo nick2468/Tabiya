@@ -5309,3 +5309,33 @@ the Najdorf's Alapin line are listed with their old and new ids in the two conte
 above.
 
 - [x] **Review gate 45**
+
+## Phase 47 - the app is called Tabiya
+
+Goal: Nick, 2026-10-17, preparing to make the GitHub repository public. The app is renamed
+**Tabiya**, the standard position an opening heads for before play diverges, which is what
+every chapter in every course teaches. The old name sat in a field of near-identical
+descriptive titles, which is what it was changed to get out of.
+
+Chipped as `chips/phase-47-tabiya.md`. The data folders move, so this is a migration phase
+and the phase 15 rules bind in full: a verified COPY, nothing deleted, the old folder left
+for Nick. Three identities and only two of them move. The product name and the data folders
+change; the Tauri identifier and the `london-trainer.*` localStorage keys do not, both
+because they are invisible and changing them would cost something for nothing.
+
+Version is the next patch after phase 46, which is chipped in
+`chips/phase-46-bar-number.md` and not yet built or entered here.
+
+- [ ] 47.1 The identifier stays, and the false claim about why is corrected.
+- [ ] 47.2 The localStorage keys stay, with a comment saying why.
+- [ ] 47.3 The data folders move, the migration chain carries the trainee across.
+- [ ] 47.4 The capability scopes follow, with both old generations readable.
+- [ ] 47.5 The installer hook names the new folders; a second app appears, as expected.
+- [ ] 47.6 Every place a person reads the name.
+- [ ] 47.7 What must NOT be renamed: chips, BRIEF, the historical plan and spec entries.
+- [ ] 47.8 SPEC and PLAN.
+- [ ] 47.9 Proved in the browser AND in a packaged build against copied folders.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 47**
