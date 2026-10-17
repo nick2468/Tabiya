@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.10.3",
   "type": "module",
+  "license": "MIT",
   "scripts": {
     "dev": "npm run engine && vite --port 5175 --strictPort",
     "build": "npm run engine && tsc -b && vite build",
