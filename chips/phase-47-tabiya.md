@@ -1,7 +1,11 @@
 # Chip: phase 47 - the app is called Tabiya
 
 You are a builder session in the Repertoire Trainer repository, working on `main` (no
-worktree - repo convention, and there is no remote yet: never push, never create one).
+worktree - repo convention). **There IS a remote now**, added 2026-10-17: `origin` at
+`github.com/nick2468/Tabiya`, private for the moment. **You still never push.** Pushing is
+the orchestrator's step after the review gate, which is the house rule in
+`C:\Users\nick2\Code\CLAUDE.md`, and it matters more than usual here because this phase
+touches the trainee's data folders.
 **The folder is either `C:\Users\nick2\Code\London` or `C:\Users\nick2\Code\Tabiya`**,
 depending on whether Nick has renamed it yet (see the out of scope note). Work in whichever
 one you were started in and do not try to rename it: a session cannot rename the directory
@@ -202,7 +206,9 @@ absolute paths in tracked files are stack traces inside `docs/engine-runs/**` an
 path-traversal test fixture, none of which are ever read as paths. The open items should
 say whether the folder had already been renamed when this phase ran.
 
-Creating the GitHub remote. The identifier. The localStorage keys. Any chess content.
+Creating the repository on GitHub, which is done and PRIVATE. Making it public is Nick's
+step and should wait for this phase, because a public repository called Tabiya whose every
+string says Repertoire Trainer is a poor first page. The identifier. The localStorage keys. Any chess content.
 Any change to the four checkers. Phase 46's eval bar number, which is its own chip.
 
 ## Escalation
