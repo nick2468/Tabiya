@@ -1,7 +1,11 @@
 # Chip: phase 47 - the app is called Tabiya
 
-You are a builder session in `C:\Users\nick2\Code\London`, working on `main` (no
+You are a builder session in the Repertoire Trainer repository, working on `main` (no
 worktree - repo convention, and there is no remote yet: never push, never create one).
+**The folder is either `C:\Users\nick2\Code\London` or `C:\Users\nick2\Code\Tabiya`**,
+depending on whether Nick has renamed it yet (see the out of scope note). Work in whichever
+one you were started in and do not try to rename it: a session cannot rename the directory
+it is running in, which was confirmed at this phase.
 Read SPEC.md sections 8 and 10, PLAN.md phases 15, 16 and 17 (the folder move, the second
 copy and the uninstaller: this phase is the same job a second time),
 `src/storage/paths.ts` in full, `src/storage/migrate.ts` in full, `src/storage/safety.ts`,
@@ -181,9 +185,24 @@ are not interchangeable.
 
 ## Out of scope
 
-Renaming the repository FOLDER on disk (`C:\Users\nick2\Code\London`), which a session
-cannot do while running inside it: that is Nick's step and the open items should remind
-him. Creating the GitHub remote. The identifier. The localStorage keys. Any chess content.
+Renaming the repository FOLDER on disk. This was tried at chip-writing time and failed
+with "the process cannot access the file because it is being used by another process":
+the open Claude session holds its own project directory, and the harness resets the shell
+back into it after every command, so changing directory inside a call does not help. It is
+Nick's step, and with the session closed it is two commands:
+
+```
+cd C:\Users\nick2\Code
+ren London Tabiya
+```
+
+then reopen the session on `C:\Users\nick2\Code\Tabiya`. Nothing inside the repository
+depends on the folder name: `.claude/launch.json` runs npm relatively, and the only
+absolute paths in tracked files are stack traces inside `docs/engine-runs/**` and one
+path-traversal test fixture, none of which are ever read as paths. The open items should
+say whether the folder had already been renamed when this phase ran.
+
+Creating the GitHub remote. The identifier. The localStorage keys. Any chess content.
 Any change to the four checkers. Phase 46's eval bar number, which is its own chip.
 
 ## Escalation
