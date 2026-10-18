@@ -272,6 +272,23 @@ describe('what the trainee is told afterwards', () => {
     expect(note).not.toContain('course you had added')
   })
 
+  it('does not claim the folder it came from was named after an internal id', () => {
+    // True of the identifier folder, false of `Repertoire Trainer`, and the
+    // note cannot tell which it came from. So it says what IS true of both:
+    // the new folder carries the app's name and the old one no longer does.
+    const note = migrationNote({
+      kind: 'migrated',
+      from: 'C:/AppData/Roaming/Repertoire Trainer',
+      to: 'C:/AppData/Roaming/Tabiya',
+      lines: 2,
+      courses: 0,
+      trouble: [],
+    })
+
+    expect(note).toContain("carries the app's name")
+    expect(note).not.toContain('internal id')
+  })
+
   it('says which courses did not come across', () => {
     const note = migrationNote({
       kind: 'migrated',

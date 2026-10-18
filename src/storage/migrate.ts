@@ -5,10 +5,16 @@ import type { DataRoots } from './paths'
  * Carrying the trainee's data from the old folder to the new one.
  *
  * Phase 15 renamed the data folder from the Tauri identifier to the product
- * name. The rename is cosmetic; the file inside it is not. So the move is a
- * COPY, verified before the new location counts as live, and the old folder is
- * left exactly as it was for the trainee to delete when they are satisfied. A
- * migration that deletes has one chance to be right.
+ * name, and phase 47 renamed it again when the product was renamed. The rename
+ * is cosmetic; the file inside it is not. So the move is a COPY, verified
+ * before the new location counts as live, and the old folder is left exactly as
+ * it was for the trainee to delete when they are satisfied. A migration that
+ * deletes has one chance to be right.
+ *
+ * It still takes ONE source folder and one destination, which is why phase 47
+ * changed nothing in here but a sentence of the note. There are two older
+ * generations now, and choosing between them is `pickOldRoot` in `paths.ts`:
+ * that is a question about where data has lived, not about how to copy it.
  *
  * The failure rule matters more than the happy path. If the old file is there
  * and cannot be read, copied or verified, the app must not start blank and must
@@ -226,8 +232,8 @@ export function migrationNote(done: Extract<Migration, { kind: 'migrated' }>): s
       ? ''
       : ` These course folders did not come across, so import them again if you want them: ${done.trouble.join('; ')}.`
   return (
-    `Your data folder moved to ${done.to}. It is named after the app now, rather than ` +
-    `after an internal id. ${what}, and the copy was checked afterwards. The old folder ` +
+    `Your data folder moved to ${done.to}. It carries the app's name, which the old one ` +
+    `does not any more. ${what}, and the copy was checked afterwards. The old folder ` +
     `${done.from} was left exactly as it was, so nothing is at risk: delete it yourself ` +
     `once you are happy.${trouble}`
   )
