@@ -89,7 +89,7 @@ export function gameToPgn(game: GameForPgn): string {
   const result = pgnResult(report.outcome, studentColour)
 
   const header = [
-    pgnTag('Event', 'Repertoire Trainer'),
+    pgnTag('Event', 'Tabiya'),
     pgnTag('Site', game.courseTitle),
     pgnTag('Date', pgnDate(game.at)),
     pgnTag('Round', '-'),

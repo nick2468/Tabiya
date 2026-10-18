@@ -2,7 +2,7 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "london-dev",
+      "name": "tabiya-dev",
       "runtimeExecutable": "npm",
       "runtimeArgs": [
         "run",

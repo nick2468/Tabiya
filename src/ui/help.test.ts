@@ -125,7 +125,7 @@ const catalog: Catalog = {
   courses: [course, other],
   chapters: [...course.chapters, ...other.chapters],
   scanned: true,
-  folder: 'C:/Users/example/Repertoire Trainer/courses',
+  folder: 'C:/Users/example/Tabiya/courses',
   find: (id: string) => [course, other].find((each) => each.id === id),
   rescan: async () => {},
 }
@@ -262,7 +262,7 @@ const screens: Record<Screen, string> = {
       createElement(Report, {
         report: reportFixture,
         opponentColour: 'black' as const,
-        pgn: '[Event "Repertoire Trainer"]',
+        pgn: '[Event "Tabiya"]',
         replay: { ply: 2, count: 4, onJump: () => {}, onBack: () => {}, onForward: () => {} },
       }),
     ),

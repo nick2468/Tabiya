@@ -153,7 +153,7 @@ export function Shell() {
       <header className="app-header">
         <div>
           <h1>
-            Repertoire Trainer <span className="app-version">v{__APP_VERSION__}</span>
+            Tabiya <span className="app-version">v{__APP_VERSION__}</span>
           </h1>
           <p className="app-tagline">Learn your openings by understanding them.</p>
         </div>

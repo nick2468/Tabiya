@@ -22,11 +22,12 @@ import { parseProgressJson } from '../storage/progress'
 /**
  * What an exported progress file is called by default.
  *
- * Renamed in phase 16 with the executable and the profile folder. It is only a
- * suggestion in a Save dialog and nothing reads it back by name, so an older
- * export the trainee already has still imports.
+ * Renamed in phase 16 with the executable and the profile folder, and again in
+ * phase 47 with the app. It is only a suggestion in a Save dialog and nothing
+ * reads it back by name, so every older export the trainee already has still
+ * imports, under whichever of the three names it was saved with.
  */
-const FILE_NAME = 'repertoire-trainer-progress.json'
+const FILE_NAME = 'tabiya-progress.json'
 
 export interface BackupResult {
   /** Something to show the trainee. Null when they cancelled. */

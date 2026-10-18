@@ -68,7 +68,7 @@ describe('gameToPgn', () => {
   it('fills the seven tags, and invents nothing', () => {
     const { tags } = parsePgn(gameToPgn(game)).games[0]
     expect(tags).toMatchObject({
-      Event: 'Repertoire Trainer',
+      Event: 'Tabiya',
       Site: 'The London System',
       Round: '-',
       White: 'You',

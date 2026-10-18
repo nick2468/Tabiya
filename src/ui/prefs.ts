@@ -31,7 +31,7 @@ export type { DrillGap } from '../scheduler'
  * imported, and a course id inside it would travel with an export to a machine
  * that may not have that course. Losing one of these costs a click; carrying
  * one to the wrong machine costs a puzzle. `localStorage` lives in the
- * WebView2 profile under `Repertoire Trainer Data`, which survives an upgrade
+ * WebView2 profile under `Tabiya Data`, which survives an upgrade
  * and goes on a ticked uninstall, and that is the right life for a preference.
  *
  * Storage can be refused outright, in a private window or a locked-down

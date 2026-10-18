@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    repertoire_trainer_lib::run()
+    tabiya_lib::run()
 }

@@ -1,4 +1,4 @@
-//! The Tauri shell around the Repertoire Trainer web app.
+//! The Tauri shell around the Tabiya web app.
 //!
 //! It does almost nothing on purpose. The app is the same web build that runs
 //! in a browser; the only reason for the wrapper is a real window on Windows
@@ -7,16 +7,16 @@
 //! The one thing it does do is choose where the window keeps its WebView2
 //! profile. Tauri's default is a folder named after the bundle identifier,
 //! which on this machine meant `%LOCALAPPDATA%\com.nick.london-trainer` for an
-//! app called Repertoire Trainer. The identifier itself deliberately does not
-//! change: NSIS keys the install on the product name, nobody ever sees the
-//! identifier, and changing it would buy nothing while adding a third
-//! generation of folder for the frontend's migration to carry a trainee out
-//! of. (This comment said until phase 47 that changing the identifier had
-//! already put a second app beside the first. It had not: the identifier has
-//! never changed. The second app came from the PRODUCT NAME change at phase
-//! 15. The matching correction is in `src/storage/paths.ts`.) So the folder is
-//! pointed somewhere sensible instead. Sensible is NOT
-//! `%LOCALAPPDATA%\Repertoire Trainer`: that is the install folder itself.
+//! app called Tabiya. The identifier itself deliberately does not change: NSIS
+//! keys the install on the product name, nobody ever sees the identifier, and
+//! changing it would buy nothing while adding a third generation of folder for
+//! the frontend's migration to carry a trainee out of. (This comment said
+//! until phase 47 that changing the identifier had already put a second app
+//! beside the first. It had not: the identifier has never changed. The second
+//! app came from the PRODUCT NAME change at phase 15. The matching correction
+//! is in `src/storage/paths.ts`.) So the folder is pointed somewhere sensible
+//! instead. Sensible is NOT `%LOCALAPPDATA%\Tabiya`: that is the install
+//! folder itself.
 //!
 //! That is why the window is built here rather than left to `tauri.conf.json`.
 //! Every setting still lives in the config: the window is declared there with
@@ -68,5 +68,5 @@ pub fn run() {
             Ok(())
         })
         .run(tauri::generate_context!())
-        .expect("error while running the Repertoire Trainer window");
+        .expect("error while running the Tabiya window");
 }

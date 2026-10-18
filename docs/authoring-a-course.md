@@ -1,6 +1,6 @@
 # Writing a course
 
-A course in Repertoire Trainer is one file. You write it in a chess program you
+A course in Tabiya is one file. You write it in a chess program you
 already know, export it, and open it in the app. There is no programming in this,
 and nothing in this page needs anything except a chess board and words.
 

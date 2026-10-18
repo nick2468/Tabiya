@@ -1,8 +1,11 @@
-# Repertoire Trainer
+# Tabiya
 
 A Windows desktop app for learning chess opening repertoires: read a line and why
 each move is played, drill the moves back from memory on a schedule, then play the
 opening against an engine that is steered into the lines you have studied.
+
+A tabiya is the standard position an opening heads for, before play diverges. That
+is what every chapter here teaches.
 
 Built in Australia.
 

@@ -83,7 +83,7 @@ export const HELP_SECTIONS: HelpSection[] = [
     id: 'what',
     title: 'What this is',
     body: [
-      'Repertoire Trainer teaches you chess opening repertoires. A course is one',
+      'Tabiya teaches you chess opening repertoires. A course is one',
       'repertoire, written as chapters of lines, with a note on every move saying why it',
       'is played. You study the lines, drill them until they come back on their own, and',
       'play them against Stockfish.',

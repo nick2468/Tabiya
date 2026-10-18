@@ -5447,8 +5447,8 @@ built: 1.10.5 if it has landed by then, 1.10.4 if it has not.
 - [x] 47.3 The data folders move, the migration chain carries the trainee across.
 - [x] 47.4 The capability scopes follow, with both old generations readable.
 - [ ] 47.5 The installer hook names the new folders; a second app appears, as expected.
-- [ ] 47.6 Every place a person reads the name.
-- [ ] 47.7 What must NOT be renamed: chips, BRIEF, the historical plan and spec entries.
+- [x] 47.6 Every place a person reads the name.
+- [x] 47.7 What must NOT be renamed: chips, BRIEF, the historical plan and spec entries.
 - [ ] 47.8 SPEC and PLAN.
 - [ ] 47.9 Proved in the browser AND in a packaged build against copied folders.
 

@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Repertoire Trainer",
+  "productName": "Tabiya",
   "version": "1.10.4",
   "identifier": "com.nick.london-trainer",
   "build": {
@@ -13,7 +13,7 @@
     "windows": [
       {
         "create": false,
-        "title": "Repertoire Trainer",
+        "title": "Tabiya",
         "width": 1400,
         "height": 980,
         "minWidth": 900,

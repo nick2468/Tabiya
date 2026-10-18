@@ -342,7 +342,7 @@ export function Play({
     return gameToPgn({
       moves: session.moves,
       report,
-      courseTitle: game.courseTitle ?? 'Repertoire Trainer',
+      courseTitle: game.courseTitle ?? 'Tabiya',
       studentColour: session.studentColour,
       level: game.level ?? 0,
       at: game.recordedAt ?? new Date().toISOString(),
