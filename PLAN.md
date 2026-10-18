@@ -5333,7 +5333,7 @@ stops being harmless the moment a number appears on the bar.
 - [x] 46.3 The bar at 24 px, the gap at 20, the number's colours from the piece colours.
 - [x] 46.4 Tests for the number and its placement, and the bar read after a move.
 - [x] 46.5 SPEC section 2 and the section 8 reversal; this plan; version 1.10.4.
-- [ ] 46.6 Proved in the browser build, both themes, a White game and a Black game.
+- [x] 46.6 Proved in the browser build, both themes, a White game and a Black game.
 - [x] 46.7 `gameToPgn` says a checkmate once.
 - [x] 46.8 The two test files that compiled by accident declare their node types.
 - [x] 46.9 `whitePovPawns` reads `mate 0` as a loss for the side to move.
