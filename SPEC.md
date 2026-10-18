@@ -93,7 +93,8 @@ Full or partial games as White against Stockfish, in three launch shapes:
 
 Options: game length (to move 10, to move 15, or full game) and strength (a 1-8 scale;
 implementation in section 5). A live evaluation bar sits to the left of the board while
-the game is going, in the board's own orientation, and it carries no number. The game
+the game is going, in the board's own orientation, and it carries the evaluation as a
+number, always from White's point of view (phase 46, reversing phase 23). The game
 names the course it belongs to above the board, and the chapter when it is sparring
 against one. A reviewed game can be walked through move by move, copied out as PGN, and
 resumed from where it stopped. A game in progress can also be stopped and discarded, with
@@ -103,7 +104,8 @@ no report and no record (phase 39). After the game or segment, a report:
   Black left book first, the report says from which move it was "just chess".
 - A blunder scan of White's moves at fixed engine effort.
 - Verdicts in words ("clearly better for White"), never bare numbers. That binds the
-  live bar too: it is a shape, with the same words as its accessible name.
+  REPORT, which is read once at the end. The live bar is read out of the corner of an
+  eye a hundred times a game, and since phase 46 it carries the number instead.
 
 ### Progress
 
@@ -1006,6 +1008,22 @@ by default now, moved by Slower and Faster in half seconds between 500 and 5000,
 gap on the screen beside them. The speed is remembered, which follows the phase 44 ruling
 about settings; Study's PLACE stays in memory only, which is phase 40's, and the two are
 different things.
+
+2026-09-13, phase 46: **the live bar carries the number, which reverses half of the
+phase 23 ruling.** That ruling let the bar in on condition it stayed a shape: "no
+number, so it says which way the game is going and not by how much". Nick built Simply
+Chess out of this app's code, gave its bar the number, played with it, and wants the same
+here. His reason is the one that settles it: the live bar is read out of the corner of an
+eye a hundred times a game, where a number is quicker than a phrase, and "clearly better"
+covers a range he can see the inside of. **The report is untouched** and still speaks in
+words, because it is read once, at the end, where a word is what the reader can act on.
+
+The rest of phase 23 stands and is what keeps the original concern honest: the bar is the
+engine's own view at full strength, and every value it shows is handed to the scan, so the
+report cannot contradict the screen afterwards. The number is from White's point of view
+like every other number in the app, which means it is made where the score is read and the
+side to move is still known: a mate is reported from the side to move, and a sign worked
+out later from a number that has forgotten its side is a sign that will one day be wrong.
 
 ## 9. v1 acceptance
 

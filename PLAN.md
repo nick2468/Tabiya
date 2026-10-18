@@ -5328,17 +5328,66 @@ a third one pulls node types into the whole program, and a mate-score sign that 
 `mate 0` as a win for the side that has just been mated. The last is harmless today and
 stops being harmless the moment a number appears on the bar.
 
-- [ ] 46.1 The evaluation carries its text beside its number.
-- [ ] 46.2 The live bar renders the number; the accessible name carries it.
-- [ ] 46.3 The bar at 24 px, the gap at 20, the number's colours from the piece colours.
-- [ ] 46.4 Tests for the number and its placement, and the bar read after a move.
-- [ ] 46.5 SPEC section 2 and the section 8 reversal; this plan; version 1.10.4.
+- [x] 46.1 The evaluation carries its text beside its number.
+- [x] 46.2 The live bar renders the number; the accessible name carries it.
+- [x] 46.3 The bar at 24 px, the gap at 20, the number's colours from the piece colours.
+- [x] 46.4 Tests for the number and its placement, and the bar read after a move.
+- [x] 46.5 SPEC section 2 and the section 8 reversal; this plan; version 1.10.4.
 - [ ] 46.6 Proved in the browser build, both themes, a White game and a Black game.
-- [ ] 46.7 `gameToPgn` says a checkmate once.
-- [ ] 46.8 The two test files that compiled by accident declare their node types.
-- [ ] 46.9 `whitePovPawns` reads `mate 0` as a loss for the side to move.
+- [x] 46.7 `gameToPgn` says a checkmate once.
+- [x] 46.8 The two test files that compiled by accident declare their node types.
+- [x] 46.9 `whitePovPawns` reads `mate 0` as a loss for the side to move.
 
 Acceptance: as the chip's own section.
+
+**For the gate.** 46.1: an evaluation is `{ pawns, text }`, made by `evaluationOf` at the
+two places a score is read with its side to move still in hand, which are the provider's
+`evaluate` and `scanGame`. That is the whole reason the text is carried rather than
+derived: the engine reports from the side to move, a mate above all, and a sign worked out
+later from a number that has forgotten its side is a sign that will one day be wrong.
+Everything else reads `.pawns`: `scanForSlips`, `buildReport`, the report's `finalEval`
+and the record's. **The stored record is unchanged**, because `PlayRecord.finalEval` was
+always a number and still is, so nothing on disk moved and there is no migration.
+
+46.2 and 46.3: `LiveEvalBar` draws the number where `numberPlacement` says, which is the
+larger share at that share's outer end, so the digits are never printed across the join.
+The accessible name is `Evaluation: +0.4` rather than the report's words. The bar is 24 px
+rather than 16 and `.play-board`'s gap is 20 rather than 28, which keeps the 44 px the
+button rows start at: measured live at 1400x980, bar left 24 and width 24, gap 20, board
+left 68, `.play-controls` left 68, so the inset from the bar's own left edge is exactly 44.
+The bar, `.board` and `cg-board` all have height 416 and all end on 593.19, to the
+hundredth of a pixel.
+
+46.4: eleven score-and-side pairs through `evalText`, each asserted on `evaluationOf` too;
+`-0.0` never printed; `M0` with its sign both ways; the four placement cases plus the level
+one; and two DOM tests that read the number off the screen through the real provider, one
+as White (`+0.4` with the fake engine at `cp: 40`) and one as Black (`-0.3` at `cp: 30`,
+`at-bottom`). Both go red when the sign in `evalText` is flipped, which is how they were
+checked. The suite is 1255 tests in 12.9 seconds and `tsc -b` is clean.
+
+46.6, driven at 1400x980 against the dev server with a real Stockfish: a London game dark
+showed `+0.4` `at-bottom on-white` with the accessible name `Evaluation: +0.4`; the same
+game in light showed the same number in the same colour, because both are piece colours
+and neither moves between themes (`rgb(42, 44, 48)` on `#ece9e2`, measured in both). A Slav
+game, where the trainee is Black and the engine opens, showed `+0.2` `at-top on-white` with
+White's share drawn from the top, which is the other orientation and the other end of the
+bar. No console errors; storage cleared afterwards. The two legible screenshots in the
+notes were taken at 800 wide, because the pane scales a 1400-wide page down and a 10 px
+number does not survive it; every measurement above was taken at 1400x980.
+
+46.7, 46.8 and 46.9 are the three faults copying this code into Simply Chess exposed, each
+its own commit. The PGN writer said a checkmate twice because `buildReport` takes the
+outcome as the verdict when there is no evaluation to put in words; the fix pushes the
+outcome only when it differs, and the new test goes red on the old line. The two test
+files that read `node:fs` now declare their own node types: deleting the one
+`/// <reference>` in `blank-start-real.test.ts` put TS2591 on all three, which is how the
+hidden dependency was measured. And `whitePovPawns` read `mate 0` as a win for the side to
+move, when it means that side is mated already; harmless today because no candidate ever
+carries it, and no longer harmless once the sign is a number on the screen.
+
+Reuse review: the find the chip predicted was there. `scanGame` and the provider's
+`evaluate` each split a FEN by hand to get the side to move, beside `sideToMove` in
+`position.ts` that does exactly that; both now call it.
 
 - [ ] **Review gate 46**
 
