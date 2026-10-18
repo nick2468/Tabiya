@@ -5310,6 +5310,38 @@ above.
 
 - [x] **Review gate 45**
 
+## Phase 46 - the number on the live evaluation bar
+
+Goal: Nick, 2026-09-13, after building Simply Chess (`C:\Users\nick2\Code\SimpleChess`),
+whose bar carries the engine's number: the trainer's bar gets the same number. The report
+keeps its words. This reverses half of the phase 23 ruling, which said the live bar carries
+no number; the other half, that verdicts are words and never bare numbers, still stands and
+the report is untouched.
+
+Chipped by Nick as `chips/phase-46-bar-number.md`, committed 2026-10-18 so it lives in the
+repository rather than only on his disk. Simply Chess is this app's code copied the other
+way, so the chip reads those files as the origin and copies the number back. Version 1.10.4.
+
+The chip also carries three faults that copying the code to the other app exposed here: a
+PGN closing comment that says a checkmate twice, two test files that only type-check because
+a third one pulls node types into the whole program, and a mate-score sign that reads
+`mate 0` as a win for the side that has just been mated. The last is harmless today and
+stops being harmless the moment a number appears on the bar.
+
+- [ ] 46.1 The evaluation carries its text beside its number.
+- [ ] 46.2 The live bar renders the number; the accessible name carries it.
+- [ ] 46.3 The bar at 24 px, the gap at 20, the number's colours from the piece colours.
+- [ ] 46.4 Tests for the number and its placement, and the bar read after a move.
+- [ ] 46.5 SPEC section 2 and the section 8 reversal; this plan; version 1.10.4.
+- [ ] 46.6 Proved in the browser build, both themes, a White game and a Black game.
+- [ ] 46.7 `gameToPgn` says a checkmate once.
+- [ ] 46.8 The two test files that compiled by accident declare their node types.
+- [ ] 46.9 `whitePovPawns` reads `mate 0` as a loss for the side to move.
+
+Acceptance: as the chip's own section.
+
+- [ ] **Review gate 46**
+
 ## Phase 47 - the app is called Tabiya
 
 Goal: Nick, 2026-10-17, preparing to make the GitHub repository public. The app is renamed
@@ -5323,8 +5355,8 @@ for Nick. Three identities and only two of them move. The product name and the d
 change; the Tauri identifier and the `london-trainer.*` localStorage keys do not, both
 because they are invisible and changing them would cost something for nothing.
 
-Version is the next patch after phase 46, which is chipped in
-`chips/phase-46-bar-number.md` and not yet built or entered here.
+Version is the next patch after phase 46, which is chipped and entered above and not yet
+built: 1.10.5 if it has landed by then, 1.10.4 if it has not.
 
 - [ ] 47.1 The identifier stays, and the false claim about why is corrected.
 - [ ] 47.2 The localStorage keys stay, with a comment saying why.
