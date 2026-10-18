@@ -53,9 +53,17 @@ are not interchangeable.
   sentence where it appears in `paths.ts` and in SPEC.md. The reason the identifier stays
   is the true one: it is invisible, nothing reads it but `appDataDir()`, and changing it
   buys nothing while costing a third folder generation to migrate from.
-- [ ] **47.2 The localStorage keys stay `london-trainer.*`.** Thirteen of them across
-  `prefs.ts` and `theme.ts`, holding the theme, the selected course, and every Play and
-  Drill setting phase 44 made persistent. They are invisible, and renaming them would
+- [ ] **47.2 The localStorage keys stay `london-trainer.*`.** **Fourteen** of them, and
+  they are NOT all in `prefs.ts`: twelve are there, `london-trainer.theme` is in
+  `theme.ts`, and **`london-trainer.progress` is in `src/storage/progress.ts`**, which is
+  the browser build's entire progress store and the most important of the lot. An earlier
+  draft of this chip said thirteen in two files, which an alignment check at 2026-10-18
+  found wrong. They hold the theme, the selected course, the whole browser-build progress
+  store, and every Play and Drill setting phase 44 made persistent. Tests assert these key
+  strings in `progress.test.ts`, `selection.test.ts`, `other-side.dom.test.tsx`,
+  `remembered-settings.dom.test.tsx` and `step-speed.dom.test.tsx`, and
+  `docs/content-schema.md` and `docs/course-bundles-concept.md` mention them: all of those
+  stay as they are too, and none of them is a gap. They are invisible, and renaming them would
   silently reset the lot. Add one comment at the key block saying they are deliberately
   not renamed and why, so a later tidy-up does not do it. This is the same reasoning as
   the identifier and should read that way.
@@ -106,6 +114,14 @@ are not interchangeable.
 
 - [ ] `src-tauri/installer-hooks.nsh` names both data folders in its offer to remove
   application data: `APP_DATA_FOLDER` and `APP_LOCAL_FOLDER` become the Tabiya ones.
+- [ ] **The installer's own filename carries the product name and must change with it.**
+  Nick raised this on 2026-10-18: the last build came out as
+  `Repertoire Trainer_1.10.3_x64-setup.exe`. Tauri's NSIS target names the file
+  `<productName>_<version>_<arch>-setup.exe`, so changing `productName` renames it with no
+  extra work, and 47.9's packaged build must CONFIRM the file is called
+  `Tabiya_<version>_x64-setup.exe` rather than assume it. The executable inside it is named
+  by the Cargo package instead, so that becomes `tabiya.exe`: two different sources for two
+  different names, and both have to land.
 - [ ] **A second installed application will appear, and that is expected.** NSIS keys its
   uninstall entry on the product name, so installing Tabiya leaves "Repertoire Trainer"
   registered beside it exactly as "London Trainer" was left at phase 15. Nick uninstalls
@@ -122,9 +138,27 @@ are not interchangeable.
 
 - [ ] `src-tauri/tauri.conf.json` `productName`; `index.html` title; `src/ui/App.tsx`
   header; `src/ui/Play.tsx`; `src/ui/help-text.ts`; `src/ui/prefs.ts`'s docblock;
-  `src/play/game-pgn.ts` (the PGN tag the app stamps on an exported game);
-  `vite.config.ts`. Their tests move with them: `help.test.ts`,
-  `blank-start-real.test.ts`, `game-pgn.test.ts`.
+  `src/play/game-pgn.ts` (the PGN tag the app stamps on an exported game). Their tests move
+  with them: `help.test.ts`, `blank-start-real.test.ts`, `game-pgn.test.ts`.
+- [ ] **Four more the alignment check of 2026-10-18 found, none of them in the first draft
+  of this chip:**
+  - **`src/ui/backup.ts`**, `FILE_NAME = 'repertoire-trainer-progress.json'`. This is the
+    name offered in the Save dialog when a trainee exports their progress. It becomes
+    `tabiya-progress.json`. Its own docblock says it was renamed at phase 16 along with the
+    executable and nothing reads it back by name, so an older export still imports: that
+    precedent covers this change, and the docblock should name phase 47 beside phase 16.
+  - **`scripts/packaged-eval.mjs`** tells a human to run
+    `./src-tauri/target/release/repertoire-trainer.exe`. The executable is named by the
+    Cargo package, so it becomes `tabiya.exe` and the instructions must follow or they are
+    simply wrong.
+  - **`docs/authoring-a-course.md`** names the app in live prose, not history.
+  - **`.claude/launch.json`** names the dev server `london-dev`. It is tracked and will be
+    public. Rename it and anything that refers to it by that name.
+- [ ] **`vite.config.ts` is NOT renamed, and the first draft of this chip was wrong to list
+  it.** Its only mention is inside a comment narrating a real incident: "a window titled
+  Repertoire Trainer once showed someone else's site". That is a thing that happened to an
+  app with that name, so the name stays, the same way the chips and the old plan entries
+  do.
 - [ ] `package.json` `name` becomes `tabiya`; `src-tauri/Cargo.toml` `name` becomes
   `tabiya` and the lib name follows (`repertoire_trainer_lib`), which means
   `src-tauri/src/main.rs` and the `lib.rs` export change with it. `Cargo.lock` is
@@ -145,7 +179,11 @@ are not interchangeable.
   `docs/multi-opening-concept.md` and `docs/v1-acceptance.md` are the same.
   `docs/engine-runs/**` are measurement records and are never edited.
 - [ ] A find-and-replace across the repository would break every one of these. Change the
-  files 47.1 to 47.6 name, and nothing else. List in the open items every file you
+  files 47.1 to 47.6 name, and nothing else. **The split was checked file by file on
+  2026-10-18** and comes out at 33 history files that keep the old name, 2 mixed files
+  (PLAN.md and SPEC.md, where old dated entries keep it and new text does not), and the
+  live set named in 47.1 to 47.6. The lock files (`package-lock.json`, `Cargo.lock`) carry
+  the package name and are regenerated by the build, never hand-edited. List in the open items every file you
   changed, so the review can check that list against this rule.
 
 ### 47.8 SPEC and PLAN
@@ -159,6 +197,8 @@ are not interchangeable.
 ### 47.9 Prove it
 
 - [ ] Browser build at 1400x980: the header, the title bar and the help all say Tabiya.
+- [ ] **Say the installer's filename and the executable's filename in the open items**, as
+  the two things a person actually sees and the two that come from different places.
 - [ ] **The desktop build matters more here than in any phase since 15, because the
   capabilities and the migration can only fail there.** Build the app, install it beside
   the existing one, and confirm: the new folders are created, the progress file is carried
