@@ -1,8 +1,8 @@
-# London Trainer - build plan
+# Tabiya - build plan
 
 v2.0, 2026-08-28 (v1 phases 1-5 shipped 2026-08-27). Governed by SPEC.md; where they
 disagree, SPEC.md wins. One builder session executes one phase, working in
-`C:\Users\nick2\Code\London` on `main`, no worktree. Read SPEC.md in full - section 10
+`C:\Users\nick2\Code\Tabiya` on `main`, no worktree. Read SPEC.md in full - section 10
 for the v2 phases - then your phase here, before touching code. Every convention below
 applies to every phase, v2 included.
 
@@ -5439,8 +5439,8 @@ for Nick. Three identities and only two of them move. The product name and the d
 change; the Tauri identifier and the `london-trainer.*` localStorage keys do not, both
 because they are invisible and changing them would cost something for nothing.
 
-Version is the next patch after phase 46, which is chipped and entered above and not yet
-built: 1.10.5 if it has landed by then, 1.10.4 if it has not.
+Version 1.10.5. Phase 46 landed as 1.10.4 on 2026-10-18 and passed its gate, so this is
+the next patch: a rename and a folder migration, with no new course and no new mode.
 
 - [x] 47.1 The identifier stays, and the false claim about why is corrected.
 - [x] 47.2 The localStorage keys stay, with a comment saying why.
@@ -5449,7 +5449,7 @@ built: 1.10.5 if it has landed by then, 1.10.4 if it has not.
 - [ ] 47.5 The installer hook names the new folders; a second app appears, as expected.
 - [x] 47.6 Every place a person reads the name.
 - [x] 47.7 What must NOT be renamed: chips, BRIEF, the historical plan and spec entries.
-- [ ] 47.8 SPEC and PLAN.
+- [x] 47.8 SPEC and PLAN.
 - [ ] 47.9 Proved in the browser AND in a packaged build against copied folders.
 
 Acceptance: as the chip's final paragraph.

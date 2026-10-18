@@ -1,4 +1,4 @@
-# London Trainer - specification
+# Tabiya - specification
 
 v2.0, 2026-08-28 (v1.0 shipped 2026-08-27). The authoritative build document. It
 supersedes BRIEF.md (kept for history) and folds in the review of four external briefs
@@ -291,7 +291,11 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   on the way in. Left undone deliberately at phase 7: it is a one-off saving of one
   manual uninstall, it cannot be tested from a headless session, and an installer
   hook that deletes the wrong folder is a worse outcome than an extra entry in Apps
-  and Features.
+  and Features. **Still not taken at phase 47**, which is the second rename and so
+  the second manual uninstall: "Repertoire Trainer" is now the entry left behind. The
+  reasoning has not changed and the second instance does not change it, because the
+  cost is still one uninstall a person does once while the risk is still installer
+  code deleting a folder nobody checked.
 - **Classical move order content** (2.Nf3 first): schema-ready; author when wanted.
 - **A real exercise set, built as puzzles rather than as deep repertoire lines**: both
   courses' exercise chapters end long authored lines on the move that carries the
@@ -360,6 +364,27 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   names the two real folders. It carries the stock block's own guard, so it fires only
   when the trainee ticked the box and only when the uninstall is not the one an upgrade
   runs on its way past. See the paragraph in section 10 for what was and was not proved.
+  **Renamed at phase 47** to `$APPDATA\Tabiya` and `$LOCALAPPDATA\Tabiya Data`, which is
+  the case this entry was written about, arriving a second time. The right way round
+  held without any extra work: the hook always names the folders its own install writes
+  to, so the "Repertoire Trainer" uninstaller left registered beside Tabiya names the
+  OLD folders and cannot reach the new ones. `installer-hook.test.ts` holds the hook's
+  two literals, `DATA_FOLDER`, `LOCAL_FOLDER` and `lib.rs`'s own copy to the same
+  strings, and a new `capabilities.test.ts` does the same job for the window's grants.
+- **A blank start does not look for the marker or the second copy in a folder the app
+  has walked away from.** `checkBlankStart` is handed one data folder and one backup
+  folder, the current pair, so the evidence it weighs is the evidence THIS generation
+  wrote. That is right for every start but one: a trainee whose progress file was
+  already missing when they upgraded. Before phase 47 that trainee was blocked and
+  offered the second copy; after it the new folders are empty, nothing says the app has
+  saved here before, and the app starts blank. Nothing is destroyed, because the file it
+  would have recovered is not in the new folder either, but the net that exists for
+  exactly that case does not catch them. It is open for one start: the first save in the
+  new folders puts it back. Not taken at phase 47 for two reasons. It reshapes
+  `safety.ts`, which is the module the phase 15 and 16 rules exist to protect, and what
+  the banner should say about a folder the app has now abandoned twice is Nick's call
+  rather than a builder's. The grant it would need is deliberately absent too: nothing
+  may read `$LOCALDATA/Repertoire Trainer Data/progress.backup.json`. Found at phase 47.
 - **A gap in the London course, found from the other side**: the Slav's chapter 5
   answers 5.c3 Qb6 6.Qb3 with 6...c4, and the London course's chapter 2 covers only
   6...Qxb3. That is a hole in White's preparation rather than an error in it, and the
@@ -1025,6 +1050,53 @@ like every other number in the app, which means it is made where the score is re
 side to move is still known: a mate is reported from the side to move, and a sign worked
 out later from a number that has forgotten its side is a sign that will one day be wrong.
 
+2026-10-17, phase 47: **the app is called Tabiya.** Nick's, preparing to make the GitHub
+repository public. A tabiya is the standard position an opening heads for, before play
+diverges, which is what every chapter in every course teaches. The old name sat in a field
+of near-identical descriptive titles, Chess Opening Trainer and Chess Opener and Chess
+Prep Pro and ChessAtlas, and getting out of that field is the whole reason for the change.
+The tagline is untouched: "Learn your openings by understanding them." still fits.
+
+**Three identities, and only two of them move.** The app has three names, they are not
+interchangeable, and that is the part worth writing down.
+
+**The PRODUCT NAME changes.** It is the window title, the header, the Start menu entry,
+the install folder and the installer's own filename, which Tauri's NSIS builds as
+`<productName>_<version>_<arch>-setup.exe`. The executable inside the installer is named
+by the Cargo package instead, so `tabiya.exe` comes from a second place and both have to
+land.
+
+**The DATA FOLDERS change, with a migration.** `<roaming>/Tabiya` and
+`<local>/Tabiya Data`. This is where the trainee's progress lives, so the phase 15 rules
+bind in full: a COPY, verified by reading it back and counting the learnt lines before the
+new folder counts as live, the old folder left exactly as it was, and any failure blocking
+saves rather than starting blank. `oldDataRoots()` is a chain now, newest first, and the
+caller takes the newest generation that holds a progress file, so a trainee arriving from
+either older folder is carried across and `migrate.ts` itself is unchanged.
+
+**The TAURI IDENTIFIER does not change**, for the reason the correction in section 10
+gives: nothing but `appDataDir()` reads it, nobody sees it, and changing it would add a
+third generation of folder to migrate out of for no gain at all.
+
+**The FOURTEEN `london-trainer.*` localStorage KEYS do not change either**, for the same
+reason, and a comment at each of the three places they are declared now says so. Renaming
+a key abandons its value rather than moving it, so a rename would reset every remembered
+setting and, in a browser build, every learnt line.
+
+**A second installed application appears, and it is expected.** NSIS keys its uninstall
+entry on the product name, so installing Tabiya leaves "Repertoire Trainer" registered
+beside it, exactly as "London Trainer" was left at phase 15. Nick uninstalls the old one
+by hand, once. The installer hook that would do it for him is still in section 6's
+register, with the reason it is still not taken.
+
+**The window's profile moves with the local folder, and that costs the settings once.**
+`localStorage` lives inside the WebView2 profile folder, and that folder is built from
+`LOCAL_FOLDER`, so the theme and all twelve remembered Play and Drill settings start again
+on the first run after the upgrade, however carefully their keys were left alone. Progress
+does not: on the desktop it is a file in the roaming data folder and the migration carries
+it. The Progress screen says both halves of that, and names both abandoned profile
+folders so they can be deleted.
+
 ## 9. v1 acceptance
 
 1. Study: all eight chapters open; every line steps through with notes, arrows and
@@ -1173,6 +1245,13 @@ literals matching `DATA_FOLDER` in `src/storage/paths.ts` and `LOCAL_FOLDER` in
 `src-tauri/src/lib.rs`, not `${PRODUCTNAME}`: the two strings are equal today by choice
 rather than by construction, and a deletion that followed a renamed product would be a
 deletion of the wrong folder.
+
+**Phase 47 renamed those folders too**, to `$APPDATA\Tabiya` and
+`$LOCALAPPDATA\Tabiya Data`, and the choice above is what made that safe. Each
+uninstaller names the folders its own install wrote, so the "Repertoire Trainer" entry
+left registered beside Tabiya removes the OLD folders, which are the copies the
+migration left behind and are Nick's to delete anyway, and can reach nothing of
+Tabiya's.
 
 The macro is proved four ways by `scripts/check-uninstall-hook.mjs`, which compiles the
 same macro text against scratch folders and runs each combination of the two variables.
