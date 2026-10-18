@@ -724,17 +724,26 @@ function OldProfileNote() {
     }
   }, [])
 
-  if (!folders || !folders.before) return null
+  if (!folders || folders.before.length === 0) return null
 
+  const many = folders.before.length > 1
   return (
     <p className="notice">
       The window keeps its browser profile in <code>{folders.now}</code> now, named
       after the app rather than after an internal id.{' '}
       {folders.moved ? '' : 'That folder appears the next time the app starts. '}
-      The old one is still at <code>{folders.before}</code> and nothing uses it. It is
-      about 32 MB. Delete it yourself once you are happy, the same as the old data
-      folder. The one thing it held that the app cannot carry across is your light or
-      dark choice, so set that again from the header.
+      {many ? 'The old ones are still at ' : 'The old one is still at '}
+      {folders.before.map((path, index) => (
+        <span key={path}>
+          {index > 0 ? ' and ' : ''}
+          <code>{path}</code>
+        </span>
+      ))}
+      , and nothing uses {many ? 'them' : 'it'}. Delete {many ? 'them' : 'it'} yourself
+      once you are happy, the same as the old data folder. What a profile folder holds
+      that the app cannot carry across is your light or dark choice and your remembered
+      Play and Drill settings, so set those again. Your progress is not in there: that
+      is a file in the data folder, and it came across with it.
     </p>
   )
 }

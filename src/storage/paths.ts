@@ -47,6 +47,12 @@ export const DATA_FOLDER = 'Tabiya'
 export const FORMER_DATA_FOLDER = 'Repertoire Trainer'
 
 /**
+ * Where the LOCAL folder was over the same stretch. Named only so the app can
+ * tell the trainee what it left behind there; nothing reads inside it.
+ */
+export const FORMER_LOCAL_FOLDER = 'Repertoire Trainer Data'
+
+/**
  * The app's folder under the user's LOCAL data folder, which holds the second
  * copy of the progress file and the window's browser profile.
  *
@@ -221,20 +227,31 @@ export async function pickOldRoot(
 }
 
 /**
- * The two WebView2 profile folders: the one the window uses now, and the one it
- * used before phase 16.
+ * The window's WebView2 profile folder, and the ones it has left behind.
  *
- * Before phase 16 the profile was Tauri's default, which is the folder named
- * after the bundle identifier - `com.nick.london-trainer`, again for an app
- * not called that, and about 32 MB of it. The window now builds its
- * own with an explicit folder. The old one is left exactly where it is for the
- * trainee to delete, the same rule the data folder move followed.
+ * It has moved twice. Before phase 16 it was Tauri's default, the folder named
+ * after the bundle identifier: `com.nick.london-trainer`, again for an app not
+ * called that, and about 32 MB of it. Phase 16 gave the window an explicit
+ * folder, and phase 47 moved that folder with the app's name. Both old ones are
+ * left exactly where they are for the trainee to delete, which is the rule the
+ * data folder move follows too. Newest first, like `oldDataRoots()`.
+ *
+ * A moved profile is a FRESH profile, and that is why the app says this on
+ * screen rather than only in a comment. `localStorage` lives inside the
+ * profile, so the theme and every remembered Play and Drill setting start
+ * again after a move, however carefully their keys were left alone. Progress
+ * does not: on the desktop that is a file in the roaming data folder, and the
+ * migration carries it across.
  */
-export async function profilePaths(): Promise<{ now: string; before: string }> {
+export async function profilePaths(): Promise<{ now: string; before: string[] }> {
   const { localDataDir, appLocalDataDir, join } = await api()
+  const local = await localDataDir()
   return {
-    now: await join(await localDataDir(), LOCAL_FOLDER, WEBVIEW_FOLDER),
-    before: await appLocalDataDir(),
+    now: await join(local, LOCAL_FOLDER, WEBVIEW_FOLDER),
+    before: [
+      await join(local, FORMER_LOCAL_FOLDER, WEBVIEW_FOLDER),
+      await appLocalDataDir(),
+    ],
   }
 }
 
