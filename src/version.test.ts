@@ -1,3 +1,7 @@
+// Node types for `node:fs`, which `tsconfig.app.json` does not load: it lists
+// `vite/client` alone. Every file here that reads one declares its own, rather
+// than leaning on another test file happening to declare it first.
+/// <reference types="node" />
 import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 
