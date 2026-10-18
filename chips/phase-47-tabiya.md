@@ -6,10 +6,12 @@ worktree - repo convention). **There IS a remote now**, added 2026-10-17: `origi
 the orchestrator's step after the review gate, which is the house rule in
 `C:\Users\nick2\Code\CLAUDE.md`, and it matters more than usual here because this phase
 touches the trainee's data folders.
-**The folder is either `C:\Users\nick2\Code\London` or `C:\Users\nick2\Code\Tabiya`**,
-depending on whether Nick has renamed it yet (see the out of scope note). Work in whichever
-one you were started in and do not try to rename it: a session cannot rename the directory
-it is running in, which was confirmed at this phase.
+**The folder is `C:\Users\nick2\Code\Tabiya`.** Nick renamed it on 2026-10-18, after this
+chip was first written, so earlier drafts saying it might still be `London` are out of date
+and any path in an older message of yours points at a folder that no longer exists. The
+sessions were forked into the new tree and carried over; their SCRATCHPAD directories were
+not, so a path to a scratch file from before the rename will not resolve and a
+`git commit -F` against one will fail. Write a fresh one.
 Read SPEC.md sections 8 and 10, PLAN.md phases 15, 16 and 17 (the folder move, the second
 copy and the uninstaller: this phase is the same job a second time),
 `src/storage/paths.ts` in full, `src/storage/migrate.ts` in full, `src/storage/safety.ts`,
@@ -23,8 +25,8 @@ near-identical descriptive titles (Chess Opening Trainer, Chess Opener, Chess Pr
 ChessAtlas), which is what it was changed to get out of.
 
 **No chess content. The data folders move, so this is a migration phase and the phase 15
-rules bind in full.** Version: the next patch after phase 46, so **1.10.5** if phase 46
-has landed, **1.10.4** if it has not. Say which you used and why.
+rules bind in full.** Version **1.10.5**: phase 46 landed on 2026-10-18 as 1.10.4 and
+passed its gate, so the question the first draft of this chip left open is settled.
 
 ## What the name is, and where it goes
 
@@ -229,18 +231,19 @@ are not interchangeable.
 
 ## Out of scope
 
-Renaming the repository FOLDER on disk. This was tried at chip-writing time and failed
-with "the process cannot access the file because it is being used by another process":
-the open Claude session holds its own project directory, and the harness resets the shell
-back into it after every command, so changing directory inside a call does not help. It is
-Nick's step, and with the session closed it is two commands:
+Renaming the repository FOLDER on disk, which is DONE: Nick renamed it on 2026-10-18 and
+the sessions were forked into the new tree. It had to be his step, because a session cannot
+rename the directory it runs in. Tried at chip-writing time and refused with "the process
+cannot access the file because it is being used by another process": the session holds its
+own project directory and the harness resets the shell back into it after every command, so
+changing directory inside a call does not help. For the record, what he ran was:
 
 ```
 cd C:\Users\nick2\Code
 ren London Tabiya
 ```
 
-then reopen the session on `C:\Users\nick2\Code\Tabiya`. Nothing inside the repository
+and the sessions came back on `C:\Users\nick2\Code\Tabiya`. Nothing inside the repository
 depends on the folder name: `.claude/launch.json` runs npm relatively, and the only
 absolute paths in tracked files are stack traces inside `docs/engine-runs/**` and one
 path-traversal test fixture, none of which are ever read as paths. The open items should
