@@ -4,7 +4,7 @@ A Windows desktop app for learning chess opening repertoires: read a line and wh
 each move is played, drill the moves back from memory on a schedule, then play the
 opening against an engine that is steered into the lines you have studied.
 
-Built in Australia. Version 1.10.3.
+Built in Australia.
 
 ## What is in it
 
