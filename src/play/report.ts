@@ -4,6 +4,7 @@ import { positionKey } from '../model/position'
 import { lineFollowed } from '../model/stats'
 import { colourName, type Colour, type LoadedCourse, type MistakeGrade } from '../model/types'
 import type { Book } from './book'
+import type { Evaluation } from './evalbar'
 
 /**
  * The post-game report, and the rules it follows.
@@ -44,8 +45,15 @@ export interface PlayedMove {
   alternative?: MistakeGrade
 }
 
-/** What the engine thought of a position, in pawns from White's point of view. */
-export type Evaluations = Map<string, number>
+/**
+ * What the engine thought of a position: the pawns from White's point of
+ * view, and the text the live bar prints for them.
+ *
+ * One map, made where the score is read and the side to move is still known,
+ * because that is the only place a mate's sign can be worked out. Everything
+ * that wants the number reads `.pawns`; only the bar reads the text.
+ */
+export type Evaluations = Map<string, Evaluation>
 
 /**
  * And what it would have played there, as UCI, from the same search. Kept
@@ -331,8 +339,8 @@ export function scanForSlips(
   const slips: MoveReview[] = []
   for (const move of moves) {
     if (move.colour !== studentColour) continue
-    const before = evaluations.get(positionKey(move.fen))
-    const after = evaluations.get(positionKey(move.after))
+    const before = evaluations.get(positionKey(move.fen))?.pawns
+    const after = evaluations.get(positionKey(move.after))?.pawns
     if (before === undefined || after === undefined) continue
     const loss = studentColour === 'white' ? before - after : after - before
     const tag = tagFor(loss)
@@ -481,7 +489,9 @@ export function buildReport(
   context?: { course?: LoadedCourse; chapterTitle?: string },
 ): GameReport {
   const last = moves.at(-1)
-  const finalEval = last ? evaluations.get(positionKey(last.after)) : undefined
+  // The number alone: the record and the report's own bar have always held
+  // a number, so nothing on disk changes and no migration is needed.
+  const finalEval = last ? evaluations.get(positionKey(last.after))?.pawns : undefined
   // On the other side the trainee holds the book's opponent colour, and the
   // scan of their moves has to know it: a Black trainee's loss is the number
   // going up.

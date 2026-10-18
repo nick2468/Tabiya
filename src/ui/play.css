@@ -113,8 +113,8 @@
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  /* Starts under the board's left edge, not the bar's: the bar (16px) and
-     the gap after it (28px) sit to the left of the board in .play-board. */
+  /* Starts under the board's left edge, not the bar's: the bar (24px) and
+     the gap after it (20px) sit to the left of the board in .play-board. */
   margin-left: 44px;
 }
 
@@ -331,13 +331,17 @@
    reads as the board's own margin rather than as a widget of its own. */
 .play-board {
   display: flex;
-  gap: 28px;
+  /* 20px rather than the 28 it was, because the bar is 24 rather than 16:
+     the two still make the 44 the button rows start at. */
+  gap: 20px;
   align-items: stretch;
 }
 
 .live-eval {
   position: relative;
-  width: 16px;
+  /* 24px rather than the 16 it was: the bar carries its number now, "+0.4"
+     at 10px, which needs the room. */
+  width: 24px;
   /* Stretched to the board by .play-board; the border is inside that height
      so the two boxes end on the same pixel. */
   box-sizing: border-box;
@@ -354,6 +358,42 @@
   left: 0;
   right: 0;
   background: var(--piece-white);
+}
+
+/* The number on the bar. It sits in the larger share, at that share's outer
+   end, so it is never printed across the line between the two colours; which
+   end that is comes from `numberPlacement`, not from here. Tabular figures so
+   "+0.4" and "-1.2" are the same width and the number does not jitter as the
+   game moves. */
+.live-eval-number {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.live-eval-number.at-top {
+  top: 2px;
+}
+
+.live-eval-number.at-bottom {
+  bottom: 2px;
+}
+
+/* Drawn in the colour of the share it is NOT in, which is the only pair of
+   colours that reads on either half of a bar made of two piece colours. It
+   therefore needs no theme of its own: both are piece colours and neither
+   moves between light and dark. */
+.live-eval-number.on-white {
+  color: var(--piece-black);
+}
+
+.live-eval-number.on-black {
+  color: var(--piece-white);
 }
 
 /* The report's own bar: the final position, horizontal, under the verdict. */

@@ -18,13 +18,16 @@ import { STORAGE_KEY, emptyProgress, type PlayRecord } from '../storage/progress
  *
  * `Shell` rather than `App` because `App` builds the providers itself with no
  * way in. Everything below the providers is identical.
+ *
+ * `engine` reaches the fake engine, for a test that needs a particular answer
+ * out of it rather than any answer at all.
  */
-export function renderApp() {
+export function renderApp(engine: Parameters<typeof fakeEngine>[0] = {}) {
   const user = userEvent.setup()
   render(
     <ProgressProvider>
       <CatalogProvider>
-        <PlayProvider createEngine={() => fakeEngine()}>
+        <PlayProvider createEngine={() => fakeEngine(engine)}>
           <StudyProvider>
             <Shell />
           </StudyProvider>
@@ -61,6 +64,11 @@ export function movesOnScreen(): string[] {
       .map((cell) => cell.textContent?.trim() ?? '')
       .filter((text) => text !== '' && text !== '...'),
   )
+}
+
+/** The number on the live evaluation bar, and nothing if it has none yet. */
+export function barNumber(): string | null {
+  return document.querySelector('.live-eval-number')?.textContent ?? null
 }
 
 /** What the board is showing, what it is highlighting, and its arrows. */

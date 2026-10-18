@@ -6,17 +6,17 @@ import {
   StockfishEngine,
   splitMove,
   strengthProfile,
-  whitePovPawns,
   type Engine,
 } from '../engine'
 import { sanForMove } from '../model/grade'
-import { positionKey } from '../model/position'
+import { positionKey, sideToMove } from '../model/position'
 import type { LoadedCourse } from '../model/types'
 import {
   PlaySession,
   bookEndedAt,
   bookHint,
   buildReport,
+  evaluationOf,
   clubEngineHint,
   clubHint,
   engineHint,
@@ -26,6 +26,7 @@ import {
   studentBookMove,
   type Book,
   type CourseMoves,
+  type Evaluation,
   type GameLength,
   type GameReport,
   type Hint,
@@ -132,7 +133,7 @@ export interface PlayGame {
   replayPly: number | null
   setReplayPly: (ply: number | null) => void
   scanning: { done: number; total: number } | null
-  evaluations: Map<string, number>
+  evaluations: Map<string, Evaluation>
   thinking: boolean
   engineError: string | null
   /** The move being suggested, until something moves the board. */
@@ -235,7 +236,7 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
   // its report would show the wrong position for one render.
   const [replayPly, setReplayPly] = useState<number | null>(null)
   const [scanning, setScanning] = useState<{ done: number; total: number } | null>(null)
-  const [evaluations, setEvaluations] = useState<Map<string, number>>(() => new Map())
+  const [evaluations, setEvaluations] = useState<Map<string, Evaluation>>(() => new Map())
   const [hint, setHint] = useState<Hint | null>(null)
 
   const engineRef = useRef<Engine | null>(null)
@@ -255,7 +256,7 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
     recordedAtRef.current = at
     setRecordedAt(at)
   }, [])
-  const evaluationsRef = useRef<Map<string, number>>(new Map())
+  const evaluationsRef = useRef<Map<string, Evaluation>>(new Map())
   // The engine's move at each position, from the same search as the number,
   // so a game reviewed after the live bar has seen it carries the same facts
   // as one scanned from scratch. A ref only: nothing renders from it, and the
@@ -297,9 +298,9 @@ function usePlayValue(createEngine: CreateEngine): PlayGame {
       const result = await running.search(fen, SCAN_MOVETIME)
       const best = result.candidates[0]
       if (!best) return
-      const side = fen.split(' ')[1] === 'b' ? 'black' : 'white'
+      const side = sideToMove(fen)
       const next = new Map(evaluationsRef.current)
-      next.set(key, whitePovPawns(best.score, side))
+      next.set(key, evaluationOf(best.score, side))
       evaluationsRef.current = next
       const move = result.bestMove ?? best.move
       if (move) bestMovesRef.current.set(key, move)

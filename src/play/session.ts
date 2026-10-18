@@ -1,7 +1,8 @@
 import { Chess } from 'chess.js'
-import { chooseCandidate, splitMove, whitePovPawns, type Engine, type StrengthProfile } from '../engine'
-import { positionKey } from '../model/position'
+import { chooseCandidate, splitMove, type Engine, type StrengthProfile } from '../engine'
+import { positionKey, sideToMove } from '../model/position'
 import { chooseOpponentReply, type Book } from './book'
+import { evaluationOf, type Evaluation } from './evalbar'
 import { outcomeOf } from './outcome'
 import type { PlayedMove } from './report'
 import type { Colour, MistakeGrade } from '../model/types'
@@ -442,10 +443,10 @@ export async function scanGame(
   engine: Engine,
   movetime: number,
   onProgress?: (done: number, total: number) => void,
-  known?: Map<string, number>,
+  known?: Map<string, Evaluation>,
   knownBest?: Map<string, string>,
-): Promise<{ evaluations: Map<string, number>; bestMoves: Map<string, string> }> {
-  const evaluations = new Map<string, number>(known)
+): Promise<{ evaluations: Map<string, Evaluation>; bestMoves: Map<string, string> }> {
+  const evaluations = new Map<string, Evaluation>(known)
   // The engine's move at each position, from the same search as the number.
   // One search per position: the best move is in the answer already.
   const bestMoves = new Map<string, string>(knownBest)
@@ -456,7 +457,7 @@ export async function scanGame(
     const key = positionKey(fen)
     if (seen.has(key) || evaluations.has(key)) return
     seen.add(key)
-    positions.push({ key, fen, side: fen.split(' ')[1] === 'b' ? 'black' : 'white' })
+    positions.push({ key, fen, side: sideToMove(fen) })
   }
   for (const move of moves) {
     add(move.fen)
@@ -466,7 +467,7 @@ export async function scanGame(
   for (const [index, position] of positions.entries()) {
     const result = await engine.search(position.fen, movetime)
     const best = result.candidates[0]
-    if (best) evaluations.set(position.key, whitePovPawns(best.score, position.side))
+    if (best) evaluations.set(position.key, evaluationOf(best.score, position.side))
     const move = result.bestMove ?? best?.move
     if (move) bestMoves.set(position.key, move)
     onProgress?.(index + 1, positions.length)

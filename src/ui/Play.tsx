@@ -29,10 +29,12 @@ import {
   fullMove,
   gameToPgn,
   moveAtPly,
+  numberPlacement,
   plyBeforeMove,
   positionAtPly,
   shownEvaluation,
   verdictInWords,
+  type Evaluation,
   type GameLength,
   type GameReport,
   type CourseMoves,
@@ -552,7 +554,7 @@ export function Play({
         <div className="play-column">
           <div className="play-board">
             <LiveEvalBar
-              pawns={shownEvaluation(shown, session.moves, evaluations)}
+              evaluation={shownEvaluation(shown, session.moves, evaluations)}
               studentColour={session.studentColour}
             />
 
@@ -1218,25 +1220,31 @@ function CopyGame({ text }: { text: string }) {
  * is at the bottom of it whichever colour they are playing, so a bar growing
  * towards them always means the same thing.
  *
- * No number on it, which is the part of the v1 ruling that survives. The
- * accessible name is the report's own words.
+ * It carries the number, which is Nick's phase 46 ruling and reverses the
+ * phase 23 one that it would not. Where the number goes is `numberPlacement`'s
+ * answer rather than this component's, and the two classes below are all that
+ * reaches the stylesheet, because a colour belongs in CSS and a piece colour
+ * doubly so. The report's own bar still speaks in words: it is read once, with
+ * the report, where a word is what the reader can act on.
  */
 function LiveEvalBar({
-  pawns,
+  evaluation,
   studentColour,
 }: {
-  pawns: number | undefined
+  /** Undefined until the engine has looked at something. */
+  evaluation: Evaluation | undefined
   studentColour: Colour
 }) {
-  const layout = evalBarLayout(pawns ?? 0, studentColour)
+  const layout = evalBarLayout(evaluation?.pawns ?? 0, studentColour)
+  const placement = numberPlacement(layout)
   return (
     <div
       className="live-eval"
       role="img"
       aria-label={
-        pawns === undefined
+        evaluation === undefined
           ? 'Evaluation: the engine has not looked yet'
-          : `Evaluation: ${verdictInWords(pawns).toLowerCase()}`
+          : `Evaluation: ${evaluation.text}`
       }
     >
       <div
@@ -1247,6 +1255,13 @@ function LiveEvalBar({
           bottom: layout.whiteAtBottom ? 0 : 'auto',
         }}
       />
+      {evaluation !== undefined ? (
+        <span
+          className={`live-eval-number at-${placement.edge} ${placement.onWhite ? 'on-white' : 'on-black'}`}
+        >
+          {evaluation.text}
+        </span>
+      ) : null}
     </div>
   )
 }

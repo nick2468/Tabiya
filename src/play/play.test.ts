@@ -7,6 +7,7 @@ import {
   opponentBookReplies,
   studentBookMove,
 } from './book'
+import { evaluationOf, type Evaluation } from './evalbar'
 import {
   buildReport,
   describeAlternatives,
@@ -24,6 +25,15 @@ import { blackCourse, loadFixture as load, loadFixtureCourse, manifest } from '.
 import { positionKey } from '../model/position'
 import { strengthProfile } from '../engine'
 import { fakeEngine } from '../test/fake-engine'
+
+/**
+ * An evaluation entry from a number of pawns, built the way the app builds
+ * one: through `evaluationOf`, from a score with White to move, so the text
+ * beside the number is the real function's rather than a guess at it. These
+ * tests read the pawns; the text is along for the ride and has to be right.
+ */
+const at = (pawns: number): Evaluation =>
+  evaluationOf({ kind: 'cp', centipawns: Math.round(pawns * 100) }, 'white')
 
 /** 1.d4 d5 2.Bf4, with two Black replies of different popularity. */
 const RAW_CHAPTER = {
@@ -277,10 +287,10 @@ describe('the report for a game played against the course', () => {
 
   it('never judges the trainee against a repertoire, and scans their moves as the other colour', () => {
     const moves = playedMoves(['d4', 'd5', 'Bf4', 'Nf6', 'e3', 'e6'])
-    const evaluations = new Map<string, number>()
+    const evaluations = new Map<string, Evaluation>()
     // Black's 3...e6 turned a level position into one clearly better for White.
-    evaluations.set(positionKey(moves[5].fen), 0.1)
-    evaluations.set(positionKey(moves[5].after), 1.6)
+    evaluations.set(positionKey(moves[5].fen), at(0.1))
+    evaluations.set(positionKey(moves[5].after), at(1.6))
     const report = buildReport(moves, book, evaluations, undefined, 0, 'other')
     expect(report.deviation.kind).toBe('course-book-ended')
     expect(report.slips.map((slip) => slip.san)).toEqual(['e6'])
@@ -317,33 +327,33 @@ describe('scanForSlips', () => {
   const moves = playedMoves(['d4', 'd5', 'Bf4', 'Nf6', 'e3'])
 
   function evaluationsFor(values: Record<number, number>) {
-    const map = new Map<string, number>()
+    const map = new Map<string, Evaluation>()
     for (const [index, value] of Object.entries(values)) {
       const move = moves[Number(index)]
-      map.set(positionKey(move.fen), value)
-      map.set(positionKey(move.after), value)
+      map.set(positionKey(move.fen), at(value))
+      map.set(positionKey(move.after), at(value))
     }
     return map
   }
 
   it('finds nothing when nothing went wrong', () => {
-    const evaluations = new Map<string, number>()
+    const evaluations = new Map<string, Evaluation>()
     for (const move of moves) {
-      evaluations.set(positionKey(move.fen), 0.2)
-      evaluations.set(positionKey(move.after), 0.2)
+      evaluations.set(positionKey(move.fen), at(0.2))
+      evaluations.set(positionKey(move.after), at(0.2))
     }
     expect(scanForSlips(moves, evaluations)).toEqual([])
   })
 
   it('grades a slip by how much it cost', () => {
-    const evaluations = new Map<string, number>()
+    const evaluations = new Map<string, Evaluation>()
     for (const move of moves) {
-      evaluations.set(positionKey(move.fen), 0)
-      evaluations.set(positionKey(move.after), 0)
+      evaluations.set(positionKey(move.fen), at(0))
+      evaluations.set(positionKey(move.after), at(0))
     }
     // White's third move drops three pawns' worth.
-    evaluations.set(positionKey(moves[4].fen), 0.5)
-    evaluations.set(positionKey(moves[4].after), -2.5)
+    evaluations.set(positionKey(moves[4].fen), at(0.5))
+    evaluations.set(positionKey(moves[4].after), at(-2.5))
     const slips = scanForSlips(moves, evaluations)
     expect(slips).toHaveLength(1)
     expect(slips[0]).toMatchObject({ san: 'e3', tag: 'blunder', loss: 3 })
@@ -352,12 +362,12 @@ describe('scanForSlips', () => {
   it('scans only the trainee, since the report is on their play', () => {
     // Black blunders on move 1 and the evaluation stays there. White's moves
     // lose nothing, so the report has nothing to say, however bad Black was.
-    const evaluations = new Map<string, number>()
-    evaluations.set(positionKey(moves[0].fen), 0)
-    evaluations.set(positionKey(moves[0].after), 0)
+    const evaluations = new Map<string, Evaluation>()
+    evaluations.set(positionKey(moves[0].fen), at(0))
+    evaluations.set(positionKey(moves[0].after), at(0))
     for (const move of moves.slice(1)) {
-      evaluations.set(positionKey(move.fen), 5)
-      evaluations.set(positionKey(move.after), 5)
+      evaluations.set(positionKey(move.fen), at(5))
+      evaluations.set(positionKey(move.after), at(5))
     }
     expect(scanForSlips(moves, evaluations)).toEqual([])
   })
@@ -369,17 +379,17 @@ describe('scanForSlips', () => {
   })
 
   it('lists slips most recent first, not worst first', () => {
-    const evaluations = new Map<string, number>()
+    const evaluations = new Map<string, Evaluation>()
     for (const move of moves) {
-      evaluations.set(positionKey(move.fen), 0)
-      evaluations.set(positionKey(move.after), 0)
+      evaluations.set(positionKey(move.fen), at(0))
+      evaluations.set(positionKey(move.after), at(0))
     }
     // The blunder is EARLIER than the inaccuracy, so worst-first would put it
     // on top and move order puts it second.
-    evaluations.set(positionKey(moves[0].fen), 0)
-    evaluations.set(positionKey(moves[0].after), -2.2)
-    evaluations.set(positionKey(moves[4].fen), 0)
-    evaluations.set(positionKey(moves[4].after), -0.8)
+    evaluations.set(positionKey(moves[0].fen), at(0))
+    evaluations.set(positionKey(moves[0].after), at(-2.2))
+    evaluations.set(positionKey(moves[4].fen), at(0))
+    evaluations.set(positionKey(moves[4].after), at(-0.8))
     const slips = scanForSlips(moves, evaluations)
     expect(slips.map((slip) => [slip.ply, slip.tag])).toEqual([
       [4, 'inaccuracy'],
@@ -388,15 +398,15 @@ describe('scanForSlips', () => {
   })
 
   it('puts a later slip first whatever its size', () => {
-    const evaluations = new Map<string, number>()
+    const evaluations = new Map<string, Evaluation>()
     for (const move of moves) {
-      evaluations.set(positionKey(move.fen), 0)
-      evaluations.set(positionKey(move.after), 0)
+      evaluations.set(positionKey(move.fen), at(0))
+      evaluations.set(positionKey(move.after), at(0))
     }
-    evaluations.set(positionKey(moves[0].fen), 0)
-    evaluations.set(positionKey(moves[0].after), -0.8)
-    evaluations.set(positionKey(moves[4].fen), 0)
-    evaluations.set(positionKey(moves[4].after), -2.2)
+    evaluations.set(positionKey(moves[0].fen), at(0))
+    evaluations.set(positionKey(moves[0].after), at(-0.8))
+    evaluations.set(positionKey(moves[4].fen), at(0))
+    evaluations.set(positionKey(moves[4].after), at(-2.2))
     const slips = scanForSlips(moves, evaluations)
     expect(slips.map((slip) => slip.tag)).toEqual(['blunder', 'inaccuracy'])
   })
@@ -437,17 +447,17 @@ describe('what the engine preferred', () => {
   const moves = playedMoves(['d4', 'd5', 'Bf4', 'Nf6', 'e3'])
 
   function allLevel() {
-    const map = new Map<string, number>()
+    const map = new Map<string, Evaluation>()
     for (const move of moves) {
-      map.set(positionKey(move.fen), 0)
-      map.set(positionKey(move.after), 0)
+      map.set(positionKey(move.fen), at(0))
+      map.set(positionKey(move.after), at(0))
     }
     return map
   }
 
   it('gives a slip the engine\'s move from the position it was played in, as SAN', () => {
     const evaluations = allLevel()
-    evaluations.set(positionKey(moves[4].after), -0.8)
+    evaluations.set(positionKey(moves[4].after), at(-0.8))
     // e3 was the slip; the engine wanted the knight out. UCI, as the engine
     // says it; the slip says it the way a move list does.
     const bestMoves = new Map([[positionKey(moves[4].fen), 'g1f3']])
@@ -458,7 +468,7 @@ describe('what the engine preferred', () => {
 
   it('says nothing when no best move was kept, and carries no key for it', () => {
     const evaluations = allLevel()
-    evaluations.set(positionKey(moves[4].after), -0.8)
+    evaluations.set(positionKey(moves[4].after), at(-0.8))
     const [slip] = scanForSlips(moves, evaluations, 'white')
     expect(slip.better).toBeUndefined()
     expect('better' in slip).toBe(false)
@@ -466,7 +476,7 @@ describe('what the engine preferred', () => {
 
   it('says nothing when the engine\'s move is the move that was played', () => {
     const evaluations = allLevel()
-    evaluations.set(positionKey(moves[4].after), -0.8)
+    evaluations.set(positionKey(moves[4].after), at(-0.8))
     const bestMoves = new Map([[positionKey(moves[4].fen), 'e2e3']])
     const [slip] = scanForSlips(moves, evaluations, 'white', bestMoves)
     expect(slip.better).toBeUndefined()
@@ -495,7 +505,7 @@ describe('what the engine preferred', () => {
   it('reaches the report through buildReport', () => {
     const book = buildBook({ colour: 'white', chapters: [chapter] })
     const evaluations = allLevel()
-    evaluations.set(positionKey(moves[4].after), -0.8)
+    evaluations.set(positionKey(moves[4].after), at(-0.8))
     const bestMoves = new Map([[positionKey(moves[4].fen), 'g1f3']])
     const report = buildReport(moves, book, evaluations, undefined, 0, 'course', bestMoves)
     expect(report.slips[0].better).toBe('Nf3')
@@ -964,8 +974,8 @@ describe('scanGame', () => {
     expect(bestMoves.size).toBe(3)
     expect(bestMoves.get(positionKey(moves[0].fen))).toBe('a2a3')
     // The engine always says +0.30 for the side to move, so White's view flips.
-    expect(evaluations.get(positionKey(moves[0].fen))).toBe(0.3)
-    expect(evaluations.get(positionKey(moves[1].fen))).toBe(-0.3)
+    expect(evaluations.get(positionKey(moves[0].fen))?.pawns).toBe(0.3)
+    expect(evaluations.get(positionKey(moves[1].fen))?.pawns).toBe(-0.3)
   })
 
   it('reports progress so a long scan can show it', async () => {
@@ -976,7 +986,7 @@ describe('scanGame', () => {
 
   it('keeps what the live bar already worked out rather than searching it again', async () => {
     const moves = playedMoves(['d4', 'd5'])
-    const known = new Map([[positionKey(moves[0].fen), 1.5]])
+    const known = new Map([[positionKey(moves[0].fen), at(1.5)]])
     const seen: number[] = []
     const { evaluations } = await scanGame(
       moves,
@@ -987,7 +997,7 @@ describe('scanGame', () => {
     )
     // The report is judged by the number that was on the screen, not by a
     // fresh search that might disagree with it.
-    expect(evaluations.get(positionKey(moves[0].fen))).toBe(1.5)
+    expect(evaluations.get(positionKey(moves[0].fen))?.pawns).toBe(1.5)
     expect(evaluations.size).toBe(3)
     // And the scan is two positions shorter than it would have been.
     expect(seen).toEqual([2, 2])
@@ -1106,12 +1116,12 @@ describe('buildReport', () => {
   it('puts the deviation, the slips and the verdict together', () => {
     const book = buildBook({ colour: 'white', chapters: [chapter] })
     const moves = playedMoves(['d4', 'd5', 'Bf4', 'Nf6', 'Nf3'])
-    const evaluations = new Map<string, number>()
+    const evaluations = new Map<string, Evaluation>()
     for (const move of moves) {
-      evaluations.set(positionKey(move.fen), 0)
-      evaluations.set(positionKey(move.after), 0)
+      evaluations.set(positionKey(move.fen), at(0))
+      evaluations.set(positionKey(move.after), at(0))
     }
-    evaluations.set(positionKey(moves[4].after), -1.2)
+    evaluations.set(positionKey(moves[4].after), at(-1.2))
     const report = buildReport(moves, book, evaluations, 'Stopped at move 3')
     expect(report.deviation.kind).toBe('student-left-book')
     expect(report.slips.map((slip) => slip.tag)).toEqual(['mistake'])
@@ -1218,14 +1228,14 @@ describe('playing a Black course', () => {
     // Evaluations are always from White's point of view, so for a Black course
     // a move that costs the student makes the number go UP.
     const moves = playedMoves(['e4', 'c6', 'd4', 'd5'])
-    const evaluations = new Map<string, number>()
+    const evaluations = new Map<string, Evaluation>()
     for (const move of moves) {
-      evaluations.set(positionKey(move.fen), 0)
-      evaluations.set(positionKey(move.after), 0)
+      evaluations.set(positionKey(move.fen), at(0))
+      evaluations.set(positionKey(move.after), at(0))
     }
     // Black's second move hands White two and a half pawns.
-    evaluations.set(positionKey(moves[3].fen), 0)
-    evaluations.set(positionKey(moves[3].after), 2.5)
+    evaluations.set(positionKey(moves[3].fen), at(0))
+    evaluations.set(positionKey(moves[3].after), at(2.5))
     const slips = scanForSlips(moves, evaluations, 'black')
     expect(slips).toHaveLength(1)
     expect(slips[0]).toMatchObject({ san: 'd5', tag: 'blunder', loss: 2.5 })
@@ -1235,12 +1245,12 @@ describe('playing a Black course', () => {
 
   it('builds a whole report from Black\'s side', () => {
     const moves = playedMoves(['e4', 'c6', 'd4', 'g6'])
-    const evaluations = new Map<string, number>()
+    const evaluations = new Map<string, Evaluation>()
     for (const move of moves) {
-      evaluations.set(positionKey(move.fen), 0)
-      evaluations.set(positionKey(move.after), 0)
+      evaluations.set(positionKey(move.fen), at(0))
+      evaluations.set(positionKey(move.after), at(0))
     }
-    evaluations.set(positionKey(moves[3].after), 1.5)
+    evaluations.set(positionKey(moves[3].after), at(1.5))
     const report = buildReport(moves, book, evaluations, 'Stopped at move 2')
     expect(report.deviation.kind).toBe('student-left-book')
     expect(report.slips.map((slip) => slip.tag)).toEqual(['mistake'])

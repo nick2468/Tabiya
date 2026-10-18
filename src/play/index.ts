@@ -15,8 +15,13 @@ export {
 export {
   evalBarLayout,
   evalShare,
+  evalText,
+  evaluationOf,
+  numberPlacement,
   shownEvaluation,
   type EvalBarLayout,
+  type Evaluation,
+  type NumberPlacement,
 } from './evalbar'
 export { gameToPgn, pgnDate, pgnResult, type GameForPgn } from './game-pgn'
 export { bookEndedAt, bookHint, clubEngineHint, clubHint, engineHint, type Hint } from './hint'

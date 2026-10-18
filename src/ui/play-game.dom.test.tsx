@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { screen } from '@testing-library/react'
-import { board, goTo, movesOnScreen, renderApp } from '../test/dom'
+import { barNumber, board, goTo, movesOnScreen, renderApp } from '../test/dom'
 
 vi.mock('./Board', async () => await import('../test/board-stub'))
 
@@ -45,6 +45,48 @@ describe('a game on screen', () => {
     await vi.waitFor(() => expect(movesOnScreen()).toHaveLength(2))
     expect(movesOnScreen()[0]).toBe('d4')
     expect(board().lastMove).not.toBe('')
+  })
+
+  /**
+   * The number is the thing a person actually reads off the bar, and its sign
+   * is the half of it that can be wrong without looking wrong.
+   *
+   * The fake engine answers +0.30 from the SIDE TO MOVE for every position,
+   * as a real one does. So after d4, with Black to move, the bar is Black's
+   * 0.4 and prints -0.4; after Black's reply it is White's and prints +0.4.
+   * One sign error anywhere between the engine and the screen flips both.
+   */
+  it('prints the engine number on the bar, from White point of view', async () => {
+    const { user } = renderApp({ cp: 40 })
+    await startGame(user)
+
+    await user.click(await screen.findByRole('button', { name: 'move d4' }))
+    await vi.waitFor(() => expect(movesOnScreen()).toHaveLength(2))
+    await vi.waitFor(() => expect(barNumber()).toBe('+0.4'))
+
+    // And the accessible name is the same number rather than the report's
+    // words, which is the part of the phase 23 ruling that was reversed.
+    expect(screen.getByRole('img', { name: 'Evaluation: +0.4' })).toBeTruthy()
+  })
+
+  /**
+   * The other sign and the other end of the bar, in one test.
+   *
+   * In a Black course the engine moves first, so the bar is read with BLACK
+   * to move: the same +0.30 from the side to move is -0.3 from White's, and
+   * the number goes to the bottom of the bar, because a Black trainee's own
+   * colour is the one at the bottom.
+   */
+  it('turns the number round for a trainee playing Black', async () => {
+    const { user } = renderApp({ cp: 30 })
+    await user.selectOptions(await screen.findByLabelText('Course'), 'slav-black')
+    await goTo(user, 'Play')
+    await user.click(await screen.findByRole('button', { name: 'Start the game' }))
+    await screen.findByTestId('board')
+
+    await vi.waitFor(() => expect(movesOnScreen()).toHaveLength(1))
+    await vi.waitFor(() => expect(barNumber()).toBe('-0.3'))
+    expect(document.querySelector('.live-eval-number')?.className).toContain('at-bottom')
   })
 
   /**
