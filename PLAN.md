@@ -5389,7 +5389,42 @@ Reuse review: the find the chip predicted was there. `scanGame` and the provider
 `evaluate` each split a FEN by hand to get the side to move, beside `sideToMove` in
 `position.ts` that does exactly that; both now call it.
 
-- [ ] **Review gate 46**
+**Gate 46 passed, 2026-10-18.** `tsc -b` clean, 1255 tests in 13.4 seconds. Nothing under
+`courses/`, and no file under `src/model/` or `src/content/` either, so no line id can have
+moved and none was rebuilt.
+
+**Everything the builder measured, the gate measured again and independently.** A White
+course with White ahead put the number `at-bottom on-white`; a Black course at the same
+`+0.4` put it `at-top on-white`, which is the orientation flip and the one piece of this
+easy to get backwards. The bar is 24 px wide, `.play-board`'s gap is 20, and the bar,
+`.board` and `cg-board` all have height 416 and end on the same pixel. The accessible name
+is `Evaluation: +0.4`. The number is `rgb(42, 44, 48)` in BOTH themes, which is the piece
+colour and is theme-independent by design, verified at gate 44. No console errors; storage
+cleared; viewport reset.
+
+**The arithmetic was read rather than taken on trust.** `evalText` handles all four mate
+cases correctly, including the one the phase exists to fix: White to move with `mate 0`
+gives `-M0`, because that side is mated already and the mate is the other side's. The
+`-0.0` guard works by taking the absolute value before the sign. `numberPlacement` puts the
+number on the larger share at that share's OUTER end, so the digits never cross the join.
+
+**46.9 was mutation-checked**: putting `moves >= 0` back turns the new engine test red, and
+it was restored. 46.8's claim stands at source: `tsconfig.app.json` lists `vite/client`
+alone, so a file reading `node:fs` has no node types of its own and only compiled because
+another test file declared them for the whole program. 46.7 carries a negative test too,
+holding that an outcome which is NOT the verdict is still said, which is the half a
+one-sided fix would have broken.
+
+**One anomaly, chased down and benign.** The first suite run after Nick renamed the folder
+reported 16 failures across 11 files. Every run since has been green: four of them, one
+with `node_modules/.vite` deleted first to test a stale cache keyed on the old path, which
+did not reproduce it. The first run's timings were about three times normal across every
+phase (transform 28s against 8s, import 187s against 63s), so it was machine load during
+the rename rather than anything in the code, and the failures will have been timeouts in
+the timing-sensitive DOM tests. Recorded so the next person to see it does not go looking
+for a fault that is not there.
+
+- [x] **Review gate 46**
 
 ## Phase 47 - the app is called Tabiya
 
