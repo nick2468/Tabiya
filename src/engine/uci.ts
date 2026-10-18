@@ -80,10 +80,16 @@ export function parseBestMove(line: string): string | null {
 export const MATE_PAWNS = 100
 
 export function whitePovPawns(score: Score, sideToMove: 'white' | 'black'): number {
+  // `moves > 0`, not `>= 0`. A mate score counts from the side to move, and
+  // `mate 0` means that side is mated ALREADY, so the mate belongs to the
+  // other one. Nothing reaches this with a zero today, because Stockfish
+  // sends it only for a finished position with no line to play and the
+  // search keeps only candidates that have one; it is written correctly
+  // anyway, because the bar now prints this sign for a person to read.
   const raw =
     score.kind === 'cp'
       ? score.centipawns / 100
-      : score.moves >= 0
+      : score.moves > 0
         ? MATE_PAWNS
         : -MATE_PAWNS
   return sideToMove === 'white' ? raw : -raw

@@ -59,6 +59,14 @@ describe('whitePovPawns', () => {
     expect(whitePovPawns({ kind: 'mate', moves: -1 }, 'white')).toBe(-MATE_PAWNS)
   })
 
+  it('gives a mate already delivered to the side NOT to move', () => {
+    // `mate 0` says the side to move is mated, so the mate is the other
+    // side's. Read as a win for the mover it would have put the bar's number
+    // on the wrong end of the board.
+    expect(whitePovPawns({ kind: 'mate', moves: 0 }, 'white')).toBe(-MATE_PAWNS)
+    expect(whitePovPawns({ kind: 'mate', moves: 0 }, 'black')).toBe(MATE_PAWNS)
+  })
+
   it('knows a mate score from an evaluation', () => {
     expect(isMate({ kind: 'mate', moves: 1 })).toBe(true)
     expect(isMate({ kind: 'cp', centipawns: 900 })).toBe(false)
