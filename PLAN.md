@@ -5446,12 +5446,71 @@ the next patch: a rename and a folder migration, with no new course and no new m
 - [x] 47.2 The localStorage keys stay, with a comment saying why.
 - [x] 47.3 The data folders move, the migration chain carries the trainee across.
 - [x] 47.4 The capability scopes follow, with both old generations readable.
-- [ ] 47.5 The installer hook names the new folders; a second app appears, as expected.
+- [x] 47.5 The installer hook names the new folders; a second app appears, as expected.
 - [x] 47.6 Every place a person reads the name.
 - [x] 47.7 What must NOT be renamed: chips, BRIEF, the historical plan and spec entries.
 - [x] 47.8 SPEC and PLAN.
-- [ ] 47.9 Proved in the browser AND in a packaged build against copied folders.
+- [x] 47.9 Proved in the browser AND in a packaged build against copied folders.
 
 Acceptance: as the chip's final paragraph.
+
+**For the gate.** 47.1: the false claim was in THREE live places, not the two the chip
+names. `paths.ts` and SPEC.md section 10 are the two it names; `src-tauri/src/lib.rs`
+carried the same sentence and is live source, so it was corrected too. The chip says the
+claim contradicts section 8; it does not appear there at all, and section 8 had no mention
+of either name before this phase. 47.2: fourteen keys confirmed at source, twelve in
+`prefs.ts`, one in `theme.ts`, one in `progress.ts`, each block now carrying a comment.
+
+47.3: `migrate.ts` did NOT need reshaping, which is what the chip's escalation rule asked
+to be checked. It takes one source and one destination, and all that changed is which
+source it is handed. The chooser is a new `pickOldRoot` in `paths.ts`, beside
+`oldDataRoots`, which is where "where has the data lived" is already answered. An `exists`
+that THROWS counts as a no, because that is what a missing grant looks like. Five tests
+drive the real pair on the fake filesystem, including a throw on the newer generation and
+a fresh install where no folder at all is created.
+
+47.4: fifty-two paths, up from thirty-one, because three generations are visible at once
+and only one is writable. The middle generation gets the same nine grants the identifier
+folder has had working since phase 15, rather than a tighter set derived from the call
+sites: a missing grant does not fail a build, it blocks the app on the trainee's machine.
+A new `capabilities.test.ts` holds every path to one of the four folder constants and
+every write, mkdir and remove inside the folder the app owns. Both guards were
+mutation-checked.
+
+47.5: **the installer is `Tabiya_1.10.5_x64-setup.exe` and the executable inside it is
+`tabiya.exe`**, confirmed from the build output rather than assumed, and they come from
+two different sources: `productName` and the Cargo package. The install folder is
+`%LOCALAPPDATA%\Tabiya`, which is exactly the collision `LOCAL_FOLDER` is `Tabiya Data` to avoid.
+**The second application is a Start menu entry, not an Apps and Features entry**, which is
+not what the chip predicted: this machine has `Repertoire Trainer.lnk` and `Tabiya.lnk`
+side by side, and the old install at `%LOCALAPPDATA%\Repertoire Trainer` still has its
+exe and its own `uninstall.exe`, but no uninstall registration. So Nick cannot remove it
+from Apps and Features; he runs that `uninstall.exe` by hand. **Neither uninstaller can
+touch the other's folders**, confirmed two ways: the hook names literals rather than
+`${PRODUCTNAME}`, and the old uninstaller binary contains no "Tabiya" string at all while
+the new one contains no "Repertoire Trainer" string.
+
+47.9: the browser at 1400x980 shows `Tabiya v1.10.5` in the header, `Tabiya` in the tab
+title, and "Tabiya teaches you chess opening repertoires" as the Help's first line, with
+no occurrence of the old name anywhere in the rendered page. **The packaged build was
+installed and driven for real.** Nick's answer to the copy question was "nothing needs to
+be preserved", so the migration ran against the live folders with a full copy of all three
+old folders taken into the session scratchpad first, verified at 380 files. The result:
+both new folders created; `progress.json`, `progress.marker.json`, the second copy and the
+WebView2 profile all written; **the file that came across hashes to the PHASE 15 folder,
+not the identifier folder**, which is the chain picking newest first, proved live by the
+two sources having the same two learnt lines but different hashes; two learnt lines either
+side; and all three old folders byte-identical to the copy afterwards. Ticking a line in
+Study wrote 3 learnt lines to the new `progress.json`, the second copy and the marker
+while the old folder stayed at 2, which is the save landing in the new location and
+nowhere else. Every capability grant was probed through the real scope layer and permitted,
+with an ungranted path refused as the negative control. No failure banner, no alerts.
+Browser storage cleared, viewport reset.
+
+**One thing the chip asked for that cannot be done.** It says to drive the packaged build
+against a COPY of the folders. Tauri resolves the roaming folder with
+`SHGetKnownFolderPath(FOLDERID_RoamingAppData)`, verified in `dirs-sys` 0.5.0 at source,
+so an installed build always reads the real `%APPDATA%` and no copy can stand in for it.
+Nick was asked and chose the live run.
 
 - [ ] **Review gate 47**
