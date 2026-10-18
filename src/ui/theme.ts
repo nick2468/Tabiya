@@ -10,6 +10,12 @@ import { useCallback, useEffect, useState } from 'react'
 
 export type Theme = 'dark' | 'light'
 
+/**
+ * Still `london-trainer.*`, deliberately. Phase 47 renamed the app to Tabiya
+ * and left the keys alone: renaming a key abandons its value rather than
+ * moving it, and nobody ever reads a key. The full reasoning is at the key
+ * block in `prefs.ts`.
+ */
 const KEY = 'london-trainer.theme'
 
 function saved(): Theme {

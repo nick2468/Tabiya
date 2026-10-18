@@ -9,10 +9,19 @@
  * Repertoire Trainer.
  *
  * So the root is now built by hand: the user's roaming data folder plus a
- * literal folder name. The identifier is deliberately NOT changed. It is the
- * bundle id the installer hangs its uninstall entry off, and changing it once
- * already left a second application beside the first. The identifier is
- * invisible; the folder is what a person reads.
+ * literal folder name. The identifier is deliberately NOT changed.
+ *
+ * The reason this comment gave for that until phase 47 was wrong, and the
+ * correction is worth keeping because the wrong version sounded convincing. It
+ * said that changing the identifier had already left a second application
+ * beside the first. It had not. The identifier has held one value since the
+ * Tauri commit and has never changed. The second application came from the
+ * PRODUCT NAME change at phase 15, because Tauri's NSIS keys its uninstall
+ * entry on the product name: the v1 entry was `HKCU\...\Uninstall\London
+ * Trainer`, with no key under the identifier anywhere. The true reason the
+ * identifier stays is plainer. Nothing but `appDataDir()` reads it, nobody
+ * sees it, and changing it would buy nothing while adding a third generation
+ * of folder for the migration below to carry a trainee out of.
  *
  * `appDataDir()` still means the identifier folder, which is exactly the old
  * location, so it is how the migration finds what to carry across.

@@ -341,7 +341,17 @@ export function parseProgressJson(text: string): ProgressState {
   return parseProgress(parsed)
 }
 
-/** The default key. Exported so tests and the Tauri swap can name it. */
+/**
+ * The default key. Exported so tests and the Tauri swap can name it.
+ *
+ * Still `london-trainer.*`, deliberately, and this is the one of the fourteen
+ * keys that matters most: in a browser build it holds the whole progress file.
+ * Phase 47 renamed the app to Tabiya and left the keys alone, because renaming
+ * a key abandons its value rather than moving it. A rename here would start
+ * every browser trainee blank, which is the one failure this app's storage
+ * code exists to prevent. The full reasoning is at the key block in
+ * `src/ui/prefs.ts`.
+ */
 export const STORAGE_KEY = 'london-trainer.progress'
 
 /**

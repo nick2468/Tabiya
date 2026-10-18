@@ -1150,8 +1150,13 @@ Repertoire Trainer. So the app now builds its data folder from the user's roamin
 folder plus the literal name `Repertoire Trainer`, instead of calling `appDataDir()`,
 which is Tauri's identifier folder. The identifier itself is unchanged, for the reason
 the correction above found: NSIS keys the install on the product name and the identifier
-is invisible, so changing it buys nothing and one identity change has already installed
-a second application beside the first. The move is a COPY, verified by reading it back
+is invisible, so changing it buys nothing. **Corrected at phase 47:** this sentence used
+to end "and changing it once has already installed a second application beside the
+first", which is wrong. The identifier has held one value since the Tauri commit and has
+never changed. The second application came from the PRODUCT NAME change, as the phase 7
+correction above says in the registry's own words. What changing the identifier would
+actually cost is one more generation of folder for the migration to carry a trainee out
+of. The move is a COPY, verified by reading it back
 and counting the learnt lines before the new folder counts as live, and the old folder
 is left exactly as it was for Nick to delete himself. A migration that deletes has one
 chance to be right.

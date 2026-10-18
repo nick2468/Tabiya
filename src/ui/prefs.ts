@@ -39,6 +39,20 @@ export type { DrillGap } from '../scheduler'
  * just forgets.
  */
 
+/**
+ * The keys, which are still `london-trainer.*` and are deliberately not
+ * renamed.
+ *
+ * Phase 47 renamed the app to Tabiya and left these exactly as they were, for
+ * the same reason it left the Tauri identifier alone: nobody reads them. A key
+ * is the name a value is filed under inside the browser profile. Renaming a
+ * key does not move its value, it abandons it, so a rename here would silently
+ * reset every setting on every machine that already has one. There are
+ * fourteen of them: the twelve below, the theme in `theme.ts`, and the browser
+ * build's whole progress store in `src/storage/progress.ts`, where the cost
+ * would be learnt lines rather than clicks. Nothing to gain, one real thing to
+ * lose, so a later tidy-up should leave them.
+ */
 const COURSE_KEY = 'london-trainer.course'
 const DRILL_KEY = 'london-trainer.drill'
 const OTHER_SIDE_KEY = 'london-trainer.other-side'

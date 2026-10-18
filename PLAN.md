@@ -5442,8 +5442,8 @@ because they are invisible and changing them would cost something for nothing.
 Version is the next patch after phase 46, which is chipped and entered above and not yet
 built: 1.10.5 if it has landed by then, 1.10.4 if it has not.
 
-- [ ] 47.1 The identifier stays, and the false claim about why is corrected.
-- [ ] 47.2 The localStorage keys stay, with a comment saying why.
+- [x] 47.1 The identifier stays, and the false claim about why is corrected.
+- [x] 47.2 The localStorage keys stay, with a comment saying why.
 - [ ] 47.3 The data folders move, the migration chain carries the trainee across.
 - [ ] 47.4 The capability scopes follow, with both old generations readable.
 - [ ] 47.5 The installer hook names the new folders; a second app appears, as expected.
