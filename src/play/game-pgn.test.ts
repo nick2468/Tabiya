@@ -126,6 +126,31 @@ describe('gameToPgn', () => {
     )
   })
 
+  it('says a checkmate once, not twice', () => {
+    // A mated position has no evaluation, so `buildReport` makes the outcome
+    // the verdict too. Both slots then carry the same sentence, and the file
+    // used to read "You won by checkmate. You won by checkmate."
+    const mated = {
+      ...game,
+      report: { ...report, verdict: 'You won by checkmate', outcome: 'You won by checkmate' },
+    }
+    const played = parsePgn(gameToPgn(mated)).games[0].moves
+    expect(played.at(-1)?.comment).toBe(
+      'You won by checkmate. White was played by you at level 4.',
+    )
+  })
+
+  it('still says an outcome that is not the verdict', () => {
+    const drawn = {
+      ...game,
+      report: { ...report, outcome: 'Drawn by repetition' },
+    }
+    const played = parsePgn(gameToPgn(drawn)).games[0].moves
+    expect(played.at(-1)?.comment).toBe(
+      'Clearly better for Black. Drawn by repetition. White was played by you at level 4.',
+    )
+  })
+
   it('says nothing about a repertoire the game never left', () => {
     const stayed = { ...game, report: { ...report, deviation: { kind: 'stayed-in-book' } as const } }
     const text = gameToPgn(stayed)

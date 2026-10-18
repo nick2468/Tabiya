@@ -129,8 +129,13 @@ export function gameToPgn(game: GameForPgn): string {
   // The verdict last, so a reader ends on what the engine made of it. The
   // outcome is said too when the game ended by itself, because "1-0" does not
   // say whether it was a mate or a resignation, and this app never resigns.
+  //
+  // Not twice. A mated position has no evaluation to put in words, so
+  // `buildReport` takes the outcome AS the verdict, and the two slots then
+  // hold the same sentence: "You won by checkmate. You won by checkmate."
+  // Found 2026-09-13 while copying this writer into Simply Chess.
   const closing = [report.verdict]
-  if (report.outcome) closing.push(report.outcome)
+  if (report.outcome && report.outcome !== report.verdict) closing.push(report.outcome)
   closing.push(
     game.side === 'other'
       ? `${colourName(studentColour)} was played by you against the course, at level ${level}`
