@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { migrateDataFolder, migrationNote, type MigrationFiles } from './migrate'
-import type { DataRoots } from './paths'
+import { pickOldRoot, type DataRoots } from './paths'
+import { parseProgressJson } from './progress'
 
 /**
  * Moving the trainee's data folder.
@@ -284,5 +285,120 @@ describe('what the trainee is told afterwards', () => {
     expect(note).toContain('Your progress came across')
     expect(note).toContain('colle (it is locked)')
     expect(note).toContain('import them again')
+  })
+})
+
+/**
+ * Two generations of old folder, since phase 47.
+ *
+ * The app's data has lived in three places: the folder named after the Tauri
+ * identifier, then `Repertoire Trainer` from phase 15, then `Tabiya` from phase
+ * 47. A trainee arriving from either of the first two has to be carried across,
+ * and nobody arriving from neither may have a migration run at them.
+ *
+ * These drive the real pair: `pickOldRoot` from `paths.ts` chooses the source,
+ * `migrateDataFolder` copies it. The folder names are the real ones because
+ * which generation wins is the whole question here.
+ */
+const ROAMING = 'C:/Users/example/AppData/Roaming'
+
+function rootsFor(root: string): DataRoots {
+  return {
+    root,
+    progress: `${root}/progress.json`,
+    courses: `${root}/courses`,
+    marker: `${root}/progress.marker.json`,
+  }
+}
+
+const TABIYA = rootsFor(`${ROAMING}/Tabiya`)
+/** Newest first, exactly as `oldDataRoots()` returns them. */
+const OLDER = [
+  rootsFor(`${ROAMING}/Repertoire Trainer`),
+  rootsFor(`${ROAMING}/com.nick.london-trainer`),
+]
+
+const ONE_LINE = JSON.stringify(
+  { version: 4, learntLines: ['london-white/ch1:d4 d5 Bf4'], cards: {}, tagHistory: {}, playGames: [] },
+  null,
+  2,
+)
+
+/** The whole of what the desktop store does on its first read of a session. */
+async function carryAcross(files: MigrationFiles) {
+  return migrateDataFolder(files, await pickOldRoot(files.exists, OLDER), TABIYA)
+}
+
+describe('arriving from an older folder', () => {
+  it('carries the phase 15 folder across and counts the lines on the far side', async () => {
+    // Both old generations hold a file. The newer one is the one the app was
+    // last saving to, so it is the one that must win.
+    const disk = fake({
+      [OLDER[0].progress]: SAVED,
+      [OLDER[1].progress]: ONE_LINE,
+    })
+
+    const result = await carryAcross(disk.api)
+
+    expect(result).toMatchObject({
+      kind: 'migrated',
+      from: `${ROAMING}/Repertoire Trainer`,
+      to: `${ROAMING}/Tabiya`,
+      lines: 2,
+    })
+    // Counted in the copy rather than in the source, which is what makes the
+    // new folder safe to treat as live.
+    expect(parseProgressJson(disk.tree[TABIYA.progress]).learntLines).toHaveLength(2)
+    expect(disk.tree[OLDER[0].progress]).toBe(SAVED)
+    expect(disk.tree[OLDER[1].progress]).toBe(ONE_LINE)
+  })
+
+  it('reaches past the phase 15 folder when nobody ever used it', async () => {
+    // A trainee who last ran the app before phase 15 and is upgrading now.
+    const disk = fake({ [OLDER[1].progress]: ONE_LINE })
+
+    const result = await carryAcross(disk.api)
+
+    expect(result).toMatchObject({
+      kind: 'migrated',
+      from: `${ROAMING}/com.nick.london-trainer`,
+      lines: 1,
+    })
+    expect(disk.tree[TABIYA.progress]).toBe(ONE_LINE)
+  })
+
+  it('keeps looking when an old folder cannot even be looked at', async () => {
+    // A missing capability grant throws rather than answering no. The older
+    // generation is still worth asking about.
+    const disk = fake({ [OLDER[1].progress]: ONE_LINE })
+    disk.break('exists', OLDER[0].progress, 'not allowed')
+
+    expect(await carryAcross(disk.api)).toMatchObject({
+      kind: 'migrated',
+      from: `${ROAMING}/com.nick.london-trainer`,
+    })
+  })
+
+  it('runs no migration at all for a fresh install', async () => {
+    const disk = fake({})
+
+    expect(await carryAcross(disk.api)).toEqual({ kind: 'not-needed' })
+    // Nothing anywhere: not the file, not the folder. A fresh install starts
+    // blank because it IS blank, and `safety.ts` owns that decision from here.
+    expect(disk.tree[TABIYA.progress]).toBeUndefined()
+    expect(disk.dirs.has(TABIYA.root)).toBe(false)
+  })
+
+  it('blocks rather than starting blank when the copy cannot be written', async () => {
+    // The shape of a capability scope that did not follow the folders.
+    const disk = fake({ [OLDER[0].progress]: SAVED })
+    disk.break('write', TABIYA.progress, 'not allowed')
+
+    const result = await carryAcross(disk.api)
+
+    expect(result.kind).toBe('failed')
+    expect(result.kind === 'failed' && result.reason).toContain(`${ROAMING}/Repertoire Trainer`)
+    expect(disk.tree[TABIYA.progress]).toBeUndefined()
+    expect(disk.tree[OLDER[0].progress]).toBe(SAVED)
   })
 })

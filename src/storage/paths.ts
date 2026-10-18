@@ -5,8 +5,8 @@
  * course installer all need the same root, and until phase 15 each of them
  * worked it out for itself by calling `appDataDir()`. Three copies of one
  * answer is three chances to drift, and the folder they pointed at was named
- * after the Tauri identifier: `com.nick.london-trainer`, for an app called
- * Repertoire Trainer.
+ * after the Tauri identifier: `com.nick.london-trainer`, for an app that was
+ * not called that either.
  *
  * So the root is now built by hand: the user's roaming data folder plus a
  * literal folder name. The identifier is deliberately NOT changed.
@@ -23,8 +23,13 @@
  * sees it, and changing it would buy nothing while adding a third generation
  * of folder for the migration below to carry a trainee out of.
  *
- * `appDataDir()` still means the identifier folder, which is exactly the old
- * location, so it is how the migration finds what to carry across.
+ * There are now TWO old locations, because phase 47 renamed the app to Tabiya
+ * and moved the folders with it. `oldDataRoots()` returns them newest first:
+ * `<roaming>/Repertoire Trainer`, which is where phase 15 put the data, and
+ * then `appDataDir()`, which still means the identifier folder and is where
+ * everything before phase 15 lived. A trainee coming from either one is
+ * carried across. Keeping the older of the two costs one `exists` call and
+ * means nobody is stranded on a generation the code used to support.
  *
  * Phase 16 added a second folder, under the user's LOCAL data folder, holding
  * a copy of the progress file and the window's browser profile. It is separate
@@ -36,24 +41,30 @@
  */
 
 /** The app's data folder, under the user's roaming data folder. */
-export const DATA_FOLDER = 'Repertoire Trainer'
+export const DATA_FOLDER = 'Tabiya'
+
+/** Where the data folder was between phases 15 and 47. Read only. */
+export const FORMER_DATA_FOLDER = 'Repertoire Trainer'
 
 /**
  * The app's folder under the user's LOCAL data folder, which holds the second
  * copy of the progress file and the window's browser profile.
  *
- * NOT `Repertoire Trainer`, which is what phase 16's chip asked for and what
- * this deliberately is not. On this machine the NSIS installer's
- * `InstallLocation` is exactly `%LOCALAPPDATA%\Repertoire Trainer`, verified in
- * the registry under `HKCU\...\Uninstall\Repertoire Trainer`. A second copy of
- * the progress file inside the install folder would be deleted by an uninstall,
- * which is precisely the kind of loss it exists to prevent. So it goes in a
- * sibling folder that no installer touches.
+ * NOT `Tabiya`, and the ` Data` on the end is the whole point. On this machine
+ * the NSIS installer's `InstallLocation` is `%LOCALAPPDATA%\<product name>`,
+ * verified in the registry at phase 16 under
+ * `HKCU\...\Uninstall\Repertoire Trainer`, and the product name is what the
+ * installer keys on, so the renamed installer will sit at
+ * `%LOCALAPPDATA%\Tabiya`. A second copy of the progress file inside the
+ * install folder would be deleted by an uninstall, which is precisely the kind
+ * of loss it exists to prevent. So it goes in a sibling folder that no
+ * installer touches.
  *
  * The same literal is in `src-tauri/src/lib.rs`, which builds the window's
- * profile folder from it.
+ * profile folder from it, and in `src-tauri/installer-hooks.nsh`, which is
+ * allowed to delete it. `installer-hook.test.ts` holds all three together.
  */
-export const LOCAL_FOLDER = 'Repertoire Trainer Data'
+export const LOCAL_FOLDER = 'Tabiya Data'
 
 /** The folder inside it that courses are dropped into. */
 export const COURSES_FOLDER = 'courses'
@@ -138,10 +149,10 @@ async function rootsAt(root: string): Promise<DataRoots> {
 }
 
 let current: Promise<DataRoots> | null = null
-let previous: Promise<DataRoots> | null = null
+let previous: Promise<DataRoots[]> | null = null
 let second: Promise<BackupRoots> | null = null
 
-/** Where the app's data lives now: `<roaming>/Repertoire Trainer`. */
+/** Where the app's data lives now: `<roaming>/Tabiya`. */
 export function dataRoots(): Promise<DataRoots> {
   if (!current) {
     current = (async () => {
@@ -153,15 +164,60 @@ export function dataRoots(): Promise<DataRoots> {
 }
 
 /**
- * Where it lived before phase 15: the folder named after the identifier.
- * Read only. Nothing in the app writes there any more, and the capabilities
- * are cut down to reads so that it cannot.
+ * Everywhere the data has lived before, newest first.
+ *
+ * `<roaming>/Repertoire Trainer` is phase 15's folder, abandoned at phase 47.
+ * The identifier folder is where everything before phase 15 lived, and
+ * `appDataDir()` still means exactly that. Both are read only: nothing in the
+ * app writes to either any more, and the capabilities grant reads alone so
+ * that it cannot. Write access to an old folder is what would turn the
+ * migration from a copy into a move.
+ *
+ * Newest first matters. A trainee who came through phase 15 has a file in both
+ * folders, and the one to carry forward is the one the app was last saving to.
  */
-export function oldDataRoots(): Promise<DataRoots> {
+export function oldDataRoots(): Promise<DataRoots[]> {
   if (!previous) {
-    previous = (async () => rootsAt(await (await api()).appDataDir()))()
+    previous = (async () => {
+      const { dataDir, appDataDir, join } = await api()
+      return Promise.all([
+        rootsAt(await join(await dataDir(), FORMER_DATA_FOLDER)),
+        rootsAt(await appDataDir()),
+      ])
+    })()
   }
   return previous
+}
+
+/**
+ * Which of those to carry across: the newest generation that has a progress
+ * file in it.
+ *
+ * An `exists` that throws counts as a no. That is what a missing capability
+ * grant looks like, and a folder the app is not allowed to look at is not a
+ * folder it could have copied out of anyway, so the next generation is still
+ * worth asking about. When none of them holds a file the newest is handed back,
+ * because `migrateDataFolder` answers a source with no progress file with
+ * `not-needed`, which is the right answer and the only one needed.
+ *
+ * This lives here rather than in `migrate.ts` on purpose. That module copies
+ * one folder into another and verifies the copy before the new one counts as
+ * live. It is the one piece of this app standing between the trainee and a
+ * second lost progress file, and choosing which folder to hand it is a
+ * question about where data has lived, which is this module's question.
+ */
+export async function pickOldRoot(
+  exists: (path: string) => Promise<boolean>,
+  candidates: DataRoots[],
+): Promise<DataRoots> {
+  for (const candidate of candidates) {
+    try {
+      if (await exists(candidate.progress)) return candidate
+    } catch {
+      // Unreadable is not a reason to stop looking at the rest.
+    }
+  }
+  return candidates[0]
 }
 
 /**
@@ -170,7 +226,7 @@ export function oldDataRoots(): Promise<DataRoots> {
  *
  * Before phase 16 the profile was Tauri's default, which is the folder named
  * after the bundle identifier - `com.nick.london-trainer`, again for an app
- * called Repertoire Trainer, and about 32 MB of it. The window now builds its
+ * not called that, and about 32 MB of it. The window now builds its
  * own with an explicit folder. The old one is left exactly where it is for the
  * trainee to delete, the same rule the data folder move followed.
  */
@@ -184,7 +240,7 @@ export async function profilePaths(): Promise<{ now: string; before: string }> {
 
 /**
  * Where the second copy of the progress file lives:
- * `<local data>/Repertoire Trainer`.
+ * `<local data>/Tabiya Data`.
  *
  * The local data folder rather than the roaming one, so that the two copies
  * are in genuinely different places, and a folder of its own rather than the

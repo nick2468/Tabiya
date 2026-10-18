@@ -27,13 +27,15 @@ use tauri::{Manager, WebviewWindowBuilder};
 
 /// The app's own folder under the user's local data folder.
 ///
-/// NOT `Repertoire Trainer`, which is the INSTALL folder: the NSIS installer's
-/// `InstallLocation` on this machine is `%LOCALAPPDATA%\Repertoire Trainer`,
-/// verified in the registry. Putting the profile there would mean an uninstall
-/// wiping it, and the frontend keeps its second copy of the progress file in
-/// this same folder, where an uninstall must not reach. The frontend has the
-/// same literal in `src/storage/paths.ts`.
-const LOCAL_FOLDER: &str = "Repertoire Trainer Data";
+/// NOT `Tabiya`, which is the INSTALL folder, and the ` Data` on the end is
+/// what keeps the two apart. The NSIS installer's `InstallLocation` is
+/// `%LOCALAPPDATA%\<product name>`, verified in the registry at phase 16 when
+/// the product was called something else. Putting the profile there would mean
+/// an uninstall wiping it, and the frontend keeps its second copy of the
+/// progress file in this same folder, where an uninstall must not reach. The
+/// frontend has the same literal in `src/storage/paths.ts`, and
+/// `installer-hooks.nsh` has it a third time.
+const LOCAL_FOLDER: &str = "Tabiya Data";
 
 /// The browser profile inside it: cache, cookies and local storage.
 const WEBVIEW_FOLDER: &str = "WebView2";

@@ -5,7 +5,7 @@ import { join } from 'node:path'
 import { tmpdir } from 'node:os'
 import { checkBlankStart, writeMarkerAndBackup, type SafetyFiles } from './safety'
 import { emptyProgress, type ProgressState } from './progress'
-import type { BackupRoots, DataRoots } from './paths'
+import { DATA_FOLDER, LOCAL_FOLDER, type BackupRoots, type DataRoots } from './paths'
 
 /**
  * The blank-start guard, against a real filesystem.
@@ -26,10 +26,11 @@ import type { BackupRoots, DataRoots } from './paths'
  *
  * Everything happens under the OS temp folder and is cleaned up afterwards.
  *
- * The reference above is the only one in `src`. The app's own tsconfig deliberately
- * knows nothing about node, because app code must not reach for it; this file is
- * the exception, and naming the types here rather than in the tsconfig keeps the
- * exception to one file.
+ * The reference above is this file's own. The app's tsconfig deliberately knows
+ * nothing about node, because app code must not reach for it, so every test file
+ * that reads the real filesystem declares the types itself rather than leaning on
+ * another one happening to declare them first. Phase 46 found that this file was
+ * declaring them for all three.
  */
 
 const files: SafetyFiles = {
@@ -53,10 +54,10 @@ const roots: string[] = []
 
 /** A fresh pair of folders: the app's data folder, and the local one. */
 async function folders(): Promise<{ data: DataRoots; local: BackupRoots }> {
-  const root = await mkdtemp(join(tmpdir(), 'repertoire-blank-start-'))
+  const root = await mkdtemp(join(tmpdir(), 'tabiya-blank-start-'))
   roots.push(root)
-  const data = join(root, 'Repertoire Trainer')
-  const local = join(root, 'Repertoire Trainer Data')
+  const data = join(root, DATA_FOLDER)
+  const local = join(root, LOCAL_FOLDER)
   await mkdir(data, { recursive: true })
   return {
     data: {

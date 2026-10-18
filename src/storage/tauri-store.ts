@@ -1,4 +1,12 @@
-import { backupRoots, dataRoots, isDesktop, oldDataRoots, type BackupRoots, type DataRoots } from './paths'
+import {
+  backupRoots,
+  dataRoots,
+  isDesktop,
+  oldDataRoots,
+  pickOldRoot,
+  type BackupRoots,
+  type DataRoots,
+} from './paths'
 import { migrateDataFolder, migrationNote, tauriFiles, type Migration } from './migrate'
 import { checkBlankStart, tauriSafetyFiles, writeMarkerAndBackup } from './safety'
 import {
@@ -27,10 +35,11 @@ import {
  * needs a real path to create. Where that folder is lives in `paths.ts`, which
  * is the one place that answers the question for the whole app.
  *
- * The first read of the session also carries the file across from the folder
- * the app used before phase 15. A migration that cannot be completed blocks
- * saving through the same `failure` route a bad read takes, which is the point:
- * the app must never start blank and then save over something real.
+ * The first read of the session also carries the file across from whichever
+ * folder the app used last: the one it had between phases 15 and 47, or the
+ * identifier folder it used before that. A migration that cannot be completed
+ * blocks saving through the same `failure` route a bad read takes, which is the
+ * point: the app must never start blank and then save over something real.
  *
  * Phase 16 closed the last way that could still happen. A progress file that is
  * simply NOT THERE used to be read as a new trainee, so deleting the data
@@ -65,12 +74,20 @@ export class TauriProgressStore implements ProgressStore {
     return dataRoots()
   }
 
-  /** Run once per session, before anything reads or writes. */
+  /**
+   * Run once per session, before anything reads or writes.
+   *
+   * There are two older generations of data folder since phase 47, so the
+   * source is chosen before the copy starts: `pickOldRoot` takes the newest
+   * one that actually holds a progress file. The migration itself is handed
+   * one `from` and one `to`, exactly as it was at phase 15.
+   */
   private migrate(): Promise<Migration> {
     if (!this.moved) {
       this.moved = (async () => {
-        const [from, to] = await Promise.all([oldDataRoots(), dataRoots()])
-        return migrateDataFolder(tauriFiles(), from, to)
+        const files = tauriFiles()
+        const [olds, to] = await Promise.all([oldDataRoots(), dataRoots()])
+        return migrateDataFolder(files, await pickOldRoot(files.exists, olds), to)
       })()
     }
     return this.moved
