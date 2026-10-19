@@ -7,6 +7,10 @@ opening against an engine that is steered into the lines you have studied.
 A tabiya is the standard position an opening heads for, before play diverges. That
 is what every chapter here teaches.
 
+Its companion, [Tabiya Player](https://github.com/nick2468/TabiyaPlayer), is for
+what comes after the opening: a no-frills game against Stockfish, played to the
+end, with the engine naming every slip and the move it preferred.
+
 Built in Australia.
 
 ## Download
