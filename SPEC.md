@@ -347,6 +347,18 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   **Done at phase 16**, on exactly that route: the executable is `repertoire-trainer.exe`
   and Nick confirmed on his own machine that a clean uninstall and reinstall leaves no
   orphan behind.
+  **It happened anyway, found on 2026-10-19 while tidying up after phase 47.** Removing
+  the old "Repertoire Trainer" install by running its own `uninstall.exe /S` took away the
+  uninstaller and the Start menu shortcut and LEFT `repertoire-trainer.exe`, 9.4 MB, in
+  the install folder. Deleted by hand. The cause is not established and the evidence is
+  thin: that install folder held an executable dated 2026-08-31 beside an uninstaller
+  dated 2026-09-06, so the September install did not rewrite the executable, probably
+  because it was running, and it had no entry in Apps and Features either. So this is as
+  likely to be one install that went half way as a fault in the uninstaller. What makes
+  it worth recording is that the same machinery will one day uninstall `tabiya.exe`:
+  anyone who uninstalls this app should look in `%LOCALAPPDATA%\Tabiya` afterwards rather
+  than assume, which is what the phase 15 entry above asked for and what the phase 16
+  confirmation was taken to settle.
 - **The uninstaller no longer removes the app's data, because the data moved and the
   identifier did not.** The generated `installer.nsi` removes `$APPDATA\${BUNDLEID}` and
   `$LOCALAPPDATA\${BUNDLEID}`, which are the folders named after the Tauri identifier.
