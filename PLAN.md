@@ -5513,4 +5513,71 @@ against a COPY of the folders. Tauri resolves the roaming folder with
 so an installed build always reads the real `%APPDATA%` and no copy can stand in for it.
 Nick was asked and chose the live run.
 
-- [ ] **Review gate 47**
+**Gate 47 passed, 2026-10-19.** `tsc -b` clean, 1269 tests in 13.2 seconds, tree clean,
+nothing pushed by the builder. No file under `courses/`, `src/model/` or `src/content/`, so
+no line id can have moved. The two frozen identities held: the identifier is still
+`com.nick.london-trainer` and all fourteen `london-trainer.*` keys are still there across
+the three files that declare them. 1.10.5 in all three manifests.
+
+**The builder corrected this chip three times and was right every time.** Each was checked
+at source rather than taken on its word.
+
+- The false identifier claim sat in THREE live places, not the two the chip named:
+  `paths.ts`, SPEC, and `src-tauri/src/lib.rs`, which the chip missed. And the chip said it
+  contradicted section 8; it was in section **10** (line 1154 before the phase). My error
+  on both counts.
+- The duplicate install is a START MENU entry, not an Apps and Features one. Verified now:
+  the registry holds exactly one entry, `Tabiya 1.10.5` at `%LOCALAPPDATA%\Tabiya`, and
+  nothing for the old name under any display name, install path or the identifier. So the
+  instruction the chip wrote for Nick named a list the old install was never on. The
+  post-gate finding corroborates it: the orphaned executable was dated 2026-08-31 beside an
+  uninstaller dated 2026-09-06, which fits an install that went half way and would explain
+  a missing registration as well.
+- "Drive it against a COPY of Nick's folders" was impossible as written. `dirs-sys` 0.5.0
+  resolves the roaming folder with `SHGetKnownFolderPath(FOLDERID_RoamingAppData)`, read at
+  source in `known_folder_roaming_app_data`, so it is a Win32 call and no `%APPDATA%`
+  override can redirect it. The builder put the options to Nick, he ruled nothing needed
+  preserving, and it copied all three old folders to the scratchpad first regardless.
+
+**Nick's data is safe by construction, not just by report.** `migrate.ts` has exactly one
+`remove`, and it targets `to.progress`, the copy in the NEW folder, and only when
+verification failed. The source is never touched by any path through that module. The
+capability grants for both older generations are read, exists and read-dir only: no write,
+no mkdir, no remove, so the app has no way to alter what it migrates from. The three
+folder literals agree across `paths.ts`, `lib.rs` and the NSIS hook, which is the thing
+phase 16 once shipped disagreeing.
+
+**Three things the chip did not ask for, all three right to have done.**
+
+- **The WebView2 profile moves with `LOCAL_FOLDER`**, so the desktop's localStorage resets
+  and 47.2's careful preservation of the keys buys nothing there. Confirmed at
+  `paths.ts:250`. This is the finding of the phase: the chip froze the keys to protect
+  settings and the folder move resets them anyway. It costs twelve clicks and no progress,
+  because desktop progress is a file. The Progress notice now names both abandoned profile
+  folders, says the theme and the remembered Play and Drill settings are what goes, and
+  says progress is not in there.
+- **`capabilities.test.ts`**, eight tests holding all 52 paths to the four folder constants
+  and every write inside the folder the app owns, both guards mutation-checked. The
+  capability file was the one change that could only fail in a packaged build; now it
+  cannot fail silently either.
+- **The titles of SPEC.md and PLAN.md** still said "London Trainer", a name the app lost at
+  phase 5, on the two documents a public repository's reader opens first. A document title
+  is live text, not a dated entry, so 47.7's history rule does not protect it.
+
+**Driven in the browser at 1400x980.** Tab title Tabiya, header Tabiya v1.10.5, the Help
+opening "Tabiya teaches you chess opening repertoires", and ZERO occurrences of the old
+name anywhere in the rendered page. The only "London" left is The London System, which is
+a course. No console errors; storage cleared; viewport reset. Every remaining mention of
+the old name in the tree was checked and every one is deliberate: the `FORMER_*` constants
+the migration needs, the capability grants it reads through, the NSIS comments about what
+is left alone, the migration tests, and the `vite.config.ts` comment narrating an incident
+that happened to an app with that name.
+
+**Open, and Nick's to close.** His four old folders are deliberately still on disk so the
+migration chain can be re-driven; once they go it cannot be exercised live again without
+fixtures. Two register entries stand in SPEC section 6: the NSIS predecessor hook, still
+not taken at its second rename, and a new one, that a blank start does not look for the
+marker or the second copy in a folder the app has walked away from, which is open for one
+start after a rename and needs his ruling on the wording.
+
+- [x] **Review gate 47**
