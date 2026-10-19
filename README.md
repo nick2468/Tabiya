@@ -9,6 +9,17 @@ is what every chapter here teaches.
 
 Built in Australia.
 
+## Download
+
+**[Download the latest installer](https://github.com/nick2468/Tabiya/releases/latest)**
+for 64-bit Windows.
+
+Windows will warn you that the publisher is unknown, because the installer is
+not signed with a code signing certificate. That is what an unsigned installer
+looks like whoever wrote it. If you would rather not take that on a stranger's
+word, the source is all here and `npm run dev` runs the app in a browser
+without installing anything.
+
 ## What is in it
 
 Ten courses ship with the app, five as White and five as Black, in 71 chapters.
