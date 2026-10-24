@@ -45,4 +45,17 @@ describe('the version', () => {
   it('is what the app shows', () => {
     expect(__APP_VERSION__).toBe(declared)
   })
+
+  it('is the same in package-lock.json, in both places it is written', () => {
+    // Added 2026-10-24, when the 1.10.8 bump found the lockfile still saying
+    // 1.10.6: phase 50's bump to 1.10.7 had changed package.json and left the
+    // lockfile behind, and nothing here looked at it. npm writes the version at
+    // the top and again on the root package entry.
+    const lock = JSON.parse(read('package-lock.json')) as {
+      version: string
+      packages: Record<string, { version?: string }>
+    }
+    expect(lock.version).toBe(declared)
+    expect(lock.packages[''].version).toBe(declared)
+  })
 })
