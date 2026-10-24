@@ -1,7 +1,7 @@
 import { createElement, type ReactNode } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
-import { About } from './About'
+import { About, Licences } from './About'
 import { Shell } from './App'
 import { Drill, Feedback } from './Drill'
 import { CourseMovesChoice, Play, PlayActions, PlayControls, PlayHead, Report } from './Play'
@@ -290,7 +290,9 @@ const screens: Record<Screen, string> = {
     inApp(learntOne, createElement(Progress, { courseId: course.id, onPlayOn: () => {} })) +
     // The archive view, which the screen shows only after a click.
     inApp(learntOne, createElement(PlayOn, { onPlayOn: () => {}, initialView: 'archive' })),
-  about: renderToStaticMarkup(createElement(About)),
+  // The licences only render once View the licences is pressed, and a string
+  // render presses nothing, so they are rendered on their own.
+  about: renderToStaticMarkup(createElement(About)) + renderToStaticMarkup(createElement(Licences)),
 }
 
 /**

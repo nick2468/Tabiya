@@ -135,7 +135,8 @@ export const HELP_SECTIONS: HelpSection[] = [
       'Help and About come last in that row, after a faint line, because neither is a',
       'step, and both are always there. **About** says who made the app and where its',
       'source code is, and **View the licences** on it shows the licences the program is',
-      'distributed under.',
+      'distributed under. **Third-party notices**, at the bottom of those, lists every',
+      'library the program contains with its own copyright and licence notice.',
     ].join('\n'),
   },
   {
@@ -539,4 +540,5 @@ export const HELP_CONTROLS: HelpControl[] = [
   { name: 'Import progress', screen: 'progress' },
 
   { name: 'View the licences', screen: 'about' },
+  { name: 'Third-party notices', screen: 'about' },
 ]

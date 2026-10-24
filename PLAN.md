@@ -5781,7 +5781,7 @@ bundle. Version 1.10.7.
 - [x] 50.3 Each licence resolved: OR choices, own files, vendored fallbacks, NOTICEs, failures.
 - [x] 50.4 The MPL crates' source locations stated.
 - [x] 50.5 Readable inside the app, loaded on demand.
-- [ ] 50.6 README, SPEC and Help.
+- [x] 50.6 README, SPEC and Help.
 - [x] 50.7 Tests, mutation-checked.
 - [ ] 50.8 Version 1.10.7.
 - [ ] 50.9 Proved in a production build and an installed build, with sizes measured.

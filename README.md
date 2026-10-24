@@ -131,3 +131,7 @@ GPL terms first.
 Everything else the app depends on is permissively licensed: React, react-markdown
 and ts-fsrs under MIT, chess.js under BSD-2-Clause, and the Tauri libraries under
 MIT or Apache-2.0.
+
+The full third-party notices, the copyright and licence of every JavaScript package
+and Rust crate a build contains, ship inside the app under About, View the licences,
+Third-party notices, generated from the build itself every time by `scripts/notices/`.
