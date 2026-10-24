@@ -1,0 +1,148 @@
+## Nick:
+I want to write a windows app with Claude Code that will teach me how to play and get good at the Chess opening known as the London System. I need an initial brief, can you suggest one?
+
+## Claude:
+I'll take a quick look at what's in the London directory first, then draft the brief as a file there.
+
+Empty directory, clean slate. I'll draft the brief as `BRIEF.md` in there now, making sensible default decisions and flagging the few things only you can rule on.
+
+Done. The brief is at [BRIEF.md](BRIEF.md), written as a settled-defaults document you can mark up rather than a list of options.
+
+The shape of it:
+
+- **The app trains three things**: knowing the moves, knowing the plans, and playing them under pressure. One mode each (Study, Drill, Play) plus a Progress view.
+- **The distinctive design piece** is Play mode steering: while a game stays inside your repertoire, Black's moves come from the repertoire data itself, weighted by real-world frequency, so practice games land in the structures you just studied. The engine only takes over once the game leaves book. After each game you get "here is where you left the repertoire, and why the book move matters" plus a blunder scan.
+- **Content is data, not code**: eight chapters as JSON move trees with a prose note per move, from the core setup through the critical ...c5/...Qb6 lines to a tactics-and-model-games chapter. Club depth, about move 10-12 in the mains.
+- **Stack**: React + TypeScript + Vite (your dc.web stack), chessground for the board, chess.js for rules, Stockfish WASM for the opponent, ts-fsrs for spaced repetition. It runs in the browser through the build phases and gets wrapped as a native Windows .exe with Tauri at the end.
+
+Three questions in the brief only you can answer, with the defaults I assumed:
+
+1. Your level and goal. I assumed club improver, roughly 1000-1700 online rapid.
+2. Move order: modern 2.Bf4 (assumed) or classical 2.Nf3 first. This changes the critical chapter.
+3. Wrapper: Tauri (needs a one-time Rust install), Electron, or no wrapper at all.
+
+Answer those, or just tell me what reads wrong, and I'll fold it in. Once the brief settles I can turn phase 1 into a self-contained build prompt.
+
+## Nick:
+1. yes club improver 2. modern but we might extend later to include the alternative 2nd move 3. Technical stack wise I do not know - would like to know the differences
+
+## Claude:
+Both rulings are easy to fold in, and the good news on question 3 is that it barely blocks anything: all three wrapper options run the exact same React + TypeScript app, so the choice only matters at the final phase. I'll update the brief first, then walk through the differences.
+
+[BRIEF.md](BRIEF.md) is now v0.2: club improver locked in, modern 2.Bf4 locked in with the classical order noted as a future extension (the move-tree format must allow a second White move at a node, tagged by variant, so adding it later is a content job, not a rewrite).
+
+Now the wrapper. The key fact first: whichever you pick, the app itself is the same React + TypeScript code, and it runs in a normal browser during development. The wrapper is just the shell it ships in, added at the final phase. So this ruling can wait until you've been using the app for weeks.
+
+**Option 1: no wrapper (browser only).** You start it with one command and it opens in a browser tab. Edge can also "install" it as an app, which gives it its own window and Start menu icon, still with nothing extra on your machine. Zero packaging work, ever. Two real drawbacks. There is no true .exe, so something has to serve the app. And your training progress lives in browser storage, which is wiped if you ever clear site data. The export button in the brief exists for exactly that risk, but real files are safer.
+
+**Option 2: Electron.** Bundles a full copy of the Chrome engine and Node inside your app. You get a proper installer and .exe, and the whole toolchain stays JavaScript, so nothing new to install. The cost is bulk: roughly 200-300 MB on disk and a couple of hundred MB of memory for what is a small training tool. It is the most battle-tested option (VS Code and Slack are Electron apps).
+
+**Option 3: Tauri.** Also wraps the web app, but instead of shipping a browser it uses WebView2, the Edge-based page renderer already built into Windows 11. The result is an .exe of a few MB, a much lighter memory footprint, and real file access, so progress is stored as files in AppData rather than browser storage. It could also run the full native Stockfish as a helper process later, though the in-browser engine is already far stronger than any training opponent needs. The cost: Tauri's shell layer is Rust, so a one-time toolchain install (rustup, plus the MSVC C++ build tools). If your Visual Studio setup already includes the C++ workload, the only new piece is rustup. The first build compiles for a few minutes, then it caches.
+
+**What about WPF/.NET, given you know it?** Ruled out in the brief. Every ready-made piece this app needs (board widget, rules library, in-browser engine, repetition scheduler) is JavaScript. WPF would mean hand-building a board control and engine plumbing, which is weeks of work that teaches you no chess.
+
+**My recommendation stays Tauri**: a real, small Windows app with durable file-based progress, at the cost of one toolchain install that Claude Code can script. Pick Electron if "no new toolchain, maximum boring reliability" appeals more than size. Pick browser-only if, honestly, an icon and an .exe don't matter to you.
+
+You can rule now or after phase 1. Either way, the next step when you're ready is for me to turn phase 1 (scaffold, board on screen, move-tree model, first three chapters drafted) into a self-contained build prompt.
+
+## Nick:
+I pick Tauri
+
+## Claude:
+Tauri it is. I'll fold the ruling into the brief, and since that was the last open question, I'll also write the phase 1 build prompt now so everything is ready to hand to a build session.
+
+Brief settled at v0.3. Now the phase 1 build prompt:
+
+Tauri is locked in and the project is ready to build. Two files now sit in the folder:
+
+- [BRIEF.md](BRIEF.md) at v0.3, with all three rulings recorded and nothing left open.
+- [chips/phase-1-scaffold.md](chips/phase-1-scaffold.md), the self-contained build prompt for phase 1.
+
+Phase 1 delivers the foundation: git repo, Vite + React + TypeScript scaffold with tests, a playable chessground board with legal-move enforcement, the chapter JSON schema with a validating loader (every drafted move is machine-checked for legality), and drafted content for the first three chapters - the system basics, classical ...d5/...e6, and the critical ...c5/...Qb6 chapter. Rust and Tauri stay out of the picture until phase 5, so nothing installs on your machine yet.
+
+The chip has a checkbox work plan the builder ticks as it goes, so you can watch progress from the file. Two ways to run it:
+
+1. Start a fresh Claude Code session in `C:\Users\nick2\Code\London` and say: "Execute chips/phase-1-scaffold.md".
+2. Or just tell me "build phase 1" and I'll run it in this session.
+
+Either way, when phase 1 lands you'll have a board on screen and real London content to look at, and we review it together before phase 2 (Study mode) gets its chip.
+
+## Nick:
+I asked four other AI models: Grok, chatGPT, Copilot and Gemini the same question, I put their answers in the chips folder too. They each may have had some useful ideas which we can fold into the build. Please review their answers, let me know what you think about them especially the good parts to keep and ask me any questions to resolve directions. Then write the final brief or a specification document whichever is appropriate for another session to do the build from. The build session will follow a plan with checkboxes that you will write, you will also review each phase of the build.
+
+## Claude:
+I'll read the four answers now, then give you my assessment and the direction questions before writing the final document.
+
+I've read all four. Verdict first: nothing in them overturns the settled direction. Three of the four (ChatGPT, Copilot, Grok) proposed .NET native UI, which we ruled out for good reason - the ready-made chess pieces (board widget, rules library, WASM engine, scheduler) are all JavaScript. Gemini independently landed on almost exactly our stack (Tauri/React/TS, chess.js, Stockfish WASM), which is decent validation. But several ideas are genuinely worth folding in, mostly ChatGPT's pedagogy and Gemini's play-mode framing.
+
+**Worth keeping:**
+
+From **ChatGPT** (much the strongest on teaching, weakest on tech):
+
+1. **Graded move feedback.** "This is playable, but you're missing the chance to prepare e4" teaches; "Incorrect, the answer is Nbd2" doesn't. Foldable honestly: the content schema gains authored notes on the *common wrong moves* at key positions, so drills grade your move as correct / playable / mistake, each with a why.
+2. **Concept tags and weakness tracking.** Tag positions by theme (e4-break, kingside-attack, vs-c5...), report accuracy per concept in Progress, and offer "drill my weak areas". This is the honest, buildable version of their "adaptive personal tutor" idea.
+3. **Play-length options**: play to move 10, to move 15, or a full game. Shortens the practice loop.
+4. **Words, not numbers**: reports say "clearly better for White", not "+0.72".
+5. **A "common mistakes" section in every chapter** intro.
+
+From **Gemini**:
+
+6. **Chapter-targeted practice**: "spar vs the King's Indian setup only", alongside the weighted-random opponent.
+7. **Play-from-here**: start an engine game from any position while studying. Turns every tabiya into a sparring partner - probably the single best idea in the four files.
+8. The **Bd3 vs ...d5 / Be2 vs ...g6** bishop-adaptation point goes into the content quality bar.
+
+From **Grok**: the 800-1600 target band (matches your ruling), per-chapter completion % in Progress, dark theme as default, and "find the plan" quizzes - which I've made question 1 below.
+
+From **Copilot**: honestly nothing new. Its one distinct idea (an in-app content editor, shared with Gemini) I'd defer permanently - the content editor for this app is a Claude session.
+
+**Rejecting, with the why:** difficulty tiers and onboarding diagnostics (single known user), SQLite (progress data is tiny), a real-time eval bar during play (a crutch - it goes in the post-game review instead), square-control heatmaps (gimmick), ChatGPT's free-prose middlegame coaching ("you spent three moves rearranging pieces" - not honestly buildable, the deviation report is the truthful version), and full adaptive exercise generation (concept-tag weighting delivers most of that value at a tenth of the cost).
+
+Two directions genuinely need your ruling before I write the final spec:
+
+Now marking the old documents as superseded:
+
+The final documents are written. The project now has two authoritative files and a clean history:
+
+- **[SPEC.md](SPEC.md)** - the full specification a build session works from: purpose and teaching principle, the four modes in detail, the eight chapters with their quality bar, the complete content schema (now including concept tags, graded mistake entries, and authored board highlights), architecture with module boundaries, the deferred register, risks, your rulings log, and the v1 acceptance list.
+- **[PLAN.md](PLAN.md)** - five phases of checkboxes. The builder ticks task boxes as it goes so you can watch progress from the file. Each phase ends with a **review gate box that only I tick**, after reviewing the phase against the spec - the next phase cannot start before that. Phase 4 includes the engine sanity pass over the critical ...Qb6 chapter.
+- [BRIEF.md](BRIEF.md) and the old phase 1 chip are marked superseded and kept for history, alongside your four input files.
+
+What the review folded in, as ruled: graded drill feedback ("playable, but..." with the why, from ChatGPT), concept tags with per-concept accuracy and a weak-areas drill filter (the honest version of ChatGPT's adaptive tutor), play-from-any-position sparring and chapter-targeted practice (Gemini), game-length caps, word verdicts instead of eval numbers, per-chapter typical-mistakes sections, dark theme default. Plan quizzes and PGN import went to the deferred register per your rulings, with the reasons recorded.
+
+Rust and Tauri still touch nothing until phase 5, so the first four phases run and test entirely in the browser.
+
+To start the build, open a fresh Claude Code session in `C:\Users\nick2\Code\London` and say: **"Read SPEC.md and PLAN.md, then execute phase 1."** When it stops at the gate, come back here and tell me - I'll review the phase, tick the gate if it holds, and correct anything that doesn't.
+
+## Nick:
+The builder session has finished phase 1 - review it
+
+## Claude:
+On it. The builder stopped at the gate correctly and left three open items. I'll verify the claims against the source rather than taking the summary on faith: git history and conventions first, then the test suite, then the code and content, then a live check of the running app.
+
+History and hygiene look right so far: nine commits in the specified order, clean tree, no remote. Now the tracked file list, trailers, and the test suite.
+
+The model layer is exactly what the spec ordered - pure, strict, error-collecting, with unknown-field rejection as a bonus hardening. Now the tests themselves and the position helper.
+
+The pane isn't displayed on your side, so no pixels - but the accessibility tree and the dev board API give me everything the review needs.
+
+Everything the acceptance list demanded is verified working. Applying the review fixes now: the resize robustness fix, the two content touches, and the gate.
+
+Fix verified live: a fresh load in the same degenerate context now measures 480x480 with no manual nudge. Committing the review work as three explicit-path commits:
+
+**Review gate 1 is passed and ticked.** The build is genuinely good. I verified it rather than trusting the summary, found one real robustness gap (fixed at review), made two small content corrections, and left three commits on main after the builder's nine.
+
+**What I checked and how it held up:**
+
+- **History and conventions.** Nine commits in the planned order, clean tree, no remote, explicit rationale in every body, and the trailers correctly name Claude Opus 5 as the builder. Em-dash sweep over `src/`, `docs/` and `content/`: zero hits.
+- **Tests.** 47 tests green, then re-run green after my fixes, plus a full `tsc` build. All seven mandated negative fixtures exist, with extras (unknown-field rejection, multi-error collection). Best of all, the content quality bar itself is in the suite - intro length, line depth, mistake-entry minimums, tags, weights - so a chapter that drifts below spec fails CI.
+- **The model layer.** The loader walks every line with chess.js and enforces the full schema. One design decision worth praising: drill cards are keyed on a four-field FEN, and a test proves two different move orders reaching the same position share one card.
+- **The content, read in full.** All three chapters are sound club-level theory. The critical ...Qb6 chapter teaches one coherent rule (Nc3 gambit before c3, Qb3 trade after c3, Qc1 when ...c6 refutes the knight jump - the ...cxb5 point is exactly right), and the spec's honesty requirement is honoured: the pawn offer is sold as an initiative, never a forced win.
+- **The running app, driven end to end.** Board renders, a legal move plays through the whole chessground-to-chess.js-to-React loop, three illegal move attempts were all rejected, and the panel shows the three chapters PASS (23/52/48 nodes, deepest moves 10/11/10).
+
+**The one real finding:** chessground measures its host once, at mount, so a board mounted while hidden or collapsed stays zero-width and unplayable. Real users were fine in phase 1, but phases 2 and 3 mount boards inside switched-away views, where this would have bitten. Fixed with a ResizeObserver calling `redrawAll` ([Board.tsx](src/ui/Board.tsx)), and verified live on a fresh load.
+
+**Small corrections:** the ...Qxb2 grab now carries the top weight after 4.Nc3 (the intro says most club opponents take the pawn - now the steering will agree), and ch1's premature-h4 note claims "backfires" rather than "loses".
+
+**The builder's three open items are all legitimate and correctly parked:** the ch2 engine check is first in line for task 4.6 (I added a note to also deepen the short ...Nc6 decline line there), the `trustAllEvents` dev-gating claim is true at source, and the promotion picker is tagged to task 4.3.
+
+Phase 2 is clear to start: fresh session in the London folder, "Read SPEC.md and PLAN.md, then execute phase 2."

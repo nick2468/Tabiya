@@ -94,6 +94,12 @@ typechecks, and `npx tauri build` produces the Windows installer under
 
 ## How it was built
 
+Start with [Initial prompts.txt](Initial%20prompts.txt): the conversation that
+began the project, from the first request for an app to teach the London System,
+through the first brief, the choice of stack, a review of four other AI models'
+answers to the same question, and the first build review. It is kept verbatim,
+including the decisions that were later reversed.
+
 `SPEC.md` is the contract and `PLAN.md` is the running record: every phase, what it
 changed, and what the review of it found. `chips/` holds the brief each phase was
 built from. Reading a phase's chip, then its plan section, then its review notes
