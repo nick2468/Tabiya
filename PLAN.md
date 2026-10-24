@@ -5761,3 +5761,31 @@ Part B (blocked on the certificate; Nick present):
 Acceptance: as the chip's final paragraph.
 
 - [ ] **Review gate 49**
+
+## Phase 50 - every library the app ships, credited inside it
+
+Goal: Nick, 2026-10-24: the app credits every third-party library it ships. MIT, BSD,
+Apache-2.0 and Unicode-3.0 ask for their notices to travel with every copy, and gate 48
+confirmed the built program carries none but Nick's and the GPL text's. True of every
+installer so far; fixed now that the repository is public with a download link.
+
+Chipped as `chips/phase-50-third-party-notices.md`. **Runs before phase 49**, whose second
+half waits on Nick's certificate. Measured first: 95 non-dev JavaScript packages at most, and
+247 Rust crates compiled into the Windows program, of which 11 ship no licence file and 5 are
+MPL-2.0, whose licence asks the distributor to say where their source is. The notices are
+generated from the build itself, loaded on demand in the About, and kept out of the main
+bundle. Version 1.10.7.
+
+- [ ] 50.1 A generator, built from what actually ships, in two sections.
+- [ ] 50.2 The Rust crates in the binary, procedural macros left out with the reason.
+- [ ] 50.3 Each licence resolved: OR choices, own files, vendored fallbacks, NOTICEs, failures.
+- [ ] 50.4 The MPL crates' source locations stated.
+- [ ] 50.5 Readable inside the app, loaded on demand.
+- [ ] 50.6 README, SPEC and Help.
+- [ ] 50.7 Tests, mutation-checked.
+- [ ] 50.8 Version 1.10.7.
+- [ ] 50.9 Proved in a production build and an installed build, with sizes measured.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 50**
