@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { isDesktop } from '../storage/paths'
 import { GPL_TEXT, MIT_TEXT, OTHER_DEPENDENCIES } from './licences'
+import { loadNotices, type NoticesLoad } from './notices'
 import { openRepository, REPOSITORY_SHOWN, REPOSITORY_URL } from './repository'
 import './help.css'
 import './about.css'
@@ -105,7 +106,78 @@ export function Licences() {
           </li>
         ))}
       </ul>
+
+      <ThirdPartyNotices />
     </div>
+  )
+}
+
+/**
+ * Every library the program contains, with its own copyright and licence
+ * notice, fetched only when it is opened.
+ *
+ * The list above names the libraries the app asks for. This is everything that
+ * ships, theirs included: each JavaScript package with code in the bundle and
+ * each Rust crate in the Windows program, a few hundred kilobytes. Fetched on
+ * the first open and kept, never imported, so it is not in the main bundle.
+ *
+ * Exported for its test.
+ */
+export function ThirdPartyNotices({ load = loadNotices }: { load?: () => Promise<NoticesLoad> }) {
+  const [open, setOpen] = useState(false)
+  const [notices, setNotices] = useState<NoticesLoad | 'loading' | null>(null)
+
+  const toggle = () => {
+    const opening = !open
+    setOpen(opening)
+    if (opening && notices === null) {
+      setNotices('loading')
+      void load().then(setNotices)
+    }
+  }
+
+  return (
+    <>
+      <h4>Every library it contains</h4>
+      <p>
+        The copyright and licence notice of every library in the program, those above
+        included: each JavaScript package in the app and each Rust crate in the Windows
+        program. They are generated from the build itself, every time it is built.
+      </p>
+      <p>
+        <button
+          type="button"
+          aria-expanded={open}
+          aria-controls="about-third-party"
+          onClick={toggle}
+        >
+          Third-party notices
+        </button>
+      </p>
+      {open ? <div id="about-third-party">{shown(notices)}</div> : null}
+    </>
+  )
+}
+
+/** What the open section says, for each state the fetch can be in. */
+function shown(notices: NoticesLoad | 'loading' | null) {
+  if (notices === null || notices === 'loading') return <p>Loading the notices.</p>
+  if (notices.kind === 'loaded') return <pre className="notices">{notices.text}</pre>
+  if (notices.kind === 'missing') {
+    // In development there is no bundle for the notices to be read from. In a
+    // release a missing file is a fault, and it is not dressed up as anything else.
+    return (
+      <p role="note">
+        {import.meta.env.DEV
+          ? 'The third-party notices are generated when the app is built for release, so a development build has none to show.'
+          : 'The third-party notices are missing from this build. Every release build writes them, so this one was not built the usual way.'}
+      </p>
+    )
+  }
+  return (
+    <p role="alert" className="about-failed">
+      The third-party notices could not be loaded ({notices.why}).
+    </p>
   )
 }
 

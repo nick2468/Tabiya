@@ -15,7 +15,8 @@ import {
   resolvePackage,
   type PackageInput,
 } from '../../scripts/notices/core.ts'
-import { COPIED_INTO_THE_APP, packageDirOf } from '../../scripts/notices/plugin.ts'
+import { COPIED_INTO_THE_APP, NOTICES_FILE, packageDirOf } from '../../scripts/notices/plugin.ts'
+import { NOTICES_PATH, NOTICES_TITLE as SCREEN_TITLE } from '../ui/notices'
 
 /**
  * The third-party notices generator, held rule by rule.
@@ -335,6 +336,18 @@ describe('the canonical texts', () => {
       'MPL-2.0': /^Mozilla Public License Version 2\.0$/,
     }
     expect(title).toMatch(expected[id])
+  })
+})
+
+describe('the About screen and the generator', () => {
+  /**
+   * The screen fetches the file by name and recognises it by its first line.
+   * Two copies of two strings in two places, and a mismatch would not fail a
+   * build: the screen would quietly say the notices are missing.
+   */
+  it('agree on the file and its title', () => {
+    expect(NOTICES_PATH).toBe(NOTICES_FILE)
+    expect(SCREEN_TITLE).toBe(NOTICES_TITLE)
   })
 })
 

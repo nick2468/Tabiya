@@ -68,3 +68,14 @@
   padding-left: 20px;
   color: var(--text-soft);
 }
+
+/* The third-party notices. Unlike the two texts above, this file holds licences
+   written every way there is, some of them a paragraph to a line, so it WRAPS:
+   unwrapped, one line ran to 5,300 px. It is as wide as the screen allows, which
+   at the app's own width is wider than the file's 78 columns, so the lines that
+   are short already are not broken again. */
+.licences pre.notices {
+  width: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
