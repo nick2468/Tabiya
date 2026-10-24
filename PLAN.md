@@ -5869,4 +5869,41 @@ MIT.
 the chessground package carries no separate notice for it, only its own GPL-3.0-or-later
 LICENSE, which the file credits. I have not guessed at a notice the package does not ship.
 
-- [ ] **Review gate 50**
+**Gate 50 passed, 2026-10-24.** `tsc -b` clean, 1335 tests in 13.1 seconds, tree clean,
+nothing pushed by the builder, no content touched. 1.10.7 in all three manifests.
+
+**The gate built the production bundle itself and read the file.** `dist/third-party-notices.txt`
+is 328,653 bytes: 61 JavaScript packages and 211 Rust crates, exactly as reported. React's
+"Copyright (c) Meta Platforms, Inc. and affiliates." is in it once; webview2-com, which ships
+no licence file, carries the canonical MIT with a copyright line built from its repository;
+the source section lists all four MPL-2.0 crates in the binary (cssparser 0.36.0, dtoa-short
+0.3.5, option-ext 0.2.0, selectors 0.36.1), each with its crates.io and repository address.
+None of the file's marker phrases occurs in any main-bundle file, so the notices really are
+fetched on demand and not shipped up front.
+
+**The builder's numbers reconcile with the chip's, and correct it.** The chip counted 247
+crates by walking normal dependencies straight through procedural macros. Stopping at the
+macros reaches 228: 17 macros, whose code runs at compile time, plus 211 shipped. The other
+19 of the 247 are needed only by those macros. And ten shipped crates lack a licence file,
+not eleven: `webview2-com-macros` is itself a macro.
+
+**One departure from the chip, and it is right.** The chip said to choose MIT whenever an OR
+expression offers it. The builder takes a text the package actually ships before a canonical
+one, because the package's own file carries its real copyright line. That changes one
+package: brotli-decompressor, "BSD-3-Clause/MIT", ships only its BSD text, with "Copyright
+(c) 2016 Dropbox, Inc." The chip's literal rule would have printed a template MIT with an
+invented holder in place of Dropbox's real notice. Confirmed in the generated file.
+
+**One gate correction, its own commit** ([84ae3e5]). The register entry the builder wrote
+for the installer is right that NSIS's LZMA module, which Tauri's schema labels "(default)"
+and which `tauri.conf.json` does not override, is under the Common Public License 1.0. It
+left out the special exception further down NSIS's own `COPYING`, in which the module's
+authors permit linking your code to it without subjecting that code to the CPL. So the CPL
+cannot reach Tabiya's code; only the module's own object-code conditions remain.
+
+**Open, and Nick's.** That installer decision: `bundle.windows.nsis.compression` set to
+`zlib` removes the LZMA module at the cost of a larger download, or an installer licence
+page carries NSIS's terms, the LZMA source address and the plugin's notice. The notices in
+this phase cover what is installed, not the program that installs it.
+
+- [x] **Review gate 50**
