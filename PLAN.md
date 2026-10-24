@@ -5581,3 +5581,26 @@ marker or the second copy in a folder the app has walked away from, which is ope
 start after a rename and needs his ruling on the wording.
 
 - [x] **Review gate 47**
+
+## Phase 48 - an About screen, and the notices an open-source release owes
+
+Goal: Nick, 2026-10-24, releasing Tabiya as open source. The app gets an About that names
+him, links to the GitHub repository, and says what the word tabiya means in chess.
+
+Chipped as `chips/phase-48-about.md`. It carries more than a name because the installer
+contains two GPL libraries, Stockfish and chessground, so the program as a whole goes out
+under GPL-3.0, and a GPL program with a user interface owes its users the licence notices
+and a copy of the licence text. The About is where the app pays that. The link needs a new
+desktop permission, scoped to the one repository address and held by the capability test.
+Version 1.10.6.
+
+- [ ] 48.1 The About screen, beside Help, with the drafted wording.
+- [ ] 48.2 The link, with the opener permission scoped to the repository address alone.
+- [ ] 48.3 The licence texts shipped and viewable offline, read from their files at build time.
+- [ ] 48.4 Help and SPEC.
+- [ ] 48.5 Version 1.10.6.
+- [ ] 48.6 Proved in the browser and in an installed build, including a refused address.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 48**
