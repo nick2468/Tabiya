@@ -1,6 +1,8 @@
 import { readFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
+import { thirdPartyNotices } from './scripts/notices/plugin.ts'
 
 interface Manifest {
   version: string
@@ -34,7 +36,10 @@ const dependencyLicences = Object.keys(own.dependencies ?? {})
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  // The notices file every library the app ships is credited in. Production
+  // builds only: it reads the finished bundle, so there is nothing to read in
+  // dev, and a test run has no bundle either.
+  plugins: [react(), thirdPartyNotices({ root: fileURLToPath(new URL('.', import.meta.url)), version })],
   define: {
     __APP_VERSION__: JSON.stringify(version),
     __DEPENDENCY_LICENCES__: JSON.stringify(dependencyLicences),

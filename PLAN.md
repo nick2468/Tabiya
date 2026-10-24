@@ -5776,13 +5776,13 @@ MPL-2.0, whose licence asks the distributor to say where their source is. The no
 generated from the build itself, loaded on demand in the About, and kept out of the main
 bundle. Version 1.10.7.
 
-- [ ] 50.1 A generator, built from what actually ships, in two sections.
-- [ ] 50.2 The Rust crates in the binary, procedural macros left out with the reason.
-- [ ] 50.3 Each licence resolved: OR choices, own files, vendored fallbacks, NOTICEs, failures.
-- [ ] 50.4 The MPL crates' source locations stated.
+- [x] 50.1 A generator, built from what actually ships, in two sections.
+- [x] 50.2 The Rust crates in the binary, procedural macros left out with the reason.
+- [x] 50.3 Each licence resolved: OR choices, own files, vendored fallbacks, NOTICEs, failures.
+- [x] 50.4 The MPL crates' source locations stated.
 - [ ] 50.5 Readable inside the app, loaded on demand.
 - [ ] 50.6 README, SPEC and Help.
-- [ ] 50.7 Tests, mutation-checked.
+- [x] 50.7 Tests, mutation-checked.
 - [ ] 50.8 Version 1.10.7.
 - [ ] 50.9 Proved in a production build and an installed build, with sizes measured.
 
