@@ -5735,10 +5735,14 @@ Chipped as `chips/phase-49-signed-installer.md`, to run after phase 48. **Part A
 buildable now** with a throwaway certificate: a separate signing configuration so the
 ordinary build stays unsigned, a preflight, a signature check, one `build:signed` command
 and a written release procedure. **Part B is blocked on Nick's certificate and needs him
-present**, because signing means logging in to SimplySign with a token from his phone. Two
-facts are unconfirmed and nothing may assume them: the exact publisher wording, and whether
-Certum issues this product to individuals. Signing names the publisher; it does not make the
-SmartScreen warning vanish on day one.
+present**, because signing means logging in to SimplySign with a token from his phone.
+**Nick bought the certificate on 2026-10-24 and is waiting for Certum to activate it.**
+Certum's own page confirms it is issued to an individual, with the subject "natural person
+data prefixed with 'Open Source Developer' phrase", so Windows will show that phrase with his
+name; the exact field and punctuation are recorded when it is issued. No Australian
+certificate authority exists to buy from instead, and the same-shape alternatives cost four
+to six times as much. Signing names the publisher; it does not make the SmartScreen warning
+vanish on day one.
 
 Part A:
 

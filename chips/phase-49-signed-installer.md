@@ -8,8 +8,9 @@ what this phase eventually changes), `src-tauri/tauri.conf.json`, `package.json`
 47 and 48 (the packaged-build walks this follows) before starting.
 
 **THIS PHASE NEEDS NICK AT THE KEYBOARD FOR ITS SECOND HALF, AND THAT HALF IS BLOCKED UNTIL
-HIS CERTIFICATE IS ISSUED.** Part A is buildable now with a throwaway certificate. Part B
-needs Nick's real certificate, and signing with it needs Nick to log in to SimplySign with a
+HIS CERTIFICATE IS ACTIVE.** **Nick bought the certificate on 2026-10-24 and is waiting for
+Certum to activate it.** Part A is buildable now with a throwaway certificate. Part B needs
+Nick's real certificate, and signing with it needs Nick to log in to SimplySign with a
 one-time token from his phone. Do Part A, stop, and report. Do not start Part B until Nick
 says the certificate is active and he is present.
 
@@ -27,14 +28,25 @@ below were re-checked at source by the orchestrator before going into this chip.
 - Microsoft's own signing service does not serve individuals in Australia, per the PdfCraft
   research; SignPath Foundation is free but would show "SignPath Foundation" as the
   publisher, and Nick wants his own name.
-- **Two things NOT confirmed by any source, so nothing here may assume them:** the exact
-  wording of the certificate's subject (community reports say it reads "Open Source
-  Developer, Nick Walker"; nothing official says so), and whether Certum issues this
-  product to individuals without an organisation. Nick confirms both when he buys it. Your
-  code reads the subject from configuration once it is known; it never hard-codes it.
+- **Confirmed on Certum's own product page, 2026-10-24:** the certificate contains "natural
+  person data prefixed with 'Open Source Developer' phrase". So it IS issued to an
+  individual, and Windows will show "Open Source Developer" together with Nick's name, not
+  his name alone. The page does NOT say which subject field the phrase lands in, or the
+  exact punctuation. **So your code still reads the expected subject from configuration and
+  never hard-codes it**; 49.9 records it exactly as issued.
+- The page said "Product is out of stock" on 2026-10-24, and Nick bought it the same day
+  regardless, so that label did not block a purchase.
+- The page states no validity term. Since late February 2026 a code-signing certificate
+  lasts at most about 459 days at Certum, so expect to renew, with a new thumbprint, at
+  least that often.
+- There is no Australian certificate authority to buy from instead: of the 550 roots Windows
+  trusts, the only Australian owner is the Department of Defence. Same-shape alternatives
+  (Certum's standard cloud certificate, SSL.com's individual certificate with its cloud
+  signing) cost four to six times as much. Researched 2026-10-24 and recorded so nobody
+  re-runs the search.
 
-**What signing does and does not do.** It replaces "Unknown publisher" with Nick's name and
-lets Windows build up reputation for the publisher. It does NOT make the SmartScreen warning
+**What signing does and does not do.** It replaces "Unknown publisher" with Nick's name,
+prefixed "Open Source Developer", and lets Windows build up reputation for the publisher. It does NOT make the SmartScreen warning
 disappear on day one: a new publisher, and a new file, still start with no reputation. Say
 that wherever the release is described.
 
@@ -136,9 +148,10 @@ that wherever the release is described.
 
 ### 49.8 Nick's steps (a person's, never a session's)
 
-- [ ] Nick buys the certificate and passes Certum's identity check, then installs SimplySign
-  Desktop and the SimplySign phone app and activates the certificate. Certum's activation
-  guide: files.certum.eu, "CS Open Source Code Signing in the cloud Certificate activation".
+- [x] Nick buys the certificate. Done 2026-10-24.
+- [ ] He passes Certum's identity check, installs SimplySign Desktop and the SimplySign phone
+  app, and activates the certificate. Certum's activation guide: files.certum.eu, "CS Open
+  Source Code Signing in the cloud Certificate activation".
 - [ ] At signing time he logs in: right-click the SimplySign tray icon, Connect to SimplySign,
   then his username and the one-time token from his phone. **Never ask him to type any of
   that into this session, and never put it in a file or on a command line.**
@@ -162,8 +175,10 @@ that wherever the release is described.
 
 - [ ] Rewrite the Download paragraph in the SAME commit as the first signed release, so it is
   true for the release it links: the installer is signed in Nick Walker's name with a Certum
-  certificate, and SmartScreen may still warn on a new release until it builds reputation.
-  Keep the sentence that the source is all here and runs without installing.
+  open-source certificate, quoting the publisher exactly as Windows shows it (49.9 recorded
+  it; expect "Open Source Developer" in it), and SmartScreen may still warn on a new release
+  until it builds reputation. Keep the sentence that the source is all here and runs without
+  installing.
 - [ ] Nick's landing page has a general note that his installers are unsigned. Tell the
   orchestrator that it now needs narrowing; do not edit `C:\Users\nick2\Code\nick2468`
   yourself.
