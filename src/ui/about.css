@@ -28,14 +28,30 @@
   color: var(--warn);
 }
 
+/* The screen's prose keeps Help's reading width; the licence boxes do not,
+   because they need their own. */
+.about.help-doc {
+  max-width: none;
+}
+
+.about > p,
+.licences > p,
+.licences ul {
+  max-width: 62ch;
+}
+
 /* The licence texts. Long, so each scrolls inside its own box rather than
-   pushing the screen to ten thousand pixels; and wrapped, so a narrow window
-   reads them without scrolling sideways. */
+   pushing the screen to ten thousand pixels. NOT wrapped: both files break
+   their own lines at about 78 columns, and wrapping them again in a box
+   narrower than that breaks every line twice. So the box is as wide as the
+   text, and a window too narrow for it scrolls inside the box, never the page. */
 .licences h4 {
   margin-top: 24px;
 }
 
 .licences pre {
+  width: fit-content;
+  max-width: 100%;
   max-height: 24em;
   overflow: auto;
   padding: 12px;
@@ -45,7 +61,7 @@
   color: var(--text-soft);
   font-size: 0.8rem;
   line-height: 1.45;
-  white-space: pre-wrap;
+  white-space: pre;
 }
 
 .licences ul {
