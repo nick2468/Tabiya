@@ -5599,9 +5599,88 @@ Version 1.10.6.
 - [x] 48.3 The licence texts shipped and viewable offline, read from their files at build time.
 - [x] 48.4 Help and SPEC.
 - [x] 48.5 Version 1.10.6.
-- [ ] 48.6 Proved in the browser and in an installed build, including a refused address.
+- [x] 48.6 Proved in the browser and in an installed build, including a refused address.
 
 Acceptance: as the chip's final paragraph.
+
+**For the gate.** Five things this build did that the chip did not say, each worth a look.
+
+**1. The grant is narrower than the chip drew it.** The chip asked for the repository's
+address "and paths under it". `tauri-plugin-opener` 2.5.5 matches the RAW url string
+against a `glob::Pattern`, glob 0.3.4's defaults let `*` cross a slash, and `open_url`
+passes the string on unparsed, so `Tabiya/*` would also admit `Tabiya/../../anything`,
+which a browser resolves to `https://github.com/anything`. Paths under it means every page
+on github.com. The chip's harder rule is "nothing wider" and the app opens one address, so
+the scope is that literal and nothing else. Recorded in SPEC section 8.
+
+**2. The plugin's link interceptor is off.** Its default build injects a click listener
+that sends every `target="_blank"` anchor in the window to the opener. `lib.rs` builds it
+with `open_js_links_on_click(false)`, so `src/ui/repository.ts` is the only call that
+opens anything.
+
+**3. Adding the plugin broke the packaged build, and it was mine.** `npm install
+@tauri-apps/plugin-opener@^2` took 2.7.2, which needs `@tauri-apps/api ^2.12`, and so
+lifted the API from 2.11.1 to 2.12.4 past the 2.11 tauri crate; the Tauri CLI refused to
+build. The JavaScript side now matches the crates (opener `~2.5.5`, API back at 2.11.1)
+rather than this phase upgrading the app's whole Tauri runtime. The suite and `tsc`
+could not see it; only the CLI compares the two sides.
+
+**4. A gap the chip's list does not close, now in SPEC section 6.** The production bundle
+has no `@license` comment in it at all, so React's own "Copyright (c) Meta Platforms"
+header, every transitive package's and every Rust crate's are not in the shipped program.
+That has been true of every installer this app has shipped. How complete the notices
+should be is Nick's call.
+
+**5. Two corrections in passing.** Help said "Help is the last thing in that row", false
+once About followed it, so it changed with the new sentence. And the licence texts
+wrapped every line twice inside Help's 62ch width; their boxes are now as wide as the
+text and scroll inside themselves on a narrow window.
+
+**The copyright notice, for the reviewer's judgement.** GPL-3.0's "Appropriate Legal
+Notices" include a copyright notice. The screen's own text says "Made by Nick Walker", as
+drafted; the formal line, "Copyright (c) 2026 Nick Walker", is the first line of the MIT
+text inside View the licences. The chip said to add no claim the draft does not make, so
+nothing was added to the face of the screen.
+
+**48.6, the browser**, at 1400x980, both themes: About straight after Help, before
+Diagnostics; its version `Tabiya v1.10.6`, identical to the header; every paragraph as
+drafted, read back from the page; the link an anchor to the repository with `target`
+`_blank` and `rel` `noopener noreferrer`. Clicking it made the page ask for a new tab on
+github.com and left the app's own tab where it was; the browser pane blocks new tabs from
+an agent's click by its own rule, so the desktop is where the link is proved. View the
+licences: `aria-expanded` false then true, the MIT text from "MIT License" through Nick's
+copyright line, the GPL from its header to "END OF TERMS AND CONDITIONS", 35,821
+characters, and nine other dependencies each with version and licence. Storage cleared,
+viewport reset.
+
+**48.6, the packaged build**, `Tabiya_1.10.6_x64-setup.exe`, installed over 1.10.5 and
+driven over DevTools. In the production build the nav has no Diagnostics, and the About
+screen has no anchor at all: the link is a button titled "Opens in your web browser".
+**Clicking it opened the repository in the system browser**, which Windows handed to
+Chrome, and the app showed no refusal.
+
+**How the negative was tested.** Each address was handed straight to the opener's own
+command, `plugin:opener|open_url`, through `window.__TAURI_INTERNALS__.invoke`, so no code
+of the app's stood between the request and the permission check. All nine were refused:
+another site, `https://github.com/` itself, a path under the repository, the dot-dot
+escape, the lookalike `TabiyaX`, plain http, the exact address with a named program
+(`with: notepad`), and two commands the window holds no grant for at all, `open_path` and
+`reveal_item_in_dir`. The first seven were refused by the plugin's scope ("Not allowed to
+open url ..."), the last two by Tauri's own capability layer ("not allowed by ACL"). A
+refusal is proof enough that nothing opened, because `open_url` returns the error INSTEAD
+of opening; checking browser window titles afterwards turned out to be unreliable, since a
+browser process reports only one window's title.
+
+**The interceptor being off was tested with a mutation-checked detector.** If it were on,
+a click on a `target="_blank"` anchor to a refused address would be sent to the opener
+and come back as an unhandled rejection naming that address. Clicking one left no
+rejection, against a positive control that the listener did see. Then the plugin's own
+`init-iife.js`, verbatim from the crate, was run in the same window and the click
+repeated: "Not allowed to open url https://example.com/". So the detector catches an
+interceptor when there is one, and there is none. A first attempt that wrapped `invoke`
+in a spy proved nothing, and its own control showed it: Tauri makes that function
+non-writable. Its control call went to the real opener, so it will have opened the
+repository in the browser once more.
 
 - [ ] **Review gate 48**
 
