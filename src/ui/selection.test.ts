@@ -171,6 +171,20 @@ describe('the shell on first click', () => {
     expect(html).not.toContain('Open a course first')
   })
 
+  it('puts About beside Help, before Diagnostics', () => {
+    const html = render(emptyProgress(), catalog, createElement(Shell))
+    const labels = [...html.matchAll(/<button[^>]*class="nav-link[^"]*"[^>]*>([^<]*)<\/button>/g)].map(
+      (match) => match[1],
+    )
+    const help = labels.indexOf('Help')
+    const about = labels.indexOf('About')
+    expect(help).toBeGreaterThan(-1)
+    expect(about).toBe(help + 1)
+    // Diagnostics only renders in a development build, which this is.
+    const diagnostics = labels.indexOf('Diagnostics')
+    if (diagnostics !== -1) expect(diagnostics).toBe(about + 1)
+  })
+
   it('shows the Course switcher with more than one course', () => {
     expect(render(emptyProgress(), catalog, createElement(Shell))).toContain(
       'id="course-switch"',

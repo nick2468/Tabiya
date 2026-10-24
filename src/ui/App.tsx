@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { About } from './About'
 import { Catalog } from './Catalog'
 import { CatalogProvider, useCatalog } from './catalog-context'
 import { Diagnostics } from './Diagnostics'
@@ -52,7 +53,15 @@ import './app.css'
  * 2026-09-03, because studying or drilling another opening mid-game is a
  * normal thing to want. The game names its own course above the board instead.
  */
-type View = 'courses' | 'study' | 'drill' | 'play' | 'progress' | 'help' | 'diagnostics'
+type View =
+  | 'courses'
+  | 'study'
+  | 'drill'
+  | 'play'
+  | 'progress'
+  | 'help'
+  | 'about'
+  | 'diagnostics'
 
 const MODES: { view: View; label: string }[] = [
   { view: 'courses', label: 'Courses' },
@@ -69,6 +78,12 @@ const MODES: { view: View; label: string }[] = [
  * open.
  */
 const HELP_MODE: { view: View; label: string } = { view: 'help', label: 'Help' }
+
+/**
+ * About sits with Help, for the same reasons: it is something to read rather
+ * than a step in the loop, and it is never disabled.
+ */
+const ABOUT_MODE: { view: View; label: string } = { view: 'about', label: 'About' }
 
 export function App() {
   return (
@@ -178,6 +193,14 @@ export function Shell() {
           >
             {HELP_MODE.label}
           </button>
+          <button
+            type="button"
+            className={showing === ABOUT_MODE.view ? 'nav-link current' : 'nav-link'}
+            aria-current={showing === ABOUT_MODE.view ? 'page' : undefined}
+            onClick={() => setView(ABOUT_MODE.view)}
+          >
+            {ABOUT_MODE.label}
+          </button>
           {showDiagnostics ? (
             <button
               type="button"
@@ -263,6 +286,7 @@ export function Shell() {
           <Progress courseId={course?.id ?? null} onPlayOn={playFrom} />
         ) : null}
         {showing === 'help' ? <Help /> : null}
+        {showing === 'about' ? <About /> : null}
         {showing === 'diagnostics' ? <Diagnostics /> : null}
       </main>
     </div>

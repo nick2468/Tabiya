@@ -1,0 +1,5 @@
+/* The About screen. It reads as Help does, so most of its look is help.css's. */
+
+.about h2 {
+  margin-bottom: 12px;
+}

@@ -5594,7 +5594,7 @@ and a copy of the licence text. The About is where the app pays that. The link n
 desktop permission, scoped to the one repository address and held by the capability test.
 Version 1.10.6.
 
-- [ ] 48.1 The About screen, beside Help, with the drafted wording.
+- [x] 48.1 The About screen, beside Help, with the drafted wording.
 - [ ] 48.2 The link, with the opener permission scoped to the repository address alone.
 - [ ] 48.3 The licence texts shipped and viewable offline, read from their files at build time.
 - [ ] 48.4 Help and SPEC.
