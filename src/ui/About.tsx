@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { isDesktop } from '../storage/paths'
+import { GPL_TEXT, MIT_TEXT, OTHER_DEPENDENCIES } from './licences'
 import { openRepository, REPOSITORY_SHOWN, REPOSITORY_URL } from './repository'
 import './help.css'
 import './about.css'
@@ -26,6 +27,7 @@ import './about.css'
  * version written here by hand would be wrong by the next release.
  */
 export function About() {
+  const [licences, setLicences] = useState(false)
   return (
     <div className="help-doc about">
       <h2>
@@ -58,6 +60,48 @@ export function About() {
         change and share it under those terms. It comes with no warranty. The complete
         source is at the address above.
       </p>
+      <p>
+        <button
+          type="button"
+          aria-expanded={licences}
+          aria-controls="about-licences"
+          onClick={() => setLicences(!licences)}
+        >
+          View the licences
+        </button>
+      </p>
+      {licences ? <Licences /> : null}
+    </div>
+  )
+}
+
+/**
+ * The full texts, offline: GPL-3.0 section 4 says whoever receives the program
+ * gets a copy of its licence with it, and this is that copy.
+ *
+ * Exported for its test, which cannot click the button in a string render.
+ */
+export function Licences() {
+  return (
+    <div id="about-licences" className="licences">
+      <h4>Tabiya: the MIT licence</h4>
+      <pre>{MIT_TEXT}</pre>
+
+      <h4>Stockfish and chessground: the GNU General Public License, version 3</h4>
+      <p>
+        This one text covers both libraries. Each ships it as its own licence file, and the
+        two are the same word for word.
+      </p>
+      <pre>{GPL_TEXT}</pre>
+
+      <h4>Its other direct dependencies</h4>
+      <ul>
+        {OTHER_DEPENDENCIES.map((dependency) => (
+          <li key={dependency.name}>
+            {dependency.name} {dependency.version}: {dependency.licence}
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

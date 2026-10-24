@@ -5596,7 +5596,7 @@ Version 1.10.6.
 
 - [x] 48.1 The About screen, beside Help, with the drafted wording.
 - [x] 48.2 The link, with the opener permission scoped to the repository address alone.
-- [ ] 48.3 The licence texts shipped and viewable offline, read from their files at build time.
+- [x] 48.3 The licence texts shipped and viewable offline, read from their files at build time.
 - [ ] 48.4 Help and SPEC.
 - [ ] 48.5 Version 1.10.6.
 - [ ] 48.6 Proved in the browser and in an installed build, including a refused address.

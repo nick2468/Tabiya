@@ -27,3 +27,28 @@
 .about-failed {
   color: var(--warn);
 }
+
+/* The licence texts. Long, so each scrolls inside its own box rather than
+   pushing the screen to ten thousand pixels; and wrapped, so a narrow window
+   reads them without scrolling sideways. */
+.licences h4 {
+  margin-top: 24px;
+}
+
+.licences pre {
+  max-height: 24em;
+  overflow: auto;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--text-soft);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+.licences ul {
+  padding-left: 20px;
+  color: var(--text-soft);
+}

@@ -2,18 +2,43 @@ import { readFileSync } from 'node:fs'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
 
+interface Manifest {
+  version: string
+  license?: string
+  dependencies?: Record<string, string>
+}
+
+function manifest(path: string): Manifest {
+  return JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8')) as Manifest
+}
+
 // The version the app shows comes from package.json, read here at BUILD time
 // and substituted into the bundle. Not from a Tauri call: the browser build has
 // no Tauri, and a number the app has to ask for at runtime is a number that can
 // be missing on the one screen that shows it.
-const { version } = JSON.parse(
-  readFileSync(new URL('./package.json', import.meta.url), 'utf8'),
-) as { version: string }
+const own = manifest('./package.json')
+const { version } = own
+
+// Every library the app ships, with the licence its OWN package.json declares,
+// for the About screen's list. Read here for the same reason the version is: a
+// list written out by hand drifts the first time a dependency is added, and
+// this one is a licence notice. Straight from node_modules rather than through
+// a resolver, because chessground's `exports` map does not expose its
+// package.json.
+const dependencyLicences = Object.keys(own.dependencies ?? {})
+  .sort()
+  .map((name) => {
+    const theirs = manifest(`./node_modules/${name}/package.json`)
+    return { name, version: theirs.version, licence: theirs.license ?? 'not stated' }
+  })
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  define: { __APP_VERSION__: JSON.stringify(version) },
+  define: {
+    __APP_VERSION__: JSON.stringify(version),
+    __DEPENDENCY_LICENCES__: JSON.stringify(dependencyLicences),
+  },
   // Honour PORT so a launcher can place the dev server. The default is 5175,
   // not Vite's own 5173: Nick holds 5173 and 5174 for other projects, and the
   // `dev` script and `devUrl` in tauri.conf.json both name 5175. A config that
