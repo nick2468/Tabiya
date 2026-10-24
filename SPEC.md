@@ -624,7 +624,11 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   neither of which asks anything of a binary; but its LZMA module is under the Common
   Public License 1.0, which asks whoever distributes it as object code to disclaim
   warranties on the contributors' behalf and to say that its source is available and how
-  to get it. Tauri's own plugin, `nsis_tauri_utils.dll`, is MIT or Apache-2.0 and is in
+  to get it. The same `COPYING` carries a "SPECIAL EXCEPTION FOR LZMA COMPRESSION MODULE":
+  its authors "expressly permit you to statically or dynamically link your code ... without
+  subjecting your linked code to the terms of the Common Public license version 1.0". So the
+  licence can never reach Tabiya's own code; what remains is the module's own conditions on
+  its object code, the disclaimer and the source address (gate 50). Tauri's own plugin, `nsis_tauri_utils.dll`, is MIT or Apache-2.0 and is in
   the installer too. None of that is in the notices, which cover what is INSTALLED, not
   the program that installs it. Not taken at phase 50 because the chip ruled the
   installer out of scope and the two answers are a product choice: setting
