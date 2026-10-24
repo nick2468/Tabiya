@@ -112,10 +112,22 @@ something you sell. Keep the copyright notice in any copy you pass on. The cours
 content under `courses/` and the documents under `docs/` are covered by the same
 licence.
 
-**One thing to know before you redistribute a build.** The app plays against
-[Stockfish](https://stockfishchess.org/), which is licensed GPL-3.0. Stockfish is
-not in this repository: `scripts/copy-engine.mjs` copies it out of `node_modules`
-at build time, and `public/engine/` is gitignored. So the source here is MIT and
-nothing more. A built installer, though, has Stockfish inside it, and distributing
-that combined binary puts GPL-3.0 obligations on it. If you ship a build rather
-than the source, read the GPL terms first.
+**One thing to know before you redistribute a build.** Two of the libraries the
+app is built on are licensed under the GPL rather than MIT:
+
+| Library | What it does here | Licence |
+|---|---|---|
+| [Stockfish](https://stockfishchess.org/) | the engine you play against | GPL-3.0 |
+| [chessground](https://github.com/lichess-org/chessground) | the board | GPL-3.0-or-later |
+
+Neither is in this repository. Both arrive from `node_modules` when you build:
+chessground is bundled into the app's code, and `scripts/copy-engine.mjs` copies
+Stockfish into `public/engine/`, which is gitignored. So the source here, the
+code and content written for this project, is MIT and nothing more. A built
+installer, though, contains both libraries, and distributing that combined program
+puts GPL obligations on it. If you ship a build rather than the source, read the
+GPL terms first.
+
+Everything else the app depends on is permissively licensed: React, react-markdown
+and ts-fsrs under MIT, chess.js under BSD-2-Clause, and the Tauri libraries under
+MIT or Apache-2.0.
