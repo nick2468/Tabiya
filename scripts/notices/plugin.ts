@@ -116,9 +116,13 @@ export function rustCrates(srcTauri: string): {
   compileOnly: number
 } {
   const cargo = findCargo()
+  // NOT --locked. A version bump changes Cargo.toml and so Cargo.lock's own
+  // entry, and a packaged build runs this Vite build BEFORE cargo, so --locked
+  // refused every release build after a bump. The phase 50 build found it.
+  // `cargo build` updates that line a moment later anyway; this does the same.
   const raw = execFileSync(
     cargo,
-    ['metadata', '--format-version', '1', '--filter-platform', TARGET, '--locked'],
+    ['metadata', '--format-version', '1', '--filter-platform', TARGET],
     { cwd: srcTauri, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 },
   )
   const meta = JSON.parse(raw) as CargoMetadata
