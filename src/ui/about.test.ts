@@ -63,7 +63,11 @@ describe('the About screen', () => {
   })
 
   it('carries the notices a GPL program owes whoever runs it', () => {
-    expect(text).toContain('Tabiya\'s own code and course content are free software under the MIT licence.')
+    // GPL-3.0 section 0: a program with an interactive user interface displays an
+    // appropriate copyright notice. "Made by" is not one, so the notice itself is on
+    // the face of the screen and not only inside the licence text a click away.
+    expect(text).toContain('copyright (c) 2026 Nick Walker')
+    expect(text).toContain('free software under the MIT licence.')
     expect(text).toContain('Stockfish (GPL-3.0), the engine you play against')
     expect(text).toContain('chessground (GPL-3.0-or-later), the board')
     expect(text).toContain(

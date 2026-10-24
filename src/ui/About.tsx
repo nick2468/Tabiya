@@ -51,7 +51,10 @@ export function About() {
       </p>
 
       <h3>Licence</h3>
-      <p>Tabiya's own code and course content are free software under the MIT licence.</p>
+      <p>
+        Tabiya's own code and course content are copyright (c) 2026 Nick Walker, and are
+        free software under the MIT licence.
+      </p>
       <p>
         The program you are running also contains two libraries licensed under the GNU
         General Public License: Stockfish (GPL-3.0), the engine you play against, and
