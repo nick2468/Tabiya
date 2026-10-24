@@ -1,6 +1,7 @@
 import { createElement, type ReactNode } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
+import { About } from './About'
 import { Shell } from './App'
 import { Drill, Feedback } from './Drill'
 import { CourseMovesChoice, Play, PlayActions, PlayControls, PlayHead, Report } from './Play'
@@ -289,6 +290,7 @@ const screens: Record<Screen, string> = {
     inApp(learntOne, createElement(Progress, { courseId: course.id, onPlayOn: () => {} })) +
     // The archive view, which the screen shows only after a click.
     inApp(learntOne, createElement(PlayOn, { onPlayOn: () => {}, initialView: 'archive' })),
+  about: renderToStaticMarkup(createElement(About)),
 }
 
 /**
@@ -347,6 +349,7 @@ const named: Record<Screen, Set<string>> = {
   play: controlNames(screens.play),
   drill: controlNames(screens.drill),
   progress: controlNames(screens.progress),
+  about: controlNames(screens.about),
 }
 
 describe('the help document', () => {

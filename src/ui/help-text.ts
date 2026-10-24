@@ -22,7 +22,7 @@
  */
 
 /** The screens a control can be found on, for the test that goes looking. */
-export type Screen = 'nav' | 'catalog' | 'study' | 'drill' | 'play' | 'progress'
+export type Screen = 'nav' | 'catalog' | 'study' | 'drill' | 'play' | 'progress' | 'about'
 
 /** A control named in the prose, and where the test should expect to find it. */
 export interface HelpControl {
@@ -132,8 +132,10 @@ export const HELP_SECTIONS: HelpSection[] = [
       'Nothing is compulsory and nothing is timed. Studying a chapter and never ticking a',
       'line is a fair way to use the app; you just will not get any drills.',
       '',
-      'Help is the last thing in that row, after a faint line, because it is not a step.',
-      'It is always there.',
+      'Help and About come last in that row, after a faint line, because neither is a',
+      'step, and both are always there. **About** says who made the app and where its',
+      'source code is, and **View the licences** on it shows the licences the program is',
+      'distributed under.',
     ].join('\n'),
   },
   {
@@ -466,6 +468,7 @@ export const HELP_CONTROLS: HelpControl[] = [
   { name: 'Drill', screen: 'nav' },
   { name: 'Progress', screen: 'nav' },
   { name: 'Help', screen: 'nav' },
+  { name: 'About', screen: 'nav' },
   { name: 'Course', screen: 'nav' },
 
   { name: 'Add a course from a file', screen: 'catalog' },
@@ -534,4 +537,6 @@ export const HELP_CONTROLS: HelpControl[] = [
   { name: 'Backup', screen: 'progress' },
   { name: 'Export progress', screen: 'progress' },
   { name: 'Import progress', screen: 'progress' },
+
+  { name: 'View the licences', screen: 'about' },
 ]

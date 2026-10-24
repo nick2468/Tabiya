@@ -117,6 +117,14 @@ be archived, which takes it out of every list and count and into an archive view
 this screen where it can be brought back, or deleted for good with a two-click control
 (phase 39).
 
+### About
+
+Not one of the four modes: it sits beside Help after the nav's separator and is never
+disabled, and it says who made the app, links to its source on GitHub, explains what a
+tabiya is, and carries the licence notices the distributed program owes, with the full
+MIT and GPL-3.0 texts and every other direct dependency's licence viewable offline
+(phase 48).
+
 ## 3. Content
 
 Eight chapters, drafted by Claude in-session (ruled 2026-08-27: no external PGN
@@ -581,6 +589,23 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   pinned rather than merely written down - `play-game.dom.test.tsx` presses Undo and Redo
   through the buttons, and putting the memo back turns both red. That is the bug this
   entry was written about, held by a test at last.
+- **The shipped program does not carry its MIT dependencies' copyright notices.** The
+  About screen names every DIRECT dependency with its licence, generated from
+  `package.json`, and shows the MIT and GPL texts in full. What it does not carry is each
+  MIT library's own copyright line, and the MIT licence asks for its notice to be
+  "included in all copies or substantial portions of the Software". React's production
+  build opens with `@license React ... Copyright (c) Meta Platforms, Inc. and
+  affiliates`; the bundle Vite produces has no `@license` comment in it at all, checked
+  at phase 48, so that line is not in the program. The same is true of every package
+  pulled in underneath a direct dependency, of which react-markdown alone brings dozens,
+  and of the Rust crates compiled into `tabiya.exe`. None of it is new: it has been true
+  of every installer this app has shipped. Not taken at phase 48 because how complete the
+  notices should be is Nick's decision rather than a builder's, the honest answers differ
+  in size (keeping the bundler's legal comments is one line of config and covers only
+  the packages that carry such a comment; a generated third-party notices file covering
+  every JavaScript package and every Rust crate is a build step of its own), and either
+  reaches well past the chip's list. What makes it worth taking is that the repository is
+  public and an installer is downloadable from it. Found at phase 48.
 
 ## 7. Risks
 
@@ -1108,6 +1133,28 @@ on the first run after the upgrade, however carefully their keys were left alone
 does not: on the desktop it is a file in the roaming data folder and the migration carries
 it. The Progress screen says both halves of that, and names both abandoned profile
 folders so they can be deleted.
+
+2026-10-24, phase 48: **an About screen, for the open-source release.** Nick's: the app
+names him, links to github.com/nick2468/Tabiya, and says what a tabiya is and where the
+word comes from. On the origin it says "Arabic in origin" and nothing more, because the
+meaning and the shatranj history are well attested and the Arabic root is not: sources
+split between a word glossed "arrangement" or "battle array" and a different one meaning
+"normal manner".
+
+**Why an About screen carries licences.** The installer contains Stockfish (GPL-3.0) and
+chessground (GPL-3.0-or-later), so although Tabiya's own code is MIT, the program as
+distributed goes out as a whole under GPL-3.0. GPL-3.0 section 0 asks a program with an
+interactive interface to display its legal notices and section 4 says recipients get a
+copy of the licence, so the About screen carries both, with each text read from its own
+file at build time; that is the ordinary conservative reading every GPL desktop app
+follows, and it is not legal advice.
+
+**The link opens exactly one address, which is narrower than the chip drew it.** The chip
+asked for the repository's address and paths under it. `tauri-plugin-opener` matches the
+raw string against a glob in which `*` crosses a slash, and passes it on unparsed, so
+`Tabiya/*` would also admit `Tabiya/../../anything`, which a browser resolves to any page
+on github.com. The app opens one address, so the grant is that literal with no wildcard,
+the plugin's link-click interceptor is off, and `capabilities.test.ts` holds both.
 
 ## 9. v1 acceptance
 
