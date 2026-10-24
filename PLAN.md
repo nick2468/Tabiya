@@ -5784,8 +5784,85 @@ bundle. Version 1.10.7.
 - [x] 50.6 README, SPEC and Help.
 - [x] 50.7 Tests, mutation-checked.
 - [x] 50.8 Version 1.10.7.
-- [ ] 50.9 Proved in a production build and an installed build, with sizes measured.
+- [x] 50.9 Proved in a production build and an installed build, with sizes measured.
 
 Acceptance: as the chip's final paragraph.
+
+**For the gate.** Every production build writes `third-party-notices.txt`: **61 JavaScript
+packages and 211 Rust crates**, 328,653 bytes, 60 KB gzipped, the 272 packages sharing 133
+texts. The JavaScript list is read from the bundle itself, so no lockfile fallback was
+needed; Rolldown gives every chunk its modules with the length each contributed.
+
+**The crate counts reconcile with the chip's 247.** Walking normal dependencies from the
+root and stopping at proc-macros reaches 228: 17 proc-macros and 211 shipped. Walking
+through the macros as well reaches 247, the extra 19 being compile-time only. The file
+names the 17 and counts the 19. Ten shipped crates have no licence file, not eleven: the
+eleventh, webview2-com-macros, is a proc-macro.
+
+**Four places this build departed from or added to the chip, each worth a look.**
+
+**1. The choice rule is refined.** The chip says MIT whenever offered, otherwise the first.
+The generator takes MIT when the package ships its text, otherwise the first choice the
+package ships a text for, and only then falls back to a canonical text, because a
+package's own file carries its real copyright line. It changes one package:
+brotli-decompressor, `BSD-3-Clause/MIT`, which ships only its BSD text with Dropbox's
+copyright. Without the refinement it would have been credited with a template MIT text
+and a copyright line made up from metadata. Recorded beside it in the file.
+
+**2. The MPL-2.0 text appears twice, not once.** cssparser's copy says `http://mozilla.org`
+in Exhibit A where SPDX's says `https://`, so the dedup rule keeps them apart. I would
+rather print each package's text exactly than merge two that differ.
+
+**3. The canonical texts are SPDX's plain-text copies**, from the `license-list-data`
+repository behind spdx.org, not spdx.org's own `.txt` files, which carry SPDX template
+markup in places (`<<var;name=copyright;...>>` in BSD-3-Clause). The words are the same;
+both addresses are recorded in `scripts/licence-texts/README.md`.
+
+**4. Three things beyond the chip's list, found by the data.** siphasher's `COPYING`
+states its copyright and points at a `LICENSE-MIT` the published crate does not include,
+so it gets the canonical MIT text and its `COPYING` verbatim. crossbeam-channel's
+`LICENSE-THIRD-PARTY` holds notices for code it bundles, and is carried. tslib, vendored
+inside `@tauri-apps/api`, has its Microsoft notice in a comment the bundler strips, so it
+is lifted from the source file. And Stockfish is credited explicitly, because
+`copy-engine.mjs` copies it into the app without it ever being a module.
+
+**Two faults found by building rather than by testing.** The first build stopped on
+`@ungap/structured-clone`'s ISC text: my licence signatures assumed single spaces, and
+that file breaks a phrase over a line. All of them now match across line breaks. And the
+first PACKAGED build stopped on `cargo metadata --locked`: a version bump makes
+`Cargo.lock`'s own entry stale, and Tauri runs the Vite build before cargo, so every
+release build after a bump would have failed. `--locked` is gone; `cargo build` updates
+the same line a moment later anyway.
+
+**The installer is a register entry, as the chip's out-of-scope list asked.** NSIS's own
+`COPYING` puts its LZMA module under CPL-1.0, which asks a distributor of object code to
+say where the source is, and Tauri builds with LZMA by default. Two ways to close it are in
+SPEC section 6 for Nick to choose between.
+
+**The proof.** In a production build served by vite preview at 1400x980: nothing fetched
+before Third-party notices is pressed, then one request; the file shows with its title,
+both sections, both counts and React's notice; and it wraps, after the first look found an
+unwrapped line 5,337 px wide in a 970 px box. In the installed `Tabiya_1.10.7_x64-setup.exe`,
+driven over DevTools: nothing fetched on opening About or View the licences, then one
+request for `http://tauri.localhost/third-party-notices.txt`; both sections, 61 and 211;
+React's notice; webview2-com with the canonical MIT text and "Copyright (c) The
+webview2-com authors (https://github.com/wravery/webview2-rs)", since its metadata names
+no authors; and the four MPL crates, cssparser 0.36.0, dtoa-short 0.3.5, option-ext 0.2.0
+and selectors 0.36.1, each with its crates.io page and repository.
+
+**Sizes.** Main bundle 1,768,831 bytes before the phase, 1,770,487 after: 1,656 bytes for
+the section, its loader and the version string. The notices are their own 328,653-byte
+file, and "Copyright (c) Meta Platforms", "WHERE TO GET THE SOURCE" and "IN THE WINDOWS
+PROGRAM ONLY" occur 0 times in the main bundle.
+
+**Tests.** 35 against the generator's pure core, mutation-checked ten ways, every one red
+then restored; 7 for the on-demand loading, mutation-checked two ways; the help test on
+the new name. One mutation found a gap first: my Unicode fixture could not catch the guard
+I thought it covered, because without that guard the Unicode licence reads as MIT-0, not
+MIT.
+
+**One observation, not a finding.** chessground's piece set is Colin M.L. Burnett's, and
+the chessground package carries no separate notice for it, only its own GPL-3.0-or-later
+LICENSE, which the file credits. I have not guessed at a notice the package does not ship.
 
 - [ ] **Review gate 50**
