@@ -5682,7 +5682,47 @@ in a spy proved nothing, and its own control showed it: Tauri makes that functio
 non-writable. Its control call went to the real opener, so it will have opened the
 repository in the browser once more.
 
-- [ ] **Review gate 48**
+**Gate 48 passed, 2026-10-24.** `tsc -b` clean, 1292 tests in 12.8 seconds, tree clean,
+nothing pushed by the builder. No content touched. 1.10.6 in all three manifests.
+
+**The builder overrode this chip once, and was right.** The chip asked for the opener
+permission to cover the repository "and paths under it". Checked at source:
+tauri-plugin-opener 2.5.5 matches the raw URL with `glob::Pattern` (`scope.rs`), and glob
+0.3.4 defaults to `require_literal_separator: false`, so `*` crosses slashes. A scope of
+`Tabiya/*` therefore admits `Tabiya/../../anything`, which a browser resolves to
+`https://github.com/anything` (node's URL parser agrees). "Paths under it" would have meant
+every page on GitHub. The grant is the one literal address, with no glob, and is the only
+opener permission. The plugin's own link interceptor is off (`open_js_links_on_click(false)`),
+so one function in the app opens anything at all.
+
+**The rest held at source.** The origin of the word names no root and a test fails on the
+three disputed glosses. Both licence texts are read from their files; the GPL is shipped once
+and a test fails the day chessground's copy diverges from Stockfish's. The dependency list is
+generated from each package's own `package.json`. The version fix (opener ~2.5.5, API back at
+2.11.1) is what is installed. The refusal testing went straight to the opener's own IPC
+command, so no app code stood between the request and the permission check, and nine
+addresses were refused, including the dot-dot escape and a lookalike.
+
+**Two fixes at the gate, each its own commit.**
+
+- **The copyright notice is on the face of the screen** ([0a35618]). GPL-3.0's Appropriate
+  Legal Notices include "an appropriate copyright notice". The draft in this chip said "Made
+  by Nick Walker", which is not one, and told the builder to add nothing, so it flagged it
+  instead. The licence paragraph now reads "copyright (c) 2026 Nick Walker, and are free
+  software under the MIT licence", held by a test that was mutation-checked.
+- **The Tauri API is pinned to its minor version** ([ad33098]), as the opener already was. The
+  build broke today because a new package lifted the API from 2.11 to 2.12 past the crate;
+  the API's own caret range would let any `npm update` do the same. Lockfile changed by that
+  one string; installed version unchanged.
+
+**Open, and Nick's: the third-party notices are incomplete, and always have been.** Confirmed
+in the built bundle: the only copyright lines in it are Nick's and the GPL text's own. React's
+notice, and those of every other bundled package and of the Rust crates in `tabiya.exe`, are
+absent, which MIT asks to be kept "in all copies or substantial portions". True of every
+installer this app has shipped. Registered in SPEC section 6 by the builder; how complete the
+notices should be is his call.
+
+- [x] **Review gate 48**
 
 ## Phase 49 - the installer is signed in Nick's name
 
