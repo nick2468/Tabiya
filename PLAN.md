@@ -5907,3 +5907,35 @@ page carries NSIS's terms, the LZMA source address and the plugin's notice. The 
 this phase cover what is installed, not the program that installs it.
 
 - [x] **Review gate 50**
+
+## Phase 51 - the installer compresses with zlib
+
+Goal: Nick, 2026-10-24: close the gap gate 50 found in the installer. NSIS's LZMA module, the
+default Tauri uses, is under the Common Public License 1.0, whose conditions on its object
+code no Tabiya installer had met. Switching to zlib removes the module and the obligation.
+
+Done directly by the orchestrator rather than chipped, because it is one line of
+configuration: `bundle.windows.nsis.compression` set to `zlib` in `tauri.conf.json`.
+Version 1.10.8.
+
+- [x] 51.1 The compression set to zlib; the generated script reads `SetCompressor /SOLID "zlib"`.
+- [x] 51.2 Version 1.10.8, and the lockfile's version brought into line with it.
+- [x] 51.3 The version test holds the lockfile too.
+- [x] 51.4 SPEC: the register entry's LZMA half closed, the smaller remainder kept open, and the ruling.
+- [x] 51.5 Proved by installing it and starting the installed program.
+
+**Record, 2026-10-24.** The 1.10.7 installer's generated script read `SetCompressor /SOLID
+"lzma"`; the 1.10.8 one reads `SetCompressor /SOLID "zlib"`. The installer grew from
+7,227,714 to 7,561,065 bytes, 333,351 bytes or under 5 per cent. A search of both installers
+for the string "LZMA" found none in either, so it proves nothing and is not counted. Proved by
+installing the new installer silently over 1.10.7 with Tabiya closed (exit code 0, the
+installed program and the Apps and Features entry both reading 1.10.8), then starting the
+installed program, which opened its Tabiya window and closed normally when asked.
+
+**Found on the way.** The lockfile's version said 1.10.6: phase 50's bump to 1.10.7 had
+changed `package.json` and left `package-lock.json` behind, and the version test did not look
+at it. It now does, at both places npm writes the version, and was mutation-checked by putting
+the lockfile back to 1.10.6. **Still open, smaller:** `nsis_tauri_utils.dll`, Tauri's own
+plugin inside the installer, MIT or Apache-2.0, is credited nowhere; recorded in SPEC section 6.
+
+`tsc -b` clean, 1336 tests green.

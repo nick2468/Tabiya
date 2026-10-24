@@ -638,6 +638,15 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   plugin's notice keeps the compression and adds a click. Worth taking for the same
   reason the notices were: the installer is what the repository's download link hands
   out. Found at phase 50.
+  **The LZMA half is CLOSED as of 1.10.8** (2026-10-24, Nick's ruling): `tauri.conf.json`
+  sets `bundle.windows.nsis.compression` to `zlib`, the generated script now reads
+  `SetCompressor /SOLID "zlib"`, and the installer carries no LZMA module. The cost was
+  333,351 bytes on a 7.2 MB download, under 5 per cent. **What is still open is smaller:**
+  `nsis_tauri_utils.dll`, Tauri's own NSIS plugin, MIT or Apache-2.0, sits in the installer
+  and is credited nowhere. It is extracted to a temporary folder while installing rather
+  than installed, but MIT asks for its notice in every copy. Not taken because Nick ruled
+  the compression switch alone; worth taking by crediting it in the notices file the way
+  Stockfish is, from its own licence text, once its version and text are pinned.
 
 ## 7. Risks
 
@@ -1210,6 +1219,14 @@ is a notice left out.
 **MPL-2.0 asks for more than a notice**, so the four MPL crates in the binary are listed
 with their exact versions and where their source is. The notices file is fetched by the
 About screen when it is opened, never imported, so the main bundle does not carry it.
+
+2026-10-24, 1.10.8: **the installer compresses with zlib, not LZMA.** Nick's ruling. NSIS's
+LZMA module is under the Common Public License 1.0, whose conditions on its object code (a
+warranty disclaimer for its authors and the address of its source) no Tabiya installer had
+ever met. NSIS's zlib module is under zlib/libpng, which asks nothing of a binary, so
+switching removes the obligation rather than meeting it, at the cost of a download under 5
+per cent larger. Chosen over adding a licence page to the installer, which would have kept
+the smaller download and added a click for everyone who installs.
 
 ## 9. v1 acceptance
 
