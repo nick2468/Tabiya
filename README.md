@@ -94,7 +94,7 @@ typechecks, and `npx tauri build` produces the Windows installer under
 
 ## How it was built
 
-Start with [Initial prompts.txt](Initial%20prompts.txt): the conversation that
+Start with [initial-prompts.txt](initial-prompts.txt): the conversation that
 began the project, from the first request for an app to teach the London System,
 through the first brief, the choice of stack, a review of four other AI models'
 answers to the same question, and the first build review. It is kept verbatim,
