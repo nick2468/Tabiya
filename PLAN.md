@@ -5604,3 +5604,41 @@ Version 1.10.6.
 Acceptance: as the chip's final paragraph.
 
 - [ ] **Review gate 48**
+
+## Phase 49 - the installer is signed in Nick's name
+
+Goal: Nick, 2026-10-24, after seeing his PdfCraft installers signed: Tabiya's Windows
+installer is code-signed with Certum's "Open Source Code Signing in the Cloud" certificate,
+from EUR 49 a year, so Windows names him as the publisher instead of "Unknown publisher".
+Researched in the PdfCraft session and handed over the same day; re-checked at source here.
+
+Chipped as `chips/phase-49-signed-installer.md`, to run after phase 48. **Part A is
+buildable now** with a throwaway certificate: a separate signing configuration so the
+ordinary build stays unsigned, a preflight, a signature check, one `build:signed` command
+and a written release procedure. **Part B is blocked on Nick's certificate and needs him
+present**, because signing means logging in to SimplySign with a token from his phone. Two
+facts are unconfirmed and nothing may assume them: the exact publisher wording, and whether
+Certum issues this product to individuals. Signing names the publisher; it does not make the
+SmartScreen warning vanish on day one.
+
+Part A:
+
+- [ ] 49.1 Signing configuration in its own file, merged only for a release.
+- [ ] 49.2 A preflight that refuses plainly when the certificate is not available.
+- [ ] 49.3 A check of subject, issuer, timestamp and digest on every file Tauri signs.
+- [ ] 49.4 `npm run build:signed`.
+- [ ] 49.5 Proved end to end with a throwaway certificate, kept out of the trusted stores and deleted.
+- [ ] 49.6 `docs/releasing.md`, and one line in the README's "Running it".
+- [ ] 49.7 SPEC section 8 ruling; no version bump; stop and report.
+
+Part B (blocked on the certificate; Nick present):
+
+- [ ] 49.8 Nick buys, verifies his identity, installs SimplySign and activates.
+- [ ] 49.9 The real thumbprint and subject committed.
+- [ ] 49.10 The first signed build, installed, checked in his name.
+- [ ] 49.11 The README's Download paragraph changed in the release that ships it.
+- [ ] 49.12 The release, cut by the orchestrator after the gate.
+
+Acceptance: as the chip's final paragraph.
+
+- [ ] **Review gate 49**
