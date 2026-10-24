@@ -45,6 +45,17 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_dialog::init())
+        // The About screen's link to the source, and nothing else. The
+        // plugin's default build injects a click listener that sends every
+        // `target="_blank"` anchor in the window to the opener; this app has
+        // one address to open and one call that opens it, so that listener is
+        // off. What may be opened at all is `opener:allow-open-url` in the
+        // capability file, scoped to the repository's address alone.
+        .plugin(
+            tauri_plugin_opener::Builder::new()
+                .open_js_links_on_click(false)
+                .build(),
+        )
         .setup(|app| {
             // Cloned so the borrow of the config ends here: the builder below
             // wants the app handle, and holding both at once would not compile.

@@ -3,3 +3,27 @@
 .about h2 {
   margin-bottom: 12px;
 }
+
+/* The repository address in the desktop window, where it is a button that
+   asks the system browser to open it. It reads as a link because it is one. */
+.link-button {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--link);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link-button:hover {
+  color: var(--text);
+}
+
+.about a {
+  color: var(--link);
+}
+
+.about-failed {
+  color: var(--warn);
+}

@@ -2,6 +2,7 @@ import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { About } from './About'
+import { REPOSITORY_URL } from './repository'
 
 /**
  * The About screen says a small number of things, and each one is held here
@@ -30,6 +31,16 @@ describe('the About screen', () => {
   it('names who made it and where the source is', () => {
     expect(text).toContain('Made by Nick Walker.')
     expect(text).toContain('github.com/nick2468/Tabiya')
+  })
+
+  it('links the address, in a browser, into a new tab that cannot reach back', () => {
+    // A string render is the browser build: `isDesktop()` is false outside the
+    // Tauri window. The desktop's own link is a button that asks the opener,
+    // and that one is proved in a packaged build, where its permission lives.
+    const anchor = html.match(/<a [^>]*>github\.com\/nick2468\/Tabiya<\/a>/)?.[0] ?? ''
+    expect(anchor).toContain(`href="${REPOSITORY_URL}"`)
+    expect(anchor).toContain('target="_blank"')
+    expect(anchor).toContain('rel="noopener noreferrer"')
   })
 
   it('says what a tabiya is', () => {

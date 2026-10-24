@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import { isDesktop } from '../storage/paths'
+import { openRepository, REPOSITORY_SHOWN, REPOSITORY_URL } from './repository'
 import './help.css'
 import './about.css'
 
@@ -28,7 +31,9 @@ export function About() {
       <h2>
         Tabiya <span className="app-version">v{__APP_VERSION__}</span>
       </h2>
-      <p>Made by Nick Walker. The source code is at github.com/nick2468/Tabiya.</p>
+      <p>
+        Made by Nick Walker. The source code is at <RepositoryLink />.
+      </p>
 
       <h3>What a tabiya is</h3>
       <p>
@@ -54,5 +59,49 @@ export function About() {
         source is at the address above.
       </p>
     </div>
+  )
+}
+
+/**
+ * The address, as something that opens it.
+ *
+ * In a browser it is a plain anchor into a new tab. In the desktop window it is
+ * a button that asks the opener plugin, because an anchor there would navigate
+ * the app's own window if anything went wrong with the click, and a button
+ * cannot navigate anything. A refusal or a missing browser is said beside it
+ * rather than swallowed: a link that silently does nothing looks broken.
+ */
+function RepositoryLink() {
+  const [failed, setFailed] = useState(false)
+  if (!isDesktop()) {
+    return (
+      <a href={REPOSITORY_URL} target="_blank" rel="noopener noreferrer">
+        {REPOSITORY_SHOWN}
+      </a>
+    )
+  }
+  return (
+    <>
+      <button
+        type="button"
+        className="link-button"
+        title="Opens in your web browser"
+        onClick={() => {
+          setFailed(false)
+          openRepository().catch((error: unknown) => {
+            console.warn('The repository link could not be opened:', error)
+            setFailed(true)
+          })
+        }}
+      >
+        {REPOSITORY_SHOWN}
+      </button>
+      {failed ? (
+        <span role="alert" className="about-failed">
+          {' '}
+          (it could not be opened from here, so type the address into a browser)
+        </span>
+      ) : null}
+    </>
   )
 }

@@ -1,7 +1,7 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "What the Tabiya window is allowed to do. It keeps its own progress file, its marker and its courses in its own data folder, $DATA/Tabiya, which is the only folder here it may write to. It keeps one second copy of the progress file under the user's local data folder, in $LOCALDATA/Tabiya Data, so that deleting the data folder cannot lose everything. It installs and removes courses in the new folder, picks up courses dropped into it, looks at the window's own browser profile folder and the two it used before so the trainee can be told which is which, and lets the trainee pick a file to import or a place to export. TWO OLDER GENERATIONS OF DATA FOLDER ARE READABLE AND NEITHER IS WRITABLE, which is what makes the migration a copy rather than a move: $DATA/Repertoire Trainer, where the data lived between phases 15 and 47, and $APPDATA, the folder named after the bundle identifier, where it lived before phase 15. A trainee arriving from either is carried across once, the newest one first. Write access to an old folder is the one grant that would turn a migration into something that can lose a file, so neither has it. Nothing may remove the second copy either: it is written blind and read only when the main file has gone.",
+  "description": "What the Tabiya window is allowed to do. It keeps its own progress file, its marker and its courses in its own data folder, $DATA/Tabiya, which is the only folder here it may write to. It keeps one second copy of the progress file under the user's local data folder, in $LOCALDATA/Tabiya Data, so that deleting the data folder cannot lose everything. It installs and removes courses in the new folder, picks up courses dropped into it, looks at the window's own browser profile folder and the two it used before so the trainee can be told which is which, and lets the trainee pick a file to import or a place to export. It may open ONE web address in the system browser, https://github.com/nick2468/Tabiya, which is the About screen's link to the source; not paths under it, because the opener matches the raw string against a glob and `Tabiya/*` would also admit `Tabiya/../../anything`, which a browser resolves to any page on github.com. TWO OLDER GENERATIONS OF DATA FOLDER ARE READABLE AND NEITHER IS WRITABLE, which is what makes the migration a copy rather than a move: $DATA/Repertoire Trainer, where the data lived between phases 15 and 47, and $APPDATA, the folder named after the bundle identifier, where it lived before phase 15. A trainee arriving from either is carried across once, the newest one first. Write access to an old folder is the one grant that would turn a migration into something that can lose a file, so neither has it. Nothing may remove the second copy either: it is written blind and read only when the main file has gone.",
   "windows": [
     "main"
   ],
@@ -9,6 +9,14 @@
     "core:default",
     "dialog:allow-open",
     "dialog:allow-save",
+    {
+      "identifier": "opener:allow-open-url",
+      "allow": [
+        {
+          "url": "https://github.com/nick2468/Tabiya"
+        }
+      ]
+    },
     {
       "identifier": "fs:allow-read-text-file",
       "allow": [

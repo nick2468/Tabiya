@@ -5,6 +5,7 @@
 import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { DATA_FOLDER, FORMER_DATA_FOLDER, FORMER_LOCAL_FOLDER, LOCAL_FOLDER } from './paths'
+import { REPOSITORY_URL } from '../ui/repository'
 
 /**
  * The window's filesystem grants name their folders by literal, and this holds
@@ -26,9 +27,19 @@ import { DATA_FOLDER, FORMER_DATA_FOLDER, FORMER_LOCAL_FOLDER, LOCAL_FOLDER } fr
  */
 const repo = new URL('../../', import.meta.url)
 
+/**
+ * One entry in a scope. The filesystem grants name a `path`; the opener grant,
+ * since phase 48, names a `url`. Every entry must be exactly one of the two, so
+ * a third kind cannot arrive and slip past both sets of checks below.
+ */
+interface Entry {
+  path?: string
+  url?: string
+}
+
 interface Scope {
   identifier: string
-  allow: { path: string }[]
+  allow: Entry[]
 }
 
 const capability = JSON.parse(
@@ -38,11 +49,22 @@ const capability = JSON.parse(
 const scopes = capability.permissions.filter((entry): entry is Scope => typeof entry !== 'string')
 
 function paths(identifier: string): string[] {
-  return scopes.filter((scope) => scope.identifier === identifier).flatMap((scope) => scope.allow.map((a) => a.path))
+  return scopes
+    .filter((scope) => scope.identifier === identifier)
+    .flatMap((scope) => scope.allow.flatMap((a) => (a.path === undefined ? [] : [a.path])))
+}
+
+function urls(identifier: string): string[] {
+  return scopes
+    .filter((scope) => scope.identifier === identifier)
+    .flatMap((scope) => scope.allow.flatMap((a) => (a.url === undefined ? [] : [a.url])))
 }
 
 /** Every path in the file, whatever it grants. */
-const every = scopes.flatMap((scope) => scope.allow.map((a) => a.path))
+const every = scopes.flatMap((scope) => scope.allow.flatMap((a) => (a.path === undefined ? [] : [a.path])))
+
+/** Every permission the window holds, by its identifier, plain or scoped. */
+const identifiers = capability.permissions.map((entry) => (typeof entry === 'string' ? entry : entry.identifier))
 
 /** The folder name a path sits under, for the two roots that have one. */
 function folderUnder(root: string, path: string): string | null {
@@ -122,10 +144,43 @@ describe('the window filesystem grants', () => {
     expect(paths('fs:allow-exists')).toContain('$APPLOCALDATA')
   })
 
+  it('gives every scope entry exactly one of a path or a url', () => {
+    const odd = scopes.flatMap((scope) =>
+      scope.allow
+        .filter((a) => (a.path === undefined) === (a.url === undefined))
+        .map((a) => `${scope.identifier}: ${JSON.stringify(a)}`),
+    )
+    expect(odd).toEqual([])
+  })
+
+  /**
+   * The one web address, and the narrowest grant that opens it.
+   *
+   * EXACTLY the repository, not paths under it. The opener matches the raw
+   * string against a glob and passes it on unchanged, so `Tabiya/*` would also
+   * admit `Tabiya/../../anything`, which a browser resolves to any page on
+   * github.com. A literal with no wildcard in it is the only scope that means
+   * one address.
+   */
+  it('lets the window open the repository and no other address', () => {
+    expect(urls('opener:allow-open-url')).toEqual([REPOSITORY_URL])
+    const wild = scopes.flatMap((scope) =>
+      scope.allow.flatMap((a) => (a.url !== undefined && /[*?[\]{}]/.test(a.url) ? [a.url] : [])),
+    )
+    expect(wild).toEqual([])
+  })
+
+  it('holds no other opener permission', () => {
+    // opener:default alone would grant every http, https, mailto and tel
+    // address, and the reveal-in-folder command besides.
+    expect(identifiers.filter((id) => id.startsWith('opener:'))).toEqual(['opener:allow-open-url'])
+  })
+
   it('has a description that names the folders it grants', () => {
     // The field is prose for a human, and prose goes stale quietly.
     expect(capability.description).toContain(`$DATA/${DATA_FOLDER}`)
     expect(capability.description).toContain(`$LOCALDATA/${LOCAL_FOLDER}`)
     expect(capability.description).toContain(`$DATA/${FORMER_DATA_FOLDER}`)
+    expect(capability.description).toContain(REPOSITORY_URL)
   })
 })
