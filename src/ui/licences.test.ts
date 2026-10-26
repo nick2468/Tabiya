@@ -139,3 +139,22 @@ describe('the licences on screen', () => {
     expect(about).not.toContain('Version 3, 29 June 2007')
   })
 })
+
+describe('the name the installer writes', () => {
+  // Added 2026-10-27 (phase 52). With no publisher set, Tauri took the second
+  // part of the identifier, com.nick.london-trainer, and Apps and Features
+  // listed the publisher as "nick". The installer's publisher and copyright
+  // now name the LICENSE's holder, and this holds them to it.
+  const holder = read('LICENSE').match(/^Copyright \(c\) \d{4} (.+)$/m)?.[1]
+  const bundle = (
+    JSON.parse(read('src-tauri/tauri.conf.json')) as {
+      bundle: { publisher: string; copyright: string }
+    }
+  ).bundle
+
+  it('is the copyright holder in LICENSE', () => {
+    expect(holder).toBe('Nicholas Walker')
+    expect(bundle.publisher).toBe(holder)
+    expect(bundle.copyright).toBe(`Copyright (c) 2026 ${holder}`)
+  })
+})

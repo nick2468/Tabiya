@@ -40,6 +40,8 @@
     "icon": [
       "icons/icon.ico"
     ],
+    "publisher": "Nicholas Walker",
+    "copyright": "Copyright (c) 2026 Nicholas Walker",
     "shortDescription": "Chess opening repertoire trainer",
     "longDescription": "Study, drill and play your opening repertoires, with a Stockfish sparring partner.",
     "windows": {

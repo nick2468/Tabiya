@@ -5952,4 +5952,9 @@ Done directly by the orchestrator. Version 1.10.9.
 - [x] 52.1 README: "Made by Nicholas Walker, in Australia." near the top, and the Licence
   section names the copyright holder.
 - [x] 52.2 Version 1.10.9 in all four files and both places in the lockfile.
-- [x] 52.3 Released as 1.10.9, so the installed About screen says Nicholas Walker.
+- [ ] 52.3 Released as 1.10.9, so the installed About screen says Nicholas Walker.
+- [x] 52.4 The installer's publisher and copyright set to Nicholas Walker. Found by installing
+  the first 1.10.9 build: with no publisher set, Tauri took the second part of the identifier
+  `com.nick.london-trainer`, so Apps and Features listed the publisher as "nick". A test in
+  `src/ui/licences.test.ts` holds both to the LICENSE's holder; mutation-checked by putting the
+  publisher back to "nick".
