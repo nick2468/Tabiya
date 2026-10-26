@@ -52,7 +52,7 @@ const RECOGNISED = new Set([
 describe('the licence texts', () => {
   it('ship the repository LICENSE as the MIT text', () => {
     expect(MIT_TEXT).toBe(read('LICENSE'))
-    expect(MIT_TEXT).toContain('Copyright (c) 2026 Nick Walker')
+    expect(MIT_TEXT).toContain('Copyright (c) 2026 Nicholas Walker')
   })
 
   it('ship the full GPL version 3, from the library file', () => {
@@ -116,7 +116,7 @@ describe('the licences on screen', () => {
   const shown = renderToStaticMarkup(createElement(Licences))
 
   it('carries both texts', () => {
-    expect(shown).toContain('Copyright (c) 2026 Nick Walker')
+    expect(shown).toContain('Copyright (c) 2026 Nicholas Walker')
     expect(shown).toContain('Version 3, 29 June 2007')
     expect(shown).toContain('This one text covers both libraries.')
   })

@@ -29,7 +29,7 @@ describe('the About screen', () => {
   })
 
   it('names who made it and where the source is', () => {
-    expect(text).toContain('Made by Nick Walker.')
+    expect(text).toContain('Made by Nicholas Walker.')
     expect(text).toContain('github.com/nick2468/Tabiya')
   })
 
@@ -66,7 +66,7 @@ describe('the About screen', () => {
     // GPL-3.0 section 0: a program with an interactive user interface displays an
     // appropriate copyright notice. "Made by" is not one, so the notice itself is on
     // the face of the screen and not only inside the licence text a click away.
-    expect(text).toContain('copyright (c) 2026 Nick Walker')
+    expect(text).toContain('copyright (c) 2026 Nicholas Walker')
     expect(text).toContain('free software under the MIT licence.')
     expect(text).toContain('Stockfish (GPL-3.0), the engine you play against')
     expect(text).toContain('chessground (GPL-3.0-or-later), the board')

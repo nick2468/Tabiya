@@ -35,7 +35,7 @@ export function About() {
         Tabiya <span className="app-version">v{__APP_VERSION__}</span>
       </h2>
       <p>
-        Made by Nick Walker. The source code is at <RepositoryLink />.
+        Made by Nicholas Walker. The source code is at <RepositoryLink />.
       </p>
 
       <h3>What a tabiya is</h3>
@@ -53,7 +53,7 @@ export function About() {
 
       <h3>Licence</h3>
       <p>
-        Tabiya's own code and course content are copyright (c) 2026 Nick Walker, and are
+        Tabiya's own code and course content are copyright (c) 2026 Nicholas Walker, and are
         free software under the MIT licence.
       </p>
       <p>
