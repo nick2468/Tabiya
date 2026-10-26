@@ -11,7 +11,7 @@ Its companion, [Tabiya Player](https://github.com/nick2468/TabiyaPlayer), is for
 what comes after the opening: a no-frills game against Stockfish, played to the
 end, with the engine naming every slip and the move it preferred.
 
-Built in Australia.
+Made by Nicholas Walker, in Australia.
 
 ## Download
 
@@ -107,7 +107,7 @@ shows the whole loop, including the parts that were wrong the first time.
 
 ## Licence
 
-MIT. See [LICENSE](LICENSE). You may copy, change and use this, including in
+MIT, copyright (c) 2026 Nicholas Walker. See [LICENSE](LICENSE). You may copy, change and use this, including in
 something you sell. Keep the copyright notice in any copy you pass on. The course
 content under `courses/` and the documents under `docs/` are covered by the same
 licence.

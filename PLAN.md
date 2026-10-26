@@ -5939,3 +5939,17 @@ the lockfile back to 1.10.6. **Still open, smaller:** `nsis_tauri_utils.dll`, Ta
 plugin inside the installer, MIT or Apache-2.0, is credited nowhere; recorded in SPEC section 6.
 
 `tsc -b` clean, 1336 tests green.
+
+## Phase 52 - the full name where Certum can see it
+
+Goal: Nick, 2026-10-27: Certum, verifying the code signing order, asked to see his full name
+as stated on the order, Nicholas Walker, on the project's GitHub page. The LICENSE, the About
+screen and `Cargo.toml` already said Nicholas Walker (commit 1f84b3f), but nothing on the
+repository's front page did, and no release carried the About change.
+
+Done directly by the orchestrator. Version 1.10.9.
+
+- [x] 52.1 README: "Made by Nicholas Walker, in Australia." near the top, and the Licence
+  section names the copyright holder.
+- [x] 52.2 Version 1.10.9 in all four files and both places in the lockfile.
+- [x] 52.3 Released as 1.10.9, so the installed About screen says Nicholas Walker.
