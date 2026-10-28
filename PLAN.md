@@ -5766,7 +5766,9 @@ Part B:
   Developer Nicholas Walker`, issuer `Certum Code Signing 2021 CA`, SHA-1 thumbprint
   `4C83A6CA031C3CE9CFCA8C853780CF679F887CE8`, valid 28 October 2026 to 28 October 2027.
   The script reads all of this from the file rather than holding a copy.
-- [x] 49.10 The first signed build (1.10.10), installed and checked: installer, installed
+- [x] 49.10 The first signed build (1.10.10), installed and checked (**corrected at phase 53:**
+  this install ran inside the session's sandbox, not on the real machine; the signatures it
+  checked are real, the "installed" was not): installer, installed
   `tabiya.exe` and `uninstall.exe` all Valid, signed by that thumbprint, sha256, timestamped by
   "Certum Timestamp 2026"; the program started and closed normally.
 - [x] 49.11 The README's Download paragraph changed in the release commit that ships it.
@@ -5975,7 +5977,9 @@ Done directly by the orchestrator. Version 1.10.9.
 - [x] 52.1 README: "Made by Nicholas Walker, in Australia." near the top, and the Licence
   section names the copyright holder.
 - [x] 52.2 Version 1.10.9 in all four files and both places in the lockfile.
-- [x] 52.3 Released as 1.10.9, so the installed About screen says Nicholas Walker. Proved by
+- [x] 52.3 Released as 1.10.9, so the installed About screen says Nicholas Walker. (**Corrected
+  at phase 53:** the install below ran inside the session's sandbox, and 52.4's publisher change
+  broke upgrades from 1.10.8; see phase 53.) Proved by
   installing the clean-tree build silently over the first 1.10.9 (exit code 0; the program's
   properties and Apps and Features both naming Nicholas Walker), starting it and closing it; the
   released asset's SHA-256 matches the tested file. `tsc -b` clean, 1337 tests green.
@@ -5984,3 +5988,55 @@ Done directly by the orchestrator. Version 1.10.9.
   `com.nick.london-trainer`, so Apps and Features listed the publisher as "nick". A test in
   `src/ui/licences.test.ts` holds both to the LICENSE's holder; mutation-checked by putting the
   publisher back to "nick".
+
+## Phase 53 - upgrades find the old install again
+
+Goal: Nick, 2026-10-28: installing 1.10.10 over his installed Tabiya failed. On "Already
+Installed" he took the default, "Uninstall before installing"; NSIS said "Error launching
+installer", then the installer said "Unable to uninstall!". Done directly by the orchestrator.
+Version 1.10.11.
+
+**The cause.** Tauri names one registry key after `bundle.publisher`:
+`HKCU\Software\<publisher>\Tabiya`, whose default value is the install folder. An upgrade reads
+it and runs the OLD uninstaller in place with `uninstall.exe _?=<folder>`. Phase 52 changed the
+publisher from "nick" to "Nicholas Walker", so 1.10.9 and 1.10.10 read a key no earlier install
+had written and ran `uninstall.exe _?=` with nothing after it. Seen directly: the uninstaller's
+command line, read while Nick's error box was on screen, ended in a bare `_?=`.
+
+- [x] 53.1 `bundle.publisher` back to "nick", for good: it is a registry key name now, not a
+  label. A test holds it there.
+- [x] 53.2 A new `NSIS_HOOK_POSTINSTALL` writes "Nicholas Walker" as the Publisher that Apps and
+  Features shows, after Tauri has written "nick", and removes the stray
+  `HKCU\Software\Nicholas Walker\Tabiya` key 1.10.9 and 1.10.10 wrote. The test holds the hook to
+  the LICENSE's holder; mutation-checked by making the hook write "nick".
+- [x] 53.3 `scripts/upgrade-walk.ps1` and `.cmd`: an upgrade driven through the installer's real
+  windows, recording the command line the old uninstaller gets. `docs/releasing.md` step 6 now
+  uses it.
+- [x] 53.4 Proved on Nick's real machine, started through Explorer: from the 1.10.8 entry his
+  registry actually held, "Uninstall before installing" ran the 1.10.8 uninstaller with the
+  folder and installed 1.10.11 (Apps and Features: 1.10.11, Nicholas Walker; both files signed;
+  progress.json unchanged at 37,428 bytes); then the same-version route, "Uninstall Tabiya" and
+  reinstall, also clean. The released asset's SHA-256 matches the file walked.
+
+**Why every earlier check missed it, which matters more than the bug.** This session's shell
+runs in a sandbox whose writes to the user's registry and LocalAppData land in a private copy.
+Every install it ran for phases 49 and 52, and every check that followed, happened inside that
+copy: its own silent 1.10.9 install had written the new key, so its later upgrade tests passed,
+while Nick's real machine still held 1.10.8 with the key only under "nick". Reading the registry
+"outside the sandbox" from the same tool showed the same private copy. Only a process started
+by Explorer saw the real state. The checks also used `/S`, which skips the page that runs the
+old uninstaller. Both gaps are what `upgrade-walk` closes. The memory rule about not trusting
+this shell's view of Nick's data folders was the same lesson, met earlier.
+
+**Found on the way.** The real machine's install folder held only the 1.10.8 uninstaller, with
+`tabiya.exe` gone; what removed it was not established, and the 1.10.11 install repaired it.
+Nick's progress was never touched. The installer's last signing step failed once on the
+timestamp server and succeeded when repeated by hand; `docs/releasing.md` says so.
+
+**Not taken, and why.** Anyone who installed 1.10.9 or 1.10.10 fresh has only the "Nicholas
+Walker" key, so their upgrade to 1.10.11 would hit the same fault the other way round. Not fixed:
+GitHub counted no outside downloads of either (one download of 1.10.10, the session's own test),
+and covering it would mean forking Tauri's NSIS template. Their workaround is "Do not uninstall",
+which installs over the top. Recorded in SPEC section 6.
+
+- [x] **Review gate 53**, passed 2026-10-28 by the orchestrator.

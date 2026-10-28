@@ -647,6 +647,13 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   than installed, but MIT asks for its notice in every copy. Not taken because Nick ruled
   the compression switch alone; worth taking by crediting it in the notices file the way
   Stockfish is, from its own licence text, once its version and text are pinned.
+- **An upgrade from a fresh 1.10.9 or 1.10.10 install fails the same way 1.10.9 did from
+  1.10.8** (phase 53). Those two versions wrote the install-folder key under
+  `HKCU\Software\Nicholas Walker\Tabiya`, and 1.10.11 reads it under `nick` again, so "Uninstall
+  before installing" would hand their old uninstaller an empty folder. Not taken because GitHub
+  counted no outside downloads of either release when 1.10.11 shipped, and covering it means
+  forking Tauri's NSIS template to read both keys. The workaround is "Do not uninstall", which
+  installs over the top. Worth taking only if someone reports it.
 
 ## 7. Risks
 
@@ -1238,6 +1245,15 @@ same-shape alternatives cost four to six times as much. The key stays in Certum'
 cloud, so a signed build needs Nick logged in; the signing settings are merged only by
 `npm run build:signed`, and a plain `npx tauri build` stays unsigned. Signing names the
 publisher; it does not stop SmartScreen warning about a new file on day one.
+
+2026-10-28, 1.10.11: **`bundle.publisher` is "nick" and never changes.** Tauri names the
+registry key an upgrade reads the install folder from after it, so phase 52's change to
+"Nicholas Walker" broke every upgrade from 1.10.8 or earlier that took "Uninstall before
+installing". The name people see in Apps and Features is written by the installer's
+post-install hook instead. **Every release is also installed over the previous one through
+the installer's windows, started by Explorer**, with `scripts/upgrade-walk`: a silent install
+skips the page that runs the old uninstaller, and a Claude Code session's own shell installs
+into a sandboxed copy of the registry, so neither proves an upgrade works.
 
 ## 9. v1 acceptance
 

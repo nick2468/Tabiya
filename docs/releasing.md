@@ -28,12 +28,24 @@ signs.
 4. Run `npm run build:signed`. It checks the certificate is available, builds, and then checks
    the installer's signature. Each step stops the rest if it fails. Tauri also signs the
    program, the uninstaller and the installer's plugins, but inside the installer, so those
-   are checked after installing, in step 6.
+   are checked after installing, in step 6. If signing fails at the very last step, on the
+   installer itself, it is almost always the timestamp server: sign that one file again by hand
+   with the same command the build printed, then run `node scripts/build-signed.mjs verify`.
+   Never sign without the timestamp to get past it.
 5. The build may update `src-tauri/Cargo.lock` with the new version. If it does, commit that.
-6. Install the new installer over the old version with Tabiya closed. Check the installed
-   program and its uninstaller:
-   `node scripts/build-signed.mjs verify "$LOCALAPPDATA/Tabiya/tabiya.exe" "$LOCALAPPDATA/Tabiya/uninstall.exe"`.
-   Start the installed program and close it.
+6. Install it over the previous release **through its windows, as a user would**, with
+   `scripts/upgrade-walk.cmd`. It clicks through the installer, picks "Uninstall before
+   installing" (or "Uninstall Tabiya" for the same version), checks the old uninstaller was
+   given the install folder, leaves "Delete the application data" unticked, and finishes. Then
+   it records the installed version, publisher and signatures, and starts the program. Its log
+   is `%TEMP%\tabiya-upgrade-walk.log`.
+   **A Claude Code session must start it through Explorer**:
+   `Start-Process explorer.exe '"<repo>\scripts\upgrade-walk.cmd"'`, then wait for the log's
+   `.finished` file before reading the log. The session's own shell runs in a sandbox whose
+   writes to the registry and LocalAppData go to a private copy. An install run from it changes
+   nothing on the real machine, and its upgrade tests see its own earlier installs. That is how
+   1.10.9 and 1.10.10 shipped an upgrade that failed (phase 53). A silent `/S` install is no
+   substitute either: it skips the page that runs the old uninstaller.
 7. Push, tag `v<version>`, push the tag, and create the release with the installer as its one
    asset, titled "Tabiya <version>":
    `gh release create v<version> src-tauri/target/release/bundle/nsis/Tabiya_<version>_x64-setup.exe --repo nick2468/Tabiya --title "Tabiya <version>" --notes-file <notes>`.

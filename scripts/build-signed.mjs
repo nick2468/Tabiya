@@ -127,12 +127,14 @@ function build() {
 /**
  * The one signed file the build leaves on disk: the installer.
  *
- * Tauri 2.11 signs more than that, as the first signed build's log showed
- * (1.10.10, 2026-10-28): a copy of `tabiya.exe`, the uninstaller and every
- * NSIS plugin DLL, `nsis_tauri_utils.dll` among them. But it signs them in
- * staging and temporary folders while it packs the installer, and
- * `target/release/tabiya.exe` itself stays unsigned. So the program and the
- * uninstaller can only be checked once installed:
+ * Tauri 2.11 signs more than that: `tabiya.exe`, the uninstaller and every
+ * NSIS plugin DLL, `nsis_tauri_utils.dll` among them. The uninstaller and the
+ * DLLs are signed in staging and temporary folders while it packs the
+ * installer, so they never sit on disk signed. `target/release/tabiya.exe` was
+ * found unsigned after the 1.10.10 build and signed after the 1.10.11 one, for
+ * a reason not pinned down, so it is not relied on either. What ships is what
+ * the installer wrote, so the program and the uninstaller are checked once
+ * installed, by `scripts/upgrade-walk.ps1`, or with
  * `node scripts/build-signed.mjs verify <install folder>/tabiya.exe <install folder>/uninstall.exe`.
  */
 function builtFiles() {
