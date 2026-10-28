@@ -42,11 +42,15 @@ describe('the auto step speed', () => {
   it('stops at both ends of the range', async () => {
     const { user } = renderApp()
     await openStudy(user)
-    for (let press = 0; press < 12; press += 1) await user.click(button('Faster'))
+    // Plain clicks, not user-event's: 32 of those, each simulating a whole
+    // pointer sequence, ran past the five-second limit once the machine was
+    // busy (2026-10-28). This test is about the ends of the range, and a
+    // disabled button ignores a plain click just the same.
+    for (let press = 0; press < 12; press += 1) fireEvent.click(button('Faster'))
     expect(speed()).toBe('0.5s')
     expect(button('Faster').disabled).toBe(true)
 
-    for (let press = 0; press < 20; press += 1) await user.click(button('Slower'))
+    for (let press = 0; press < 20; press += 1) fireEvent.click(button('Slower'))
     expect(speed()).toBe('5.0s')
     expect(button('Slower').disabled).toBe(true)
   })
