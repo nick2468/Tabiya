@@ -90,7 +90,9 @@ npm run dev
 
 The dev server binds to port 5175. `npm test` runs the suite, `npx tsc -b`
 typechecks, and `npx tauri build` produces the Windows installer under
-`src-tauri/target/release/bundle/nsis/`.
+`src-tauri/target/release/bundle/nsis/`. That installer is unsigned. A release is
+signed with `npm run build:signed`, which needs the author's certificate; see
+[docs/releasing.md](docs/releasing.md).
 
 ## How it was built
 
