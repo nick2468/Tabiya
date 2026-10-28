@@ -18,11 +18,11 @@ Made by Nicholas Walker, in Australia.
 **[Download the latest installer](https://github.com/nick2468/Tabiya/releases/latest)**
 for 64-bit Windows.
 
-Windows will warn you that the publisher is unknown, because the installer is
-not signed with a code signing certificate. That is what an unsigned installer
-looks like whoever wrote it. If you would rather not take that on a stranger's
-word, the source is all here and `npm run dev` runs the app in a browser
-without installing anything.
+The installer is signed with a Certum open-source code signing certificate, so
+Windows names the publisher as **Open Source Developer Nicholas Walker**. Windows
+SmartScreen may still warn about a new release for a while, until the file builds
+up a reputation. If you would rather not take that on a stranger's word, the source
+is all here and `npm run dev` runs the app in a browser without installing anything.
 
 ## What is in it
 
