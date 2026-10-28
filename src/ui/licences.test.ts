@@ -141,30 +141,22 @@ describe('the licences on screen', () => {
 })
 
 describe('the name the installer writes', () => {
-  // Added 2026-10-27 (phase 52), corrected 2026-10-28 (phase 53). Phase 52 set
-  // `bundle.publisher` to the LICENSE's holder so Apps and Features would stop
-  // saying "nick". But Tauri also names a registry key after the publisher,
-  // HKCU\Software\<publisher>\Tabiya, and an upgrade reads the old install's
-  // folder from it. Every install before 1.10.9 wrote it under "nick", so the
-  // new name sent the old uninstaller an empty folder and the upgrade failed.
-  // So the publisher is "nick" for good, and the name shown is written by the
-  // install hook.
+  // Added 2026-10-27 (phase 52), and settled 2026-10-28 (phase 54). Tauri uses
+  // `bundle.publisher` twice: as the publisher Apps and Features shows and the
+  // executable's company name, and as the name of the registry key an upgrade
+  // reads the old install's folder from. So it is set once and never changed:
+  // changing it at 1.10.9 broke every upgrade (phase 53). It names the
+  // LICENSE's holder, and this holds it there.
   const holder = read('LICENSE').match(/^Copyright \(c\) \d{4} (.+)$/m)?.[1]
   const bundle = (
     JSON.parse(read('src-tauri/tauri.conf.json')) as {
       bundle: { publisher: string; copyright: string }
     }
   ).bundle
-  const hook = read('src-tauri/installer-hooks.nsh')
 
-  it('keeps the registry key every earlier install wrote', () => {
-    expect(bundle.publisher).toBe('nick')
-  })
-
-  it('shows the copyright holder in LICENSE as the publisher, and in the copyright', () => {
+  it('is the copyright holder in LICENSE', () => {
     expect(holder).toBe('Nicholas Walker')
-    const postinstall = hook.match(/!macro NSIS_HOOK_POSTINSTALL([\s\S]*?)!macroend/)?.[1] ?? ''
-    expect(postinstall).toContain(`WriteRegStr SHCTX "\${UNINSTKEY}" "Publisher" "${holder}"`)
+    expect(bundle.publisher).toBe(holder)
     expect(bundle.copyright).toBe(`Copyright (c) 2026 ${holder}`)
   })
 })

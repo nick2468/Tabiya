@@ -74,8 +74,10 @@ function State($label) {
   L "--- state: $label"
   $u = Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Tabiya' -ErrorAction SilentlyContinue
   L ("uninstall entry: version '{0}', publisher '{1}'" -f $u.DisplayVersion, $u.Publisher)
-  L ("install-folder key HKCU\Software\nick\Tabiya: '{0}'" -f (Get-ItemProperty 'HKCU:\Software\nick\Tabiya' -ErrorAction SilentlyContinue).'(default)')
-  L ("stray key HKCU\Software\Nicholas Walker\Tabiya exists: {0}" -f (Test-Path 'HKCU:\Software\Nicholas Walker\Tabiya'))
+  # The key an upgrade reads the install folder from, named after the publisher
+  # (phase 54), and the one every version up to 1.10.11 wrote instead.
+  L ("install-folder key HKCU\Software\Nicholas Walker\Tabiya: '{0}'" -f (Get-ItemProperty 'HKCU:\Software\Nicholas Walker\Tabiya' -ErrorAction SilentlyContinue).'(default)')
+  L ("old key HKCU\Software\nick\Tabiya exists: {0}" -f (Test-Path 'HKCU:\Software\nick\Tabiya'))
   foreach ($f in "$env:LOCALAPPDATA\Tabiya\tabiya.exe", "$env:LOCALAPPDATA\Tabiya\uninstall.exe") {
     if (Test-Path $f) {
       $s = Get-AuthenticodeSignature $f
