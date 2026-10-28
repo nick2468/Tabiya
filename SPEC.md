@@ -647,16 +647,13 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   than installed, but MIT asks for its notice in every copy. Not taken because Nick ruled
   the compression switch alone; worth taking by crediting it in the notices file the way
   Stockfish is, from its own licence text, once its version and text are pinned.
-- **An upgrade from a fresh 1.10.9 or 1.10.10 install fails the same way 1.10.9 did from
-  1.10.8** (phase 53). Those two versions wrote the install-folder key under
-  `HKCU\Software\Nicholas Walker\Tabiya`, and 1.10.11 reads it under `nick` again, so "Uninstall
-  before installing" would hand their old uninstaller an empty folder. Not taken because GitHub
-  counted no outside downloads of either release when 1.10.11 shipped, and covering it means
-  forking Tauri's NSIS template to read both keys. The workaround is "Do not uninstall", which
-  installs over the top. Worth taking only if someone reports it. The root fix belongs in
-  Tauri: a drafted issue, `docs/upstream/tauri-nsis-publisher-change.md`, asks its installer to
-  fall back to the uninstall entry's InstallLocation; once a Tauri release has that, the
-  publisher can become "Nicholas Walker" everywhere.
+- **An install of 1.10.11 or earlier cannot be upgraded by 1.10.12 or later through
+  "Uninstall before installing"** (phase 54). Those versions wrote the install-folder key under
+  `nick`; from 1.10.12 the installer reads it under `Nicholas Walker`. Not fixed because GitHub
+  counted no outside download of any of them, and Nick's own install was moved across by hand.
+  The 1.10.12 release notes tell anyone affected to uninstall first (data kept). The general fix
+  belongs in Tauri: the drafted issue `docs/upstream/tauri-nsis-publisher-change.md` asks its
+  installer to fall back to the uninstall entry's InstallLocation.
 
 ## 7. Risks
 
@@ -1249,7 +1246,7 @@ cloud, so a signed build needs Nick logged in; the signing settings are merged o
 `npm run build:signed`, and a plain `npx tauri build` stays unsigned. Signing names the
 publisher; it does not stop SmartScreen warning about a new file on day one.
 
-2026-10-28, 1.10.11: **`bundle.publisher` is "nick" and never changes.** Tauri names the
+2026-10-28, 1.10.11, **superseded the same day at 1.10.12 (below)**: **`bundle.publisher` is "nick" and never changes.** Tauri names the
 registry key an upgrade reads the install folder from after it, so phase 52's change to
 "Nicholas Walker" broke every upgrade from 1.10.8 or earlier that took "Uninstall before
 installing". The name people see in Apps and Features is written by the installer's
@@ -1257,6 +1254,12 @@ post-install hook instead. **Every release is also installed over the previous o
 the installer's windows, started by Explorer**, with `scripts/upgrade-walk`: a silent install
 skips the page that runs the old uninstaller, and a Claude Code session's own shell installs
 into a sandboxed copy of the registry, so neither proves an upgrade works.
+
+2026-10-28, 1.10.12: **`bundle.publisher` is "Nicholas Walker", set once and never changed
+again.** Nick's ruling: GitHub showed no outside download of any Tabiya installer, so the only
+install made under "nick" was his own, moved across by hand. The post-install hook that wrote the
+displayed publisher is gone. A future change to the publisher would break upgrades exactly as
+1.10.9 did; the upgrade walk would catch it.
 
 ## 9. v1 acceptance
 

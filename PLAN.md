@@ -6040,3 +6040,31 @@ and covering it would mean forking Tauri's NSIS template. Their workaround is "D
 which installs over the top. Recorded in SPEC section 6.
 
 - [x] **Review gate 53**, passed 2026-10-28 by the orchestrator.
+
+## Phase 54 - the publisher is Nicholas Walker for good
+
+Goal: Nick, 2026-10-28, on phase 53's "nick for good": if nobody has downloaded any installer,
+the publisher can change now and only his machine is affected. Checked: GitHub counted no
+download of any asset of any release of Tabiya, Tabiya Player, PDFluffer or Cuber (the one
+download of 1.10.10 was the session's own test, and that release is deleted). Done directly by
+the orchestrator. Version 1.10.12.
+
+- [x] 54.1 `bundle.publisher` is "Nicholas Walker"; phase 53's post-install hook is removed, so
+  Apps and Features, the executable's company name and the registry key all say the same thing.
+  The licences test holds the publisher to the LICENSE's holder again.
+- [x] 54.2 Nick's machine moved across, by a script Explorer started: 1.10.11 uninstalled
+  silently (exit 0; progress.json untouched at 37,428 bytes), 1.10.12 installed fresh through
+  its windows with `upgrade-walk`, then reinstalled over itself through "Uninstall Tabiya" (the
+  uninstaller got `_?=` with the folder, read from the new key). The stale
+  `HKCU\Software\nick\Tabiya` key, which Tauri's uninstaller keeps unless the data box is
+  ticked, was removed; the other keys under `nick` (Cuber, Simply Chess, Repertoire Trainer)
+  were left alone. Installed `tabiya.exe`: 1.10.12, company "Nicholas Walker", signed.
+- [x] 54.3 Released as 1.10.12, whose notes tell anyone on 1.10.11 or earlier to uninstall first
+  (data kept), since this installer cannot find an install made under "nick". The released
+  asset's SHA-256 matches the file walked.
+
+The Tauri issue drafted at phase 53 (`docs/upstream/tauri-nsis-publisher-change.md`) is no longer
+needed by Tabiya, but the bug is Tauri's and real for any app whose publisher changes, so it is
+kept for Nick to file if he chooses.
+
+- [x] **Review gate 54**, passed 2026-10-28 by the orchestrator.

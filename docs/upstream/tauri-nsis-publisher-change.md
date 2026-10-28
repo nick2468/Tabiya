@@ -1,11 +1,11 @@
 # Draft issue for tauri-apps/tauri: NSIS upgrade fails after `bundle.publisher` changes
 
-**Status: draft, not filed.** Written 2026-10-28 at Tabiya phase 53. Nick files it from his own
+**Status: draft, not filed. No longer needed by Tabiya** (phase 54 set the publisher to
+"Nicholas Walker" while no outside install existed), but the bug is Tauri's and affects any app
+whose publisher changes, so it is kept for Nick to file if he chooses. Written 2026-10-28 at Tabiya phase 53. Nick files it from his own
 GitHub account, using Tauri's bug report form; the sections below follow that form. A search of
 the tracker on 2026-10-28 found no existing report (the nearest, #7317, is a different bug in
-tauri-cli 1.4.0). When a Tauri release contains a fix, Tabiya can set `bundle.publisher` to
-"Nicholas Walker", walk an upgrade from 1.10.11 with `scripts/upgrade-walk`, and drop the
-post-install hook that writes the displayed publisher.
+tauri-cli 1.4.0). 
 
 ---
 
@@ -133,7 +133,8 @@ None. It is an installer behaviour, not a crash.
 ### Additional context
 
 Found in [Tabiya](https://github.com/nick2468/Tabiya), whose 1.10.9 release changed the
-publisher from the identifier-derived "nick" to the author's name. Our workaround: the publisher
-is back to "nick", and an `NSIS_HOOK_POSTINSTALL` hook rewrites the `Publisher` value in the
-uninstall key so Apps and Features shows the real name. That keeps upgrades working, but the
-executable's CompanyName still says "nick", because it also comes from `bundle.publisher`.
+publisher from the identifier-derived "nick" to the author's name. We could only recover because no
+one outside had installed it yet: a workaround that keeps the old publisher (rewriting the
+`Publisher` value in the uninstall key from an `NSIS_HOOK_POSTINSTALL` hook) keeps upgrades
+working, but leaves the executable's CompanyName on the old name, since that also comes from
+`bundle.publisher`.
