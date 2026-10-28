@@ -653,7 +653,10 @@ Deferred with reasons (the register; a later phase working nearby may take one a
   before installing" would hand their old uninstaller an empty folder. Not taken because GitHub
   counted no outside downloads of either release when 1.10.11 shipped, and covering it means
   forking Tauri's NSIS template to read both keys. The workaround is "Do not uninstall", which
-  installs over the top. Worth taking only if someone reports it.
+  installs over the top. Worth taking only if someone reports it. The root fix belongs in
+  Tauri: a drafted issue, `docs/upstream/tauri-nsis-publisher-change.md`, asks its installer to
+  fall back to the uninstall entry's InstallLocation; once a Tauri release has that, the
+  publisher can become "Nicholas Walker" everywhere.
 
 ## 7. Risks
 
