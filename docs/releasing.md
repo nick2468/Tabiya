@@ -26,7 +26,9 @@ signs.
 3. Nick logs in to SimplySign Desktop: right-click its icon by the clock, choose
    **Connect to SimplySign**, and enter the code from the phone app.
 4. Run `npm run build:signed`. It checks the certificate is available, builds, and then checks
-   every signed file. Each step stops the rest if it fails.
+   the installer's signature. Each step stops the rest if it fails. Tauri also signs the
+   program, the uninstaller and the installer's plugins, but inside the installer, so those
+   are checked after installing, in step 6.
 5. The build may update `src-tauri/Cargo.lock` with the new version. If it does, commit that.
 6. Install the new installer over the old version with Tabiya closed. Check the installed
    program and its uninstaller:

@@ -23,8 +23,9 @@
 // Three steps, and a failure at any one stops the rest:
 //   1. preflight: the certificate is current and Windows can sign with it now;
 //   2. the build, with the signing config merged;
-//   3. verify: every file Tauri signed carries this certificate, a sha256
-//      digest and an RFC 3161 timestamp.
+//   3. verify: the installer carries this certificate, a sha256 digest and an
+//      RFC 3161 timestamp. The program and uninstaller inside it are checked
+//      the same way once installed; see builtFiles below for why not here.
 //
 // Run it with: npm run build:signed
 // `node scripts/build-signed.mjs verify [file...]` runs step 3 alone, on the
@@ -123,14 +124,20 @@ function build() {
   if (result.status !== 0) fail('The signed build failed. Nothing was verified.')
 }
 
-/** The files Tauri signs that are left on disk by the build. */
+/**
+ * The one signed file the build leaves on disk: the installer.
+ *
+ * Tauri 2.11 signs more than that, as the first signed build's log showed
+ * (1.10.10, 2026-10-28): a copy of `tabiya.exe`, the uninstaller and every
+ * NSIS plugin DLL, `nsis_tauri_utils.dll` among them. But it signs them in
+ * staging and temporary folders while it packs the installer, and
+ * `target/release/tabiya.exe` itself stays unsigned. So the program and the
+ * uninstaller can only be checked once installed:
+ * `node scripts/build-signed.mjs verify <install folder>/tabiya.exe <install folder>/uninstall.exe`.
+ */
 function builtFiles() {
   const version = JSON.parse(readFileSync(join(repo, 'package.json'), 'utf8')).version
-  const release = join(repo, 'src-tauri', 'target', 'release')
-  return [
-    join(release, 'bundle', 'nsis', `Tabiya_${version}_x64-setup.exe`),
-    join(release, 'tabiya.exe'),
-  ]
+  return [join(repo, 'src-tauri', 'target', 'release', 'bundle', 'nsis', `Tabiya_${version}_x64-setup.exe`)]
 }
 
 function verify(files) {
@@ -178,4 +185,5 @@ if (command === 'verify') {
   preflight()
   build()
   verify(builtFiles())
+  console.log('Now install it and check the installed tabiya.exe and uninstall.exe (docs/releasing.md, step 6).')
 }

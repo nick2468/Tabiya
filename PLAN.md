@@ -5746,23 +5746,44 @@ vanish on day one.
 
 Part A:
 
-- [ ] 49.1 Signing configuration in its own file, merged only for a release.
-- [ ] 49.2 A preflight that refuses plainly when the certificate is not available.
-- [ ] 49.3 A check of subject, issuer, timestamp and digest on every file Tauri signs.
-- [ ] 49.4 `npm run build:signed`.
-- [ ] 49.5 Proved end to end with a throwaway certificate, kept out of the trusted stores and deleted.
-- [ ] 49.6 `docs/releasing.md`, and one line in the README's "Running it".
-- [ ] 49.7 SPEC section 8 ruling; no version bump; stop and report.
+- [x] 49.1 Signing configuration in its own file, merged only for a release.
+- [x] 49.2 A preflight that refuses plainly when the certificate is not available.
+- [x] 49.3 A check of signer, timestamp and digest. Built by the orchestrator on 2026-10-28,
+  not the builder, because the certificate had arrived and Nick was present.
+- [x] 49.4 `npm run build:signed`.
+- [x] 49.5 **Replaced by the real certificate.** The throwaway certificate existed to prove the
+  wiring before money was spent on a real one; by the time this was built the real one had been
+  issued, so the wiring was proved with it, and no test certificate was ever made.
+- [x] 49.6 `docs/releasing.md`, and one line in the README's "Running it".
+- [x] 49.7 SPEC section 8 ruling.
 
-Part B (blocked on the certificate; Nick present):
+Part B:
 
-- [ ] 49.8 Nick buys, verifies his identity, installs SimplySign and activates.
-- [ ] 49.9 The real thumbprint and subject committed.
-- [ ] 49.10 The first signed build, installed, checked in his name.
-- [ ] 49.11 The README's Download paragraph changed in the release that ships it.
-- [ ] 49.12 The release, cut by the orchestrator after the gate.
+- [x] 49.8 Nick bought it (2026-10-24), passed Certum's identity check (an Ergon electricity bill
+  and his full name on the GitHub page, phase 52), installed SimplySign Desktop and connected.
+- [x] 49.9 The certificate as issued, committed as `src-tauri/signing/code-signing.cer` (public
+  half only): subject `C=AU, ST=Queensland, L=Mackay, O=Open Source Developer, CN=Open Source
+  Developer Nicholas Walker`, issuer `Certum Code Signing 2021 CA`, SHA-1 thumbprint
+  `4C83A6CA031C3CE9CFCA8C853780CF679F887CE8`, valid 28 October 2026 to 28 October 2027.
+  The script reads all of this from the file rather than holding a copy.
+- [x] 49.10 The first signed build (1.10.10), installed and checked: installer, installed
+  `tabiya.exe` and `uninstall.exe` all Valid, signed by that thumbprint, sha256, timestamped by
+  "Certum Timestamp 2026"; the program started and closed normally.
+- [x] 49.11 The README's Download paragraph changed in the release commit that ships it.
+- [x] 49.12 Released as 1.10.10.
 
-Acceptance: as the chip's final paragraph.
+**Found on the way.** Tauri 2.11.4 signs a copy of `tabiya.exe`, the uninstaller and every
+NSIS plugin DLLs, `nsis_tauri_utils.dll` among them, but in staging and temporary folders: the
+only signed file the build leaves is the installer, and `target/release/tabiya.exe` stays
+unsigned. The first check looked at that file and failed; it now checks the installer, and the
+program and uninstaller are checked once installed. Also, the step-speed bounds test's 32
+user-event clicks ran past the five-second limit on a busy machine and failed every full run;
+it now clicks plainly (its own commit). The full suite took 21 seconds with other sessions
+running, just over the twenty-second rule.
+
+Apps and Features names the publisher "Nicholas Walker" (`bundle.publisher`, phase 52) while the
+signature says "Open Source Developer Nicholas Walker", as Certum issues it. Both are right;
+they come from different places.
 
 - [ ] **Review gate 49**
 

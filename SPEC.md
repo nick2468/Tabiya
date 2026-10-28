@@ -1228,6 +1228,17 @@ switching removes the obligation rather than meeting it, at the cost of a downlo
 per cent larger. Chosen over adding a licence page to the installer, which would have kept
 the smaller download and added a click for everyone who installs.
 
+2026-10-24, ruled; 2026-10-28, 1.10.10, shipped: **the installer is code-signed** with
+Nicholas Walker's Certum "Open Source Code Signing in the Cloud" certificate, so Windows names
+the publisher as "Open Source Developer Nicholas Walker" instead of "Unknown publisher". Certum
+because it is the one certificate of this shape sold to an individual at EUR 49 a year: no
+Australian certificate authority exists, Microsoft's signing service does not serve
+individuals in Australia, SignPath Foundation would name itself as the publisher, and the
+same-shape alternatives cost four to six times as much. The key stays in Certum's SimplySign
+cloud, so a signed build needs Nick logged in; the signing settings are merged only by
+`npm run build:signed`, and a plain `npx tauri build` stays unsigned. Signing names the
+publisher; it does not stop SmartScreen warning about a new file on day one.
+
 ## 9. v1 acceptance
 
 1. Study: all eight chapters open; every line steps through with notes, arrows and
