@@ -5773,7 +5773,7 @@ Part B:
 - [x] 49.12 Released as 1.10.10.
 
 **Found on the way.** Tauri 2.11.4 signs a copy of `tabiya.exe`, the uninstaller and every
-NSIS plugin DLLs, `nsis_tauri_utils.dll` among them, but in staging and temporary folders: the
+NSIS plugin DLL, `nsis_tauri_utils.dll` among them, but in staging and temporary folders: the
 only signed file the build leaves is the installer, and `target/release/tabiya.exe` stays
 unsigned. The first check looked at that file and failed; it now checks the installer, and the
 program and uninstaller are checked once installed. Also, the step-speed bounds test's 32
@@ -5785,7 +5785,9 @@ Apps and Features names the publisher "Nicholas Walker" (`bundle.publisher`, pha
 signature says "Open Source Developer Nicholas Walker", as Certum issues it. Both are right;
 they come from different places.
 
-- [ ] **Review gate 49**
+- [x] **Review gate 49**, passed 2026-10-28 by the orchestrator, which also built it. Tag
+  v1.10.10 is on 7a00df1, the commit the installer was built from; the released asset's SHA-256
+  matches the installed and checked file.
 
 ## Phase 50 - every library the app ships, credited inside it
 
