@@ -1,6 +1,6 @@
 [package]
 name = "tabiya"
-version = "1.10.10"
+version = "1.10.11"
 description = "A trainer for chess opening repertoires"
 authors = ["Nicholas Walker"]
 license = "MIT"

@@ -1,7 +1,22 @@
 ; Installer hooks for Tabiya.
 ;
-; One hook only: the one NSIS runs at the end of an uninstall, immediately
-; after its own data-removal block.
+; Two hooks: one at the end of an install, which names the publisher, and one
+; at the end of an uninstall, immediately after NSIS's own data-removal block.
+;
+; THE INSTALL HOOK (phase 53, 2026-10-28). Tauri names one registry key after
+; `bundle.publisher`: HKCU\Software\<publisher>\Tabiya, whose default value is
+; the install folder. An upgrade reads it to tell the OLD uninstaller where to
+; run (`uninstall.exe _?=<folder>`). Phase 52 changed the publisher from "nick"
+; to "Nicholas Walker", so 1.10.9 and 1.10.10 looked under a key no earlier
+; install had written, passed an empty folder, and the old uninstaller failed
+; with "Error launching installer" and then "Unable to uninstall!". So the
+; publisher in tauri.conf.json is "nick" again and must never change: it is a
+; registry key name now, not a label. What Apps and Features SHOWS is written
+; here instead, after Tauri has written "nick" into it.
+;
+; It also removes HKCU\Software\Nicholas Walker\Tabiya, the key 1.10.9 and
+; 1.10.10 wrote and nothing reads any more, and its parent if that leaves it
+; empty. /ifempty means a key anything else put there survives.
 ;
 ; WHY IT EXISTS. That stock block removes $APPDATA\${BUNDLEID} and
 ; $LOCALAPPDATA\${BUNDLEID}, the two folders named after the bundle identifier.
@@ -57,6 +72,12 @@
 !ifndef APP_LOCAL_FOLDER
   !define APP_LOCAL_FOLDER "$LOCALAPPDATA\Tabiya Data"
 !endif
+
+!macro NSIS_HOOK_POSTINSTALL
+  WriteRegStr SHCTX "${UNINSTKEY}" "Publisher" "Nicholas Walker"
+  DeleteRegKey HKCU "Software\Nicholas Walker\Tabiya"
+  DeleteRegKey /ifempty HKCU "Software\Nicholas Walker"
+!macroend
 
 !macro NSIS_HOOK_POSTUNINSTALL
   ${If} $DeleteAppDataCheckboxState = 1

@@ -141,20 +141,30 @@ describe('the licences on screen', () => {
 })
 
 describe('the name the installer writes', () => {
-  // Added 2026-10-27 (phase 52). With no publisher set, Tauri took the second
-  // part of the identifier, com.nick.london-trainer, and Apps and Features
-  // listed the publisher as "nick". The installer's publisher and copyright
-  // now name the LICENSE's holder, and this holds them to it.
+  // Added 2026-10-27 (phase 52), corrected 2026-10-28 (phase 53). Phase 52 set
+  // `bundle.publisher` to the LICENSE's holder so Apps and Features would stop
+  // saying "nick". But Tauri also names a registry key after the publisher,
+  // HKCU\Software\<publisher>\Tabiya, and an upgrade reads the old install's
+  // folder from it. Every install before 1.10.9 wrote it under "nick", so the
+  // new name sent the old uninstaller an empty folder and the upgrade failed.
+  // So the publisher is "nick" for good, and the name shown is written by the
+  // install hook.
   const holder = read('LICENSE').match(/^Copyright \(c\) \d{4} (.+)$/m)?.[1]
   const bundle = (
     JSON.parse(read('src-tauri/tauri.conf.json')) as {
       bundle: { publisher: string; copyright: string }
     }
   ).bundle
+  const hook = read('src-tauri/installer-hooks.nsh')
 
-  it('is the copyright holder in LICENSE', () => {
+  it('keeps the registry key every earlier install wrote', () => {
+    expect(bundle.publisher).toBe('nick')
+  })
+
+  it('shows the copyright holder in LICENSE as the publisher, and in the copyright', () => {
     expect(holder).toBe('Nicholas Walker')
-    expect(bundle.publisher).toBe(holder)
+    const postinstall = hook.match(/!macro NSIS_HOOK_POSTINSTALL([\s\S]*?)!macroend/)?.[1] ?? ''
+    expect(postinstall).toContain(`WriteRegStr SHCTX "\${UNINSTKEY}" "Publisher" "${holder}"`)
     expect(bundle.copyright).toBe(`Copyright (c) 2026 ${holder}`)
   })
 })

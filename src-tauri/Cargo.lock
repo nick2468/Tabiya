@@ -3338,7 +3338,7 @@ dependencies = [
 
 [[package]]
 name = "tabiya"
-version = "1.10.10"
+version = "1.10.11"
 dependencies = [
  "serde",
  "serde_json",
